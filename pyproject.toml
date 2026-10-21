@@ -1,0 +1,41 @@
+[project]
+name = "hakathon-eda"
+version = "0.1.0"
+description = "Pre-modeling exploratory data analysis (EDA) of a bank loan-portfolio / credit-registry dataset"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.155.0",
+    "httpx>=0.28.1",
+    "jsonschema>=4.26.0",
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.4",
+    "openpyxl>=3.1.5",
+    "pandas>=3.0.6",
+    "pyarrow>=26.0.0",
+    "pyyaml>=6.0.3",
+    "scikit-learn>=1.9.1",
+    "scipy>=1.18.1",
+    "threadpoolctl>=3.7.0",
+    "uvicorn>=0.54.0",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.4.0",
+    "pytest>=9.1.1",
+    "ruff>=0.17.1",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]  # long narrative strings are fine
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q -m 'not slow'"
+markers = ["slow: trains models on the synthetic dataset (run with: uv run pytest -m slow)"]

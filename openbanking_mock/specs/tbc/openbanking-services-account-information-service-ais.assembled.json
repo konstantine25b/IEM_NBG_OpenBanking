@@ -1,0 +1,5492 @@
+{
+ "openapi": "3.0.1",
+ "info": {
+  "title": "OpenBanking Services - Account Information Service (AIS)",
+  "description": "The Account Information Service (AIS) offers the following services:\n  * Transaction reports for a given account or card account including balances if applicable\n  * Balances of a given account or card account\n  * A list of available accounts or card account\n  * Account details of a given account or card account or of the list of all accessible accounts or card account relative to a granted consent \n\nAbbreviations used in the documentation:\n  * TPP - Third Party Providers\n  * AIS - Account Information Service\n  * ASPSP - Account Servicing Payment Service Provider \n  * PSU - Payment Service User\n  * SCA - Strong Customer Authentication\n",
+  "version": "1.0"
+ },
+ "servers": [
+  {
+   "url": "https://test-openbanking.tbcbank.ge/0.8",
+   "description": "Sandbox"
+  },
+  {
+   "url": "https://openbanking.tbcbank.ge/0.8",
+   "description": "Production"
+  },
+  {
+   "url": "https://test-api.tbcbank.ge",
+   "description": "Sandbox for .well-known and authorize endpoints"
+  },
+  {
+   "url": "https://api.tbcbank.ge",
+   "description": "Production for .well-known and authorize endpoints"
+  }
+ ],
+ "paths": {
+  "/v1/consents": {
+   "post": {
+    "summary": "Create Consent",
+    "description": "This method create a consent resource, defining access rights to PSU accounts. \nThese accounts are addressed explicitly in the method as parameters as a core function.\n\n**Side Effects**\nWhen this consent request is a requested and if it exists already a former consent on account information for the PSU, then the former consent automatically expires as soon as the new consent request is authorised by the PSU.\n\nOptional Extension:\n  * As an option, an ASPSP might optionally accept a specific access right on the access on PSD2 related services for all available accounts.\n\n  * As option an ASPSP might optionally also accept a command, where only access rights are inserted without mentioning the addressed account. The relation to accounts is then handled afterwards between PSU and ASPSP. \n\n  * As a last option, an ASPSP might in addition accept a command with access rights\n    * to see the list of available payment accounts or\n    * to see the list of available payment accounts with balances.\n",
+    "operationId": "aiscreateconsent",
+    "tags": [
+     "Consents"
+    ],
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/X-Request-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Digest"
+     },
+     {
+      "$ref": "#/components/parameters/X-JWS-Signature"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-ID"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-Corporate-ID"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Address"
+     },
+     {
+      "$ref": "#/components/parameters/Accept-Language"
+     },
+     {
+      "$ref": "#/components/parameters/TPP-Redirect-URI"
+     },
+     {
+      "$ref": "#/components/parameters/TPP-Explicit-Authorisation-Preferred"
+     },
+     {
+      "$ref": "#/components/parameters/TPP-Redirect-Preferred"
+     },
+     {
+      "$ref": "#/components/parameters/TPP-Decoupled-Preferred"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Port"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-Geo-Location"
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CreateConsentRequest"
+       },
+       "examples": {
+        "Consent Request on Dedicated Accounts": {
+         "$ref": "#/components/examples/CreateConsentRequest_DedicatedAccounts_Example"
+        },
+        "Consent Request on Account List of Available Accounts": {
+         "$ref": "#/components/examples/CreateConsentRequest_AvailableAccounts_Example"
+        },
+        "Consent Request on Account List or without Indication of dedicated Accounts": {
+         "$ref": "#/components/examples/CreateConsentRequest_BankOfferedAccounts_Example"
+        }
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Created",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       },
+       "ASPSP-SCA-Approach": {
+        "$ref": "#/components/headers/ASPSP-SCA-Approach"
+       },
+       "Location": {
+        "$ref": "#/components/headers/Location"
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CreateConsentResponse"
+        },
+        "examples": {
+         "Response example in case of a redirect with a dedicated start of the authorisation process": {
+          "$ref": "#/components/examples/CreateConsentResponse_Redirect_Example"
+         },
+         "Response example in case of the OAuth2 approach with an implicit generated authorisation resource": {
+          "$ref": "#/components/examples/CreateConsentResponse_OAuth2_Example"
+         },
+         "Response example in case of the decoupled approach": {
+          "$ref": "#/components/examples/CreateConsentResponse_Decoupled_Example"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/400_BadRequest_Example_Consents"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Server Error",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/500_InternalError_Example_Consents"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/consents/{consentId}": {
+   "delete": {
+    "summary": "Delete Consent",
+    "description": "The TPP can delete an account information consent object if needed.",
+    "operationId": "aisdeleteconsent",
+    "tags": [
+     "Consents"
+    ],
+    "security": [
+     {
+      "BearerAuthOAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/ConsentId"
+     },
+     {
+      "$ref": "#/components/parameters/X-Request-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Digest"
+     },
+     {
+      "$ref": "#/components/parameters/X-JWS-Signature"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Address"
+     },
+     {
+      "$ref": "#/components/parameters/Accept-Language"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Port"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-Geo-Location"
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "No Content",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/400_BadRequest_Example_Consents"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/401_Unauthorized_Example_Consents"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Forbidden",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/403_Forbidden_Example_Consents"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "NotFound",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/404_NotFound_Example_Consents"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Server Error",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/500_InternalError_Example_Consents"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "summary": "Get Consent Details",
+    "description": "Returns the content of an account information consent object. \nThis is returning the data for the TPP especially in cases, where the consent was directly managed between ASPSP and PSU e.g. in a redirect SCA Approach.\n",
+    "operationId": "aisgetconsentdetails",
+    "tags": [
+     "Consents"
+    ],
+    "security": [
+     {
+      "BearerAuthOAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/ConsentId"
+     },
+     {
+      "$ref": "#/components/parameters/X-Request-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Digest"
+     },
+     {
+      "$ref": "#/components/parameters/X-JWS-Signature"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Address"
+     },
+     {
+      "$ref": "#/components/parameters/Accept-Language"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Port"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-Geo-Location"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GetConsentResponse"
+        },
+        "examples": {
+         "Response on Get Consent request": {
+          "$ref": "#/components/examples/GetConsentResponse_Example"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/400_BadRequest_Example_Consents"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/401_Unauthorized_Example_Consents"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Forbidden",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/403_Forbidden_Example_Consents"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Server Error",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/500_InternalError_Example_Consents"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/consents/{consentId}/authorisations": {
+   "get": {
+    "summary": "Get Consent Authorisations",
+    "description": "Return a list of all authorisation subresources IDs which have been created.\n\nThis function returns an array of hyperlinks to all generated authorisation sub-resources.\n",
+    "operationId": "aisgetconsentauthorizations",
+    "tags": [
+     "Consents"
+    ],
+    "security": [
+     {
+      "BearerAuthOAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/ConsentId"
+     },
+     {
+      "$ref": "#/components/parameters/X-Request-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Digest"
+     },
+     {
+      "$ref": "#/components/parameters/X-JWS-Signature"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Address"
+     },
+     {
+      "$ref": "#/components/parameters/Accept-Language"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Port"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-Geo-Location"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AuthorisationIdsResponse"
+        },
+        "examples": {
+         "Response example on get consent authorisations request": {
+          "$ref": "#/components/examples/AuthorisationIdsResponse_Example"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/400_BadRequest_Example_Consents"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/401_Unauthorized_Example_Consents"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Forbidden",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/403_Forbidden_Example_Consents"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Server Error",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/500_InternalError_Example_Consents"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "summary": "Start Consent Authorisation Process",
+    "description": "Create an authorisation sub-resource and start the authorisation process of a consent. \nThe message might in addition transmit authentication and authorisation related data.\n\nThis method is iterated n times for a n times SCA authorisation in a corporate context, each creating an own authorisation sub-endpoint for the corresponding PSU authorising the consent.\n\nThe ASPSP might make the usage of this access method unnecessary, since the related authorisation resource will be automatically created by the ASPSP after the submission of the consent data with the first POST consents call.\n\nThe start authorisation process is a process which is needed for creating a new authorisation or cancellation sub-resource. \n\nThis applies in the following scenarios:\n\n  * The ASPSP has indicated with an 'startAuthorisation' hyperlink in the preceding Payment initiation response that an explicit start of the authorisation process is needed by the TPP. \n    The 'startAuthorisation' hyperlink can transport more information about data which needs to be uploaded by using the extended forms:\n    * 'startAuthorisationWithPsuIdentfication', \n    * 'startAuthorisationWithPsuAuthentication' \n    * 'startAuthorisationWithEncryptedPsuAuthentication'\n    * 'startAuthorisationWithAuthentciationMethodSelection' \n  * The related payment initiation cannot yet be executed since a multilevel SCA is mandated.\n  * The ASPSP has indicated with an 'startAuthorisation' hyperlink in the preceding payment cancellation response that an explicit start of the authorisation process is needed by the TPP. \n    The 'startAuthorisation' hyperlink can transport more information about data which needs to be uploaded by using the extended forms as indicated above.\n  * The related payment cancellation request cannot be applied yet since a multilevel SCA is mandate for executing the cancellation.\n  * The signing basket needs to be authorised yet.\n",
+    "operationId": "aisstartconsentauthorization",
+    "tags": [
+     "Consents"
+    ],
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/ConsentId"
+     },
+     {
+      "$ref": "#/components/parameters/X-Request-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Digest"
+     },
+     {
+      "$ref": "#/components/parameters/X-JWS-Signature"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-ID"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-Corporate-ID"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Address"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Port"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-Geo-Location"
+     },
+     {
+      "$ref": "#/components/parameters/Accept-Language"
+     },
+     {
+      "$ref": "#/components/parameters/TPP-Redirect-URI"
+     },
+     {
+      "$ref": "#/components/parameters/TPP-Redirect-Preferred"
+     },
+     {
+      "$ref": "#/components/parameters/TPP-Decoupled-Preferred"
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "Created",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       },
+       "ASPSP-SCA-Approach": {
+        "$ref": "#/components/headers/ASPSP-SCA-Approach"
+       },
+       "Location": {
+        "$ref": "#/components/headers/Location"
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/StartAuthorisationResponse"
+        },
+        "examples": {
+         "Response example in case of a redirect with a dedicated start of the authorisation process": {
+          "$ref": "#/components/examples/StartAuthorisationResponse_Redirect_Example"
+         },
+         "Response example in case of the decoupled approach": {
+          "$ref": "#/components/examples/StartAuthorisationResponse_Decoupled_Example"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/400_BadRequest_Example_Consents"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Forbidden",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/403_Forbidden_Example_Consents"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "NotFound",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/404_NotFound_Example_Consents"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Conflict",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/409_Conflict_Example_Consents"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Server Error",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/500_InternalError_Example_Consents"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/psd2/openbanking/oauth/authorize": {
+   "get": {
+    "summary": "Authorization",
+    "description": "To interact with the resource owner and get the authorization to access the protected resource.\n\n**NOTE**: for this method please use servers for .well-known and authorize endpoints:\n* https://test-api.tbcbank.ge - Sandbox\n* https://api.tbcbank.ge - Production\n",
+    "operationId": "aisoauthauhtorization",
+    "tags": [
+     "OAuth"
+    ],
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/Oauth-Client-Id"
+     },
+     {
+      "$ref": "#/components/parameters/Oauth-Scope"
+     },
+     {
+      "$ref": "#/components/parameters/Oauth-Response-Type"
+     },
+     {
+      "$ref": "#/components/parameters/Oauth-Redirect-Uri"
+     },
+     {
+      "$ref": "#/components/parameters/Oauth-Nonce"
+     },
+     {
+      "$ref": "#/components/parameters/Oauth-Code-Challenge-Method"
+     },
+     {
+      "$ref": "#/components/parameters/Oauth-Code-Challenge"
+     },
+     {
+      "$ref": "#/components/parameters/Oauth-Ui-Locales"
+     },
+     {
+      "$ref": "#/components/parameters/Oauth-State"
+     }
+    ],
+    "responses": {
+     "302": {
+      "description": "Found",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       },
+       "Location": {
+        "$ref": "#/components/headers/Location"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/openbanking/oauth/token": {
+   "post": {
+    "summary": "Authorize or Refresh Token",
+    "description": "This method authorizes or refreshes the token depending on the body of the request.\nFor creating new token required parameters are: code, grant_type, redirect_uri, code_verifier and client_id\n\nFor refreshing existing token required parameters are: refresh_token, grant_type, client_id\n",
+    "operationId": "aisoauthtoken",
+    "tags": [
+     "OAuth"
+    ],
+    "requestBody": {
+     "content": {
+      "application/x-www-form-urlencoded": {
+       "schema": {
+        "$ref": "#/components/schemas/OauthTokenRequest"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/OauthTokenResponse"
+        },
+        "examples": {
+         "Response example on oauth token generation": {
+          "$ref": "#/components/examples/OauthTokenResponse_Token_Example"
+         },
+         "Response example on refreshing oauth token": {
+          "$ref": "#/components/examples/OauthTokenResponse_RefreshToken_Example"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "BadRequest",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "examples": {
+         "Error example when Invalid Authorization Code": {
+          "$ref": "#/components/examples/400_BadRequest_Example_InvalidAuthorizationCode_Oauth"
+         },
+         "Error example when Certificate is Missing": {
+          "$ref": "#/components/examples/400_BadRequest_Example_CertificateMissing_Oauth"
+         }
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Server Error",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/500_InternalError_Example_Oauth"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/.well-known/oauth-authorization-server": {
+   "get": {
+    "summary": "Get Oauth Authorization Server",
+    "description": "Gets Oauth Authorization Server details.\n\n**NOTE**: for this method please use servers for .well-known and authorize endpoints:\n* https://test-api.tbcbank.ge - Sandbox\n* https://api.tbcbank.ge - Production\n",
+    "operationId": "aisopenidconfiguration",
+    "tags": [
+     "OAuth"
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/OAuthAuthorizationServerResponse"
+        },
+        "examples": {
+         "Response example on get oauth authorization server details": {
+          "$ref": "#/components/examples/OAuthAuthorizationServerResponse_Example"
+         }
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Server Error",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/500_InternalError_Example_Oauth"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/accounts/{account-id}/balances": {
+   "get": {
+    "summary": "Read Account Balances",
+    "description": "Reads account data from a given account addressed by \"account-id\"\n\n**Remark:** This account-id can be a tokenised identification due to data protection reason since the path information might be logged on intermediary servers within the ASPSP sphere.\nThis account-id then can be retrieved by the \"Get account list\" call.\n\nThe account-id is constant at least throughout the lifecycle of a given consent.\n",
+    "operationId": "aisreadaccountbalance",
+    "tags": [
+     "Accounts"
+    ],
+    "security": [
+     {
+      "BearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/Account-ID"
+     },
+     {
+      "$ref": "#/components/parameters/X-Request-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Consent-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Digest"
+     },
+     {
+      "$ref": "#/components/parameters/X-JWS-Signature"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Address"
+     },
+     {
+      "$ref": "#/components/parameters/Accept-Language"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GetBalanceResponse"
+        },
+        "examples": {
+         "Response example for get account balances": {
+          "$ref": "#/components/examples/GetBalanceResponse_Example"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/400_BadRequest_Example_Accounts"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/401_Unauthorized_Example_Accounts"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/404_NotFound_Example_Accounts"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Server Error",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/500_InternalError_Example_Accounts"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/accounts/{account-id}": {
+   "get": {
+    "summary": "Read Account Details",
+    "description": "Reads details about an account, with balances where required. \nIt is assumed that a consent of the PSU to this access is already given and stored on the ASPSP system. \nThe addressed details of this account depends then on the stored consent addressed by consentId, respectively the OAuth2 access token.\n\nNOTE: The account-id can represent a multicurrency account.\nIn this case the currency code is set to \"XXX\".\n",
+    "operationId": "aisreadaccountdetails",
+    "tags": [
+     "Accounts"
+    ],
+    "security": [
+     {
+      "BearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/Account-ID"
+     },
+     {
+      "$ref": "#/components/parameters/X-Request-ID"
+     },
+     {
+      "$ref": "#/components/parameters/WithBalance"
+     },
+     {
+      "$ref": "#/components/parameters/Consent-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Digest"
+     },
+     {
+      "$ref": "#/components/parameters/X-JWS-Signature"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Address"
+     },
+     {
+      "$ref": "#/components/parameters/Accept-Language"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GetPsd2AccountResponse"
+        },
+        "examples": {
+         "Response example for get account details": {
+          "$ref": "#/components/examples/GetPsd2AccountDetailsResponse_Example"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/400_BadRequest_Example_Accounts"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/401_Unauthorized_Example_Accounts"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/404_NotFound_Example_Accounts"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Server Error",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/500_InternalError_Example_Accounts"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/accounts": {
+   "get": {
+    "summary": "Read Account List",
+    "description": "Read the identifiers of the available payment account together with booking balance information, depending on the consent granted. \n\nReturns all identifiers of the accounts, to which an account access has been granted to through the /consents endpoint by the PSU.\nIn addition, relevant information about the accounts and hyperlinks to corresponding account information resources are provided if a related consent has been already granted.\n\nRemark: Note that the /consents endpoint optionally offers to grant an access on all available payment accounts of a PSU. \nIn this case, this endpoint will deliver the information about all available payment accounts of the PSU at this ASPSP.\"\n",
+    "operationId": "aisreadaccountlist",
+    "tags": [
+     "Accounts"
+    ],
+    "security": [
+     {
+      "BearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/X-Request-ID"
+     },
+     {
+      "$ref": "#/components/parameters/WithBalance"
+     },
+     {
+      "$ref": "#/components/parameters/Consent-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Digest"
+     },
+     {
+      "$ref": "#/components/parameters/X-JWS-Signature"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Address"
+     },
+     {
+      "$ref": "#/components/parameters/Accept-Language"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GetPsd2AccountsResponse"
+        },
+        "examples": {
+         "Response example for accounts list": {
+          "$ref": "#/components/examples/GetPsd2AccountsResponse_Example"
+         },
+         "Response example for available accounts": {
+          "$ref": "#/components/examples/GetPsd2AccountsResponse_AvailableAccounts_Example"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/400_BadRequest_Example_Accounts"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/401_Unauthorized_Example_Accounts"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/404_NotFound_Example_Accounts"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Server Error",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/500_InternalError_Example_Accounts"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/accounts/{account-id}/transactions": {
+   "get": {
+    "summary": "Read Account Transaction List",
+    "description": "Read transaction reports or transaction lists of a given account addressed by \"account-id\", depending on the steering parameter \"bookingStatus\" together with balances.\n\nFor a given account, additional parameters are e.g. the attributes \"dateFrom\" and \"dateTo\". \nThe ASPSP might add balance information, if transaction lists without balances are not supported.\n",
+    "operationId": "aisreadaccounttransactionlist",
+    "tags": [
+     "Accounts"
+    ],
+    "security": [
+     {
+      "BearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/Account-ID"
+     },
+     {
+      "$ref": "#/components/parameters/DateFrom"
+     },
+     {
+      "$ref": "#/components/parameters/DateTo"
+     },
+     {
+      "$ref": "#/components/parameters/BookingStatus"
+     },
+     {
+      "$ref": "#/components/parameters/WithBalance"
+     },
+     {
+      "$ref": "#/components/parameters/EntryReferenceFrom"
+     },
+     {
+      "$ref": "#/components/parameters/X-Request-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Consent-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Digest"
+     },
+     {
+      "$ref": "#/components/parameters/X-JWS-Signature"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Address"
+     },
+     {
+      "$ref": "#/components/parameters/Accept-Language"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GetPsd2TransactionsResponse"
+        },
+        "examples": {
+         "Response example for get account transactions list": {
+          "$ref": "#/components/examples/GetPsd2TransactionsResponse_Example"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/400_BadRequest_Example_Accounts"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/401_Unauthorized_Example_Accounts"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/404_NotFound_Example_Accounts"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Server Error",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/500_InternalError_Example_Accounts"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/card-accounts/{account-id}/balances": {
+   "get": {
+    "summary": "Read Card Account Balances",
+    "description": "Reads balance data from a given card account addressed by \"cardAccount-id\"\n\n**Remark**: This cardAccount-id can be a tokenised identification due to data protection reason since the path information might be logged on intermediary servers within the ASPSP sphere.\nThis cardAccount-id then can be retrieved by the \"Get card account list\" call.\n",
+    "operationId": "aisreadcardaccountbalances",
+    "tags": [
+     "Card Accounts"
+    ],
+    "security": [
+     {
+      "BearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/Account-ID"
+     },
+     {
+      "$ref": "#/components/parameters/X-Request-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Consent-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Digest"
+     },
+     {
+      "$ref": "#/components/parameters/X-JWS-Signature"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Address"
+     },
+     {
+      "$ref": "#/components/parameters/Accept-Language"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GetCardBalanceResponse"
+        },
+        "examples": {
+         "Response example for get card account balances": {
+          "$ref": "#/components/examples/GetCardAccountBalanceResponse_Example"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/400_BadRequest_Example_Accounts"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/401_Unauthorized_Example_Accounts"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/404_NotFound_Example_Accounts"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Server Error",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/500_InternalError_Example_Accounts"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/card-accounts/{account-id}": {
+   "get": {
+    "summary": "Read Card Account Details",
+    "description": "Reads details about a card account. \nIt is assumed that a consent of the PSU to this access is already given and stored on the ASPSP system.\nThe addressed details of this account depends then on the stored consent addressed by consentId, \nrespectively the OAuth2 access token.\n",
+    "operationId": "aisreadcardaccountdetails",
+    "tags": [
+     "Card Accounts"
+    ],
+    "security": [
+     {
+      "BearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/Account-ID"
+     },
+     {
+      "$ref": "#/components/parameters/X-Request-ID"
+     },
+     {
+      "$ref": "#/components/parameters/WithBalance"
+     },
+     {
+      "$ref": "#/components/parameters/Consent-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Digest"
+     },
+     {
+      "$ref": "#/components/parameters/X-JWS-Signature"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Address"
+     },
+     {
+      "$ref": "#/components/parameters/Accept-Language"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GetCardAccountResponse"
+        },
+        "examples": {
+         "Response example for get card account details": {
+          "$ref": "#/components/examples/GetCardAccountResponse_Example"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/400_BadRequest_Example_Accounts"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/401_Unauthorized_Example_Accounts"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/404_NotFound_Example_Accounts"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Server Error",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/500_InternalError_Example_Accounts"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/card-accounts": {
+   "get": {
+    "summary": "Read Card Account List",
+    "description": "Reads a list of card accounts with additional information, e.g. balance information. \nIt is assumed that a consent of the PSU to this access is already given and stored on the ASPSP system.\n\nThe addressed list of card accounts depends then on the PSU ID and the stored consent addressed by consentId, respectively the OAuth2 access token.\n",
+    "operationId": "aisreadcardaccountlist",
+    "tags": [
+     "Card Accounts"
+    ],
+    "security": [
+     {
+      "BearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/X-Request-ID"
+     },
+     {
+      "$ref": "#/components/parameters/WithBalance"
+     },
+     {
+      "$ref": "#/components/parameters/Consent-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Digest"
+     },
+     {
+      "$ref": "#/components/parameters/X-JWS-Signature"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Address"
+     },
+     {
+      "$ref": "#/components/parameters/Accept-Language"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GetCardAccountsResponse"
+        },
+        "examples": {
+         "Response example for get card account list": {
+          "$ref": "#/components/examples/GetCardAccountsResponse_withBalances_Example"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/400_BadRequest_Example_Accounts"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/401_Unauthorized_Example_Accounts"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/404_NotFound_Example_Accounts"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Server Error",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/500_InternalError_Example_Accounts"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/card-accounts/{account-id}/transactions": {
+   "get": {
+    "summary": "Read Card Account Transaction List",
+    "description": "Reads account data from a given card account addressed by \"account-id\".",
+    "operationId": "aisreadcardaccounttransactionlist",
+    "tags": [
+     "Card Accounts"
+    ],
+    "security": [
+     {
+      "BearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/Account-ID"
+     },
+     {
+      "$ref": "#/components/parameters/DateFrom"
+     },
+     {
+      "$ref": "#/components/parameters/DateTo"
+     },
+     {
+      "$ref": "#/components/parameters/BookingStatus"
+     },
+     {
+      "$ref": "#/components/parameters/WithBalance"
+     },
+     {
+      "$ref": "#/components/parameters/EntryReferenceFrom"
+     },
+     {
+      "$ref": "#/components/parameters/X-Request-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Consent-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Digest"
+     },
+     {
+      "$ref": "#/components/parameters/X-JWS-Signature"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Address"
+     },
+     {
+      "$ref": "#/components/parameters/Accept-Language"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GetCardTransactionsResponse"
+        },
+        "examples": {
+         "Response example for get card account transactions list": {
+          "$ref": "#/components/examples/GetCardAccountTransactionsResponse_Example"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/400_BadRequest_Example_Accounts"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/401_Unauthorized_Example_Accounts"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/404_NotFound_Example_Accounts"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Server Error",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/500_InternalError_Example_Accounts"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/consents/{consentId}/authorisations/{authorisationId}": {
+   "get": {
+    "summary": "Read Consent Authorisation Status",
+    "description": "This method returns the SCA status of a consent initiation's authorisation sub-resource.",
+    "operationId": "aisreadconsentauthorizationstatus",
+    "tags": [
+     "Consents"
+    ],
+    "security": [
+     {
+      "BearerAuthOAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/ConsentId"
+     },
+     {
+      "$ref": "#/components/parameters/AuthorisationId"
+     },
+     {
+      "$ref": "#/components/parameters/X-Request-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Digest"
+     },
+     {
+      "$ref": "#/components/parameters/X-JWS-Signature"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Address"
+     },
+     {
+      "$ref": "#/components/parameters/Accept-Language"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Port"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-Geo-Location"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AuthorisationStatusResponse"
+        },
+        "examples": {
+         "Response example on get consent authorisation status request": {
+          "$ref": "#/components/examples/AuthorisationStatusResponse_Example"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/400_BadRequest_Example_Consents"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/401_Unauthorized_Example_Consents"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Forbidden",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/403_Forbidden_Example_Consents"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Server Error",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/500_InternalError_Example_Consents"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/consents/{consentId}/status": {
+   "get": {
+    "summary": "Read Consent Status",
+    "description": "Read the status of an account information consent resource.",
+    "operationId": "aisreadconsentstatus",
+    "tags": [
+     "Consents"
+    ],
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/ConsentId"
+     },
+     {
+      "$ref": "#/components/parameters/X-Request-ID"
+     },
+     {
+      "$ref": "#/components/parameters/Digest"
+     },
+     {
+      "$ref": "#/components/parameters/X-JWS-Signature"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Address"
+     },
+     {
+      "$ref": "#/components/parameters/Accept-Language"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-IP-Port"
+     },
+     {
+      "$ref": "#/components/parameters/PSU-Geo-Location"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GetConsentStatusResponse"
+        },
+        "examples": {
+         "Response on Get Consent status request": {
+          "$ref": "#/components/examples/GetConsentStatusResponse_Example"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/400_BadRequest_Example_Consents"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/401_Unauthorized_Example_Consents"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Forbidden",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/403_Forbidden_Example_Consents"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Server Error",
+      "headers": {
+       "X-Request-ID": {
+        "$ref": "#/components/headers/X-Request-ID"
+       }
+      },
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "example": {
+         "$ref": "#/components/examples/500_InternalError_Example_Consents"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "headers": {
+   "X-Request-ID": {
+    "description": "ID of the request, unique to the call, as determined by the initiating party.",
+    "required": true,
+    "example": "dca140c0-7db3-4cf3-9415-81b5a141f5f3",
+    "schema": {
+     "type": "string",
+     "format": "uuid"
+    }
+   },
+   "ASPSP-SCA-Approach": {
+    "description": "This data element must be contained, if the SCA Approach is already fixed.\nPossible values are\n  * DECOUPLED\n  * REDIRECT\nThe OAuth SCA approach will be subsumed by REDIRECT.\n",
+    "schema": {
+     "type": "string",
+     "enum": [
+      "DECOUPLED",
+      "REDIRECT"
+     ]
+    },
+    "example": "REDIRECT",
+    "required": false
+   },
+   "Location": {
+    "description": "URI where the client can view and accept consent. In case of errron will be returned redirect uri with error and error description \n        \n***Examples:***\n  * ***success example with Location:***\n    \n    https://customerconsent.tbcbank.ge/loginappsandbox/session?sessionid=219d20e1-a34e-4608-89bc-0d55c66dd576\n\n  * ***error example:***\n\n    https://tempuri.org/callback?error=server_error&error_description=The authorization server encountered an unexpected condition that&state=e09bd498-262d-41be-8744-6a706ab3426a\n",
+    "schema": {
+     "type": "string",
+     "format": "uri"
+    },
+    "examples": {
+     "success example with Location": {
+      "value": "https://customerconsent.tbcbank.ge/loginappsandbox/session?sessionid=219d20e1-a34e-4608-89bc-0d55c66dd576"
+     },
+     "error example": {
+      "value": "https://tempuri.org/callback?error=server_error&error_description=The authorization server encountered an unexpected condition that&state=e09bd498-262d-41be-8744-6a706ab3426a"
+     }
+    },
+    "required": false
+   }
+  },
+  "parameters": {
+   "X-Request-ID": {
+    "name": "X-Request-ID",
+    "in": "header",
+    "description": "ID of the request, unique to the call, as determined by the initiating party.",
+    "required": true,
+    "example": "dca140c0-7db3-4cf3-9415-81b5a141f5f3",
+    "schema": {
+     "type": "string",
+     "format": "uuid"
+    }
+   },
+   "Digest": {
+    "name": "Digest",
+    "in": "header",
+    "description": "Is contained if and only if the \"Signature\" element is contained in the header of the request.",
+    "required": true,
+    "example": "SHA-256=+cHUU0wsuM/h13R5ler2wULmkj+gN3XAuUww3SbbAdM=",
+    "schema": {
+     "type": "string"
+    }
+   },
+   "X-JWS-Signature": {
+    "name": "X-JWS-Signature",
+    "in": "header",
+    "description": "A signature of the request by the TPP on application level. This might be mandated by ASPSP.",
+    "required": true,
+    "schema": {
+     "type": "string"
+    }
+   },
+   "PSU-ID": {
+    "name": "PSU-ID",
+    "in": "header",
+    "description": "Identity number of user to identify client in ASPSP systems.",
+    "example": "PNOGE-01234567890",
+    "schema": {
+     "type": "string"
+    }
+   },
+   "PSU-Corporate-ID": {
+    "name": "PSU-Corporate-ID",
+    "in": "header",
+    "description": "Identity number of corporate user to identify corporate client in ASPSP systems.",
+    "schema": {
+     "type": "string"
+    },
+    "example": "NTRGE-0123456789"
+   },
+   "PSU-IP-Address": {
+    "name": "PSU-IP-Address",
+    "in": "header",
+    "description": "The forwarded IP Address header field consists of the corresponding HTTP request IP Address field between PSU and TPP. It shall be contained if and only if this request was actively initiated by the PSU.",
+    "required": true,
+    "example": "123.345.567.78",
+    "schema": {
+     "type": "string",
+     "format": "ipv4 or ipv6"
+    }
+   },
+   "Accept-Language": {
+    "name": "Accept-Language",
+    "in": "header",
+    "description": "HTTP header indicates the natural language and locale that the client prefers.",
+    "example": "ka",
+    "schema": {
+     "type": "string"
+    }
+   },
+   "TPP-Redirect-URI": {
+    "name": "TPP-Redirect-URI",
+    "in": "header",
+    "description": "URI of the TPP, where user will be redirected to after accepting consent.",
+    "required": true,
+    "example": "https://tpp.com/redirect",
+    "schema": {
+     "type": "string",
+     "format": "uri"
+    }
+   },
+   "TPP-Explicit-Authorisation-Preferred": {
+    "name": "TPP-Explicit-Authorisation-Preferred",
+    "in": "header",
+    "description": "If it equals \"true\", the TPP prefers to start the authorisation process separately.\nIf it equals \"false\" or if the parameter is not used, there is no preference of the TPP.\nThis especially indicates that the TPP assumes a direct authorisation of the transaction in the next step.\n",
+    "schema": {
+     "type": "boolean"
+    },
+    "example": false
+   },
+   "TPP-Redirect-Preferred": {
+    "name": "TPP-Redirect-Preferred",
+    "in": "header",
+    "description": "If it equals \"true\", the TPP prefers a redirect SCA approach.\nIf it equals \"false\", the TPP prefers not to be redirected for SCA. The ASPSP will consider the Decoupled SCA approach, depending on the parameter TPP-Decoupled-Preferred.\n\n**The parameter is required to be false, if TPP prefers to use decoupled SCA aproach and TPP-Decoupled-Preferred is \"true\".**\n\nIf the parameter is not used, ASPSP will consider Redirect SCA Approach.\n",
+    "schema": {
+     "type": "boolean"
+    },
+    "example": false
+   },
+   "TPP-Decoupled-Preferred": {
+    "name": "TPP-Decoupled-Preferred",
+    "in": "header",
+    "description": "If it equals \"true\", the TPP prefers a decoupled SCA approach. \nIf it equals \"false\", the TPP prefers not to use the decoupled approach for SCA. The ASPSP will consider redirect as SCA approach.\n\n**The parameter is required if TPP prefers to use decoupled SCA aproach.**\n\nIf both parameters TPP-Redirect-Preferred and TPP-Decoupled-Preferred are present and true, the request is still not rejected and  ASPSP will consider Redirect SCA Approach.\n",
+    "schema": {
+     "type": "boolean"
+    },
+    "example": false
+   },
+   "PSU-IP-Port": {
+    "name": "PSU-IP-Port",
+    "in": "header",
+    "description": "The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available.",
+    "example": "1234",
+    "schema": {
+     "type": "string"
+    }
+   },
+   "PSU-Geo-Location": {
+    "name": "PSU-Geo-Location",
+    "in": "header",
+    "description": "The forwarded Geo Location of the corresponding http request between PSU and TPP if available.",
+    "example": "GEO:42.00;43.50",
+    "schema": {
+     "type": "string"
+    }
+   },
+   "ConsentId": {
+    "description": "ID of the corresponding consent object as returned by an account information consent request.\n",
+    "name": "consentId",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "string"
+    }
+   },
+   "Oauth-Client-Id": {
+    "name": "client_id",
+    "required": true,
+    "in": "query",
+    "description": "The client identifier issued to the client during the registration process\n",
+    "schema": {
+     "type": "string"
+    },
+    "example": "PSDGE-NBG-TESTGE11"
+   },
+   "Oauth-Scope": {
+    "name": "scope",
+    "in": "query",
+    "description": "The authorization and token endpoints allow the client to specify the scope of the access request using the \"scope\" request parameter.  In turn, the authorization server uses the \"scope\" response parameter to inform the client of the scope of the access token issued. The value of the scope parameter is expressed as a list of space-delimited, case-sensitive strings.  The strings are defined by the authorization server.  If the value contains multiple space-delimited strings, their order does not matter, and each string adds an additional access range to the requested scope.\n",
+    "schema": {
+     "type": "string"
+    },
+    "required": true,
+    "example": "AIS:65cf58ce-8961-4184-b525-6456b5bc33f8"
+   },
+   "Oauth-Response-Type": {
+    "name": "response_type",
+    "required": true,
+    "in": "query",
+    "description": "The value MUST be one of \"code\" for requesting an authorization code, \"token\" for requesting an access token (implicit grant) or a registered extension value\n",
+    "schema": {
+     "type": "string"
+    },
+    "example": "code"
+   },
+   "Oauth-Redirect-Uri": {
+    "name": "redirect_uri",
+    "required": true,
+    "in": "query",
+    "description": "After completing its interaction with the resource owner, the authorization server directs the resource owner's user-agent back to the client.  The authorization server redirects the user-agent to the client's 'redirect_uri' previously established with the authorization server during the client registration process or when making the authorization request. The 'redirect_uri' MUST be an absolute URI.\n",
+    "schema": {
+     "type": "string"
+    },
+    "example": "https://www.tppredirect.ge/callback"
+   },
+   "Oauth-Nonce": {
+    "name": "nonce",
+    "required": true,
+    "in": "query",
+    "description": "String value used to associate a Client session with an ID Token, and to mitigate replay attacks. The value is passed through unmodified from the Authorization Request to the ID Token. Sufficient entropy MUST be present in the nonce values used to prevent attackers from guessing values.\n",
+    "schema": {
+     "type": "string"
+    },
+    "example": 1682590731
+   },
+   "Oauth-Code-Challenge-Method": {
+    "name": "code_challenge_method",
+    "in": "query",
+    "description": "Method used to generate the challenge (e.g., S256). The PKCE spec defines two methods, S256 and plain, the former is used in this example and is the only one supported by Auth0 since the latter is discouraged.\n",
+    "schema": {
+     "type": "string"
+    },
+    "example": "S256"
+   },
+   "Oauth-Code-Challenge": {
+    "name": "code_challenge",
+    "in": "query",
+    "description": "The authorization server should recognize the code_challenge parameter in the request, and associate that with the authorization code it generates.\n",
+    "schema": {
+     "type": "string"
+    },
+    "example": "3Od3Qrwcf1J3b1VBRVV52jNhLu7aOPj2Y71gh8CTISg"
+   },
+   "Oauth-Ui-Locales": {
+    "name": "ui_locales",
+    "in": "query",
+    "description": "Specifies the preferred languages and scripts for the user interface.\n",
+    "schema": {
+     "type": "string"
+    },
+    "example": "ka"
+   },
+   "Oauth-State": {
+    "name": "state",
+    "required": true,
+    "in": "query",
+    "description": "An opaque value that the client application may use. If this request parameter is contained in the authorization request, it is returned to the redirect URI as a query parameter.\n",
+    "schema": {
+     "type": "string"
+    },
+    "example": "a9fd8be3-0489-4fe0-a286-c27b1b28f2a6"
+   },
+   "Consent-ID": {
+    "name": "Consent-ID",
+    "in": "header",
+    "description": "This then contains the consentId of the related AIS consent, which was performed prior to this payment initiation.",
+    "required": true,
+    "style": "simple",
+    "schema": {
+     "type": "string"
+    },
+    "example": "d87251a0-17a1-411c-b2d3-fc42eb9c87af"
+   },
+   "Account-ID": {
+    "name": "account-id",
+    "in": "path",
+    "description": "This identification is denoting the addressed (card) account. \nThe account-id is retrieved by using a \"Read Account List\" of \"Read Card Account List\" call. \nThe account-id is the \"resourceId\" attribute of the account structure. \nIts value is constant at least throughout the lifecycle of a given consent.\n",
+    "required": true,
+    "schema": {
+     "type": "string"
+    }
+   },
+   "WithBalance": {
+    "name": "withBalance",
+    "in": "query",
+    "description": "If contained, this function reads the list of accessible payment accounts including the booking balance, \nif granted by the PSU in the related consent and available by the ASPSP. \nThis parameter might be ignored by the ASPSP.\n",
+    "style": "form",
+    "schema": {
+     "type": "boolean"
+    },
+    "example": true
+   },
+   "DateFrom": {
+    "name": "dateFrom",
+    "in": "query",
+    "description": "Conditional: Starting date (inclusive the date dateFrom) of the transaction list.\n\nFor booked transactions, the relevant date is the booking date.\n\nFor pending transactions, the relevant date is the entry date, \nwhich may not be transparent neither in this API nor other channels of the ASPSP.\n",
+    "style": "form",
+    "schema": {
+     "type": "string",
+     "format": "date-time"
+    }
+   },
+   "DateTo": {
+    "name": "dateTo",
+    "in": "query",
+    "description": "Conditional: End date (inclusive the data dateTo) of the transaction list, default is \"now\" if not given.\n\nFor booked transactions, the relevant date is the booking date.\n\nFor pending transactions, the relevant date is the entry date, \nwhich may not be transparent neither in this API nor other channels of the ASPSP.\n",
+    "style": "form",
+    "schema": {
+     "type": "string",
+     "format": "date-time"
+    }
+   },
+   "BookingStatus": {
+    "name": "bookingStatus",
+    "in": "query",
+    "description": "Permitted codes are\n  * \"booked\",\n  * \"pending\"\n  * \"both\"            \n\n\"booked\" shall be supported by the ASPSP. \n\nTo support the \"pending\" and \"both\" feature is optional for the ASPSP.\n\nError code if not supported in the online banking frontend. \n\nIf supported, \"both\" means to request transaction reports of transaction of bookingStatus either \"pending\" or \"booked\".\n",
+    "style": "form",
+    "schema": {
+     "type": "string",
+     "enum": [
+      "booked",
+      "pending",
+      "both"
+     ]
+    }
+   },
+   "EntryReferenceFrom": {
+    "name": "entryReferenceFrom",
+    "in": "query",
+    "description": "This data attribute is indicating that the AISP is in favour to get all transactions after the transaction with identification entryReferenceFrom alternatively to the above defined period.\n\nOptional if supported by API provider.\n",
+    "style": "form",
+    "schema": {
+     "type": "string"
+    }
+   },
+   "AuthorisationId": {
+    "name": "authorisationId",
+    "in": "path",
+    "description": "Resource identification of the related SCA.",
+    "required": true,
+    "schema": {
+     "type": "string"
+    }
+   }
+  },
+  "schemas": {
+   "AccountAccess": {
+    "type": "object",
+    "description": "Requested access services for a consent.",
+    "properties": {
+     "accounts": {
+      "description": "Is asking for detailed account information. \n\nIf the array is empty in a request, the TPP is asking for an accessible account list. \nThis may be restricted in a PSU/ASPSP authorization dialogue. \nIf the array is empty, also the arrays for balances, additionalInformation sub attributes or transactions shall be empty, if used.\n",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/AccountReference"
+      }
+     },
+     "balances": {
+      "description": "Is asking for balances of the addressed accounts.\n\nIf the array is empty in the request, the TPP is asking for the balances of all accessible account lists. \nThis may be restricted in a PSU/ASPSP authorization dialogue. \nIf the array is empty, also the arrays for accounts, additionalInformation sub attributes or transactions shall be empty, if used.\n",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/AccountReference"
+      }
+     },
+     "transactions": {
+      "description": "Is asking for transactions of the addressed accounts. \n\nIf the array is empty in the request, the TPP is asking for the transactions of all accessible account lists. \nThis may be restricted in a PSU/ASPSP authorization dialogue. \nIf the array is empty, also the arrays for accounts, additionalInformation sub attributes or balances shall be empty, if used.\n",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/AccountReference"
+      }
+     },
+     "availableAccounts": {
+      "description": "Optional if supported by API provider.\n\nThe values \"allAccounts\" and \"allAccountsWithOwnerName\" are admitted. \nThe support of the \"allAccountsWithOwnerName\" value by the ASPSP is optional.\n",
+      "type": "string",
+      "enum": [
+       "allAccounts",
+       "allAccountsWithOwnerName"
+      ]
+     },
+     "availableAccountsWithBalance": {
+      "description": "Optional if supported by API provider.\n\nThe values \"allAccounts\" and \"allAccountsWithOwnerName\" are admitted. \nThe support of the \"allAccountsWithOwnerName\" value by the ASPSP is optional.\n",
+      "type": "string",
+      "enum": [
+       "allAccounts",
+       "allAccountsWithOwnerName"
+      ]
+     },
+     "additionalInformation": {
+      "$ref": "#/components/schemas/AdditionalInformationAccess"
+     }
+    }
+   },
+   "AccountReference": {
+    "type": "object",
+    "description": "Reference to an account by either\n  * IBAN, of a payment accounts, or\n  * the Primary Account Number (PAN) of a card in a masked form, or\n",
+    "properties": {
+     "iban": {
+      "description": "IBAN of an account",
+      "type": "string"
+     },
+     "maskedPan": {
+      "maxLength": 35,
+      "type": "string",
+      "description": "Masked Primary Account Number."
+     },
+     "currency": {
+      "type": "string",
+      "description": "ISO 4217 Alpha 3 currency code."
+     },
+     "cashAccountType": {
+      "type": "string",
+      "description": "ExternalCashAccountType1Code from ISO 20022.",
+      "enum": [
+       "CACC",
+       "CARD"
+      ]
+     }
+    }
+   },
+   "AdditionalInformationAccess": {
+    "description": "Is asking for additional information as added within this structured object.\nThe usage of this data element requires at least one of the entries \"accounts\", \n\"transactions\" or \"balances\" also to be contained in the object. \nIf detailed accounts are referenced, it is required in addition that any account addressed within \nthe additionalInformation attribute is also addressed by at least one of the attributes \"accounts\", \n\"transactions\" or \"balances\".\n",
+    "type": "object",
+    "properties": {
+     "ownerName": {
+      "type": "array",
+      "description": "Is asking for account owner name of the accounts referenced within. \nIf the array is empty in the request, the TPP is asking for the account \nowner name of all accessible accounts. \nThis may be restricted in a PSU/ASPSP authorization dialogue. \nIf the array is empty, also the arrays for accounts, balances or transactions shall be empty, if used.\nThe ASPSP will indicate in the consent resource after a successful authorisation, \nwhether the ownerName consent can be accepted by providing the accounts on which the ownerName will \nbe delivered. \nThis array can be empty.\n",
+      "items": {
+       "$ref": "#/components/schemas/AccountReference"
+      }
+     }
+    }
+   },
+   "CombinedServiceIndicator": {
+    "type": "boolean",
+    "description": "If \"true\" indicates that a payment initiation service will be addressed in the same \"session\"."
+   },
+   "ConsentId": {
+    "description": "ID of the corresponding consent object as returned by an account information consent request.",
+    "type": "string",
+    "format": "uuid"
+   },
+   "ConsentStatus": {
+    "type": "string",
+    "description": "This is the overall lifecycle status of the consent.\nValid values are:\n- 'received': The consent data have been received and are technically correct. \n  The data is not authorised yet.\n- 'rejected': The consent data have been rejected e.g. since no successful authorisation has taken place.\n- 'valid': The consent is accepted and valid for GET account data calls and others as specified in the consent object.\n- 'revokedByPsu': The consent has been revoked by the PSU towards the ASPSP.\n- 'expired': The consent expired.\n- 'terminatedByTpp': The corresponding TPP has terminated the consent by applying the DELETE method to the consent resource.\n",
+    "enum": [
+     "received",
+     "rejected",
+     "valid",
+     "revokedByPsu",
+     "expired",
+     "terminatedByTpp"
+    ]
+   },
+   "CreateConsentRequest": {
+    "type": "object",
+    "description": "Request body for a consents request.",
+    "required": [
+     "access",
+     "recurringIndicator",
+     "validUntil",
+     "frequencyPerDay",
+     "combinedServiceIndicator"
+    ],
+    "properties": {
+     "access": {
+      "$ref": "#/components/schemas/AccountAccess"
+     },
+     "recurringIndicator": {
+      "$ref": "#/components/schemas/RecurringIndicator"
+     },
+     "validUntil": {
+      "$ref": "#/components/schemas/ValidUntil"
+     },
+     "frequencyPerDay": {
+      "$ref": "#/components/schemas/FrequencyPerDay"
+     },
+     "combinedServiceIndicator": {
+      "$ref": "#/components/schemas/CombinedServiceIndicator"
+     }
+    }
+   },
+   "CreateConsentResponse": {
+    "type": "object",
+    "description": "Body of the response for a successful consent request.",
+    "required": [
+     "consentStatus",
+     "consentId",
+     "_links"
+    ],
+    "properties": {
+     "consentStatus": {
+      "$ref": "#/components/schemas/ConsentStatus"
+     },
+     "consentId": {
+      "$ref": "#/components/schemas/ConsentId"
+     },
+     "_links": {
+      "$ref": "#/components/schemas/LinksConsents"
+     },
+     "psuMessage": {
+      "$ref": "#/components/schemas/PsuMessage"
+     }
+    }
+   },
+   "FrequencyPerDay": {
+    "type": "integer",
+    "description": "This field indicates the requested maximum frequency for an access without PSU involvement per day. For a one-off access, this attribute is set to \"1\". The frequency needs to be greater equal to one. If not otherwise agreed bilaterally between TPP and ASPSP, the frequency is less equal to 4.",
+    "format": "int32"
+   },
+   "HrefType": {
+    "description": "Link to a resource.",
+    "type": "object",
+    "properties": {
+     "href": {
+      "type": "string",
+      "description": "Link to a resource."
+     }
+    }
+   },
+   "LinksConsents": {
+    "type": "object",
+    "description": "A list of hyperlinks to be recognised by the TPP.\n\nType of links admitted in this response (which might be extended by single ASPSPs as indicated in its XS2A \ndocumentation):\n  * 'scaRedirect': \n    In case of an SCA Redirect Approach, the ASPSP is transmitting the link to which to redirect the \n    PSU browser.\n  * 'scaOAuth': \n    In case of an OAuth2 based Redirect Approach, the ASPSP is transmitting the link where the configuration \n    of the OAuth2 Server is defined. \n    The configuration follows the OAuth 2.0 Authorisation Server Metadata specification. \n  * 'startAuthorisation': \n    In case, where an explicit start of the transaction authorisation is needed, \n    but no more data needs to be updated (no authentication method to be selected, \n    no PSU identification nor PSU authentication data to be uploaded).\n  * 'startAuthorisationWithPsuIdentification': \n    The link to the authorisation end-point, where the authorisation sub-resource has to be generated \n    while uploading the PSU identification data.\n  * 'self': \n    The link to the Establish Account Information Consent resource created by this request. \n    This link can be used to retrieve the resource data. \n  * 'status': \n    The link to retrieve the status of the account information consent.\n  * 'scaStatus': The link to retrieve the scaStatus of the corresponding authorisation sub-resource. \n    This link is only contained, if an authorisation sub-resource has been already created.\n",
+    "properties": {
+     "scaRedirect": {
+      "$ref": "#/components/schemas/HrefType"
+     },
+     "scaOAuth": {
+      "$ref": "#/components/schemas/HrefType"
+     },
+     "startAuthorisation": {
+      "$ref": "#/components/schemas/HrefType"
+     },
+     "startAuthorisationWithPsuIdentification": {
+      "$ref": "#/components/schemas/HrefType"
+     },
+     "self": {
+      "$ref": "#/components/schemas/HrefType"
+     },
+     "status": {
+      "$ref": "#/components/schemas/HrefType"
+     },
+     "scaStatus": {
+      "$ref": "#/components/schemas/HrefType"
+     }
+    }
+   },
+   "ApiProblemDetails": {
+    "description": "A machine-readable format for specifying errors in HTTP API responses.",
+    "type": "object",
+    "properties": {
+     "type": {
+      "description": "A URI reference [RFC3986] that identifies the problem type.",
+      "type": "string"
+     },
+     "title": {
+      "description": "A short, human-readable summary of the problem type.",
+      "type": "string"
+     },
+     "status": {
+      "description": "The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.",
+      "type": "integer",
+      "format": "int32"
+     },
+     "detail": {
+      "description": "A human-readable explanation specific to this occurrence of the problem.",
+      "type": "string"
+     },
+     "instance": {
+      "description": "A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced.",
+      "type": "string"
+     },
+     "traceId": {
+      "description": "Message identification for searching errors",
+      "type": "string"
+     },
+     "code": {
+      "type": "string",
+      "description": "Message codes defined for AIS for appropriate HTTP status code"
+     }
+    }
+   },
+   "PsuMessage": {
+    "description": "Text to be displayed to the PSU. Used only during Decoupled Authorisation.",
+    "type": "string"
+   },
+   "RecurringIndicator": {
+    "type": "boolean",
+    "description": "\"true\", if the consent is for recurring access to the account data. \"false\", if the consent is for one access to the account data.\n",
+    "example": false
+   },
+   "ValidUntil": {
+    "type": "string",
+    "format": "date",
+    "description": "This parameter is defining a valid until date (including the mentioned date) for the requested consent. \n\nMax value for this field is 90 days. \nIf date is provided more than 90 days, it will be decreased to 90 days.\nLess than 90 days, will remain same as provided date.\n",
+    "example": "2022-12-31T00:00:00.000Z"
+   },
+   "AuthorisationId": {
+    "description": "Resource identification of the related SCA.",
+    "type": "string"
+   },
+   "AuthorisationIdsResponse": {
+    "description": "Body of the response for a successfull get authorisations request.",
+    "type": "object",
+    "required": [
+     "authorisationIds"
+    ],
+    "properties": {
+     "authorisationIds": {
+      "description": "An array of all authorisationIds.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/AuthorisationId"
+      }
+     }
+    }
+   },
+   "GetConsentResponse": {
+    "type": "object",
+    "description": "Body of the response for a successfull get consent request.",
+    "required": [
+     "access",
+     "recurringIndicator",
+     "validUntil",
+     "frequencyPerDay",
+     "lastActionDate",
+     "consentStatus"
+    ],
+    "properties": {
+     "access": {
+      "$ref": "#/components/schemas/AccountAccess"
+     },
+     "recurringIndicator": {
+      "$ref": "#/components/schemas/RecurringIndicator"
+     },
+     "validUntil": {
+      "$ref": "#/components/schemas/ValidUntil"
+     },
+     "frequencyPerDay": {
+      "$ref": "#/components/schemas/FrequencyPerDay"
+     },
+     "lastActionDate": {
+      "$ref": "#/components/schemas/LastActionDate"
+     },
+     "consentStatus": {
+      "$ref": "#/components/schemas/ConsentStatus"
+     },
+     "_links": {
+      "$ref": "#/components/schemas/LinksConsentsInfo"
+     }
+    }
+   },
+   "LastActionDate": {
+    "type": "string",
+    "format": "date",
+    "description": "This date is containing the date of the last action on the consent object either through the XS2A interface or the PSU/ASPSP interface having an impact on the status."
+   },
+   "LinksConsentsInfo": {
+    "type": "object",
+    "description": "A list of hyperlinks to be recognised by the TPP.\n\nLinks of type \"account\" and/or \"cardAccount\", depending on the nature of the consent.\n",
+    "properties": {
+     "account": {
+      "$ref": "#/components/schemas/HrefType"
+     },
+     "cardAccount": {
+      "$ref": "#/components/schemas/HrefType"
+     }
+    }
+   },
+   "OauthTokenRequest": {
+    "type": "object",
+    "description": "Request body for a consents request.",
+    "required": [
+     "client_id",
+     "grant_type"
+    ],
+    "properties": {
+     "client_id": {
+      "type": "string",
+      "description": "The client identifier issued to the client during the registration process"
+     },
+     "code": {
+      "type": "string",
+      "description": "The client will send the authorization code it obtained in the redirect"
+     },
+     "grant_type": {
+      "enum": [
+       "authorization_code",
+       "refresh_token",
+       "client_credentials"
+      ],
+      "description": "When creating new token grant_type must be 'authorization_code', for refresh token grant_type must be 'refresh_token'.\n\nIn case Decoupled Authorization value must be 'client_credentials'\n"
+     },
+     "code_verifier": {
+      "type": "string",
+      "description": "code verifier"
+     },
+     "refresh_token": {
+      "type": "string",
+      "description": "refresh_token parameter used when refreshing the token"
+     },
+     "redirect_uri": {
+      "type": "string",
+      "description": "The redirect URL that was used in the initial authorization request"
+     }
+    }
+   },
+   "OauthTokenResponse": {
+    "type": "object",
+    "properties": {
+     "access_token": {
+      "type": "string",
+      "description": "Access tokens are credentials used to access protected resources. An access token is a string representing an authorization issued to the client.  The string is usually opaque to the client.  Tokens represent specific scopes and durations of access, granted by the resource owner, and enforced by the resource server and authorization server.",
+      "example": "ffODwEVU5sD9RADdEWEYUQNijrcE"
+     },
+     "token_type": {
+      "type": "string",
+      "description": "The access token type provides the client with the information required to successfully utilize the access token to make a protected resource request (along with type-specific attributes).  The client MUST NOT use an access token if it does not understand the token type.",
+      "example": "Bearer"
+     },
+     "refresh_token": {
+      "type": "string",
+      "description": "Refresh tokens are credentials used to obtain access tokens.  Refresh tokens are issued to the client by the authorization server and are used to obtain a new access token when the current access token becomes invalid or expires, or to obtain additional access tokens with identical or narrower scope (access tokens may have a shorter lifetime and fewer permissions than authorized by the resource owner).  Issuing a refresh token is optional at the discretion of the authorization server.",
+      "example": "qjfHpGMyOZGv7gZVRxGPGoPfbgHNwIHs"
+     },
+     "refresh_token_issued_at": {
+      "type": "string",
+      "description": "refresh token issued timestamp",
+      "example": "1682595156807"
+     },
+     "refresh_token_expires_in": {
+      "type": "string",
+      "description": "The lifetime in seconds of the access token. For example, the value \"3600\" denotes that the access token will expire in one hour from the time the response was generated. If omitted, the authorization server SHOULD provide the expiration time via other means or document the default value",
+      "example": "7775593"
+     },
+     "refresh_count": {
+      "type": "integer",
+      "description": "indicates how many times the token has been refreshed",
+      "example": 1
+     },
+     "scope": {
+      "type": "string",
+      "description": "The authorization and token endpoints allow the client to specify the scope of the access request using the \"scope\" request parameter.  In turn, the authorization server uses the \"scope\" response parameter to inform the client of the scope of the access token issued.",
+      "example": "PIS:45f90ecc-3879-4574-de8e-08db40b82e17"
+     },
+     "issued_at": {
+      "type": "string",
+      "description": "refresh token last update timestamp",
+      "example": "1682595563649"
+     },
+     "expires_in": {
+      "type": "string",
+      "description": "current token expire seconds",
+      "example": "3599"
+     }
+    }
+   },
+   "OAuthAuthorizationServerResponse": {
+    "type": "object",
+    "description": "The authorization server authenticates requests sent to the resource server.",
+    "properties": {
+     "issuer": {
+      "type": "string",
+      "description": "the URL the Authorization Server asserts as its Issuer Identifier.",
+      "example": "https://test-api.tbcbank.ge/.well-known"
+     },
+     "authorization_endpoint": {
+      "type": "string",
+      "description": "the URL of the OAuth 2.0 Authorization Endpoint.",
+      "example": "https://test-api.tbcbank.ge/psd2/openbanking/oauth/authorize"
+     },
+     "token_endpoint": {
+      "type": "string",
+      "description": "the URL of the OAuth 2.0 Token Endpoint.",
+      "example": "https://test-openbanking.tbcbank.ge/openbanking/oauth/token"
+     },
+     "token_endpoint_auth_methods_supported": {
+      "enum": [
+       "tls_client_auth"
+      ],
+      "description": "the client authentication methods supported by the OAuth 2.0 Token Endpoint.",
+      "example": "tls_client_auth"
+     },
+     "tls_client_certificate_bound_access_tokens": {
+      "type": "boolean",
+      "description": "Boolean value indicating server support for mutual-TLS client certificate-bound access tokens. If omitted, the default value is false.",
+      "example": false
+     },
+     "registration_endpoint": {
+      "type": "string",
+      "description": "the URL of the OAuth 2.0 Dynamic Client Registration Endpoint.",
+      "example": "https://test-openbanking.tbcbank.ge/openbanking/oauth/register"
+     },
+     "scopes_supported": {
+      "description": "the OAuth 2.0 scope values supported.",
+      "enum": [
+       "openid",
+       "AIS:<consentId>",
+       "PIS:<paymentId>"
+      ],
+      "example": "PIS:74822a8c-0c97-48a8-9d34-54f7a523e7f8"
+     },
+     "response_types_supported": {
+      "enum": [
+       "code"
+      ],
+      "description": "the OAuth 2.0 response_type values supported.",
+      "example": "code"
+     },
+     "grant_types_supported": {
+      "enum": [
+       "authorization_code",
+       "refresh_token"
+      ],
+      "description": "the OAuth 2.0 grant_type values supported.",
+      "example": "authorization_code"
+     },
+     "revocation_endpoint_auth_methods_supported": {
+      "enum": [
+       "tls_client_auth"
+      ],
+      "description": "the client authentication methods supported by the OAuth 2.0 Token Revocation Endpoint"
+     },
+     "revocation_endpoint": {
+      "type": "string",
+      "description": "the URL of the OAuth 2.0 Token Revocation Endpoint",
+      "example": "https://test-openbanking.tbcbank.ge/openbanking/oauth/token"
+     },
+     "ui_locales_supported": {
+      "enum": [
+       "en",
+       "ka"
+      ],
+      "description": "the OAuth 2.0 ui_locales values supported.",
+      "example": "ka"
+     }
+    }
+   },
+   "AccountReferenceResponse": {
+    "type": "object",
+    "properties": {
+     "iban": {
+      "type": "string",
+      "description": "IBAN of an account",
+      "nullable": true,
+      "example": "FR7612345987650123456789014"
+     },
+     "bban": {
+      "type": "string",
+      "description": "Basic Bank Account Number (BBAN) Identifier.\r\n<br /><br />\r\nThis data element can be used in the body of the consent request. Message for retrieving account access consent from this account. This data elements is used for payment accounts which have no IBAN. ISO20022: Basic Bank Account Number (BBAN).\r\n<br /><br />\r\nIdentifier used nationally by financial institutions, i.e., in individual countries, generally as part of a National Account Numbering Scheme(s), which uniquely identifies the account of a customer.",
+      "nullable": true,
+      "example": "BARC12345612345678"
+     },
+     "pan": {
+      "type": "string",
+      "description": "Primary Account Number according to ISO/IEC 7812.",
+      "nullable": true,
+      "example": "5409050000000000"
+     },
+     "maskedPan": {
+      "type": "string",
+      "description": "Masked Primary Account Number.",
+      "nullable": true,
+      "example": "123456xxxxxx1234"
+     },
+     "msisdn": {
+      "type": "string",
+      "description": "Mobile phone number.",
+      "nullable": true,
+      "example": "+49 170 1234567"
+     },
+     "currency": {
+      "type": "string",
+      "description": "ISO 4217 Alpha 3 currency code.",
+      "nullable": true,
+      "example": "EUR"
+     },
+     "other": {
+      "$ref": "#/components/schemas/OtherTypeResponse"
+     }
+    },
+    "additionalProperties": false
+   },
+   "BalanceAmountResponse": {
+    "type": "object",
+    "properties": {
+     "currency": {
+      "type": "string",
+      "description": "ISO 4217 Alpha 3 currency code.",
+      "nullable": true
+     },
+     "amount": {
+      "type": "string",
+      "description": "The amount given with fractional digits, where fractions must be compliant to the currency definition. Up to 14 significant figures. Negative amounts are signed by minus. The decimal separator is a dot.",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "GetBalanceResponse": {
+    "type": "object",
+    "properties": {
+     "account": {
+      "$ref": "#/components/schemas/AccountReferenceResponse"
+     },
+     "balances": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Psd2BalanceResponse"
+      },
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": "Body of the response for a successful read balance for an account request."
+   },
+   "OtherTypeResponse": {
+    "type": "object",
+    "properties": {
+     "identification": {
+      "type": "string",
+      "description": "Identification",
+      "nullable": true
+     },
+     "schemeNameCode": {
+      "type": "string",
+      "description": "Scheme Name Code",
+      "nullable": true
+     },
+     "schemeNameProprietary": {
+      "type": "string",
+      "description": "Scheme Name Proprietary",
+      "nullable": true
+     },
+     "issuer": {
+      "type": "string",
+      "description": "Issuer",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "Psd2BalanceResponse": {
+    "type": "object",
+    "properties": {
+     "balanceType": {
+      "type": "string",
+      "description": "The following balance types are defined:\r\n<br> • \"closingBooked\": Balance of the account at the end of the pre-agreed account reporting period. It is the sum of the opening booked balance at the beginning of the period and all entries booked to the account during the pre-agreed account reporting period.<br> • \"expected\": Balance composed of booked entries and pending items known at the time of calculation, which projects the end of day balance if everything is booked on the account and no other entry is posted.<br> • \"openingBooked\": Book balance of the account at the beginning of the account reporting period. It always equals the closing book balance from the previous report.<br> • \"interimAvailable\": Available balance calculated in the course of the account ?servicer?s business day, at the time specified, and subject to further changes during the business day. The interim balance is calculated on the basis of booked credit and debit items during the calculation time/period specified.<br> • \"interimBooked\": Balance calculated in the course of the account servicer's business day, at the time specified, and subject to further changes during the business day. The interim balance is calculated on the basis of booked credit and debit items during the calculation time/period specified.<br> • \"forwardAvailable\": Forward available balance of money that is at the disposal of the account owner on the date specified.<br> • \"nonInvoiced\": Only for card accounts, to be checked yet.<br> • ",
+      "nullable": true
+     },
+     "balanceAmount": {
+      "$ref": "#/components/schemas/BalanceAmountResponse"
+     },
+     "creditLimitIncluded": {
+      "type": "boolean",
+      "description": "A flag indicating if the credit limit of the corresponding account is included in the calculation of the balance, where applicable.",
+      "nullable": true,
+      "example": false
+     },
+     "lastCommittedTransaction": {
+      "type": "string",
+      "description": "\"entryReference\" of the last commited transaction to support the TPP in identifying whether all PSU transactions are already known.",
+      "nullable": true
+     },
+     "referenceDate": {
+      "type": "string",
+      "description": "Indicates the date of the balance.",
+      "nullable": true
+     },
+     "lastChangeDateTime": {
+      "type": "string",
+      "description": "This data element might be used to indicate e.g. with the expected or booked balance that no action is known on the account, which is not yet booked.",
+      "format": "date-time",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": "A single balance element."
+   },
+   "GetPsd2AccountResponse": {
+    "type": "object",
+    "properties": {
+     "account": {
+      "$ref": "#/components/schemas/Psd2AccountsResponse"
+     }
+    },
+    "additionalProperties": false
+   },
+   "HrefTypeResponse": {
+    "type": "object",
+    "properties": {
+     "href": {
+      "type": "string",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "LinksAccountResponse": {
+    "type": "object",
+    "properties": {
+     "balances": {
+      "$ref": "#/components/schemas/HrefTypeResponse"
+     },
+     "transactions": {
+      "$ref": "#/components/schemas/HrefTypeResponse"
+     },
+     "aggregationAccount": {
+      "$ref": "#/components/schemas/HrefTypeResponse"
+     },
+     "account": {
+      "$ref": "#/components/schemas/HrefTypeResponse"
+     }
+    },
+    "additionalProperties": false
+   },
+   "Psd2AccountsResponse": {
+    "type": "object",
+    "properties": {
+     "resourceId": {
+      "type": "string",
+      "description": "This shall be filled, if addressable resource are created by the ASPSP on the /accounts or /card-accounts endpoint.",
+      "nullable": true
+     },
+     "iban": {
+      "type": "string",
+      "description": "pattern: [A-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}\r\nexample: GE00TB0000000000000000",
+      "nullable": true
+     },
+     "bban": {
+      "type": "string",
+      "nullable": true
+     },
+     "msisdn": {
+      "type": "string",
+      "nullable": true
+     },
+     "currency": {
+      "type": "string",
+      "description": "pattern: [A-Z]{3}\r\nexample: EUR\r\nISO 4217 Alpha 3 currency code.",
+      "nullable": true
+     },
+     "ownerName": {
+      "type": "string",
+      "description": "example: Bidzina Tabagari\r\nName of the legal account owner.If there is more than one owner, then e.g.two names might be noted here.\r\nFor a corporate account, the corporate name is used for this attribute.Even if supported by the ASPSP, the provision of this field might depend on the fact whether an explicit consent to this specific additional account information has been given by the PSU.",
+      "nullable": true
+     },
+     "name": {
+      "type": "string",
+      "description": "Name of the account, as assigned by the ASPSP, in agreement with the account owner in order to provide an additional means of identification of the account.",
+      "nullable": true
+     },
+     "displayName": {
+      "type": "string",
+      "description": "Name of the account as defined by the PSU within online channels.",
+      "nullable": true
+     },
+     "product": {
+      "type": "string",
+      "description": "Product name of the bank for this account, proprietary definition.",
+      "nullable": true
+     },
+     "cashAccountType": {
+      "type": "string",
+      "description": "ExternalCashAccountType1Code from ISO 20022.",
+      "nullable": true
+     },
+     "status": {
+      "type": "string",
+      "description": "accountStatusstring\r\nAccount status.The value is one of the following:\r\n\"enabled\": account is available\r\n\"deleted\": account is terminated\r\n\"blocked\": account is blocked e.g. for legal reasons If this field is not used, than the account is available in the sense of this specification.",
+      "nullable": true
+     },
+     "bic": {
+      "type": "string",
+      "description": "\tbicfistring\r\npattern: [A-Z]{6,6}\r\n[A-Z2-9][A-NP-Z0-9] ([A - Z0 - 9]{3,3}){ 0,1}\r\nexample: AAAADEBBXXX\r\nBICFI",
+      "nullable": true
+     },
+     "linkedAccounts": {
+      "type": "string",
+      "description": "Case of a set of pending card transactions, the APSP will provide the relevant cash account the card is set up on.",
+      "nullable": true
+     },
+     "usage": {
+      "type": "string",
+      "description": "Specifies the usage of the account:\r\nPRIV: private personal account\r\nORGA: professional account",
+      "nullable": true
+     },
+     "details": {
+      "type": "string",
+      "description": "Specifications that might be provided by the ASPSP:\r\ncharacteristics of the account\r\ncharacteristics of the relevant card",
+      "nullable": true
+     },
+     "balances": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Psd2BalanceResponse"
+      },
+      "description": "A list of balances regarding this account, e.g. the current balance, the last booked balance. The list might be restricted to the current balance.",
+      "nullable": true
+     },
+     "links": {
+      "$ref": "#/components/schemas/LinksAccountResponse"
+     }
+    },
+    "additionalProperties": false
+   },
+   "GetPsd2AccountsResponse": {
+    "type": "object",
+    "properties": {
+     "accounts": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Psd2AccountsResponse"
+      },
+      "description": "List of accounts with details.",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "AccountReportResponse": {
+    "type": "object",
+    "properties": {
+     "booked": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Psd2TransactionDetailsResponse"
+      },
+      "description": "Array of transaction details.",
+      "nullable": true
+     },
+     "pending": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Psd2TransactionDetailsResponse"
+      },
+      "description": "Array of transaction details.",
+      "nullable": true
+     },
+     "links": {
+      "$ref": "#/components/schemas/LinksTransactionsResponse"
+     }
+    },
+    "additionalProperties": false,
+    "description": "JSON based account report. This account report contains transactions resulting from the query parameters.\r\n'booked' shall be contained if bookingStatus parameter is set to \"booked\" or \"both\".\r\n'pending' is not contained if the bookingStatus parameter is set to \"booked\" or \"information\".\r\n'information' Only contained if the bookingStatus is set to \"information\" and if supported by ASPSP."
+   },
+   "CurrencyExchangeResponse": {
+    "type": "object",
+    "properties": {
+     "sourceCurrency": {
+      "type": "string",
+      "description": "Source Currency",
+      "nullable": true
+     },
+     "exchangeRate": {
+      "type": "string",
+      "description": "Exchange Rate",
+      "nullable": true
+     },
+     "unitCurrency": {
+      "type": "string",
+      "description": "Unit Currency",
+      "nullable": true
+     },
+     "targetCurrency": {
+      "type": "string",
+      "description": "Target Currency",
+      "nullable": true
+     },
+     "quotationDate": {
+      "type": "string",
+      "description": "Quotation Date",
+      "nullable": true
+     },
+     "contractIdentification": {
+      "type": "string",
+      "description": "Contract Identification",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "GetPsd2TransactionsResponse": {
+    "type": "object",
+    "properties": {
+     "account": {
+      "$ref": "#/components/schemas/AccountReferenceResponse"
+     },
+     "balances": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Psd2BalanceResponse"
+      },
+      "nullable": true
+     },
+     "transactions": {
+      "$ref": "#/components/schemas/AccountReportResponse"
+     },
+     "links": {
+      "$ref": "#/components/schemas/LinksDownloadResponse"
+     }
+    },
+    "additionalProperties": false,
+    "description": "Body of the JSON response for a successful read transaction list request. This account report contains transactions resulting from the query parameters."
+   },
+   "LinksDownloadResponse": {
+    "type": "object",
+    "properties": {
+     "download": {
+      "$ref": "#/components/schemas/HrefTypeResponse"
+     }
+    },
+    "additionalProperties": false
+   },
+   "LinksTransactionsResponse": {
+    "type": "object",
+    "properties": {
+     "account": {
+      "$ref": "#/components/schemas/HrefTypeResponse"
+     },
+     "first": {
+      "$ref": "#/components/schemas/HrefTypeResponse"
+     },
+     "next": {
+      "$ref": "#/components/schemas/HrefTypeResponse"
+     },
+     "previous": {
+      "$ref": "#/components/schemas/HrefTypeResponse"
+     }
+    },
+    "additionalProperties": false
+   },
+   "OtherIdentificationItemResponse": {
+    "type": "object",
+    "properties": {
+     "identification": {
+      "type": "string",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "OtherIdentificationsListResponse": {
+    "type": "object",
+    "properties": {
+     "others": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/OtherIdentificationItemResponse"
+      },
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "PartyIdentificationResponse": {
+    "type": "object",
+    "properties": {
+     "organisationId": {
+      "$ref": "#/components/schemas/OtherIdentificationsListResponse"
+     },
+     "privateId": {
+      "$ref": "#/components/schemas/OtherIdentificationsListResponse"
+     }
+    },
+    "additionalProperties": false
+   },
+   "Psd2TransactionDetailsResponse": {
+    "type": "object",
+    "properties": {
+     "transactionId": {
+      "type": "string",
+      "description": "example: 3dc3d5b3-7023-4848-9853-f5400a64e80f\r\nThis identification is given by the attribute transactionId of the corresponding entry of a transaction list.",
+      "nullable": true
+     },
+     "entryReference": {
+      "type": "string",
+      "description": "Is the identification of the transaction as used e.g. for reference for deltafunction on application level. The same identification as for example used within camt.05x messages.",
+      "nullable": true
+     },
+     "endToEndId": {
+      "type": "string",
+      "description": "Unique end to end identity.",
+      "nullable": true
+     },
+     "mandateId": {
+      "type": "string",
+      "description": "Identification of Mandates, e.g. a SEPA Mandate ID.",
+      "nullable": true
+     },
+     "creditorId": {
+      "type": "string",
+      "description": "example: Creditor Id 5678\r\nIdentification of Creditors, e.g.a SEPA Creditor ID.",
+      "nullable": true
+     },
+     "creditorName": {
+      "type": "string",
+      "description": "example: Creditor Name\r\nCreditor name.",
+      "nullable": true
+     },
+     "creditorAccount": {
+      "$ref": "#/components/schemas/AccountReferenceResponse"
+     },
+     "creditorAgent": {
+      "type": "string",
+      "description": "pattern: [A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}\r\nexample: AAAADEBBXXX",
+      "nullable": true
+     },
+     "creditorIdentification": {
+      "$ref": "#/components/schemas/PartyIdentificationResponse"
+     },
+     "debtorName": {
+      "type": "string",
+      "description": "example: Debtor Name\r\nDebtor Name",
+      "nullable": true
+     },
+     "debtorAccount": {
+      "$ref": "#/components/schemas/AccountReferenceResponse"
+     },
+     "debtorAgent": {
+      "type": "string",
+      "description": "Debtor Agent\r\nexample: AAAADEBBXXX",
+      "nullable": true
+     },
+     "debtorIdentification": {
+      "$ref": "#/components/schemas/PartyIdentificationResponse"
+     },
+     "ultimateDebtor": {
+      "type": "string",
+      "description": "example: Ultimate Debtor\r\nUltimate debtor.",
+      "nullable": true
+     },
+     "ultimateDebtorIdentification": {
+      "$ref": "#/components/schemas/PartyIdentificationResponse"
+     },
+     "transactionAmount": {
+      "$ref": "#/components/schemas/BalanceAmountResponse"
+     },
+     "bookingDate": {
+      "type": "string",
+      "description": "The date when an entry is posted to an account on the ASPSPs books.",
+      "nullable": true
+     },
+     "valueDate": {
+      "type": "string",
+      "description": "The Date at which assets become available to the account owner in case of a credit, or cease to be available to the account owner in case of a debit entry. Usage: If entry status is pending and value date is present, then the value date refers to an expected/requested value date.",
+      "nullable": true
+     },
+     "remittanceInformationUnstructured": {
+      "type": "string",
+      "description": "example: Ref Number Merchant\r\nUnstructured remittance information.",
+      "nullable": true
+     },
+     "remittanceInformationStructured": {
+      "type": "string",
+      "description": "Structured remittance information Max",
+      "nullable": true
+     },
+     "remittanceInformationUnstructuredArary": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "description": "example: List [ \"Ref Number Merchant\", \"Some Other Text\" ]\r\nArray of unstructured remittance information.",
+      "nullable": true
+     },
+     "additionalInformation": {
+      "type": "string",
+      "description": "example: Some additional transaction related information.\r\nMight be used by the ASPSP to transport additional transaction related information to the PSU",
+      "nullable": true
+     },
+     "purposeCode": {
+      "type": "string",
+      "description": "ExternalPurpose1Code from ISO 20022.\r\nValues from ISO 20022 External Code List ExternalCodeSets_1Q2018 June 2018.",
+      "nullable": true
+     },
+     "bankTransactionCode": {
+      "type": "string",
+      "description": "Bank transaction code as used by the ASPSP and using the sub elements of this structured code defined by ISO 20022.",
+      "nullable": true
+     },
+     "currencyExchange": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/CurrencyExchangeResponse"
+      },
+      "description": "Array of exchange rates.",
+      "nullable": true
+     },
+     "proprietaryBankTransactionCode": {
+      "type": "string",
+      "description": "Proprietary bank transaction code as used within a community or within an ASPSP e.g. for MT94x based transaction reports.",
+      "nullable": true
+     },
+     "balanceAfterTransaction": {
+      "$ref": "#/components/schemas/Psd2BalanceResponse"
+     }
+    },
+    "additionalProperties": false,
+    "description": "Transaction details."
+   },
+   "GetCardBalanceResponse": {
+    "type": "object",
+    "properties": {
+     "cardAccount": {
+      "$ref": "#/components/schemas/AccountReferenceResponse"
+     },
+     "balances": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Psd2BalanceResponse"
+      },
+      "description": "A list of balances regarding this account, e.g. the current balance, the last booked balance. The list might be restricted to the current balance.",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "CardAccountsResponse": {
+    "type": "object",
+    "properties": {
+     "resourceId": {
+      "type": "string",
+      "description": "This is the data element to be used in the path when retrieving data from a dedicated account. This shall be filled, if addressable resource are created by the ASPSP on the /card-accounts endpoint.",
+      "nullable": true,
+      "example": "123456xxxxxx1234"
+     },
+     "maskedPan": {
+      "type": "string",
+      "description": "Masked Primary Account Number.",
+      "nullable": true
+     },
+     "currency": {
+      "type": "string",
+      "description": "currencyCode",
+      "nullable": true,
+      "example": "EUR"
+     },
+     "ownerName": {
+      "type": "string",
+      "description": "Name of the legal account owner. If there is more than one owner, then e.g. two names might be noted here. <br /><br />For a corporate account, the corporate name is used for this attribute. Even if supported by the ASPSP, the provision of this field might depend on the fact whether an explicit consent to this specific additional account information has been given by the PSU.",
+      "nullable": true,
+      "example": "John Doe"
+     },
+     "name": {
+      "type": "string",
+      "description": "Name of the account, as assigned by the ASPSP, in agreement with the account owner in order to provide an additional means of identification of the account.",
+      "nullable": true
+     },
+     "displayName": {
+      "type": "string",
+      "description": "Name of the account as defined by the PSU within online channels.",
+      "nullable": true
+     },
+     "product": {
+      "type": "string",
+      "description": "Product Name of the Bank for this account, proprietary definition.",
+      "nullable": true
+     },
+     "status": {
+      "type": "string",
+      "description": "accountStatus\r\n<br>Account status. The value is one of the following:<br> • \"enabled\": account is available<br> • \"deleted\": account is terminated<br> • \"blocked\": account is blocked e.g. for legal reasons If this field is not used, than the account is available in the sense of this specification.",
+      "nullable": true
+     },
+     "usage": {
+      "type": "string",
+      "description": "<br>Specifies the usage of the account:\r\n<br> • PRIV: private personal account\r\n<br> • ORGA: professional account",
+      "nullable": true
+     },
+     "details": {
+      "type": "string",
+      "description": "<br>Specifications that might be provided by the ASPSP:\r\n<br> • characteristics of the account\r\n<br> • characteristics of the relevant card",
+      "nullable": true
+     },
+     "creditLimit": {
+      "type": "string",
+      "description": "The amount given with fractional digits, where fractions must be compliant to the currency definition. Up to 14 significant figures. Negative amounts are signed by minus. The decimal separator is a dot.",
+      "nullable": true
+     },
+     "balances": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Psd2BalanceResponse"
+      },
+      "description": "A list of balances regarding this account, e.g. the current balance, the last booked balance. The list might be restricted to the current balance.",
+      "nullable": true
+     },
+     "links": {
+      "$ref": "#/components/schemas/LinksCardAccountResponse"
+     }
+    },
+    "additionalProperties": false
+   },
+   "GetCardAccountResponse": {
+    "type": "object",
+    "properties": {
+     "cardAccount": {
+      "$ref": "#/components/schemas/CardAccountsResponse"
+     }
+    },
+    "additionalProperties": false
+   },
+   "LinksCardAccountResponse": {
+    "type": "object",
+    "properties": {
+     "balances": {
+      "$ref": "#/components/schemas/HrefTypeResponse"
+     },
+     "transactions": {
+      "$ref": "#/components/schemas/HrefTypeResponse"
+     },
+     "cardAccount": {
+      "$ref": "#/components/schemas/HrefTypeResponse"
+     }
+    },
+    "additionalProperties": false
+   },
+   "GetCardAccountsResponse": {
+    "type": "object",
+    "properties": {
+     "cardAccounts": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/CardAccountsResponse"
+      },
+      "description": "Card Accounts List response",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "CardAccountReportResponse": {
+    "type": "object",
+    "properties": {
+     "booked": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/CardTransactionDetailsResponse"
+      },
+      "description": "Booked Card Transaction Details List",
+      "nullable": true
+     },
+     "pending": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/CardTransactionDetailsResponse"
+      },
+      "description": "Pending Card Transaction Details List",
+      "nullable": true
+     },
+     "links": {
+      "$ref": "#/components/schemas/LinksCardTransactionsResponse"
+     }
+    },
+    "additionalProperties": false
+   },
+   "CardTransactionDetailsResponse": {
+    "type": "object",
+    "properties": {
+     "cardTransactionId": {
+      "type": "string",
+      "description": "Unique end to end identity.",
+      "nullable": true
+     },
+     "terminalId": {
+      "type": "string",
+      "description": "Identification of the Terminal, where the card has been used.",
+      "nullable": true
+     },
+     "transactionDate": {
+      "type": "string",
+      "description": "Date of the actual card transaction.",
+      "nullable": true
+     },
+     "acceptorTransactionDateTime": {
+      "type": "string",
+      "description": "Timestamp of the actual card transaction within the acceptance system",
+      "format": "date-time",
+      "nullable": true
+     },
+     "bookingDate": {
+      "type": "string",
+      "description": "The date when an entry is posted to an account on the ASPSPs books.",
+      "nullable": true
+     },
+     "transactionAmount": {
+      "$ref": "#/components/schemas/BalanceAmountResponse"
+     },
+     "currencyExchange": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/CurrencyExchangeResponse"
+      },
+      "description": "Array of exchange rates.",
+      "nullable": true
+     },
+     "originalAmount": {
+      "$ref": "#/components/schemas/BalanceAmountResponse"
+     },
+     "markupFee": {
+      "$ref": "#/components/schemas/BalanceAmountResponse"
+     },
+     "markupFeePercentage": {
+      "type": "string",
+      "description": "Markup Fee Percentage",
+      "nullable": true,
+      "example": "0.3"
+     },
+     "cardAcceptorId": {
+      "type": "string",
+      "description": "Card AcceptorId",
+      "nullable": true
+     },
+     "maskedPan": {
+      "type": "string",
+      "description": "Masked Primary Account Number.",
+      "nullable": true,
+      "example": "123456xxxxxx1234"
+     },
+     "transactionDetails": {
+      "type": "string",
+      "description": "Transaction Details",
+      "nullable": true
+     },
+     "invoiced": {
+      "type": "boolean",
+      "description": "Invoiced",
+      "nullable": true
+     },
+     "proprietaryBankTransactionCode": {
+      "type": "string",
+      "description": "Proprietary bank transaction code as used within a community or within an ASPSP e.g. for MT94x based transaction reports.",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "GetCardTransactionsResponse": {
+    "type": "object",
+    "properties": {
+     "cardAccount": {
+      "$ref": "#/components/schemas/AccountReferenceResponse"
+     },
+     "balances": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Psd2BalanceResponse"
+      },
+      "description": "A list of balances regarding this account, e.g. the current balance, the last booked balance. The list might be restricted to the current balance.",
+      "nullable": true
+     },
+     "cardTransactions": {
+      "$ref": "#/components/schemas/CardAccountReportResponse"
+     },
+     "links": {
+      "$ref": "#/components/schemas/LinksDownloadResponse"
+     }
+    },
+    "additionalProperties": false
+   },
+   "LinksCardTransactionsResponse": {
+    "type": "object",
+    "properties": {
+     "cardAccount": {
+      "$ref": "#/components/schemas/HrefTypeResponse"
+     },
+     "first": {
+      "$ref": "#/components/schemas/HrefTypeResponse"
+     },
+     "next": {
+      "$ref": "#/components/schemas/HrefTypeResponse"
+     },
+     "previous": {
+      "$ref": "#/components/schemas/HrefTypeResponse"
+     }
+    },
+    "additionalProperties": false
+   },
+   "AuthorisationStatusResponse": {
+    "description": "Body of the response for a successfull get authorisation status request.",
+    "type": "object",
+    "properties": {
+     "scaStatus": {
+      "$ref": "#/components/schemas/ScaStatus"
+     }
+    }
+   },
+   "ScaStatus": {
+    "description": "This data element is containing information about the status of the SCA method applied. \n\nThe following codes are defined for this data type.\n\n  * 'received':\n    An authorisation or cancellation-authorisation resource has been created successfully.\n  * 'psuIdentified':\n    The PSU related to the authorisation or cancellation-authorisation resource has been identified.\n  * 'psuAuthenticated':\n    The PSU related to the authorisation or cancellation-authorisation resource has been identified and authenticated e.g. by a password or by an access token.\n  * 'scaMethodSelected':\n    The PSU/TPP has selected the related SCA routine. \n    If the SCA method is chosen implicitly since only one SCA method is available, \n    then this is the first status to be reported instead of 'received'.\n  * 'unconfirmed':\n    SCA is technically successfully finalised by the PSU, but the authorisation resource needs a confirmation command by the TPP yet. \n  * 'started':\n    The addressed SCA routine has been started.\n  * 'finalised':\n    The SCA routine has been finalised successfully (including a potential confirmation command). \n    This is a final status of the authorisation resource.\n  * 'failed':\n    The SCA routine failed.\n    This is a final status of the authorisation resource.\n  * 'exempted':\n    SCA was exempted for the related transaction, the related authorisation is successful.\n    This is a final status of the authorisation resource.\n",
+    "type": "string",
+    "enum": [
+     "received",
+     "psuIdentified",
+     "psuAuthenticated",
+     "scaMethodSelected",
+     "started",
+     "unconfirmed",
+     "finalised",
+     "failed",
+     "exempted"
+    ]
+   },
+   "GetConsentStatusResponse": {
+    "description": "Body of the response for a successful get consent status request.",
+    "type": "object",
+    "required": [
+     "consentStatus"
+    ],
+    "properties": {
+     "consentStatus": {
+      "$ref": "#/components/schemas/ConsentStatus"
+     },
+     "psuMessage": {
+      "$ref": "#/components/schemas/PsuMessage"
+     }
+    }
+   },
+   "LinksAuthorisations": {
+    "description": "A list of hyperlinks to be recognised by the TPP. The actual hyperlinks used in the \nresponse depend on the dynamical decisions of the ASPSP when processing the request.\n\n**Remark:** All links can be relative or full links, to be decided by the ASPSP.\n\nType of links admitted in this response, (further links might be added for ASPSP defined \nextensions):\n\n- 'scaRedirect': \n  In case of an SCA Redirect Approach, the ASPSP is transmitting the link to which to \n  redirect the PSU browser.\n- 'scaOAuth': \n  In case of a SCA OAuth2 Approach, the ASPSP is transmitting the URI where the configuration of the Authorisation Server can be retrieved. The configuration follows the OAuth 2.0 Authorisation Server Metadata specification.\n- 'updatePsuIdentification': \n  The link to the authorisation or cancellation authorisation sub-resource, \n  where PSU identification data needs to be uploaded.\n- 'scaStatus': \n  The link to retrieve the scaStatus of the corresponding authorisation sub-resource. \n",
+    "type": "object",
+    "properties": {
+     "scaRedirect": {
+      "$ref": "#/components/schemas/HrefType"
+     },
+     "scaOAuth": {
+      "$ref": "#/components/schemas/HrefType"
+     },
+     "updatePsuIdentification": {
+      "$ref": "#/components/schemas/HrefType"
+     },
+     "scaStatus": {
+      "$ref": "#/components/schemas/HrefType"
+     }
+    }
+   },
+   "StartAuthorisationResponse": {
+    "description": "Body of the response for a Start SCA authorisation request.",
+    "type": "object",
+    "required": [
+     "scaStatus",
+     "authorisationId",
+     "_links"
+    ],
+    "properties": {
+     "scaStatus": {
+      "$ref": "#/components/schemas/ScaStatus"
+     },
+     "authorisationId": {
+      "$ref": "#/components/schemas/AuthorisationId"
+     },
+     "_links": {
+      "$ref": "#/components/schemas/LinksAuthorisations"
+     },
+     "psuMessage": {
+      "$ref": "#/components/schemas/PsuMessage"
+     }
+    }
+   }
+  },
+  "examples": {
+   "400_BadRequest_Example_Consents": {
+    "value": {
+     "code": "FORMAT_ERROR",
+     "traceId": "00-5336c4b7d89889b8b4a1bbdfb8c1a583-305db5d2099f1c58-01",
+     "type": "https://developers.tbcbank.ge/docs/error-type-400",
+     "title": "Invalid Request",
+     "status": 400,
+     "detail": "ValidUntil parameter is invalid, please check the date.",
+     "instance": "/v1/consents"
+    }
+   },
+   "500_InternalError_Example_Consents": {
+    "value": {
+     "code": "",
+     "traceId": "00-ada2ec0e2c26c91bf50469bf79fdb14e-7bed7bf0dd005c16-01",
+     "type": "https://developers.tbcbank.ge/docs/error-type-500",
+     "title": "Internal Error",
+     "status": 500,
+     "detail": "Something wrong happened in the application",
+     "instance": "/v1/consents"
+    }
+   },
+   "CreateConsentRequest_DedicatedAccounts_Example": {
+    "description": "Consent Request on Dedicated Accounts",
+    "value": {
+     "access": {
+      "Accounts": [
+       {
+        "Iban": "GE11TB1000000000000010"
+       }
+      ],
+      "Balances": [
+       {
+        "Iban": "GE11TB1000000000000010",
+        "Currency": "GEL"
+       }
+      ],
+      "Transactions": [
+       {
+        "Iban": "GE11TB1000000000000010"
+       },
+       {
+        "maskedPan": "123456xxxxxx1234"
+       }
+      ]
+     },
+     "frequencyPerDay": 4,
+     "recurringIndicator": true,
+     "validUntil": "2023-07-01",
+     "combinedServiceIndicator": false
+    }
+   },
+   "CreateConsentRequest_AvailableAccounts_Example": {
+    "description": "Consent Request on account list of available accounts",
+    "value": {
+     "access": {
+      "availableAccountsWithBalance": "allAccounts"
+     },
+     "frequencyPerDay": 1,
+     "recurringIndicator": false,
+     "validUntil": "2023-07-01",
+     "combinedServiceIndicator": false
+    }
+   },
+   "CreateConsentRequest_BankOfferedAccounts_Example": {
+    "description": "Consent request on account list or without indication of accounts",
+    "value": {
+     "access": {
+      "Accounts": [],
+      "Balances": [],
+      "Transactions": []
+     },
+     "frequencyPerDay": 4,
+     "recurringIndicator": true,
+     "validUntil": "2023-07-01",
+     "combinedServiceIndicator": false
+    }
+   },
+   "CreateConsentResponse_Redirect_Example": {
+    "description": "Response example in case of a redirect with a dedicated start of the authorisation process",
+    "value": {
+     "consentStatus": "received",
+     "consentId": "ab60aab2-4598-4f9b-be47-c52ff7f1973e",
+     "_links": {
+      "startAuthorisation": {
+       "href": "/0.8/v1/consents/ab60aab2-4598-4f9b-be47-c52ff7f1973e/authorisations"
+      }
+     }
+    }
+   },
+   "CreateConsentResponse_OAuth2_Example": {
+    "description": "Response example in case of the OAuth2 approach with an implicit generated authorisation resource",
+    "value": {
+     "consentStatus": "received",
+     "consentId": "c79ad1fb-8d01-44fc-b602-9ce471033952",
+     "_links": {
+      "scaOAuth": {
+       "href": "https://test-api.tbcbank.ge/.well-known/oauth-authorization-server"
+      },
+      "self": {
+       "href": "/0.8/v1/consents/c79ad1fb-8d01-44fc-b602-9ce471033952"
+      },
+      "status": {
+       "href": "/0.8/v1/consents/c79ad1fb-8d01-44fc-b602-9ce471033952/status"
+      },
+      "scaStatus": {
+       "href": "/0.8/v1/consents/c79ad1fb-8d01-44fc-b602-9ce471033952/authorisations/9647ca44-d5ce-4831-f0d7-08dd78f81e43"
+      }
+     }
+    }
+   },
+   "CreateConsentResponse_Decoupled_Example": {
+    "description": "Response example in case of the decoupled approach",
+    "value": {
+     "consentStatus": "received",
+     "consentId": "d87251a0-17a1-411c-b2d3-fc42eb9c87af",
+     "_links": {
+      "startAuthorisationWithPsuIdentification": {
+       "href": "/0.8/v1/consents/d87251a0-17a1-411c-b2d3-fc42eb9c87af/authorisations"
+      }
+     }
+    }
+   },
+   "401_Unauthorized_Example_Consents": {
+    "value": {
+     "type": "https://developers.tbcbank.ge/docs/error-type-401",
+     "title": "Access Token is expired.",
+     "status": 401,
+     "detail": "Access Token is expired.",
+     "systemCode": "System code for problem is System code for problem is psd2_accounts-0.8.401.TOKEN_EXPIRED",
+     "code": "TOKEN_EXPIRED",
+     "traceId": "rrt-04053ba3aa8013db2-a-de-14879-4916302-1",
+     "instance": "/v1/consents/c9161b2e-46d0-4891-8114-2767253d4510"
+    }
+   },
+   "403_Forbidden_Example_Consents": {
+    "value": {
+     "code": "CONSENT_UNKNOWN",
+     "traceId": "00-88e0f2509e1d5ad73d99dee283010f18-bdcf39859de601a7-01",
+     "type": "https://developers.tbcbank.ge/docs/error-type-403",
+     "title": "Consent not found",
+     "status": 403,
+     "detail": "Consent not found with this Id: c9161b2e-46d0-4891-8114-2767253d4510",
+     "instance": "/v1/consents/c9161b2e-46d0-4891-8114-2767253d4510"
+    }
+   },
+   "404_NotFound_Example_Consents": {
+    "value": {
+     "traceId": "00-88e0f2509e1d5ad73d99dee283010f18-bdcf39859de601a7-01",
+     "type": "https://developers.tbcbank.ge/docs/error-type-404",
+     "title": "Consent not found",
+     "status": 404,
+     "instance": "/v1/consents/c9161b2e-46d0-4891-8114-2767253d4510"
+    }
+   },
+   "AuthorisationIdsResponse_Example": {
+    "description": "Response example on get consent authorisations request",
+    "value": {
+     "authorisationIds": [
+      "dd059f4f-0c93-44ff-8cbb-3817b67ef85c"
+     ]
+    }
+   },
+   "GetConsentResponse_Example": {
+    "description": "Response example on get consent request",
+    "value": {
+     "access": {
+      "accounts": [
+       {
+        "iban": "GE22TB2000000000000020",
+        "currency": "GEL",
+        "cashAccountType": "CARD"
+       },
+       {
+        "iban": "GE11TB1000000000000010",
+        "currency": "XXX",
+        "cashAccountType": "CACC"
+       },
+       {
+        "maskedPan": "************1234"
+       }
+      ],
+      "balances": [
+       {
+        "iban": "GE22TB2000000000000020",
+        "currency": "GEL",
+        "cashAccountType": "CARD"
+       },
+       {
+        "iban": "GE11TB1000000000000010",
+        "currency": "XXX",
+        "cashAccountType": "CACC"
+       },
+       {
+        "maskedPan": "************1234"
+       }
+      ],
+      "transactions": [
+       {
+        "iban": "GE22TB2000000000000020",
+        "currency": "GEL",
+        "cashAccountType": "CARD"
+       },
+       {
+        "iban": "GE11TB1000000000000010",
+        "currency": "XXX",
+        "cashAccountType": "CACC"
+       },
+       {
+        "maskedPan": "************1234"
+       }
+      ]
+     },
+     "recurringIndicator": true,
+     "validUntil": "2023-07-01",
+     "frequencyPerDay": 4,
+     "lastActionDate": "2023-04-01",
+     "consentStatus": "valid",
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts"
+      }
+     }
+    }
+   },
+   "400_BadRequest_Example_InvalidAuthorizationCode_Oauth": {
+    "value": {
+     "error": "invalid_request",
+     "error_uri": "https://developers.tbcbank.ge/docs/error-type-400",
+     "error_description": "Invalid Authorization Code",
+     "systemCode": "System code for problem is psd2_oauth.400.001"
+    }
+   },
+   "400_BadRequest_Example_CertificateMissing_Oauth": {
+    "value": {
+     "error": "CERTIFICATE_MISSING",
+     "error_uri": "https://developers.tbcbank.ge/docs/error-type-400",
+     "error_description": "Certificate is Missing",
+     "systemCode": "System code for problem is psd2_oauth.400.CERTIFICATE_MISSING"
+    }
+   },
+   "500_InternalError_Example_Oauth": {
+    "value": {
+     "code": "",
+     "traceId": "00-ada2ec0e2c26c91bf50469bf79fdb14e-7bed7bf0dd005c16-01",
+     "type": "https://developers.tbcbank.ge/docs/error-type-500",
+     "title": "Internal Error",
+     "status": 500,
+     "detail": "Something wrong happened in the application"
+    }
+   },
+   "OauthTokenResponse_Token_Example": {
+    "description": "Response example on oauth token generation",
+    "value": {
+     "access_token": "ffODwEVU5sD9RADdEWEYUQNijrcE",
+     "token_type": "Bearer",
+     "refresh_token": "qjfHpGMyOZGv7gZVRxGPGoPfbgHNwIHs",
+     "refresh_token_issued_at": "1682595156807",
+     "refresh_token_expires_in": "7775999",
+     "refresh_count": 0,
+     "scope": "PIS:45f90ecc-3879-4574-de8e-08db40b82e17",
+     "issued_at": "1682595156807",
+     "expires_in": 3599
+    }
+   },
+   "OauthTokenResponse_RefreshToken_Example": {
+    "description": "Response example on refreshing oauth token",
+    "value": {
+     "access_token": "olFXJEkx4pA8OEFu2IHoLSsh8fFZ",
+     "token_type": "Bearer",
+     "refresh_token": "qjfHpGMyOZGv7gZVRxGPGoPfbgHNwIHs",
+     "refresh_token_issued_at": "1682595156807",
+     "refresh_token_expires_in": "7775593",
+     "refresh_count": 1,
+     "scope": "PIS:45f90ecc-3879-4574-de8e-08db40b82e17",
+     "issued_at": "1682595563649",
+     "expires_in": 3599
+    }
+   },
+   "OAuthAuthorizationServerResponse_Example": {
+    "description": "Response example on get oauth authorization server details",
+    "value": {
+     "issuer": "https://test-api.tbcbank.ge",
+     "authorization_endpoint": "https://test-api.tbcbank.ge/psd2/openbanking/oauth/authorize",
+     "token_endpoint": "https://test-openbanking.tbcbank.ge/openbanking/oauth/token",
+     "token_endpoint_auth_methods_supported": [
+      "tls_client_auth"
+     ],
+     "tls_client_certificate_bound_access_tokens": true,
+     "registration_endpoint": "https://test-openbanking.tbcbank.ge/openbanking/oauth/register",
+     "scopes_supported": [
+      "openid",
+      "profile",
+      "AIS:<consentId>",
+      "PIS:<paymentId>"
+     ],
+     "response_types_supported": [
+      "code"
+     ],
+     "grant_types_supported": [
+      "authorization_code",
+      "refresh_token"
+     ],
+     "revocation_endpoint_auth_methods_supported": [
+      "tls_client_auth"
+     ],
+     "revocation_endpoint": "https://test-openbanking.tbcbank.ge/openbanking/oauth/token",
+     "ui_locales_supported": [
+      "en",
+      "ka"
+     ]
+    }
+   },
+   "400_BadRequest_Example_Accounts": {
+    "value": {
+     "code": "FORMAT_ERROR",
+     "traceId": "00-5336c4b7d89889b8b4a1bbdfb8c1a583-305db5d2099f1c58-01",
+     "type": "https://developers.tbcbank.ge/docs/error-type-400",
+     "title": "Invalid Request",
+     "status": 400,
+     "detail": "ValidUntil parameter is invalid, please check the date.",
+     "instance": "/v1/accounts"
+    }
+   },
+   "401_Unauthorized_Example_Accounts": {
+    "value": {
+     "code": "CONSENT_INVALID",
+     "type": "https://developers.tbcbank.ge/docs/error-type-401",
+     "traceId": "00-88e0f2509e1d5ad73d99dee283010f18-bdcf39859de601a7-01",
+     "title": "Invalid Access",
+     "status": 401,
+     "detail": "Consent does not have access on accounts balances",
+     "instance": "/v1/accounts"
+    }
+   },
+   "404_NotFound_Example_Accounts": {
+    "value": {
+     "code": "CONSENT_UNKNOWN",
+     "traceId": "00-88e0f2509e1d5ad73d99dee283010f18-bdcf39859de601a7-01",
+     "type": "https://developers.tbcbank.ge/docs/error-type-404",
+     "title": "Consent not found",
+     "status": 404,
+     "detail": "Consent not found with this Id: c9161b2e-46d0-4891-8114-2767253d4510",
+     "instance": "/v1/accounts"
+    }
+   },
+   "500_InternalError_Example_Accounts": {
+    "value": {
+     "code": "",
+     "traceId": "00-ada2ec0e2c26c91bf50469bf79fdb14e-7bed7bf0dd005c16-01",
+     "type": "https://developers.tbcbank.ge/docs/error-type-500",
+     "title": "Internal Error",
+     "status": 500,
+     "detail": "Something wrong happened in the application",
+     "instance": "/v1/accounts"
+    }
+   },
+   "GetBalanceResponse_Example": {
+    "description": "Response example for get account balances",
+    "value": {
+     "account": {
+      "iban": "GE01TB0203040506070809",
+      "currency": "XXX"
+     },
+     "balances": [
+      {
+       "balanceType": "interimAvailable",
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "30.00"
+       },
+       "creditLimitIncluded": false
+      },
+      {
+       "balanceType": "interimBooked",
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "30.00"
+       },
+       "creditLimitIncluded": false,
+       "referenceDate": "2025-03-26",
+       "lastChangeDateTime": "2025-03-26T00:00:00"
+      },
+      {
+       "balanceType": "closingBooked",
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-30.00"
+       }
+      },
+      {
+       "balanceType": "interimAvailable",
+       "balanceAmount": {
+        "currency": "USD",
+        "amount": "0.00"
+       },
+       "creditLimitIncluded": false
+      },
+      {
+       "balanceType": "interimBooked",
+       "balanceAmount": {
+        "currency": "USD",
+        "amount": "0.00"
+       },
+       "creditLimitIncluded": false,
+       "referenceDate": "2024-12-24",
+       "lastChangeDateTime": "2024-12-24T00:00:00"
+      },
+      {
+       "balanceType": "closingBooked",
+       "balanceAmount": {
+        "currency": "USD",
+        "amount": "0.00"
+       }
+      },
+      {
+       "balanceType": "interimAvailable",
+       "balanceAmount": {
+        "currency": "EUR",
+        "amount": "0.00"
+       },
+       "creditLimitIncluded": false
+      },
+      {
+       "balanceType": "interimBooked",
+       "balanceAmount": {
+        "currency": "EUR",
+        "amount": "0.33"
+       },
+       "creditLimitIncluded": false,
+       "referenceDate": "2025-02-23",
+       "lastChangeDateTime": "2025-02-23T00:00:00"
+      },
+      {
+       "balanceType": "closingBooked",
+       "balanceAmount": {
+        "currency": "EUR",
+        "amount": "-0.33"
+       }
+      }
+     ]
+    }
+   },
+   "GetPsd2AccountDetailsResponse_Example": {
+    "description": "Response example for get account details",
+    "value": {
+     "account": {
+      "resourceId": "c5503035-7f59-4f66-ff96-08dd6cfe8f7c",
+      "iban": "GE01TB2123003210034512",
+      "msisdn": "558112233",
+      "currency": "USD",
+      "ownerName": "მოქი მოქიაშვილი",
+      "ownerIdentification": {
+       "privateId": {
+        "others": [
+         {
+          "identification": "PNOGE-00000000001"
+         }
+        ]
+       }
+      },
+      "name": "მოქი მოქიაშვილი",
+      "displayName": "ჩემი ბარათი",
+      "cashAccountType": "CARD",
+      "status": "enabled",
+      "bic": "TBCBGE22",
+      "usage": "PRIV",
+      "balances": [],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/c5503035-7f59-4f66-ff96-08dd6cfe8f7c/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/c5503035-7f59-4f66-ff96-08dd6cfe8f7c/transactions"
+       },
+       "aggregationAccount": {
+        "href": "/0.8/v1/accounts/dfd0efe6-5e7a-4d1c-ff94-08dd6cfe8f7c"
+       },
+       "account": {
+        "href": "/0.8/v1/accounts/c5503035-7f59-4f66-ff96-08dd6cfe8f7c"
+       }
+      }
+     }
+    }
+   },
+   "GetPsd2AccountsResponse_Example": {
+    "description": "Response example for get accounts list",
+    "value": {
+     "accounts": [
+      {
+       "resourceId": "761a7d98-3251-4e98-50fe-08dd818830c7",
+       "iban": "GE01TB0203040506070809",
+       "msisdn": "555112233",
+       "currency": "XXX",
+       "ownerName": "Owner Name 1",
+       "ownerIdentification": {
+        "privateId": {
+         "others": [
+          {
+           "identification": "PNOGE-00112233445"
+          }
+         ]
+        }
+       },
+       "name": "Owner Name 1",
+       "displayName": "Concept",
+       "cashAccountType": "CARD",
+       "status": "enabled",
+       "bic": "TBCBGE22",
+       "usage": "PRIV",
+       "balances": [
+        {
+         "balanceType": "interimBooked",
+         "balanceAmount": {
+          "currency": "GEL",
+          "amount": "30.00"
+         },
+         "creditLimitIncluded": false,
+         "referenceDate": "2025-03-26",
+         "lastChangeDateTime": "2025-03-26T00:00:00"
+        },
+        {
+         "balanceType": "interimAvailable",
+         "balanceAmount": {
+          "currency": "GEL",
+          "amount": "30.00"
+         },
+         "creditLimitIncluded": false
+        },
+        {
+         "balanceType": "interimBooked",
+         "balanceAmount": {
+          "currency": "USD",
+          "amount": "0.00"
+         },
+         "creditLimitIncluded": false,
+         "referenceDate": "2024-12-24",
+         "lastChangeDateTime": "2024-12-24T00:00:00"
+        },
+        {
+         "balanceType": "interimAvailable",
+         "balanceAmount": {
+          "currency": "USD",
+          "amount": "0.00"
+         },
+         "creditLimitIncluded": false
+        },
+        {
+         "balanceType": "interimBooked",
+         "balanceAmount": {
+          "currency": "EUR",
+          "amount": "0.33"
+         },
+         "creditLimitIncluded": false,
+         "referenceDate": "2025-02-23",
+         "lastChangeDateTime": "2025-02-23T00:00:00"
+        },
+        {
+         "balanceType": "interimAvailable",
+         "balanceAmount": {
+          "currency": "EUR",
+          "amount": "0.00"
+         },
+         "creditLimitIncluded": false
+        }
+       ],
+       "_links": {
+        "balances": {
+         "href": "/0.8/v1/accounts/761a7d98-3251-4e98-50fe-08dd818830c7/balances"
+        },
+        "transactions": {
+         "href": "/0.8/v1/accounts/761a7d98-3251-4e98-50fe-08dd818830c7/transactions"
+        },
+        "account": {
+         "href": "/0.8/v1/accounts/761a7d98-3251-4e98-50fe-08dd818830c7"
+        }
+       }
+      },
+      {
+       "resourceId": "00f6360b-2720-4e64-50ff-08dd818830c7",
+       "iban": "GE01TB0203040506070809",
+       "msisdn": "555112233",
+       "currency": "GEL",
+       "ownerName": "Owner Name 1",
+       "ownerIdentification": {
+        "privateId": {
+         "others": [
+          {
+           "identification": "PNOGE-00112233445"
+          }
+         ]
+        }
+       },
+       "name": "Owner Name 1",
+       "displayName": "Concept",
+       "cashAccountType": "CARD",
+       "status": "enabled",
+       "bic": "TBCBGE22",
+       "usage": "PRIV",
+       "balances": [
+        {
+         "balanceType": "interimBooked",
+         "balanceAmount": {
+          "currency": "GEL",
+          "amount": "30.00"
+         },
+         "creditLimitIncluded": false,
+         "referenceDate": "2025-03-26",
+         "lastChangeDateTime": "2025-03-26T00:00:00"
+        },
+        {
+         "balanceType": "interimAvailable",
+         "balanceAmount": {
+          "currency": "GEL",
+          "amount": "30.00"
+         },
+         "creditLimitIncluded": false
+        }
+       ],
+       "_links": {
+        "balances": {
+         "href": "/0.8/v1/accounts/00f6360b-2720-4e64-50ff-08dd818830c7/balances"
+        },
+        "transactions": {
+         "href": "/0.8/v1/accounts/00f6360b-2720-4e64-50ff-08dd818830c7/transactions"
+        },
+        "aggregationAccount": {
+         "href": "/0.8/v1/accounts/761a7d98-3251-4e98-50fe-08dd818830c7"
+        },
+        "account": {
+         "href": "/0.8/v1/accounts/00f6360b-2720-4e64-50ff-08dd818830c7"
+        }
+       }
+      },
+      {
+       "resourceId": "20ab9546-f384-4950-5100-08dd818830c7",
+       "iban": "GE01TB0203040506070809",
+       "msisdn": "555112233",
+       "currency": "USD",
+       "ownerName": "Owner Name 1",
+       "ownerIdentification": {
+        "privateId": {
+         "others": [
+          {
+           "identification": "PNOGE-00112233445"
+          }
+         ]
+        }
+       },
+       "name": "Owner Name 1",
+       "displayName": "Concept",
+       "cashAccountType": "CARD",
+       "status": "enabled",
+       "bic": "TBCBGE22",
+       "usage": "PRIV",
+       "balances": [
+        {
+         "balanceType": "interimBooked",
+         "balanceAmount": {
+          "currency": "USD",
+          "amount": "0.00"
+         },
+         "creditLimitIncluded": false,
+         "referenceDate": "2024-12-24",
+         "lastChangeDateTime": "2024-12-24T00:00:00"
+        },
+        {
+         "balanceType": "interimAvailable",
+         "balanceAmount": {
+          "currency": "USD",
+          "amount": "0.00"
+         },
+         "creditLimitIncluded": false
+        }
+       ],
+       "_links": {
+        "balances": {
+         "href": "/0.8/v1/accounts/20ab9546-f384-4950-5100-08dd818830c7/balances"
+        },
+        "transactions": {
+         "href": "/0.8/v1/accounts/20ab9546-f384-4950-5100-08dd818830c7/transactions"
+        },
+        "aggregationAccount": {
+         "href": "/0.8/v1/accounts/761a7d98-3251-4e98-50fe-08dd818830c7"
+        },
+        "account": {
+         "href": "/0.8/v1/accounts/20ab9546-f384-4950-5100-08dd818830c7"
+        }
+       }
+      },
+      {
+       "resourceId": "ea7f2d3e-d371-407b-5101-08dd818830c7",
+       "iban": "GE01TB0203040506070809",
+       "msisdn": "555112233",
+       "currency": "EUR",
+       "ownerName": "Owner Name 1",
+       "ownerIdentification": {
+        "privateId": {
+         "others": [
+          {
+           "identification": "PNOGE-00112233445"
+          }
+         ]
+        }
+       },
+       "name": "Owner Name 1",
+       "displayName": "Concept",
+       "cashAccountType": "CARD",
+       "status": "enabled",
+       "bic": "TBCBGE22",
+       "usage": "PRIV",
+       "balances": [
+        {
+         "balanceType": "interimBooked",
+         "balanceAmount": {
+          "currency": "EUR",
+          "amount": "0.33"
+         },
+         "creditLimitIncluded": false,
+         "referenceDate": "2025-02-23",
+         "lastChangeDateTime": "2025-02-23T00:00:00"
+        },
+        {
+         "balanceType": "interimAvailable",
+         "balanceAmount": {
+          "currency": "EUR",
+          "amount": "0.00"
+         },
+         "creditLimitIncluded": false
+        }
+       ],
+       "_links": {
+        "balances": {
+         "href": "/0.8/v1/accounts/ea7f2d3e-d371-407b-5101-08dd818830c7/balances"
+        },
+        "transactions": {
+         "href": "/0.8/v1/accounts/ea7f2d3e-d371-407b-5101-08dd818830c7/transactions"
+        },
+        "aggregationAccount": {
+         "href": "/0.8/v1/accounts/761a7d98-3251-4e98-50fe-08dd818830c7"
+        },
+        "account": {
+         "href": "/0.8/v1/accounts/ea7f2d3e-d371-407b-5101-08dd818830c7"
+        }
+       }
+      }
+     ]
+    }
+   },
+   "GetPsd2AccountsResponse_AvailableAccounts_Example": {
+    "description": "Response example for get available accounts list",
+    "value": {
+     "accounts": [
+      {
+       "iban": "GE75TB7341367986493342",
+       "msisdn": "555302442",
+       "currency": "GEL",
+       "name": "ადრიანუს ჯონეს მარია საჩეჩელაშვილი",
+       "displayName": "Concept",
+       "cashAccountType": "CARD",
+       "status": "enabled",
+       "bic": "TBCBGE22",
+       "usage": "PRIV",
+       "balances": [
+        {
+         "balanceType": "interimBooked",
+         "balanceAmount": {
+          "currency": "GEL",
+          "amount": "30.00"
+         },
+         "creditLimitIncluded": false,
+         "referenceDate": "2025-03-26",
+         "lastChangeDateTime": "2025-03-26T00:00:00"
+        },
+        {
+         "balanceType": "interimAvailable",
+         "balanceAmount": {
+          "currency": "GEL",
+          "amount": "30.00"
+         },
+         "creditLimitIncluded": false
+        }
+       ],
+       "_links": {}
+      },
+      {
+       "iban": "GE75TB7341367986493342",
+       "msisdn": "555302442",
+       "currency": "USD",
+       "name": "ადრიანუს ჯონეს მარია საჩეჩელაშვილი",
+       "displayName": "Concept",
+       "cashAccountType": "CARD",
+       "status": "enabled",
+       "bic": "TBCBGE22",
+       "usage": "PRIV",
+       "balances": [
+        {
+         "balanceType": "interimBooked",
+         "balanceAmount": {
+          "currency": "USD",
+          "amount": "0.00"
+         },
+         "creditLimitIncluded": false,
+         "referenceDate": "2024-12-24",
+         "lastChangeDateTime": "2024-12-24T00:00:00"
+        },
+        {
+         "balanceType": "interimAvailable",
+         "balanceAmount": {
+          "currency": "USD",
+          "amount": "0.00"
+         },
+         "creditLimitIncluded": false
+        }
+       ],
+       "_links": {}
+      },
+      {
+       "iban": "GE75TB7341367986493342",
+       "msisdn": "555302442",
+       "currency": "EUR",
+       "name": "ადრიანუს ჯონეს მარია საჩეჩელაშვილი",
+       "displayName": "Concept",
+       "cashAccountType": "CARD",
+       "status": "enabled",
+       "bic": "TBCBGE22",
+       "usage": "PRIV",
+       "balances": [
+        {
+         "balanceType": "interimBooked",
+         "balanceAmount": {
+          "currency": "EUR",
+          "amount": "0.33"
+         },
+         "creditLimitIncluded": false,
+         "referenceDate": "2025-02-23",
+         "lastChangeDateTime": "2025-02-23T00:00:00"
+        },
+        {
+         "balanceType": "interimAvailable",
+         "balanceAmount": {
+          "currency": "EUR",
+          "amount": "0.00"
+         },
+         "creditLimitIncluded": false
+        }
+       ],
+       "_links": {}
+      }
+     ]
+    }
+   },
+   "GetPsd2TransactionsResponse_Example": {
+    "description": "Response example for get account transactions",
+    "value": {
+     "account": {
+      "iban": "GE01TB0203040506070809",
+      "currency": "XXX"
+     },
+     "transactions": {
+      "booked": [
+       {
+        "transactionId": "c_11223344556",
+        "entryReference": "c_11223344556",
+        "debtorName": "Debtor Name",
+        "debtorAccount": {
+         "iban": "GE11TB1234567891234567",
+         "currency": "GEL"
+        },
+        "debtorAgent": "TBCBGE22",
+        "debtorIdentification": {
+         "privateId": {
+          "others": [
+           {
+            "identification": "PNOGE-00112233445"
+           }
+          ]
+         }
+        },
+        "transactionAmount": {
+         "currency": "GEL",
+         "amount": "250.00"
+        },
+        "bookingDate": "2024-03-10",
+        "valueDate": "2024-03-10",
+        "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+        "additionalInformation": "საკუთარ ანგარიშზე გადარიცხვა",
+        "proprietaryBankTransactionCode": "GMI"
+       },
+       {
+        "transactionId": "d_11223344556",
+        "entryReference": "d_11223344556",
+        "creditorName": "Creditor Name",
+        "creditorAccount": {
+         "iban": "GE11TB1234567891234567",
+         "currency": "GEL"
+        },
+        "creditorAgent": "TBCBGE22",
+        "creditorIdentification": {
+         "privateId": {
+          "others": [
+           {
+            "identification": "PNOGE-00112233445"
+           }
+          ]
+         }
+        },
+        "debtorIdentification": {
+         "privateId": {
+          "others": [
+           {
+            "identification": "PNOGE-00112233445"
+           }
+          ]
+         }
+        },
+        "transactionAmount": {
+         "currency": "GEL",
+         "amount": "-50.00"
+        },
+        "bookingDate": "2024-03-11",
+        "valueDate": "2024-03-11",
+        "remittanceInformationUnstructured": "პირადი გადარიცხვა თიბისიში",
+        "additionalInformation": "პირადი გადარიცხვა თიბისიში",
+        "proprietaryBankTransactionCode": "GMB"
+       }
+      ],
+      "pending": [],
+      "_links": {
+       "account": {
+        "href": "/0.8/v1/accounts/761a7d98-3251-4e98-50fe-08dd818830c7"
+       },
+       "first": {
+        "href": "/0.8/v1/accounts/761a7d98-3251-4e98-50fe-08dd818830c7/transactions?withbalance=false&dateFrom=2023-01-01&bookingStatus=both"
+       }
+      }
+     }
+    }
+   },
+   "GetCardAccountBalanceResponse_Example": {
+    "description": "Response example for get card account balance",
+    "value": {
+     "cardAccount": {
+      "maskedPan": "123456******7890",
+      "currency": "XXX"
+     },
+     "balances": [
+      {
+       "balanceType": "interimAvailable",
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "30.00"
+       },
+       "creditLimitIncluded": false
+      },
+      {
+       "balanceType": "interimBooked",
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "30.00"
+       },
+       "creditLimitIncluded": false,
+       "referenceDate": "2025-03-26",
+       "lastChangeDateTime": "2025-03-26T00:00:00"
+      },
+      {
+       "balanceType": "closingBooked",
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-30.00"
+       }
+      },
+      {
+       "balanceType": "interimAvailable",
+       "balanceAmount": {
+        "currency": "USD",
+        "amount": "0.00"
+       },
+       "creditLimitIncluded": false
+      },
+      {
+       "balanceType": "interimBooked",
+       "balanceAmount": {
+        "currency": "USD",
+        "amount": "0.00"
+       },
+       "creditLimitIncluded": false,
+       "referenceDate": "2024-12-24",
+       "lastChangeDateTime": "2024-12-24T00:00:00"
+      },
+      {
+       "balanceType": "closingBooked",
+       "balanceAmount": {
+        "currency": "USD",
+        "amount": "0.00"
+       }
+      },
+      {
+       "balanceType": "interimAvailable",
+       "balanceAmount": {
+        "currency": "EUR",
+        "amount": "0.00"
+       },
+       "creditLimitIncluded": false
+      },
+      {
+       "balanceType": "interimBooked",
+       "balanceAmount": {
+        "currency": "EUR",
+        "amount": "0.33"
+       },
+       "creditLimitIncluded": false,
+       "referenceDate": "2025-02-23",
+       "lastChangeDateTime": "2025-02-23T00:00:00"
+      },
+      {
+       "balanceType": "closingBooked",
+       "balanceAmount": {
+        "currency": "EUR",
+        "amount": "-0.33"
+       }
+      }
+     ]
+    }
+   },
+   "GetCardAccountResponse_Example": {
+    "description": "Response example for get card account detail",
+    "value": {
+     "resourceId": "0f92178b-a77f-45d8-50f5-08dd818830c7",
+     "maskedPan": "123456******7890",
+     "currency": "XXX",
+     "ownerName": "Owner Name 1",
+     "name": "Owner Name 1",
+     "product": "VISA",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceType": "interimBooked",
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "30.00"
+       },
+       "creditLimitIncluded": false,
+       "referenceDate": "2025-03-26",
+       "lastChangeDateTime": "2025-03-26T00:00:00"
+      },
+      {
+       "balanceType": "interimAvailable",
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "30.00"
+       },
+       "creditLimitIncluded": false
+      },
+      {
+       "balanceType": "interimBooked",
+       "balanceAmount": {
+        "currency": "USD",
+        "amount": "0.00"
+       },
+       "creditLimitIncluded": false,
+       "referenceDate": "2024-12-24",
+       "lastChangeDateTime": "2024-12-24T00:00:00"
+      },
+      {
+       "balanceType": "interimAvailable",
+       "balanceAmount": {
+        "currency": "USD",
+        "amount": "0.00"
+       },
+       "creditLimitIncluded": false
+      },
+      {
+       "balanceType": "interimBooked",
+       "balanceAmount": {
+        "currency": "EUR",
+        "amount": "0.33"
+       },
+       "creditLimitIncluded": false,
+       "referenceDate": "2025-02-23",
+       "lastChangeDateTime": "2025-02-23T00:00:00"
+      },
+      {
+       "balanceType": "interimAvailable",
+       "balanceAmount": {
+        "currency": "EUR",
+        "amount": "0.00"
+       },
+       "creditLimitIncluded": false
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/0f92178b-a77f-45d8-50f5-08dd818830c7/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/0f92178b-a77f-45d8-50f5-08dd818830c7/transactions"
+      },
+      "cardAccount": {
+       "href": "/0.8/v1/card-accounts/0f92178b-a77f-45d8-50f5-08dd818830c7"
+      }
+     }
+    }
+   },
+   "GetCardAccountsResponse_withBalances_Example": {
+    "description": "Response example for get card accounts list",
+    "value": {
+     "cardAccounts": [
+      {
+       "resourceId": "0f92178b-a77f-45d8-50f5-08dd818830c7",
+       "maskedPan": "123456******7890",
+       "currency": "XXX",
+       "ownerName": "Owner Name 1",
+       "name": "Owner Name 1",
+       "product": "VISA",
+       "status": "enabled",
+       "usage": "PRIV",
+       "balances": [
+        {
+         "balanceType": "interimBooked",
+         "balanceAmount": {
+          "currency": "GEL",
+          "amount": "30.00"
+         },
+         "creditLimitIncluded": false,
+         "referenceDate": "2025-03-26",
+         "lastChangeDateTime": "2025-03-26T00:00:00"
+        },
+        {
+         "balanceType": "interimAvailable",
+         "balanceAmount": {
+          "currency": "GEL",
+          "amount": "30.00"
+         },
+         "creditLimitIncluded": false
+        },
+        {
+         "balanceType": "interimBooked",
+         "balanceAmount": {
+          "currency": "USD",
+          "amount": "0.00"
+         },
+         "creditLimitIncluded": false,
+         "referenceDate": "2024-12-24",
+         "lastChangeDateTime": "2024-12-24T00:00:00"
+        },
+        {
+         "balanceType": "interimAvailable",
+         "balanceAmount": {
+          "currency": "USD",
+          "amount": "0.00"
+         },
+         "creditLimitIncluded": false
+        },
+        {
+         "balanceType": "interimBooked",
+         "balanceAmount": {
+          "currency": "EUR",
+          "amount": "0.33"
+         },
+         "creditLimitIncluded": false,
+         "referenceDate": "2025-02-23",
+         "lastChangeDateTime": "2025-02-23T00:00:00"
+        },
+        {
+         "balanceType": "interimAvailable",
+         "balanceAmount": {
+          "currency": "EUR",
+          "amount": "0.00"
+         },
+         "creditLimitIncluded": false
+        }
+       ],
+       "_links": {
+        "balances": {
+         "href": "/0.8/v1/card-accounts/0f92178b-a77f-45d8-50f5-08dd818830c7/balances"
+        },
+        "transactions": {
+         "href": "/0.8/v1/card-accounts/0f92178b-a77f-45d8-50f5-08dd818830c7/transactions"
+        },
+        "cardAccount": {
+         "href": "/0.8/v1/card-accounts/0f92178b-a77f-45d8-50f5-08dd818830c7"
+        }
+       }
+      },
+      {
+       "resourceId": "67a95e02-f018-417e-50fa-08dd818830c7",
+       "maskedPan": "123456******7890",
+       "currency": "XXX",
+       "ownerName": "Owner Name 1",
+       "name": "Owner Name 1",
+       "product": "VISA",
+       "status": "enabled",
+       "usage": "PRIV",
+       "balances": [
+        {
+         "balanceType": "interimBooked",
+         "balanceAmount": {
+          "currency": "GEL",
+          "amount": "0.00"
+         },
+         "creditLimitIncluded": false,
+         "referenceDate": "2024-12-22",
+         "lastChangeDateTime": "2024-12-22T00:00:00"
+        },
+        {
+         "balanceType": "interimAvailable",
+         "balanceAmount": {
+          "currency": "GEL",
+          "amount": "0.00"
+         },
+         "creditLimitIncluded": false
+        },
+        {
+         "balanceType": "interimBooked",
+         "balanceAmount": {
+          "currency": "USD",
+          "amount": "0.00"
+         },
+         "creditLimitIncluded": false,
+         "referenceDate": "2024-09-19",
+         "lastChangeDateTime": "2024-09-19T00:00:00"
+        },
+        {
+         "balanceType": "interimAvailable",
+         "balanceAmount": {
+          "currency": "USD",
+          "amount": "0.00"
+         },
+         "creditLimitIncluded": false
+        },
+        {
+         "balanceType": "interimBooked",
+         "balanceAmount": {
+          "currency": "EUR",
+          "amount": "0.20"
+         },
+         "creditLimitIncluded": false,
+         "referenceDate": "2024-12-22",
+         "lastChangeDateTime": "2024-12-22T00:00:00"
+        },
+        {
+         "balanceType": "interimAvailable",
+         "balanceAmount": {
+          "currency": "EUR",
+          "amount": "0.20"
+         },
+         "creditLimitIncluded": false
+        }
+       ],
+       "_links": {
+        "balances": {
+         "href": "/0.8/v1/card-accounts/67a95e02-f018-417e-50fa-08dd818830c7/balances"
+        },
+        "transactions": {
+         "href": "/0.8/v1/card-accounts/67a95e02-f018-417e-50fa-08dd818830c7/transactions"
+        },
+        "cardAccount": {
+         "href": "/0.8/v1/card-accounts/67a95e02-f018-417e-50fa-08dd818830c7"
+        }
+       }
+      }
+     ]
+    }
+   },
+   "GetCardAccountTransactionsResponse_Example": {
+    "description": "Response example for get card account transactions list",
+    "value": {
+     "cardAccount": {
+      "maskedPan": "123456******7890",
+      "currency": "XXX"
+     },
+     "cardTransactions": {
+      "booked": [
+       {
+        "bookingDate": "2024-03-10",
+        "transactionAmount": {
+         "currency": "GEL",
+         "amount": "250.00"
+        },
+        "proprietaryBankTransactionCode": "GMI"
+       },
+       {
+        "bookingDate": "2024-03-11",
+        "transactionAmount": {
+         "currency": "GEL",
+         "amount": "-50.00"
+        },
+        "proprietaryBankTransactionCode": "GMB"
+       }
+      ],
+      "pending": [],
+      "_links": {
+       "first": {
+        "href": "/0.8/v1/card-accounts/0f92178b-a77f-45d8-50f5-08dd818830c7/transactions?withbalance=false&dateFrom=2024-01-01&bookingStatus=both"
+       }
+      }
+     }
+    }
+   },
+   "AuthorisationStatusResponse_Example": {
+    "description": "Response example on get consent authorisation status request",
+    "value": {
+     "scaStatus": "scaMethodSelected"
+    }
+   },
+   "GetConsentStatusResponse_Example": {
+    "description": "Response example on get consent status request",
+    "value": {
+     "consentStatus": "valid"
+    }
+   },
+   "409_Conflict_Example_Consents": {
+    "value": {
+     "code": "STATUS_INVALID",
+     "traceId": "00-52c9017a1ce75790a168d47ee41b9ad0-fbc6a16cfc2769ff-01",
+     "type": "https://developers.tbcbank.ge/docs/error-type-409",
+     "title": "Started Authorisation",
+     "status": 403,
+     "detail": "Started Authorisation process already exist and is not finished",
+     "instance": "/v1/consents/69a3d6a8-e7fe-4de0-904b-27eab5d33366/authorisations"
+    }
+   },
+   "StartAuthorisationResponse_Redirect_Example": {
+    "description": "Response example in case of a redirect with a dedicated start of the authorisation process",
+    "value": {
+     "scaStatus": "scaMethodSelected",
+     "authorisationId": "78c5d6ff-cfd7-4db5-83da-74ec258a3d4e",
+     "_links": {
+      "scaOAuth": {
+       "href": "https://test-openbanking.tbcbank.ge/openbanking/oauth/.well-known/oauth-authorization-server"
+      },
+      "scaStatus": {
+       "href": "/0.8/v1/consents/70c9c538-8353-491b-b6ba-e39826fa9f1c/authorisations/78c5d6ff-cfd7-4db5-83da-74ec258a3d4e"
+      }
+     }
+    }
+   },
+   "StartAuthorisationResponse_Decoupled_Example": {
+    "description": "Response example in case of the decoupled approach",
+    "value": {
+     "scaStatus": "scaMethodSelected",
+     "authorisationId": "efe158ff-351b-4d3d-abac-0c67c4521507",
+     "_links": {
+      "scaOAuth": {
+       "href": "https://test-openbanking.tbcbank.ge/openbanking/oauth/.well-known/oauth-authorization-server"
+      },
+      "scaStatus": {
+       "href": "/0.8/v1/consents/85e3fa6f-c98e-492b-a9c5-8dee22dd5286/authorisations/efe158ff-351b-4d3d-abac-0c67c4521507"
+      }
+     },
+     "psuMessage": "In order to continue process, you will receive SMS https://consent.tbcbank.ge/authorisation/efe158ff-351b-4d3d-abac-0c67c4521507"
+    }
+   }
+  },
+  "securitySchemes": {
+   "BearerAuth": {
+    "description": "Bearer Token. \n\nIs contained only, if an OAuth2 based authentication was performed in a pre-step or \nan OAuth2 based SCA was performed in a preceding AIS service in the same session.\n",
+    "type": "http",
+    "scheme": "bearer"
+   }
+  }
+ },
+ "security": [
+  {}
+ ],
+ "x-provenance": {
+  "note": "ASSEMBLED from per-operation OAS fragments embedded in developers.tbcbank.ge reference pages (ReadMe ssr-props document.api.schema). Not an official full download. Paths verbatim from fragments.",
+  "source_pages": [
+   {
+    "slug": "aiscreateconsent",
+    "page": "https://developers.tbcbank.ge/reference/aiscreateconsent",
+    "method": "post",
+    "path": "/v1/consents"
+   },
+   {
+    "slug": "aisdeleteconsent",
+    "page": "https://developers.tbcbank.ge/reference/aisdeleteconsent",
+    "method": "delete",
+    "path": "/v1/consents/{consentId}"
+   },
+   {
+    "slug": "aisgetconsentauthorizations",
+    "page": "https://developers.tbcbank.ge/reference/aisgetconsentauthorizations",
+    "method": "get",
+    "path": "/v1/consents/{consentId}/authorisations"
+   },
+   {
+    "slug": "aisgetconsentdetails",
+    "page": "https://developers.tbcbank.ge/reference/aisgetconsentdetails",
+    "method": "get",
+    "path": "/v1/consents/{consentId}"
+   },
+   {
+    "slug": "aisoauthauhtorization",
+    "page": "https://developers.tbcbank.ge/reference/aisoauthauhtorization",
+    "method": "get",
+    "path": "/psd2/openbanking/oauth/authorize"
+   },
+   {
+    "slug": "aisoauthtoken",
+    "page": "https://developers.tbcbank.ge/reference/aisoauthtoken",
+    "method": "post",
+    "path": "/openbanking/oauth/token"
+   },
+   {
+    "slug": "aisopenidconfiguration",
+    "page": "https://developers.tbcbank.ge/reference/aisopenidconfiguration",
+    "method": "get",
+    "path": "/.well-known/oauth-authorization-server"
+   },
+   {
+    "slug": "aisreadaccountbalance",
+    "page": "https://developers.tbcbank.ge/reference/aisreadaccountbalance",
+    "method": "get",
+    "path": "/v1/accounts/{account-id}/balances"
+   },
+   {
+    "slug": "aisreadaccountdetails",
+    "page": "https://developers.tbcbank.ge/reference/aisreadaccountdetails",
+    "method": "get",
+    "path": "/v1/accounts/{account-id}"
+   },
+   {
+    "slug": "aisreadaccountlist",
+    "page": "https://developers.tbcbank.ge/reference/aisreadaccountlist",
+    "method": "get",
+    "path": "/v1/accounts"
+   },
+   {
+    "slug": "aisreadaccounttransactionlist",
+    "page": "https://developers.tbcbank.ge/reference/aisreadaccounttransactionlist",
+    "method": "get",
+    "path": "/v1/accounts/{account-id}/transactions"
+   },
+   {
+    "slug": "aisreadcardaccountbalances",
+    "page": "https://developers.tbcbank.ge/reference/aisreadcardaccountbalances",
+    "method": "get",
+    "path": "/v1/card-accounts/{account-id}/balances"
+   },
+   {
+    "slug": "aisreadcardaccountdetails",
+    "page": "https://developers.tbcbank.ge/reference/aisreadcardaccountdetails",
+    "method": "get",
+    "path": "/v1/card-accounts/{account-id}"
+   },
+   {
+    "slug": "aisreadcardaccountlist",
+    "page": "https://developers.tbcbank.ge/reference/aisreadcardaccountlist",
+    "method": "get",
+    "path": "/v1/card-accounts"
+   },
+   {
+    "slug": "aisreadcardaccounttransactionlist",
+    "page": "https://developers.tbcbank.ge/reference/aisreadcardaccounttransactionlist",
+    "method": "get",
+    "path": "/v1/card-accounts/{account-id}/transactions"
+   },
+   {
+    "slug": "aisreadconsentauthorizationstatus",
+    "page": "https://developers.tbcbank.ge/reference/aisreadconsentauthorizationstatus",
+    "method": "get",
+    "path": "/v1/consents/{consentId}/authorisations/{authorisationId}"
+   },
+   {
+    "slug": "aisreadconsentstatus",
+    "page": "https://developers.tbcbank.ge/reference/aisreadconsentstatus",
+    "method": "get",
+    "path": "/v1/consents/{consentId}/status"
+   },
+   {
+    "slug": "aisstartconsentauthorization",
+    "page": "https://developers.tbcbank.ge/reference/aisstartconsentauthorization",
+    "method": "post",
+    "path": "/v1/consents/{consentId}/authorisations"
+   }
+  ],
+  "conflicts": [],
+  "unresolved_refs": [],
+  "undefined_security_schemes": [
+   "BearerAuthOAuth"
+  ],
+  "fragment_variation": {
+   "openapi": 1,
+   "info": 1,
+   "servers": 1,
+   "security": 1
+  }
+ }
+}

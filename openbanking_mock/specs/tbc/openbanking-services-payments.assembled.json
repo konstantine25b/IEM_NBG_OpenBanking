@@ -1,0 +1,3620 @@
+{
+ "openapi": "3.0.4",
+ "info": {
+  "title": "OpenBanking Services - Payments",
+  "description": "APIs for initiating payment and getting its details and status.\n\nAbbreviations used in the documentation:\n  * TPP - Third Party Providers\n  * PIS - Payment Initiation Service\n  * ASPSP - Account Servicing Payment Service Provider \n  * PSU - Payment Service User\n  * SCA - Strong Customer Authentication\n  * PISP - Payment Initiation Service Provider\n\nIn order to make test integration, please use  https://test-openbanking.tbcbank.ge/0.8\n",
+  "version": "1.0"
+ },
+ "servers": [
+  {
+   "url": "https://test-openbanking.tbcbank.ge/0.8"
+  },
+  {
+   "url": "https://openbanking.tbcbank.ge/0.8"
+  }
+ ],
+ "paths": {
+  "/v1/{payment-service}/{payment-product}/{paymentId}": {
+   "delete": {
+    "tags": [
+     "Payments"
+    ],
+    "summary": "Payment cancellation request",
+    "parameters": [
+     {
+      "name": "payment-service",
+      "in": "path",
+      "description": "<div class=\"enum-desc\"><p>Values:</p><ul><li><i>payments</i></li><li><i>bulk-payments</i></li><li><i>periodic-payments</i></li><li><i>secured-payments</i></li></ul></div><div class=\"enum-desc\"><p>Values:</p><ul><li><i>payments</i></li><li><i>bulk-payments</i></li><li><i>periodic-payments</i></li><li><i>secured-payments</i></li></ul></div>",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/PaymentServiceEnum"
+      }
+     },
+     {
+      "name": "payment-product",
+      "in": "path",
+      "description": "<div class=\"enum-desc\"><p>Values:</p><ul><li><i>aspsp</i></li><li><i>domestic</i></li><li><i>foreign</i></li></ul></div><div class=\"enum-desc\"><p>Values:</p><ul><li><i>aspsp</i></li><li><i>domestic</i></li><li><i>foreign</i></li></ul></div>",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/PaymentProductEnum"
+      }
+     },
+     {
+      "name": "paymentId",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "X-Request-ID",
+      "in": "header",
+      "description": "ID of the request, unique to the call, as determined by the initiating party.",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      },
+      "example": "698a3904-49aa-481f-b51e-b027e2b998e5"
+     },
+     {
+      "name": "PSU-ID",
+      "in": "header",
+      "description": "Client ID of the PSU in the ASPSP client interface.\r\n\r\nMight be mandated in the ASPSP's documentation.\r\n\r\nIt might be contained even if an OAuth2 based authentication was performed in a pre-step or an OAuth2 based SCA was performed in an preceding AIS service in the same session. In this case the ASPSP might check whether PSU-ID and token match, according to ASPSP documentation.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "PSU-1234"
+     },
+     {
+      "name": "PSU-ID-Type",
+      "in": "header",
+      "description": "Type of the PSU-ID, needed in scenarios where PSUs have several PSU-IDs as access possibility.\r\n\r\nIn this case, the mean and use are then defined in the ASPSP’s documentation.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "PSU-IP-Address",
+      "in": "header",
+      "description": "The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "192.168.8.78"
+     },
+     {
+      "name": "PSU-IP-Port",
+      "in": "header",
+      "description": "The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "1234"
+     },
+     {
+      "name": "PSU-Geo-Location",
+      "in": "header",
+      "description": "The forwarded Geo Location of the corresponding http request between PSU and TPP if available.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "GEO:52.506931;13.144558"
+     },
+     {
+      "name": "Accept-Language",
+      "in": "header",
+      "description": "The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPP-Redirect-URI",
+      "in": "header",
+      "description": "URI of the TPP, where the transaction flow shall be redirected to after a Redirect.\r\n\r\nMandated for the Redirect SCA Approach, specifically when TPP-Redirect-Preferred equals \"true\". It is recommended to always use this header field.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "X-Apigee-UserId",
+      "in": "header",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPP-Explicit-Authorisation-Preferred",
+      "in": "header",
+      "description": "If it equals \"true\", the TPP prefers to start the authorisation process separately, e.g. because of the usage of a signing basket. This preference might be ignored by the ASPSP, if a signing basket is not supported as functionality.\r\n\r\nIf it equals \"false\" or if the parameter is not used, there is no preference of the TPP. This especially indicates that the TPP assumes a direct authorisation of the transaction in the next step, without using a signing basket.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPPRejectionNoFundsPreferred",
+      "in": "header",
+      "description": "If it equals \"true\" then the TPP prefers a rejection of the payment initiation in case the ASPSP is providing an integrated confirmation of funds request an the result of this is that not sufficient funds are available.\r\n\r\nIf it equals \"false\" then the TPP prefers that the ASPSP is dealing with the payment initiation like in the ASPSPs online channel, potentially waiting for a certain time period for funds to arrive to initiate the payment.\r\n\r\nThis parameter might be ignored by the ASPSP.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "Consent-ID",
+      "in": "header",
+      "description": "Consent Id",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "examples": {
+         "Error example when Ip address is empty": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Ip address is empty",
+           "status": 400,
+           "detail": "Ip address is empty",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent not found",
+           "status": 400,
+           "detail": "Consent not found",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent has expired": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent has expired",
+           "status": 401,
+           "detail": "Consent has expired",
+           "instance": "/cards/************",
+           "code": "CONSENT_EXPIRED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid consent": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid consent",
+           "status": 401,
+           "detail": "Invalid consent",
+           "instance": "/cards/************",
+           "code": "CONSENT_INVALID",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid CardId": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid CardId",
+           "status": 400,
+           "detail": "Invalid CardId",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Card not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Card not found",
+           "status": 404,
+           "detail": "Card not found",
+           "instance": "/cards/************",
+           "code": "RESOURCE_UNKNOWN",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Access exceeded": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Too many request",
+           "status": 429,
+           "detail": "Too many request",
+           "instance": "/cards/************",
+           "code": "ACCESS_EXCEEDED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User doesn't have userid or a customerid assigned to it": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User doesn't have userid or a customerid assigned to it.",
+           "status": 400,
+           "detail": "User doesn't have userid or a customerid assigned to it.",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User is not active": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User is not active",
+           "status": 400,
+           "detail": "User is not active",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         }
+        }
+       }
+      }
+     },
+     "405": {
+      "description": "Method Not Allowed",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "examples": {
+         "Error example when Ip address is empty": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Ip address is empty",
+           "status": 400,
+           "detail": "Ip address is empty",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent not found",
+           "status": 400,
+           "detail": "Consent not found",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent has expired": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent has expired",
+           "status": 401,
+           "detail": "Consent has expired",
+           "instance": "/cards/************",
+           "code": "CONSENT_EXPIRED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid consent": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid consent",
+           "status": 401,
+           "detail": "Invalid consent",
+           "instance": "/cards/************",
+           "code": "CONSENT_INVALID",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid CardId": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid CardId",
+           "status": 400,
+           "detail": "Invalid CardId",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Card not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Card not found",
+           "status": 404,
+           "detail": "Card not found",
+           "instance": "/cards/************",
+           "code": "RESOURCE_UNKNOWN",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Access exceeded": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Too many request",
+           "status": 429,
+           "detail": "Too many request",
+           "instance": "/cards/************",
+           "code": "ACCESS_EXCEEDED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User doesn't have userid or a customerid assigned to it": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User doesn't have userid or a customerid assigned to it.",
+           "status": 400,
+           "detail": "User doesn't have userid or a customerid assigned to it.",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User is not active": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User is not active",
+           "status": 400,
+           "detail": "User is not active",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         }
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "examples": {
+         "Error example when Ip address is empty": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Ip address is empty",
+           "status": 400,
+           "detail": "Ip address is empty",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent not found",
+           "status": 400,
+           "detail": "Consent not found",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent has expired": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent has expired",
+           "status": 401,
+           "detail": "Consent has expired",
+           "instance": "/cards/************",
+           "code": "CONSENT_EXPIRED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid consent": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid consent",
+           "status": 401,
+           "detail": "Invalid consent",
+           "instance": "/cards/************",
+           "code": "CONSENT_INVALID",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid CardId": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid CardId",
+           "status": 400,
+           "detail": "Invalid CardId",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Card not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Card not found",
+           "status": 404,
+           "detail": "Card not found",
+           "instance": "/cards/************",
+           "code": "RESOURCE_UNKNOWN",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Access exceeded": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Too many request",
+           "status": 429,
+           "detail": "Too many request",
+           "instance": "/cards/************",
+           "code": "ACCESS_EXCEEDED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User doesn't have userid or a customerid assigned to it": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User doesn't have userid or a customerid assigned to it.",
+           "status": 400,
+           "detail": "User doesn't have userid or a customerid assigned to it.",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User is not active": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User is not active",
+           "status": 400,
+           "detail": "User is not active",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/payments/{payment-product}/{paymentId}/status": {
+   "get": {
+    "tags": [
+     "Payments"
+    ],
+    "summary": "Payment initiation request",
+    "parameters": [
+     {
+      "name": "payment-product",
+      "in": "path",
+      "description": "<div class=\"enum-desc\"><p>Values:</p><ul><li><i>aspsp</i></li><li><i>domestic</i></li><li><i>foreign</i></li></ul></div><div class=\"enum-desc\"><p>Values:</p><ul><li><i>aspsp</i></li><li><i>domestic</i></li><li><i>foreign</i></li></ul></div>",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/PaymentProductEnum"
+      }
+     },
+     {
+      "name": "paymentId",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "X-Request-ID",
+      "in": "header",
+      "description": "ID of the request, unique to the call, as determined by the initiating party.",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      },
+      "example": "698a3904-49aa-481f-b51e-b027e2b998e5"
+     },
+     {
+      "name": "PSU-ID",
+      "in": "header",
+      "description": "Client ID of the PSU in the ASPSP client interface.\r\n\r\nMight be mandated in the ASPSP's documentation.\r\n\r\nIt might be contained even if an OAuth2 based authentication was performed in a pre-step or an OAuth2 based SCA was performed in an preceding AIS service in the same session. In this case the ASPSP might check whether PSU-ID and token match, according to ASPSP documentation.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "PSU-1234"
+     },
+     {
+      "name": "PSU-ID-Type",
+      "in": "header",
+      "description": "Type of the PSU-ID, needed in scenarios where PSUs have several PSU-IDs as access possibility.\r\n\r\nIn this case, the mean and use are then defined in the ASPSP’s documentation.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "PSU-IP-Address",
+      "in": "header",
+      "description": "The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "192.168.8.78"
+     },
+     {
+      "name": "PSU-IP-Port",
+      "in": "header",
+      "description": "The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "1234"
+     },
+     {
+      "name": "PSU-Geo-Location",
+      "in": "header",
+      "description": "The forwarded Geo Location of the corresponding http request between PSU and TPP if available.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "GEO:52.506931;13.144558"
+     },
+     {
+      "name": "Accept-Language",
+      "in": "header",
+      "description": "The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPP-Redirect-URI",
+      "in": "header",
+      "description": "URI of the TPP, where the transaction flow shall be redirected to after a Redirect.\r\n\r\nMandated for the Redirect SCA Approach, specifically when TPP-Redirect-Preferred equals \"true\". It is recommended to always use this header field.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "X-Apigee-UserId",
+      "in": "header",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPP-Explicit-Authorisation-Preferred",
+      "in": "header",
+      "description": "If it equals \"true\", the TPP prefers to start the authorisation process separately, e.g. because of the usage of a signing basket. This preference might be ignored by the ASPSP, if a signing basket is not supported as functionality.\r\n\r\nIf it equals \"false\" or if the parameter is not used, there is no preference of the TPP. This especially indicates that the TPP assumes a direct authorisation of the transaction in the next step, without using a signing basket.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPPRejectionNoFundsPreferred",
+      "in": "header",
+      "description": "If it equals \"true\" then the TPP prefers a rejection of the payment initiation in case the ASPSP is providing an integrated confirmation of funds request an the result of this is that not sufficient funds are available.\r\n\r\nIf it equals \"false\" then the TPP prefers that the ASPSP is dealing with the payment initiation like in the ASPSPs online channel, potentially waiting for a certain time period for funds to arrive to initiate the payment.\r\n\r\nThis parameter might be ignored by the ASPSP.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "Consent-ID",
+      "in": "header",
+      "description": "Consent Id",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GetPaymentStatusResponse"
+        },
+        "examples": {
+         "Example 1: Payment status request": {
+          "value": {
+           "transactionStatus": "RCVD",
+           "fundsAvailable": true
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "examples": {
+         "Error example when Ip address is empty": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Ip address is empty",
+           "status": 400,
+           "detail": "Ip address is empty",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent not found",
+           "status": 400,
+           "detail": "Consent not found",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent has expired": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent has expired",
+           "status": 401,
+           "detail": "Consent has expired",
+           "instance": "/cards/************",
+           "code": "CONSENT_EXPIRED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid consent": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid consent",
+           "status": 401,
+           "detail": "Invalid consent",
+           "instance": "/cards/************",
+           "code": "CONSENT_INVALID",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid CardId": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid CardId",
+           "status": 400,
+           "detail": "Invalid CardId",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Card not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Card not found",
+           "status": 404,
+           "detail": "Card not found",
+           "instance": "/cards/************",
+           "code": "RESOURCE_UNKNOWN",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Access exceeded": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Too many request",
+           "status": 429,
+           "detail": "Too many request",
+           "instance": "/cards/************",
+           "code": "ACCESS_EXCEEDED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User doesn't have userid or a customerid assigned to it": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User doesn't have userid or a customerid assigned to it.",
+           "status": 400,
+           "detail": "User doesn't have userid or a customerid assigned to it.",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User is not active": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User is not active",
+           "status": 400,
+           "detail": "User is not active",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "examples": {
+         "Error example when Ip address is empty": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Ip address is empty",
+           "status": 400,
+           "detail": "Ip address is empty",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent not found",
+           "status": 400,
+           "detail": "Consent not found",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent has expired": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent has expired",
+           "status": 401,
+           "detail": "Consent has expired",
+           "instance": "/cards/************",
+           "code": "CONSENT_EXPIRED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid consent": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid consent",
+           "status": 401,
+           "detail": "Invalid consent",
+           "instance": "/cards/************",
+           "code": "CONSENT_INVALID",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid CardId": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid CardId",
+           "status": 400,
+           "detail": "Invalid CardId",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Card not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Card not found",
+           "status": 404,
+           "detail": "Card not found",
+           "instance": "/cards/************",
+           "code": "RESOURCE_UNKNOWN",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Access exceeded": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Too many request",
+           "status": 429,
+           "detail": "Too many request",
+           "instance": "/cards/************",
+           "code": "ACCESS_EXCEEDED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User doesn't have userid or a customerid assigned to it": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User doesn't have userid or a customerid assigned to it.",
+           "status": 400,
+           "detail": "User doesn't have userid or a customerid assigned to it.",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User is not active": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User is not active",
+           "status": 400,
+           "detail": "User is not active",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         }
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "examples": {
+         "Error example when Ip address is empty": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Ip address is empty",
+           "status": 400,
+           "detail": "Ip address is empty",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent not found",
+           "status": 400,
+           "detail": "Consent not found",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent has expired": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent has expired",
+           "status": 401,
+           "detail": "Consent has expired",
+           "instance": "/cards/************",
+           "code": "CONSENT_EXPIRED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid consent": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid consent",
+           "status": 401,
+           "detail": "Invalid consent",
+           "instance": "/cards/************",
+           "code": "CONSENT_INVALID",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid CardId": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid CardId",
+           "status": 400,
+           "detail": "Invalid CardId",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Card not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Card not found",
+           "status": 404,
+           "detail": "Card not found",
+           "instance": "/cards/************",
+           "code": "RESOURCE_UNKNOWN",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Access exceeded": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Too many request",
+           "status": 429,
+           "detail": "Too many request",
+           "instance": "/cards/************",
+           "code": "ACCESS_EXCEEDED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User doesn't have userid or a customerid assigned to it": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User doesn't have userid or a customerid assigned to it.",
+           "status": 400,
+           "detail": "User doesn't have userid or a customerid assigned to it.",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User is not active": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User is not active",
+           "status": 400,
+           "detail": "User is not active",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         }
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "examples": {
+         "Error example when Ip address is empty": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Ip address is empty",
+           "status": 400,
+           "detail": "Ip address is empty",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent not found",
+           "status": 400,
+           "detail": "Consent not found",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent has expired": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent has expired",
+           "status": 401,
+           "detail": "Consent has expired",
+           "instance": "/cards/************",
+           "code": "CONSENT_EXPIRED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid consent": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid consent",
+           "status": 401,
+           "detail": "Invalid consent",
+           "instance": "/cards/************",
+           "code": "CONSENT_INVALID",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid CardId": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid CardId",
+           "status": 400,
+           "detail": "Invalid CardId",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Card not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Card not found",
+           "status": 404,
+           "detail": "Card not found",
+           "instance": "/cards/************",
+           "code": "RESOURCE_UNKNOWN",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Access exceeded": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Too many request",
+           "status": 429,
+           "detail": "Too many request",
+           "instance": "/cards/************",
+           "code": "ACCESS_EXCEEDED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User doesn't have userid or a customerid assigned to it": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User doesn't have userid or a customerid assigned to it.",
+           "status": 400,
+           "detail": "User doesn't have userid or a customerid assigned to it.",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User is not active": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User is not active",
+           "status": 400,
+           "detail": "User is not active",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/payments/{payment-product}/{paymentId}": {
+   "get": {
+    "tags": [
+     "Payments"
+    ],
+    "summary": "Get payment information",
+    "parameters": [
+     {
+      "name": "payment-product",
+      "in": "path",
+      "description": "<div class=\"enum-desc\"><p>Values:</p><ul><li><i>aspsp</i></li><li><i>domestic</i></li><li><i>foreign</i></li></ul></div><div class=\"enum-desc\"><p>Values:</p><ul><li><i>aspsp</i></li><li><i>domestic</i></li><li><i>foreign</i></li></ul></div>",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/PaymentProductEnum"
+      }
+     },
+     {
+      "name": "paymentId",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "X-Request-ID",
+      "in": "header",
+      "description": "ID of the request, unique to the call, as determined by the initiating party.",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      },
+      "example": "698a3904-49aa-481f-b51e-b027e2b998e5"
+     },
+     {
+      "name": "PSU-ID",
+      "in": "header",
+      "description": "Client ID of the PSU in the ASPSP client interface.\r\n\r\nMight be mandated in the ASPSP's documentation.\r\n\r\nIt might be contained even if an OAuth2 based authentication was performed in a pre-step or an OAuth2 based SCA was performed in an preceding AIS service in the same session. In this case the ASPSP might check whether PSU-ID and token match, according to ASPSP documentation.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "PSU-1234"
+     },
+     {
+      "name": "PSU-ID-Type",
+      "in": "header",
+      "description": "Type of the PSU-ID, needed in scenarios where PSUs have several PSU-IDs as access possibility.\r\n\r\nIn this case, the mean and use are then defined in the ASPSP’s documentation.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "PSU-IP-Address",
+      "in": "header",
+      "description": "The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "192.168.8.78"
+     },
+     {
+      "name": "PSU-IP-Port",
+      "in": "header",
+      "description": "The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "1234"
+     },
+     {
+      "name": "PSU-Geo-Location",
+      "in": "header",
+      "description": "The forwarded Geo Location of the corresponding http request between PSU and TPP if available.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "GEO:52.506931;13.144558"
+     },
+     {
+      "name": "Accept-Language",
+      "in": "header",
+      "description": "The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPP-Redirect-URI",
+      "in": "header",
+      "description": "URI of the TPP, where the transaction flow shall be redirected to after a Redirect.\r\n\r\nMandated for the Redirect SCA Approach, specifically when TPP-Redirect-Preferred equals \"true\". It is recommended to always use this header field.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "X-Apigee-UserId",
+      "in": "header",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPP-Explicit-Authorisation-Preferred",
+      "in": "header",
+      "description": "If it equals \"true\", the TPP prefers to start the authorisation process separately, e.g. because of the usage of a signing basket. This preference might be ignored by the ASPSP, if a signing basket is not supported as functionality.\r\n\r\nIf it equals \"false\" or if the parameter is not used, there is no preference of the TPP. This especially indicates that the TPP assumes a direct authorisation of the transaction in the next step, without using a signing basket.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPPRejectionNoFundsPreferred",
+      "in": "header",
+      "description": "If it equals \"true\" then the TPP prefers a rejection of the payment initiation in case the ASPSP is providing an integrated confirmation of funds request an the result of this is that not sufficient funds are available.\r\n\r\nIf it equals \"false\" then the TPP prefers that the ASPSP is dealing with the payment initiation like in the ASPSPs online channel, potentially waiting for a certain time period for funds to arrive to initiate the payment.\r\n\r\nThis parameter might be ignored by the ASPSP.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "Consent-ID",
+      "in": "header",
+      "description": "Consent Id",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GetPaymentResponse"
+        },
+        "examples": {
+         "Example 1: Payment initiation response": {
+          "value": {
+           "debtorAccount": {
+            "iban": "GE83TB7438345061622218",
+            "currency": "GEL"
+           },
+           "instructedAmount": {
+            "currency": "USD",
+            "amount": "15"
+           },
+           "creditorAccount": {
+            "iban": "GE83TB7438345061655577",
+            "currency": "GEL"
+           },
+           "creditorAgent": "TRESGE22",
+           "creditorName": "Wolfgang Amadeus Mozart",
+           "remittanceInformationUnstructured": "Ref Number Merchant",
+           "transactionStatus": "ACTC",
+           "debtorIdentification": {
+            "privateId": {
+             "others": [
+              {
+               "identification": "PNOGE-01019013212"
+              }
+             ]
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "examples": {
+         "Error example when Ip address is empty": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Ip address is empty",
+           "status": 400,
+           "detail": "Ip address is empty",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent not found",
+           "status": 400,
+           "detail": "Consent not found",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent has expired": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent has expired",
+           "status": 401,
+           "detail": "Consent has expired",
+           "instance": "/cards/************",
+           "code": "CONSENT_EXPIRED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid consent": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid consent",
+           "status": 401,
+           "detail": "Invalid consent",
+           "instance": "/cards/************",
+           "code": "CONSENT_INVALID",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid CardId": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid CardId",
+           "status": 400,
+           "detail": "Invalid CardId",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Card not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Card not found",
+           "status": 404,
+           "detail": "Card not found",
+           "instance": "/cards/************",
+           "code": "RESOURCE_UNKNOWN",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Access exceeded": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Too many request",
+           "status": 429,
+           "detail": "Too many request",
+           "instance": "/cards/************",
+           "code": "ACCESS_EXCEEDED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User doesn't have userid or a customerid assigned to it": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User doesn't have userid or a customerid assigned to it.",
+           "status": 400,
+           "detail": "User doesn't have userid or a customerid assigned to it.",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User is not active": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User is not active",
+           "status": 400,
+           "detail": "User is not active",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "examples": {
+         "Error example when Ip address is empty": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Ip address is empty",
+           "status": 400,
+           "detail": "Ip address is empty",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent not found",
+           "status": 400,
+           "detail": "Consent not found",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent has expired": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent has expired",
+           "status": 401,
+           "detail": "Consent has expired",
+           "instance": "/cards/************",
+           "code": "CONSENT_EXPIRED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid consent": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid consent",
+           "status": 401,
+           "detail": "Invalid consent",
+           "instance": "/cards/************",
+           "code": "CONSENT_INVALID",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid CardId": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid CardId",
+           "status": 400,
+           "detail": "Invalid CardId",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Card not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Card not found",
+           "status": 404,
+           "detail": "Card not found",
+           "instance": "/cards/************",
+           "code": "RESOURCE_UNKNOWN",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Access exceeded": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Too many request",
+           "status": 429,
+           "detail": "Too many request",
+           "instance": "/cards/************",
+           "code": "ACCESS_EXCEEDED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User doesn't have userid or a customerid assigned to it": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User doesn't have userid or a customerid assigned to it.",
+           "status": 400,
+           "detail": "User doesn't have userid or a customerid assigned to it.",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User is not active": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User is not active",
+           "status": 400,
+           "detail": "User is not active",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         }
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "examples": {
+         "Error example when Ip address is empty": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Ip address is empty",
+           "status": 400,
+           "detail": "Ip address is empty",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent not found",
+           "status": 400,
+           "detail": "Consent not found",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent has expired": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent has expired",
+           "status": 401,
+           "detail": "Consent has expired",
+           "instance": "/cards/************",
+           "code": "CONSENT_EXPIRED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid consent": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid consent",
+           "status": 401,
+           "detail": "Invalid consent",
+           "instance": "/cards/************",
+           "code": "CONSENT_INVALID",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid CardId": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid CardId",
+           "status": 400,
+           "detail": "Invalid CardId",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Card not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Card not found",
+           "status": 404,
+           "detail": "Card not found",
+           "instance": "/cards/************",
+           "code": "RESOURCE_UNKNOWN",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Access exceeded": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Too many request",
+           "status": 429,
+           "detail": "Too many request",
+           "instance": "/cards/************",
+           "code": "ACCESS_EXCEEDED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User doesn't have userid or a customerid assigned to it": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User doesn't have userid or a customerid assigned to it.",
+           "status": 400,
+           "detail": "User doesn't have userid or a customerid assigned to it.",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User is not active": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User is not active",
+           "status": 400,
+           "detail": "User is not active",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         }
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "examples": {
+         "Error example when Ip address is empty": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Ip address is empty",
+           "status": 400,
+           "detail": "Ip address is empty",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent not found",
+           "status": 400,
+           "detail": "Consent not found",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent has expired": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent has expired",
+           "status": 401,
+           "detail": "Consent has expired",
+           "instance": "/cards/************",
+           "code": "CONSENT_EXPIRED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid consent": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid consent",
+           "status": 401,
+           "detail": "Invalid consent",
+           "instance": "/cards/************",
+           "code": "CONSENT_INVALID",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid CardId": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid CardId",
+           "status": 400,
+           "detail": "Invalid CardId",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Card not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Card not found",
+           "status": 404,
+           "detail": "Card not found",
+           "instance": "/cards/************",
+           "code": "RESOURCE_UNKNOWN",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Access exceeded": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Too many request",
+           "status": 429,
+           "detail": "Too many request",
+           "instance": "/cards/************",
+           "code": "ACCESS_EXCEEDED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User doesn't have userid or a customerid assigned to it": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User doesn't have userid or a customerid assigned to it.",
+           "status": 400,
+           "detail": "User doesn't have userid or a customerid assigned to it.",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User is not active": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User is not active",
+           "status": 400,
+           "detail": "User is not active",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/bulk-payments/{payment-product}": {
+   "post": {
+    "tags": [
+     "Payments"
+    ],
+    "summary": "Bulk Payment Initiation request",
+    "parameters": [
+     {
+      "name": "payment-product",
+      "in": "path",
+      "description": "<div class=\"enum-desc\"><p>Values:</p><ul><li><i>aspsp</i></li><li><i>domestic</i></li><li><i>foreign</i></li></ul></div><div class=\"enum-desc\"><p>Values:</p><ul><li><i>aspsp</i></li><li><i>domestic</i></li><li><i>foreign</i></li></ul></div>",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/PaymentProductEnum"
+      }
+     },
+     {
+      "name": "X-Request-ID",
+      "in": "header",
+      "description": "ID of the request, unique to the call, as determined by the initiating party.",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      },
+      "example": "698a3904-49aa-481f-b51e-b027e2b998e5"
+     },
+     {
+      "name": "PSU-ID",
+      "in": "header",
+      "description": "Client ID of the PSU in the ASPSP client interface.\r\n\r\nMight be mandated in the ASPSP's documentation.\r\n\r\nIt might be contained even if an OAuth2 based authentication was performed in a pre-step or an OAuth2 based SCA was performed in an preceding AIS service in the same session. In this case the ASPSP might check whether PSU-ID and token match, according to ASPSP documentation.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "PSU-1234"
+     },
+     {
+      "name": "PSU-ID-Type",
+      "in": "header",
+      "description": "Type of the PSU-ID, needed in scenarios where PSUs have several PSU-IDs as access possibility.\r\n\r\nIn this case, the mean and use are then defined in the ASPSP’s documentation.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "PSU-IP-Address",
+      "in": "header",
+      "description": "The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "192.168.8.78"
+     },
+     {
+      "name": "PSU-IP-Port",
+      "in": "header",
+      "description": "The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "1234"
+     },
+     {
+      "name": "PSU-Geo-Location",
+      "in": "header",
+      "description": "The forwarded Geo Location of the corresponding http request between PSU and TPP if available.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "GEO:52.506931;13.144558"
+     },
+     {
+      "name": "Accept-Language",
+      "in": "header",
+      "description": "The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPP-Redirect-URI",
+      "in": "header",
+      "description": "URI of the TPP, where the transaction flow shall be redirected to after a Redirect.\r\n\r\nMandated for the Redirect SCA Approach, specifically when TPP-Redirect-Preferred equals \"true\". It is recommended to always use this header field.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "X-Apigee-UserId",
+      "in": "header",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPP-Explicit-Authorisation-Preferred",
+      "in": "header",
+      "description": "If it equals \"true\", the TPP prefers to start the authorisation process separately, e.g. because of the usage of a signing basket. This preference might be ignored by the ASPSP, if a signing basket is not supported as functionality.\r\n\r\nIf it equals \"false\" or if the parameter is not used, there is no preference of the TPP. This especially indicates that the TPP assumes a direct authorisation of the transaction in the next step, without using a signing basket.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPPRejectionNoFundsPreferred",
+      "in": "header",
+      "description": "If it equals \"true\" then the TPP prefers a rejection of the payment initiation in case the ASPSP is providing an integrated confirmation of funds request an the result of this is that not sufficient funds are available.\r\n\r\nIf it equals \"false\" then the TPP prefers that the ASPSP is dealing with the payment initiation like in the ASPSPs online channel, potentially waiting for a certain time period for funds to arrive to initiate the payment.\r\n\r\nThis parameter might be ignored by the ASPSP.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "Consent-ID",
+      "in": "header",
+      "description": "Consent Id",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/BulkPaymentInitiationRequest"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Created",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PaymentInitiationResponse"
+        },
+        "examples": {
+         "Example 1: Payment initiation response - without debtor": {
+          "value": {
+           "paymentId": "7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1",
+           "transactionStatus": "ACTC",
+           "_links": {
+            "scaOAuth": {
+             "href": "https://dev-openbanking.tbcbank.ge/openbanking/oauth/.well-known/oauth-authorization-server"
+            },
+            "self": {
+             "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1"
+            },
+            "status": {
+             "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/status"
+            },
+            "scaStatus": {
+             "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/authorisations/df93472a-a86c-47f8-6d64-08dae1b187de"
+            }
+           }
+          }
+         },
+         "Example 2: Payment initiation response - convertation": {
+          "value": {
+           "paymentId": "1c76b997-3028-4929-1b34-08dae1b181a1",
+           "transactionStatus": "ACTC",
+           "estimatedTotalAmount": {
+            "currency": "GEL",
+            "amount": "41.25"
+           },
+           "estimatedInterbankSettlementAmount": {
+            "currency": "USD",
+            "amount": "15.00"
+           },
+           "_links": {
+            "scaOAuth": {
+             "href": "https://dev-openbanking.tbcbank.ge/openbanking/oauth/.well-known/oauth-authorization-server"
+            },
+            "self": {
+             "href": "/0.8/v1/payments/aspsp/1c76b997-3028-4929-1b34-08dae1b181a1"
+            },
+            "status": {
+             "href": "/0.8/v1/payments/aspsp/1c76b997-3028-4929-1b34-08dae1b181a1/status"
+            },
+            "scaStatus": {
+             "href": "/0.8/v1/payments/aspsp/1c76b997-3028-4929-1b34-08dae1b181a1/authorisations/b3b12e5e-4ed8-4140-6d65-08dae1b187de"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "examples": {
+         "Error example when Ip address is empty": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Ip address is empty",
+           "status": 400,
+           "detail": "Ip address is empty",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent not found",
+           "status": 400,
+           "detail": "Consent not found",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent has expired": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent has expired",
+           "status": 401,
+           "detail": "Consent has expired",
+           "instance": "/cards/************",
+           "code": "CONSENT_EXPIRED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid consent": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid consent",
+           "status": 401,
+           "detail": "Invalid consent",
+           "instance": "/cards/************",
+           "code": "CONSENT_INVALID",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid CardId": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid CardId",
+           "status": 400,
+           "detail": "Invalid CardId",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Card not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Card not found",
+           "status": 404,
+           "detail": "Card not found",
+           "instance": "/cards/************",
+           "code": "RESOURCE_UNKNOWN",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Access exceeded": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Too many request",
+           "status": 429,
+           "detail": "Too many request",
+           "instance": "/cards/************",
+           "code": "ACCESS_EXCEEDED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User doesn't have userid or a customerid assigned to it": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User doesn't have userid or a customerid assigned to it.",
+           "status": 400,
+           "detail": "User doesn't have userid or a customerid assigned to it.",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User is not active": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User is not active",
+           "status": 400,
+           "detail": "User is not active",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         }
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "examples": {
+         "Error example when Ip address is empty": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Ip address is empty",
+           "status": 400,
+           "detail": "Ip address is empty",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent not found",
+           "status": 400,
+           "detail": "Consent not found",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent has expired": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent has expired",
+           "status": 401,
+           "detail": "Consent has expired",
+           "instance": "/cards/************",
+           "code": "CONSENT_EXPIRED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid consent": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid consent",
+           "status": 401,
+           "detail": "Invalid consent",
+           "instance": "/cards/************",
+           "code": "CONSENT_INVALID",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid CardId": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid CardId",
+           "status": 400,
+           "detail": "Invalid CardId",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Card not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Card not found",
+           "status": 404,
+           "detail": "Card not found",
+           "instance": "/cards/************",
+           "code": "RESOURCE_UNKNOWN",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Access exceeded": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Too many request",
+           "status": 429,
+           "detail": "Too many request",
+           "instance": "/cards/************",
+           "code": "ACCESS_EXCEEDED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User doesn't have userid or a customerid assigned to it": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User doesn't have userid or a customerid assigned to it.",
+           "status": 400,
+           "detail": "User doesn't have userid or a customerid assigned to it.",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User is not active": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User is not active",
+           "status": 400,
+           "detail": "User is not active",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/{payment-service}/{payment-product}/{paymentId}/authorisations": {
+   "post": {
+    "tags": [
+     "Payments"
+    ],
+    "summary": "Start the authorisation process for a payment initiation",
+    "parameters": [
+     {
+      "name": "payment-service",
+      "in": "path",
+      "description": "<div class=\"enum-desc\"><p>Values:</p><ul><li><i>payments</i></li><li><i>bulk-payments</i></li><li><i>periodic-payments</i></li><li><i>secured-payments</i></li></ul></div><div class=\"enum-desc\"><p>Values:</p><ul><li><i>payments</i></li><li><i>bulk-payments</i></li><li><i>periodic-payments</i></li><li><i>secured-payments</i></li></ul></div>",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/PaymentServiceEnum"
+      }
+     },
+     {
+      "name": "payment-product",
+      "in": "path",
+      "description": "<div class=\"enum-desc\"><p>Values:</p><ul><li><i>aspsp</i></li><li><i>domestic</i></li><li><i>foreign</i></li></ul></div><div class=\"enum-desc\"><p>Values:</p><ul><li><i>aspsp</i></li><li><i>domestic</i></li><li><i>foreign</i></li></ul></div>",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/PaymentProductEnum"
+      }
+     },
+     {
+      "name": "paymentId",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "X-Request-ID",
+      "in": "header",
+      "description": "ID of the request, unique to the call, as determined by the initiating party.",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      },
+      "example": "698a3904-49aa-481f-b51e-b027e2b998e5"
+     },
+     {
+      "name": "PSU-ID",
+      "in": "header",
+      "description": "Client ID of the PSU in the ASPSP client interface.\r\n\r\nMight be mandated in the ASPSP's documentation.\r\n\r\nIt might be contained even if an OAuth2 based authentication was performed in a pre-step or an OAuth2 based SCA was performed in an preceding AIS service in the same session. In this case the ASPSP might check whether PSU-ID and token match, according to ASPSP documentation.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "PSU-1234"
+     },
+     {
+      "name": "PSU-ID-Type",
+      "in": "header",
+      "description": "Type of the PSU-ID, needed in scenarios where PSUs have several PSU-IDs as access possibility.\r\n\r\nIn this case, the mean and use are then defined in the ASPSP’s documentation.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "PSU-IP-Address",
+      "in": "header",
+      "description": "The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "192.168.8.78"
+     },
+     {
+      "name": "PSU-IP-Port",
+      "in": "header",
+      "description": "The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "1234"
+     },
+     {
+      "name": "PSU-Geo-Location",
+      "in": "header",
+      "description": "The forwarded Geo Location of the corresponding http request between PSU and TPP if available.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "GEO:52.506931;13.144558"
+     },
+     {
+      "name": "Accept-Language",
+      "in": "header",
+      "description": "The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPP-Redirect-URI",
+      "in": "header",
+      "description": "URI of the TPP, where the transaction flow shall be redirected to after a Redirect.\r\n\r\nMandated for the Redirect SCA Approach, specifically when TPP-Redirect-Preferred equals \"true\". It is recommended to always use this header field.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "X-Apigee-UserId",
+      "in": "header",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPP-Explicit-Authorisation-Preferred",
+      "in": "header",
+      "description": "If it equals \"true\", the TPP prefers to start the authorisation process separately, e.g. because of the usage of a signing basket. This preference might be ignored by the ASPSP, if a signing basket is not supported as functionality.\r\n\r\nIf it equals \"false\" or if the parameter is not used, there is no preference of the TPP. This especially indicates that the TPP assumes a direct authorisation of the transaction in the next step, without using a signing basket.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPPRejectionNoFundsPreferred",
+      "in": "header",
+      "description": "If it equals \"true\" then the TPP prefers a rejection of the payment initiation in case the ASPSP is providing an integrated confirmation of funds request an the result of this is that not sufficient funds are available.\r\n\r\nIf it equals \"false\" then the TPP prefers that the ASPSP is dealing with the payment initiation like in the ASPSPs online channel, potentially waiting for a certain time period for funds to arrive to initiate the payment.\r\n\r\nThis parameter might be ignored by the ASPSP.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "Consent-ID",
+      "in": "header",
+      "description": "Consent Id",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "Created",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/StartScaprocessResponse"
+        },
+        "examples": {
+         "Example 1: Create Authorisation": {
+          "value": {
+           "scaStatus": "received",
+           "authorisationId": "123auth456",
+           "_links": {
+            "scaStatus": {
+             "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/authorisations/df93472a-a86c-47f8-6d64-08dae1b187de"
+            }
+           },
+           "psuMessage": "Please use your BankApp for transaction Authorisation."
+          }
+         },
+         "Example 2: Create Authorisation": {
+          "value": {
+           "scaStatus": "scaMethodSelected",
+           "authorisationId": "123auth456",
+           "_links": {
+            "scaOAuth": {
+             "href": "https://test-api.tbcbank.ge/.well-known/oauth-authorization-server"
+            },
+            "scaStatus": {
+             "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/authorisations/df93472a-a86c-47f8-6d64-08dae1b187de"
+            }
+           },
+           "psuMessage": "პროცესის გასაგრძელებლად თქვენ მიიღებთ SMS შეტყობინებას https://customerconsent.tbcbank.ge/loginappsandbox/session?sessionid=7c31aead-863c-4885-9508-bea98d2eb87a"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/payments/{payment-product}": {
+   "post": {
+    "tags": [
+     "Payments"
+    ],
+    "summary": "Payment Initiation request",
+    "parameters": [
+     {
+      "name": "payment-product",
+      "in": "path",
+      "description": "<div class=\"enum-desc\"><p>Values:</p><ul><li><i>aspsp</i></li><li><i>domestic</i></li><li><i>foreign</i></li></ul></div><div class=\"enum-desc\"><p>Values:</p><ul><li><i>aspsp</i></li><li><i>domestic</i></li><li><i>foreign</i></li></ul></div>",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/PaymentProductEnum"
+      }
+     },
+     {
+      "name": "X-Request-ID",
+      "in": "header",
+      "description": "ID of the request, unique to the call, as determined by the initiating party.",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      },
+      "example": "698a3904-49aa-481f-b51e-b027e2b998e5"
+     },
+     {
+      "name": "PSU-ID",
+      "in": "header",
+      "description": "Client ID of the PSU in the ASPSP client interface.\r\n\r\nMight be mandated in the ASPSP's documentation.\r\n\r\nIt might be contained even if an OAuth2 based authentication was performed in a pre-step or an OAuth2 based SCA was performed in an preceding AIS service in the same session. In this case the ASPSP might check whether PSU-ID and token match, according to ASPSP documentation.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "PSU-1234"
+     },
+     {
+      "name": "PSU-ID-Type",
+      "in": "header",
+      "description": "Type of the PSU-ID, needed in scenarios where PSUs have several PSU-IDs as access possibility.\r\n\r\nIn this case, the mean and use are then defined in the ASPSP’s documentation.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "PSU-IP-Address",
+      "in": "header",
+      "description": "The forwarded IP Address header field consists of the corresponding http request IP Address field between PSU and TPP. If not available, the TPP shall use the IP Address used by the TPP when submitting this request.",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "example": "192.168.8.78"
+     },
+     {
+      "name": "PSU-IP-Port",
+      "in": "header",
+      "description": "The forwarded IP Port header field consists of the corresponding HTTP request IP Port field between PSU and TPP, if available.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "1234"
+     },
+     {
+      "name": "PSU-Geo-Location",
+      "in": "header",
+      "description": "The forwarded Geo Location of the corresponding http request between PSU and TPP if available.",
+      "schema": {
+       "type": "string"
+      },
+      "example": "GEO:52.506931;13.144558"
+     },
+     {
+      "name": "Accept-Language",
+      "in": "header",
+      "description": "The forwarded IP Accept header fields consist of the corresponding HTTP request Accept header fields between PSU and TPP, if available.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPP-Redirect-URI",
+      "in": "header",
+      "description": "URI of the TPP, where the transaction flow shall be redirected to after a Redirect.\r\n\r\nMandated for the Redirect SCA Approach, specifically when TPP-Redirect-Preferred equals \"true\". It is recommended to always use this header field.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "X-Apigee-UserId",
+      "in": "header",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPP-Explicit-Authorisation-Preferred",
+      "in": "header",
+      "description": "If it equals \"true\", the TPP prefers to start the authorisation process separately, e.g. because of the usage of a signing basket. This preference might be ignored by the ASPSP, if a signing basket is not supported as functionality.\r\n\r\nIf it equals \"false\" or if the parameter is not used, there is no preference of the TPP. This especially indicates that the TPP assumes a direct authorisation of the transaction in the next step, without using a signing basket.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "TPPRejectionNoFundsPreferred",
+      "in": "header",
+      "description": "If it equals \"true\" then the TPP prefers a rejection of the payment initiation in case the ASPSP is providing an integrated confirmation of funds request an the result of this is that not sufficient funds are available.\r\n\r\nIf it equals \"false\" then the TPP prefers that the ASPSP is dealing with the payment initiation like in the ASPSPs online channel, potentially waiting for a certain time period for funds to arrive to initiate the payment.\r\n\r\nThis parameter might be ignored by the ASPSP.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "Consent-ID",
+      "in": "header",
+      "description": "Consent Id",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PaymentInitiationRequest"
+       },
+       "examples": {
+        "Example 1: Payment initiation request - debtor account": {
+         "value": {
+          "debtorAccount": {
+           "iban": "GE83TB7438345061622218",
+           "currency": "GEL"
+          },
+          "instructedAmount": {
+           "currency": "USD",
+           "amount": "15"
+          },
+          "creditorAccount": {
+           "iban": "GE83TB7438345061655577",
+           "currency": "GEL"
+          },
+          "creditorName": "Wolfgang Amadeus Mozart",
+          "remittanceInformationUnstructured": "Test Payment Noa9f5ca22-628b-4cc3-b239-78170db9ac88"
+         }
+        },
+        "Example 2: Payment initiation request - without debtor account": {
+         "value": {
+          "instructedAmount": {
+           "currency": "USD",
+           "amount": "15"
+          },
+          "creditorAccount": {
+           "iban": "GE83TB7438345061655577",
+           "currency": "GEL"
+          },
+          "remittanceInformationUnstructured": "Test Payment Noa9f5ca22-628b-4cc3-b239-78170db9ac88"
+         }
+        },
+        "Example 3: Payment initiation request - transfer to the budget instead of someone else": {
+         "value": {
+          "debtorAccount": {
+           "iban": "GE83TB7438345061655577",
+           "currency": "1.2"
+          },
+          "ultimateDebtorIdentification": {
+           "privateId": {
+            "others": [
+             {
+              "identification": "PNOGE-01019013212"
+             }
+            ]
+           }
+          },
+          "ultimateDebtor": "Ludwig van Beethoven",
+          "instructedAmount": {
+           "currency": "GEL",
+           "amount": "1.2"
+          },
+          "creditorAccount": {
+           "other": {
+            "identification": "101001000"
+           }
+          },
+          "creditorAgent": "TRESGE22",
+          "creditorName": "Ludwig van Beethoven",
+          "remittanceInformationUnstructured": "Ref Number Merchant"
+         }
+        },
+        "Example 4: Payment initiation request - transfer to the budget": {
+         "value": {
+          "debtorAccount": {
+           "iban": "GE83TB7438345061655577",
+           "currency": "1.2"
+          },
+          "instructedAmount": {
+           "currency": "GEL",
+           "amount": "1.2"
+          },
+          "creditorAccount": {
+           "other": {
+            "identification": "101001000"
+           }
+          },
+          "creditorAgent": "TRESGE22",
+          "creditorName": "Johann Sebastian Bach",
+          "remittanceInformationUnstructured": "Ref Number Merchant"
+         }
+        }
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Created",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PaymentInitiationResponse"
+        },
+        "examples": {
+         "Example 1: Payment initiation response - without debtor": {
+          "value": {
+           "paymentId": "7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1",
+           "transactionStatus": "ACTC",
+           "_links": {
+            "scaOAuth": {
+             "href": "https://dev-openbanking.tbcbank.ge/openbanking/oauth/.well-known/oauth-authorization-server"
+            },
+            "self": {
+             "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1"
+            },
+            "status": {
+             "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/status"
+            },
+            "scaStatus": {
+             "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/authorisations/df93472a-a86c-47f8-6d64-08dae1b187de"
+            }
+           }
+          }
+         },
+         "Example 2: Payment initiation response - convertation": {
+          "value": {
+           "paymentId": "1c76b997-3028-4929-1b34-08dae1b181a1",
+           "transactionStatus": "ACTC",
+           "estimatedTotalAmount": {
+            "currency": "GEL",
+            "amount": "41.25"
+           },
+           "estimatedInterbankSettlementAmount": {
+            "currency": "USD",
+            "amount": "15.00"
+           },
+           "_links": {
+            "scaOAuth": {
+             "href": "https://dev-openbanking.tbcbank.ge/openbanking/oauth/.well-known/oauth-authorization-server"
+            },
+            "self": {
+             "href": "/0.8/v1/payments/aspsp/1c76b997-3028-4929-1b34-08dae1b181a1"
+            },
+            "status": {
+             "href": "/0.8/v1/payments/aspsp/1c76b997-3028-4929-1b34-08dae1b181a1/status"
+            },
+            "scaStatus": {
+             "href": "/0.8/v1/payments/aspsp/1c76b997-3028-4929-1b34-08dae1b181a1/authorisations/b3b12e5e-4ed8-4140-6d65-08dae1b187de"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "examples": {
+         "Error example when Ip address is empty": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Ip address is empty",
+           "status": 400,
+           "detail": "Ip address is empty",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent not found",
+           "status": 400,
+           "detail": "Consent not found",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent has expired": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent has expired",
+           "status": 401,
+           "detail": "Consent has expired",
+           "instance": "/cards/************",
+           "code": "CONSENT_EXPIRED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid consent": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid consent",
+           "status": 401,
+           "detail": "Invalid consent",
+           "instance": "/cards/************",
+           "code": "CONSENT_INVALID",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid CardId": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid CardId",
+           "status": 400,
+           "detail": "Invalid CardId",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Card not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Card not found",
+           "status": 404,
+           "detail": "Card not found",
+           "instance": "/cards/************",
+           "code": "RESOURCE_UNKNOWN",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Access exceeded": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Too many request",
+           "status": 429,
+           "detail": "Too many request",
+           "instance": "/cards/************",
+           "code": "ACCESS_EXCEEDED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User doesn't have userid or a customerid assigned to it": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User doesn't have userid or a customerid assigned to it.",
+           "status": 400,
+           "detail": "User doesn't have userid or a customerid assigned to it.",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User is not active": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User is not active",
+           "status": 400,
+           "detail": "User is not active",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         }
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApiProblemDetails"
+        },
+        "examples": {
+         "Error example when Ip address is empty": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Ip address is empty",
+           "status": 400,
+           "detail": "Ip address is empty",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent not found",
+           "status": 400,
+           "detail": "Consent not found",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Consent has expired": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Consent has expired",
+           "status": 401,
+           "detail": "Consent has expired",
+           "instance": "/cards/************",
+           "code": "CONSENT_EXPIRED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid consent": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid consent",
+           "status": 401,
+           "detail": "Invalid consent",
+           "instance": "/cards/************",
+           "code": "CONSENT_INVALID",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Invalid CardId": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Invalid CardId",
+           "status": 400,
+           "detail": "Invalid CardId",
+           "instance": "/cards/************",
+           "code": "FORMAT_ERROR",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Card not found": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Card not found",
+           "status": 404,
+           "detail": "Card not found",
+           "instance": "/cards/************",
+           "code": "RESOURCE_UNKNOWN",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when Access exceeded": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "Too many request",
+           "status": 429,
+           "detail": "Too many request",
+           "instance": "/cards/************",
+           "code": "ACCESS_EXCEEDED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User doesn't have userid or a customerid assigned to it": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User doesn't have userid or a customerid assigned to it.",
+           "status": 400,
+           "detail": "User doesn't have userid or a customerid assigned to it.",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         },
+         "Error example when User is not active": {
+          "value": {
+           "type": "https://developers.tbcbank.ge/docs/error-type-400",
+           "title": "User is not active",
+           "status": 400,
+           "detail": "User is not active",
+           "instance": "/cards/************",
+           "code": "RESOURCE_BLOCKED",
+           "traceId": "00-2ddc00ce6479ee8d32702c2a2ae1d10c-fe571a473a809386-01"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "ApiProblemDetails": {
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "string",
+      "nullable": true
+     },
+     "title": {
+      "type": "string",
+      "nullable": true
+     },
+     "status": {
+      "type": "integer",
+      "format": "int32",
+      "nullable": true
+     },
+     "detail": {
+      "type": "string",
+      "nullable": true
+     },
+     "instance": {
+      "type": "string",
+      "nullable": true
+     },
+     "code": {
+      "type": "string",
+      "nullable": true
+     },
+     "traceId": {
+      "type": "string",
+      "nullable": true
+     },
+     "errors": {
+      "type": "object",
+      "additionalProperties": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       },
+       "nullable": true
+      },
+      "nullable": true
+     }
+    },
+    "additionalProperties": {}
+   },
+   "PaymentProductEnum": {
+    "enum": [
+     "aspsp",
+     "domestic",
+     "foreign"
+    ],
+    "type": "string",
+    "description": "<div class=\"enum-desc\"><p>Values:</p><ul><li><i>aspsp</i></li><li><i>domestic</i></li><li><i>foreign</i></li></ul></div>",
+    "x-enumNames": [
+     "aspsp",
+     "domestic",
+     "foreign"
+    ]
+   },
+   "PaymentServiceEnum": {
+    "enum": [
+     "payments",
+     "bulk-payments",
+     "periodic-payments",
+     "secured-payments"
+    ],
+    "type": "string",
+    "description": "<div class=\"enum-desc\"><p>Values:</p><ul><li><i>payments</i></li><li><i>bulk-payments</i></li><li><i>periodic-payments</i></li><li><i>secured-payments</i></li></ul></div>",
+    "x-enumNames": [
+     "payments",
+     "bulk-payments",
+     "periodic-payments",
+     "secured-payments"
+    ]
+   },
+   "GetPaymentStatusResponse": {
+    "type": "object",
+    "properties": {
+     "transactionStatus": {
+      "type": "string",
+      "nullable": true
+     },
+     "fundsAvailable": {
+      "type": "boolean"
+     }
+    },
+    "additionalProperties": false
+   },
+   "AccountReference": {
+    "type": "object",
+    "properties": {
+     "iban": {
+      "type": "string",
+      "description": "Iban",
+      "nullable": true,
+      "example": "\n            GE83TB7438345061655577\n            "
+     },
+     "bban": {
+      "type": "string",
+      "nullable": true
+     },
+     "pan": {
+      "maxLength": 35,
+      "type": "string",
+      "nullable": true
+     },
+     "maskedPan": {
+      "maxLength": 35,
+      "type": "string",
+      "nullable": true
+     },
+     "msisdn": {
+      "maxLength": 35,
+      "type": "string",
+      "nullable": true
+     },
+     "currency": {
+      "type": "string",
+      "description": "Currency",
+      "nullable": true,
+      "example": "\n            GEL\n            "
+     },
+     "other": {
+      "$ref": "#/components/schemas/OtherType"
+     },
+     "cashAccountType": {
+      "type": "string",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "Address": {
+    "type": "object",
+    "properties": {
+     "streetName": {
+      "type": "string",
+      "description": "maxLength: 70\nexample: Text, maximum of 70 characters.",
+      "nullable": true
+     },
+     "buildingNumber": {
+      "type": "string",
+      "nullable": true
+     },
+     "townName": {
+      "type": "string",
+      "nullable": true
+     },
+     "country": {
+      "type": "string",
+      "description": "Length: 2 \npattern: [A-Z]{2}\nexample: SE",
+      "nullable": true
+     },
+     "postCode": {
+      "type": "string",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "GetPaymentResponse": {
+    "type": "object",
+    "properties": {
+     "debtorAccount": {
+      "$ref": "#/components/schemas/AccountReference"
+     },
+     "instructedAmount": {
+      "$ref": "#/components/schemas/InstructedAmount"
+     },
+     "creditorAccount": {
+      "$ref": "#/components/schemas/AccountReference"
+     },
+     "creditorAgent": {
+      "type": "string",
+      "nullable": true
+     },
+     "creditorName": {
+      "type": "string",
+      "nullable": true
+     },
+     "creditorAddress": {
+      "$ref": "#/components/schemas/Address"
+     },
+     "remittanceInformationUnstructured": {
+      "type": "string",
+      "nullable": true
+     },
+     "transactionStatus": {
+      "type": "string",
+      "nullable": true
+     },
+     "tppMessage": {
+      "type": "string",
+      "nullable": true
+     },
+     "debtorName": {
+      "type": "string",
+      "nullable": true
+     },
+     "debtorIdentification": {
+      "$ref": "#/components/schemas/PartyIdentification"
+     }
+    },
+    "additionalProperties": false
+   },
+   "InstructedAmount": {
+    "type": "object",
+    "properties": {
+     "currency": {
+      "type": "string",
+      "description": "ლength: 3\npattern: [A-Z]{3}\nexample: GEL",
+      "nullable": true
+     },
+     "amount": {
+      "type": "string",
+      "description": "pattern: -?[0-9]{1,14}(\\.[0-9]{1,3})?\nThe amount given with fractional digits, where fractions must be compliant to the currency definition.Up to 14 significant figures. Negative amounts are signed by minus. The decimal separator is a dot. Example: Valid representations for EUR with up to two decimals are:1056, 5768.2, -1.50, 5877.78",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "OtherIdentificationItem": {
+    "type": "object",
+    "properties": {
+     "identification": {
+      "type": "string",
+      "description": "maxLength: 35\nexample: Text, maximum of 35 characters.",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "OtherIdentificationsList": {
+    "type": "object",
+    "properties": {
+     "others": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/OtherIdentificationItem"
+      },
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "OtherType": {
+    "type": "object",
+    "properties": {
+     "identification": {
+      "type": "string",
+      "nullable": true
+     },
+     "schemeNameCode": {
+      "type": "string",
+      "nullable": true
+     },
+     "schemeNameProprietary": {
+      "type": "string",
+      "nullable": true
+     },
+     "issuer": {
+      "type": "string",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "PartyIdentification": {
+    "type": "object",
+    "properties": {
+     "organisationId": {
+      "$ref": "#/components/schemas/OtherIdentificationsList"
+     },
+     "privateId": {
+      "$ref": "#/components/schemas/OtherIdentificationsList"
+     }
+    },
+    "additionalProperties": false
+   },
+   "AuthenticationObject": {
+    "type": "object",
+    "properties": {
+     "authenticationType": {
+      "type": "string",
+      "nullable": true
+     },
+     "authenticationVersion": {
+      "type": "string",
+      "nullable": true
+     },
+     "authenticationMethod": {
+      "type": "string",
+      "nullable": true
+     },
+     "name": {
+      "type": "string",
+      "nullable": true
+     },
+     "explanation": {
+      "type": "string",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "BulkPaymentInitiationRequest": {
+    "type": "object",
+    "properties": {
+     "batchBookingPreferred": {
+      "type": "boolean",
+      "description": "Batch Booking Preferred (true/false)",
+      "nullable": true
+     },
+     "debtorAccount": {
+      "$ref": "#/components/schemas/AccountReference"
+     },
+     "debtorIdentification": {
+      "$ref": "#/components/schemas/PartyIdentification"
+     },
+     "debtorName": {
+      "maxLength": 70,
+      "type": "string",
+      "description": "Debtor Name",
+      "nullable": true
+     },
+     "paymentInformationId": {
+      "maxLength": 35,
+      "type": "string",
+      "description": "PaymentInformationId a unique identifier of the bulk payments maximum 35 characters long",
+      "nullable": true
+     },
+     "payments": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/PaymentBaseRequestModel"
+      },
+      "description": "Payments a list of payment initiations for bulk payments",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "ChallengeData": {
+    "type": "object",
+    "properties": {
+     "image": {
+      "type": "string",
+      "nullable": true
+     },
+     "data": {
+      "type": "string",
+      "nullable": true
+     },
+     "imageLink": {
+      "type": "string",
+      "nullable": true
+     },
+     "otpMaxLength": {
+      "type": "integer",
+      "format": "int32"
+     },
+     "otpFormat": {
+      "type": "string",
+      "nullable": true
+     },
+     "additionalInformation": {
+      "type": "string",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "HrefTypeDto": {
+    "type": "object",
+    "properties": {
+     "href": {
+      "type": "string",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "LinksPaymentInitiation": {
+    "type": "object",
+    "properties": {
+     "scaRedirect": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     },
+     "scaOAuth": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     },
+     "startAuthorisation": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     },
+     "startAuthorisationWithPsuIdentification": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     },
+     "startAuthorisationWithPsuAuthentication": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     },
+     "startAuthorisationWithEncryptedPsuAuthentication": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     },
+     "startAuthorisationWithAuthenticationMethodSelection": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     },
+     "startAuthorisationWithTransactionAuthorisation": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     },
+     "self": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     },
+     "status": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     },
+     "scaStatus": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     }
+    },
+    "additionalProperties": false
+   },
+   "PaymentBaseRequestModel": {
+    "required": [
+     "creditorAccount",
+     "instructedAmount"
+    ],
+    "type": "object",
+    "properties": {
+     "creditorIdentification": {
+      "$ref": "#/components/schemas/PartyIdentification"
+     },
+     "ultimateDebtorIdentification": {
+      "$ref": "#/components/schemas/PartyIdentification"
+     },
+     "ultimateDebtor": {
+      "maxLength": 70,
+      "type": "string",
+      "description": "UltimateDebtor",
+      "nullable": true
+     },
+     "instructedAmount": {
+      "$ref": "#/components/schemas/InstructedAmount"
+     },
+     "creditorAccount": {
+      "$ref": "#/components/schemas/AccountReference"
+     },
+     "creditorAgent": {
+      "type": "string",
+      "description": "Creditor Agent",
+      "nullable": true
+     },
+     "creditorName": {
+      "maxLength": 70,
+      "type": "string",
+      "description": "Creditor Name",
+      "nullable": true
+     },
+     "creditorAgentName": {
+      "maxLength": 140,
+      "type": "string",
+      "description": "Creditor Agent Name",
+      "nullable": true
+     },
+     "creditorAddress": {
+      "$ref": "#/components/schemas/Address"
+     },
+     "remittanceInformationUnstructured": {
+      "maxLength": 140,
+      "type": "string",
+      "description": "Remittance Information Unstructured",
+      "nullable": true
+     },
+     "additionalInformation": {
+      "type": "string",
+      "description": "Additional Information",
+      "nullable": true
+     },
+     "chargeBearer": {
+      "type": "string",
+      "description": "Charge Bearer",
+      "nullable": true
+     },
+     "instructionIdentification": {
+      "maxLength": 35,
+      "type": "string",
+      "nullable": true
+     },
+     "transactionCurrency": {
+      "type": "string",
+      "nullable": true
+     },
+     "requestedExecutionTime": {
+      "nullable": true
+     },
+     "requestedExecutionDate": {
+      "nullable": true
+     },
+     "remittanceInformationStructured": {
+      "nullable": true
+     },
+     "remittanceInformationStructuredArray": {
+      "nullable": true
+     },
+     "purposeCode": {
+      "nullable": true
+     },
+     "ultimateCreditorIdentification": {
+      "nullable": true
+     },
+     "ultimateCreditor": {
+      "nullable": true
+     },
+     "creditorNameAndAddress": {
+      "nullable": true
+     },
+     "creditorId": {
+      "nullable": true
+     },
+     "exchangeRateInformation": {
+      "nullable": true
+     },
+     "currencyOfTransfer": {
+      "nullable": true
+     },
+     "debtorId": {
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "PaymentInitiationResponse": {
+    "type": "object",
+    "properties": {
+     "paymentId": {
+      "type": "string",
+      "description": "Resource  identification  of  the  generated  payment initiation resource.",
+      "nullable": true
+     },
+     "transactionStatus": {
+      "type": "string",
+      "description": "Transaction status",
+      "nullable": true
+     },
+     "transactionFees": {
+      "$ref": "#/components/schemas/InstructedAmount"
+     },
+     "currencyConversionFee": {
+      "$ref": "#/components/schemas/InstructedAmount"
+     },
+     "estimatedTotalAmount": {
+      "$ref": "#/components/schemas/InstructedAmount"
+     },
+     "estimatedInterbankSettlementAmount": {
+      "$ref": "#/components/schemas/InstructedAmount"
+     },
+     "transactionFeeIndicator": {
+      "type": "boolean",
+      "description": "If  equals  true,  the  transaction  will  involve  specific transaction  cost  as  shown  by  the  ASPSP  in  their public price list or as agreed between ASPSP and PSU.If  equals false,  the  transaction  will  not  involve additional  specific  transaction  costs  to  the  PSUunless  the  fee  amount  is  given  specifically  in  the data elements transactionFees and/or currencyConversionFees.If   this   data   element   is   not   used,there   is   no information  about  transaction  fees  unless  the  fee amount  is  given  explicitly  in  the  data  element transactionFees and/or currencyConversionFees.",
+      "nullable": true
+     },
+     "scaMethods": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/AuthenticationObject"
+      },
+      "description": "This  data  element  might  be  contained,  if  SCA  is required  and  if  the  PSU  has  a  choice  between different authentication methods. Depending on the risk  management  of  the  ASPSP  this  choice  might be  offered  before  or  after  the  PSU  has  been identified  with  the  first  relevant  factor,  or  if  an access tokenis transported. If this data element is contained,  then  there  is  also  a  hyperlink  of  type \"startAuthorisationWithAuthenticationMethodSelection\"contained  in  the response body.These  methods  shall  be  presented  towards  the PSU for selection by the TPP.",
+      "nullable": true
+     },
+     "chosenScaMethod": {
+      "$ref": "#/components/schemas/AuthenticationObject"
+     },
+     "challengeData": {
+      "$ref": "#/components/schemas/ChallengeData"
+     },
+     "_links": {
+      "$ref": "#/components/schemas/LinksPaymentInitiation"
+     },
+     "psuMessage": {
+      "type": "string",
+      "description": "Text to be displayed to the PSU",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "LinksAuthorisationsDto": {
+    "type": "object",
+    "properties": {
+     "scaRedirect": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     },
+     "scaOAuth": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     },
+     "updatePsuIdentification": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     },
+     "startAuthorisationWithPsuAuthentication": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     },
+     "startAuthorisationWithEncryptedPsuAuthentication": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     },
+     "selectAuthenticationMethod": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     },
+     "authoriseTransaction": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     },
+     "scaStatus": {
+      "$ref": "#/components/schemas/HrefTypeDto"
+     }
+    },
+    "additionalProperties": false
+   },
+   "StartScaprocessResponse": {
+    "type": "object",
+    "properties": {
+     "scaStatus": {
+      "type": "string",
+      "nullable": true
+     },
+     "authorisationId": {
+      "type": "string",
+      "nullable": true
+     },
+     "scaMethods": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/AuthenticationObject"
+      },
+      "nullable": true
+     },
+     "chosenScaMethod": {
+      "$ref": "#/components/schemas/AuthenticationObject"
+     },
+     "challengeData": {
+      "$ref": "#/components/schemas/ChallengeData"
+     },
+     "_links": {
+      "$ref": "#/components/schemas/LinksAuthorisationsDto"
+     },
+     "psuMessage": {
+      "type": "string",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "PaymentInitiationRequest": {
+    "required": [
+     "creditorAccount",
+     "instructedAmount"
+    ],
+    "type": "object",
+    "properties": {
+     "creditorIdentification": {
+      "$ref": "#/components/schemas/PartyIdentification"
+     },
+     "ultimateDebtorIdentification": {
+      "$ref": "#/components/schemas/PartyIdentification"
+     },
+     "ultimateDebtor": {
+      "maxLength": 70,
+      "type": "string",
+      "description": "UltimateDebtor",
+      "nullable": true
+     },
+     "instructedAmount": {
+      "$ref": "#/components/schemas/InstructedAmount"
+     },
+     "creditorAccount": {
+      "$ref": "#/components/schemas/AccountReference"
+     },
+     "creditorAgent": {
+      "type": "string",
+      "description": "Creditor Agent",
+      "nullable": true
+     },
+     "creditorName": {
+      "maxLength": 70,
+      "type": "string",
+      "description": "Creditor Name",
+      "nullable": true
+     },
+     "creditorAgentName": {
+      "maxLength": 140,
+      "type": "string",
+      "description": "Creditor Agent Name",
+      "nullable": true
+     },
+     "creditorAddress": {
+      "$ref": "#/components/schemas/Address"
+     },
+     "remittanceInformationUnstructured": {
+      "maxLength": 140,
+      "type": "string",
+      "description": "Remittance Information Unstructured",
+      "nullable": true
+     },
+     "additionalInformation": {
+      "type": "string",
+      "description": "Additional Information",
+      "nullable": true
+     },
+     "chargeBearer": {
+      "type": "string",
+      "description": "Charge Bearer",
+      "nullable": true
+     },
+     "instructionIdentification": {
+      "maxLength": 35,
+      "type": "string",
+      "nullable": true
+     },
+     "transactionCurrency": {
+      "type": "string",
+      "nullable": true
+     },
+     "requestedExecutionTime": {
+      "nullable": true
+     },
+     "requestedExecutionDate": {
+      "nullable": true
+     },
+     "remittanceInformationStructured": {
+      "nullable": true
+     },
+     "remittanceInformationStructuredArray": {
+      "nullable": true
+     },
+     "purposeCode": {
+      "nullable": true
+     },
+     "ultimateCreditorIdentification": {
+      "nullable": true
+     },
+     "ultimateCreditor": {
+      "nullable": true
+     },
+     "creditorNameAndAddress": {
+      "nullable": true
+     },
+     "creditorId": {
+      "nullable": true
+     },
+     "exchangeRateInformation": {
+      "nullable": true
+     },
+     "currencyOfTransfer": {
+      "nullable": true
+     },
+     "debtorId": {
+      "nullable": true
+     },
+     "debtorAccount": {
+      "$ref": "#/components/schemas/AccountReference"
+     },
+     "debtorIdentification": {
+      "$ref": "#/components/schemas/PartyIdentification"
+     },
+     "debtorName": {
+      "maxLength": 70,
+      "type": "string",
+      "description": "Debtor Name",
+      "nullable": true
+     },
+     "serviceLevel": {
+      "nullable": true
+     }
+    },
+    "additionalProperties": false
+   }
+  }
+ },
+ "security": null,
+ "x-provenance": {
+  "note": "ASSEMBLED from per-operation OAS fragments embedded in developers.tbcbank.ge reference pages (ReadMe ssr-props document.api.schema). Not an official full download. Paths verbatim from fragments.",
+  "source_pages": [
+   {
+    "slug": "delete_v1-payment-service-payment-product-paymentid",
+    "page": "https://developers.tbcbank.ge/reference/delete_v1-payment-service-payment-product-paymentid",
+    "method": "delete",
+    "path": "/v1/{payment-service}/{payment-product}/{paymentId}"
+   },
+   {
+    "slug": "get_v1-payments-payment-product-paymentid-status",
+    "page": "https://developers.tbcbank.ge/reference/get_v1-payments-payment-product-paymentid-status",
+    "method": "get",
+    "path": "/v1/payments/{payment-product}/{paymentId}/status"
+   },
+   {
+    "slug": "get_v1-payments-payment-product-paymentid",
+    "page": "https://developers.tbcbank.ge/reference/get_v1-payments-payment-product-paymentid",
+    "method": "get",
+    "path": "/v1/payments/{payment-product}/{paymentId}"
+   },
+   {
+    "slug": "post_v1-bulk-payments-payment-product",
+    "page": "https://developers.tbcbank.ge/reference/post_v1-bulk-payments-payment-product",
+    "method": "post",
+    "path": "/v1/bulk-payments/{payment-product}"
+   },
+   {
+    "slug": "post_v1-payment-service-payment-product-paymentid-authorisations",
+    "page": "https://developers.tbcbank.ge/reference/post_v1-payment-service-payment-product-paymentid-authorisations",
+    "method": "post",
+    "path": "/v1/{payment-service}/{payment-product}/{paymentId}/authorisations"
+   },
+   {
+    "slug": "post_v1-payments-payment-product",
+    "page": "https://developers.tbcbank.ge/reference/post_v1-payments-payment-product",
+    "method": "post",
+    "path": "/v1/payments/{payment-product}"
+   }
+  ],
+  "conflicts": [],
+  "unresolved_refs": [],
+  "undefined_security_schemes": [],
+  "fragment_variation": {
+   "openapi": 1,
+   "info": 1,
+   "servers": 1,
+   "security": 1
+  }
+ }
+}

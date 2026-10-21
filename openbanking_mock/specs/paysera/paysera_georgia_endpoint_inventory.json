@@ -1,0 +1,551 @@
+[
+ {
+  "slug": "get-account-list",
+  "method": "GET",
+  "path": "/accounts",
+  "title": "Read account list",
+  "auth": "mTLS cert + Bearer token + Consent-ID",
+  "documented_as_not_supported": false,
+  "params": [
+   "Query Parameters:withBalance(boolean)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_get-account-list-georgia.html"
+ },
+ {
+  "slug": "read-account-details",
+  "method": "GET",
+  "path": "/accounts/{account-id}",
+  "title": "Read account details",
+  "auth": "mTLS cert + Bearer token + Consent-ID",
+  "documented_as_not_supported": false,
+  "params": [
+   "Path Parameters:account-id(string,req)",
+   "Query Parameters:withBalance(boolean)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_read-account-details-georgia.html"
+ },
+ {
+  "slug": "get-balances",
+  "method": "GET",
+  "path": "/accounts/{account-id}/balances",
+  "title": "Read balance",
+  "auth": "mTLS cert + Bearer token + Consent-ID",
+  "documented_as_not_supported": false,
+  "params": [
+   "Path Parameters:account-id(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_get-balances-georgia.html"
+ },
+ {
+  "slug": "get-transaction-list",
+  "method": "GET",
+  "path": "/accounts/{account-id}/transactions",
+  "title": "Read transaction list of an account",
+  "auth": "mTLS cert + Bearer token + Consent-ID",
+  "documented_as_not_supported": false,
+  "params": [
+   "Path Parameters:account-id(string,req)",
+   "Query Parameters:dateFrom(string)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_get-transaction-list-georgia.html"
+ },
+ {
+  "slug": "get-transaction-details",
+  "method": "GET",
+  "path": "/accounts/{account-id}/transactions/{transactionId}",
+  "title": "Read transaction details",
+  "auth": "mTLS cert + Bearer token + Consent-ID",
+  "documented_as_not_supported": false,
+  "params": [
+   "Path Parameters:account-id(string,req)",
+   "Path Parameters:transactionId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_get-transaction-details-georgia.html"
+ },
+ {
+  "slug": "create-consent",
+  "method": "POST",
+  "path": "/consents",
+  "title": "Create consent",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": false,
+  "params": [
+   "Request Body:access(object,req)",
+   "Request Body:recurringIndicator(boolean,req)",
+   "Request Body:validUntil(string,req)",
+   "Request Body:frequencyPerDay(integer,req)",
+   "Request Body:combinedServiceIndicator(boolean,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_create-consent-georgia.html"
+ },
+ {
+  "slug": "delete-consent",
+  "method": "DELETE",
+  "path": "/consents/{consentId}",
+  "title": "Delete consent",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": false,
+  "params": [
+   "Path Parameters:consentId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_delete-consent-georgia.html"
+ },
+ {
+  "slug": "get-consent-information",
+  "method": "GET",
+  "path": "/consents/{consentId}",
+  "title": "Get consent request",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": false,
+  "params": [
+   "Path Parameters:consentId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_get-consent-information-georgia.html"
+ },
+ {
+  "slug": "get-consent-authorisation",
+  "method": "GET",
+  "path": "/consents/{consentId}/authorisations",
+  "title": "Get consent authorisation sub-resources request",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": false,
+  "params": [
+   "Path Parameters:consentId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_get-consent-authorisation-georgia.html"
+ },
+ {
+  "slug": "start-consent-authorisation",
+  "method": "POST",
+  "path": "/consents/{consentId}/authorisations",
+  "title": "Start the authorisation process for a consent",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": true,
+  "params": [
+   "Path Parameters:consentId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_start-consent-authorisation-georgia.html"
+ },
+ {
+  "slug": "get-consent-sca-status",
+  "method": "GET",
+  "path": "/consents/{consentId}/authorisations/{authorisationId}",
+  "title": "Read the SCA status of the consent authorisation",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": false,
+  "params": [
+   "Path Parameters:consentId(string,req)",
+   "Path Parameters:authorisationId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_get-consent-sca-status-georgia.html"
+ },
+ {
+  "slug": "update-consents-psu-data",
+  "method": "PUT",
+  "path": "/consents/{consentId}/authorisations/{authorisationId}",
+  "title": "Update PSU Data for consents",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": true,
+  "params": [
+   "Path Parameters:consentId(string,req)",
+   "Path Parameters:authorisationId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_update-consents-psu-data-georgia.html"
+ },
+ {
+  "slug": "get-consent-status",
+  "method": "GET",
+  "path": "/consents/{consentId}/status",
+  "title": "Consent status request",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": false,
+  "params": [
+   "Path Parameters:consentId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_get-consent-status-georgia.html"
+ },
+ {
+  "slug": "initiate-payment",
+  "method": "POST",
+  "path": "/payments/{payment-product}",
+  "title": "Payment initiation request",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": false,
+  "params": [
+   "Path Parameters:payment-product(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_initiate-payment-georgia.html"
+ },
+ {
+  "slug": "cancel-payment",
+  "method": "DELETE",
+  "path": "/payments/{payment-product}/{paymentId}",
+  "title": "Payment cancellation request",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": true,
+  "params": [
+   "Path Parameters:payment-product(string,req)",
+   "Path Parameters:paymentId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_cancel-payment-georgia.html"
+ },
+ {
+  "slug": "get-payment-information",
+  "method": "GET",
+  "path": "/payments/{payment-product}/{paymentId}",
+  "title": "Get payment information",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": false,
+  "params": [
+   "Path Parameters:payment-product(string,req)",
+   "Path Parameters:paymentId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_get-payment-information-georgia.html"
+ },
+ {
+  "slug": "get-payment-initiation-authorisation",
+  "method": "GET",
+  "path": "/payments/{payment-product}/{paymentId}/authorisations",
+  "title": "Get payment initiation authorisation sub-resources request",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": false,
+  "params": [
+   "Path Parameters:payment-product(string,req)",
+   "Path Parameters:paymentId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_get-payment-initiation-authorisation-georgia.html"
+ },
+ {
+  "slug": "start-payment-authorisation",
+  "method": "POST",
+  "path": "/payments/{payment-product}/{paymentId}/authorisations",
+  "title": "Start the authorisation process for a payment initiation",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": true,
+  "params": [
+   "Path Parameters:payment-product(string,req)",
+   "Path Parameters:paymentId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_start-payment-authorisation-georgia.html"
+ },
+ {
+  "slug": "get-payment-initiation-sca-status",
+  "method": "GET",
+  "path": "/payments/{payment-product}/{paymentId}/authorisations/{authorisationId}",
+  "title": "Read the SCA status of the payment authorisation",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": false,
+  "params": [
+   "Path Parameters:payment-product(string,req)",
+   "Path Parameters:paymentId(string,req)",
+   "Path Parameters:authorisationId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_get-payment-initiation-sca-status-georgia.html"
+ },
+ {
+  "slug": "update-payment-psu-data",
+  "method": "PUT",
+  "path": "/payments/{payment-product}/{paymentId}/authorisations/{authorisationId}",
+  "title": "Update PSU data for payment initiation",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": true,
+  "params": [
+   "Path Parameters:payment-product(string,req)",
+   "Path Parameters:paymentId(string,req)",
+   "Path Parameters:authorisationId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_update-payment-psu-data-georgia.html"
+ },
+ {
+  "slug": "get-payment-initiation-cancellation-authorisation-information",
+  "method": "GET",
+  "path": "/payments/{payment-product}/{paymentId}/cancellation-authorisations",
+  "title": "Will deliver an array of resource identifications to all generated cancellation authorisation sub-resources",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": true,
+  "params": [
+   "Path Parameters:payment-product(string,req)",
+   "Path Parameters:paymentId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_get-payment-initiation-cancellation-authorisation-information-georgia.html"
+ },
+ {
+  "slug": "start-payment-initiation-cancellation-authorisation",
+  "method": "POST",
+  "path": "/payments/{payment-product}/{paymentId}/cancellation-authorisations",
+  "title": "Start the authorisation process for the cancellation of the addressed payment",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": true,
+  "params": [
+   "Path Parameters:payment-product(string,req)",
+   "Path Parameters:paymentId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_start-payment-initiation-cancellation-authorisation-georgia.html"
+ },
+ {
+  "slug": "get-payment-cancellation-sca-status",
+  "method": "GET",
+  "path": "/payments/{payment-product}/{paymentId}/cancellation-authorisations/{authorisationId}",
+  "title": "Read the SCA status of the payment cancellation's authorisation",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": true,
+  "params": [
+   "Path Parameters:payment-product(string,req)",
+   "Path Parameters:paymentId(string,req)",
+   "Path Parameters:authorisationId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_get-payment-cancellation-sca-status-georgia.html"
+ },
+ {
+  "slug": "update-payment-cancellation-psu-data",
+  "method": "PUT",
+  "path": "/payments/{payment-product}/{paymentId}/cancellation-authorisations/{authorisationId}",
+  "title": "Update PSU data for payment initiation cancellation",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": true,
+  "params": [
+   "Path Parameters:payment-product(string,req)",
+   "Path Parameters:paymentId(string,req)",
+   "Path Parameters:authorisationId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_update-payment-cancellation-psu-data-georgia.html"
+ },
+ {
+  "slug": "get-payment-initiation-status",
+  "method": "GET",
+  "path": "/payments/{payment-product}/{paymentId}/status",
+  "title": "Payment initiation status request",
+  "auth": "mTLS cert only",
+  "documented_as_not_supported": false,
+  "params": [
+   "Path Parameters:payment-product(string,req)",
+   "Path Parameters:paymentId(string,req)"
+  ],
+  "error_statuses": [
+   "400",
+   "401",
+   "403",
+   "404",
+   "405",
+   "429",
+   "500"
+  ],
+  "source_file": "api_open-banking-georgia_get-payment-initiation-status-georgia.html"
+ }
+]

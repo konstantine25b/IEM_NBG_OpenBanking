@@ -1,0 +1,3207 @@
+{
+  "mode": "examples",
+  "generated_at_utc": "2026-10-20T16:38:06.050783+00:00",
+  "requested_operations": 71,
+  "records": [
+    {
+      "operation_id": "01_aiscreateconsent",
+      "method": "POST",
+      "path": "/v1/consents",
+      "source_url": "https://developers.tbcbank.ge/reference/aiscreateconsent",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "201",
+      "content_type_documented": "application/json",
+      "example_name": "Response example in case of a redirect with a dedicated start of the authorisation process",
+      "body": {
+        "consentStatus": "received",
+        "consentId": "ab60aab2-4598-4f9b-be47-c52ff7f1973e",
+        "_links": {
+          "startAuthorisation": {
+            "href": "/0.8/v1/consents/ab60aab2-4598-4f9b-be47-c52ff7f1973e/authorisations"
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "02_aisgetconsentdetails",
+      "method": "GET",
+      "path": "/v1/consents/{consentId}",
+      "source_url": "https://developers.tbcbank.ge/reference/aisgetconsentdetails",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response on Get Consent request",
+      "body": {
+        "access": {
+          "accounts": [
+            {
+              "iban": "GE22TB2000000000000020",
+              "currency": "GEL",
+              "cashAccountType": "CARD"
+            },
+            {
+              "iban": "GE11TB1000000000000010",
+              "currency": "XXX",
+              "cashAccountType": "CACC"
+            },
+            {
+              "maskedPan": "************1234"
+            }
+          ],
+          "balances": [
+            {
+              "iban": "GE22TB2000000000000020",
+              "currency": "GEL",
+              "cashAccountType": "CARD"
+            },
+            {
+              "iban": "GE11TB1000000000000010",
+              "currency": "XXX",
+              "cashAccountType": "CACC"
+            },
+            {
+              "maskedPan": "************1234"
+            }
+          ],
+          "transactions": [
+            {
+              "iban": "GE22TB2000000000000020",
+              "currency": "GEL",
+              "cashAccountType": "CARD"
+            },
+            {
+              "iban": "GE11TB1000000000000010",
+              "currency": "XXX",
+              "cashAccountType": "CACC"
+            },
+            {
+              "maskedPan": "************1234"
+            }
+          ]
+        },
+        "recurringIndicator": true,
+        "validUntil": "2023-07-01",
+        "frequencyPerDay": 4,
+        "lastActionDate": "2023-04-01",
+        "consentStatus": "valid",
+        "_links": {
+          "account": {
+            "href": "/0.8/v1/accounts"
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "03_aisdeleteconsent",
+      "method": "DELETE",
+      "path": "/v1/consents/{consentId}",
+      "source_url": "https://developers.tbcbank.ge/reference/aisdeleteconsent",
+      "network_request_made": false,
+      "classification": "documented_no_body",
+      "documented_statuses": [
+        "204"
+      ],
+      "body": null
+    },
+    {
+      "operation_id": "04_aisreadconsentstatus",
+      "method": "GET",
+      "path": "/v1/consents/{consentId}/status",
+      "source_url": "https://developers.tbcbank.ge/reference/aisreadconsentstatus",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response on Get Consent status request",
+      "body": {
+        "consentStatus": "valid"
+      }
+    },
+    {
+      "operation_id": "05_aisstartconsentauthorization",
+      "method": "POST",
+      "path": "/v1/consents/{consentId}/authorisations",
+      "source_url": "https://developers.tbcbank.ge/reference/aisstartconsentauthorization",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "201",
+      "content_type_documented": "application/json",
+      "example_name": "Response example in case of a redirect with a dedicated start of the authorisation process",
+      "body": {
+        "scaStatus": "scaMethodSelected",
+        "authorisationId": "78c5d6ff-cfd7-4db5-83da-74ec258a3d4e",
+        "_links": {
+          "scaOAuth": {
+            "href": "https://test-openbanking.tbcbank.ge/openbanking/oauth/.well-known/oauth-authorization-server"
+          },
+          "scaStatus": {
+            "href": "/0.8/v1/consents/70c9c538-8353-491b-b6ba-e39826fa9f1c/authorisations/78c5d6ff-cfd7-4db5-83da-74ec258a3d4e"
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "06_aisgetconsentauthorizations",
+      "method": "GET",
+      "path": "/v1/consents/{consentId}/authorisations",
+      "source_url": "https://developers.tbcbank.ge/reference/aisgetconsentauthorizations",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response example on get consent authorisations request",
+      "body": {
+        "authorisationIds": [
+          "dd059f4f-0c93-44ff-8cbb-3817b67ef85c"
+        ]
+      }
+    },
+    {
+      "operation_id": "07_aisreadconsentauthorizationstatus",
+      "method": "GET",
+      "path": "/v1/consents/{consentId}/authorisations/{authorisationId}",
+      "source_url": "https://developers.tbcbank.ge/reference/aisreadconsentauthorizationstatus",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response example on get consent authorisation status request",
+      "body": {
+        "scaStatus": "scaMethodSelected"
+      }
+    },
+    {
+      "operation_id": "08_aisopenidconfiguration",
+      "method": "GET",
+      "path": "/.well-known/oauth-authorization-server",
+      "source_url": "https://developers.tbcbank.ge/reference/aisopenidconfiguration",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response example on get oauth authorization server details",
+      "body": {
+        "issuer": "https://test-api.tbcbank.ge",
+        "authorization_endpoint": "https://test-api.tbcbank.ge/psd2/openbanking/oauth/authorize",
+        "token_endpoint": "https://test-openbanking.tbcbank.ge/openbanking/oauth/token",
+        "token_endpoint_auth_methods_supported": [
+          "tls_client_auth"
+        ],
+        "tls_client_certificate_bound_access_tokens": true,
+        "registration_endpoint": "https://test-openbanking.tbcbank.ge/openbanking/oauth/register",
+        "scopes_supported": [
+          "openid",
+          "profile",
+          "AIS:<consentId>",
+          "PIS:<paymentId>"
+        ],
+        "response_types_supported": [
+          "code"
+        ],
+        "grant_types_supported": [
+          "authorization_code",
+          "refresh_token"
+        ],
+        "revocation_endpoint_auth_methods_supported": [
+          "tls_client_auth"
+        ],
+        "revocation_endpoint": "https://test-openbanking.tbcbank.ge/openbanking/oauth/token",
+        "ui_locales_supported": [
+          "en",
+          "ka"
+        ]
+      }
+    },
+    {
+      "operation_id": "09_aisoauthauhtorization",
+      "method": "GET",
+      "path": "/psd2/openbanking/oauth/authorize",
+      "source_url": "https://developers.tbcbank.ge/reference/aisoauthauhtorization",
+      "network_request_made": false,
+      "classification": "documented_redirect",
+      "documented_statuses": [
+        "302"
+      ],
+      "message": "Redirect is documented; no JSON success body is invented."
+    },
+    {
+      "operation_id": "10_aisoauthtoken",
+      "method": "POST",
+      "path": "/openbanking/oauth/token",
+      "source_url": "https://developers.tbcbank.ge/reference/aisoauthtoken",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response example on oauth token generation",
+      "body": {
+        "access_token": "ffODwEVU5sD9RADdEWEYUQNijrcE",
+        "token_type": "Bearer",
+        "refresh_token": "qjfHpGMyOZGv7gZVRxGPGoPfbgHNwIHs",
+        "refresh_token_issued_at": "1682595156807",
+        "refresh_token_expires_in": "7775999",
+        "refresh_count": 0,
+        "scope": "PIS:45f90ecc-3879-4574-de8e-08db40b82e17",
+        "issued_at": "1682595156807",
+        "expires_in": 3599
+      }
+    },
+    {
+      "operation_id": "11_aisreadaccountlist",
+      "method": "GET",
+      "path": "/v1/accounts",
+      "source_url": "https://developers.tbcbank.ge/reference/aisreadaccountlist",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response example for accounts list",
+      "body": {
+        "accounts": [
+          {
+            "resourceId": "761a7d98-3251-4e98-50fe-08dd818830c7",
+            "iban": "GE01TB0203040506070809",
+            "msisdn": "555112233",
+            "currency": "XXX",
+            "ownerName": "Owner Name 1",
+            "ownerIdentification": {
+              "privateId": {
+                "others": [
+                  {
+                    "identification": "PNOGE-00112233445"
+                  }
+                ]
+              }
+            },
+            "name": "Owner Name 1",
+            "displayName": "Concept",
+            "cashAccountType": "CARD",
+            "status": "enabled",
+            "bic": "TBCBGE22",
+            "usage": "PRIV",
+            "balances": [
+              {
+                "balanceType": "interimBooked",
+                "balanceAmount": {
+                  "currency": "GEL",
+                  "amount": "30.00"
+                },
+                "creditLimitIncluded": false,
+                "referenceDate": "2025-03-26",
+                "lastChangeDateTime": "2025-03-26T00:00:00"
+              },
+              {
+                "balanceType": "interimAvailable",
+                "balanceAmount": {
+                  "currency": "GEL",
+                  "amount": "30.00"
+                },
+                "creditLimitIncluded": false
+              },
+              {
+                "balanceType": "interimBooked",
+                "balanceAmount": {
+                  "currency": "USD",
+                  "amount": "0.00"
+                },
+                "creditLimitIncluded": false,
+                "referenceDate": "2024-12-24",
+                "lastChangeDateTime": "2024-12-24T00:00:00"
+              },
+              {
+                "balanceType": "interimAvailable",
+                "balanceAmount": {
+                  "currency": "USD",
+                  "amount": "0.00"
+                },
+                "creditLimitIncluded": false
+              },
+              {
+                "balanceType": "interimBooked",
+                "balanceAmount": {
+                  "currency": "EUR",
+                  "amount": "0.33"
+                },
+                "creditLimitIncluded": false,
+                "referenceDate": "2025-02-23",
+                "lastChangeDateTime": "2025-02-23T00:00:00"
+              },
+              {
+                "balanceType": "interimAvailable",
+                "balanceAmount": {
+                  "currency": "EUR",
+                  "amount": "0.00"
+                },
+                "creditLimitIncluded": false
+              }
+            ],
+            "_links": {
+              "balances": {
+                "href": "/0.8/v1/accounts/761a7d98-3251-4e98-50fe-08dd818830c7/balances"
+              },
+              "transactions": {
+                "href": "/0.8/v1/accounts/761a7d98-3251-4e98-50fe-08dd818830c7/transactions"
+              },
+              "account": {
+                "href": "/0.8/v1/accounts/761a7d98-3251-4e98-50fe-08dd818830c7"
+              }
+            }
+          },
+          {
+            "resourceId": "00f6360b-2720-4e64-50ff-08dd818830c7",
+            "iban": "GE01TB0203040506070809",
+            "msisdn": "555112233",
+            "currency": "GEL",
+            "ownerName": "Owner Name 1",
+            "ownerIdentification": {
+              "privateId": {
+                "others": [
+                  {
+                    "identification": "PNOGE-00112233445"
+                  }
+                ]
+              }
+            },
+            "name": "Owner Name 1",
+            "displayName": "Concept",
+            "cashAccountType": "CARD",
+            "status": "enabled",
+            "bic": "TBCBGE22",
+            "usage": "PRIV",
+            "balances": [
+              {
+                "balanceType": "interimBooked",
+                "balanceAmount": {
+                  "currency": "GEL",
+                  "amount": "30.00"
+                },
+                "creditLimitIncluded": false,
+                "referenceDate": "2025-03-26",
+                "lastChangeDateTime": "2025-03-26T00:00:00"
+              },
+              {
+                "balanceType": "interimAvailable",
+                "balanceAmount": {
+                  "currency": "GEL",
+                  "amount": "30.00"
+                },
+                "creditLimitIncluded": false
+              }
+            ],
+            "_links": {
+              "balances": {
+                "href": "/0.8/v1/accounts/00f6360b-2720-4e64-50ff-08dd818830c7/balances"
+              },
+              "transactions": {
+                "href": "/0.8/v1/accounts/00f6360b-2720-4e64-50ff-08dd818830c7/transactions"
+              },
+              "aggregationAccount": {
+                "href": "/0.8/v1/accounts/761a7d98-3251-4e98-50fe-08dd818830c7"
+              },
+              "account": {
+                "href": "/0.8/v1/accounts/00f6360b-2720-4e64-50ff-08dd818830c7"
+              }
+            }
+          },
+          {
+            "resourceId": "20ab9546-f384-4950-5100-08dd818830c7",
+            "iban": "GE01TB0203040506070809",
+            "msisdn": "555112233",
+            "currency": "USD",
+            "ownerName": "Owner Name 1",
+            "ownerIdentification": {
+              "privateId": {
+                "others": [
+                  {
+                    "identification": "PNOGE-00112233445"
+                  }
+                ]
+              }
+            },
+            "name": "Owner Name 1",
+            "displayName": "Concept",
+            "cashAccountType": "CARD",
+            "status": "enabled",
+            "bic": "TBCBGE22",
+            "usage": "PRIV",
+            "balances": [
+              {
+                "balanceType": "interimBooked",
+                "balanceAmount": {
+                  "currency": "USD",
+                  "amount": "0.00"
+                },
+                "creditLimitIncluded": false,
+                "referenceDate": "2024-12-24",
+                "lastChangeDateTime": "2024-12-24T00:00:00"
+              },
+              {
+                "balanceType": "interimAvailable",
+                "balanceAmount": {
+                  "currency": "USD",
+                  "amount": "0.00"
+                },
+                "creditLimitIncluded": false
+              }
+            ],
+            "_links": {
+              "balances": {
+                "href": "/0.8/v1/accounts/20ab9546-f384-4950-5100-08dd818830c7/balances"
+              },
+              "transactions": {
+                "href": "/0.8/v1/accounts/20ab9546-f384-4950-5100-08dd818830c7/transactions"
+              },
+              "aggregationAccount": {
+                "href": "/0.8/v1/accounts/761a7d98-3251-4e98-50fe-08dd818830c7"
+              },
+              "account": {
+                "href": "/0.8/v1/accounts/20ab9546-f384-4950-5100-08dd818830c7"
+              }
+            }
+          },
+          {
+            "resourceId": "ea7f2d3e-d371-407b-5101-08dd818830c7",
+            "iban": "GE01TB0203040506070809",
+            "msisdn": "555112233",
+            "currency": "EUR",
+            "ownerName": "Owner Name 1",
+            "ownerIdentification": {
+              "privateId": {
+                "others": [
+                  {
+                    "identification": "PNOGE-00112233445"
+                  }
+                ]
+              }
+            },
+            "name": "Owner Name 1",
+            "displayName": "Concept",
+            "cashAccountType": "CARD",
+            "status": "enabled",
+            "bic": "TBCBGE22",
+            "usage": "PRIV",
+            "balances": [
+              {
+                "balanceType": "interimBooked",
+                "balanceAmount": {
+                  "currency": "EUR",
+                  "amount": "0.33"
+                },
+                "creditLimitIncluded": false,
+                "referenceDate": "2025-02-23",
+                "lastChangeDateTime": "2025-02-23T00:00:00"
+              },
+              {
+                "balanceType": "interimAvailable",
+                "balanceAmount": {
+                  "currency": "EUR",
+                  "amount": "0.00"
+                },
+                "creditLimitIncluded": false
+              }
+            ],
+            "_links": {
+              "balances": {
+                "href": "/0.8/v1/accounts/ea7f2d3e-d371-407b-5101-08dd818830c7/balances"
+              },
+              "transactions": {
+                "href": "/0.8/v1/accounts/ea7f2d3e-d371-407b-5101-08dd818830c7/transactions"
+              },
+              "aggregationAccount": {
+                "href": "/0.8/v1/accounts/761a7d98-3251-4e98-50fe-08dd818830c7"
+              },
+              "account": {
+                "href": "/0.8/v1/accounts/ea7f2d3e-d371-407b-5101-08dd818830c7"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "operation_id": "12_aisreadaccountdetails",
+      "method": "GET",
+      "path": "/v1/accounts/{account-id}",
+      "source_url": "https://developers.tbcbank.ge/reference/aisreadaccountdetails",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response example for get account details",
+      "body": {
+        "account": {
+          "resourceId": "c5503035-7f59-4f66-ff96-08dd6cfe8f7c",
+          "iban": "GE01TB2123003210034512",
+          "msisdn": "558112233",
+          "currency": "USD",
+          "ownerName": "მოქი მოქიაშვილი",
+          "ownerIdentification": {
+            "privateId": {
+              "others": [
+                {
+                  "identification": "PNOGE-00000000001"
+                }
+              ]
+            }
+          },
+          "name": "მოქი მოქიაშვილი",
+          "displayName": "ჩემი ბარათი",
+          "cashAccountType": "CARD",
+          "status": "enabled",
+          "bic": "TBCBGE22",
+          "usage": "PRIV",
+          "balances": [],
+          "_links": {
+            "balances": {
+              "href": "/0.8/v1/accounts/c5503035-7f59-4f66-ff96-08dd6cfe8f7c/balances"
+            },
+            "transactions": {
+              "href": "/0.8/v1/accounts/c5503035-7f59-4f66-ff96-08dd6cfe8f7c/transactions"
+            },
+            "aggregationAccount": {
+              "href": "/0.8/v1/accounts/dfd0efe6-5e7a-4d1c-ff94-08dd6cfe8f7c"
+            },
+            "account": {
+              "href": "/0.8/v1/accounts/c5503035-7f59-4f66-ff96-08dd6cfe8f7c"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "13_aisreadaccountbalance",
+      "method": "GET",
+      "path": "/v1/accounts/{account-id}/balances",
+      "source_url": "https://developers.tbcbank.ge/reference/aisreadaccountbalance",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response example for get account balances",
+      "body": {
+        "account": {
+          "iban": "GE01TB0203040506070809",
+          "currency": "XXX"
+        },
+        "balances": [
+          {
+            "balanceType": "interimAvailable",
+            "balanceAmount": {
+              "currency": "GEL",
+              "amount": "30.00"
+            },
+            "creditLimitIncluded": false
+          },
+          {
+            "balanceType": "interimBooked",
+            "balanceAmount": {
+              "currency": "GEL",
+              "amount": "30.00"
+            },
+            "creditLimitIncluded": false,
+            "referenceDate": "2025-03-26",
+            "lastChangeDateTime": "2025-03-26T00:00:00"
+          },
+          {
+            "balanceType": "closingBooked",
+            "balanceAmount": {
+              "currency": "GEL",
+              "amount": "-30.00"
+            }
+          },
+          {
+            "balanceType": "interimAvailable",
+            "balanceAmount": {
+              "currency": "USD",
+              "amount": "0.00"
+            },
+            "creditLimitIncluded": false
+          },
+          {
+            "balanceType": "interimBooked",
+            "balanceAmount": {
+              "currency": "USD",
+              "amount": "0.00"
+            },
+            "creditLimitIncluded": false,
+            "referenceDate": "2024-12-24",
+            "lastChangeDateTime": "2024-12-24T00:00:00"
+          },
+          {
+            "balanceType": "closingBooked",
+            "balanceAmount": {
+              "currency": "USD",
+              "amount": "0.00"
+            }
+          },
+          {
+            "balanceType": "interimAvailable",
+            "balanceAmount": {
+              "currency": "EUR",
+              "amount": "0.00"
+            },
+            "creditLimitIncluded": false
+          },
+          {
+            "balanceType": "interimBooked",
+            "balanceAmount": {
+              "currency": "EUR",
+              "amount": "0.33"
+            },
+            "creditLimitIncluded": false,
+            "referenceDate": "2025-02-23",
+            "lastChangeDateTime": "2025-02-23T00:00:00"
+          },
+          {
+            "balanceType": "closingBooked",
+            "balanceAmount": {
+              "currency": "EUR",
+              "amount": "-0.33"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "operation_id": "14_aisreadaccounttransactionlist",
+      "method": "GET",
+      "path": "/v1/accounts/{account-id}/transactions",
+      "source_url": "https://developers.tbcbank.ge/reference/aisreadaccounttransactionlist",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response example for get account transactions list",
+      "body": {
+        "account": {
+          "iban": "GE01TB0203040506070809",
+          "currency": "XXX"
+        },
+        "transactions": {
+          "booked": [
+            {
+              "transactionId": "c_11223344556",
+              "entryReference": "c_11223344556",
+              "debtorName": "Debtor Name",
+              "debtorAccount": {
+                "iban": "GE11TB1234567891234567",
+                "currency": "GEL"
+              },
+              "debtorAgent": "TBCBGE22",
+              "debtorIdentification": {
+                "privateId": {
+                  "others": [
+                    {
+                      "identification": "PNOGE-00112233445"
+                    }
+                  ]
+                }
+              },
+              "transactionAmount": {
+                "currency": "GEL",
+                "amount": "250.00"
+              },
+              "bookingDate": "2024-03-10",
+              "valueDate": "2024-03-10",
+              "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+              "additionalInformation": "საკუთარ ანგარიშზე გადარიცხვა",
+              "proprietaryBankTransactionCode": "GMI"
+            },
+            {
+              "transactionId": "d_11223344556",
+              "entryReference": "d_11223344556",
+              "creditorName": "Creditor Name",
+              "creditorAccount": {
+                "iban": "GE11TB1234567891234567",
+                "currency": "GEL"
+              },
+              "creditorAgent": "TBCBGE22",
+              "creditorIdentification": {
+                "privateId": {
+                  "others": [
+                    {
+                      "identification": "PNOGE-00112233445"
+                    }
+                  ]
+                }
+              },
+              "debtorIdentification": {
+                "privateId": {
+                  "others": [
+                    {
+                      "identification": "PNOGE-00112233445"
+                    }
+                  ]
+                }
+              },
+              "transactionAmount": {
+                "currency": "GEL",
+                "amount": "-50.00"
+              },
+              "bookingDate": "2024-03-11",
+              "valueDate": "2024-03-11",
+              "remittanceInformationUnstructured": "პირადი გადარიცხვა თიბისიში",
+              "additionalInformation": "პირადი გადარიცხვა თიბისიში",
+              "proprietaryBankTransactionCode": "GMB"
+            }
+          ],
+          "pending": [],
+          "_links": {
+            "account": {
+              "href": "/0.8/v1/accounts/761a7d98-3251-4e98-50fe-08dd818830c7"
+            },
+            "first": {
+              "href": "/0.8/v1/accounts/761a7d98-3251-4e98-50fe-08dd818830c7/transactions?withbalance=false&dateFrom=2023-01-01&bookingStatus=both"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "15_aisreadcardaccountlist",
+      "method": "GET",
+      "path": "/v1/card-accounts",
+      "source_url": "https://developers.tbcbank.ge/reference/aisreadcardaccountlist",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response example for get card account list",
+      "body": {
+        "cardAccounts": [
+          {
+            "resourceId": "0f92178b-a77f-45d8-50f5-08dd818830c7",
+            "maskedPan": "123456******7890",
+            "currency": "XXX",
+            "ownerName": "Owner Name 1",
+            "name": "Owner Name 1",
+            "product": "VISA",
+            "status": "enabled",
+            "usage": "PRIV",
+            "balances": [
+              {
+                "balanceType": "interimBooked",
+                "balanceAmount": {
+                  "currency": "GEL",
+                  "amount": "30.00"
+                },
+                "creditLimitIncluded": false,
+                "referenceDate": "2025-03-26",
+                "lastChangeDateTime": "2025-03-26T00:00:00"
+              },
+              {
+                "balanceType": "interimAvailable",
+                "balanceAmount": {
+                  "currency": "GEL",
+                  "amount": "30.00"
+                },
+                "creditLimitIncluded": false
+              },
+              {
+                "balanceType": "interimBooked",
+                "balanceAmount": {
+                  "currency": "USD",
+                  "amount": "0.00"
+                },
+                "creditLimitIncluded": false,
+                "referenceDate": "2024-12-24",
+                "lastChangeDateTime": "2024-12-24T00:00:00"
+              },
+              {
+                "balanceType": "interimAvailable",
+                "balanceAmount": {
+                  "currency": "USD",
+                  "amount": "0.00"
+                },
+                "creditLimitIncluded": false
+              },
+              {
+                "balanceType": "interimBooked",
+                "balanceAmount": {
+                  "currency": "EUR",
+                  "amount": "0.33"
+                },
+                "creditLimitIncluded": false,
+                "referenceDate": "2025-02-23",
+                "lastChangeDateTime": "2025-02-23T00:00:00"
+              },
+              {
+                "balanceType": "interimAvailable",
+                "balanceAmount": {
+                  "currency": "EUR",
+                  "amount": "0.00"
+                },
+                "creditLimitIncluded": false
+              }
+            ],
+            "_links": {
+              "balances": {
+                "href": "/0.8/v1/card-accounts/0f92178b-a77f-45d8-50f5-08dd818830c7/balances"
+              },
+              "transactions": {
+                "href": "/0.8/v1/card-accounts/0f92178b-a77f-45d8-50f5-08dd818830c7/transactions"
+              },
+              "cardAccount": {
+                "href": "/0.8/v1/card-accounts/0f92178b-a77f-45d8-50f5-08dd818830c7"
+              }
+            }
+          },
+          {
+            "resourceId": "67a95e02-f018-417e-50fa-08dd818830c7",
+            "maskedPan": "123456******7890",
+            "currency": "XXX",
+            "ownerName": "Owner Name 1",
+            "name": "Owner Name 1",
+            "product": "VISA",
+            "status": "enabled",
+            "usage": "PRIV",
+            "balances": [
+              {
+                "balanceType": "interimBooked",
+                "balanceAmount": {
+                  "currency": "GEL",
+                  "amount": "0.00"
+                },
+                "creditLimitIncluded": false,
+                "referenceDate": "2024-12-22",
+                "lastChangeDateTime": "2024-12-22T00:00:00"
+              },
+              {
+                "balanceType": "interimAvailable",
+                "balanceAmount": {
+                  "currency": "GEL",
+                  "amount": "0.00"
+                },
+                "creditLimitIncluded": false
+              },
+              {
+                "balanceType": "interimBooked",
+                "balanceAmount": {
+                  "currency": "USD",
+                  "amount": "0.00"
+                },
+                "creditLimitIncluded": false,
+                "referenceDate": "2024-09-19",
+                "lastChangeDateTime": "2024-09-19T00:00:00"
+              },
+              {
+                "balanceType": "interimAvailable",
+                "balanceAmount": {
+                  "currency": "USD",
+                  "amount": "0.00"
+                },
+                "creditLimitIncluded": false
+              },
+              {
+                "balanceType": "interimBooked",
+                "balanceAmount": {
+                  "currency": "EUR",
+                  "amount": "0.20"
+                },
+                "creditLimitIncluded": false,
+                "referenceDate": "2024-12-22",
+                "lastChangeDateTime": "2024-12-22T00:00:00"
+              },
+              {
+                "balanceType": "interimAvailable",
+                "balanceAmount": {
+                  "currency": "EUR",
+                  "amount": "0.20"
+                },
+                "creditLimitIncluded": false
+              }
+            ],
+            "_links": {
+              "balances": {
+                "href": "/0.8/v1/card-accounts/67a95e02-f018-417e-50fa-08dd818830c7/balances"
+              },
+              "transactions": {
+                "href": "/0.8/v1/card-accounts/67a95e02-f018-417e-50fa-08dd818830c7/transactions"
+              },
+              "cardAccount": {
+                "href": "/0.8/v1/card-accounts/67a95e02-f018-417e-50fa-08dd818830c7"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "operation_id": "16_aisreadcardaccountdetails",
+      "method": "GET",
+      "path": "/v1/card-accounts/{account-id}",
+      "source_url": "https://developers.tbcbank.ge/reference/aisreadcardaccountdetails",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response example for get card account details",
+      "body": {
+        "resourceId": "0f92178b-a77f-45d8-50f5-08dd818830c7",
+        "maskedPan": "123456******7890",
+        "currency": "XXX",
+        "ownerName": "Owner Name 1",
+        "name": "Owner Name 1",
+        "product": "VISA",
+        "status": "enabled",
+        "usage": "PRIV",
+        "balances": [
+          {
+            "balanceType": "interimBooked",
+            "balanceAmount": {
+              "currency": "GEL",
+              "amount": "30.00"
+            },
+            "creditLimitIncluded": false,
+            "referenceDate": "2025-03-26",
+            "lastChangeDateTime": "2025-03-26T00:00:00"
+          },
+          {
+            "balanceType": "interimAvailable",
+            "balanceAmount": {
+              "currency": "GEL",
+              "amount": "30.00"
+            },
+            "creditLimitIncluded": false
+          },
+          {
+            "balanceType": "interimBooked",
+            "balanceAmount": {
+              "currency": "USD",
+              "amount": "0.00"
+            },
+            "creditLimitIncluded": false,
+            "referenceDate": "2024-12-24",
+            "lastChangeDateTime": "2024-12-24T00:00:00"
+          },
+          {
+            "balanceType": "interimAvailable",
+            "balanceAmount": {
+              "currency": "USD",
+              "amount": "0.00"
+            },
+            "creditLimitIncluded": false
+          },
+          {
+            "balanceType": "interimBooked",
+            "balanceAmount": {
+              "currency": "EUR",
+              "amount": "0.33"
+            },
+            "creditLimitIncluded": false,
+            "referenceDate": "2025-02-23",
+            "lastChangeDateTime": "2025-02-23T00:00:00"
+          },
+          {
+            "balanceType": "interimAvailable",
+            "balanceAmount": {
+              "currency": "EUR",
+              "amount": "0.00"
+            },
+            "creditLimitIncluded": false
+          }
+        ],
+        "_links": {
+          "balances": {
+            "href": "/0.8/v1/card-accounts/0f92178b-a77f-45d8-50f5-08dd818830c7/balances"
+          },
+          "transactions": {
+            "href": "/0.8/v1/card-accounts/0f92178b-a77f-45d8-50f5-08dd818830c7/transactions"
+          },
+          "cardAccount": {
+            "href": "/0.8/v1/card-accounts/0f92178b-a77f-45d8-50f5-08dd818830c7"
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "17_aisreadcardaccountbalances",
+      "method": "GET",
+      "path": "/v1/card-accounts/{account-id}/balances",
+      "source_url": "https://developers.tbcbank.ge/reference/aisreadcardaccountbalances",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response example for get card account balances",
+      "body": {
+        "cardAccount": {
+          "maskedPan": "123456******7890",
+          "currency": "XXX"
+        },
+        "balances": [
+          {
+            "balanceType": "interimAvailable",
+            "balanceAmount": {
+              "currency": "GEL",
+              "amount": "30.00"
+            },
+            "creditLimitIncluded": false
+          },
+          {
+            "balanceType": "interimBooked",
+            "balanceAmount": {
+              "currency": "GEL",
+              "amount": "30.00"
+            },
+            "creditLimitIncluded": false,
+            "referenceDate": "2025-03-26",
+            "lastChangeDateTime": "2025-03-26T00:00:00"
+          },
+          {
+            "balanceType": "closingBooked",
+            "balanceAmount": {
+              "currency": "GEL",
+              "amount": "-30.00"
+            }
+          },
+          {
+            "balanceType": "interimAvailable",
+            "balanceAmount": {
+              "currency": "USD",
+              "amount": "0.00"
+            },
+            "creditLimitIncluded": false
+          },
+          {
+            "balanceType": "interimBooked",
+            "balanceAmount": {
+              "currency": "USD",
+              "amount": "0.00"
+            },
+            "creditLimitIncluded": false,
+            "referenceDate": "2024-12-24",
+            "lastChangeDateTime": "2024-12-24T00:00:00"
+          },
+          {
+            "balanceType": "closingBooked",
+            "balanceAmount": {
+              "currency": "USD",
+              "amount": "0.00"
+            }
+          },
+          {
+            "balanceType": "interimAvailable",
+            "balanceAmount": {
+              "currency": "EUR",
+              "amount": "0.00"
+            },
+            "creditLimitIncluded": false
+          },
+          {
+            "balanceType": "interimBooked",
+            "balanceAmount": {
+              "currency": "EUR",
+              "amount": "0.33"
+            },
+            "creditLimitIncluded": false,
+            "referenceDate": "2025-02-23",
+            "lastChangeDateTime": "2025-02-23T00:00:00"
+          },
+          {
+            "balanceType": "closingBooked",
+            "balanceAmount": {
+              "currency": "EUR",
+              "amount": "-0.33"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "operation_id": "18_aisreadcardaccounttransactionlist",
+      "method": "GET",
+      "path": "/v1/card-accounts/{account-id}/transactions",
+      "source_url": "https://developers.tbcbank.ge/reference/aisreadcardaccounttransactionlist",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response example for get card account transactions list",
+      "body": {
+        "cardAccount": {
+          "maskedPan": "123456******7890",
+          "currency": "XXX"
+        },
+        "cardTransactions": {
+          "booked": [
+            {
+              "bookingDate": "2024-03-10",
+              "transactionAmount": {
+                "currency": "GEL",
+                "amount": "250.00"
+              },
+              "proprietaryBankTransactionCode": "GMI"
+            },
+            {
+              "bookingDate": "2024-03-11",
+              "transactionAmount": {
+                "currency": "GEL",
+                "amount": "-50.00"
+              },
+              "proprietaryBankTransactionCode": "GMB"
+            }
+          ],
+          "pending": [],
+          "_links": {
+            "first": {
+              "href": "/0.8/v1/card-accounts/0f92178b-a77f-45d8-50f5-08dd818830c7/transactions?withbalance=false&dateFrom=2024-01-01&bookingStatus=both"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "19_post_v1-payments-payment-product",
+      "method": "POST",
+      "path": "/v1/payments/{payment-product}",
+      "source_url": "https://developers.tbcbank.ge/reference/post_v1-payments-payment-product",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "201",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Payment initiation response - without debtor",
+      "body": {
+        "paymentId": "7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1",
+        "transactionStatus": "ACTC",
+        "_links": {
+          "scaOAuth": {
+            "href": "https://dev-openbanking.tbcbank.ge/openbanking/oauth/.well-known/oauth-authorization-server"
+          },
+          "self": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1"
+          },
+          "status": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/status"
+          },
+          "scaStatus": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/authorisations/df93472a-a86c-47f8-6d64-08dae1b187de"
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "20_post_v1-bulk-payments-payment-product",
+      "method": "POST",
+      "path": "/v1/bulk-payments/{payment-product}",
+      "source_url": "https://developers.tbcbank.ge/reference/post_v1-bulk-payments-payment-product",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "201",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Payment initiation response - without debtor",
+      "body": {
+        "paymentId": "7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1",
+        "transactionStatus": "ACTC",
+        "_links": {
+          "scaOAuth": {
+            "href": "https://dev-openbanking.tbcbank.ge/openbanking/oauth/.well-known/oauth-authorization-server"
+          },
+          "self": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1"
+          },
+          "status": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/status"
+          },
+          "scaStatus": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/authorisations/df93472a-a86c-47f8-6d64-08dae1b187de"
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "21_get_v1-payments-payment-product-paymentid",
+      "method": "GET",
+      "path": "/v1/payments/{payment-product}/{paymentId}",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v1-payments-payment-product-paymentid",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Payment initiation response",
+      "body": {
+        "debtorAccount": {
+          "iban": "GE83TB7438345061622218",
+          "currency": "GEL"
+        },
+        "instructedAmount": {
+          "currency": "USD",
+          "amount": "15"
+        },
+        "creditorAccount": {
+          "iban": "GE83TB7438345061655577",
+          "currency": "GEL"
+        },
+        "creditorAgent": "TRESGE22",
+        "creditorName": "Wolfgang Amadeus Mozart",
+        "remittanceInformationUnstructured": "Ref Number Merchant",
+        "transactionStatus": "ACTC",
+        "debtorIdentification": {
+          "privateId": {
+            "others": [
+              {
+                "identification": "PNOGE-01019013212"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "22_get_v1-bulk-payments-payment-product-paymentid",
+      "method": "GET",
+      "path": "/v1/bulk-payments/{payment-product}/{paymentId}",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v1-bulk-payments-payment-product-paymentid",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Payment initiation response",
+      "body": {
+        "debtorAccount": {
+          "iban": "GE83TB7438345061622218",
+          "currency": "GEL"
+        },
+        "instructedAmount": {
+          "currency": "USD",
+          "amount": "15"
+        },
+        "creditorAccount": {
+          "iban": "GE83TB7438345061655577",
+          "currency": "GEL"
+        },
+        "creditorAgent": "TRESGE22",
+        "creditorName": "Wolfgang Amadeus Mozart",
+        "remittanceInformationUnstructured": "Ref Number Merchant",
+        "transactionStatus": "ACTC",
+        "debtorIdentification": {
+          "privateId": {
+            "others": [
+              {
+                "identification": "PNOGE-01019013212"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "23_get_v1-payments-payment-product-paymentid-status",
+      "method": "GET",
+      "path": "/v1/payments/{payment-product}/{paymentId}/status",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v1-payments-payment-product-paymentid-status",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Payment status request",
+      "body": {
+        "transactionStatus": "RCVD",
+        "fundsAvailable": true
+      }
+    },
+    {
+      "operation_id": "24_get_v1-bulk-payments-payment-product-paymentid-status",
+      "method": "GET",
+      "path": "/v1/bulk-payments/{payment-product}/{paymentId}/status",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v1-bulk-payments-payment-product-paymentid-status",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Payment status request",
+      "body": {
+        "transactionStatus": "RCVD",
+        "fundsAvailable": true
+      }
+    },
+    {
+      "operation_id": "25_delete_v1-payment-service-payment-product-paymentid",
+      "method": "DELETE",
+      "path": "/v1/{payment-service}/{payment-product}/{paymentId}",
+      "source_url": "https://developers.tbcbank.ge/reference/delete_v1-payment-service-payment-product-paymentid",
+      "network_request_made": false,
+      "classification": "schema_only",
+      "message": "No complete published response example for this selection.",
+      "response_schemas": [],
+      "schema_file": "output/tbc_openbanking_examples/response_schemas/25_delete_v1-payment-service-payment-product-paymentid.openapi.json"
+    },
+    {
+      "operation_id": "26_post_v1-payment-service-payment-product-paymentid-authorisations",
+      "method": "POST",
+      "path": "/v1/{payment-service}/{payment-product}/{paymentId}/authorisations",
+      "source_url": "https://developers.tbcbank.ge/reference/post_v1-payment-service-payment-product-paymentid-authorisations",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "201",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Create Authorisation",
+      "body": {
+        "scaStatus": "received",
+        "authorisationId": "123auth456",
+        "_links": {
+          "scaStatus": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/authorisations/df93472a-a86c-47f8-6d64-08dae1b187de"
+          }
+        },
+        "psuMessage": "Please use your BankApp for transaction Authorisation."
+      }
+    },
+    {
+      "operation_id": "27_get_v1-payment-service-payment-product-paymentid-authorisations",
+      "method": "GET",
+      "path": "/v1/{payment-service}/{payment-product}/{paymentId}/authorisations",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v1-payment-service-payment-product-paymentid-authorisations",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Get Authorisations",
+      "body": {
+        "authorisationIds": [
+          "123auth456",
+          "654auth321"
+        ]
+      }
+    },
+    {
+      "operation_id": "28_get_v1-payment-service-payment-product-paymentid-authorisations-authorisationid",
+      "method": "GET",
+      "path": "/v1/{payment-service}/{payment-product}/{paymentId}/authorisations/{authorisationId}",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v1-payment-service-payment-product-paymentid-authorisations-authorisationid",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Get Authorisation status",
+      "body": {
+        "scaStatus": "psuAuthenticated"
+      }
+    },
+    {
+      "operation_id": "29_post_v1-payment-service-payment-product-paymentid-cancellation-authorisations",
+      "method": "POST",
+      "path": "/v1/{payment-service}/{payment-product}/{paymentId}/cancellation-authorisations",
+      "source_url": "https://developers.tbcbank.ge/reference/post_v1-payment-service-payment-product-paymentid-cancellation-authorisations",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "201",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Create Authorisation",
+      "body": {
+        "scaStatus": "received",
+        "authorisationId": "123auth456",
+        "_links": {
+          "scaStatus": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/authorisations/df93472a-a86c-47f8-6d64-08dae1b187de"
+          }
+        },
+        "psuMessage": "Please use your BankApp for transaction Authorisation."
+      }
+    },
+    {
+      "operation_id": "30_get_v1-payment-service-payment-product-paymentid-cancellation-authorisations",
+      "method": "GET",
+      "path": "/v1/{payment-service}/{payment-product}/{paymentId}/cancellation-authorisations",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v1-payment-service-payment-product-paymentid-cancellation-authorisations",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Get Authorisations",
+      "body": {
+        "authorisationIds": [
+          "123auth456",
+          "654auth321"
+        ]
+      }
+    },
+    {
+      "operation_id": "31_get_v1-payment-service-payment-product-paymentid-cancellation-authorisations-authorisationid",
+      "method": "GET",
+      "path": "/v1/{payment-service}/{payment-product}/{paymentId}/cancellation-authorisations/{authorisationId}",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v1-payment-service-payment-product-paymentid-cancellation-authorisations-authorisationid",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Get Authorisation status",
+      "body": {
+        "scaStatus": "psuAuthenticated"
+      }
+    },
+    {
+      "operation_id": "32_get_openbanking-oauth-well-known-oauth-authorization-server",
+      "method": "GET",
+      "path": "/openbanking/oauth/.well-known/oauth-authorization-server",
+      "source_url": "https://developers.tbcbank.ge/reference/get_openbanking-oauth-well-known-oauth-authorization-server",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "OAuthAuthorizationServer Response Example",
+      "body": {
+        "issuer": "https://test-api.tbcbank.ge/.well-known",
+        "authorization_endpoint": "https://test-api.tbcbank.ge/psd2/openbanking/oauth/authorize",
+        "token_endpoint": "https://test-openbanking.tbcbank.ge/openbanking/oauth/token",
+        "token_endpoint_auth_methods_supported": [
+          "tls_client_auth"
+        ],
+        "tls_client_certificate_bound_access_tokens": true,
+        "registration_endpoint": "https://test-openbanking.tbcbank.ge/openbanking/oauth/register",
+        "scopes_supported": [
+          "openid",
+          "AIS:<consentId>",
+          "PIS:<paymentId>"
+        ],
+        "response_types_supported": [
+          "code"
+        ],
+        "grant_types_supported": [
+          "authorization_code",
+          "refresh_token"
+        ],
+        "revocation_endpoint_auth_methods_supported": [
+          "tls_client_auth"
+        ],
+        "revocation_endpoint": "https://test-openbanking.tbcbank.ge/openbanking/oauth/token",
+        "ui_locales_supported": [
+          "en",
+          "ka"
+        ]
+      }
+    },
+    {
+      "operation_id": "33_get_psd2-openbanking-oauth-authorize",
+      "method": "GET",
+      "path": "/psd2/openbanking/oauth/authorize",
+      "source_url": "https://developers.tbcbank.ge/reference/get_psd2-openbanking-oauth-authorize",
+      "network_request_made": false,
+      "classification": "documented_redirect",
+      "documented_statuses": [
+        "302"
+      ],
+      "message": "Redirect is documented; no JSON success body is invented."
+    },
+    {
+      "operation_id": "34_post_openbanking-oauth-token",
+      "method": "POST",
+      "path": "/openbanking/oauth/token",
+      "source_url": "https://developers.tbcbank.ge/reference/post_openbanking-oauth-token",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Create Oauth token Example",
+      "body": {
+        "access_token": "ffODwEVU5sD9RADdEWEYUQNijrcE",
+        "token_type": "Bearer",
+        "refresh_token": "qjfHpGMyOZGv7gZVRxGPGoPfbgHNwIHs",
+        "refresh_token_issued_at": "1682595156807",
+        "refresh_token_expires_in": "7775999",
+        "refresh_count": 0,
+        "scope": "PIS:45f90ecc-3879-4574-de8e-08db40b82e17",
+        "issued_at": "1682595156807",
+        "expires_in": 3599
+      }
+    },
+    {
+      "operation_id": "35_post_v2-deferred-payment-service-payment-product-1",
+      "method": "POST",
+      "path": "/v2/{deferred-payment-service}/{payment-product}",
+      "source_url": "https://developers.tbcbank.ge/reference/post_v2-deferred-payment-service-payment-product-1",
+      "network_request_made": false,
+      "classification": "schema_only",
+      "message": "No complete published response example for this selection.",
+      "response_schemas": [
+        {
+          "status": "201",
+          "content_type": "application/json",
+          "schema": {
+            "$ref": "#/components/schemas/ExtendedPaymentInitiationResponse"
+          },
+          "fields": [
+            "paymentId",
+            "transactionStatus",
+            "transactionFees",
+            "transactionFees.currency",
+            "transactionFees.amount",
+            "currencyConversionFee",
+            "currencyConversionFee.currency",
+            "currencyConversionFee.amount",
+            "estimatedTotalAmount",
+            "estimatedTotalAmount.currency",
+            "estimatedTotalAmount.amount",
+            "estimatedInterbankSettlementAmount",
+            "estimatedInterbankSettlementAmount.currency",
+            "estimatedInterbankSettlementAmount.amount",
+            "transactionFeeIndicator",
+            "scaMethods[]",
+            "scaMethods[].authenticationType",
+            "scaMethods[].authenticationVersion",
+            "scaMethods[].authenticationMethod",
+            "scaMethods[].name",
+            "scaMethods[].explanation",
+            "chosenScaMethod",
+            "chosenScaMethod.authenticationType",
+            "chosenScaMethod.authenticationVersion",
+            "chosenScaMethod.authenticationMethod",
+            "chosenScaMethod.name",
+            "chosenScaMethod.explanation",
+            "challengeData",
+            "challengeData.image",
+            "challengeData.data",
+            "challengeData.imageLink",
+            "challengeData.otpMaxLength",
+            "challengeData.otpFormat",
+            "challengeData.additionalInformation",
+            "_links",
+            "_links.scaRedirect",
+            "_links.scaRedirect.href",
+            "_links.scaOAuth",
+            "_links.scaOAuth.href",
+            "_links.startAuthorisation",
+            "_links.startAuthorisation.href",
+            "_links.startAuthorisationWithPsuIdentification",
+            "_links.startAuthorisationWithPsuIdentification.href",
+            "_links.startAuthorisationWithPsuAuthentication",
+            "_links.startAuthorisationWithPsuAuthentication.href",
+            "_links.startAuthorisationWithEncryptedPsuAuthentication",
+            "_links.startAuthorisationWithEncryptedPsuAuthentication.href",
+            "_links.startAuthorisationWithAuthenticationMethodSelection",
+            "_links.startAuthorisationWithAuthenticationMethodSelection.href",
+            "_links.startAuthorisationWithTransactionAuthorisation",
+            "_links.startAuthorisationWithTransactionAuthorisation.href",
+            "_links.self",
+            "_links.self.href",
+            "_links.status",
+            "_links.status.href",
+            "_links.scaStatus",
+            "_links.scaStatus.href",
+            "psuMessage",
+            "expiryDateTime"
+          ]
+        }
+      ],
+      "schema_file": "output/tbc_openbanking_examples/response_schemas/35_post_v2-deferred-payment-service-payment-product-1.openapi.json"
+    },
+    {
+      "operation_id": "36_get_v2-deferred-payments-payment-product-paymentid",
+      "method": "GET",
+      "path": "/v2/deferred-payments/{payment-product}/{paymentId}",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-deferred-payments-payment-product-paymentid",
+      "network_request_made": false,
+      "classification": "schema_only",
+      "message": "No complete published response example for this selection.",
+      "response_schemas": [
+        {
+          "status": "200",
+          "content_type": "application/json",
+          "schema": {
+            "$ref": "#/components/schemas/GetDiferredConsentResponse"
+          },
+          "fields": [
+            "transactionStatus",
+            "paymentIdentification",
+            "paymentIdentification.endToEndId",
+            "paymentIdentification.instructionId",
+            "debtor",
+            "debtor.name",
+            "debtor.identification",
+            "debtor.identification.organisationId",
+            "debtor.identification.organisationId.others[]",
+            "debtor.identification.organisationId.others[].identification",
+            "debtor.identification.privateId",
+            "debtor.identification.privateId.others[]",
+            "debtor.identification.privateId.others[].identification",
+            "debtorAccount",
+            "debtorAccount.iban",
+            "debtorAccount.bban",
+            "debtorAccount.pan",
+            "debtorAccount.maskedPan",
+            "debtorAccount.msisdn",
+            "debtorAccount.currency",
+            "debtorAccount.other",
+            "debtorAccount.other.identification",
+            "debtorAccount.other.schemeNameCode",
+            "debtorAccount.other.schemeNameProprietary",
+            "debtorAccount.other.issuer",
+            "debtorAccount.typeCode",
+            "debtorAccount.typeProprietary",
+            "debtorAccount.proxy",
+            "debtorAccount.proxy.typeCode",
+            "debtorAccount.proxy.typeProprietary",
+            "debtorAccount.proxy.identification",
+            "ultimateDebtor",
+            "ultimateDebtor.name",
+            "ultimateDebtor.identification",
+            "ultimateDebtor.identification.organisationId",
+            "ultimateDebtor.identification.organisationId.others[]",
+            "ultimateDebtor.identification.organisationId.others[].identification",
+            "ultimateDebtor.identification.privateId",
+            "ultimateDebtor.identification.privateId.others[]",
+            "ultimateDebtor.identification.privateId.others[].identification",
+            "instructedAmount",
+            "instructedAmount.currency",
+            "instructedAmount.amount",
+            "creditorAccount",
+            "creditorAccount.iban",
+            "creditorAccount.bban",
+            "creditorAccount.pan",
+            "creditorAccount.maskedPan",
+            "creditorAccount.msisdn",
+            "creditorAccount.currency",
+            "creditorAccount.other",
+            "creditorAccount.other.identification",
+            "creditorAccount.other.schemeNameCode",
+            "creditorAccount.other.schemeNameProprietary",
+            "creditorAccount.other.issuer",
+            "creditorAccount.typeCode",
+            "creditorAccount.typeProprietary",
+            "creditorAccount.proxy",
+            "creditorAccount.proxy.typeCode",
+            "creditorAccount.proxy.typeProprietary",
+            "creditorAccount.proxy.identification",
+            "creditorAgent",
+            "creditorAgent.financialInstitutionId",
+            "creditorAgent.financialInstitutionId.bicfi",
+            "creditorAgent.name",
+            "creditor",
+            "creditor.name",
+            "creditor.identification",
+            "creditor.identification.organisationId",
+            "creditor.identification.organisationId.others[]",
+            "creditor.identification.organisationId.others[].identification",
+            "creditor.identification.privateId",
+            "creditor.identification.privateId.others[]",
+            "creditor.identification.privateId.others[].identification",
+            "creditor.address",
+            "creditor.address.streetName",
+            "creditor.address.buildingNumber",
+            "creditor.address.townName",
+            "creditor.address.country",
+            "creditor.address.postCode",
+            "chargeBearer",
+            "chargesAccount",
+            "chargesAccount.iban",
+            "chargesAccount.bban",
+            "chargesAccount.pan",
+            "chargesAccount.maskedPan",
+            "chargesAccount.msisdn",
+            "chargesAccount.currency",
+            "chargesAccount.other",
+            "chargesAccount.other.identification",
+            "chargesAccount.other.schemeNameCode",
+            "chargesAccount.other.schemeNameProprietary",
+            "chargesAccount.other.issuer",
+            "chargesAccount.typeCode",
+            "chargesAccount.typeProprietary",
+            "chargesAccount.proxy",
+            "chargesAccount.proxy.typeCode",
+            "chargesAccount.proxy.typeProprietary",
+            "chargesAccount.proxy.identification",
+            "remittanceInformationUnstructured",
+            "expiryDateTime"
+          ]
+        }
+      ],
+      "schema_file": "output/tbc_openbanking_examples/response_schemas/36_get_v2-deferred-payments-payment-product-paymentid.openapi.json"
+    },
+    {
+      "operation_id": "37_get_v2-secured-deferred-payments-payment-product-paymentid",
+      "method": "GET",
+      "path": "/v2/secured-deferred-payments/{payment-product}/{paymentId}",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-secured-deferred-payments-payment-product-paymentid",
+      "network_request_made": false,
+      "classification": "schema_only",
+      "message": "No complete published response example for this selection.",
+      "response_schemas": [
+        {
+          "status": "200",
+          "content_type": "application/json",
+          "schema": {
+            "$ref": "#/components/schemas/GetDiferredConsentResponse"
+          },
+          "fields": [
+            "transactionStatus",
+            "paymentIdentification",
+            "paymentIdentification.endToEndId",
+            "paymentIdentification.instructionId",
+            "debtor",
+            "debtor.name",
+            "debtor.identification",
+            "debtor.identification.organisationId",
+            "debtor.identification.organisationId.others[]",
+            "debtor.identification.organisationId.others[].identification",
+            "debtor.identification.privateId",
+            "debtor.identification.privateId.others[]",
+            "debtor.identification.privateId.others[].identification",
+            "debtorAccount",
+            "debtorAccount.iban",
+            "debtorAccount.bban",
+            "debtorAccount.pan",
+            "debtorAccount.maskedPan",
+            "debtorAccount.msisdn",
+            "debtorAccount.currency",
+            "debtorAccount.other",
+            "debtorAccount.other.identification",
+            "debtorAccount.other.schemeNameCode",
+            "debtorAccount.other.schemeNameProprietary",
+            "debtorAccount.other.issuer",
+            "debtorAccount.typeCode",
+            "debtorAccount.typeProprietary",
+            "debtorAccount.proxy",
+            "debtorAccount.proxy.typeCode",
+            "debtorAccount.proxy.typeProprietary",
+            "debtorAccount.proxy.identification",
+            "ultimateDebtor",
+            "ultimateDebtor.name",
+            "ultimateDebtor.identification",
+            "ultimateDebtor.identification.organisationId",
+            "ultimateDebtor.identification.organisationId.others[]",
+            "ultimateDebtor.identification.organisationId.others[].identification",
+            "ultimateDebtor.identification.privateId",
+            "ultimateDebtor.identification.privateId.others[]",
+            "ultimateDebtor.identification.privateId.others[].identification",
+            "instructedAmount",
+            "instructedAmount.currency",
+            "instructedAmount.amount",
+            "creditorAccount",
+            "creditorAccount.iban",
+            "creditorAccount.bban",
+            "creditorAccount.pan",
+            "creditorAccount.maskedPan",
+            "creditorAccount.msisdn",
+            "creditorAccount.currency",
+            "creditorAccount.other",
+            "creditorAccount.other.identification",
+            "creditorAccount.other.schemeNameCode",
+            "creditorAccount.other.schemeNameProprietary",
+            "creditorAccount.other.issuer",
+            "creditorAccount.typeCode",
+            "creditorAccount.typeProprietary",
+            "creditorAccount.proxy",
+            "creditorAccount.proxy.typeCode",
+            "creditorAccount.proxy.typeProprietary",
+            "creditorAccount.proxy.identification",
+            "creditorAgent",
+            "creditorAgent.financialInstitutionId",
+            "creditorAgent.financialInstitutionId.bicfi",
+            "creditorAgent.name",
+            "creditor",
+            "creditor.name",
+            "creditor.identification",
+            "creditor.identification.organisationId",
+            "creditor.identification.organisationId.others[]",
+            "creditor.identification.organisationId.others[].identification",
+            "creditor.identification.privateId",
+            "creditor.identification.privateId.others[]",
+            "creditor.identification.privateId.others[].identification",
+            "creditor.address",
+            "creditor.address.streetName",
+            "creditor.address.buildingNumber",
+            "creditor.address.townName",
+            "creditor.address.country",
+            "creditor.address.postCode",
+            "chargeBearer",
+            "chargesAccount",
+            "chargesAccount.iban",
+            "chargesAccount.bban",
+            "chargesAccount.pan",
+            "chargesAccount.maskedPan",
+            "chargesAccount.msisdn",
+            "chargesAccount.currency",
+            "chargesAccount.other",
+            "chargesAccount.other.identification",
+            "chargesAccount.other.schemeNameCode",
+            "chargesAccount.other.schemeNameProprietary",
+            "chargesAccount.other.issuer",
+            "chargesAccount.typeCode",
+            "chargesAccount.typeProprietary",
+            "chargesAccount.proxy",
+            "chargesAccount.proxy.typeCode",
+            "chargesAccount.proxy.typeProprietary",
+            "chargesAccount.proxy.identification",
+            "remittanceInformationUnstructured",
+            "expiryDateTime"
+          ]
+        }
+      ],
+      "schema_file": "output/tbc_openbanking_examples/response_schemas/37_get_v2-secured-deferred-payments-payment-product-paymentid.openapi.json"
+    },
+    {
+      "operation_id": "38_get_v2-multiple-deferred-payments-payment-product-paymentid",
+      "method": "GET",
+      "path": "/v2/{multiple-deferred-payments}/{payment-product}/{paymentId}",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-multiple-deferred-payments-payment-product-paymentid",
+      "network_request_made": false,
+      "classification": "schema_only",
+      "message": "No complete published response example for this selection.",
+      "response_schemas": [
+        {
+          "status": "200",
+          "content_type": "application/json",
+          "schema": {
+            "$ref": "#/components/schemas/GetMultipleDeferredConsentResponse"
+          },
+          "fields": [
+            "transactionStatus",
+            "paymentIdentification",
+            "paymentIdentification.endToEndId",
+            "paymentIdentification.instructionId",
+            "debtor",
+            "debtor.name",
+            "debtor.identification",
+            "debtor.identification.organisationId",
+            "debtor.identification.organisationId.others[]",
+            "debtor.identification.organisationId.others[].identification",
+            "debtor.identification.privateId",
+            "debtor.identification.privateId.others[]",
+            "debtor.identification.privateId.others[].identification",
+            "debtorAccount",
+            "debtorAccount.iban",
+            "debtorAccount.bban",
+            "debtorAccount.pan",
+            "debtorAccount.maskedPan",
+            "debtorAccount.msisdn",
+            "debtorAccount.currency",
+            "debtorAccount.other",
+            "debtorAccount.other.identification",
+            "debtorAccount.other.schemeNameCode",
+            "debtorAccount.other.schemeNameProprietary",
+            "debtorAccount.other.issuer",
+            "debtorAccount.typeCode",
+            "debtorAccount.typeProprietary",
+            "debtorAccount.proxy",
+            "debtorAccount.proxy.typeCode",
+            "debtorAccount.proxy.typeProprietary",
+            "debtorAccount.proxy.identification",
+            "ultimateDebtor",
+            "ultimateDebtor.name",
+            "ultimateDebtor.identification",
+            "ultimateDebtor.identification.organisationId",
+            "ultimateDebtor.identification.organisationId.others[]",
+            "ultimateDebtor.identification.organisationId.others[].identification",
+            "ultimateDebtor.identification.privateId",
+            "ultimateDebtor.identification.privateId.others[]",
+            "ultimateDebtor.identification.privateId.others[].identification",
+            "instructedAmount",
+            "instructedAmount.currency",
+            "instructedAmount.amount",
+            "creditorAccount",
+            "creditorAccount.iban",
+            "creditorAccount.bban",
+            "creditorAccount.pan",
+            "creditorAccount.maskedPan",
+            "creditorAccount.msisdn",
+            "creditorAccount.currency",
+            "creditorAccount.other",
+            "creditorAccount.other.identification",
+            "creditorAccount.other.schemeNameCode",
+            "creditorAccount.other.schemeNameProprietary",
+            "creditorAccount.other.issuer",
+            "creditorAccount.typeCode",
+            "creditorAccount.typeProprietary",
+            "creditorAccount.proxy",
+            "creditorAccount.proxy.typeCode",
+            "creditorAccount.proxy.typeProprietary",
+            "creditorAccount.proxy.identification",
+            "creditorAgent",
+            "creditorAgent.financialInstitutionId",
+            "creditorAgent.financialInstitutionId.bicfi",
+            "creditorAgent.name",
+            "creditor",
+            "creditor.name",
+            "creditor.identification",
+            "creditor.identification.organisationId",
+            "creditor.identification.organisationId.others[]",
+            "creditor.identification.organisationId.others[].identification",
+            "creditor.identification.privateId",
+            "creditor.identification.privateId.others[]",
+            "creditor.identification.privateId.others[].identification",
+            "creditor.address",
+            "creditor.address.streetName",
+            "creditor.address.buildingNumber",
+            "creditor.address.townName",
+            "creditor.address.country",
+            "creditor.address.postCode",
+            "chargeBearer",
+            "chargesAccount",
+            "chargesAccount.iban",
+            "chargesAccount.bban",
+            "chargesAccount.pan",
+            "chargesAccount.maskedPan",
+            "chargesAccount.msisdn",
+            "chargesAccount.currency",
+            "chargesAccount.other",
+            "chargesAccount.other.identification",
+            "chargesAccount.other.schemeNameCode",
+            "chargesAccount.other.schemeNameProprietary",
+            "chargesAccount.other.issuer",
+            "chargesAccount.typeCode",
+            "chargesAccount.typeProprietary",
+            "chargesAccount.proxy",
+            "chargesAccount.proxy.typeCode",
+            "chargesAccount.proxy.typeProprietary",
+            "chargesAccount.proxy.identification",
+            "remittanceInformationUnstructured",
+            "expiryDateTime",
+            "remainingAuthorised",
+            "remainingAuthorised.currency",
+            "remainingAuthorised.amount"
+          ]
+        }
+      ],
+      "schema_file": "output/tbc_openbanking_examples/response_schemas/38_get_v2-multiple-deferred-payments-payment-product-paymentid.openapi.json"
+    },
+    {
+      "operation_id": "39_get_v2-extended-payment-service-payment-product-paymentid-status-1",
+      "method": "GET",
+      "path": "/v2/{extended-payment-service}/{payment-product}/{paymentId}/status",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-extended-payment-service-payment-product-paymentid-status-1",
+      "network_request_made": false,
+      "classification": "schema_only",
+      "message": "No complete published response example for this selection.",
+      "response_schemas": [
+        {
+          "status": "200",
+          "content_type": "application/json",
+          "schema": {
+            "$ref": "#/components/schemas/GetConsentStatusResponse"
+          },
+          "fields": [
+            "transactionStatus",
+            "remainingAuthorised",
+            "remainingAuthorised.currency",
+            "remainingAuthorised.amount"
+          ]
+        }
+      ],
+      "schema_file": "output/tbc_openbanking_examples/response_schemas/39_get_v2-extended-payment-service-payment-product-paymentid-status-1.openapi.json"
+    },
+    {
+      "operation_id": "40_delete_v2-extended-payment-service-payment-product-paymentid-1",
+      "method": "DELETE",
+      "path": "/v2/{extended-payment-service}/{payment-product}/{paymentId}",
+      "source_url": "https://developers.tbcbank.ge/reference/delete_v2-extended-payment-service-payment-product-paymentid-1",
+      "network_request_made": false,
+      "classification": "schema_only",
+      "message": "No complete published response example for this selection.",
+      "response_schemas": [
+        {
+          "status": "202",
+          "content_type": "application/json",
+          "schema": {
+            "$ref": "#/components/schemas/GetConsentStatusResponse"
+          },
+          "fields": [
+            "transactionStatus",
+            "remainingAuthorised",
+            "remainingAuthorised.currency",
+            "remainingAuthorised.amount"
+          ]
+        }
+      ],
+      "schema_file": "output/tbc_openbanking_examples/response_schemas/40_delete_v2-extended-payment-service-payment-product-paymentid-1.openapi.json"
+    },
+    {
+      "operation_id": "41_post_v2-deferred-payment-service-payment-product-paymentid-initiations-1",
+      "method": "POST",
+      "path": "/v2/{deferred-payment-service}/{payment-product}/{paymentId}/initiations",
+      "source_url": "https://developers.tbcbank.ge/reference/post_v2-deferred-payment-service-payment-product-paymentid-initiations-1",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "201",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Payment initiation responce - without debtor",
+      "body": {
+        "paymentId": "7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1",
+        "transactionStatus": "ACTC",
+        "_links": {
+          "scaOAuth": {
+            "href": "https://dev-openbanking.tbcbank.ge/openbanking/oauth/.well-known/oauth-authorization-server"
+          },
+          "self": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1"
+          },
+          "status": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/status"
+          },
+          "scaStatus": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/authorisations/df93472a-a86c-47f8-6d64-08dae1b187de"
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "42_post_v2-recurring-payments-payment-product-paymentid-initiations-1",
+      "method": "POST",
+      "path": "/v2/recurring-payments/{payment-product}/{paymentId}/initiations",
+      "source_url": "https://developers.tbcbank.ge/reference/post_v2-recurring-payments-payment-product-paymentid-initiations-1",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "201",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Payment initiation responce - without debtor",
+      "body": {
+        "paymentId": "7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1",
+        "transactionStatus": "ACTC",
+        "_links": {
+          "scaOAuth": {
+            "href": "https://dev-openbanking.tbcbank.ge/openbanking/oauth/.well-known/oauth-authorization-server"
+          },
+          "self": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1"
+          },
+          "status": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/status"
+          },
+          "scaStatus": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/authorisations/df93472a-a86c-47f8-6d64-08dae1b187de"
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "43_post_v2-multiple-recurring-payments-payment-product-paymentid-initiations-1",
+      "method": "POST",
+      "path": "/v2/multiple-recurring-payments/{payment-product}/{paymentId}/initiations",
+      "source_url": "https://developers.tbcbank.ge/reference/post_v2-multiple-recurring-payments-payment-product-paymentid-initiations-1",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "201",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Payment initiation responce - without debtor",
+      "body": {
+        "paymentId": "7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1",
+        "transactionStatus": "ACTC",
+        "_links": {
+          "scaOAuth": {
+            "href": "https://dev-openbanking.tbcbank.ge/openbanking/oauth/.well-known/oauth-authorization-server"
+          },
+          "self": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1"
+          },
+          "status": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/status"
+          },
+          "scaStatus": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/authorisations/df93472a-a86c-47f8-6d64-08dae1b187de"
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "44_get_v2-extended-payment-service-payment-product-paymentid-initiations-initiationid-status-1",
+      "method": "GET",
+      "path": "/v2/{extended-payment-service}/{payment-product}/{paymentId}/initiations/{initiationId}/status",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-extended-payment-service-payment-product-paymentid-initiations-initiationid-status-1",
+      "network_request_made": false,
+      "classification": "schema_only",
+      "message": "No complete published response example for this selection.",
+      "response_schemas": [
+        {
+          "status": "200",
+          "content_type": "application/json",
+          "schema": {
+            "$ref": "#/components/schemas/GetConsentPaymentStatusResponse"
+          },
+          "fields": [
+            "transactionStatus",
+            "transactionAmount",
+            "transactionAmount.currency",
+            "transactionAmount.amount"
+          ]
+        }
+      ],
+      "schema_file": "output/tbc_openbanking_examples/response_schemas/44_get_v2-extended-payment-service-payment-product-paymentid-initiations-initiationid-status-1.openapi.json"
+    },
+    {
+      "operation_id": "45_get_v2-extended-payment-service-payment-product-paymentid-initiations-initiationid-1",
+      "method": "GET",
+      "path": "/v2/{extended-payment-service}/{payment-product}/{paymentId}/initiations/{initiationId}",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-extended-payment-service-payment-product-paymentid-initiations-initiationid-1",
+      "network_request_made": false,
+      "classification": "schema_only",
+      "message": "No complete published response example for this selection.",
+      "response_schemas": [
+        {
+          "status": "200",
+          "content_type": "application/json",
+          "schema": {
+            "$ref": "#/components/schemas/GetConsentPaymentStatusResponse"
+          },
+          "fields": [
+            "transactionStatus",
+            "transactionAmount",
+            "transactionAmount.currency",
+            "transactionAmount.amount"
+          ]
+        }
+      ],
+      "schema_file": "output/tbc_openbanking_examples/response_schemas/45_get_v2-extended-payment-service-payment-product-paymentid-initiations-initiationid-1.openapi.json"
+    },
+    {
+      "operation_id": "46_delete_v2-extended-payment-service-payment-product-paymentid-initiations-initiationid-1",
+      "method": "DELETE",
+      "path": "/v2/{extended-payment-service}/{payment-product}/{paymentId}/initiations/{initiationId}",
+      "source_url": "https://developers.tbcbank.ge/reference/delete_v2-extended-payment-service-payment-product-paymentid-initiations-initiationid-1",
+      "network_request_made": false,
+      "classification": "schema_only",
+      "message": "No complete published response example for this selection.",
+      "response_schemas": [
+        {
+          "status": "202",
+          "content_type": "application/json",
+          "schema": {
+            "$ref": "#/components/schemas/GetConsentStatusResponse"
+          },
+          "fields": [
+            "transactionStatus",
+            "remainingAuthorised",
+            "remainingAuthorised.currency",
+            "remainingAuthorised.amount"
+          ]
+        }
+      ],
+      "schema_file": "output/tbc_openbanking_examples/response_schemas/46_delete_v2-extended-payment-service-payment-product-paymentid-initiations-initiationid-1.openapi.json"
+    },
+    {
+      "operation_id": "47_get_v2-extended-payment-service-payment-product-paymentid-initiations-1",
+      "method": "GET",
+      "path": "/v2/{extended-payment-service}/{payment-product}/{paymentId}/initiations",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-extended-payment-service-payment-product-paymentid-initiations-1",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Payment initiation responce - without debtor",
+      "body": {
+        "paymentId": "7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1",
+        "transactionStatus": "ACTC",
+        "_links": {
+          "scaOAuth": {
+            "href": "https://dev-openbanking.tbcbank.ge/openbanking/oauth/.well-known/oauth-authorization-server"
+          },
+          "self": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1"
+          },
+          "status": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/status"
+          },
+          "scaStatus": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/authorisations/df93472a-a86c-47f8-6d64-08dae1b187de"
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "48_post_v2-secured-payments-payment-product-1",
+      "method": "POST",
+      "path": "/v2/secured-payments/{payment-product}",
+      "source_url": "https://developers.tbcbank.ge/reference/post_v2-secured-payments-payment-product-1",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "201",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Payment initiation responce - without debtor",
+      "body": {
+        "paymentId": "7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1",
+        "transactionStatus": "ACTC",
+        "_links": {
+          "scaOAuth": {
+            "href": "https://dev-openbanking.tbcbank.ge/openbanking/oauth/.well-known/oauth-authorization-server"
+          },
+          "self": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1"
+          },
+          "status": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/status"
+          },
+          "scaStatus": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/authorisations/df93472a-a86c-47f8-6d64-08dae1b187de"
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "49_get_v2-secured-payments-payment-product-paymentid",
+      "method": "GET",
+      "path": "/v2/secured-payments/{payment-product}/{paymentId}",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-secured-payments-payment-product-paymentid",
+      "network_request_made": false,
+      "classification": "schema_only",
+      "message": "No complete published response example for this selection.",
+      "response_schemas": [
+        {
+          "status": "200",
+          "content_type": "application/json",
+          "schema": {
+            "$ref": "#/components/schemas/GetExtendedPaymentsResponse"
+          },
+          "fields": [
+            "transactionStatus",
+            "paymentIdentification",
+            "paymentIdentification.endToEndId",
+            "paymentIdentification.instructionId",
+            "debtor",
+            "debtor.name",
+            "debtor.identification",
+            "debtor.identification.organisationId",
+            "debtor.identification.organisationId.others[]",
+            "debtor.identification.organisationId.others[].identification",
+            "debtor.identification.privateId",
+            "debtor.identification.privateId.others[]",
+            "debtor.identification.privateId.others[].identification",
+            "debtorAccount",
+            "debtorAccount.iban",
+            "debtorAccount.bban",
+            "debtorAccount.pan",
+            "debtorAccount.maskedPan",
+            "debtorAccount.msisdn",
+            "debtorAccount.currency",
+            "debtorAccount.other",
+            "debtorAccount.other.identification",
+            "debtorAccount.other.schemeNameCode",
+            "debtorAccount.other.schemeNameProprietary",
+            "debtorAccount.other.issuer",
+            "debtorAccount.typeCode",
+            "debtorAccount.typeProprietary",
+            "debtorAccount.proxy",
+            "debtorAccount.proxy.typeCode",
+            "debtorAccount.proxy.typeProprietary",
+            "debtorAccount.proxy.identification",
+            "ultimateDebtor",
+            "ultimateDebtor.name",
+            "ultimateDebtor.identification",
+            "ultimateDebtor.identification.organisationId",
+            "ultimateDebtor.identification.organisationId.others[]",
+            "ultimateDebtor.identification.organisationId.others[].identification",
+            "ultimateDebtor.identification.privateId",
+            "ultimateDebtor.identification.privateId.others[]",
+            "ultimateDebtor.identification.privateId.others[].identification",
+            "instructedAmount",
+            "instructedAmount.currency",
+            "instructedAmount.amount",
+            "creditorAccount",
+            "creditorAccount.iban",
+            "creditorAccount.bban",
+            "creditorAccount.pan",
+            "creditorAccount.maskedPan",
+            "creditorAccount.msisdn",
+            "creditorAccount.currency",
+            "creditorAccount.other",
+            "creditorAccount.other.identification",
+            "creditorAccount.other.schemeNameCode",
+            "creditorAccount.other.schemeNameProprietary",
+            "creditorAccount.other.issuer",
+            "creditorAccount.typeCode",
+            "creditorAccount.typeProprietary",
+            "creditorAccount.proxy",
+            "creditorAccount.proxy.typeCode",
+            "creditorAccount.proxy.typeProprietary",
+            "creditorAccount.proxy.identification",
+            "creditorAgent",
+            "creditorAgent.financialInstitutionId",
+            "creditorAgent.financialInstitutionId.bicfi",
+            "creditorAgent.name",
+            "creditor",
+            "creditor.name",
+            "creditor.identification",
+            "creditor.identification.organisationId",
+            "creditor.identification.organisationId.others[]",
+            "creditor.identification.organisationId.others[].identification",
+            "creditor.identification.privateId",
+            "creditor.identification.privateId.others[]",
+            "creditor.identification.privateId.others[].identification",
+            "creditor.address",
+            "creditor.address.streetName",
+            "creditor.address.buildingNumber",
+            "creditor.address.townName",
+            "creditor.address.country",
+            "creditor.address.postCode",
+            "chargeBearer",
+            "chargesAccount",
+            "chargesAccount.iban",
+            "chargesAccount.bban",
+            "chargesAccount.pan",
+            "chargesAccount.maskedPan",
+            "chargesAccount.msisdn",
+            "chargesAccount.currency",
+            "chargesAccount.other",
+            "chargesAccount.other.identification",
+            "chargesAccount.other.schemeNameCode",
+            "chargesAccount.other.schemeNameProprietary",
+            "chargesAccount.other.issuer",
+            "chargesAccount.typeCode",
+            "chargesAccount.typeProprietary",
+            "chargesAccount.proxy",
+            "chargesAccount.proxy.typeCode",
+            "chargesAccount.proxy.typeProprietary",
+            "chargesAccount.proxy.identification",
+            "remittanceInformationUnstructured"
+          ]
+        }
+      ],
+      "schema_file": "output/tbc_openbanking_examples/response_schemas/49_get_v2-secured-payments-payment-product-paymentid.openapi.json"
+    },
+    {
+      "operation_id": "50_delete_v2-secured-payments-payment-product-paymentid",
+      "method": "DELETE",
+      "path": "/v2/secured-payments/{payment-product}/{paymentId}",
+      "source_url": "https://developers.tbcbank.ge/reference/delete_v2-secured-payments-payment-product-paymentid",
+      "network_request_made": false,
+      "classification": "schema_only",
+      "message": "No complete published response example for this selection.",
+      "response_schemas": [],
+      "schema_file": "output/tbc_openbanking_examples/response_schemas/50_delete_v2-secured-payments-payment-product-paymentid.openapi.json"
+    },
+    {
+      "operation_id": "51_get_v2-secured-payments-payment-product-paymentid-status",
+      "method": "GET",
+      "path": "/v2/secured-payments/{payment-product}/{paymentId}/status",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-secured-payments-payment-product-paymentid-status",
+      "network_request_made": false,
+      "classification": "schema_only",
+      "message": "No complete published response example for this selection.",
+      "response_schemas": [
+        {
+          "status": "200",
+          "content_type": "application/json",
+          "schema": {
+            "$ref": "#/components/schemas/GetExtendedPaymentsStatusResponse"
+          },
+          "fields": [
+            "transactionStatus"
+          ]
+        }
+      ],
+      "schema_file": "output/tbc_openbanking_examples/response_schemas/51_get_v2-secured-payments-payment-product-paymentid-status.openapi.json"
+    },
+    {
+      "operation_id": "52_post_v2-recurring-payments-payment-product-1",
+      "method": "POST",
+      "path": "/v2/recurring-payments/{payment-product}",
+      "source_url": "https://developers.tbcbank.ge/reference/post_v2-recurring-payments-payment-product-1",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "201",
+      "content_type_documented": "application/json",
+      "example_name": "Example 1: Payment initiation responce - without debtor",
+      "body": {
+        "paymentId": "7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1",
+        "transactionStatus": "ACTC",
+        "_links": {
+          "scaOAuth": {
+            "href": "https://dev-openbanking.tbcbank.ge/openbanking/oauth/.well-known/oauth-authorization-server"
+          },
+          "self": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1"
+          },
+          "status": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/status"
+          },
+          "scaStatus": {
+            "href": "/0.8/v1/payments/domestic/7cd2d0e2-60a6-4cc6-1b33-08dae1b181a1/authorisations/df93472a-a86c-47f8-6d64-08dae1b187de"
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "53_post_v2-multiple-recurring-payments-payment-product-1",
+      "method": "POST",
+      "path": "/v2/multiple-recurring-payments/{payment-product}",
+      "source_url": "https://developers.tbcbank.ge/reference/post_v2-multiple-recurring-payments-payment-product-1",
+      "network_request_made": false,
+      "classification": "schema_only",
+      "message": "No complete published response example for this selection.",
+      "response_schemas": [
+        {
+          "status": "201",
+          "content_type": "application/json",
+          "schema": {
+            "$ref": "#/components/schemas/ExtendedPaymentInitiationResponse"
+          },
+          "fields": [
+            "paymentId",
+            "transactionStatus",
+            "transactionFees",
+            "transactionFees.currency",
+            "transactionFees.amount",
+            "currencyConversionFee",
+            "currencyConversionFee.currency",
+            "currencyConversionFee.amount",
+            "estimatedTotalAmount",
+            "estimatedTotalAmount.currency",
+            "estimatedTotalAmount.amount",
+            "estimatedInterbankSettlementAmount",
+            "estimatedInterbankSettlementAmount.currency",
+            "estimatedInterbankSettlementAmount.amount",
+            "transactionFeeIndicator",
+            "scaMethods[]",
+            "scaMethods[].authenticationType",
+            "scaMethods[].authenticationVersion",
+            "scaMethods[].authenticationMethod",
+            "scaMethods[].name",
+            "scaMethods[].explanation",
+            "chosenScaMethod",
+            "chosenScaMethod.authenticationType",
+            "chosenScaMethod.authenticationVersion",
+            "chosenScaMethod.authenticationMethod",
+            "chosenScaMethod.name",
+            "chosenScaMethod.explanation",
+            "challengeData",
+            "challengeData.image",
+            "challengeData.data",
+            "challengeData.imageLink",
+            "challengeData.otpMaxLength",
+            "challengeData.otpFormat",
+            "challengeData.additionalInformation",
+            "_links",
+            "_links.scaRedirect",
+            "_links.scaRedirect.href",
+            "_links.scaOAuth",
+            "_links.scaOAuth.href",
+            "_links.startAuthorisation",
+            "_links.startAuthorisation.href",
+            "_links.startAuthorisationWithPsuIdentification",
+            "_links.startAuthorisationWithPsuIdentification.href",
+            "_links.startAuthorisationWithPsuAuthentication",
+            "_links.startAuthorisationWithPsuAuthentication.href",
+            "_links.startAuthorisationWithEncryptedPsuAuthentication",
+            "_links.startAuthorisationWithEncryptedPsuAuthentication.href",
+            "_links.startAuthorisationWithAuthenticationMethodSelection",
+            "_links.startAuthorisationWithAuthenticationMethodSelection.href",
+            "_links.startAuthorisationWithTransactionAuthorisation",
+            "_links.startAuthorisationWithTransactionAuthorisation.href",
+            "_links.self",
+            "_links.self.href",
+            "_links.status",
+            "_links.status.href",
+            "_links.scaStatus",
+            "_links.scaStatus.href",
+            "psuMessage",
+            "expiryDateTime"
+          ]
+        }
+      ],
+      "schema_file": "output/tbc_openbanking_examples/response_schemas/53_post_v2-multiple-recurring-payments-payment-product-1.openapi.json"
+    },
+    {
+      "operation_id": "54_get_v2-recurring-payments-payment-product-paymentid",
+      "method": "GET",
+      "path": "/v2/recurring-payments/{payment-product}/{paymentId}",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-recurring-payments-payment-product-paymentid",
+      "network_request_made": false,
+      "classification": "schema_only",
+      "message": "No complete published response example for this selection.",
+      "response_schemas": [
+        {
+          "status": "200",
+          "content_type": "application/json",
+          "schema": {
+            "$ref": "#/components/schemas/GetRecurringConsentResponse"
+          },
+          "fields": [
+            "transactionStatus",
+            "paymentIdentification",
+            "paymentIdentification.endToEndId",
+            "paymentIdentification.instructionId",
+            "debtor",
+            "debtor.name",
+            "debtor.identification",
+            "debtor.identification.organisationId",
+            "debtor.identification.organisationId.others[]",
+            "debtor.identification.organisationId.others[].identification",
+            "debtor.identification.privateId",
+            "debtor.identification.privateId.others[]",
+            "debtor.identification.privateId.others[].identification",
+            "debtorAccount",
+            "debtorAccount.iban",
+            "debtorAccount.bban",
+            "debtorAccount.pan",
+            "debtorAccount.maskedPan",
+            "debtorAccount.msisdn",
+            "debtorAccount.currency",
+            "debtorAccount.other",
+            "debtorAccount.other.identification",
+            "debtorAccount.other.schemeNameCode",
+            "debtorAccount.other.schemeNameProprietary",
+            "debtorAccount.other.issuer",
+            "debtorAccount.typeCode",
+            "debtorAccount.typeProprietary",
+            "debtorAccount.proxy",
+            "debtorAccount.proxy.typeCode",
+            "debtorAccount.proxy.typeProprietary",
+            "debtorAccount.proxy.identification",
+            "ultimateDebtor",
+            "ultimateDebtor.name",
+            "ultimateDebtor.identification",
+            "ultimateDebtor.identification.organisationId",
+            "ultimateDebtor.identification.organisationId.others[]",
+            "ultimateDebtor.identification.organisationId.others[].identification",
+            "ultimateDebtor.identification.privateId",
+            "ultimateDebtor.identification.privateId.others[]",
+            "ultimateDebtor.identification.privateId.others[].identification",
+            "instructedAmount",
+            "instructedAmount.currency",
+            "instructedAmount.amount",
+            "creditorAccount",
+            "creditorAccount.iban",
+            "creditorAccount.bban",
+            "creditorAccount.pan",
+            "creditorAccount.maskedPan",
+            "creditorAccount.msisdn",
+            "creditorAccount.currency",
+            "creditorAccount.other",
+            "creditorAccount.other.identification",
+            "creditorAccount.other.schemeNameCode",
+            "creditorAccount.other.schemeNameProprietary",
+            "creditorAccount.other.issuer",
+            "creditorAccount.typeCode",
+            "creditorAccount.typeProprietary",
+            "creditorAccount.proxy",
+            "creditorAccount.proxy.typeCode",
+            "creditorAccount.proxy.typeProprietary",
+            "creditorAccount.proxy.identification",
+            "creditorAgent",
+            "creditorAgent.financialInstitutionId",
+            "creditorAgent.financialInstitutionId.bicfi",
+            "creditorAgent.name",
+            "creditor",
+            "creditor.name",
+            "creditor.identification",
+            "creditor.identification.organisationId",
+            "creditor.identification.organisationId.others[]",
+            "creditor.identification.organisationId.others[].identification",
+            "creditor.identification.privateId",
+            "creditor.identification.privateId.others[]",
+            "creditor.identification.privateId.others[].identification",
+            "creditor.address",
+            "creditor.address.streetName",
+            "creditor.address.buildingNumber",
+            "creditor.address.townName",
+            "creditor.address.country",
+            "creditor.address.postCode",
+            "chargeBearer",
+            "chargesAccount",
+            "chargesAccount.iban",
+            "chargesAccount.bban",
+            "chargesAccount.pan",
+            "chargesAccount.maskedPan",
+            "chargesAccount.msisdn",
+            "chargesAccount.currency",
+            "chargesAccount.other",
+            "chargesAccount.other.identification",
+            "chargesAccount.other.schemeNameCode",
+            "chargesAccount.other.schemeNameProprietary",
+            "chargesAccount.other.issuer",
+            "chargesAccount.typeCode",
+            "chargesAccount.typeProprietary",
+            "chargesAccount.proxy",
+            "chargesAccount.proxy.typeCode",
+            "chargesAccount.proxy.typeProprietary",
+            "chargesAccount.proxy.identification",
+            "remittanceInformationUnstructured",
+            "startDate",
+            "endDate",
+            "dayOfExecution",
+            "frequency"
+          ]
+        }
+      ],
+      "schema_file": "output/tbc_openbanking_examples/response_schemas/54_get_v2-recurring-payments-payment-product-paymentid.openapi.json"
+    },
+    {
+      "operation_id": "55_get_v2-multiple-recurring-payments-payment-product-paymentid",
+      "method": "GET",
+      "path": "/v2/multiple-recurring-payments/{payment-product}/{paymentId}",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-multiple-recurring-payments-payment-product-paymentid",
+      "network_request_made": false,
+      "classification": "schema_only",
+      "message": "No complete published response example for this selection.",
+      "response_schemas": [
+        {
+          "status": "200",
+          "content_type": "application/json",
+          "schema": {
+            "$ref": "#/components/schemas/GetMultipleRecurringConsentResponse"
+          },
+          "fields": [
+            "transactionStatus",
+            "paymentIdentification",
+            "paymentIdentification.endToEndId",
+            "paymentIdentification.instructionId",
+            "debtor",
+            "debtor.name",
+            "debtor.identification",
+            "debtor.identification.organisationId",
+            "debtor.identification.organisationId.others[]",
+            "debtor.identification.organisationId.others[].identification",
+            "debtor.identification.privateId",
+            "debtor.identification.privateId.others[]",
+            "debtor.identification.privateId.others[].identification",
+            "debtorAccount",
+            "debtorAccount.iban",
+            "debtorAccount.bban",
+            "debtorAccount.pan",
+            "debtorAccount.maskedPan",
+            "debtorAccount.msisdn",
+            "debtorAccount.currency",
+            "debtorAccount.other",
+            "debtorAccount.other.identification",
+            "debtorAccount.other.schemeNameCode",
+            "debtorAccount.other.schemeNameProprietary",
+            "debtorAccount.other.issuer",
+            "debtorAccount.typeCode",
+            "debtorAccount.typeProprietary",
+            "debtorAccount.proxy",
+            "debtorAccount.proxy.typeCode",
+            "debtorAccount.proxy.typeProprietary",
+            "debtorAccount.proxy.identification",
+            "ultimateDebtor",
+            "ultimateDebtor.name",
+            "ultimateDebtor.identification",
+            "ultimateDebtor.identification.organisationId",
+            "ultimateDebtor.identification.organisationId.others[]",
+            "ultimateDebtor.identification.organisationId.others[].identification",
+            "ultimateDebtor.identification.privateId",
+            "ultimateDebtor.identification.privateId.others[]",
+            "ultimateDebtor.identification.privateId.others[].identification",
+            "instructedAmount",
+            "instructedAmount.currency",
+            "instructedAmount.amount",
+            "creditorAccount",
+            "creditorAccount.iban",
+            "creditorAccount.bban",
+            "creditorAccount.pan",
+            "creditorAccount.maskedPan",
+            "creditorAccount.msisdn",
+            "creditorAccount.currency",
+            "creditorAccount.other",
+            "creditorAccount.other.identification",
+            "creditorAccount.other.schemeNameCode",
+            "creditorAccount.other.schemeNameProprietary",
+            "creditorAccount.other.issuer",
+            "creditorAccount.typeCode",
+            "creditorAccount.typeProprietary",
+            "creditorAccount.proxy",
+            "creditorAccount.proxy.typeCode",
+            "creditorAccount.proxy.typeProprietary",
+            "creditorAccount.proxy.identification",
+            "creditorAgent",
+            "creditorAgent.financialInstitutionId",
+            "creditorAgent.financialInstitutionId.bicfi",
+            "creditorAgent.name",
+            "creditor",
+            "creditor.name",
+            "creditor.identification",
+            "creditor.identification.organisationId",
+            "creditor.identification.organisationId.others[]",
+            "creditor.identification.organisationId.others[].identification",
+            "creditor.identification.privateId",
+            "creditor.identification.privateId.others[]",
+            "creditor.identification.privateId.others[].identification",
+            "creditor.address",
+            "creditor.address.streetName",
+            "creditor.address.buildingNumber",
+            "creditor.address.townName",
+            "creditor.address.country",
+            "creditor.address.postCode",
+            "chargeBearer",
+            "chargesAccount",
+            "chargesAccount.iban",
+            "chargesAccount.bban",
+            "chargesAccount.pan",
+            "chargesAccount.maskedPan",
+            "chargesAccount.msisdn",
+            "chargesAccount.currency",
+            "chargesAccount.other",
+            "chargesAccount.other.identification",
+            "chargesAccount.other.schemeNameCode",
+            "chargesAccount.other.schemeNameProprietary",
+            "chargesAccount.other.issuer",
+            "chargesAccount.typeCode",
+            "chargesAccount.typeProprietary",
+            "chargesAccount.proxy",
+            "chargesAccount.proxy.typeCode",
+            "chargesAccount.proxy.typeProprietary",
+            "chargesAccount.proxy.identification",
+            "remittanceInformationUnstructured",
+            "startDate",
+            "endDate",
+            "dayOfExecution",
+            "frequency",
+            "remainingAuthorised",
+            "remainingAuthorised.currency",
+            "remainingAuthorised.amount"
+          ]
+        }
+      ],
+      "schema_file": "output/tbc_openbanking_examples/response_schemas/55_get_v2-multiple-recurring-payments-payment-product-paymentid.openapi.json"
+    },
+    {
+      "operation_id": "56_post_v2-consents-account-access",
+      "method": "POST",
+      "path": "/v2/consents/account-access",
+      "source_url": "https://developers.tbcbank.ge/reference/post_v2-consents-account-access",
+      "network_request_made": false,
+      "classification": "schema_only",
+      "message": "No complete published response example for this selection.",
+      "response_schemas": [
+        {
+          "status": "201",
+          "content_type": "application/json",
+          "schema": {
+            "$ref": "#/components/schemas/CreateConsentResponse"
+          },
+          "fields": [
+            "consentStatus",
+            "challengeData",
+            "challengeData.image",
+            "challengeData.data[]",
+            "challengeData.imageLink[]",
+            "challengeData.otpMaxLength[]",
+            "challengeData.otpFormat[]",
+            "challengeData.additionalInformation[]",
+            "consentId",
+            "_links",
+            "_links.scaRedirect",
+            "_links.scaRedirect.href",
+            "_links.scaOAuth",
+            "_links.scaOAuth.href",
+            "_links.startAuthorisation",
+            "_links.startAuthorisation.href",
+            "_links.startAuthorisationWithPsuIdentification",
+            "_links.startAuthorisationWithPsuIdentification.href",
+            "_links.startAuthorisationWithPsuAuthentication",
+            "_links.startAuthorisationWithPsuAuthentication.href",
+            "_links.startAuthorisationWithEncryptedPsuAuthentication",
+            "_links.startAuthorisationWithEncryptedPsuAuthentication.href",
+            "_links.startAuthorisationWithAuthenticationMethodSelection",
+            "_links.startAuthorisationWithAuthenticationMethodSelection.href",
+            "_links.startAuthorisationWithTransactionAuthorisation",
+            "_links.startAuthorisationWithTransactionAuthorisation.href",
+            "_links.self",
+            "_links.self.href",
+            "_links.status",
+            "_links.status.href",
+            "_links.scaStatus",
+            "_links.scaStatus.href",
+            "psuMessage"
+          ]
+        }
+      ],
+      "schema_file": "output/tbc_openbanking_examples/response_schemas/56_post_v2-consents-account-access.openapi.json"
+    },
+    {
+      "operation_id": "57_get_v2-consents-account-access-consentid",
+      "method": "GET",
+      "path": "/v2/consents/account-access/{consentId}",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-consents-account-access-consentid",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response on Get Consent request",
+      "body": {
+        "access": {
+          "loans": [
+            {
+              "account": {
+                "iban": "GE78TB1121245063622479"
+              },
+              "rights": [
+                "accountDetails",
+                "balances",
+                "transactions",
+                "ownerName"
+              ]
+            }
+          ]
+        },
+        "consentType": "V2Consent",
+        "recurringIndicator": true,
+        "validTo": "2023-07-01",
+        "frequencyPerDay": 4,
+        "consentStatus": "valid"
+      }
+    },
+    {
+      "operation_id": "58_delete_v2-consents-account-access-consentid",
+      "method": "DELETE",
+      "path": "/v2/consents/account-access/{consentId}",
+      "source_url": "https://developers.tbcbank.ge/reference/delete_v2-consents-account-access-consentid",
+      "network_request_made": false,
+      "classification": "documented_no_body",
+      "documented_statuses": [
+        "204"
+      ],
+      "body": null
+    },
+    {
+      "operation_id": "59_get_v2-consents-account-access-consentid-status",
+      "method": "GET",
+      "path": "/v2/consents/account-access/{consentId}/status",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-consents-account-access-consentid-status",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response on Get Consent status request",
+      "body": {
+        "consentStatus": "valid"
+      }
+    },
+    {
+      "operation_id": "60_post_v2-consents-account-access-consentid-authorisations",
+      "method": "POST",
+      "path": "/v2/consents/account-access/{consentId}/authorisations",
+      "source_url": "https://developers.tbcbank.ge/reference/post_v2-consents-account-access-consentid-authorisations",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "201",
+      "content_type_documented": "application/json",
+      "example_name": "Response in case of a redirect with a dedicated start of the authorisation process",
+      "body": {
+        "scaStatus": "scaMethodSelected",
+        "authorisationId": "78c5d6ff-cfd7-4db5-83da-74ec258a3d4e",
+        "_links": {
+          "scaOAuth": {
+            "href": "https://test-openbanking.tbcbank.ge/openbanking/oauth/.well-known/oauth-authorization-server"
+          },
+          "scaStatus": {
+            "href": "/0.8/v1/consents/70c9c538-8353-491b-b6ba-e39826fa9f1c/authorisations/78c5d6ff-cfd7-4db5-83da-74ec258a3d4e"
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "61_get_v2-consents-account-access-consentid-authorisations",
+      "method": "GET",
+      "path": "/v2/consents/account-access/{consentId}/authorisations",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-consents-account-access-consentid-authorisations",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response on Get Consent Authorisations request",
+      "body": {
+        "authorisationIds": [
+          "dd059f4f-0c93-44ff-8cbb-3817b67ef85c"
+        ]
+      }
+    },
+    {
+      "operation_id": "62_get_v2-consents-account-access-consentid-authorisations-authorisationid",
+      "method": "GET",
+      "path": "/v2/consents/account-access/{consentId}/authorisations/{authorisationId}",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-consents-account-access-consentid-authorisations-authorisationid",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Response on Get Consent Authorisation status request",
+      "body": {
+        "scaStatus": "scaMethodSelected"
+      }
+    },
+    {
+      "operation_id": "63_get_openbanking-oauth-well-known-oauth-authorization-server-2",
+      "method": "GET",
+      "path": "/openbanking/oauth/.well-known/oauth-authorization-server",
+      "source_url": "https://developers.tbcbank.ge/reference/get_openbanking-oauth-well-known-oauth-authorization-server-2",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "OAuthAuthorizationServer Response Example",
+      "body": {
+        "issuer": "https://test-api.tbcbank.ge/.well-known",
+        "authorization_endpoint": "https://test-api.tbcbank.ge/psd2/openbanking/oauth/authorize",
+        "token_endpoint": "https://test-openbanking.tbcbank.ge/openbanking/oauth/token",
+        "token_endpoint_auth_methods_supported": [
+          "tls_client_auth"
+        ],
+        "tls_client_certificate_bound_access_tokens": true,
+        "registration_endpoint": "https://test-openbanking.tbcbank.ge/openbanking/oauth/register",
+        "scopes_supported": [
+          "openid",
+          "AIS:<consentId>",
+          "PIS:<paymentId>"
+        ],
+        "response_types_supported": [
+          "code"
+        ],
+        "grant_types_supported": [
+          "authorization_code",
+          "refresh_token"
+        ],
+        "revocation_endpoint_auth_methods_supported": [
+          "tls_client_auth"
+        ],
+        "revocation_endpoint": "https://test-openbanking.tbcbank.ge/openbanking/oauth/token",
+        "ui_locales_supported": [
+          "en",
+          "ka"
+        ]
+      }
+    },
+    {
+      "operation_id": "64_get_psd2-openbanking-oauth-authorize-3",
+      "method": "GET",
+      "path": "/psd2/openbanking/oauth/authorize",
+      "source_url": "https://developers.tbcbank.ge/reference/get_psd2-openbanking-oauth-authorize-3",
+      "network_request_made": false,
+      "classification": "documented_redirect",
+      "documented_statuses": [
+        "302"
+      ],
+      "message": "Redirect is documented; no JSON success body is invented."
+    },
+    {
+      "operation_id": "65_post_openbanking-oauth-token-3",
+      "method": "POST",
+      "path": "/openbanking/oauth/token",
+      "source_url": "https://developers.tbcbank.ge/reference/post_openbanking-oauth-token-3",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "Create Oauth token Example",
+      "body": {
+        "access_token": "ffODwEVU5sD9RADdEWEYUQNijrcE",
+        "token_type": "Bearer",
+        "refresh_token": "qjfHpGMyOZGv7gZVRxGPGoPfbgHNwIHs",
+        "refresh_token_issued_at": "1682595156807",
+        "refresh_token_expires_in": "7775999",
+        "refresh_count": 0,
+        "scope": "PIS:45f90ecc-3879-4574-de8e-08db40b82e17",
+        "issued_at": "1682595156807",
+        "expires_in": 3599
+      }
+    },
+    {
+      "operation_id": "66_get_v2-loans",
+      "method": "GET",
+      "path": "/v2/loans",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-loans",
+      "network_request_made": false,
+      "classification": "synthetic_schema_illustration",
+      "message": "Constructed values; NOT a bank-published or live response.",
+      "body": {
+        "accounts": [
+          {
+            "resourceId": "11111111-1111-4111-8111-111111111111",
+            "currency": "GEL",
+            "relatedDates": {
+              "contractStartDate": "2025-01-01T00:00:00",
+              "contractEndDate": "2027-01-01T00:00:00"
+            },
+            "balances": [
+              {
+                "balanceAmount": {
+                  "currency": "GEL",
+                  "amount": 12500.0
+                },
+                "balanceType": "InterimBooked",
+                "referenceDate": "2026-10-20T00:00:00"
+              }
+            ],
+            "status": "Enabled",
+            "interest": {
+              "rate": {
+                "percentage": 12.5
+              }
+            },
+            "product": "Synthetic loan product"
+          }
+        ]
+      }
+    },
+    {
+      "operation_id": "67_get_v2-loans-resourceid",
+      "method": "GET",
+      "path": "/v2/loans/{resourceId}",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-loans-resourceid",
+      "network_request_made": false,
+      "classification": "synthetic_schema_illustration",
+      "message": "Constructed values; NOT a bank-published or live response.",
+      "body": {
+        "account": {
+          "resourceId": "11111111-1111-4111-8111-111111111111",
+          "currency": "GEL",
+          "relatedDates": {
+            "contractStartDate": "2025-01-01T00:00:00",
+            "contractEndDate": "2027-01-01T00:00:00"
+          },
+          "balances": [
+            {
+              "balanceAmount": {
+                "currency": "GEL",
+                "amount": 12500.0
+              },
+              "balanceType": "InterimBooked",
+              "referenceDate": "2026-10-20T00:00:00"
+            }
+          ],
+          "status": "Enabled",
+          "interest": {
+            "rate": {
+              "percentage": 12.5
+            }
+          },
+          "product": "Synthetic loan product"
+        }
+      }
+    },
+    {
+      "operation_id": "68_get_v2-loans-resourceid-balances",
+      "method": "GET",
+      "path": "/v2/loans{resourceId}/balances",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-loans-resourceid-balances",
+      "network_request_made": false,
+      "classification": "synthetic_schema_illustration",
+      "message": "Constructed values; NOT a bank-published or live response.",
+      "body": {
+        "balances": [
+          {
+            "balanceAmount": {
+              "currency": "GEL",
+              "amount": 12500.0
+            },
+            "balanceType": "InterimBooked",
+            "referenceDate": "2026-10-20T00:00:00"
+          }
+        ]
+      }
+    },
+    {
+      "operation_id": "69_get_v2-savings",
+      "method": "GET",
+      "path": "/v2/savings",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-savings",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "example",
+      "body": {
+        "accounts": [
+          {
+            "resourceId": "456f48dh-f22f-444e-4fgr-15dcf9c6gc19",
+            "product": "Term",
+            "currency": "GEL",
+            "status": "Active",
+            "period": 36,
+            "contractStartDate": "2024-01-03",
+            "ownerName": "Saxeli Gvari",
+            "cashAccountType": "SVGS",
+            "balances": [
+              {
+                "balanceAmount": {
+                  "currency": "GEL",
+                  "amount": "442.64"
+                },
+                "balanceType": "OpeningBooked",
+                "referenceDate": "2024-11-01"
+              }
+            ],
+            "links": {
+              "balances": {
+                "href": "v2/savings/456f48dh-f22f-444e-4fgr-15dcf9c6gc19/balances"
+              }
+            }
+          },
+          {
+            "resourceId": "123asd36-g54h-555g-6fgr-16dcf6c9gc27",
+            "product": "Term",
+            "currency": "USD",
+            "status": "Active",
+            "period": 24,
+            "contractStartDate": "2023-09-07",
+            "ownerName": "Saxeli Gvari",
+            "cashAccountType": "SVGS",
+            "balances": [
+              {
+                "balanceAmount": {
+                  "currency": "USD",
+                  "amount": "1121.08"
+                },
+                "balanceType": "OpeningBooked",
+                "referenceDate": "2024-11-01"
+              }
+            ],
+            "links": {
+              "balances": {
+                "href": "v2/savings/123asd36-g54h-555g-6fgr-16dcf6c9gc27/balances"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "operation_id": "70_get_v2-savings-resourceid",
+      "method": "GET",
+      "path": "/v2/savings/{resourceId}",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-savings-resourceid",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "example",
+      "body": {
+        "resourceId": "123asd36-g54h-555g-6fgr-16dcf6c9gc27",
+        "product": "Term",
+        "currency": "USD",
+        "status": "Active",
+        "period": 24,
+        "contractStartDate": "2023-09-07",
+        "ownerName": "Saxeli Gvari",
+        "cashAccountType": "SVGS",
+        "balances": [
+          {
+            "balanceAmount": {
+              "currency": "USD",
+              "amount": "1121.08"
+            },
+            "balanceType": "OpeningBooked",
+            "referenceDate": "2024-11-01"
+          }
+        ],
+        "links": {
+          "balances": {
+            "href": "v2/savings/123asd36-g54h-555g-6fgr-16dcf6c9gc27/balances"
+          }
+        }
+      }
+    },
+    {
+      "operation_id": "71_get_v2-savings-resourceid-balances",
+      "method": "GET",
+      "path": "/v2/savings/{resourceId}/balances",
+      "source_url": "https://developers.tbcbank.ge/reference/get_v2-savings-resourceid-balances",
+      "network_request_made": false,
+      "classification": "bank_published_example",
+      "http_status_documented": "200",
+      "content_type_documented": "application/json",
+      "example_name": "example",
+      "body": {
+        "resourceId": "123asd36-g54h-555g-6fgr-16dcf6c9gc27",
+        "balances": [
+          {
+            "balanceAmount": {
+              "currency": "USD",
+              "amount": "1121.08"
+            },
+            "balanceType": "OpeningBooked",
+            "referenceDate": "2024-11-01"
+          }
+        ]
+      }
+    }
+  ]
+}
