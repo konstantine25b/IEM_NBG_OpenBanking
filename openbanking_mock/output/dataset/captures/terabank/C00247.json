@@ -1,0 +1,571 @@
+{
+ "bank": "terabank",
+ "customer": "C00247",
+ "dialect": "altasoft_v08",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "f8619a57-587d-5fb2-b105-7e575312e47b",
+      "iban": "GE14KS1930245823625652",
+      "currency": "GEL",
+      "owner": "TAMAZ MAISURADZE",
+      "name": "TAMAZ MAISURADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "TEBAGE22",
+      "usage": "ORGA",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-505.12"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-05T08:46:24"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-505.12"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-05T08:46:24"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v1/accounts/f8619a57-587d-5fb2-b105-7e575312e47b/balances"
+       },
+       "transactions": {
+        "href": "v1/accounts/f8619a57-587d-5fb2-b105-7e575312e47b/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/f8619a57-587d-5fb2-b105-7e575312e47b",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "f8619a57-587d-5fb2-b105-7e575312e47b",
+     "iban": "GE14KS1930245823625652",
+     "currency": "GEL",
+     "owner": "TAMAZ MAISURADZE",
+     "name": "TAMAZ MAISURADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "TEBAGE22",
+     "usage": "ORGA",
+     "_links": {
+      "balances": {
+       "href": "v1/accounts/f8619a57-587d-5fb2-b105-7e575312e47b/balances"
+      },
+      "transactions": {
+       "href": "v1/accounts/f8619a57-587d-5fb2-b105-7e575312e47b/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/f8619a57-587d-5fb2-b105-7e575312e47b/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE14KS1930245823625652",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-505.12"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-505.12"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-05T08:46:24"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/f8619a57-587d-5fb2-b105-7e575312e47b/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE14KS1930245823625652",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00098400001",
+       "entryReference": "00098400001",
+       "valueDate": "2026-07-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1770.50"
+       },
+       "bookingDate": "2026-07-19",
+       "debtorName": "TeraBank",
+       "remittanceInformationUnstructured": "სესხის გაცემა",
+       "bankTransactionCode": "PMNT-RCDT-BOOK",
+       "purposeCode": "LOAN",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1770.50"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-19"
+       }
+      },
+      {
+       "transactionId": "d_00098400002",
+       "entryReference": "00098400002",
+       "valueDate": "2026-07-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-97.21"
+       },
+       "bookingDate": "2026-07-20",
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KIOSK",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1673.29"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-20"
+       }
+      },
+      {
+       "transactionId": "d_00098400003",
+       "entryReference": "00098400003",
+       "valueDate": "2026-07-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-549.55"
+       },
+       "bookingDate": "2026-07-20",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1123.74"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-20"
+       }
+      },
+      {
+       "transactionId": "d_00098400004",
+       "entryReference": "00098400004",
+       "valueDate": "2026-07-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1628.86"
+       },
+       "bookingDate": "2026-07-20",
+       "creditorName": "EMZAR ZARKUA",
+       "creditorAccount": {
+        "iban": "GE62TB1103651273372266"
+       },
+       "creditorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "გადახდა ხელშეკრულებით",
+       "bankTransactionCode": "PMNT-ICDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-505.12"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-20"
+       }
+      },
+      {
+       "transactionId": "c_00098400005",
+       "entryReference": "00098400005",
+       "valueDate": "2026-08-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "372.10"
+       },
+       "bookingDate": "2026-08-04",
+       "endToEndId": "E2E420273886996",
+       "debtorName": "თამაზ მაისურაძე",
+       "debtorAccount": {
+        "iban": "GE31TB1513231790419478"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-133.02"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-04"
+       }
+      },
+      {
+       "transactionId": "d_00098400006",
+       "entryReference": "00098400006",
+       "valueDate": "2026-08-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-372.10"
+       },
+       "bookingDate": "2026-08-05",
+       "creditorName": "TeraBank",
+       "creditorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 1DC6FA1B",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTA9CD7E16D2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-505.12"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-05"
+       }
+      },
+      {
+       "transactionId": "c_00098400007",
+       "entryReference": "00098400007",
+       "valueDate": "2026-09-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "372.10"
+       },
+       "bookingDate": "2026-09-04",
+       "endToEndId": "E2E36A485A1FFC8",
+       "debtorName": "თამაზ მაისურაძე",
+       "debtorAccount": {
+        "iban": "GE31TB1513231790419478"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-133.02"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-04"
+       }
+      },
+      {
+       "transactionId": "d_00098400008",
+       "entryReference": "00098400008",
+       "valueDate": "2026-09-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-372.10"
+       },
+       "bookingDate": "2026-09-05",
+       "creditorName": "TeraBank",
+       "creditorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 1DC6FA1B",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTA9CD7E16D2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-505.12"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-05"
+       }
+      },
+      {
+       "transactionId": "c_00098400009",
+       "entryReference": "00098400009",
+       "valueDate": "2026-10-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "372.10"
+       },
+       "bookingDate": "2026-10-02",
+       "endToEndId": "E2E7B3301E0D6AC",
+       "debtorName": "თამაზ მაისურაძე",
+       "debtorAccount": {
+        "iban": "GE31TB1513231790419478"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-133.02"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-02"
+       }
+      },
+      {
+       "transactionId": "d_00098400010",
+       "entryReference": "00098400010",
+       "valueDate": "2026-10-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-372.10"
+       },
+       "bookingDate": "2026-10-05",
+       "creditorName": "TeraBank",
+       "creditorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 1DC6FA1B",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTA9CD7E16D2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-505.12"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-05"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v1/accounts/f8619a57-587d-5fb2-b105-7e575312e47b"
+      },
+      "first": {
+       "href": "v1/accounts/f8619a57-587d-5fb2-b105-7e575312e47b/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "00fedd34-8129-5f2a-9cf7-95629ead4c97",
+      "maskedPan": "426397******9134",
+      "currency": "GEL",
+      "ownerName": "TAMAZ MAISURADZE",
+      "name": "TAMAZ MAISURADZE",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "ORGA",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-505.12"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-05T08:46:24"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-505.12"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-05T08:46:24"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v1/card-accounts/00fedd34-8129-5f2a-9cf7-95629ead4c97/balances"
+       },
+       "transactions": {
+        "href": "v1/card-accounts/00fedd34-8129-5f2a-9cf7-95629ead4c97/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/00fedd34-8129-5f2a-9cf7-95629ead4c97",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "00fedd34-8129-5f2a-9cf7-95629ead4c97",
+     "maskedPan": "426397******9134",
+     "currency": "GEL",
+     "ownerName": "TAMAZ MAISURADZE",
+     "name": "TAMAZ MAISURADZE",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "ORGA",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-505.12"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-05T08:46:24"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-505.12"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-05T08:46:24"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v1/card-accounts/00fedd34-8129-5f2a-9cf7-95629ead4c97/balances"
+      },
+      "transactions": {
+       "href": "v1/card-accounts/00fedd34-8129-5f2a-9cf7-95629ead4c97/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/00fedd34-8129-5f2a-9cf7-95629ead4c97/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "426397******9134",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-505.12"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-505.12"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-05T08:46:24"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/00fedd34-8129-5f2a-9cf7-95629ead4c97/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00098400002",
+       "transactionDate": "2026-07-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-97.21"
+       },
+       "acceptorTransactionDateTime": "2026-07-19T10:49:39",
+       "maskedPAN": "426397******9134",
+       "transactionDetails": "ბარათით გადახდა - KIOSK",
+       "bookingDate": "2026-07-20",
+       "cardAcceptorId": "KIOSK",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "d_00098400003",
+       "transactionDate": "2026-07-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-549.55"
+       },
+       "acceptorTransactionDateTime": "2026-07-19T14:07:49",
+       "maskedPAN": "426397******9134",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "bookingDate": "2026-07-20",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v1/accounts/f8619a57-587d-5fb2-b105-7e575312e47b"
+      },
+      "first": {
+       "href": "v1/card-accounts/00fedd34-8129-5f2a-9cf7-95629ead4c97/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "426397******9134",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

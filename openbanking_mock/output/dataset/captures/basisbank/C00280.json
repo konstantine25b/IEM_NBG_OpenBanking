@@ -1,0 +1,294 @@
+{
+ "bank": "basisbank",
+ "customer": "C00280",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "d7c2deb1-3a56-53c6-9735-11e91e7a1478",
+      "iban": "GE70BS1097374558592167",
+      "currency": "GEL",
+      "ownerName": "MARIAM JAVAKHISHVILI",
+      "name": "MARIAM JAVAKHISHVILI",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "CBASGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "270.11"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "270.11"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/d7c2deb1-3a56-53c6-9735-11e91e7a1478/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/d7c2deb1-3a56-53c6-9735-11e91e7a1478/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/d7c2deb1-3a56-53c6-9735-11e91e7a1478",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "d7c2deb1-3a56-53c6-9735-11e91e7a1478",
+     "iban": "GE70BS1097374558592167",
+     "currency": "GEL",
+     "ownerName": "MARIAM JAVAKHISHVILI",
+     "name": "MARIAM JAVAKHISHVILI",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "CBASGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/d7c2deb1-3a56-53c6-9735-11e91e7a1478/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/d7c2deb1-3a56-53c6-9735-11e91e7a1478/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/d7c2deb1-3a56-53c6-9735-11e91e7a1478/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE70BS1097374558592167",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "270.11"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "270.11"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/d7c2deb1-3a56-53c6-9735-11e91e7a1478/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE70BS1097374558592167",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/d7c2deb1-3a56-53c6-9735-11e91e7a1478"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/d7c2deb1-3a56-53c6-9735-11e91e7a1478/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "fa7e94c1-69be-54e0-ab69-d4494a4ffbf0",
+      "maskedPan": "533286******6938",
+      "currency": "GEL",
+      "ownerName": "MARIAM JAVAKHISHVILI",
+      "name": "MARIAM JAVAKHISHVILI",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "270.11"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "270.11"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/fa7e94c1-69be-54e0-ab69-d4494a4ffbf0/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/fa7e94c1-69be-54e0-ab69-d4494a4ffbf0/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/fa7e94c1-69be-54e0-ab69-d4494a4ffbf0",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "fa7e94c1-69be-54e0-ab69-d4494a4ffbf0",
+     "maskedPan": "533286******6938",
+     "currency": "GEL",
+     "ownerName": "MARIAM JAVAKHISHVILI",
+     "name": "MARIAM JAVAKHISHVILI",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "270.11"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "270.11"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/fa7e94c1-69be-54e0-ab69-d4494a4ffbf0/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/fa7e94c1-69be-54e0-ab69-d4494a4ffbf0/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/fa7e94c1-69be-54e0-ab69-d4494a4ffbf0/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "533286******6938",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "270.11"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "270.11"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/fa7e94c1-69be-54e0-ab69-d4494a4ffbf0/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/d7c2deb1-3a56-53c6-9735-11e91e7a1478"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/fa7e94c1-69be-54e0-ab69-d4494a4ffbf0/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "533286******6938",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

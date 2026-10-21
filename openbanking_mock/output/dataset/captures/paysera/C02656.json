@@ -1,0 +1,295 @@
+{
+ "bank": "paysera",
+ "customer": "C02656",
+ "dialect": "paysera",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "0a81ed21-33bd-5de2-9ed5-1806ab163f0e",
+      "iban": "GE75PS1159219523993586",
+      "currency": "GEL",
+      "product": "Current Account",
+      "cashAccountType": "CACC",
+      "name": "Main Account",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.35"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-12-31T20:50:49+03:00"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.35"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-12-31T20:50:49+03:00"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/xs2a/georgia/0.8/v1/accounts/0a81ed21-33bd-5de2-9ed5-1806ab163f0e/balances"
+       },
+       "transactions": {
+        "href": "/xs2a/georgia/0.8/v1/accounts/0a81ed21-33bd-5de2-9ed5-1806ab163f0e/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/0a81ed21-33bd-5de2-9ed5-1806ab163f0e",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "0a81ed21-33bd-5de2-9ed5-1806ab163f0e",
+     "iban": "GE75PS1159219523993586",
+     "currency": "GEL",
+     "product": "Current Account",
+     "cashAccountType": "CACC",
+     "name": "Main Account",
+     "_links": {
+      "balances": {
+       "href": "/xs2a/georgia/0.8/v1/accounts/0a81ed21-33bd-5de2-9ed5-1806ab163f0e/balances"
+      },
+      "transactions": {
+       "href": "/xs2a/georgia/0.8/v1/accounts/0a81ed21-33bd-5de2-9ed5-1806ab163f0e/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/xs2a/georgia/0.8/v1/accounts/0a81ed21-33bd-5de2-9ed5-1806ab163f0e/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE75PS1159219523993586",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.35"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-12-31T20:50:49+03:00"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.35"
+      },
+      "balanceType": "interimBooked",
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-12-31T20:50:49+03:00"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/xs2a/georgia/0.8/v1/accounts/0a81ed21-33bd-5de2-9ed5-1806ab163f0e/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE75PS1159219523993586",
+     "currency": "GEL"
+    },
+    "_links": {
+     "account": {
+      "href": "/xs2a/georgia/0.8/v1/accounts/0a81ed21-33bd-5de2-9ed5-1806ab163f0e"
+     },
+     "first": {
+      "href": "/xs2a/georgia/0.8/v1/accounts/0a81ed21-33bd-5de2-9ed5-1806ab163f0e/transactions?bookingStatus=both&dateFrom=2025-10-19"
+     }
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_01062000001",
+       "valueDate": "2025-10-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.79"
+       },
+       "bookingDate": "2025-10-21",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET"
+      },
+      {
+       "transactionId": "d_01062000002",
+       "valueDate": "2025-10-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.49"
+       },
+       "bookingDate": "2025-10-22",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR"
+      },
+      {
+       "transactionId": "d_01062000003",
+       "valueDate": "2025-10-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.00"
+       },
+       "bookingDate": "2025-10-27",
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება"
+      },
+      {
+       "transactionId": "d_01062000004",
+       "valueDate": "2025-10-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.22"
+       },
+       "bookingDate": "2025-10-28",
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB"
+      },
+      {
+       "transactionId": "d_01062000005",
+       "valueDate": "2025-10-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.46"
+       },
+       "bookingDate": "2025-10-30",
+       "creditorName": "WOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - WOLT"
+      },
+      {
+       "transactionId": "d_01062000006",
+       "valueDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.24"
+       },
+       "bookingDate": "2025-10-31",
+       "creditorName": "KFC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KFC"
+      },
+      {
+       "transactionId": "d_01062000007",
+       "valueDate": "2025-11-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.65"
+       },
+       "bookingDate": "2025-11-05",
+       "creditorName": "GLOVO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GLOVO"
+      },
+      {
+       "transactionId": "d_01062000008",
+       "valueDate": "2025-11-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.64"
+       },
+       "bookingDate": "2025-11-17",
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE"
+      },
+      {
+       "transactionId": "d_01062000009",
+       "valueDate": "2025-11-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.33"
+       },
+       "bookingDate": "2025-11-25",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET"
+      },
+      {
+       "transactionId": "d_01062000010",
+       "valueDate": "2025-11-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.53"
+       },
+       "bookingDate": "2025-11-25",
+       "creditorName": "SUBWAY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SUBWAY"
+      },
+      {
+       "transactionId": "d_01062000011",
+       "valueDate": "2025-11-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.61"
+       },
+       "bookingDate": "2025-11-26",
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY"
+      },
+      {
+       "transactionId": "d_01062000012",
+       "valueDate": "2025-11-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-37.72"
+       },
+       "bookingDate": "2025-12-02",
+       "creditorName": "ZARA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ZARA"
+      },
+      {
+       "transactionId": "d_01062000013",
+       "valueDate": "2025-11-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.38"
+       },
+       "bookingDate": "2025-12-02",
+       "creditorName": "CAFE LEILA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CAFE LEILA"
+      },
+      {
+       "transactionId": "d_01062000014",
+       "valueDate": "2025-12-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.03"
+       },
+       "bookingDate": "2026-01-05",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET"
+      }
+     ],
+     "pending": []
+    }
+   }
+  }
+ ]
+}

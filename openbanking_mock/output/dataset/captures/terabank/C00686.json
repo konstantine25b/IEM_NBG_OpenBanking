@@ -1,0 +1,1004 @@
+{
+ "bank": "terabank",
+ "customer": "C00686",
+ "dialect": "altasoft_v08",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "87247133-be22-5312-b914-d9bfe5a6000d",
+      "iban": "GE64KS1441159320351233",
+      "currency": "GEL",
+      "owner": "MIKHEIL BARATASHVILI",
+      "name": "MIKHEIL BARATASHVILI",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "TEBAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.31"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-12-03T17:18:49"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.31"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-12-03T17:18:49"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v1/accounts/87247133-be22-5312-b914-d9bfe5a6000d/balances"
+       },
+       "transactions": {
+        "href": "v1/accounts/87247133-be22-5312-b914-d9bfe5a6000d/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/87247133-be22-5312-b914-d9bfe5a6000d",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "87247133-be22-5312-b914-d9bfe5a6000d",
+     "iban": "GE64KS1441159320351233",
+     "currency": "GEL",
+     "owner": "MIKHEIL BARATASHVILI",
+     "name": "MIKHEIL BARATASHVILI",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "TEBAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v1/accounts/87247133-be22-5312-b914-d9bfe5a6000d/balances"
+      },
+      "transactions": {
+       "href": "v1/accounts/87247133-be22-5312-b914-d9bfe5a6000d/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/87247133-be22-5312-b914-d9bfe5a6000d/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE64KS1441159320351233",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.31"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.31"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-12-03T17:18:49"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/87247133-be22-5312-b914-d9bfe5a6000d/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE64KS1441159320351233",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00274000001",
+       "entryReference": "00274000001",
+       "valueDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.11"
+       },
+       "bookingDate": "2025-10-22",
+       "creditorName": "KFC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KFC",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "603.06"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-22"
+       }
+      },
+      {
+       "transactionId": "d_00274000002",
+       "entryReference": "00274000002",
+       "valueDate": "2025-10-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.92"
+       },
+       "bookingDate": "2025-10-23",
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KIOSK",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "598.14"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-23"
+       }
+      },
+      {
+       "transactionId": "d_00274000003",
+       "entryReference": "00274000003",
+       "valueDate": "2025-10-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-25.44"
+       },
+       "bookingDate": "2025-10-28",
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "572.70"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-28"
+       }
+      },
+      {
+       "transactionId": "d_00274000004",
+       "entryReference": "00274000004",
+       "valueDate": "2025-10-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.55"
+       },
+       "bookingDate": "2025-10-31",
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "567.15"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-31"
+       }
+      },
+      {
+       "transactionId": "d_00274000005",
+       "entryReference": "00274000005",
+       "valueDate": "2025-11-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-22.76"
+       },
+       "bookingDate": "2025-11-03",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "544.39"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-03"
+       }
+      },
+      {
+       "transactionId": "d_00274000006",
+       "entryReference": "00274000006",
+       "valueDate": "2025-11-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-50.00"
+       },
+       "bookingDate": "2025-11-03",
+       "creditorName": "SOCAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SOCAR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "494.39"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-03"
+       }
+      },
+      {
+       "transactionId": "d_00274000007",
+       "entryReference": "00274000007",
+       "valueDate": "2025-11-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.72"
+       },
+       "bookingDate": "2025-11-04",
+       "creditorName": "MACHAKHELA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MACHAKHELA",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "470.67"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-04"
+       }
+      },
+      {
+       "transactionId": "d_00274000008",
+       "entryReference": "00274000008",
+       "valueDate": "2025-11-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-44.65"
+       },
+       "bookingDate": "2025-11-06",
+       "creditorName": "MACHAKHELA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MACHAKHELA",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "426.02"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-06"
+       }
+      },
+      {
+       "transactionId": "d_00274000009",
+       "entryReference": "00274000009",
+       "valueDate": "2025-11-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-33.03"
+       },
+       "bookingDate": "2025-11-10",
+       "creditorName": "MACHAKHELA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MACHAKHELA",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "392.99"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-10"
+       }
+      },
+      {
+       "transactionId": "d_00274000010",
+       "entryReference": "00274000010",
+       "valueDate": "2025-11-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-15.45"
+       },
+       "bookingDate": "2025-11-11",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "377.54"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-11"
+       }
+      },
+      {
+       "transactionId": "d_00274000011",
+       "entryReference": "00274000011",
+       "valueDate": "2025-11-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-60.00"
+       },
+       "bookingDate": "2025-11-13",
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "bankTransactionCode": "PMNT-CCRD-CWDL",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "317.54"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-13"
+       }
+      },
+      {
+       "transactionId": "d_00274000012",
+       "entryReference": "00274000012",
+       "valueDate": "2025-11-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-57.08"
+       },
+       "bookingDate": "2025-11-14",
+       "creditorName": "CAFE LEILA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CAFE LEILA",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "260.46"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-14"
+       }
+      },
+      {
+       "transactionId": "d_00274000013",
+       "entryReference": "00274000013",
+       "valueDate": "2025-11-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-8.71"
+       },
+       "bookingDate": "2025-11-14",
+       "creditorName": "SHAVI LOMI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SHAVI LOMI",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "251.75"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-14"
+       }
+      },
+      {
+       "transactionId": "d_00274000014",
+       "entryReference": "00274000014",
+       "valueDate": "2025-11-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-50.00"
+       },
+       "bookingDate": "2025-11-18",
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "bankTransactionCode": "PMNT-CCRD-CWDL",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "201.75"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-18"
+       }
+      },
+      {
+       "transactionId": "d_00274000015",
+       "entryReference": "00274000015",
+       "valueDate": "2025-11-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-28.58"
+       },
+       "bookingDate": "2025-11-20",
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GPC",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "173.17"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-20"
+       }
+      },
+      {
+       "transactionId": "d_00274000016",
+       "entryReference": "00274000016",
+       "valueDate": "2025-11-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.44"
+       },
+       "bookingDate": "2025-11-24",
+       "creditorName": "CAFE LEILA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CAFE LEILA",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "167.73"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-24"
+       }
+      },
+      {
+       "transactionId": "d_00274000017",
+       "entryReference": "00274000017",
+       "valueDate": "2025-11-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-40.84"
+       },
+       "bookingDate": "2025-12-01",
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "126.89"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-01"
+       }
+      },
+      {
+       "transactionId": "d_00274000018",
+       "entryReference": "00274000018",
+       "valueDate": "2025-11-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-69.52"
+       },
+       "bookingDate": "2025-12-01",
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "57.37"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-01"
+       }
+      },
+      {
+       "transactionId": "d_00274000019",
+       "entryReference": "00274000019",
+       "valueDate": "2025-12-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-45.00"
+       },
+       "bookingDate": "2025-12-02",
+       "creditorName": "MACHAKHELA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MACHAKHELA",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "12.37"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-02"
+       }
+      },
+      {
+       "transactionId": "d_00274000020",
+       "entryReference": "00274000020",
+       "valueDate": "2025-12-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.06"
+       },
+       "bookingDate": "2025-12-04",
+       "creditorName": "SHAVI LOMI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SHAVI LOMI",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.31"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-04"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v1/accounts/87247133-be22-5312-b914-d9bfe5a6000d"
+      },
+      "first": {
+       "href": "v1/accounts/87247133-be22-5312-b914-d9bfe5a6000d/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "c67fd75c-534a-5b0d-9513-fd64df41c9a7",
+      "maskedPan": "533286******3944",
+      "currency": "GEL",
+      "ownerName": "MIKHEIL BARATASHVILI",
+      "name": "MIKHEIL BARATASHVILI",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.31"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-12-03T17:18:49"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.31"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-12-03T17:18:49"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v1/card-accounts/c67fd75c-534a-5b0d-9513-fd64df41c9a7/balances"
+       },
+       "transactions": {
+        "href": "v1/card-accounts/c67fd75c-534a-5b0d-9513-fd64df41c9a7/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/c67fd75c-534a-5b0d-9513-fd64df41c9a7",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "c67fd75c-534a-5b0d-9513-fd64df41c9a7",
+     "maskedPan": "533286******3944",
+     "currency": "GEL",
+     "ownerName": "MIKHEIL BARATASHVILI",
+     "name": "MIKHEIL BARATASHVILI",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.31"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-12-03T17:18:49"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.31"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-12-03T17:18:49"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v1/card-accounts/c67fd75c-534a-5b0d-9513-fd64df41c9a7/balances"
+      },
+      "transactions": {
+       "href": "v1/card-accounts/c67fd75c-534a-5b0d-9513-fd64df41c9a7/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/c67fd75c-534a-5b0d-9513-fd64df41c9a7/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "533286******3944",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.31"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.31"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-12-03T17:18:49"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/c67fd75c-534a-5b0d-9513-fd64df41c9a7/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00274000001",
+       "transactionDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.11"
+       },
+       "acceptorTransactionDateTime": "2025-10-21T20:53:36",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - KFC",
+       "bookingDate": "2025-10-22",
+       "cardAcceptorId": "KFC",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00274000002",
+       "transactionDate": "2025-10-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.92"
+       },
+       "acceptorTransactionDateTime": "2025-10-22T08:05:30",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - KIOSK",
+       "bookingDate": "2025-10-23",
+       "cardAcceptorId": "KIOSK",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "d_00274000003",
+       "transactionDate": "2025-10-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-25.44"
+       },
+       "acceptorTransactionDateTime": "2025-10-27T17:32:03",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "bookingDate": "2025-10-28",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00274000004",
+       "transactionDate": "2025-10-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.55"
+       },
+       "acceptorTransactionDateTime": "2025-10-29T17:47:21",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - METROMONEY",
+       "bookingDate": "2025-10-31",
+       "cardAcceptorId": "METROMONEY",
+       "merchantCategoryCode": "4111"
+      },
+      {
+       "cardTransactionId": "d_00274000005",
+       "transactionDate": "2025-11-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-22.76"
+       },
+       "acceptorTransactionDateTime": "2025-11-01T20:52:33",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "bookingDate": "2025-11-03",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00274000006",
+       "transactionDate": "2025-11-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-50.00"
+       },
+       "acceptorTransactionDateTime": "2025-11-02T10:36:24",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - SOCAR",
+       "bookingDate": "2025-11-03",
+       "cardAcceptorId": "SOCAR",
+       "merchantCategoryCode": "5541"
+      },
+      {
+       "cardTransactionId": "d_00274000007",
+       "transactionDate": "2025-11-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.72"
+       },
+       "acceptorTransactionDateTime": "2025-11-02T15:17:20",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - MACHAKHELA",
+       "bookingDate": "2025-11-04",
+       "cardAcceptorId": "MACHAKHELA",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00274000008",
+       "transactionDate": "2025-11-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-44.65"
+       },
+       "acceptorTransactionDateTime": "2025-11-05T21:44:22",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - MACHAKHELA",
+       "bookingDate": "2025-11-06",
+       "cardAcceptorId": "MACHAKHELA",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00274000009",
+       "transactionDate": "2025-11-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-33.03"
+       },
+       "acceptorTransactionDateTime": "2025-11-09T21:29:07",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - MACHAKHELA",
+       "bookingDate": "2025-11-10",
+       "cardAcceptorId": "MACHAKHELA",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00274000010",
+       "transactionDate": "2025-11-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-15.45"
+       },
+       "acceptorTransactionDateTime": "2025-11-10T09:36:02",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "bookingDate": "2025-11-11",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00274000011",
+       "transactionDate": "2025-11-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-60.00"
+       },
+       "acceptorTransactionDateTime": "2025-11-12T15:07:31",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბანკომატიდან განაღდება",
+       "bookingDate": "2025-11-13",
+       "cardAcceptorId": "ATM BANK OF GEORGIA",
+       "merchantCategoryCode": "6011"
+      },
+      {
+       "cardTransactionId": "d_00274000012",
+       "transactionDate": "2025-11-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-57.08"
+       },
+       "acceptorTransactionDateTime": "2025-11-13T14:23:21",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - CAFE LEILA",
+       "bookingDate": "2025-11-14",
+       "cardAcceptorId": "CAFE LEILA",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00274000013",
+       "transactionDate": "2025-11-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-8.71"
+       },
+       "acceptorTransactionDateTime": "2025-11-13T16:36:11",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - SHAVI LOMI",
+       "bookingDate": "2025-11-14",
+       "cardAcceptorId": "SHAVI LOMI",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00274000014",
+       "transactionDate": "2025-11-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-50.00"
+       },
+       "acceptorTransactionDateTime": "2025-11-17T09:12:12",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბანკომატიდან განაღდება",
+       "bookingDate": "2025-11-18",
+       "cardAcceptorId": "ATM BANK OF GEORGIA",
+       "merchantCategoryCode": "6011"
+      },
+      {
+       "cardTransactionId": "d_00274000015",
+       "transactionDate": "2025-11-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-28.58"
+       },
+       "acceptorTransactionDateTime": "2025-11-19T09:17:26",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - GPC",
+       "bookingDate": "2025-11-20",
+       "cardAcceptorId": "GPC",
+       "merchantCategoryCode": "5912"
+      },
+      {
+       "cardTransactionId": "d_00274000016",
+       "transactionDate": "2025-11-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.44"
+       },
+       "acceptorTransactionDateTime": "2025-11-21T16:48:03",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - CAFE LEILA",
+       "bookingDate": "2025-11-24",
+       "cardAcceptorId": "CAFE LEILA",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00274000017",
+       "transactionDate": "2025-11-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-40.84"
+       },
+       "acceptorTransactionDateTime": "2025-11-27T22:03:53",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "bookingDate": "2025-12-01",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00274000018",
+       "transactionDate": "2025-11-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-69.52"
+       },
+       "acceptorTransactionDateTime": "2025-11-29T19:15:56",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "bookingDate": "2025-12-01",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00274000019",
+       "transactionDate": "2025-12-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-45.00"
+       },
+       "acceptorTransactionDateTime": "2025-12-01T16:42:43",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - MACHAKHELA",
+       "bookingDate": "2025-12-02",
+       "cardAcceptorId": "MACHAKHELA",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00274000020",
+       "transactionDate": "2025-12-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.06"
+       },
+       "acceptorTransactionDateTime": "2025-12-03T17:18:49",
+       "maskedPAN": "533286******3944",
+       "transactionDetails": "ბარათით გადახდა - SHAVI LOMI",
+       "bookingDate": "2025-12-04",
+       "cardAcceptorId": "SHAVI LOMI",
+       "merchantCategoryCode": "5812"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v1/accounts/87247133-be22-5312-b914-d9bfe5a6000d"
+      },
+      "first": {
+       "href": "v1/card-accounts/c67fd75c-534a-5b0d-9513-fd64df41c9a7/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "533286******3944",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,854 @@
+{
+ "bank": "pasha",
+ "customer": "C01120",
+ "dialect": "altasoft_v2",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v2/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "24e2e080-0bb2-5911-8f1d-b7bbdd428d3a",
+      "iban": "GE78PB1624815128344526",
+      "currency": "GEL",
+      "ownerName": "BEKA MGELADZE",
+      "name": "BEKA MGELADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "PAHAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.34"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-14T13:55:31"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.34"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-14T13:55:31"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/accounts/24e2e080-0bb2-5911-8f1d-b7bbdd428d3a/balances"
+       },
+       "transactions": {
+        "href": "v2/accounts/24e2e080-0bb2-5911-8f1d-b7bbdd428d3a/transactions"
+       }
+      },
+      "displayName": "Current account",
+      "other": {
+       "identification": "1624815128344526",
+       "issuer": "PASHA Bank Georgia"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/24e2e080-0bb2-5911-8f1d-b7bbdd428d3a",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "24e2e080-0bb2-5911-8f1d-b7bbdd428d3a",
+     "iban": "GE78PB1624815128344526",
+     "currency": "GEL",
+     "ownerName": "BEKA MGELADZE",
+     "name": "BEKA MGELADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "PAHAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v2/accounts/24e2e080-0bb2-5911-8f1d-b7bbdd428d3a/balances"
+      },
+      "transactions": {
+       "href": "v2/accounts/24e2e080-0bb2-5911-8f1d-b7bbdd428d3a/transactions"
+      }
+     },
+     "displayName": "Current account",
+     "other": {
+      "identification": "1624815128344526",
+      "issuer": "PASHA Bank Georgia"
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/24e2e080-0bb2-5911-8f1d-b7bbdd428d3a/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE78PB1624815128344526",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.34"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.34"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-11-14T13:55:31"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/24e2e080-0bb2-5911-8f1d-b7bbdd428d3a/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE78PB1624815128344526",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "GE78PB1624815128344526_447600001",
+       "entryReference": "00447600001",
+       "valueDate": "2025-10-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-77.49"
+       },
+       "bookingDate": "2025-10-24",
+       "creditor": {
+        "name": "MACHAKHELA"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - MACHAKHELA"
+       ],
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "163.45"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-24"
+       },
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "111900004",
+        "transactionDateTime": "2025-10-22T12:16:02"
+       },
+       "additionalTransactionInformation": "MACHAKHELA"
+      },
+      {
+       "transactionId": "GE78PB1624815128344526_447600002",
+       "entryReference": "00447600002",
+       "valueDate": "2025-10-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-95.06"
+       },
+       "bookingDate": "2025-10-28",
+       "creditor": {
+        "name": "EUROPRODUCT"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - EUROPRODUCT"
+       ],
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "68.39"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-28"
+       },
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "111900012",
+        "transactionDateTime": "2025-10-27T09:20:24"
+       },
+       "additionalTransactionInformation": "EUROPRODUCT"
+      },
+      {
+       "transactionId": "GE78PB1624815128344526_447600003",
+       "entryReference": "00447600003",
+       "valueDate": "2025-10-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-28.71"
+       },
+       "bookingDate": "2025-10-29",
+       "creditor": {
+        "name": "CARREFOUR"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - CARREFOUR"
+       ],
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "39.68"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-29"
+       },
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "111900014",
+        "transactionDateTime": "2025-10-27T20:29:05"
+       },
+       "additionalTransactionInformation": "CARREFOUR"
+      },
+      {
+       "transactionId": "GE78PB1624815128344526_447600004",
+       "entryReference": "00447600004",
+       "valueDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.68"
+       },
+       "bookingDate": "2025-10-31",
+       "creditor": {
+        "name": "SPAR"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - SPAR"
+       ],
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "27.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-31"
+       },
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "111900017",
+        "transactionDateTime": "2025-10-30T13:22:24"
+       },
+       "additionalTransactionInformation": "SPAR"
+      },
+      {
+       "transactionId": "GE78PB1624815128344526_447600005",
+       "entryReference": "00447600005",
+       "valueDate": "2025-11-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.38"
+       },
+       "bookingDate": "2025-11-17",
+       "creditor": {
+        "name": "MACHAKHELA"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - MACHAKHELA"
+       ],
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "6.62"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-17"
+       },
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "111900049",
+        "transactionDateTime": "2025-11-13T17:59:56"
+       },
+       "additionalTransactionInformation": "MACHAKHELA"
+      },
+      {
+       "transactionId": "GE78PB1624815128344526_447600006",
+       "entryReference": "00447600006",
+       "valueDate": "2025-11-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.28"
+       },
+       "bookingDate": "2025-11-18",
+       "creditor": {
+        "name": "MCDONALDS"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - MCDONALDS"
+       ],
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.34"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-18"
+       },
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "111900051",
+        "transactionDateTime": "2025-11-14T13:55:31"
+       },
+       "additionalTransactionInformation": "MCDONALDS"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/24e2e080-0bb2-5911-8f1d-b7bbdd428d3a"
+      },
+      "first": {
+       "href": "v2/accounts/24e2e080-0bb2-5911-8f1d-b7bbdd428d3a/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "7a25ebd2-cdc5-5140-9331-09e51766368d",
+      "maskedPan": "418057******5892",
+      "currency": "GEL",
+      "ownerName": "BEKA MGELADZE",
+      "name": "BEKA MGELADZE",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.34"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-14T13:55:31"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.34"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-14T13:55:31"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/card-accounts/7a25ebd2-cdc5-5140-9331-09e51766368d/balances"
+       },
+       "transactions": {
+        "href": "v2/card-accounts/7a25ebd2-cdc5-5140-9331-09e51766368d/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/7a25ebd2-cdc5-5140-9331-09e51766368d",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "7a25ebd2-cdc5-5140-9331-09e51766368d",
+     "maskedPan": "418057******5892",
+     "currency": "GEL",
+     "ownerName": "BEKA MGELADZE",
+     "name": "BEKA MGELADZE",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.34"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-11-14T13:55:31"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.34"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-11-14T13:55:31"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v2/card-accounts/7a25ebd2-cdc5-5140-9331-09e51766368d/balances"
+      },
+      "transactions": {
+       "href": "v2/card-accounts/7a25ebd2-cdc5-5140-9331-09e51766368d/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/7a25ebd2-cdc5-5140-9331-09e51766368d/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "418057******5892",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.34"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.34"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-11-14T13:55:31"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/7a25ebd2-cdc5-5140-9331-09e51766368d/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "GE78PB1624815128344526_447600001",
+       "transactionDate": "2025-10-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-77.49"
+       },
+       "acceptorTransactionDateTime": "2025-10-22T12:16:02",
+       "maskedPAN": "418057******5892",
+       "transactionDetails": "ბარათით გადახდა - MACHAKHELA",
+       "bookingDate": "2025-10-24",
+       "cardAcceptorId": "MACHAKHELA",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "GE78PB1624815128344526_447600002",
+       "transactionDate": "2025-10-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-95.06"
+       },
+       "acceptorTransactionDateTime": "2025-10-27T09:20:24",
+       "maskedPAN": "418057******5892",
+       "transactionDetails": "ბარათით გადახდა - EUROPRODUCT",
+       "bookingDate": "2025-10-28",
+       "cardAcceptorId": "EUROPRODUCT",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE78PB1624815128344526_447600003",
+       "transactionDate": "2025-10-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-28.71"
+       },
+       "acceptorTransactionDateTime": "2025-10-27T20:29:05",
+       "maskedPAN": "418057******5892",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "bookingDate": "2025-10-29",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE78PB1624815128344526_447600004",
+       "transactionDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.68"
+       },
+       "acceptorTransactionDateTime": "2025-10-30T13:22:24",
+       "maskedPAN": "418057******5892",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "bookingDate": "2025-10-31",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE78PB1624815128344526_447600005",
+       "transactionDate": "2025-11-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.38"
+       },
+       "acceptorTransactionDateTime": "2025-11-13T17:59:56",
+       "maskedPAN": "418057******5892",
+       "transactionDetails": "ბარათით გადახდა - MACHAKHELA",
+       "bookingDate": "2025-11-17",
+       "cardAcceptorId": "MACHAKHELA",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "GE78PB1624815128344526_447600006",
+       "transactionDate": "2025-11-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.28"
+       },
+       "acceptorTransactionDateTime": "2025-11-14T13:55:31",
+       "maskedPAN": "418057******5892",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "bookingDate": "2025-11-18",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/24e2e080-0bb2-5911-8f1d-b7bbdd428d3a"
+      },
+      "first": {
+       "href": "v2/card-accounts/7a25ebd2-cdc5-5140-9331-09e51766368d/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "418057******5892",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/cards",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cards": [
+     {
+      "resourceId": "7a25ebd2-cdc5-5140-9331-09e51766368d",
+      "maskedPan": "418057******5892",
+      "currency": "GEL",
+      "ownerName": "BEKA MGELADZE",
+      "name": "BEKA MGELADZE",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.34"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-14T13:55:31"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.34"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-14T13:55:31"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/card-accounts/7a25ebd2-cdc5-5140-9331-09e51766368d/balances"
+       },
+       "transactions": {
+        "href": "v2/card-accounts/7a25ebd2-cdc5-5140-9331-09e51766368d/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/cards/7a25ebd2-cdc5-5140-9331-09e51766368d",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "7a25ebd2-cdc5-5140-9331-09e51766368d",
+     "maskedPan": "418057******5892",
+     "currency": "GEL",
+     "ownerName": "BEKA MGELADZE",
+     "name": "BEKA MGELADZE",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.34"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-11-14T13:55:31"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.34"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-11-14T13:55:31"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v2/card-accounts/7a25ebd2-cdc5-5140-9331-09e51766368d/balances"
+      },
+      "transactions": {
+       "href": "v2/card-accounts/7a25ebd2-cdc5-5140-9331-09e51766368d/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/7a25ebd2-cdc5-5140-9331-09e51766368d/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "418057******5892",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.34"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.34"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-11-14T13:55:31"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/7a25ebd2-cdc5-5140-9331-09e51766368d/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "GE78PB1624815128344526_447600001",
+       "transactionDate": "2025-10-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-77.49"
+       },
+       "acceptorTransactionDateTime": "2025-10-22T12:16:02",
+       "maskedPAN": "418057******5892",
+       "transactionDetails": "ბარათით გადახდა - MACHAKHELA",
+       "bookingDate": "2025-10-24",
+       "cardAcceptorId": "MACHAKHELA",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "GE78PB1624815128344526_447600002",
+       "transactionDate": "2025-10-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-95.06"
+       },
+       "acceptorTransactionDateTime": "2025-10-27T09:20:24",
+       "maskedPAN": "418057******5892",
+       "transactionDetails": "ბარათით გადახდა - EUROPRODUCT",
+       "bookingDate": "2025-10-28",
+       "cardAcceptorId": "EUROPRODUCT",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE78PB1624815128344526_447600003",
+       "transactionDate": "2025-10-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-28.71"
+       },
+       "acceptorTransactionDateTime": "2025-10-27T20:29:05",
+       "maskedPAN": "418057******5892",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "bookingDate": "2025-10-29",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE78PB1624815128344526_447600004",
+       "transactionDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.68"
+       },
+       "acceptorTransactionDateTime": "2025-10-30T13:22:24",
+       "maskedPAN": "418057******5892",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "bookingDate": "2025-10-31",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE78PB1624815128344526_447600005",
+       "transactionDate": "2025-11-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.38"
+       },
+       "acceptorTransactionDateTime": "2025-11-13T17:59:56",
+       "maskedPAN": "418057******5892",
+       "transactionDetails": "ბარათით გადახდა - MACHAKHELA",
+       "bookingDate": "2025-11-17",
+       "cardAcceptorId": "MACHAKHELA",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "GE78PB1624815128344526_447600006",
+       "transactionDate": "2025-11-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.28"
+       },
+       "acceptorTransactionDateTime": "2025-11-14T13:55:31",
+       "maskedPAN": "418057******5892",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "bookingDate": "2025-11-18",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/24e2e080-0bb2-5911-8f1d-b7bbdd428d3a"
+      },
+      "first": {
+       "href": "v2/card-accounts/7a25ebd2-cdc5-5140-9331-09e51766368d/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "418057******5892",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": []
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/savings",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": []
+   }
+  }
+ ]
+}

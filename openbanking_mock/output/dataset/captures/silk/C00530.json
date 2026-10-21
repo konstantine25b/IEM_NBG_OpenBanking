@@ -1,0 +1,1518 @@
+{
+ "bank": "silk",
+ "customer": "C00530",
+ "dialect": "altasoft_v2",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v2/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "c60c418d-1da0-5f30-a2a7-0075072c745a",
+      "iban": "GE47BT1955632136940629",
+      "currency": "GEL",
+      "ownerName": "MARIAM MEGRELISHVILI",
+      "name": "MARIAM MEGRELISHVILI",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "DISNGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "29.11"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-03T07:42:42"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "62.52"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-03T07:42:42"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/accounts/c60c418d-1da0-5f30-a2a7-0075072c745a/balances"
+       },
+       "transactions": {
+        "href": "v2/accounts/c60c418d-1da0-5f30-a2a7-0075072c745a/transactions"
+       }
+      },
+      "displayName": "Current account",
+      "other": {
+       "identification": "1955632136940629",
+       "issuer": "Silk Bank"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/c60c418d-1da0-5f30-a2a7-0075072c745a",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "c60c418d-1da0-5f30-a2a7-0075072c745a",
+     "iban": "GE47BT1955632136940629",
+     "currency": "GEL",
+     "ownerName": "MARIAM MEGRELISHVILI",
+     "name": "MARIAM MEGRELISHVILI",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "DISNGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v2/accounts/c60c418d-1da0-5f30-a2a7-0075072c745a/balances"
+      },
+      "transactions": {
+       "href": "v2/accounts/c60c418d-1da0-5f30-a2a7-0075072c745a/transactions"
+      }
+     },
+     "displayName": "Current account",
+     "other": {
+      "identification": "1955632136940629",
+      "issuer": "Silk Bank"
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/c60c418d-1da0-5f30-a2a7-0075072c745a/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE47BT1955632136940629",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "62.52"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "29.11"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-03T07:42:42"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/c60c418d-1da0-5f30-a2a7-0075072c745a/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE47BT1955632136940629",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "GE47BT1955632136940629_211600001",
+       "entryReference": "00211600001",
+       "valueDate": "2026-02-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "35073.85"
+       },
+       "bookingDate": "2026-02-24",
+       "debtor": {
+        "name": "MARIAM MEGRELISHVILI"
+       },
+       "remittanceInformationUnstructured": [
+        "ანაბრისთვის თანხის შემოტანა"
+       ],
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "35073.85"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-24"
+       }
+      },
+      {
+       "transactionId": "GE47BT1955632136940629_211600002",
+       "entryReference": "00211600002",
+       "valueDate": "2026-02-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-35023.07"
+       },
+       "bookingDate": "2026-02-24",
+       "creditor": {
+        "name": "Silk Bank"
+       },
+       "creditorAccount": {
+        "iban": "GE15BT3644064272628828"
+       },
+       "remittanceInformationUnstructured": [
+        "ანაბრის გახსნა"
+       ],
+       "bankTransactionCode": "PMNT-ICDT-BOOK",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "50.78"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-24"
+       },
+       "references": {
+        "endToEndId": "E2EA46B13310EDB"
+       }
+      },
+      {
+       "transactionId": "GE47BT1955632136940629_211600003",
+       "entryReference": "00211600003",
+       "valueDate": "2026-03-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-34.70"
+       },
+       "bookingDate": "2026-03-06",
+       "creditor": {
+        "name": "METROMONEY"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - METROMONEY"
+       ],
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "16.08"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-06"
+       },
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "52900255",
+        "transactionDateTime": "2026-03-04T14:10:54"
+       },
+       "additionalTransactionInformation": "METROMONEY"
+      },
+      {
+       "transactionId": "GE47BT1955632136940629_211600004",
+       "entryReference": "00211600004",
+       "valueDate": "2026-06-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-8.59"
+       },
+       "bookingDate": "2026-06-08",
+       "creditor": {
+        "name": "MINI MARKET"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - MINI MARKET"
+       ],
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "7.49"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-08"
+       },
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "52900401",
+        "transactionDateTime": "2026-06-06T16:05:22"
+       },
+       "additionalTransactionInformation": "MINI MARKET"
+      },
+      {
+       "transactionId": "GE47BT1955632136940629_211600005",
+       "entryReference": "00211600005",
+       "valueDate": "2026-09-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1807.54"
+       },
+       "bookingDate": "2026-09-19",
+       "debtor": {
+        "name": "Silk Bank"
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის გაცემა"
+       ],
+       "bankTransactionCode": "PMNT-RCDT-BOOK",
+       "purposeCode": "LOAN",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1815.03"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-19"
+       }
+      },
+      {
+       "transactionId": "GE47BT1955632136940629_211600006",
+       "entryReference": "00211600006",
+       "valueDate": "2026-09-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1662.93"
+       },
+       "bookingDate": "2026-09-20",
+       "creditor": {
+        "name": "ALEKSANDRE KHARAISHVILI"
+       },
+       "creditorAccount": {
+        "iban": "GE55TB1483146118286283"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "TBCBGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "გადახდა ხელშეკრულებით"
+       ],
+       "bankTransactionCode": "PMNT-ICDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "152.10"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-20"
+       }
+      },
+      {
+       "transactionId": "GE47BT1955632136940629_211600007",
+       "entryReference": "00211600007",
+       "valueDate": "2026-10-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "472.94"
+       },
+       "bookingDate": "2026-10-02",
+       "debtor": {
+        "name": "მარიამ მეგრელიშვილი"
+       },
+       "debtorAccount": {
+        "iban": "GE18TB1067547855341922"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "TBCBGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "625.04"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-02"
+       },
+       "references": {
+        "endToEndId": "E2E91FFC97B539D"
+       }
+      },
+      {
+       "transactionId": "GE47BT1955632136940629_211600008",
+       "entryReference": "00211600008",
+       "valueDate": "2026-10-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-472.94"
+       },
+       "bookingDate": "2026-10-03",
+       "creditor": {
+        "name": "Silk Bank"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "DISNGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა A58D7ECC"
+       ],
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "152.10"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-03"
+       }
+      },
+      {
+       "transactionId": "GE47BT1955632136940629_211600009",
+       "entryReference": "00211600009",
+       "valueDate": "2026-10-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-89.58"
+       },
+       "bookingDate": "2026-10-05",
+       "creditor": {
+        "name": "AVERSI"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - AVERSI"
+       ],
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "62.52"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-05"
+       },
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "52900604",
+        "transactionDateTime": "2026-10-02T11:37:14"
+       },
+       "additionalTransactionInformation": "AVERSI"
+      }
+     ],
+     "pending": [
+      {
+       "transactionId": "GE47BT1955632136940629_211600010",
+       "entryReference": "00211600010",
+       "valueDate": "2026-10-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-33.41"
+       },
+       "creditor": {
+        "name": "AGROHUB"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - AGROHUB"
+       ],
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "52900630",
+        "transactionDateTime": "2026-10-18T14:23:32"
+       },
+       "additionalTransactionInformation": "AGROHUB"
+      }
+     ],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/c60c418d-1da0-5f30-a2a7-0075072c745a"
+      },
+      "first": {
+       "href": "v2/accounts/c60c418d-1da0-5f30-a2a7-0075072c745a/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "3a8b7967-eacc-55bb-86b8-23423d31e84b",
+      "maskedPan": "533286******3066",
+      "currency": "GEL",
+      "ownerName": "MARIAM MEGRELISHVILI",
+      "name": "MARIAM MEGRELISHVILI",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "29.11"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-03T07:42:42"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "62.52"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-03T07:42:42"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/card-accounts/3a8b7967-eacc-55bb-86b8-23423d31e84b/balances"
+       },
+       "transactions": {
+        "href": "v2/card-accounts/3a8b7967-eacc-55bb-86b8-23423d31e84b/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/3a8b7967-eacc-55bb-86b8-23423d31e84b",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "3a8b7967-eacc-55bb-86b8-23423d31e84b",
+     "maskedPan": "533286******3066",
+     "currency": "GEL",
+     "ownerName": "MARIAM MEGRELISHVILI",
+     "name": "MARIAM MEGRELISHVILI",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "29.11"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-03T07:42:42"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "62.52"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-03T07:42:42"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v2/card-accounts/3a8b7967-eacc-55bb-86b8-23423d31e84b/balances"
+      },
+      "transactions": {
+       "href": "v2/card-accounts/3a8b7967-eacc-55bb-86b8-23423d31e84b/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/3a8b7967-eacc-55bb-86b8-23423d31e84b/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "533286******3066",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "62.52"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "29.11"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-03T07:42:42"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/3a8b7967-eacc-55bb-86b8-23423d31e84b/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "GE47BT1955632136940629_211600003",
+       "transactionDate": "2026-03-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-34.70"
+       },
+       "acceptorTransactionDateTime": "2026-03-04T14:10:54",
+       "maskedPAN": "533286******3066",
+       "transactionDetails": "ბარათით გადახდა - METROMONEY",
+       "bookingDate": "2026-03-06",
+       "cardAcceptorId": "METROMONEY",
+       "merchantCategoryCode": "4111"
+      },
+      {
+       "cardTransactionId": "GE47BT1955632136940629_211600004",
+       "transactionDate": "2026-06-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-8.59"
+       },
+       "acceptorTransactionDateTime": "2026-06-06T16:05:22",
+       "maskedPAN": "533286******3066",
+       "transactionDetails": "ბარათით გადახდა - MINI MARKET",
+       "bookingDate": "2026-06-08",
+       "cardAcceptorId": "MINI MARKET",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "GE47BT1955632136940629_211600009",
+       "transactionDate": "2026-10-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-89.58"
+       },
+       "acceptorTransactionDateTime": "2026-10-02T11:37:14",
+       "maskedPAN": "533286******3066",
+       "transactionDetails": "ბარათით გადახდა - AVERSI",
+       "bookingDate": "2026-10-05",
+       "cardAcceptorId": "AVERSI",
+       "merchantCategoryCode": "5912"
+      }
+     ],
+     "pending": [
+      {
+       "cardTransactionId": "GE47BT1955632136940629_211600010",
+       "transactionDate": "2026-10-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-33.41"
+       },
+       "acceptorTransactionDateTime": "2026-10-18T14:23:32",
+       "maskedPAN": "533286******3066",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      }
+     ],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/c60c418d-1da0-5f30-a2a7-0075072c745a"
+      },
+      "first": {
+       "href": "v2/card-accounts/3a8b7967-eacc-55bb-86b8-23423d31e84b/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "533286******3066",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/cards",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cards": [
+     {
+      "resourceId": "3a8b7967-eacc-55bb-86b8-23423d31e84b",
+      "maskedPan": "533286******3066",
+      "currency": "GEL",
+      "ownerName": "MARIAM MEGRELISHVILI",
+      "name": "MARIAM MEGRELISHVILI",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "29.11"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-03T07:42:42"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "62.52"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-03T07:42:42"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/card-accounts/3a8b7967-eacc-55bb-86b8-23423d31e84b/balances"
+       },
+       "transactions": {
+        "href": "v2/card-accounts/3a8b7967-eacc-55bb-86b8-23423d31e84b/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/cards/3a8b7967-eacc-55bb-86b8-23423d31e84b",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "3a8b7967-eacc-55bb-86b8-23423d31e84b",
+     "maskedPan": "533286******3066",
+     "currency": "GEL",
+     "ownerName": "MARIAM MEGRELISHVILI",
+     "name": "MARIAM MEGRELISHVILI",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "29.11"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-03T07:42:42"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "62.52"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-03T07:42:42"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v2/card-accounts/3a8b7967-eacc-55bb-86b8-23423d31e84b/balances"
+      },
+      "transactions": {
+       "href": "v2/card-accounts/3a8b7967-eacc-55bb-86b8-23423d31e84b/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/3a8b7967-eacc-55bb-86b8-23423d31e84b/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "533286******3066",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "62.52"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "29.11"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-03T07:42:42"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/3a8b7967-eacc-55bb-86b8-23423d31e84b/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "GE47BT1955632136940629_211600003",
+       "transactionDate": "2026-03-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-34.70"
+       },
+       "acceptorTransactionDateTime": "2026-03-04T14:10:54",
+       "maskedPAN": "533286******3066",
+       "transactionDetails": "ბარათით გადახდა - METROMONEY",
+       "bookingDate": "2026-03-06",
+       "cardAcceptorId": "METROMONEY",
+       "merchantCategoryCode": "4111"
+      },
+      {
+       "cardTransactionId": "GE47BT1955632136940629_211600004",
+       "transactionDate": "2026-06-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-8.59"
+       },
+       "acceptorTransactionDateTime": "2026-06-06T16:05:22",
+       "maskedPAN": "533286******3066",
+       "transactionDetails": "ბარათით გადახდა - MINI MARKET",
+       "bookingDate": "2026-06-08",
+       "cardAcceptorId": "MINI MARKET",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "GE47BT1955632136940629_211600009",
+       "transactionDate": "2026-10-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-89.58"
+       },
+       "acceptorTransactionDateTime": "2026-10-02T11:37:14",
+       "maskedPAN": "533286******3066",
+       "transactionDetails": "ბარათით გადახდა - AVERSI",
+       "bookingDate": "2026-10-05",
+       "cardAcceptorId": "AVERSI",
+       "merchantCategoryCode": "5912"
+      }
+     ],
+     "pending": [
+      {
+       "cardTransactionId": "GE47BT1955632136940629_211600010",
+       "transactionDate": "2026-10-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-33.41"
+       },
+       "acceptorTransactionDateTime": "2026-10-18T14:23:32",
+       "maskedPAN": "533286******3066",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      }
+     ],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/c60c418d-1da0-5f30-a2a7-0075072c745a"
+      },
+      "first": {
+       "href": "v2/card-accounts/3a8b7967-eacc-55bb-86b8-23423d31e84b/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "533286******3066",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "9a64d241-8fec-51df-9d1c-8cbde3a1e67a",
+      "iban": "GE03BT4780406445857421",
+      "currency": "GEL",
+      "ownerName": "MARIAM MEGRELISHVILI",
+      "name": "MARIAM MEGRELISHVILI",
+      "product": "Instant instalment",
+      "cashAccountType": "LOAN",
+      "status": "enabled",
+      "bic": "DISNGE22",
+      "usage": "PRIV",
+      "_links": {
+       "balances": {
+        "href": "v2/loans/9a64d241-8fec-51df-9d1c-8cbde3a1e67a/balances"
+       },
+       "transactions": {
+        "href": "v2/loans/9a64d241-8fec-51df-9d1c-8cbde3a1e67a/transactions"
+       }
+      },
+      "displayName": "Instant instalment",
+      "other": {
+       "identification": "LN-2026-431609",
+       "schemeNameProprietary": "LOAN_CONTRACT",
+       "issuer": "Silk Bank"
+      },
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-1367.99"
+        },
+        "balanceType": "closingBooked",
+        "referenceDate": "2026-10-18"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-472.94"
+        },
+        "balanceType": "expected",
+        "referenceDate": "2026-11-03"
+       }
+      ],
+      "interest": [
+       {
+        "type": "FIXD",
+        "rate": [
+         {
+          "percentage": "22.17"
+         }
+        ]
+       }
+      ],
+      "relatedDates": [
+       {
+        "contractStartDate": "2026-09-19",
+        "contractEndDate": "2027-01-03"
+       }
+      ],
+      "collateralsInvolved": true,
+      "guaranteeInvolved": true,
+      "tariffs": "4 monthly annuity instalments of 472.94 GEL due on day 3"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans/9a64d241-8fec-51df-9d1c-8cbde3a1e67a",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "9a64d241-8fec-51df-9d1c-8cbde3a1e67a",
+     "iban": "GE03BT4780406445857421",
+     "currency": "GEL",
+     "ownerName": "MARIAM MEGRELISHVILI",
+     "name": "MARIAM MEGRELISHVILI",
+     "product": "Instant instalment",
+     "cashAccountType": "LOAN",
+     "status": "enabled",
+     "bic": "DISNGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v2/loans/9a64d241-8fec-51df-9d1c-8cbde3a1e67a/balances"
+      },
+      "transactions": {
+       "href": "v2/loans/9a64d241-8fec-51df-9d1c-8cbde3a1e67a/transactions"
+      }
+     },
+     "displayName": "Instant instalment",
+     "other": {
+      "identification": "LN-2026-431609",
+      "schemeNameProprietary": "LOAN_CONTRACT",
+      "issuer": "Silk Bank"
+     },
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-1367.99"
+       },
+       "balanceType": "closingBooked",
+       "referenceDate": "2026-10-18"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-472.94"
+       },
+       "balanceType": "expected",
+       "referenceDate": "2026-11-03"
+      }
+     ],
+     "interest": [
+      {
+       "type": "FIXD",
+       "rate": [
+        {
+         "percentage": "22.17"
+        }
+       ]
+      }
+     ],
+     "relatedDates": [
+      {
+       "contractStartDate": "2026-09-19",
+       "contractEndDate": "2027-01-03"
+      }
+     ],
+     "collateralsInvolved": true,
+     "guaranteeInvolved": true,
+     "tariffs": "4 monthly annuity instalments of 472.94 GEL due on day 3"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans/9a64d241-8fec-51df-9d1c-8cbde3a1e67a/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE03BT4780406445857421",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-1367.99"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-472.94"
+      },
+      "balanceType": "expected",
+      "referenceDate": "2026-11-03"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans/9a64d241-8fec-51df-9d1c-8cbde3a1e67a/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE03BT4780406445857421",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "LN-2026-431609_1",
+       "entryReference": "0000000001",
+       "bookingDate": "2026-10-03",
+       "valueDate": "2026-10-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "472.94"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 1"
+       ],
+       "additionalTransactionInformation": "principal 439.55; interest 33.39"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/loans/9a64d241-8fec-51df-9d1c-8cbde3a1e67a"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/savings",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "6e9177bb-2516-5219-bb9f-be45e6513ec1",
+      "iban": "GE15BT3644064272628828",
+      "currency": "EUR",
+      "ownerName": "MARIAM MEGRELISHVILI",
+      "name": "MARIAM MEGRELISHVILI",
+      "product": "Term deposit",
+      "cashAccountType": "SVGS",
+      "status": "enabled",
+      "bic": "DISNGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "EUR",
+         "amount": "11121.51"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-24T03:10:45"
+       },
+       {
+        "balanceAmount": {
+         "currency": "EUR",
+         "amount": "11121.51"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-24T03:10:45"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/savings/6e9177bb-2516-5219-bb9f-be45e6513ec1/balances"
+       },
+       "transactions": {
+        "href": "v2/savings/6e9177bb-2516-5219-bb9f-be45e6513ec1/transactions"
+       }
+      },
+      "displayName": "Term deposit",
+      "other": {
+       "identification": "3644064272628828",
+       "issuer": "Silk Bank"
+      },
+      "interest": [
+       {
+        "type": "FIXD",
+        "rate": [
+         {
+          "percentage": "2.43"
+         }
+        ]
+       }
+      ],
+      "relatedDates": [
+       {
+        "contractStartDate": "2026-02-24",
+        "contractEndDate": "2028-02-24"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/savings/6e9177bb-2516-5219-bb9f-be45e6513ec1",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "6e9177bb-2516-5219-bb9f-be45e6513ec1",
+     "iban": "GE15BT3644064272628828",
+     "currency": "EUR",
+     "ownerName": "MARIAM MEGRELISHVILI",
+     "name": "MARIAM MEGRELISHVILI",
+     "product": "Term deposit",
+     "cashAccountType": "SVGS",
+     "status": "enabled",
+     "bic": "DISNGE22",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "EUR",
+        "amount": "11121.51"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-09-24T03:10:45"
+      },
+      {
+       "balanceAmount": {
+        "currency": "EUR",
+        "amount": "11121.51"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-09-24T03:10:45"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v2/savings/6e9177bb-2516-5219-bb9f-be45e6513ec1/balances"
+      },
+      "transactions": {
+       "href": "v2/savings/6e9177bb-2516-5219-bb9f-be45e6513ec1/transactions"
+      }
+     },
+     "displayName": "Term deposit",
+     "other": {
+      "identification": "3644064272628828",
+      "issuer": "Silk Bank"
+     },
+     "interest": [
+      {
+       "type": "FIXD",
+       "rate": [
+        {
+         "percentage": "2.43"
+        }
+       ]
+      }
+     ],
+     "relatedDates": [
+      {
+       "contractStartDate": "2026-02-24",
+       "contractEndDate": "2028-02-24"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/savings/6e9177bb-2516-5219-bb9f-be45e6513ec1/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE15BT3644064272628828",
+     "currency": "EUR"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "EUR",
+       "amount": "11121.51"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "EUR",
+       "amount": "11121.51"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-09-24T03:10:45"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/savings/6e9177bb-2516-5219-bb9f-be45e6513ec1/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE15BT3644064272628828",
+     "currency": "EUR"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "GE15BT3644064272628828_211640001",
+       "entryReference": "00211640001",
+       "valueDate": "2026-02-24",
+       "transactionAmount": {
+        "currency": "EUR",
+        "amount": "10965.36"
+       },
+       "bookingDate": "2026-02-24",
+       "debtor": {
+        "name": "MARIAM MEGRELISHVILI"
+       },
+       "debtorAccount": {
+        "iban": "GE47BT1955632136940629"
+       },
+       "currencyExchange": [
+        {
+         "sourceCurrency": "GEL",
+         "exchangeRate": "3.1940",
+         "unitCurrency": "EUR",
+         "targetCurrency": "EUR",
+         "quotationDate": "2026-02-24"
+        }
+       ],
+       "remittanceInformationUnstructured": [
+        "ანაბრის გახსნა"
+       ],
+       "bankTransactionCode": "LDAS-FTDP-DPST",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "EUR",
+         "amount": "10965.36"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-24"
+       },
+       "references": {
+        "endToEndId": "E2EA46B13310EDB"
+       }
+      },
+      {
+       "transactionId": "GE15BT3644064272628828_211640002",
+       "entryReference": "00211640002",
+       "valueDate": "2026-03-24",
+       "transactionAmount": {
+        "currency": "EUR",
+        "amount": "22.17"
+       },
+       "bookingDate": "2026-03-24",
+       "debtor": {
+        "name": "Silk Bank"
+       },
+       "remittanceInformationUnstructured": [
+        "ანაბრის პროცენტი"
+       ],
+       "bankTransactionCode": "ACMT-MCOP-INTR",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "EUR",
+         "amount": "10987.53"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-24"
+       }
+      },
+      {
+       "transactionId": "GE15BT3644064272628828_211640003",
+       "entryReference": "00211640003",
+       "valueDate": "2026-04-24",
+       "transactionAmount": {
+        "currency": "EUR",
+        "amount": "22.22"
+       },
+       "bookingDate": "2026-04-24",
+       "debtor": {
+        "name": "Silk Bank"
+       },
+       "remittanceInformationUnstructured": [
+        "ანაბრის პროცენტი"
+       ],
+       "bankTransactionCode": "ACMT-MCOP-INTR",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "EUR",
+         "amount": "11009.75"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-24"
+       }
+      },
+      {
+       "transactionId": "GE15BT3644064272628828_211640004",
+       "entryReference": "00211640004",
+       "valueDate": "2026-05-24",
+       "transactionAmount": {
+        "currency": "EUR",
+        "amount": "22.26"
+       },
+       "bookingDate": "2026-05-24",
+       "debtor": {
+        "name": "Silk Bank"
+       },
+       "remittanceInformationUnstructured": [
+        "ანაბრის პროცენტი"
+       ],
+       "bankTransactionCode": "ACMT-MCOP-INTR",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "EUR",
+         "amount": "11032.01"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-24"
+       }
+      },
+      {
+       "transactionId": "GE15BT3644064272628828_211640005",
+       "entryReference": "00211640005",
+       "valueDate": "2026-06-24",
+       "transactionAmount": {
+        "currency": "EUR",
+        "amount": "22.31"
+       },
+       "bookingDate": "2026-06-24",
+       "debtor": {
+        "name": "Silk Bank"
+       },
+       "remittanceInformationUnstructured": [
+        "ანაბრის პროცენტი"
+       ],
+       "bankTransactionCode": "ACMT-MCOP-INTR",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "EUR",
+         "amount": "11054.32"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-24"
+       }
+      },
+      {
+       "transactionId": "GE15BT3644064272628828_211640006",
+       "entryReference": "00211640006",
+       "valueDate": "2026-07-24",
+       "transactionAmount": {
+        "currency": "EUR",
+        "amount": "22.35"
+       },
+       "bookingDate": "2026-07-24",
+       "debtor": {
+        "name": "Silk Bank"
+       },
+       "remittanceInformationUnstructured": [
+        "ანაბრის პროცენტი"
+       ],
+       "bankTransactionCode": "ACMT-MCOP-INTR",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "EUR",
+         "amount": "11076.67"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-24"
+       }
+      },
+      {
+       "transactionId": "GE15BT3644064272628828_211640007",
+       "entryReference": "00211640007",
+       "valueDate": "2026-08-24",
+       "transactionAmount": {
+        "currency": "EUR",
+        "amount": "22.40"
+       },
+       "bookingDate": "2026-08-24",
+       "debtor": {
+        "name": "Silk Bank"
+       },
+       "remittanceInformationUnstructured": [
+        "ანაბრის პროცენტი"
+       ],
+       "bankTransactionCode": "ACMT-MCOP-INTR",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "EUR",
+         "amount": "11099.07"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-24"
+       }
+      },
+      {
+       "transactionId": "GE15BT3644064272628828_211640008",
+       "entryReference": "00211640008",
+       "valueDate": "2026-09-24",
+       "transactionAmount": {
+        "currency": "EUR",
+        "amount": "22.44"
+       },
+       "bookingDate": "2026-09-24",
+       "debtor": {
+        "name": "Silk Bank"
+       },
+       "remittanceInformationUnstructured": [
+        "ანაბრის პროცენტი"
+       ],
+       "bankTransactionCode": "ACMT-MCOP-INTR",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "EUR",
+         "amount": "11121.51"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-24"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/6e9177bb-2516-5219-bb9f-be45e6513ec1"
+      },
+      "first": {
+       "href": "v2/savings/6e9177bb-2516-5219-bb9f-be45e6513ec1/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,482 @@
+{
+ "bank": "tbc",
+ "customer": "C00101",
+ "dialect": "tbc",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "36db53e0-4ff5-5e97-bf6a-09b45edc732f",
+      "iban": "GE02TB1348757771266252",
+      "currency": "GEL",
+      "ownerName": "ნიკა წიკლაური",
+      "name": "ნიკა წიკლაური",
+      "product": "Current account",
+      "cashAccountType": "CARD",
+      "status": "enabled",
+      "bic": "TBCBGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.63"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-25T10:25:20"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.63"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-25T10:25:20"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/36db53e0-4ff5-5e97-bf6a-09b45edc732f/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/36db53e0-4ff5-5e97-bf6a-09b45edc732f/transactions"
+       }
+      },
+      "msisdn": "592421328",
+      "ownerIdentification": {
+       "privateId": {
+        "others": [
+         {
+          "identification": "PNOGE-69515831631"
+         }
+        ]
+       }
+      },
+      "displayName": "Concept"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/36db53e0-4ff5-5e97-bf6a-09b45edc732f",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "36db53e0-4ff5-5e97-bf6a-09b45edc732f",
+     "iban": "GE02TB1348757771266252",
+     "currency": "GEL",
+     "ownerName": "ნიკა წიკლაური",
+     "name": "ნიკა წიკლაური",
+     "product": "Current account",
+     "cashAccountType": "CARD",
+     "status": "enabled",
+     "bic": "TBCBGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/36db53e0-4ff5-5e97-bf6a-09b45edc732f/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/36db53e0-4ff5-5e97-bf6a-09b45edc732f/transactions"
+      }
+     },
+     "msisdn": "592421328",
+     "ownerIdentification": {
+      "privateId": {
+       "others": [
+        {
+         "identification": "PNOGE-69515831631"
+        }
+       ]
+      }
+     },
+     "displayName": "Concept"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/36db53e0-4ff5-5e97-bf6a-09b45edc732f/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE02TB1348757771266252",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.63"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.63"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-11-25T10:25:20"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/36db53e0-4ff5-5e97-bf6a-09b45edc732f/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE02TB1348757771266252",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00040000001",
+       "entryReference": "00040000001",
+       "valueDate": "2025-10-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.89"
+       },
+       "bookingDate": "2025-10-30",
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "15.11"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-30"
+       },
+       "proprietaryBankTransactionCode": "GMB",
+       "debtorIdentification": {
+        "privateId": {
+         "others": [
+          {
+           "identification": "PNOGE-69515831631"
+          }
+         ]
+        }
+       },
+       "additionalInformation": "ბარათით გადახდა - BOLT"
+      },
+      {
+       "transactionId": "d_00040000002",
+       "entryReference": "00040000002",
+       "valueDate": "2025-11-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.97"
+       },
+       "bookingDate": "2025-11-17",
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "11.14"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-17"
+       },
+       "proprietaryBankTransactionCode": "GMB",
+       "debtorIdentification": {
+        "privateId": {
+         "others": [
+          {
+           "identification": "PNOGE-69515831631"
+          }
+         ]
+        }
+       },
+       "additionalInformation": "ბარათით გადახდა - MINI MARKET"
+      },
+      {
+       "transactionId": "d_00040000003",
+       "entryReference": "00040000003",
+       "valueDate": "2025-11-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.51"
+       },
+       "bookingDate": "2025-11-26",
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.63"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-26"
+       },
+       "proprietaryBankTransactionCode": "GMB",
+       "debtorIdentification": {
+        "privateId": {
+         "others": [
+          {
+           "identification": "PNOGE-69515831631"
+          }
+         ]
+        }
+       },
+       "additionalInformation": "ბარათით გადახდა - METROMONEY"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/36db53e0-4ff5-5e97-bf6a-09b45edc732f"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/36db53e0-4ff5-5e97-bf6a-09b45edc732f/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "f4d514cb-ad4e-57e1-8fc4-29d51b4ed8c6",
+      "maskedPan": "418057******8101",
+      "currency": "GEL",
+      "ownerName": "ნიკა წიკლაური",
+      "name": "ნიკა წიკლაური",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.63"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-25T10:25:20"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.63"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-25T10:25:20"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/f4d514cb-ad4e-57e1-8fc4-29d51b4ed8c6/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/f4d514cb-ad4e-57e1-8fc4-29d51b4ed8c6/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/f4d514cb-ad4e-57e1-8fc4-29d51b4ed8c6",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "f4d514cb-ad4e-57e1-8fc4-29d51b4ed8c6",
+     "maskedPan": "418057******8101",
+     "currency": "GEL",
+     "ownerName": "ნიკა წიკლაური",
+     "name": "ნიკა წიკლაური",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "1.63"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-11-25T10:25:20"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "1.63"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-11-25T10:25:20"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/f4d514cb-ad4e-57e1-8fc4-29d51b4ed8c6/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/f4d514cb-ad4e-57e1-8fc4-29d51b4ed8c6/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/f4d514cb-ad4e-57e1-8fc4-29d51b4ed8c6/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "418057******8101",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.63"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.63"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-11-25T10:25:20"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/f4d514cb-ad4e-57e1-8fc4-29d51b4ed8c6/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00040000001",
+       "transactionDate": "2025-10-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.89"
+       },
+       "acceptorTransactionDateTime": "2025-10-29T17:46:29",
+       "transactionDetails": "ბარათით გადახდა - BOLT",
+       "bookingDate": "2025-10-30",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "BOLT",
+       "maskedPan": "418057******8101"
+      },
+      {
+       "cardTransactionId": "d_00040000002",
+       "transactionDate": "2025-11-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.97"
+       },
+       "acceptorTransactionDateTime": "2025-11-16T17:27:43",
+       "transactionDetails": "ბარათით გადახდა - MINI MARKET",
+       "bookingDate": "2025-11-17",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MINI MARKET",
+       "maskedPan": "418057******8101"
+      },
+      {
+       "cardTransactionId": "d_00040000003",
+       "transactionDate": "2025-11-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.51"
+       },
+       "acceptorTransactionDateTime": "2025-11-25T10:25:20",
+       "transactionDetails": "ბარათით გადახდა - METROMONEY",
+       "bookingDate": "2025-11-26",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "METROMONEY",
+       "maskedPan": "418057******8101"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/36db53e0-4ff5-5e97-bf6a-09b45edc732f"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/f4d514cb-ad4e-57e1-8fc4-29d51b4ed8c6/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "418057******8101",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": []
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/savings",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": []
+   }
+  }
+ ]
+}

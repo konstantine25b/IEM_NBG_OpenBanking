@@ -1,0 +1,316 @@
+{
+ "bank": "bog",
+ "customer": "C00240",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "817ac233-9821-5247-81f8-c879ddb41ffd",
+      "iban": "GE95BG1758183996798616",
+      "currency": "GEL",
+      "ownerName": "TAMAR GOGOLADZE",
+      "name": "TAMAR GOGOLADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3.81"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-12-24T08:24:44"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3.81"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-12-24T08:24:44"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/817ac233-9821-5247-81f8-c879ddb41ffd/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/817ac233-9821-5247-81f8-c879ddb41ffd/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/817ac233-9821-5247-81f8-c879ddb41ffd",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "817ac233-9821-5247-81f8-c879ddb41ffd",
+     "iban": "GE95BG1758183996798616",
+     "currency": "GEL",
+     "ownerName": "TAMAR GOGOLADZE",
+     "name": "TAMAR GOGOLADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/817ac233-9821-5247-81f8-c879ddb41ffd/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/817ac233-9821-5247-81f8-c879ddb41ffd/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/817ac233-9821-5247-81f8-c879ddb41ffd/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE95BG1758183996798616",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "3.81"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "3.81"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-12-24T08:24:44"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/817ac233-9821-5247-81f8-c879ddb41ffd/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE95BG1758183996798616",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00095600001",
+       "entryReference": "00095600001",
+       "valueDate": "2025-10-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-13.23"
+       },
+       "bookingDate": "2025-10-21",
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GPC",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "175.75"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-21"
+       }
+      },
+      {
+       "transactionId": "d_00095600002",
+       "entryReference": "00095600002",
+       "valueDate": "2025-10-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-15.21"
+       },
+       "bookingDate": "2025-10-27",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "160.54"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-27"
+       }
+      },
+      {
+       "transactionId": "d_00095600003",
+       "entryReference": "00095600003",
+       "valueDate": "2025-10-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-79.14"
+       },
+       "bookingDate": "2025-10-28",
+       "creditorName": "EVEX HOSPITALS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - EVEX HOSPITALS",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "81.40"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-28"
+       }
+      },
+      {
+       "transactionId": "d_00095600004",
+       "entryReference": "00095600004",
+       "valueDate": "2025-10-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.31"
+       },
+       "bookingDate": "2025-10-30",
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KIOSK",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "77.09"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-30"
+       }
+      },
+      {
+       "transactionId": "d_00095600005",
+       "entryReference": "00095600005",
+       "valueDate": "2025-11-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.67"
+       },
+       "bookingDate": "2025-11-25",
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "62.42"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-25"
+       }
+      },
+      {
+       "transactionId": "d_00095600006",
+       "entryReference": "00095600006",
+       "valueDate": "2025-12-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-16.70"
+       },
+       "bookingDate": "2025-12-03",
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "45.72"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-03"
+       }
+      },
+      {
+       "transactionId": "d_00095600007",
+       "entryReference": "00095600007",
+       "valueDate": "2025-12-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-32.94"
+       },
+       "bookingDate": "2025-12-17",
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "12.78"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-17"
+       }
+      },
+      {
+       "transactionId": "d_00095600008",
+       "entryReference": "00095600008",
+       "valueDate": "2025-12-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-8.97"
+       },
+       "bookingDate": "2025-12-26",
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3.81"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-26"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/817ac233-9821-5247-81f8-c879ddb41ffd"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/817ac233-9821-5247-81f8-c879ddb41ffd/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,2452 @@
+{
+ "bank": "bog",
+ "customer": "C00010",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "8ba49860-2bc1-5ff6-8243-bb38ad517233",
+      "iban": "GE86BG1049806777318633",
+      "currency": "GEL",
+      "ownerName": "MANANA TAVADZE",
+      "name": "MANANA TAVADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "8218.92"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-02T15:22:30"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "8298.93"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-02T15:22:30"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/8ba49860-2bc1-5ff6-8243-bb38ad517233/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/8ba49860-2bc1-5ff6-8243-bb38ad517233/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/8ba49860-2bc1-5ff6-8243-bb38ad517233",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "8ba49860-2bc1-5ff6-8243-bb38ad517233",
+     "iban": "GE86BG1049806777318633",
+     "currency": "GEL",
+     "ownerName": "MANANA TAVADZE",
+     "name": "MANANA TAVADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/8ba49860-2bc1-5ff6-8243-bb38ad517233/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/8ba49860-2bc1-5ff6-8243-bb38ad517233/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/8ba49860-2bc1-5ff6-8243-bb38ad517233/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE86BG1049806777318633",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "8298.93"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "8218.92"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-02T15:22:30"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/8ba49860-2bc1-5ff6-8243-bb38ad517233/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE86BG1049806777318633",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00003600001",
+       "entryReference": "00003600001",
+       "valueDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.53"
+       },
+       "bookingDate": "2025-10-23",
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "680.27"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-23"
+       }
+      },
+      {
+       "transactionId": "d_00003600002",
+       "entryReference": "00003600002",
+       "valueDate": "2025-11-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.90"
+       },
+       "bookingDate": "2025-11-17",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "669.37"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-17"
+       }
+      },
+      {
+       "transactionId": "d_00003600003",
+       "entryReference": "00003600003",
+       "valueDate": "2025-11-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.21"
+       },
+       "bookingDate": "2025-12-01",
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MAXIM",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "666.16"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-01"
+       }
+      },
+      {
+       "transactionId": "d_00003600004",
+       "entryReference": "00003600004",
+       "valueDate": "2025-11-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-15.08"
+       },
+       "bookingDate": "2025-12-01",
+       "creditorName": "MCDONALDS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MCDONALDS",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "651.08"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-01"
+       }
+      },
+      {
+       "transactionId": "d_00003600005",
+       "entryReference": "00003600005",
+       "valueDate": "2025-11-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-70.00"
+       },
+       "bookingDate": "2025-12-01",
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "bankTransactionCode": "PMNT-CCRD-CWDL",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "581.08"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-01"
+       }
+      },
+      {
+       "transactionId": "d_00003600006",
+       "entryReference": "00003600006",
+       "valueDate": "2025-12-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.66"
+       },
+       "bookingDate": "2025-12-03",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "577.42"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-03"
+       }
+      },
+      {
+       "transactionId": "d_00003600007",
+       "entryReference": "00003600007",
+       "valueDate": "2025-12-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-55.00"
+       },
+       "bookingDate": "2025-12-05",
+       "creditorName": "SOCAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SOCAR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "522.42"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-05"
+       }
+      },
+      {
+       "transactionId": "d_00003600008",
+       "entryReference": "00003600008",
+       "valueDate": "2025-12-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-11.04"
+       },
+       "bookingDate": "2025-12-09",
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "511.38"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-09"
+       }
+      },
+      {
+       "transactionId": "d_00003600009",
+       "entryReference": "00003600009",
+       "valueDate": "2025-12-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-36.25"
+       },
+       "bookingDate": "2025-12-09",
+       "creditorName": "PHARMADEPOT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - PHARMADEPOT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "475.13"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-09"
+       }
+      },
+      {
+       "transactionId": "d_00003600010",
+       "entryReference": "00003600010",
+       "valueDate": "2025-12-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.00"
+       },
+       "bookingDate": "2025-12-15",
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "474.13"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-15"
+       }
+      },
+      {
+       "transactionId": "d_00003600011",
+       "entryReference": "00003600011",
+       "valueDate": "2025-12-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.83"
+       },
+       "bookingDate": "2025-12-15",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "461.30"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-15"
+       }
+      },
+      {
+       "transactionId": "d_00003600012",
+       "entryReference": "00003600012",
+       "valueDate": "2025-12-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-8.92"
+       },
+       "bookingDate": "2025-12-18",
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "452.38"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-18"
+       }
+      },
+      {
+       "transactionId": "d_00003600013",
+       "entryReference": "00003600013",
+       "valueDate": "2025-12-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.62"
+       },
+       "bookingDate": "2025-12-19",
+       "creditorName": "AVERSI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AVERSI",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "447.76"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-19"
+       }
+      },
+      {
+       "transactionId": "c_00003600014",
+       "entryReference": "00003600014",
+       "valueDate": "2025-12-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "20292.89"
+       },
+       "bookingDate": "2025-12-21",
+       "endToEndId": "E2E5B128A016CBC",
+       "debtorName": "Bank of Georgia",
+       "debtorAccount": {
+        "iban": "GE37BG3567869868018587"
+       },
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.6660",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2025-12-21"
+        }
+       ],
+       "remittanceInformationUnstructured": "ანაბრის დახურვა",
+       "bankTransactionCode": "PMNT-RCDT-BOOK",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20740.65"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-21"
+       }
+      },
+      {
+       "transactionId": "d_00003600015",
+       "entryReference": "00003600015",
+       "valueDate": "2025-12-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.76"
+       },
+       "bookingDate": "2025-12-22",
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20734.89"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-22"
+       }
+      },
+      {
+       "transactionId": "d_00003600016",
+       "entryReference": "00003600016",
+       "valueDate": "2025-12-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.86"
+       },
+       "bookingDate": "2025-12-23",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20724.03"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-23"
+       }
+      },
+      {
+       "transactionId": "d_00003600017",
+       "entryReference": "00003600017",
+       "valueDate": "2025-12-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.06"
+       },
+       "bookingDate": "2025-12-26",
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20711.97"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-26"
+       }
+      },
+      {
+       "transactionId": "d_00003600018",
+       "entryReference": "00003600018",
+       "valueDate": "2026-01-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-38.12"
+       },
+       "bookingDate": "2026-01-12",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20673.85"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-12"
+       }
+      },
+      {
+       "transactionId": "d_00003600019",
+       "entryReference": "00003600019",
+       "valueDate": "2026-01-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.71"
+       },
+       "bookingDate": "2026-01-22",
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KIOSK",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20666.14"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-22"
+       }
+      },
+      {
+       "transactionId": "d_00003600020",
+       "entryReference": "00003600020",
+       "valueDate": "2026-01-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.95"
+       },
+       "bookingDate": "2026-01-26",
+       "creditorName": "AVERSI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AVERSI",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20642.19"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-26"
+       }
+      },
+      {
+       "transactionId": "d_00003600021",
+       "entryReference": "00003600021",
+       "valueDate": "2026-01-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.09"
+       },
+       "bookingDate": "2026-01-26",
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MAXIM",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20632.10"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-26"
+       }
+      },
+      {
+       "transactionId": "d_00003600022",
+       "entryReference": "00003600022",
+       "valueDate": "2026-01-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.22"
+       },
+       "bookingDate": "2026-01-26",
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20621.88"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-26"
+       }
+      },
+      {
+       "transactionId": "d_00003600023",
+       "entryReference": "00003600023",
+       "valueDate": "2026-01-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-110.00"
+       },
+       "bookingDate": "2026-01-26",
+       "creditorName": "WISSOL",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - WISSOL",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20511.88"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-26"
+       }
+      },
+      {
+       "transactionId": "d_00003600024",
+       "entryReference": "00003600024",
+       "valueDate": "2026-01-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-110.00"
+       },
+       "bookingDate": "2026-01-28",
+       "creditorName": "WISSOL",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - WISSOL",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20401.88"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-28"
+       }
+      },
+      {
+       "transactionId": "d_00003600025",
+       "entryReference": "00003600025",
+       "valueDate": "2026-01-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.87"
+       },
+       "bookingDate": "2026-01-30",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20399.01"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-30"
+       }
+      },
+      {
+       "transactionId": "d_00003600026",
+       "entryReference": "00003600026",
+       "valueDate": "2026-02-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-24.77"
+       },
+       "bookingDate": "2026-02-02",
+       "creditorName": "WOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - WOLT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20374.24"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-02"
+       }
+      },
+      {
+       "transactionId": "d_00003600027",
+       "entryReference": "00003600027",
+       "valueDate": "2026-02-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-31.60"
+       },
+       "bookingDate": "2026-02-16",
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20342.64"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-16"
+       }
+      },
+      {
+       "transactionId": "d_00003600028",
+       "entryReference": "00003600028",
+       "valueDate": "2026-02-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.48"
+       },
+       "bookingDate": "2026-02-17",
+       "creditorName": "WOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - WOLT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20330.16"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-17"
+       }
+      },
+      {
+       "transactionId": "d_00003600029",
+       "entryReference": "00003600029",
+       "valueDate": "2026-02-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.00"
+       },
+       "bookingDate": "2026-02-24",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20307.16"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-24"
+       }
+      },
+      {
+       "transactionId": "d_00003600030",
+       "entryReference": "00003600030",
+       "valueDate": "2026-02-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-60.00"
+       },
+       "bookingDate": "2026-02-24",
+       "creditorName": "PORTAL",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - PORTAL",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20247.16"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-24"
+       }
+      },
+      {
+       "transactionId": "d_00003600031",
+       "entryReference": "00003600031",
+       "valueDate": "2026-02-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-38.42"
+       },
+       "bookingDate": "2026-02-27",
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20208.74"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-27"
+       }
+      },
+      {
+       "transactionId": "d_00003600032",
+       "entryReference": "00003600032",
+       "valueDate": "2026-02-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-45.68"
+       },
+       "bookingDate": "2026-03-04",
+       "creditorName": "GLOVO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GLOVO",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20163.06"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-04"
+       }
+      },
+      {
+       "transactionId": "d_00003600033",
+       "entryReference": "00003600033",
+       "valueDate": "2026-03-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.31"
+       },
+       "bookingDate": "2026-03-04",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20155.75"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-04"
+       }
+      },
+      {
+       "transactionId": "d_00003600034",
+       "entryReference": "00003600034",
+       "valueDate": "2026-03-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-43.17"
+       },
+       "bookingDate": "2026-03-11",
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20112.58"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-11"
+       }
+      },
+      {
+       "transactionId": "d_00003600035",
+       "entryReference": "00003600035",
+       "valueDate": "2026-03-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-92.71"
+       },
+       "bookingDate": "2026-03-19",
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20019.87"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-19"
+       }
+      },
+      {
+       "transactionId": "d_00003600036",
+       "entryReference": "00003600036",
+       "valueDate": "2026-03-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.75"
+       },
+       "bookingDate": "2026-03-19",
+       "creditorName": "KFC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KFC",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "20005.12"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-19"
+       }
+      },
+      {
+       "transactionId": "d_00003600037",
+       "entryReference": "00003600037",
+       "valueDate": "2026-03-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-180.00"
+       },
+       "bookingDate": "2026-03-20",
+       "creditorName": "ATM LIBERTY BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "bankTransactionCode": "PMNT-CCRD-CWDL",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19825.12"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-20"
+       }
+      },
+      {
+       "transactionId": "d_00003600038",
+       "entryReference": "00003600038",
+       "valueDate": "2026-03-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-11.79"
+       },
+       "bookingDate": "2026-03-23",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19813.33"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-23"
+       }
+      },
+      {
+       "transactionId": "d_00003600039",
+       "entryReference": "00003600039",
+       "valueDate": "2026-03-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-39.94"
+       },
+       "bookingDate": "2026-03-23",
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19773.39"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-23"
+       }
+      },
+      {
+       "transactionId": "d_00003600040",
+       "entryReference": "00003600040",
+       "valueDate": "2026-03-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-15.63"
+       },
+       "bookingDate": "2026-03-23",
+       "creditorName": "GLOVO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GLOVO",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19757.76"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-23"
+       }
+      },
+      {
+       "transactionId": "d_00003600041",
+       "entryReference": "00003600041",
+       "valueDate": "2026-03-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.98"
+       },
+       "bookingDate": "2026-03-23",
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MAXIM",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19750.78"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-23"
+       }
+      },
+      {
+       "transactionId": "d_00003600042",
+       "entryReference": "00003600042",
+       "valueDate": "2026-03-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-18.14"
+       },
+       "bookingDate": "2026-03-27",
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19732.64"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-27"
+       }
+      },
+      {
+       "transactionId": "d_00003600043",
+       "entryReference": "00003600043",
+       "valueDate": "2026-03-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-25.91"
+       },
+       "bookingDate": "2026-03-30",
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GPC",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19706.73"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-30"
+       }
+      },
+      {
+       "transactionId": "d_00003600044",
+       "entryReference": "00003600044",
+       "valueDate": "2026-04-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.80"
+       },
+       "bookingDate": "2026-04-02",
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19685.93"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-02"
+       }
+      },
+      {
+       "transactionId": "d_00003600045",
+       "entryReference": "00003600045",
+       "valueDate": "2026-04-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-8.14"
+       },
+       "bookingDate": "2026-04-06",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19677.79"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-06"
+       }
+      },
+      {
+       "transactionId": "d_00003600046",
+       "entryReference": "00003600046",
+       "valueDate": "2026-04-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.15"
+       },
+       "bookingDate": "2026-04-14",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19658.64"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-14"
+       }
+      },
+      {
+       "transactionId": "d_00003600047",
+       "entryReference": "00003600047",
+       "valueDate": "2026-04-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-52.08"
+       },
+       "bookingDate": "2026-04-14",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19606.56"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-14"
+       }
+      },
+      {
+       "transactionId": "d_00003600048",
+       "entryReference": "00003600048",
+       "valueDate": "2026-04-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.40"
+       },
+       "bookingDate": "2026-04-14",
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GPC",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19596.16"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-14"
+       }
+      },
+      {
+       "transactionId": "d_00003600049",
+       "entryReference": "00003600049",
+       "valueDate": "2026-04-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-13.43"
+       },
+       "bookingDate": "2026-04-20",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19582.73"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-20"
+       }
+      },
+      {
+       "transactionId": "d_00003600050",
+       "entryReference": "00003600050",
+       "valueDate": "2026-04-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.79"
+       },
+       "bookingDate": "2026-04-20",
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19562.94"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-20"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/8ba49860-2bc1-5ff6-8243-bb38ad517233"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/8ba49860-2bc1-5ff6-8243-bb38ad517233/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      },
+      "next": {
+       "href": "/0.8/v1/accounts/8ba49860-2bc1-5ff6-8243-bb38ad517233/transactions?bookingStatus=both&dateFrom=2025-10-19&entryReferenceFrom=00003600050"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/8ba49860-2bc1-5ff6-8243-bb38ad517233/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19",
+    "entryReferenceFrom": "00003600050"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE86BG1049806777318633",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00003600051",
+       "entryReference": "00003600051",
+       "valueDate": "2026-04-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-79.01"
+       },
+       "bookingDate": "2026-04-24",
+       "creditorName": "GLOVO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GLOVO",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19483.93"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-24"
+       }
+      },
+      {
+       "transactionId": "d_00003600052",
+       "entryReference": "00003600052",
+       "valueDate": "2026-04-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-340.00"
+       },
+       "bookingDate": "2026-04-27",
+       "creditorName": "ATM LIBERTY BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "bankTransactionCode": "PMNT-CCRD-CWDL",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19143.93"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-27"
+       }
+      },
+      {
+       "transactionId": "d_00003600053",
+       "entryReference": "00003600053",
+       "valueDate": "2026-04-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-33.04"
+       },
+       "bookingDate": "2026-04-29",
+       "creditorName": "NETFLIX",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7253",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-04-28"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - NETFLIX",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19110.89"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-29"
+       }
+      },
+      {
+       "transactionId": "d_00003600054",
+       "entryReference": "00003600054",
+       "valueDate": "2026-04-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.36"
+       },
+       "bookingDate": "2026-05-01",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19101.53"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-01"
+       }
+      },
+      {
+       "transactionId": "d_00003600055",
+       "entryReference": "00003600055",
+       "valueDate": "2026-04-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-53.55"
+       },
+       "bookingDate": "2026-05-01",
+       "creditorName": "SUBWAY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SUBWAY",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19047.98"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-01"
+       }
+      },
+      {
+       "transactionId": "d_00003600056",
+       "entryReference": "00003600056",
+       "valueDate": "2026-05-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-43.56"
+       },
+       "bookingDate": "2026-05-05",
+       "creditorName": "GLOVO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GLOVO",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "19004.42"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-05"
+       }
+      },
+      {
+       "transactionId": "d_00003600057",
+       "entryReference": "00003600057",
+       "valueDate": "2026-05-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-570.00"
+       },
+       "bookingDate": "2026-05-06",
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "bankTransactionCode": "PMNT-CCRD-CWDL",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "18434.42"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-06"
+       }
+      },
+      {
+       "transactionId": "d_00003600058",
+       "entryReference": "00003600058",
+       "valueDate": "2026-05-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-190.00"
+       },
+       "bookingDate": "2026-05-11",
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "bankTransactionCode": "PMNT-CCRD-CWDL",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "18244.42"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-11"
+       }
+      },
+      {
+       "transactionId": "d_00003600059",
+       "entryReference": "00003600059",
+       "valueDate": "2026-05-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-73.05"
+       },
+       "bookingDate": "2026-05-11",
+       "creditorName": "GLOVO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GLOVO",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "18171.37"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-11"
+       }
+      },
+      {
+       "transactionId": "d_00003600060",
+       "entryReference": "00003600060",
+       "valueDate": "2026-05-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-47.95"
+       },
+       "bookingDate": "2026-05-18",
+       "creditorName": "SHAVI LOMI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SHAVI LOMI",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "18123.42"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-18"
+       }
+      },
+      {
+       "transactionId": "d_00003600061",
+       "entryReference": "00003600061",
+       "valueDate": "2026-05-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-32.34"
+       },
+       "bookingDate": "2026-05-19",
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KIOSK",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "18091.08"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-19"
+       }
+      },
+      {
+       "transactionId": "d_00003600062",
+       "entryReference": "00003600062",
+       "valueDate": "2026-05-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-40.00"
+       },
+       "bookingDate": "2026-05-22",
+       "creditorName": "WISSOL",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - WISSOL",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "18051.08"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-22"
+       }
+      },
+      {
+       "transactionId": "d_00003600063",
+       "entryReference": "00003600063",
+       "valueDate": "2026-05-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-13.56"
+       },
+       "bookingDate": "2026-05-25",
+       "creditorName": "PHARMADEPOT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - PHARMADEPOT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "18037.52"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-25"
+       }
+      },
+      {
+       "transactionId": "d_00003600064",
+       "entryReference": "00003600064",
+       "valueDate": "2026-05-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.54"
+       },
+       "bookingDate": "2026-05-25",
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "18024.98"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-25"
+       }
+      },
+      {
+       "transactionId": "d_00003600065",
+       "entryReference": "00003600065",
+       "valueDate": "2026-05-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-79.57"
+       },
+       "bookingDate": "2026-05-25",
+       "creditorName": "ZARA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ZARA",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "17945.41"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-25"
+       }
+      },
+      {
+       "transactionId": "d_00003600066",
+       "entryReference": "00003600066",
+       "valueDate": "2026-05-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.78"
+       },
+       "bookingDate": "2026-05-27",
+       "creditorName": "YANDEX GO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - YANDEX GO",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "17934.63"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-27"
+       }
+      },
+      {
+       "transactionId": "d_00003600067",
+       "entryReference": "00003600067",
+       "valueDate": "2026-05-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-45.42"
+       },
+       "bookingDate": "2026-05-28",
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MAXIM",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "17889.21"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-28"
+       }
+      },
+      {
+       "transactionId": "d_00003600068",
+       "entryReference": "00003600068",
+       "valueDate": "2026-05-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-88.51"
+       },
+       "bookingDate": "2026-06-01",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "17800.70"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-01"
+       }
+      },
+      {
+       "transactionId": "d_00003600069",
+       "entryReference": "00003600069",
+       "valueDate": "2026-06-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.49"
+       },
+       "bookingDate": "2026-06-05",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "17791.21"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-05"
+       }
+      },
+      {
+       "transactionId": "d_00003600070",
+       "entryReference": "00003600070",
+       "valueDate": "2026-06-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-31.92"
+       },
+       "bookingDate": "2026-06-08",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "17759.29"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-08"
+       }
+      },
+      {
+       "transactionId": "d_00003600071",
+       "entryReference": "00003600071",
+       "valueDate": "2026-06-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-35.79"
+       },
+       "bookingDate": "2026-06-18",
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "17723.50"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-18"
+       }
+      },
+      {
+       "transactionId": "d_00003600072",
+       "entryReference": "00003600072",
+       "valueDate": "2026-06-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-50.57"
+       },
+       "bookingDate": "2026-06-19",
+       "creditorName": "GLOVO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GLOVO",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "17672.93"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-19"
+       }
+      },
+      {
+       "transactionId": "d_00003600073",
+       "entryReference": "00003600073",
+       "valueDate": "2026-06-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-157.48"
+       },
+       "bookingDate": "2026-06-22",
+       "creditorName": "GLOVO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GLOVO",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "17515.45"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-22"
+       }
+      },
+      {
+       "transactionId": "d_00003600074",
+       "entryReference": "00003600074",
+       "valueDate": "2026-06-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-115.06"
+       },
+       "bookingDate": "2026-06-23",
+       "creditorName": "MAGNITI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MAGNITI",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "17400.39"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-23"
+       }
+      },
+      {
+       "transactionId": "d_00003600075",
+       "entryReference": "00003600075",
+       "valueDate": "2026-06-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-260.00"
+       },
+       "bookingDate": "2026-06-24",
+       "creditorName": "ROMPETROL",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ROMPETROL",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "17140.39"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-24"
+       }
+      },
+      {
+       "transactionId": "d_00003600076",
+       "entryReference": "00003600076",
+       "valueDate": "2026-06-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-44.64"
+       },
+       "bookingDate": "2026-06-25",
+       "creditorName": "GLOVO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GLOVO",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "17095.75"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-25"
+       }
+      },
+      {
+       "transactionId": "d_00003600077",
+       "entryReference": "00003600077",
+       "valueDate": "2026-06-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-75.26"
+       },
+       "bookingDate": "2026-06-30",
+       "creditorName": "MACHAKHELA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MACHAKHELA",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "17020.49"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-30"
+       }
+      },
+      {
+       "transactionId": "d_00003600078",
+       "entryReference": "00003600078",
+       "valueDate": "2026-06-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-43.82"
+       },
+       "bookingDate": "2026-06-30",
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "16976.67"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-30"
+       }
+      },
+      {
+       "transactionId": "d_00003600079",
+       "entryReference": "00003600079",
+       "valueDate": "2026-07-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-34.21"
+       },
+       "bookingDate": "2026-07-06",
+       "creditorName": "KFC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KFC",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "16942.46"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-06"
+       }
+      },
+      {
+       "transactionId": "d_00003600080",
+       "entryReference": "00003600080",
+       "valueDate": "2026-07-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-116.89"
+       },
+       "bookingDate": "2026-07-06",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "16825.57"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-06"
+       }
+      },
+      {
+       "transactionId": "d_00003600081",
+       "entryReference": "00003600081",
+       "valueDate": "2026-07-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-238.26"
+       },
+       "bookingDate": "2026-07-06",
+       "creditorName": "EVEX HOSPITALS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - EVEX HOSPITALS",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "16587.31"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-06"
+       }
+      },
+      {
+       "transactionId": "d_00003600082",
+       "entryReference": "00003600082",
+       "valueDate": "2026-07-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-8.16"
+       },
+       "bookingDate": "2026-07-14",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "16579.15"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-14"
+       }
+      },
+      {
+       "transactionId": "d_00003600083",
+       "entryReference": "00003600083",
+       "valueDate": "2026-07-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-129.05"
+       },
+       "bookingDate": "2026-07-16",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "16450.10"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-16"
+       }
+      },
+      {
+       "transactionId": "d_00003600084",
+       "entryReference": "00003600084",
+       "valueDate": "2026-07-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1000.00"
+       },
+       "bookingDate": "2026-07-16",
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "bankTransactionCode": "PMNT-CCRD-CWDL",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "15450.10"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-16"
+       }
+      },
+      {
+       "transactionId": "d_00003600085",
+       "entryReference": "00003600085",
+       "valueDate": "2026-07-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-123.08"
+       },
+       "bookingDate": "2026-07-20",
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "15327.02"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-20"
+       }
+      },
+      {
+       "transactionId": "d_00003600086",
+       "entryReference": "00003600086",
+       "valueDate": "2026-07-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-40.23"
+       },
+       "bookingDate": "2026-07-21",
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "15286.79"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-21"
+       }
+      },
+      {
+       "transactionId": "d_00003600087",
+       "entryReference": "00003600087",
+       "valueDate": "2026-07-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-410.00"
+       },
+       "bookingDate": "2026-07-27",
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "bankTransactionCode": "PMNT-CCRD-CWDL",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "14876.79"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-27"
+       }
+      },
+      {
+       "transactionId": "d_00003600088",
+       "entryReference": "00003600088",
+       "valueDate": "2026-07-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-101.04"
+       },
+       "bookingDate": "2026-07-30",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "14775.75"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-30"
+       }
+      },
+      {
+       "transactionId": "d_00003600089",
+       "entryReference": "00003600089",
+       "valueDate": "2026-08-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-430.00"
+       },
+       "bookingDate": "2026-08-11",
+       "creditorName": "SOCAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SOCAR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "14345.75"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-11"
+       }
+      },
+      {
+       "transactionId": "d_00003600090",
+       "entryReference": "00003600090",
+       "valueDate": "2026-08-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-800.00"
+       },
+       "bookingDate": "2026-08-14",
+       "creditorName": "ATM LIBERTY BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "bankTransactionCode": "PMNT-CCRD-CWDL",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "13545.75"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-14"
+       }
+      },
+      {
+       "transactionId": "d_00003600091",
+       "entryReference": "00003600091",
+       "valueDate": "2026-08-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-83.94"
+       },
+       "bookingDate": "2026-08-21",
+       "creditorName": "MACHAKHELA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MACHAKHELA",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "13461.81"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-21"
+       }
+      },
+      {
+       "transactionId": "d_00003600092",
+       "entryReference": "00003600092",
+       "valueDate": "2026-08-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-371.42"
+       },
+       "bookingDate": "2026-08-24",
+       "creditorName": "FRESCO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - FRESCO",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "13090.39"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-24"
+       }
+      },
+      {
+       "transactionId": "d_00003600093",
+       "entryReference": "00003600093",
+       "valueDate": "2026-08-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-208.85"
+       },
+       "bookingDate": "2026-08-24",
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "12881.54"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-24"
+       }
+      },
+      {
+       "transactionId": "d_00003600094",
+       "entryReference": "00003600094",
+       "valueDate": "2026-08-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-44.74"
+       },
+       "bookingDate": "2026-08-24",
+       "creditorName": "TBILISI TRANSPORT COMPANY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - TBILISI TRANSPORT COMPANY",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "12836.80"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-24"
+       }
+      },
+      {
+       "transactionId": "d_00003600095",
+       "entryReference": "00003600095",
+       "valueDate": "2026-08-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1000.00"
+       },
+       "bookingDate": "2026-08-24",
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "bankTransactionCode": "PMNT-CCRD-CWDL",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "11836.80"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-24"
+       }
+      },
+      {
+       "transactionId": "d_00003600096",
+       "entryReference": "00003600096",
+       "valueDate": "2026-09-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3184.52"
+       },
+       "bookingDate": "2026-09-07",
+       "creditorName": "LC WAIKIKI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - LC WAIKIKI",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "8652.28"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-07"
+       }
+      },
+      {
+       "transactionId": "d_00003600097",
+       "entryReference": "00003600097",
+       "valueDate": "2026-09-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-61.44"
+       },
+       "bookingDate": "2026-09-16",
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "8590.84"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-16"
+       }
+      },
+      {
+       "transactionId": "d_00003600098",
+       "entryReference": "00003600098",
+       "valueDate": "2026-09-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-39.67"
+       },
+       "bookingDate": "2026-09-21",
+       "creditorName": "YANDEX GO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - YANDEX GO",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "8551.17"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-21"
+       }
+      },
+      {
+       "transactionId": "d_00003600099",
+       "entryReference": "00003600099",
+       "valueDate": "2026-09-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-60.56"
+       },
+       "bookingDate": "2026-09-21",
+       "creditorName": "YANDEX GO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - YANDEX GO",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "8490.61"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-21"
+       }
+      },
+      {
+       "transactionId": "d_00003600100",
+       "entryReference": "00003600100",
+       "valueDate": "2026-09-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-18.01"
+       },
+       "bookingDate": "2026-09-21",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "8472.60"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-21"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/8ba49860-2bc1-5ff6-8243-bb38ad517233"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/8ba49860-2bc1-5ff6-8243-bb38ad517233/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      },
+      "next": {
+       "href": "/0.8/v1/accounts/8ba49860-2bc1-5ff6-8243-bb38ad517233/transactions?bookingStatus=both&dateFrom=2025-10-19&entryReferenceFrom=00003600100"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/8ba49860-2bc1-5ff6-8243-bb38ad517233/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19",
+    "entryReferenceFrom": "00003600100"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE86BG1049806777318633",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00003600101",
+       "entryReference": "00003600101",
+       "valueDate": "2026-09-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-26.20"
+       },
+       "bookingDate": "2026-09-22",
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "8446.40"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-22"
+       }
+      },
+      {
+       "transactionId": "d_00003600102",
+       "entryReference": "00003600102",
+       "valueDate": "2026-09-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-46.57"
+       },
+       "bookingDate": "2026-09-28",
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "8399.83"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-28"
+       }
+      },
+      {
+       "transactionId": "d_00003600103",
+       "entryReference": "00003600103",
+       "valueDate": "2026-09-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.78"
+       },
+       "bookingDate": "2026-10-01",
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "8385.05"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-01"
+       }
+      },
+      {
+       "transactionId": "d_00003600104",
+       "entryReference": "00003600104",
+       "valueDate": "2026-10-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-86.12"
+       },
+       "bookingDate": "2026-10-05",
+       "creditorName": "GLOVO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GLOVO",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "8298.93"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-05"
+       }
+      }
+     ],
+     "pending": [
+      {
+       "transactionId": "d_00003600105",
+       "entryReference": "00003600105",
+       "valueDate": "2026-10-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.54"
+       },
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD"
+      },
+      {
+       "transactionId": "d_00003600106",
+       "entryReference": "00003600106",
+       "valueDate": "2026-10-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-59.47"
+       },
+       "creditorName": "NETFLIX",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.6294",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-10-17"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - NETFLIX",
+       "bankTransactionCode": "PMNT-CCRD-POSD"
+      }
+     ],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/8ba49860-2bc1-5ff6-8243-bb38ad517233"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/8ba49860-2bc1-5ff6-8243-bb38ad517233/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

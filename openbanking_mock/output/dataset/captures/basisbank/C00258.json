@@ -1,0 +1,294 @@
+{
+ "bank": "basisbank",
+ "customer": "C00258",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "8e9ab552-ae3c-5d34-9208-c3a5baf51895",
+      "iban": "GE32BS1904275330181783",
+      "currency": "GEL",
+      "ownerName": "SALOME KUPRADZE",
+      "name": "SALOME KUPRADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "CBASGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/8e9ab552-ae3c-5d34-9208-c3a5baf51895/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/8e9ab552-ae3c-5d34-9208-c3a5baf51895/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/8e9ab552-ae3c-5d34-9208-c3a5baf51895",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "8e9ab552-ae3c-5d34-9208-c3a5baf51895",
+     "iban": "GE32BS1904275330181783",
+     "currency": "GEL",
+     "ownerName": "SALOME KUPRADZE",
+     "name": "SALOME KUPRADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "CBASGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/8e9ab552-ae3c-5d34-9208-c3a5baf51895/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/8e9ab552-ae3c-5d34-9208-c3a5baf51895/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/8e9ab552-ae3c-5d34-9208-c3a5baf51895/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE32BS1904275330181783",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/8e9ab552-ae3c-5d34-9208-c3a5baf51895/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE32BS1904275330181783",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/8e9ab552-ae3c-5d34-9208-c3a5baf51895"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/8e9ab552-ae3c-5d34-9208-c3a5baf51895/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "b20a8b92-b5a3-51b3-a2cf-6e36272b745e",
+      "maskedPan": "517805******0547",
+      "currency": "GEL",
+      "ownerName": "SALOME KUPRADZE",
+      "name": "SALOME KUPRADZE",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/b20a8b92-b5a3-51b3-a2cf-6e36272b745e/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/b20a8b92-b5a3-51b3-a2cf-6e36272b745e/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/b20a8b92-b5a3-51b3-a2cf-6e36272b745e",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "b20a8b92-b5a3-51b3-a2cf-6e36272b745e",
+     "maskedPan": "517805******0547",
+     "currency": "GEL",
+     "ownerName": "SALOME KUPRADZE",
+     "name": "SALOME KUPRADZE",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.00"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.00"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/b20a8b92-b5a3-51b3-a2cf-6e36272b745e/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/b20a8b92-b5a3-51b3-a2cf-6e36272b745e/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/b20a8b92-b5a3-51b3-a2cf-6e36272b745e/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "517805******0547",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/b20a8b92-b5a3-51b3-a2cf-6e36272b745e/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/8e9ab552-ae3c-5d34-9208-c3a5baf51895"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/b20a8b92-b5a3-51b3-a2cf-6e36272b745e/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "517805******0547",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

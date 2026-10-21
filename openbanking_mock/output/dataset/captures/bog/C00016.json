@@ -1,0 +1,853 @@
+{
+ "bank": "bog",
+ "customer": "C00016",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "7760ab98-00e3-5407-8778-93c0533c18c3",
+      "iban": "GE29BG1431928685774583",
+      "currency": "GEL",
+      "ownerName": "ALEKSANDRE GVENETADZE",
+      "name": "ALEKSANDRE GVENETADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-143.34"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-22T08:59:35"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-143.34"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-22T08:59:35"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "7760ab98-00e3-5407-8778-93c0533c18c3",
+     "iban": "GE29BG1431928685774583",
+     "currency": "GEL",
+     "ownerName": "ALEKSANDRE GVENETADZE",
+     "name": "ALEKSANDRE GVENETADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE29BG1431928685774583",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-143.34"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-143.34"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-09-22T08:59:35"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE29BG1431928685774583",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00006000001",
+       "entryReference": "00006000001",
+       "valueDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1062.03"
+       },
+       "bookingDate": "2025-10-21",
+       "endToEndId": "E2E13277D5688FF",
+       "debtorName": "ალექსანდრე გვენეტაძე",
+       "debtorAccount": {
+        "iban": "GE65TB1788426511387395"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1062.03"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-21"
+       }
+      },
+      {
+       "transactionId": "d_00006000002",
+       "entryReference": "00006000002",
+       "valueDate": "2025-10-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1062.03"
+       },
+       "bookingDate": "2025-10-22",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 925E7252",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT985E8B30F2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-22"
+       }
+      },
+      {
+       "transactionId": "c_00006000003",
+       "entryReference": "00006000003",
+       "valueDate": "2025-11-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1062.03"
+       },
+       "bookingDate": "2025-11-21",
+       "endToEndId": "E2E2D9FAB2A14AF",
+       "debtorName": "ალექსანდრე გვენეტაძე",
+       "debtorAccount": {
+        "iban": "GE65TB1788426511387395"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1062.03"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-21"
+       }
+      },
+      {
+       "transactionId": "d_00006000004",
+       "entryReference": "00006000004",
+       "valueDate": "2025-11-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1062.03"
+       },
+       "bookingDate": "2025-11-22",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 925E7252",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT985E8B30F2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-22"
+       }
+      },
+      {
+       "transactionId": "c_00006000005",
+       "entryReference": "00006000005",
+       "valueDate": "2025-12-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1062.03"
+       },
+       "bookingDate": "2025-12-19",
+       "endToEndId": "E2EFD5BF4EE3D1B",
+       "debtorName": "ალექსანდრე გვენეტაძე",
+       "debtorAccount": {
+        "iban": "GE65TB1788426511387395"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1062.03"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-19"
+       }
+      },
+      {
+       "transactionId": "d_00006000006",
+       "entryReference": "00006000006",
+       "valueDate": "2025-12-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-30.00"
+       },
+       "bookingDate": "2025-12-22",
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "bankTransactionCode": "PMNT-CCRD-CWDL",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1032.03"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-22"
+       }
+      },
+      {
+       "transactionId": "d_00006000007",
+       "entryReference": "00006000007",
+       "valueDate": "2025-12-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1062.03"
+       },
+       "bookingDate": "2025-12-22",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 925E7252",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT985E8B30F2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-30.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-22"
+       }
+      },
+      {
+       "transactionId": "c_00006000008",
+       "entryReference": "00006000008",
+       "valueDate": "2026-01-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1062.03"
+       },
+       "bookingDate": "2026-01-21",
+       "endToEndId": "E2E1E363F857621",
+       "debtorName": "ალექსანდრე გვენეტაძე",
+       "debtorAccount": {
+        "iban": "GE65TB1788426511387395"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1032.03"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-21"
+       }
+      },
+      {
+       "transactionId": "d_00006000009",
+       "entryReference": "00006000009",
+       "valueDate": "2026-01-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1062.03"
+       },
+       "bookingDate": "2026-01-22",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 925E7252",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT985E8B30F2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-30.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-22"
+       }
+      },
+      {
+       "transactionId": "c_00006000010",
+       "entryReference": "00006000010",
+       "valueDate": "2026-02-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1062.03"
+       },
+       "bookingDate": "2026-02-20",
+       "endToEndId": "E2E45BA495AEF77",
+       "debtorName": "ალექსანდრე გვენეტაძე",
+       "debtorAccount": {
+        "iban": "GE65TB1788426511387395"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1032.03"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-20"
+       }
+      },
+      {
+       "transactionId": "d_00006000011",
+       "entryReference": "00006000011",
+       "valueDate": "2026-02-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1062.03"
+       },
+       "bookingDate": "2026-02-22",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 925E7252",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT985E8B30F2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-30.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-22"
+       }
+      },
+      {
+       "transactionId": "c_00006000012",
+       "entryReference": "00006000012",
+       "valueDate": "2026-03-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1062.03"
+       },
+       "bookingDate": "2026-03-20",
+       "endToEndId": "E2E14F871A2F564",
+       "debtorName": "ალექსანდრე გვენეტაძე",
+       "debtorAccount": {
+        "iban": "GE65TB1788426511387395"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1032.03"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-20"
+       }
+      },
+      {
+       "transactionId": "d_00006000013",
+       "entryReference": "00006000013",
+       "valueDate": "2026-03-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1062.03"
+       },
+       "bookingDate": "2026-03-22",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 925E7252",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT985E8B30F2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-30.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-22"
+       }
+      },
+      {
+       "transactionId": "c_00006000014",
+       "entryReference": "00006000014",
+       "valueDate": "2026-04-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1062.03"
+       },
+       "bookingDate": "2026-04-21",
+       "endToEndId": "E2E1984DD8F084A",
+       "debtorName": "ალექსანდრე გვენეტაძე",
+       "debtorAccount": {
+        "iban": "GE65TB1788426511387395"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1032.03"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-21"
+       }
+      },
+      {
+       "transactionId": "d_00006000015",
+       "entryReference": "00006000015",
+       "valueDate": "2026-04-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1062.03"
+       },
+       "bookingDate": "2026-04-22",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 925E7252",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT985E8B30F2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-30.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-22"
+       }
+      },
+      {
+       "transactionId": "c_00006000016",
+       "entryReference": "00006000016",
+       "valueDate": "2026-05-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1062.03"
+       },
+       "bookingDate": "2026-05-21",
+       "endToEndId": "E2E35CF6BFD7751",
+       "debtorName": "ალექსანდრე გვენეტაძე",
+       "debtorAccount": {
+        "iban": "GE65TB1788426511387395"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1032.03"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-21"
+       }
+      },
+      {
+       "transactionId": "d_00006000017",
+       "entryReference": "00006000017",
+       "valueDate": "2026-05-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1062.03"
+       },
+       "bookingDate": "2026-05-22",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 925E7252",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT985E8B30F2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-30.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-22"
+       }
+      },
+      {
+       "transactionId": "c_00006000018",
+       "entryReference": "00006000018",
+       "valueDate": "2026-06-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1062.03"
+       },
+       "bookingDate": "2026-06-19",
+       "endToEndId": "E2E67BD92998514",
+       "debtorName": "ალექსანდრე გვენეტაძე",
+       "debtorAccount": {
+        "iban": "GE65TB1788426511387395"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1032.03"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-19"
+       }
+      },
+      {
+       "transactionId": "d_00006000019",
+       "entryReference": "00006000019",
+       "valueDate": "2026-06-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-57.03"
+       },
+       "bookingDate": "2026-06-22",
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "975.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-22"
+       }
+      },
+      {
+       "transactionId": "d_00006000020",
+       "entryReference": "00006000020",
+       "valueDate": "2026-06-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-30.74"
+       },
+       "bookingDate": "2026-06-22",
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "944.26"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-22"
+       }
+      },
+      {
+       "transactionId": "d_00006000021",
+       "entryReference": "00006000021",
+       "valueDate": "2026-06-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.19"
+       },
+       "bookingDate": "2026-06-22",
+       "creditorName": "KFC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KFC",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "925.07"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-22"
+       }
+      },
+      {
+       "transactionId": "d_00006000022",
+       "entryReference": "00006000022",
+       "valueDate": "2026-06-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1062.03"
+       },
+       "bookingDate": "2026-06-22",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 925E7252",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT985E8B30F2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-136.96"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-22"
+       }
+      },
+      {
+       "transactionId": "c_00006000023",
+       "entryReference": "00006000023",
+       "valueDate": "2026-07-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1062.03"
+       },
+       "bookingDate": "2026-07-21",
+       "endToEndId": "E2E80A04842A5CA",
+       "debtorName": "ალექსანდრე გვენეტაძე",
+       "debtorAccount": {
+        "iban": "GE65TB1788426511387395"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "925.07"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-21"
+       }
+      },
+      {
+       "transactionId": "d_00006000024",
+       "entryReference": "00006000024",
+       "valueDate": "2026-07-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1062.03"
+       },
+       "bookingDate": "2026-07-22",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 925E7252",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT985E8B30F2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-136.96"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-22"
+       }
+      },
+      {
+       "transactionId": "c_00006000025",
+       "entryReference": "00006000025",
+       "valueDate": "2026-08-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1062.03"
+       },
+       "bookingDate": "2026-08-21",
+       "endToEndId": "E2E1831E64BA296",
+       "debtorName": "ალექსანდრე გვენეტაძე",
+       "debtorAccount": {
+        "iban": "GE65TB1788426511387395"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "925.07"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-21"
+       }
+      },
+      {
+       "transactionId": "d_00006000026",
+       "entryReference": "00006000026",
+       "valueDate": "2026-08-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1062.03"
+       },
+       "bookingDate": "2026-08-22",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 925E7252",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT985E8B30F2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-136.96"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-22"
+       }
+      },
+      {
+       "transactionId": "c_00006000027",
+       "entryReference": "00006000027",
+       "valueDate": "2026-09-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1062.03"
+       },
+       "bookingDate": "2026-09-21",
+       "endToEndId": "E2E268B830282BD",
+       "debtorName": "ალექსანდრე გვენეტაძე",
+       "debtorAccount": {
+        "iban": "GE65TB1788426511387395"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "925.07"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-21"
+       }
+      },
+      {
+       "transactionId": "d_00006000028",
+       "entryReference": "00006000028",
+       "valueDate": "2026-09-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1062.03"
+       },
+       "bookingDate": "2026-09-22",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 925E7252",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT985E8B30F2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-136.96"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-22"
+       }
+      },
+      {
+       "transactionId": "d_00006000029",
+       "entryReference": "00006000029",
+       "valueDate": "2026-09-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.38"
+       },
+       "bookingDate": "2026-09-23",
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MAXIM",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-143.34"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-23"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

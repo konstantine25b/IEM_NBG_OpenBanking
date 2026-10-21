@@ -1,0 +1,216 @@
+{
+ "bank": "bog",
+ "customer": "C00060",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "7da042ad-f049-5b4e-a7b8-e0b8794d767d",
+      "iban": "GE44BG1760394934924884",
+      "currency": "GEL",
+      "ownerName": "ALEKSANDRE LOMIDZE",
+      "name": "ALEKSANDRE LOMIDZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "4.28"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-28T13:45:19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "4.28"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-28T13:45:19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/7da042ad-f049-5b4e-a7b8-e0b8794d767d/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/7da042ad-f049-5b4e-a7b8-e0b8794d767d/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/7da042ad-f049-5b4e-a7b8-e0b8794d767d",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "7da042ad-f049-5b4e-a7b8-e0b8794d767d",
+     "iban": "GE44BG1760394934924884",
+     "currency": "GEL",
+     "ownerName": "ALEKSANDRE LOMIDZE",
+     "name": "ALEKSANDRE LOMIDZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/7da042ad-f049-5b4e-a7b8-e0b8794d767d/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/7da042ad-f049-5b4e-a7b8-e0b8794d767d/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/7da042ad-f049-5b4e-a7b8-e0b8794d767d/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE44BG1760394934924884",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "4.28"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "4.28"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-09-28T13:45:19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/7da042ad-f049-5b4e-a7b8-e0b8794d767d/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE44BG1760394934924884",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00023600001",
+       "entryReference": "00023600001",
+       "valueDate": "2026-09-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "345.80"
+       },
+       "bookingDate": "2026-09-19",
+       "debtorName": "Bank of Georgia",
+       "remittanceInformationUnstructured": "სესხის გაცემა",
+       "bankTransactionCode": "PMNT-RCDT-BOOK",
+       "purposeCode": "LOAN",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "345.80"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-19"
+       }
+      },
+      {
+       "transactionId": "d_00023600002",
+       "entryReference": "00023600002",
+       "valueDate": "2026-09-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-318.13"
+       },
+       "bookingDate": "2026-09-20",
+       "creditorName": "REVAZ PANJIKIDZE",
+       "creditorAccount": {
+        "iban": "GE43BG1206602788333910"
+       },
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "გადახდა ხელშეკრულებით",
+       "bankTransactionCode": "PMNT-ICDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "27.67"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-20"
+       }
+      },
+      {
+       "transactionId": "d_00023600003",
+       "entryReference": "00023600003",
+       "valueDate": "2026-09-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.39"
+       },
+       "bookingDate": "2026-09-29",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "4.28"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-29"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/7da042ad-f049-5b4e-a7b8-e0b8794d767d"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/7da042ad-f049-5b4e-a7b8-e0b8794d767d/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

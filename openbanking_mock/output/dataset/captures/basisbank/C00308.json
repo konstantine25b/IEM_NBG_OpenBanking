@@ -1,0 +1,436 @@
+{
+ "bank": "basisbank",
+ "customer": "C00308",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "0ef0b03f-ac3b-5636-b52a-a77a40a65ca6",
+      "iban": "GE30BS1665314754109991",
+      "currency": "GEL",
+      "ownerName": "SABA BOLKVADZE",
+      "name": "SABA BOLKVADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "CBASGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "25.60"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-03T07:17:59"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "25.60"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-03T07:17:59"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/0ef0b03f-ac3b-5636-b52a-a77a40a65ca6/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/0ef0b03f-ac3b-5636-b52a-a77a40a65ca6/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/0ef0b03f-ac3b-5636-b52a-a77a40a65ca6",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "0ef0b03f-ac3b-5636-b52a-a77a40a65ca6",
+     "iban": "GE30BS1665314754109991",
+     "currency": "GEL",
+     "ownerName": "SABA BOLKVADZE",
+     "name": "SABA BOLKVADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "CBASGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/0ef0b03f-ac3b-5636-b52a-a77a40a65ca6/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/0ef0b03f-ac3b-5636-b52a-a77a40a65ca6/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/0ef0b03f-ac3b-5636-b52a-a77a40a65ca6/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE30BS1665314754109991",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "25.60"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "25.60"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-03T07:17:59"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/0ef0b03f-ac3b-5636-b52a-a77a40a65ca6/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE30BS1665314754109991",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00122800001",
+       "entryReference": "00122800001",
+       "valueDate": "2026-09-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1094.49"
+       },
+       "bookingDate": "2026-09-19",
+       "debtorName": "Basisbank",
+       "remittanceInformationUnstructured": "სესხის გაცემა",
+       "bankTransactionCode": "PMNT-RCDT-BOOK",
+       "purposeCode": "LOAN",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1094.49"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-19"
+       }
+      },
+      {
+       "transactionId": "d_00122800002",
+       "entryReference": "00122800002",
+       "valueDate": "2026-09-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1006.93"
+       },
+       "bookingDate": "2026-09-20",
+       "creditorName": "TINATIN MGELADZE",
+       "creditorAccount": {
+        "iban": "GE65TB1154613629149979"
+       },
+       "creditorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "გადახდა ხელშეკრულებით",
+       "bankTransactionCode": "PMNT-ICDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "87.56"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-20"
+       }
+      },
+      {
+       "transactionId": "d_00122800003",
+       "entryReference": "00122800003",
+       "valueDate": "2026-09-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-61.96"
+       },
+       "bookingDate": "2026-09-21",
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "25.60"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-21"
+       }
+      },
+      {
+       "transactionId": "c_00122800004",
+       "entryReference": "00122800004",
+       "valueDate": "2026-10-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "282.91"
+       },
+       "bookingDate": "2026-10-02",
+       "endToEndId": "E2E3561D664B92D",
+       "debtorName": "საბა ბოლქვაძე",
+       "debtorAccount": {
+        "iban": "GE48TB1886281558808218"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "308.51"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-02"
+       }
+      },
+      {
+       "transactionId": "d_00122800005",
+       "entryReference": "00122800005",
+       "valueDate": "2026-10-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-282.91"
+       },
+       "bookingDate": "2026-10-03",
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 9A233C95",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTA2EC497D2E",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "25.60"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-03"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/0ef0b03f-ac3b-5636-b52a-a77a40a65ca6"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/0ef0b03f-ac3b-5636-b52a-a77a40a65ca6/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "0aad8166-374b-5fc7-907b-d1bd6b4294d6",
+      "maskedPan": "533286******7285",
+      "currency": "GEL",
+      "ownerName": "SABA BOLKVADZE",
+      "name": "SABA BOLKVADZE",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "25.60"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-03T07:17:59"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "25.60"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-03T07:17:59"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/0aad8166-374b-5fc7-907b-d1bd6b4294d6/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/0aad8166-374b-5fc7-907b-d1bd6b4294d6/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/0aad8166-374b-5fc7-907b-d1bd6b4294d6",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "0aad8166-374b-5fc7-907b-d1bd6b4294d6",
+     "maskedPan": "533286******7285",
+     "currency": "GEL",
+     "ownerName": "SABA BOLKVADZE",
+     "name": "SABA BOLKVADZE",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "25.60"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-03T07:17:59"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "25.60"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-03T07:17:59"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/0aad8166-374b-5fc7-907b-d1bd6b4294d6/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/0aad8166-374b-5fc7-907b-d1bd6b4294d6/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/0aad8166-374b-5fc7-907b-d1bd6b4294d6/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "533286******7285",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "25.60"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "25.60"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-03T07:17:59"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/0aad8166-374b-5fc7-907b-d1bd6b4294d6/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00122800003",
+       "transactionDate": "2026-09-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-61.96"
+       },
+       "acceptorTransactionDateTime": "2026-09-20T15:37:43",
+       "maskedPAN": "533286******7285",
+       "transactionDetails": "ბარათით გადახდა - BOLT",
+       "bookingDate": "2026-09-21",
+       "cardAcceptorId": "BOLT",
+       "merchantCategoryCode": "4121"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/0ef0b03f-ac3b-5636-b52a-a77a40a65ca6"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/0aad8166-374b-5fc7-907b-d1bd6b4294d6/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "533286******7285",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

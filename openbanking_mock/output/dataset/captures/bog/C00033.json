@@ -1,0 +1,190 @@
+{
+ "bank": "bog",
+ "customer": "C00033",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "f9a1dcc9-f56f-5a30-8789-7c198ae14fd6",
+      "iban": "GE26BG1885324814550546",
+      "currency": "GEL",
+      "ownerName": "BEKA TAVADZE",
+      "name": "BEKA TAVADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "ORGA",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "7.58"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-04T21:38:21"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "7.58"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-04T21:38:21"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/f9a1dcc9-f56f-5a30-8789-7c198ae14fd6/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/f9a1dcc9-f56f-5a30-8789-7c198ae14fd6/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/f9a1dcc9-f56f-5a30-8789-7c198ae14fd6",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "f9a1dcc9-f56f-5a30-8789-7c198ae14fd6",
+     "iban": "GE26BG1885324814550546",
+     "currency": "GEL",
+     "ownerName": "BEKA TAVADZE",
+     "name": "BEKA TAVADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "ORGA",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/f9a1dcc9-f56f-5a30-8789-7c198ae14fd6/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/f9a1dcc9-f56f-5a30-8789-7c198ae14fd6/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/f9a1dcc9-f56f-5a30-8789-7c198ae14fd6/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE26BG1885324814550546",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "7.58"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "7.58"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-11-04T21:38:21"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/f9a1dcc9-f56f-5a30-8789-7c198ae14fd6/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE26BG1885324814550546",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00012800001",
+       "entryReference": "00012800001",
+       "valueDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-53.12"
+       },
+       "bookingDate": "2025-10-22",
+       "creditorName": "AVERSI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AVERSI",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "72.88"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-22"
+       }
+      },
+      {
+       "transactionId": "d_00012800002",
+       "entryReference": "00012800002",
+       "valueDate": "2025-11-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-65.30"
+       },
+       "bookingDate": "2025-11-05",
+       "creditorName": "SALOBIE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SALOBIE",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "7.58"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-05"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/f9a1dcc9-f56f-5a30-8789-7c198ae14fd6"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/f9a1dcc9-f56f-5a30-8789-7c198ae14fd6/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

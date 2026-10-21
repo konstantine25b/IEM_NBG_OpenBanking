@@ -1,0 +1,910 @@
+{
+ "bank": "credo",
+ "customer": "C00446",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "c7365d2c-433e-53fb-b236-2f2398ee7445",
+      "iban": "GE87CD1203384421129623",
+      "currency": "GEL",
+      "ownerName": "OTAR LOMIDZE",
+      "name": "OTAR LOMIDZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "JSCRGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-2.07"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-08-25T08:22:33"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-2.07"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-08-25T08:22:33"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/c7365d2c-433e-53fb-b236-2f2398ee7445/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/c7365d2c-433e-53fb-b236-2f2398ee7445/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/c7365d2c-433e-53fb-b236-2f2398ee7445",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "c7365d2c-433e-53fb-b236-2f2398ee7445",
+     "iban": "GE87CD1203384421129623",
+     "currency": "GEL",
+     "ownerName": "OTAR LOMIDZE",
+     "name": "OTAR LOMIDZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "JSCRGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/c7365d2c-433e-53fb-b236-2f2398ee7445/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/c7365d2c-433e-53fb-b236-2f2398ee7445/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/c7365d2c-433e-53fb-b236-2f2398ee7445/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE87CD1203384421129623",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-2.07"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-2.07"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-08-25T08:22:33"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/c7365d2c-433e-53fb-b236-2f2398ee7445/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE87CD1203384421129623",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00178000001",
+       "entryReference": "00178000001",
+       "valueDate": "2025-10-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "300.70"
+       },
+       "bookingDate": "2025-10-24",
+       "endToEndId": "E2E6CABF7008B7B",
+       "debtorName": "OTAR LOMIDZE",
+       "debtorAccount": {
+        "iban": "GE38BG1147925851995604"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "300.70"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-24"
+       }
+      },
+      {
+       "transactionId": "d_00178000002",
+       "entryReference": "00178000002",
+       "valueDate": "2025-10-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-300.70"
+       },
+       "bookingDate": "2025-10-25",
+       "creditorName": "Credo Bank",
+       "creditorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა BA81FD8F",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT377D0AE99C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-25"
+       }
+      },
+      {
+       "transactionId": "c_00178000003",
+       "entryReference": "00178000003",
+       "valueDate": "2025-11-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "300.70"
+       },
+       "bookingDate": "2025-11-24",
+       "endToEndId": "E2EEE88A3F9A180",
+       "debtorName": "OTAR LOMIDZE",
+       "debtorAccount": {
+        "iban": "GE38BG1147925851995604"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "300.70"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-24"
+       }
+      },
+      {
+       "transactionId": "d_00178000004",
+       "entryReference": "00178000004",
+       "valueDate": "2025-11-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-300.70"
+       },
+       "bookingDate": "2025-11-25",
+       "creditorName": "Credo Bank",
+       "creditorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა BA81FD8F",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT377D0AE99C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-25"
+       }
+      },
+      {
+       "transactionId": "c_00178000005",
+       "entryReference": "00178000005",
+       "valueDate": "2025-12-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "303.40"
+       },
+       "bookingDate": "2025-12-31",
+       "endToEndId": "E2EC66F7D7B31AF",
+       "debtorName": "OTAR LOMIDZE",
+       "debtorAccount": {
+        "iban": "GE38BG1147925851995604"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "303.40"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-31"
+       }
+      },
+      {
+       "transactionId": "d_00178000006",
+       "entryReference": "00178000006",
+       "valueDate": "2026-01-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-300.70"
+       },
+       "bookingDate": "2026-01-03",
+       "creditorName": "Credo Bank",
+       "creditorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა BA81FD8F",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT377D0AE99C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "2.70"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-03"
+       }
+      },
+      {
+       "transactionId": "d_00178000007",
+       "entryReference": "00178000007",
+       "valueDate": "2026-01-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.70"
+       },
+       "bookingDate": "2026-01-03",
+       "creditorName": "Credo Bank",
+       "remittanceInformationUnstructured": "ჯარიმა ვადაგადაცილებაზე",
+       "bankTransactionCode": "ACMT-MDOP-CHRG",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-03"
+       }
+      },
+      {
+       "transactionId": "d_00178000008",
+       "entryReference": "00178000008",
+       "valueDate": "2026-01-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.07"
+       },
+       "bookingDate": "2026-01-05",
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GPC",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-2.07"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-05"
+       }
+      },
+      {
+       "transactionId": "c_00178000009",
+       "entryReference": "00178000009",
+       "valueDate": "2026-01-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "300.70"
+       },
+       "bookingDate": "2026-01-23",
+       "endToEndId": "E2E44DEC996AAE2",
+       "debtorName": "OTAR LOMIDZE",
+       "debtorAccount": {
+        "iban": "GE38BG1147925851995604"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "298.63"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-23"
+       }
+      },
+      {
+       "transactionId": "d_00178000010",
+       "entryReference": "00178000010",
+       "valueDate": "2026-01-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-300.70"
+       },
+       "bookingDate": "2026-01-25",
+       "creditorName": "Credo Bank",
+       "creditorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა BA81FD8F",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT377D0AE99C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-2.07"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-25"
+       }
+      },
+      {
+       "transactionId": "c_00178000011",
+       "entryReference": "00178000011",
+       "valueDate": "2026-02-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "300.70"
+       },
+       "bookingDate": "2026-02-24",
+       "endToEndId": "E2E2AAEE1D52C64",
+       "debtorName": "OTAR LOMIDZE",
+       "debtorAccount": {
+        "iban": "GE38BG1147925851995604"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "298.63"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-24"
+       }
+      },
+      {
+       "transactionId": "d_00178000012",
+       "entryReference": "00178000012",
+       "valueDate": "2026-02-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-300.70"
+       },
+       "bookingDate": "2026-02-25",
+       "creditorName": "Credo Bank",
+       "creditorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა BA81FD8F",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT377D0AE99C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-2.07"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-25"
+       }
+      },
+      {
+       "transactionId": "c_00178000013",
+       "entryReference": "00178000013",
+       "valueDate": "2026-03-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "300.70"
+       },
+       "bookingDate": "2026-03-24",
+       "endToEndId": "E2EDC7A2744788D",
+       "debtorName": "OTAR LOMIDZE",
+       "debtorAccount": {
+        "iban": "GE38BG1147925851995604"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "298.63"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-24"
+       }
+      },
+      {
+       "transactionId": "d_00178000014",
+       "entryReference": "00178000014",
+       "valueDate": "2026-03-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-300.70"
+       },
+       "bookingDate": "2026-03-25",
+       "creditorName": "Credo Bank",
+       "creditorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა BA81FD8F",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT377D0AE99C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-2.07"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-25"
+       }
+      },
+      {
+       "transactionId": "c_00178000015",
+       "entryReference": "00178000015",
+       "valueDate": "2026-04-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "300.70"
+       },
+       "bookingDate": "2026-04-24",
+       "endToEndId": "E2E53796E956FFD",
+       "debtorName": "OTAR LOMIDZE",
+       "debtorAccount": {
+        "iban": "GE38BG1147925851995604"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "298.63"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-24"
+       }
+      },
+      {
+       "transactionId": "d_00178000016",
+       "entryReference": "00178000016",
+       "valueDate": "2026-04-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-300.70"
+       },
+       "bookingDate": "2026-04-25",
+       "creditorName": "Credo Bank",
+       "creditorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა BA81FD8F",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT377D0AE99C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-2.07"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-25"
+       }
+      },
+      {
+       "transactionId": "c_00178000017",
+       "entryReference": "00178000017",
+       "valueDate": "2026-05-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "300.70"
+       },
+       "bookingDate": "2026-05-22",
+       "endToEndId": "E2EE33B93A7115C",
+       "debtorName": "OTAR LOMIDZE",
+       "debtorAccount": {
+        "iban": "GE38BG1147925851995604"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "298.63"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-22"
+       }
+      },
+      {
+       "transactionId": "d_00178000018",
+       "entryReference": "00178000018",
+       "valueDate": "2026-05-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-300.70"
+       },
+       "bookingDate": "2026-05-25",
+       "creditorName": "Credo Bank",
+       "creditorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა BA81FD8F",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT377D0AE99C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-2.07"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-25"
+       }
+      },
+      {
+       "transactionId": "c_00178000019",
+       "entryReference": "00178000019",
+       "valueDate": "2026-06-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "300.70"
+       },
+       "bookingDate": "2026-06-24",
+       "endToEndId": "E2E07499FDA7BC3",
+       "debtorName": "OTAR LOMIDZE",
+       "debtorAccount": {
+        "iban": "GE38BG1147925851995604"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "298.63"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-24"
+       }
+      },
+      {
+       "transactionId": "d_00178000020",
+       "entryReference": "00178000020",
+       "valueDate": "2026-06-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-300.70"
+       },
+       "bookingDate": "2026-06-25",
+       "creditorName": "Credo Bank",
+       "creditorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა BA81FD8F",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT377D0AE99C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-2.07"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-25"
+       }
+      },
+      {
+       "transactionId": "c_00178000021",
+       "entryReference": "00178000021",
+       "valueDate": "2026-07-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "300.70"
+       },
+       "bookingDate": "2026-07-24",
+       "endToEndId": "E2E0E0450A5D150",
+       "debtorName": "OTAR LOMIDZE",
+       "debtorAccount": {
+        "iban": "GE38BG1147925851995604"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "298.63"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-24"
+       }
+      },
+      {
+       "transactionId": "d_00178000022",
+       "entryReference": "00178000022",
+       "valueDate": "2026-07-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-300.70"
+       },
+       "bookingDate": "2026-07-25",
+       "creditorName": "Credo Bank",
+       "creditorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა BA81FD8F",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT377D0AE99C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-2.07"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-25"
+       }
+      },
+      {
+       "transactionId": "c_00178000023",
+       "entryReference": "00178000023",
+       "valueDate": "2026-08-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "300.70"
+       },
+       "bookingDate": "2026-08-24",
+       "endToEndId": "E2EA1D1A2905CE2",
+       "debtorName": "OTAR LOMIDZE",
+       "debtorAccount": {
+        "iban": "GE38BG1147925851995604"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "298.63"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-24"
+       }
+      },
+      {
+       "transactionId": "d_00178000024",
+       "entryReference": "00178000024",
+       "valueDate": "2026-08-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-300.70"
+       },
+       "bookingDate": "2026-08-25",
+       "creditorName": "Credo Bank",
+       "creditorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა BA81FD8F",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT377D0AE99C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-2.07"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-25"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/c7365d2c-433e-53fb-b236-2f2398ee7445"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/c7365d2c-433e-53fb-b236-2f2398ee7445/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "4ef93ba2-0c64-575f-aa2a-1cf78d547840",
+      "maskedPan": "418057******3289",
+      "currency": "GEL",
+      "ownerName": "OTAR LOMIDZE",
+      "name": "OTAR LOMIDZE",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-2.07"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-08-25T08:22:33"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-2.07"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-08-25T08:22:33"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/4ef93ba2-0c64-575f-aa2a-1cf78d547840/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/4ef93ba2-0c64-575f-aa2a-1cf78d547840/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/4ef93ba2-0c64-575f-aa2a-1cf78d547840",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "4ef93ba2-0c64-575f-aa2a-1cf78d547840",
+     "maskedPan": "418057******3289",
+     "currency": "GEL",
+     "ownerName": "OTAR LOMIDZE",
+     "name": "OTAR LOMIDZE",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-2.07"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-08-25T08:22:33"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-2.07"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-08-25T08:22:33"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/4ef93ba2-0c64-575f-aa2a-1cf78d547840/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/4ef93ba2-0c64-575f-aa2a-1cf78d547840/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/4ef93ba2-0c64-575f-aa2a-1cf78d547840/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "418057******3289",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-2.07"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-2.07"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-08-25T08:22:33"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/4ef93ba2-0c64-575f-aa2a-1cf78d547840/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00178000008",
+       "transactionDate": "2026-01-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.07"
+       },
+       "acceptorTransactionDateTime": "2026-01-02T13:17:24",
+       "maskedPAN": "418057******3289",
+       "transactionDetails": "ბარათით გადახდა - GPC",
+       "bookingDate": "2026-01-05",
+       "cardAcceptorId": "GPC",
+       "merchantCategoryCode": "5912"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/c7365d2c-433e-53fb-b236-2f2398ee7445"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/4ef93ba2-0c64-575f-aa2a-1cf78d547840/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "418057******3289",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

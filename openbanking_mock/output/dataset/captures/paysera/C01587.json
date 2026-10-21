@@ -1,0 +1,136 @@
+{
+ "bank": "paysera",
+ "customer": "C01587",
+ "dialect": "paysera",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "ab7079c2-63bc-5993-8426-67e58fb261f6",
+      "iban": "GE05PS1469639489269427",
+      "currency": "GEL",
+      "product": "Current Account",
+      "cashAccountType": "CACC",
+      "name": "Main Account",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "28.25"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "28.25"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/xs2a/georgia/0.8/v1/accounts/ab7079c2-63bc-5993-8426-67e58fb261f6/balances"
+       },
+       "transactions": {
+        "href": "/xs2a/georgia/0.8/v1/accounts/ab7079c2-63bc-5993-8426-67e58fb261f6/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/ab7079c2-63bc-5993-8426-67e58fb261f6",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "ab7079c2-63bc-5993-8426-67e58fb261f6",
+     "iban": "GE05PS1469639489269427",
+     "currency": "GEL",
+     "product": "Current Account",
+     "cashAccountType": "CACC",
+     "name": "Main Account",
+     "_links": {
+      "balances": {
+       "href": "/xs2a/georgia/0.8/v1/accounts/ab7079c2-63bc-5993-8426-67e58fb261f6/balances"
+      },
+      "transactions": {
+       "href": "/xs2a/georgia/0.8/v1/accounts/ab7079c2-63bc-5993-8426-67e58fb261f6/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/xs2a/georgia/0.8/v1/accounts/ab7079c2-63bc-5993-8426-67e58fb261f6/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE05PS1469639489269427",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "28.25"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "28.25"
+      },
+      "balanceType": "interimBooked",
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/xs2a/georgia/0.8/v1/accounts/ab7079c2-63bc-5993-8426-67e58fb261f6/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE05PS1469639489269427",
+     "currency": "GEL"
+    },
+    "_links": {
+     "account": {
+      "href": "/xs2a/georgia/0.8/v1/accounts/ab7079c2-63bc-5993-8426-67e58fb261f6"
+     },
+     "first": {
+      "href": "/xs2a/georgia/0.8/v1/accounts/ab7079c2-63bc-5993-8426-67e58fb261f6/transactions?bookingStatus=both&dateFrom=2025-10-19"
+     }
+    },
+    "transactions": {
+     "booked": [],
+     "pending": []
+    }
+   }
+  }
+ ]
+}

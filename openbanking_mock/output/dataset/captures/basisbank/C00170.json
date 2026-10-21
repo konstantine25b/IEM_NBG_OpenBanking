@@ -1,0 +1,294 @@
+{
+ "bank": "basisbank",
+ "customer": "C00170",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "80031606-232a-58ec-869e-f47a269b3863",
+      "iban": "GE19BS1448181951518815",
+      "currency": "GEL",
+      "ownerName": "IRAKLI KAPANADZE",
+      "name": "IRAKLI KAPANADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "CBASGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/80031606-232a-58ec-869e-f47a269b3863/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/80031606-232a-58ec-869e-f47a269b3863/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/80031606-232a-58ec-869e-f47a269b3863",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "80031606-232a-58ec-869e-f47a269b3863",
+     "iban": "GE19BS1448181951518815",
+     "currency": "GEL",
+     "ownerName": "IRAKLI KAPANADZE",
+     "name": "IRAKLI KAPANADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "CBASGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/80031606-232a-58ec-869e-f47a269b3863/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/80031606-232a-58ec-869e-f47a269b3863/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/80031606-232a-58ec-869e-f47a269b3863/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE19BS1448181951518815",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/80031606-232a-58ec-869e-f47a269b3863/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE19BS1448181951518815",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/80031606-232a-58ec-869e-f47a269b3863"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/80031606-232a-58ec-869e-f47a269b3863/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "1ebd8266-b2ba-5bc2-a9ca-13cab9be6618",
+      "maskedPan": "517805******7122",
+      "currency": "GEL",
+      "ownerName": "IRAKLI KAPANADZE",
+      "name": "IRAKLI KAPANADZE",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/1ebd8266-b2ba-5bc2-a9ca-13cab9be6618/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/1ebd8266-b2ba-5bc2-a9ca-13cab9be6618/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/1ebd8266-b2ba-5bc2-a9ca-13cab9be6618",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "1ebd8266-b2ba-5bc2-a9ca-13cab9be6618",
+     "maskedPan": "517805******7122",
+     "currency": "GEL",
+     "ownerName": "IRAKLI KAPANADZE",
+     "name": "IRAKLI KAPANADZE",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.00"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.00"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/1ebd8266-b2ba-5bc2-a9ca-13cab9be6618/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/1ebd8266-b2ba-5bc2-a9ca-13cab9be6618/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/1ebd8266-b2ba-5bc2-a9ca-13cab9be6618/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "517805******7122",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/1ebd8266-b2ba-5bc2-a9ca-13cab9be6618/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/80031606-232a-58ec-869e-f47a269b3863"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/1ebd8266-b2ba-5bc2-a9ca-13cab9be6618/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "517805******7122",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

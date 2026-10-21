@@ -1,0 +1,294 @@
+{
+ "bank": "credo",
+ "customer": "C00411",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "75fa3dcb-f791-5444-8cb5-707545641c56",
+      "iban": "GE34CD1999297262198714",
+      "currency": "GEL",
+      "ownerName": "NANA GOGOLADZE",
+      "name": "NANA GOGOLADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "JSCRGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/75fa3dcb-f791-5444-8cb5-707545641c56/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/75fa3dcb-f791-5444-8cb5-707545641c56/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/75fa3dcb-f791-5444-8cb5-707545641c56",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "75fa3dcb-f791-5444-8cb5-707545641c56",
+     "iban": "GE34CD1999297262198714",
+     "currency": "GEL",
+     "ownerName": "NANA GOGOLADZE",
+     "name": "NANA GOGOLADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "JSCRGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/75fa3dcb-f791-5444-8cb5-707545641c56/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/75fa3dcb-f791-5444-8cb5-707545641c56/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/75fa3dcb-f791-5444-8cb5-707545641c56/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE34CD1999297262198714",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/75fa3dcb-f791-5444-8cb5-707545641c56/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE34CD1999297262198714",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/75fa3dcb-f791-5444-8cb5-707545641c56"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/75fa3dcb-f791-5444-8cb5-707545641c56/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "51720773-dbab-55a7-b871-05fb5a84d357",
+      "maskedPan": "533286******6612",
+      "currency": "GEL",
+      "ownerName": "NANA GOGOLADZE",
+      "name": "NANA GOGOLADZE",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/51720773-dbab-55a7-b871-05fb5a84d357/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/51720773-dbab-55a7-b871-05fb5a84d357/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/51720773-dbab-55a7-b871-05fb5a84d357",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "51720773-dbab-55a7-b871-05fb5a84d357",
+     "maskedPan": "533286******6612",
+     "currency": "GEL",
+     "ownerName": "NANA GOGOLADZE",
+     "name": "NANA GOGOLADZE",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.00"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.00"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/51720773-dbab-55a7-b871-05fb5a84d357/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/51720773-dbab-55a7-b871-05fb5a84d357/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/51720773-dbab-55a7-b871-05fb5a84d357/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "533286******6612",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/51720773-dbab-55a7-b871-05fb5a84d357/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/75fa3dcb-f791-5444-8cb5-707545641c56"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/51720773-dbab-55a7-b871-05fb5a84d357/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "533286******6612",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

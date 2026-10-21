@@ -1,0 +1,133 @@
+{
+ "bank": "procredit",
+ "customer": "C00525",
+ "dialect": "procredit",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "49533913",
+      "iban": "GE58PC1846689099005208",
+      "currency": "GEL",
+      "name": "GE58PC1846689099005208",
+      "product": "მიმდინარე ანგარიში",
+      "status": "enabled",
+      "bic": "MIBGGE22",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": 0.0
+        },
+        "balanceType": "interimAvailable"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": 0.0
+        },
+        "balanceType": "interimBooked"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/49533913/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/49533913/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/49533913",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "49533913",
+     "iban": "GE58PC1846689099005208",
+     "currency": "GEL",
+     "name": "GE58PC1846689099005208",
+     "product": "მიმდინარე ანგარიში",
+     "status": "enabled",
+     "bic": "MIBGGE22",
+     "balances": [],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/49533913/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/49533913/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/49533913/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE58PC1846689099005208",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": 0.0
+      },
+      "balanceType": "interimAvailable"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": 0.0
+      },
+      "balanceType": "closingBooked"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/49533913/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE58PC1846689099005208",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/49533913"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/49533913/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,169 @@
+{
+ "bank": "bog",
+ "customer": "C00154",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "c9af28cf-ff88-5041-af5b-1bab13d27277",
+      "iban": "GE91BG1323720274423586",
+      "currency": "GEL",
+      "ownerName": "LUKA SAMKHARADZE",
+      "name": "LUKA SAMKHARADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.71"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-10-23T16:45:32"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.71"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-10-23T16:45:32"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/c9af28cf-ff88-5041-af5b-1bab13d27277/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/c9af28cf-ff88-5041-af5b-1bab13d27277/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/c9af28cf-ff88-5041-af5b-1bab13d27277",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "c9af28cf-ff88-5041-af5b-1bab13d27277",
+     "iban": "GE91BG1323720274423586",
+     "currency": "GEL",
+     "ownerName": "LUKA SAMKHARADZE",
+     "name": "LUKA SAMKHARADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/c9af28cf-ff88-5041-af5b-1bab13d27277/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/c9af28cf-ff88-5041-af5b-1bab13d27277/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/c9af28cf-ff88-5041-af5b-1bab13d27277/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE91BG1323720274423586",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.71"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.71"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-10-23T16:45:32"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/c9af28cf-ff88-5041-af5b-1bab13d27277/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE91BG1323720274423586",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00061200001",
+       "entryReference": "00061200001",
+       "valueDate": "2025-10-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.98"
+       },
+       "bookingDate": "2025-10-27",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.71"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-27"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/c9af28cf-ff88-5041-af5b-1bab13d27277"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/c9af28cf-ff88-5041-af5b-1bab13d27277/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

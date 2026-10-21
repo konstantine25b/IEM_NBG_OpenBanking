@@ -1,0 +1,294 @@
+{
+ "bank": "basisbank",
+ "customer": "C00725",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "af1092d5-56b9-5847-9021-2635a99e0c5b",
+      "iban": "GE57BS1736325383704970",
+      "currency": "GEL",
+      "ownerName": "DATO GVENETADZE",
+      "name": "DATO GVENETADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "CBASGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "133.51"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "133.51"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/af1092d5-56b9-5847-9021-2635a99e0c5b/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/af1092d5-56b9-5847-9021-2635a99e0c5b/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/af1092d5-56b9-5847-9021-2635a99e0c5b",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "af1092d5-56b9-5847-9021-2635a99e0c5b",
+     "iban": "GE57BS1736325383704970",
+     "currency": "GEL",
+     "ownerName": "DATO GVENETADZE",
+     "name": "DATO GVENETADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "CBASGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/af1092d5-56b9-5847-9021-2635a99e0c5b/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/af1092d5-56b9-5847-9021-2635a99e0c5b/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/af1092d5-56b9-5847-9021-2635a99e0c5b/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE57BS1736325383704970",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "133.51"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "133.51"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/af1092d5-56b9-5847-9021-2635a99e0c5b/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE57BS1736325383704970",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/af1092d5-56b9-5847-9021-2635a99e0c5b"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/af1092d5-56b9-5847-9021-2635a99e0c5b/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "6fec575d-c942-5245-beba-dc97854c262a",
+      "maskedPan": "517805******5862",
+      "currency": "GEL",
+      "ownerName": "DATO GVENETADZE",
+      "name": "DATO GVENETADZE",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "133.51"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "133.51"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/6fec575d-c942-5245-beba-dc97854c262a/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/6fec575d-c942-5245-beba-dc97854c262a/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/6fec575d-c942-5245-beba-dc97854c262a",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "6fec575d-c942-5245-beba-dc97854c262a",
+     "maskedPan": "517805******5862",
+     "currency": "GEL",
+     "ownerName": "DATO GVENETADZE",
+     "name": "DATO GVENETADZE",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "133.51"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "133.51"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/6fec575d-c942-5245-beba-dc97854c262a/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/6fec575d-c942-5245-beba-dc97854c262a/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/6fec575d-c942-5245-beba-dc97854c262a/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "517805******5862",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "133.51"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "133.51"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/6fec575d-c942-5245-beba-dc97854c262a/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/af1092d5-56b9-5847-9021-2635a99e0c5b"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/6fec575d-c942-5245-beba-dc97854c262a/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "517805******5862",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}
