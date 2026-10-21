@@ -1,0 +1,232 @@
+{
+ "bank": "bog",
+ "customer": "C00220",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "f20731b4-90a9-57f8-b0fc-bb596d9a1ded",
+      "iban": "GE37BG1733474810455471",
+      "currency": "GEL",
+      "ownerName": "MANANA KHARAISHVILI",
+      "name": "MANANA KHARAISHVILI",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.01"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-27T15:34:08"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.01"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-27T15:34:08"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/f20731b4-90a9-57f8-b0fc-bb596d9a1ded/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/f20731b4-90a9-57f8-b0fc-bb596d9a1ded/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/f20731b4-90a9-57f8-b0fc-bb596d9a1ded",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "f20731b4-90a9-57f8-b0fc-bb596d9a1ded",
+     "iban": "GE37BG1733474810455471",
+     "currency": "GEL",
+     "ownerName": "MANANA KHARAISHVILI",
+     "name": "MANANA KHARAISHVILI",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/f20731b4-90a9-57f8-b0fc-bb596d9a1ded/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/f20731b4-90a9-57f8-b0fc-bb596d9a1ded/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/f20731b4-90a9-57f8-b0fc-bb596d9a1ded/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE37BG1733474810455471",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.01"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.01"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-11-27T15:34:08"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/f20731b4-90a9-57f8-b0fc-bb596d9a1ded/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE37BG1733474810455471",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00000113928",
+       "entryReference": "0000000001",
+       "bookingDate": "2025-11-03",
+       "valueDate": "2025-10-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.00"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Kobuleti 545424******0340 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000113929",
+       "entryReference": "0000000002",
+       "bookingDate": "2025-11-03",
+       "valueDate": "2025-10-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.00"
+       },
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM TBC BANK Kobuleti 545424******0340 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000113937",
+       "entryReference": "0000000003",
+       "bookingDate": "2025-11-17",
+       "valueDate": "2025-11-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.10"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Kobuleti 545424******0340 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000113939",
+       "entryReference": "0000000004",
+       "bookingDate": "2025-11-19",
+       "valueDate": "2025-11-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.75"
+       },
+       "creditorName": "OPTIMAL",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - OPTIMAL",
+       "additionalInformation": "OPTIMAL Kobuleti 545424******0340 MCC 5732",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000113944",
+       "entryReference": "0000000005",
+       "bookingDate": "2025-11-24",
+       "valueDate": "2025-11-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.00"
+       },
+       "creditorName": "WISSOL",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - WISSOL",
+       "additionalInformation": "WISSOL Kobuleti 545424******0340 MCC 5541",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000113952",
+       "entryReference": "0000000006",
+       "bookingDate": "2025-12-01",
+       "valueDate": "2025-11-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.00"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Kobuleti 545424******0340 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/f20731b4-90a9-57f8-b0fc-bb596d9a1ded"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/f20731b4-90a9-57f8-b0fc-bb596d9a1ded/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

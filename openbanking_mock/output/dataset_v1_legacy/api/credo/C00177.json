@@ -1,0 +1,420 @@
+{
+ "bank": "credo",
+ "customer": "C00177",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "6fe0fffd-bd4c-5afd-b730-1ca4b16363ad",
+      "iban": "GE74CD1311942185895617",
+      "currency": "GEL",
+      "ownerName": "NINO SULABERIDZE",
+      "name": "NINO SULABERIDZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "JSCRGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.84"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-10-28T14:03:21"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.84"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-10-28T14:03:21"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/6fe0fffd-bd4c-5afd-b730-1ca4b16363ad/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/6fe0fffd-bd4c-5afd-b730-1ca4b16363ad/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/6fe0fffd-bd4c-5afd-b730-1ca4b16363ad",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "6fe0fffd-bd4c-5afd-b730-1ca4b16363ad",
+     "iban": "GE74CD1311942185895617",
+     "currency": "GEL",
+     "ownerName": "NINO SULABERIDZE",
+     "name": "NINO SULABERIDZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "JSCRGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/6fe0fffd-bd4c-5afd-b730-1ca4b16363ad/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/6fe0fffd-bd4c-5afd-b730-1ca4b16363ad/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/6fe0fffd-bd4c-5afd-b730-1ca4b16363ad/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE74CD1311942185895617",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.84"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.84"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-10-28T14:03:21"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/6fe0fffd-bd4c-5afd-b730-1ca4b16363ad/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE74CD1311942185895617",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00000090955",
+       "entryReference": "0000000001",
+       "bookingDate": "2025-10-20",
+       "valueDate": "2025-10-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.10"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Sagarejo 476157******5107 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000090954",
+       "entryReference": "0000000002",
+       "bookingDate": "2025-10-21",
+       "valueDate": "2025-10-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.44"
+       },
+       "creditorName": "TBILISI TRANSPORT COMPANY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - TBILISI TRANSPORT COMPANY",
+       "additionalInformation": "TBILISI TRANSPORT COMPANY Sagarejo 476157******5107 MCC 4111",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000090962",
+       "entryReference": "0000000003",
+       "bookingDate": "2025-10-24",
+       "valueDate": "2025-10-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-100.00"
+       },
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM TBC BANK Sagarejo 476157******5107 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000090967",
+       "entryReference": "0000000004",
+       "bookingDate": "2025-10-29",
+       "valueDate": "2025-10-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.75"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Sagarejo 476157******5107 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/6fe0fffd-bd4c-5afd-b730-1ca4b16363ad"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/6fe0fffd-bd4c-5afd-b730-1ca4b16363ad/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "d559ec5f-597b-5ae3-aa53-fdc572df5bd2",
+      "maskedPan": "476157******5107",
+      "currency": "GEL",
+      "ownerName": "NINO SULABERIDZE",
+      "name": "NINO SULABERIDZE",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.84"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-10-28T14:03:21"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.84"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-10-28T14:03:21"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/d559ec5f-597b-5ae3-aa53-fdc572df5bd2/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/d559ec5f-597b-5ae3-aa53-fdc572df5bd2/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/d559ec5f-597b-5ae3-aa53-fdc572df5bd2",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "d559ec5f-597b-5ae3-aa53-fdc572df5bd2",
+     "maskedPan": "476157******5107",
+     "currency": "GEL",
+     "ownerName": "NINO SULABERIDZE",
+     "name": "NINO SULABERIDZE",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.84"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-10-28T14:03:21"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.84"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-10-28T14:03:21"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/d559ec5f-597b-5ae3-aa53-fdc572df5bd2/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/d559ec5f-597b-5ae3-aa53-fdc572df5bd2/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/d559ec5f-597b-5ae3-aa53-fdc572df5bd2/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "476157******5107",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.84"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.84"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-10-28T14:03:21"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/d559ec5f-597b-5ae3-aa53-fdc572df5bd2/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00000090955",
+       "transactionDate": "2025-10-19",
+       "bookingDate": "2025-10-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.10"
+       },
+       "acceptorTransactionDateTime": "2025-10-19T19:15:08",
+       "maskedPAN": "476157******5107",
+       "transactionDetails": "ბარათით გადახდა - DAILY MARKET",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "DAILY MARKET",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "d_00000090954",
+       "transactionDate": "2025-10-19",
+       "bookingDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.44"
+       },
+       "acceptorTransactionDateTime": "2025-10-19T16:51:53",
+       "maskedPAN": "476157******5107",
+       "transactionDetails": "ბარათით გადახდა - TBILISI TRANSPORT COMPANY",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "TBILISI TRANSPORT COMPANY",
+       "merchantCategoryCode": "4111"
+      },
+      {
+       "cardTransactionId": "d_00000090962",
+       "transactionDate": "2025-10-23",
+       "bookingDate": "2025-10-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-100.00"
+       },
+       "acceptorTransactionDateTime": "2025-10-23T17:56:59",
+       "maskedPAN": "476157******5107",
+       "transactionDetails": "ბანკომატიდან განაღდება",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "ATM TBC BANK",
+       "merchantCategoryCode": "6011"
+      },
+      {
+       "cardTransactionId": "d_00000090967",
+       "transactionDate": "2025-10-28",
+       "bookingDate": "2025-10-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.75"
+       },
+       "acceptorTransactionDateTime": "2025-10-28T14:03:21",
+       "maskedPAN": "476157******5107",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/6fe0fffd-bd4c-5afd-b730-1ca4b16363ad"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/d559ec5f-597b-5ae3-aa53-fdc572df5bd2/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "476157******5107",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

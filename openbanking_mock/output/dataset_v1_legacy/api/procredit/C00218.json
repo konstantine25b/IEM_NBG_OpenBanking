@@ -1,0 +1,189 @@
+{
+ "bank": "procredit",
+ "customer": "C00218",
+ "dialect": "procredit",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "69589068",
+      "iban": "GE22PC1163011917540619",
+      "currency": "GEL",
+      "name": "GE22PC1163011917540619",
+      "product": "მიმდინარე ანგარიში",
+      "status": "enabled",
+      "bic": "MIBGGE22",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": 0.68
+        },
+        "balanceType": "interimAvailable"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": 0.68
+        },
+        "balanceType": "interimBooked"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/69589068/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/69589068/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/69589068",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "69589068",
+     "iban": "GE22PC1163011917540619",
+     "currency": "GEL",
+     "name": "GE22PC1163011917540619",
+     "product": "მიმდინარე ანგარიში",
+     "status": "enabled",
+     "bic": "MIBGGE22",
+     "balances": [],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/69589068/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/69589068/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/69589068/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE22PC1163011917540619",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": 0.68
+      },
+      "balanceType": "interimAvailable"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": 0.68
+      },
+      "balanceType": "closingBooked"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/69589068/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE22PC1163011917540619",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "entryReference": "0000000001",
+       "bookingDate": "2025-10-30",
+       "valueDate": "2025-10-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.39
+       },
+       "creditorName": "TEMU",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, TEMU, 439020******4700, 29/10/2025 15:49:22.-."
+      },
+      {
+       "entryReference": "0000000002",
+       "bookingDate": "2025-10-31",
+       "valueDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -5.0
+       },
+       "creditorName": "GULF",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, GULF, 439020******4700, 30/10/2025 14:37:41.-."
+      },
+      {
+       "entryReference": "0000000003",
+       "bookingDate": "2025-11-03",
+       "valueDate": "2025-10-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -9.04
+       },
+       "creditorName": "PSP",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, PSP, 439020******4700, 31/10/2025 09:27:26.-."
+      },
+      {
+       "entryReference": "0000000004",
+       "bookingDate": "2025-11-03",
+       "valueDate": "2025-11-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -10.3
+       },
+       "creditorName": "BARBARESTAN",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, BARBARESTAN, 439020******4700, 01/11/2025 16:37:42.-."
+      },
+      {
+       "entryReference": "0000000005",
+       "bookingDate": "2025-11-04",
+       "valueDate": "2025-11-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -5.73
+       },
+       "creditorName": "NIKORA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, NIKORA, 439020******4700, 02/11/2025 20:49:44.-."
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/69589068"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/69589068/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

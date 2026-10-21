@@ -1,0 +1,512 @@
+{
+ "bank": "bog",
+ "customer": "C00172",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "c2b79649-9070-5abe-ac51-e3199645301d",
+      "iban": "GE92BG1280087125925593",
+      "currency": "GEL",
+      "ownerName": "GOGA NODIA",
+      "name": "GOGA NODIA",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "8.43"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-20T07:02:04"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "8.43"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-20T07:02:04"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/c2b79649-9070-5abe-ac51-e3199645301d/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/c2b79649-9070-5abe-ac51-e3199645301d/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/c2b79649-9070-5abe-ac51-e3199645301d",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "c2b79649-9070-5abe-ac51-e3199645301d",
+     "iban": "GE92BG1280087125925593",
+     "currency": "GEL",
+     "ownerName": "GOGA NODIA",
+     "name": "GOGA NODIA",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/c2b79649-9070-5abe-ac51-e3199645301d/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/c2b79649-9070-5abe-ac51-e3199645301d/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/c2b79649-9070-5abe-ac51-e3199645301d/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE92BG1280087125925593",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "8.43"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "8.43"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-09-20T07:02:04"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/c2b79649-9070-5abe-ac51-e3199645301d/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE92BG1280087125925593",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00000088305",
+       "entryReference": "0000000001",
+       "bookingDate": "2025-10-21",
+       "valueDate": "2025-10-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.03"
+       },
+       "creditorName": "SUBWAY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SUBWAY",
+       "additionalInformation": "SUBWAY Kutaisi 476157******8530 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000088310",
+       "entryReference": "0000000002",
+       "bookingDate": "2025-10-27",
+       "valueDate": "2025-10-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.62"
+       },
+       "creditorName": "MCDONALDS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MCDONALDS",
+       "additionalInformation": "MCDONALDS Kutaisi 476157******8530 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000088311",
+       "entryReference": "0000000003",
+       "bookingDate": "2025-10-27",
+       "valueDate": "2025-10-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-21.74"
+       },
+       "creditorName": "LC WAIKIKI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - LC WAIKIKI",
+       "additionalInformation": "LC WAIKIKI Kutaisi 476157******8530 MCC 5651",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000088318",
+       "entryReference": "0000000004",
+       "bookingDate": "2025-11-03",
+       "valueDate": "2025-10-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-18.42"
+       },
+       "creditorName": "LIBRE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - LIBRE",
+       "additionalInformation": "LIBRE Kutaisi 476157******8530 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000088322",
+       "entryReference": "0000000005",
+       "bookingDate": "2025-11-03",
+       "valueDate": "2025-10-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-28.92"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 476157******8530 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000088329",
+       "entryReference": "0000000006",
+       "bookingDate": "2025-11-13",
+       "valueDate": "2025-11-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-97.14"
+       },
+       "creditorName": "ZARA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ZARA",
+       "additionalInformation": "ZARA Kutaisi 476157******8530 MCC 5651",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000088336",
+       "entryReference": "0000000007",
+       "bookingDate": "2025-11-17",
+       "valueDate": "2025-11-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.57"
+       },
+       "creditorName": "NETFLIX",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7755",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2025-11-16"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - NETFLIX",
+       "additionalInformation": "NETFLIX 476157******8530 MCC 7832",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000088337",
+       "entryReference": "0000000008",
+       "bookingDate": "2025-11-19",
+       "valueDate": "2025-11-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-13.70"
+       },
+       "creditorName": "GLOVO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GLOVO",
+       "additionalInformation": "GLOVO 476157******8530 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000088340",
+       "entryReference": "0000000009",
+       "bookingDate": "2025-11-24",
+       "valueDate": "2025-11-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-11.87"
+       },
+       "creditorName": "GLOVO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GLOVO",
+       "additionalInformation": "GLOVO 476157******8530 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000088343",
+       "entryReference": "0000000010",
+       "bookingDate": "2025-11-25",
+       "valueDate": "2025-11-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-22.58"
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "additionalInformation": "SPAR Kutaisi 476157******8530 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000088368",
+       "entryReference": "0000000011",
+       "bookingDate": "2025-12-16",
+       "valueDate": "2025-12-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.89"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 476157******8530 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000088376",
+       "entryReference": "0000000012",
+       "bookingDate": "2025-12-22",
+       "valueDate": "2025-12-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-50.00"
+       },
+       "creditorName": "WISSOL",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - WISSOL",
+       "additionalInformation": "WISSOL Kutaisi 476157******8530 MCC 5541",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000088395",
+       "entryReference": "0000000013",
+       "bookingDate": "2026-01-08",
+       "valueDate": "2026-01-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-18.74"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Kutaisi 476157******8530 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000088578",
+       "entryReference": "0000000014",
+       "bookingDate": "2026-07-19",
+       "valueDate": "2026-07-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "6270.49"
+       },
+       "debtorName": "Bank of Georgia",
+       "remittanceInformationUnstructured": "სესხის გაცემა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000088580",
+       "entryReference": "0000000015",
+       "bookingDate": "2026-07-20",
+       "valueDate": "2026-07-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5768.85"
+       },
+       "creditorName": "TEA CHIKOVANI",
+       "creditorAccount": {
+        "iban": "GE34CD1306275082852400"
+       },
+       "creditorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "გადახდა ხელშეკრულებით",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000088591",
+       "entryReference": "0000000016",
+       "bookingDate": "2026-07-27",
+       "valueDate": "2026-07-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-45.45"
+       },
+       "creditorName": "AVERSI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AVERSI",
+       "additionalInformation": "AVERSI Kutaisi 476157******8530 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000088593",
+       "entryReference": "0000000017",
+       "bookingDate": "2026-07-30",
+       "valueDate": "2026-07-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-92.53"
+       },
+       "creditorName": "GLOVO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GLOVO",
+       "additionalInformation": "GLOVO 476157******8530 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000088595",
+       "entryReference": "0000000018",
+       "bookingDate": "2026-07-31",
+       "valueDate": "2026-07-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-235.00"
+       },
+       "creditorName": "ROMPETROL",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ROMPETROL",
+       "additionalInformation": "ROMPETROL Kutaisi 476157******8530 MCC 5541",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000088605",
+       "entryReference": "0000000019",
+       "bookingDate": "2026-08-13",
+       "valueDate": "2026-08-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-103.32"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Kutaisi 476157******8530 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000088609",
+       "entryReference": "0000000020",
+       "bookingDate": "2026-08-19",
+       "valueDate": "2026-08-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "190.89"
+       },
+       "endToEndId": "E2E0000088607",
+       "debtorName": "GOGA NODIA",
+       "debtorAccount": {
+        "iban": "GE67CD1146024306339947"
+       },
+       "debtorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000088606",
+       "entryReference": "0000000021",
+       "bookingDate": "2026-08-20",
+       "valueDate": "2026-08-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.18"
+       },
+       "creditorName": "NETFLIX",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7800",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-08-18"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - NETFLIX",
+       "additionalInformation": "NETFLIX 476157******8530 MCC 7832",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000088610",
+       "entryReference": "0000000022",
+       "bookingDate": "2026-08-20",
+       "valueDate": "2026-08-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-190.89"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 264D3C13",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000088638",
+       "entryReference": "0000000023",
+       "bookingDate": "2026-09-18",
+       "valueDate": "2026-09-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "190.89"
+       },
+       "endToEndId": "E2E0000088636",
+       "debtorName": "GOGA NODIA",
+       "debtorAccount": {
+        "iban": "GE67CD1146024306339947"
+       },
+       "debtorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000088642",
+       "entryReference": "0000000024",
+       "bookingDate": "2026-09-20",
+       "valueDate": "2026-09-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-190.89"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 264D3C13",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/c2b79649-9070-5abe-ac51-e3199645301d"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/c2b79649-9070-5abe-ac51-e3199645301d/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

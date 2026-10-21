@@ -1,0 +1,520 @@
+{
+ "bank": "credo",
+ "customer": "C00125",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "447e16b7-1cfa-5f30-bcbb-a405b53dd253",
+      "iban": "GE50CD1275548897976508",
+      "currency": "GEL",
+      "ownerName": "MERAB KUPRADZE",
+      "name": "MERAB KUPRADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "JSCRGE22",
+      "usage": "ORGA",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "5.53"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-18T08:50:09"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "5.53"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-18T08:50:09"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/447e16b7-1cfa-5f30-bcbb-a405b53dd253/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/447e16b7-1cfa-5f30-bcbb-a405b53dd253/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/447e16b7-1cfa-5f30-bcbb-a405b53dd253",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "447e16b7-1cfa-5f30-bcbb-a405b53dd253",
+     "iban": "GE50CD1275548897976508",
+     "currency": "GEL",
+     "ownerName": "MERAB KUPRADZE",
+     "name": "MERAB KUPRADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "JSCRGE22",
+     "usage": "ORGA",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/447e16b7-1cfa-5f30-bcbb-a405b53dd253/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/447e16b7-1cfa-5f30-bcbb-a405b53dd253/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/447e16b7-1cfa-5f30-bcbb-a405b53dd253/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE50CD1275548897976508",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "5.53"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "5.53"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-18T08:50:09"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/447e16b7-1cfa-5f30-bcbb-a405b53dd253/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE50CD1275548897976508",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00000064238",
+       "entryReference": "0000000001",
+       "bookingDate": "2026-06-19",
+       "valueDate": "2026-06-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "2069.98"
+       },
+       "debtorName": "Credo Bank",
+       "remittanceInformationUnstructured": "სესხის გაცემა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000064240",
+       "entryReference": "0000000002",
+       "bookingDate": "2026-06-20",
+       "valueDate": "2026-06-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1904.38"
+       },
+       "creditorName": "ZAZA NODIA",
+       "creditorAccount": {
+        "iban": "GE55BG1901549173608157"
+       },
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "გადახდა ხელშეკრულებით",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000064244",
+       "entryReference": "0000000003",
+       "bookingDate": "2026-06-23",
+       "valueDate": "2026-06-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-145.71"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Tbilisi 476157******0055 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000064249",
+       "entryReference": "0000000004",
+       "bookingDate": "2026-06-24",
+       "valueDate": "2026-06-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.36"
+       },
+       "creditorName": "YANDEX GO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - YANDEX GO",
+       "additionalInformation": "YANDEX GO 476157******0055 MCC 4121",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000064282",
+       "entryReference": "0000000005",
+       "bookingDate": "2026-07-17",
+       "valueDate": "2026-07-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "94.59"
+       },
+       "endToEndId": "E2E0000064280",
+       "debtorName": "MERAB KUPRADZE",
+       "debtorAccount": {
+        "iban": "GE91BG1755970089133283"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000064283",
+       "entryReference": "0000000006",
+       "bookingDate": "2026-07-18",
+       "valueDate": "2026-07-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-94.59"
+       },
+       "creditorName": "Credo Bank",
+       "creditorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა CFCCE79D",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000064330",
+       "entryReference": "0000000007",
+       "bookingDate": "2026-08-17",
+       "valueDate": "2026-08-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "94.59"
+       },
+       "endToEndId": "E2E0000064328",
+       "debtorName": "MERAB KUPRADZE",
+       "debtorAccount": {
+        "iban": "GE91BG1755970089133283"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000064332",
+       "entryReference": "0000000008",
+       "bookingDate": "2026-08-18",
+       "valueDate": "2026-08-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-94.59"
+       },
+       "creditorName": "Credo Bank",
+       "creditorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა CFCCE79D",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000064371",
+       "entryReference": "0000000009",
+       "bookingDate": "2026-09-17",
+       "valueDate": "2026-09-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "94.59"
+       },
+       "endToEndId": "E2E0000064369",
+       "debtorName": "MERAB KUPRADZE",
+       "debtorAccount": {
+        "iban": "GE91BG1755970089133283"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000064373",
+       "entryReference": "0000000010",
+       "bookingDate": "2026-09-18",
+       "valueDate": "2026-09-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-94.59"
+       },
+       "creditorName": "Credo Bank",
+       "creditorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა CFCCE79D",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000064422",
+       "entryReference": "0000000011",
+       "bookingDate": "2026-10-16",
+       "valueDate": "2026-10-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "94.59"
+       },
+       "endToEndId": "E2E0000064420",
+       "debtorName": "MERAB KUPRADZE",
+       "debtorAccount": {
+        "iban": "GE91BG1755970089133283"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000064423",
+       "entryReference": "0000000012",
+       "bookingDate": "2026-10-18",
+       "valueDate": "2026-10-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-94.59"
+       },
+       "creditorName": "Credo Bank",
+       "creditorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა CFCCE79D",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/447e16b7-1cfa-5f30-bcbb-a405b53dd253"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/447e16b7-1cfa-5f30-bcbb-a405b53dd253/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "9e39417f-b444-5c59-b279-74fd36fe7f57",
+      "maskedPan": "476157******0055",
+      "currency": "GEL",
+      "ownerName": "MERAB KUPRADZE",
+      "name": "MERAB KUPRADZE",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "ORGA",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "5.53"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-18T08:50:09"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "5.53"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-18T08:50:09"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/9e39417f-b444-5c59-b279-74fd36fe7f57/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/9e39417f-b444-5c59-b279-74fd36fe7f57/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/9e39417f-b444-5c59-b279-74fd36fe7f57",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "9e39417f-b444-5c59-b279-74fd36fe7f57",
+     "maskedPan": "476157******0055",
+     "currency": "GEL",
+     "ownerName": "MERAB KUPRADZE",
+     "name": "MERAB KUPRADZE",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "ORGA",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "5.53"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-18T08:50:09"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "5.53"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-18T08:50:09"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/9e39417f-b444-5c59-b279-74fd36fe7f57/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/9e39417f-b444-5c59-b279-74fd36fe7f57/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/9e39417f-b444-5c59-b279-74fd36fe7f57/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "476157******0055",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "5.53"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "5.53"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-18T08:50:09"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/9e39417f-b444-5c59-b279-74fd36fe7f57/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00000064244",
+       "transactionDate": "2026-06-22",
+       "bookingDate": "2026-06-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-145.71"
+       },
+       "acceptorTransactionDateTime": "2026-06-22T12:36:38",
+       "maskedPAN": "476157******0055",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000064249",
+       "transactionDate": "2026-06-23",
+       "bookingDate": "2026-06-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.36"
+       },
+       "acceptorTransactionDateTime": "2026-06-23T15:05:39",
+       "maskedPAN": "476157******0055",
+       "transactionDetails": "ბარათით გადახდა - YANDEX GO",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "YANDEX GO",
+       "merchantCategoryCode": "4121"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/447e16b7-1cfa-5f30-bcbb-a405b53dd253"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/9e39417f-b444-5c59-b279-74fd36fe7f57/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "476157******0055",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

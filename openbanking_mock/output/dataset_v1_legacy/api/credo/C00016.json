@@ -1,0 +1,294 @@
+{
+ "bank": "credo",
+ "customer": "C00016",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "a7582973-6e67-5512-a1e7-817effabb863",
+      "iban": "GE95CD1758311971888447",
+      "currency": "GEL",
+      "ownerName": "MAIA GVENETADZE",
+      "name": "MAIA GVENETADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "JSCRGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/a7582973-6e67-5512-a1e7-817effabb863/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/a7582973-6e67-5512-a1e7-817effabb863/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/a7582973-6e67-5512-a1e7-817effabb863",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "a7582973-6e67-5512-a1e7-817effabb863",
+     "iban": "GE95CD1758311971888447",
+     "currency": "GEL",
+     "ownerName": "MAIA GVENETADZE",
+     "name": "MAIA GVENETADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "JSCRGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/a7582973-6e67-5512-a1e7-817effabb863/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/a7582973-6e67-5512-a1e7-817effabb863/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/a7582973-6e67-5512-a1e7-817effabb863/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE95CD1758311971888447",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/a7582973-6e67-5512-a1e7-817effabb863/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE95CD1758311971888447",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/a7582973-6e67-5512-a1e7-817effabb863"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/a7582973-6e67-5512-a1e7-817effabb863/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "bb6ab541-dcec-57ae-8256-3d5a7005736c",
+      "maskedPan": "476157******3650",
+      "currency": "GEL",
+      "ownerName": "MAIA GVENETADZE",
+      "name": "MAIA GVENETADZE",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/bb6ab541-dcec-57ae-8256-3d5a7005736c/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/bb6ab541-dcec-57ae-8256-3d5a7005736c/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/bb6ab541-dcec-57ae-8256-3d5a7005736c",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "bb6ab541-dcec-57ae-8256-3d5a7005736c",
+     "maskedPan": "476157******3650",
+     "currency": "GEL",
+     "ownerName": "MAIA GVENETADZE",
+     "name": "MAIA GVENETADZE",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.00"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.00"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/bb6ab541-dcec-57ae-8256-3d5a7005736c/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/bb6ab541-dcec-57ae-8256-3d5a7005736c/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/bb6ab541-dcec-57ae-8256-3d5a7005736c/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "476157******3650",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/bb6ab541-dcec-57ae-8256-3d5a7005736c/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/a7582973-6e67-5512-a1e7-817effabb863"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/bb6ab541-dcec-57ae-8256-3d5a7005736c/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "476157******3650",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

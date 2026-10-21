@@ -1,0 +1,525 @@
+{
+ "bank": "bog",
+ "customer": "C00119",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "3b9f6d94-9ec1-59bf-b05b-1de4e8cb0144",
+      "iban": "GE98BG1997813777021780",
+      "currency": "GEL",
+      "ownerName": "DAVIT ONIANI",
+      "name": "DAVIT ONIANI",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "6.34"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-05T07:18:34"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "6.34"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-05T07:18:34"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/3b9f6d94-9ec1-59bf-b05b-1de4e8cb0144/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/3b9f6d94-9ec1-59bf-b05b-1de4e8cb0144/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/3b9f6d94-9ec1-59bf-b05b-1de4e8cb0144",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "3b9f6d94-9ec1-59bf-b05b-1de4e8cb0144",
+     "iban": "GE98BG1997813777021780",
+     "currency": "GEL",
+     "ownerName": "DAVIT ONIANI",
+     "name": "DAVIT ONIANI",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/3b9f6d94-9ec1-59bf-b05b-1de4e8cb0144/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/3b9f6d94-9ec1-59bf-b05b-1de4e8cb0144/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/3b9f6d94-9ec1-59bf-b05b-1de4e8cb0144/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE98BG1997813777021780",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "6.34"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "6.34"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-05T07:18:34"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/3b9f6d94-9ec1-59bf-b05b-1de4e8cb0144/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE98BG1997813777021780",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00000061178",
+       "entryReference": "0000000001",
+       "bookingDate": "2026-03-19",
+       "valueDate": "2026-03-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "2669.10"
+       },
+       "debtorName": "Bank of Georgia",
+       "remittanceInformationUnstructured": "სესხის გაცემა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000061181",
+       "entryReference": "0000000002",
+       "bookingDate": "2026-03-20",
+       "valueDate": "2026-03-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2455.57"
+       },
+       "creditorName": "ANA GVENETADZE",
+       "creditorAccount": {
+        "iban": "GE63TB1143544909975962"
+       },
+       "creditorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "გადახდა ხელშეკრულებით",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000061190",
+       "entryReference": "0000000003",
+       "bookingDate": "2026-03-30",
+       "valueDate": "2026-03-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-26.68"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Batumi 439020******1453 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000061191",
+       "entryReference": "0000000004",
+       "bookingDate": "2026-03-30",
+       "valueDate": "2026-03-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-8.57"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Batumi 439020******1453 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000061196",
+       "entryReference": "0000000005",
+       "bookingDate": "2026-04-02",
+       "valueDate": "2026-04-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-96.59"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 439020******1453 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000061202",
+       "entryReference": "0000000006",
+       "bookingDate": "2026-04-03",
+       "valueDate": "2026-04-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "124.50"
+       },
+       "endToEndId": "E2E0000061200",
+       "debtorName": "DAVIT ONIANI",
+       "debtorAccount": {
+        "iban": "GE54KS1765809157373580"
+       },
+       "debtorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000061207",
+       "entryReference": "0000000007",
+       "bookingDate": "2026-04-05",
+       "valueDate": "2026-04-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-124.50"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 4676A5ED",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000061204",
+       "entryReference": "0000000008",
+       "bookingDate": "2026-04-06",
+       "valueDate": "2026-04-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-13.60"
+       },
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY",
+       "additionalInformation": "METROMONEY Batumi 439020******1453 MCC 4111",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000061214",
+       "entryReference": "0000000009",
+       "bookingDate": "2026-04-14",
+       "valueDate": "2026-04-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-43.06"
+       },
+       "creditorName": "DUNKIN",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DUNKIN",
+       "additionalInformation": "DUNKIN Batumi 439020******1453 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000061253",
+       "entryReference": "0000000010",
+       "bookingDate": "2026-05-29",
+       "valueDate": "2026-05-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "127.61"
+       },
+       "endToEndId": "E2E0000061251",
+       "debtorName": "DAVIT ONIANI",
+       "debtorAccount": {
+        "iban": "GE54KS1765809157373580"
+       },
+       "debtorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000061255",
+       "entryReference": "0000000011",
+       "bookingDate": "2026-05-30",
+       "valueDate": "2026-05-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-124.50"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 4676A5ED",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000061256",
+       "entryReference": "0000000012",
+       "bookingDate": "2026-05-30",
+       "valueDate": "2026-05-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.11"
+       },
+       "creditorName": "Bank of Georgia",
+       "remittanceInformationUnstructured": "ჯარიმა ვადაგადაცილებაზე",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000061259",
+       "entryReference": "0000000013",
+       "bookingDate": "2026-06-04",
+       "valueDate": "2026-06-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "124.50"
+       },
+       "endToEndId": "E2E0000061257",
+       "debtorName": "DAVIT ONIANI",
+       "debtorAccount": {
+        "iban": "GE54KS1765809157373580"
+       },
+       "debtorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000061260",
+       "entryReference": "0000000014",
+       "bookingDate": "2026-06-05",
+       "valueDate": "2026-06-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-124.50"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 4676A5ED",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000061273",
+       "entryReference": "0000000015",
+       "bookingDate": "2026-06-30",
+       "valueDate": "2026-06-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-18.69"
+       },
+       "creditorName": "ADJARABET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ADJARABET",
+       "additionalInformation": "ADJARABET 439020******1453 MCC 7995",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000061293",
+       "entryReference": "0000000016",
+       "bookingDate": "2026-07-15",
+       "valueDate": "2026-07-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "125.86"
+       },
+       "endToEndId": "E2E0000061291",
+       "debtorName": "DAVIT ONIANI",
+       "debtorAccount": {
+        "iban": "GE54KS1765809157373580"
+       },
+       "debtorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000061294",
+       "entryReference": "0000000017",
+       "bookingDate": "2026-07-16",
+       "valueDate": "2026-07-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-124.50"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 4676A5ED",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000061295",
+       "entryReference": "0000000018",
+       "bookingDate": "2026-07-16",
+       "valueDate": "2026-07-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.36"
+       },
+       "creditorName": "Bank of Georgia",
+       "remittanceInformationUnstructured": "ჯარიმა ვადაგადაცილებაზე",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000061312",
+       "entryReference": "0000000019",
+       "bookingDate": "2026-08-05",
+       "valueDate": "2026-08-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "124.62"
+       },
+       "endToEndId": "E2E0000061310",
+       "debtorName": "DAVIT ONIANI",
+       "debtorAccount": {
+        "iban": "GE54KS1765809157373580"
+       },
+       "debtorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000061313",
+       "entryReference": "0000000020",
+       "bookingDate": "2026-08-06",
+       "valueDate": "2026-08-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-124.50"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 4676A5ED",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000061314",
+       "entryReference": "0000000021",
+       "bookingDate": "2026-08-06",
+       "valueDate": "2026-08-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-0.12"
+       },
+       "creditorName": "Bank of Georgia",
+       "remittanceInformationUnstructured": "ჯარიმა ვადაგადაცილებაზე",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000061335",
+       "entryReference": "0000000022",
+       "bookingDate": "2026-09-04",
+       "valueDate": "2026-09-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "124.50"
+       },
+       "endToEndId": "E2E0000061333",
+       "debtorName": "DAVIT ONIANI",
+       "debtorAccount": {
+        "iban": "GE54KS1765809157373580"
+       },
+       "debtorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000061337",
+       "entryReference": "0000000023",
+       "bookingDate": "2026-09-05",
+       "valueDate": "2026-09-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-124.50"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 4676A5ED",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000061371",
+       "entryReference": "0000000024",
+       "bookingDate": "2026-10-02",
+       "valueDate": "2026-10-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "124.50"
+       },
+       "endToEndId": "E2E0000061369",
+       "debtorName": "DAVIT ONIANI",
+       "debtorAccount": {
+        "iban": "GE54KS1765809157373580"
+       },
+       "debtorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000061373",
+       "entryReference": "0000000025",
+       "bookingDate": "2026-10-05",
+       "valueDate": "2026-10-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-124.50"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 4676A5ED",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/3b9f6d94-9ec1-59bf-b05b-1de4e8cb0144"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/3b9f6d94-9ec1-59bf-b05b-1de4e8cb0144/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

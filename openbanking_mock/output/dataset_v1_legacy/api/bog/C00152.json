@@ -1,0 +1,788 @@
+{
+ "bank": "bog",
+ "customer": "C00152",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "dd9a86b3-03fe-501d-b725-f5d99fa67e20",
+      "iban": "GE32BG1479526489299299",
+      "currency": "GEL",
+      "ownerName": "NIKA BOLKVADZE",
+      "name": "NIKA BOLKVADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-55.47"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-10T07:03:08"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-55.47"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-10T07:03:08"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/dd9a86b3-03fe-501d-b725-f5d99fa67e20/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/dd9a86b3-03fe-501d-b725-f5d99fa67e20/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/dd9a86b3-03fe-501d-b725-f5d99fa67e20",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "dd9a86b3-03fe-501d-b725-f5d99fa67e20",
+     "iban": "GE32BG1479526489299299",
+     "currency": "GEL",
+     "ownerName": "NIKA BOLKVADZE",
+     "name": "NIKA BOLKVADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/dd9a86b3-03fe-501d-b725-f5d99fa67e20/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/dd9a86b3-03fe-501d-b725-f5d99fa67e20/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/dd9a86b3-03fe-501d-b725-f5d99fa67e20/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE32BG1479526489299299",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-55.47"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-55.47"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-10T07:03:08"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/dd9a86b3-03fe-501d-b725-f5d99fa67e20/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE32BG1479526489299299",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00000078115",
+       "entryReference": "0000000001",
+       "bookingDate": "2025-10-21",
+       "valueDate": "2025-10-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-50.79"
+       },
+       "creditorName": "PSP",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - PSP",
+       "additionalInformation": "PSP Tbilisi 545424******3111 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000078116",
+       "entryReference": "0000000002",
+       "bookingDate": "2025-10-21",
+       "valueDate": "2025-10-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.07"
+       },
+       "creditorName": "TBILISI TRANSPORT COMPANY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - TBILISI TRANSPORT COMPANY",
+       "additionalInformation": "TBILISI TRANSPORT COMPANY Tbilisi 545424******3111 MCC 4111",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000078130",
+       "entryReference": "0000000003",
+       "bookingDate": "2025-10-29",
+       "valueDate": "2025-10-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-13.07"
+       },
+       "creditorName": "AVERSI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AVERSI",
+       "additionalInformation": "AVERSI Tbilisi 545424******3111 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000078131",
+       "entryReference": "0000000004",
+       "bookingDate": "2025-10-31",
+       "valueDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.00"
+       },
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY",
+       "additionalInformation": "METROMONEY Tbilisi 545424******3111 MCC 4111",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000078136",
+       "entryReference": "0000000005",
+       "bookingDate": "2025-11-03",
+       "valueDate": "2025-11-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-29.24"
+       },
+       "creditorName": "PSP",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - PSP",
+       "additionalInformation": "PSP Tbilisi 545424******3111 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000078140",
+       "entryReference": "0000000006",
+       "bookingDate": "2025-11-06",
+       "valueDate": "2025-11-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.76"
+       },
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MAXIM",
+       "additionalInformation": "MAXIM 545424******3111 MCC 4121",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000078142",
+       "entryReference": "0000000007",
+       "bookingDate": "2025-11-07",
+       "valueDate": "2025-11-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-100.00"
+       },
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM TBC BANK Tbilisi 545424******3111 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000078145",
+       "entryReference": "0000000008",
+       "bookingDate": "2025-11-07",
+       "valueDate": "2025-11-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "240.80"
+       },
+       "endToEndId": "E2E0000078143",
+       "debtorName": "NIKA BOLKVADZE",
+       "debtorAccount": {
+        "iban": "GE43BS1315552617074655"
+       },
+       "debtorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000078150",
+       "entryReference": "0000000009",
+       "bookingDate": "2025-11-10",
+       "valueDate": "2025-11-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-240.80"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8534F072",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000078146",
+       "entryReference": "0000000010",
+       "bookingDate": "2025-11-11",
+       "valueDate": "2025-11-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-36.07"
+       },
+       "creditorName": "ALIEXPRESS",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7676",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2025-11-08"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ALIEXPRESS",
+       "additionalInformation": "ALIEXPRESS 545424******3111 MCC 5999",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000078152",
+       "entryReference": "0000000011",
+       "bookingDate": "2025-11-11",
+       "valueDate": "2025-11-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-137.26"
+       },
+       "creditorName": "CAFE LEILA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CAFE LEILA",
+       "additionalInformation": "CAFE LEILA Tbilisi 545424******3111 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000078159",
+       "entryReference": "0000000012",
+       "bookingDate": "2025-11-18",
+       "valueDate": "2025-11-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-28.15"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 545424******3111 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000078162",
+       "entryReference": "0000000013",
+       "bookingDate": "2025-11-19",
+       "valueDate": "2025-11-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-571.06"
+       },
+       "creditorName": "MEDICLUB GEORGIA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MEDICLUB GEORGIA",
+       "additionalInformation": "MEDICLUB GEORGIA Tbilisi 545424******3111 MCC 8011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000078173",
+       "entryReference": "0000000014",
+       "bookingDate": "2025-12-03",
+       "valueDate": "2025-12-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.47"
+       },
+       "creditorName": "MYPARTS.GE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MYPARTS.GE",
+       "additionalInformation": "MYPARTS.GE 545424******3111 MCC 5999",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000078174",
+       "entryReference": "0000000015",
+       "bookingDate": "2025-12-04",
+       "valueDate": "2025-12-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-41.75"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 545424******3111 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000078175",
+       "entryReference": "0000000016",
+       "bookingDate": "2025-12-08",
+       "valueDate": "2025-12-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.50"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Tbilisi 545424******3111 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000078182",
+       "entryReference": "0000000017",
+       "bookingDate": "2025-12-09",
+       "valueDate": "2025-12-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "240.80"
+       },
+       "endToEndId": "E2E0000078180",
+       "debtorName": "NIKA BOLKVADZE",
+       "debtorAccount": {
+        "iban": "GE43BS1315552617074655"
+       },
+       "debtorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000078183",
+       "entryReference": "0000000018",
+       "bookingDate": "2025-12-10",
+       "valueDate": "2025-12-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-240.80"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8534F072",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000078218",
+       "entryReference": "0000000019",
+       "bookingDate": "2026-01-09",
+       "valueDate": "2026-01-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "240.80"
+       },
+       "endToEndId": "E2E0000078216",
+       "debtorName": "NIKA BOLKVADZE",
+       "debtorAccount": {
+        "iban": "GE43BS1315552617074655"
+       },
+       "debtorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000078219",
+       "entryReference": "0000000020",
+       "bookingDate": "2026-01-10",
+       "valueDate": "2026-01-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-240.80"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8534F072",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000078220",
+       "entryReference": "0000000021",
+       "bookingDate": "2026-01-16",
+       "valueDate": "2026-01-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.83"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Tbilisi 545424******3111 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000078266",
+       "entryReference": "0000000022",
+       "bookingDate": "2026-02-09",
+       "valueDate": "2026-02-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "240.80"
+       },
+       "endToEndId": "E2E0000078264",
+       "debtorName": "NIKA BOLKVADZE",
+       "debtorAccount": {
+        "iban": "GE43BS1315552617074655"
+       },
+       "debtorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000078268",
+       "entryReference": "0000000023",
+       "bookingDate": "2026-02-10",
+       "valueDate": "2026-02-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-240.80"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8534F072",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000078316",
+       "entryReference": "0000000024",
+       "bookingDate": "2026-03-09",
+       "valueDate": "2026-03-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "240.80"
+       },
+       "endToEndId": "E2E0000078314",
+       "debtorName": "NIKA BOLKVADZE",
+       "debtorAccount": {
+        "iban": "GE43BS1315552617074655"
+       },
+       "debtorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000078317",
+       "entryReference": "0000000025",
+       "bookingDate": "2026-03-10",
+       "valueDate": "2026-03-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-240.80"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8534F072",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000078363",
+       "entryReference": "0000000026",
+       "bookingDate": "2026-04-09",
+       "valueDate": "2026-04-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "240.80"
+       },
+       "endToEndId": "E2E0000078361",
+       "debtorName": "NIKA BOLKVADZE",
+       "debtorAccount": {
+        "iban": "GE43BS1315552617074655"
+       },
+       "debtorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000078364",
+       "entryReference": "0000000027",
+       "bookingDate": "2026-04-10",
+       "valueDate": "2026-04-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-240.80"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8534F072",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000078409",
+       "entryReference": "0000000028",
+       "bookingDate": "2026-05-08",
+       "valueDate": "2026-05-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "240.80"
+       },
+       "endToEndId": "E2E0000078407",
+       "debtorName": "NIKA BOLKVADZE",
+       "debtorAccount": {
+        "iban": "GE43BS1315552617074655"
+       },
+       "debtorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000078413",
+       "entryReference": "0000000029",
+       "bookingDate": "2026-05-10",
+       "valueDate": "2026-05-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-240.80"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8534F072",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000078412",
+       "entryReference": "0000000030",
+       "bookingDate": "2026-05-12",
+       "valueDate": "2026-05-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-22.55"
+       },
+       "creditorName": "LIBRE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - LIBRE",
+       "additionalInformation": "LIBRE Tbilisi 545424******3111 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000078457",
+       "entryReference": "0000000031",
+       "bookingDate": "2026-06-09",
+       "valueDate": "2026-06-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "240.80"
+       },
+       "endToEndId": "E2E0000078455",
+       "debtorName": "NIKA BOLKVADZE",
+       "debtorAccount": {
+        "iban": "GE43BS1315552617074655"
+       },
+       "debtorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000078459",
+       "entryReference": "0000000032",
+       "bookingDate": "2026-06-10",
+       "valueDate": "2026-06-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-240.80"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8534F072",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000078504",
+       "entryReference": "0000000033",
+       "bookingDate": "2026-07-09",
+       "valueDate": "2026-07-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "240.80"
+       },
+       "endToEndId": "E2E0000078502",
+       "debtorName": "NIKA BOLKVADZE",
+       "debtorAccount": {
+        "iban": "GE43BS1315552617074655"
+       },
+       "debtorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000078507",
+       "entryReference": "0000000034",
+       "bookingDate": "2026-07-10",
+       "valueDate": "2026-07-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-240.80"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8534F072",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000078544",
+       "entryReference": "0000000035",
+       "bookingDate": "2026-08-07",
+       "valueDate": "2026-08-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "240.80"
+       },
+       "endToEndId": "E2E0000078542",
+       "debtorName": "NIKA BOLKVADZE",
+       "debtorAccount": {
+        "iban": "GE43BS1315552617074655"
+       },
+       "debtorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000078550",
+       "entryReference": "0000000036",
+       "bookingDate": "2026-08-10",
+       "valueDate": "2026-08-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-240.80"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8534F072",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000078579",
+       "entryReference": "0000000037",
+       "bookingDate": "2026-09-09",
+       "valueDate": "2026-09-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "240.80"
+       },
+       "endToEndId": "E2E0000078577",
+       "debtorName": "NIKA BOLKVADZE",
+       "debtorAccount": {
+        "iban": "GE43BS1315552617074655"
+       },
+       "debtorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000078580",
+       "entryReference": "0000000038",
+       "bookingDate": "2026-09-10",
+       "valueDate": "2026-09-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-240.80"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8534F072",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000078634",
+       "entryReference": "0000000039",
+       "bookingDate": "2026-10-09",
+       "valueDate": "2026-10-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "240.80"
+       },
+       "endToEndId": "E2E0000078632",
+       "debtorName": "NIKA BOLKVADZE",
+       "debtorAccount": {
+        "iban": "GE43BS1315552617074655"
+       },
+       "debtorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000078636",
+       "entryReference": "0000000040",
+       "bookingDate": "2026-10-10",
+       "valueDate": "2026-10-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-240.80"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8534F072",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000078635",
+       "entryReference": "0000000041",
+       "bookingDate": "2026-10-12",
+       "valueDate": "2026-10-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-33.33"
+       },
+       "creditorName": "NETFLIX",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7285",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-10-09"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - NETFLIX",
+       "additionalInformation": "NETFLIX 545424******3111 MCC 7832",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/dd9a86b3-03fe-501d-b725-f5d99fa67e20"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/dd9a86b3-03fe-501d-b725-f5d99fa67e20/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

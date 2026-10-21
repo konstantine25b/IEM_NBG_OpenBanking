@@ -1,0 +1,167 @@
+{
+ "bank": "procredit",
+ "customer": "C00210",
+ "dialect": "procredit",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "82820626",
+      "iban": "GE66PC1149146027357722",
+      "currency": "GEL",
+      "name": "GE66PC1149146027357722",
+      "product": "მიმდინარე ანგარიში",
+      "status": "enabled",
+      "bic": "MIBGGE22",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": 0.47
+        },
+        "balanceType": "interimAvailable"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": 0.47
+        },
+        "balanceType": "interimBooked"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/82820626/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/82820626/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/82820626",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "82820626",
+     "iban": "GE66PC1149146027357722",
+     "currency": "GEL",
+     "name": "GE66PC1149146027357722",
+     "product": "მიმდინარე ანგარიში",
+     "status": "enabled",
+     "bic": "MIBGGE22",
+     "balances": [],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/82820626/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/82820626/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/82820626/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE66PC1149146027357722",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": 0.47
+      },
+      "balanceType": "interimAvailable"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": 0.47
+      },
+      "balanceType": "closingBooked"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/82820626/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE66PC1149146027357722",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "entryReference": "0000000001",
+       "bookingDate": "2025-10-24",
+       "valueDate": "2025-10-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -7.7
+       },
+       "creditorName": "ALIEXPRESS",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, ALIEXPRESS, 476157******7453, 23/10/2025 17:14:32.-."
+      },
+      {
+       "entryReference": "0000000002",
+       "bookingDate": "2025-11-04",
+       "valueDate": "2025-11-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -3.8
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 476157******7453, 03/11/2025 18:08:44.-."
+      },
+      {
+       "entryReference": "0000000003",
+       "bookingDate": "2025-11-25",
+       "valueDate": "2025-11-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.5
+       },
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, KIOSK, 476157******7453, 22/11/2025 16:05:45.-."
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/82820626"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/82820626/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

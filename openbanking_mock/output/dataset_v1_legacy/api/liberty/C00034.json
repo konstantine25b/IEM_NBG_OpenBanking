@@ -1,0 +1,420 @@
+{
+ "bank": "liberty",
+ "customer": "C00034",
+ "dialect": "altasoft_v08",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "31fe5c34-bf35-5629-ae6a-5abbe8b2f38d",
+      "iban": "GE45LB1540679649716496",
+      "currency": "GEL",
+      "ownerName": "NATIA JAPARIDZE",
+      "name": "NATIA JAPARIDZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "LBRTGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3.25"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-15T10:45:08"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3.25"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-15T10:45:08"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v1/accounts/31fe5c34-bf35-5629-ae6a-5abbe8b2f38d/balances"
+       },
+       "transactions": {
+        "href": "v1/accounts/31fe5c34-bf35-5629-ae6a-5abbe8b2f38d/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/31fe5c34-bf35-5629-ae6a-5abbe8b2f38d",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "31fe5c34-bf35-5629-ae6a-5abbe8b2f38d",
+     "iban": "GE45LB1540679649716496",
+     "currency": "GEL",
+     "ownerName": "NATIA JAPARIDZE",
+     "name": "NATIA JAPARIDZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "LBRTGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v1/accounts/31fe5c34-bf35-5629-ae6a-5abbe8b2f38d/balances"
+      },
+      "transactions": {
+       "href": "v1/accounts/31fe5c34-bf35-5629-ae6a-5abbe8b2f38d/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/31fe5c34-bf35-5629-ae6a-5abbe8b2f38d/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE45LB1540679649716496",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "3.25"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "3.25"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-11-15T10:45:08"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/31fe5c34-bf35-5629-ae6a-5abbe8b2f38d/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE45LB1540679649716496",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00000016631",
+       "entryReference": "0000000001",
+       "bookingDate": "2025-10-27",
+       "valueDate": "2025-10-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.58"
+       },
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KIOSK",
+       "additionalInformation": "KIOSK Tbilisi 517805******3324 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000016639",
+       "entryReference": "0000000002",
+       "bookingDate": "2025-11-12",
+       "valueDate": "2025-11-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-39.41"
+       },
+       "creditorName": "AVERSI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AVERSI",
+       "additionalInformation": "AVERSI Tbilisi 517805******3324 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000016642",
+       "entryReference": "0000000003",
+       "bookingDate": "2025-11-18",
+       "valueDate": "2025-11-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.96"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Zestaponi 517805******3324 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000016643",
+       "entryReference": "0000000004",
+       "bookingDate": "2025-11-18",
+       "valueDate": "2025-11-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-16.05"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Zestaponi 517805******3324 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v1/accounts/31fe5c34-bf35-5629-ae6a-5abbe8b2f38d"
+      },
+      "first": {
+       "href": "v1/accounts/31fe5c34-bf35-5629-ae6a-5abbe8b2f38d/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "35970872-e043-5af8-8e8f-946ec7c71798",
+      "maskedPan": "517805******3324",
+      "currency": "GEL",
+      "ownerName": "NATIA JAPARIDZE",
+      "name": "NATIA JAPARIDZE",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3.25"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-15T10:45:08"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3.25"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-15T10:45:08"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v1/card-accounts/35970872-e043-5af8-8e8f-946ec7c71798/balances"
+       },
+       "transactions": {
+        "href": "v1/card-accounts/35970872-e043-5af8-8e8f-946ec7c71798/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/35970872-e043-5af8-8e8f-946ec7c71798",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "35970872-e043-5af8-8e8f-946ec7c71798",
+     "maskedPan": "517805******3324",
+     "currency": "GEL",
+     "ownerName": "NATIA JAPARIDZE",
+     "name": "NATIA JAPARIDZE",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "3.25"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-11-15T10:45:08"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "3.25"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-11-15T10:45:08"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v1/card-accounts/35970872-e043-5af8-8e8f-946ec7c71798/balances"
+      },
+      "transactions": {
+       "href": "v1/card-accounts/35970872-e043-5af8-8e8f-946ec7c71798/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/35970872-e043-5af8-8e8f-946ec7c71798/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "517805******3324",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "3.25"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "3.25"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-11-15T10:45:08"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/35970872-e043-5af8-8e8f-946ec7c71798/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00000016631",
+       "transactionDate": "2025-10-26",
+       "bookingDate": "2025-10-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.58"
+       },
+       "acceptorTransactionDateTime": "2025-10-26T10:09:31",
+       "maskedPAN": "517805******3324",
+       "transactionDetails": "ბარათით გადახდა - KIOSK",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KIOSK",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "d_00000016639",
+       "transactionDate": "2025-11-10",
+       "bookingDate": "2025-11-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-39.41"
+       },
+       "acceptorTransactionDateTime": "2025-11-10T14:04:17",
+       "maskedPAN": "517805******3324",
+       "transactionDetails": "ბარათით გადახდა - AVERSI",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AVERSI",
+       "merchantCategoryCode": "5912"
+      },
+      {
+       "cardTransactionId": "d_00000016642",
+       "transactionDate": "2025-11-14",
+       "bookingDate": "2025-11-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.96"
+       },
+       "acceptorTransactionDateTime": "2025-11-14T16:35:58",
+       "maskedPAN": "517805******3324",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000016643",
+       "transactionDate": "2025-11-15",
+       "bookingDate": "2025-11-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-16.05"
+       },
+       "acceptorTransactionDateTime": "2025-11-15T10:45:08",
+       "maskedPAN": "517805******3324",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v1/accounts/31fe5c34-bf35-5629-ae6a-5abbe8b2f38d"
+      },
+      "first": {
+       "href": "v1/card-accounts/35970872-e043-5af8-8e8f-946ec7c71798/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "517805******3324",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

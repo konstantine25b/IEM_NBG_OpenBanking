@@ -1,0 +1,1684 @@
+{
+ "bank": "pasha",
+ "customer": "C00048",
+ "dialect": "altasoft_v2",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v2/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "588a14e0-84de-509e-bdaf-409294d1458f",
+      "iban": "GE63PB1208203036459310",
+      "currency": "GEL",
+      "ownerName": "TEA TSINTSADZE",
+      "name": "TEA TSINTSADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "PAHAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-24.47"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-11T08:40:23"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-24.47"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-11T08:40:23"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/accounts/588a14e0-84de-509e-bdaf-409294d1458f/balances"
+       },
+       "transactions": {
+        "href": "v2/accounts/588a14e0-84de-509e-bdaf-409294d1458f/transactions"
+       }
+      },
+      "displayName": "Current account",
+      "other": {
+       "identification": "1208203036459310",
+       "issuer": "PASHA Bank Georgia"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/588a14e0-84de-509e-bdaf-409294d1458f",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "588a14e0-84de-509e-bdaf-409294d1458f",
+     "iban": "GE63PB1208203036459310",
+     "currency": "GEL",
+     "ownerName": "TEA TSINTSADZE",
+     "name": "TEA TSINTSADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "PAHAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v2/accounts/588a14e0-84de-509e-bdaf-409294d1458f/balances"
+      },
+      "transactions": {
+       "href": "v2/accounts/588a14e0-84de-509e-bdaf-409294d1458f/transactions"
+      }
+     },
+     "displayName": "Current account",
+     "other": {
+      "identification": "1208203036459310",
+      "issuer": "PASHA Bank Georgia"
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/588a14e0-84de-509e-bdaf-409294d1458f/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE63PB1208203036459310",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-24.47"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-24.47"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-11T08:40:23"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/588a14e0-84de-509e-bdaf-409294d1458f/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE63PB1208203036459310",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "GE63PB1208203036459310_1",
+       "entryReference": "0000000001",
+       "bookingDate": "2025-11-17",
+       "valueDate": "2025-11-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "233.28"
+       },
+       "debtor": {
+        "name": "TEA TSINTSADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE40LB1366418220687252"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "LBRTGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000023911"
+       }
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_2",
+       "entryReference": "0000000002",
+       "bookingDate": "2025-11-18",
+       "valueDate": "2025-11-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-231.43"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 71139A21"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_3",
+       "entryReference": "0000000003",
+       "bookingDate": "2025-11-18",
+       "valueDate": "2025-11-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.85"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "remittanceInformationUnstructured": [
+        "ჯარიმა ვადაგადაცილებაზე"
+       ],
+       "bankTransactionCodeProprietary": "loan_penalty"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_4",
+       "entryReference": "0000000004",
+       "bookingDate": "2025-12-09",
+       "valueDate": "2025-12-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.43"
+       },
+       "debtor": {
+        "name": "TEA TSINTSADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE40LB1366418220687252"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "LBRTGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000023946"
+       }
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_5",
+       "entryReference": "0000000005",
+       "bookingDate": "2025-12-10",
+       "valueDate": "2025-12-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-231.43"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 71139A21"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_6",
+       "entryReference": "0000000006",
+       "bookingDate": "2026-01-09",
+       "valueDate": "2026-01-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.43"
+       },
+       "debtor": {
+        "name": "TEA TSINTSADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE40LB1366418220687252"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "LBRTGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000023981"
+       }
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_7",
+       "entryReference": "0000000007",
+       "bookingDate": "2026-01-10",
+       "valueDate": "2026-01-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-231.43"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 71139A21"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_8",
+       "entryReference": "0000000008",
+       "bookingDate": "2026-02-11",
+       "valueDate": "2026-02-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.89"
+       },
+       "debtor": {
+        "name": "TEA TSINTSADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE40LB1366418220687252"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "LBRTGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000024030"
+       }
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_9",
+       "entryReference": "0000000009",
+       "bookingDate": "2026-02-12",
+       "valueDate": "2026-02-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-17.17"
+       },
+       "creditor": {
+        "name": "APPLE.COM/BILL"
+       },
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.8009",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-02-11"
+        }
+       ],
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - APPLE.COM/BILL"
+       ],
+       "bankTransactionCodeProprietary": "entertainment",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": false
+        },
+        "sequenceNumber": "24033",
+        "transactionDateTime": "2026-02-11T16:14:09"
+       },
+       "additionalTransactionInformation": "APPLE.COM/BILL 418057******6891 MCC 7832"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_10",
+       "entryReference": "0000000010",
+       "bookingDate": "2026-02-12",
+       "valueDate": "2026-02-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-231.43"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 71139A21"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_11",
+       "entryReference": "0000000011",
+       "bookingDate": "2026-02-12",
+       "valueDate": "2026-02-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-0.46"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "remittanceInformationUnstructured": [
+        "ჯარიმა ვადაგადაცილებაზე"
+       ],
+       "bankTransactionCodeProprietary": "loan_penalty"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_12",
+       "entryReference": "0000000012",
+       "bookingDate": "2026-03-24",
+       "valueDate": "2026-03-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "234.90"
+       },
+       "debtor": {
+        "name": "TEA TSINTSADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE40LB1366418220687252"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "LBRTGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000024091"
+       }
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_13",
+       "entryReference": "0000000013",
+       "bookingDate": "2026-03-25",
+       "valueDate": "2026-03-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-231.43"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 71139A21"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_14",
+       "entryReference": "0000000014",
+       "bookingDate": "2026-03-25",
+       "valueDate": "2026-03-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.47"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "remittanceInformationUnstructured": [
+        "ჯარიმა ვადაგადაცილებაზე"
+       ],
+       "bankTransactionCodeProprietary": "loan_penalty"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_15",
+       "entryReference": "0000000015",
+       "bookingDate": "2026-04-09",
+       "valueDate": "2026-04-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.43"
+       },
+       "debtor": {
+        "name": "TEA TSINTSADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE40LB1366418220687252"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "LBRTGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000024122"
+       }
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_16",
+       "entryReference": "0000000016",
+       "bookingDate": "2026-04-10",
+       "valueDate": "2026-04-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-231.43"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 71139A21"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_17",
+       "entryReference": "0000000017",
+       "bookingDate": "2026-05-08",
+       "valueDate": "2026-05-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.43"
+       },
+       "debtor": {
+        "name": "TEA TSINTSADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE40LB1366418220687252"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "LBRTGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000024166"
+       }
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_18",
+       "entryReference": "0000000018",
+       "bookingDate": "2026-05-10",
+       "valueDate": "2026-05-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-231.43"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 71139A21"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_19",
+       "entryReference": "0000000019",
+       "bookingDate": "2026-06-09",
+       "valueDate": "2026-06-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.43"
+       },
+       "debtor": {
+        "name": "TEA TSINTSADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE40LB1366418220687252"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "LBRTGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000024217"
+       }
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_20",
+       "entryReference": "0000000020",
+       "bookingDate": "2026-06-10",
+       "valueDate": "2026-06-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-231.43"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 71139A21"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_21",
+       "entryReference": "0000000021",
+       "bookingDate": "2026-07-13",
+       "valueDate": "2026-07-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "232.35"
+       },
+       "debtor": {
+        "name": "TEA TSINTSADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE40LB1366418220687252"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "LBRTGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000024270"
+       }
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_22",
+       "entryReference": "0000000022",
+       "bookingDate": "2026-07-14",
+       "valueDate": "2026-07-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-231.43"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 71139A21"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_23",
+       "entryReference": "0000000023",
+       "bookingDate": "2026-07-14",
+       "valueDate": "2026-07-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-0.92"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "remittanceInformationUnstructured": [
+        "ჯარიმა ვადაგადაცილებაზე"
+       ],
+       "bankTransactionCodeProprietary": "loan_penalty"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_24",
+       "entryReference": "0000000024",
+       "bookingDate": "2026-08-20",
+       "valueDate": "2026-08-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "233.97"
+       },
+       "debtor": {
+        "name": "TEA TSINTSADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE40LB1366418220687252"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "LBRTGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000024331"
+       }
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_25",
+       "entryReference": "0000000025",
+       "bookingDate": "2026-08-21",
+       "valueDate": "2026-08-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-231.43"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 71139A21"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_26",
+       "entryReference": "0000000026",
+       "bookingDate": "2026-08-21",
+       "valueDate": "2026-08-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.54"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "remittanceInformationUnstructured": [
+        "ჯარიმა ვადაგადაცილებაზე"
+       ],
+       "bankTransactionCodeProprietary": "loan_penalty"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_27",
+       "entryReference": "0000000027",
+       "bookingDate": "2026-09-22",
+       "valueDate": "2026-09-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "234.43"
+       },
+       "debtor": {
+        "name": "TEA TSINTSADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE40LB1366418220687252"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "LBRTGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000024379"
+       }
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_28",
+       "entryReference": "0000000028",
+       "bookingDate": "2026-09-23",
+       "valueDate": "2026-09-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-231.43"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 71139A21"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_29",
+       "entryReference": "0000000029",
+       "bookingDate": "2026-09-23",
+       "valueDate": "2026-09-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.00"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "remittanceInformationUnstructured": [
+        "ჯარიმა ვადაგადაცილებაზე"
+       ],
+       "bankTransactionCodeProprietary": "loan_penalty"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_30",
+       "entryReference": "0000000030",
+       "bookingDate": "2026-10-09",
+       "valueDate": "2026-10-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.66"
+       },
+       "debtor": {
+        "name": "TEA TSINTSADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE40LB1366418220687252"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "LBRTGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000024409"
+       }
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_31",
+       "entryReference": "0000000031",
+       "bookingDate": "2026-10-11",
+       "valueDate": "2026-10-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-231.43"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 71139A21"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_32",
+       "entryReference": "0000000032",
+       "bookingDate": "2026-10-11",
+       "valueDate": "2026-10-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-0.23"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "remittanceInformationUnstructured": [
+        "ჯარიმა ვადაგადაცილებაზე"
+       ],
+       "bankTransactionCodeProprietary": "loan_penalty"
+      },
+      {
+       "transactionId": "GE63PB1208203036459310_33",
+       "entryReference": "0000000033",
+       "bookingDate": "2026-10-13",
+       "valueDate": "2026-10-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.30"
+       },
+       "creditor": {
+        "name": "BOLT"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - BOLT"
+       ],
+       "bankTransactionCodeProprietary": "rideshare",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": false
+        },
+        "sequenceNumber": "24412",
+        "transactionDateTime": "2026-10-10T13:04:20"
+       },
+       "additionalTransactionInformation": "BOLT 418057******6891 MCC 4121"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/588a14e0-84de-509e-bdaf-409294d1458f"
+      },
+      "first": {
+       "href": "v2/accounts/588a14e0-84de-509e-bdaf-409294d1458f/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "8f9d3fc3-8c6c-53f6-8512-27f829b240b8",
+      "maskedPan": "418057******6891",
+      "currency": "GEL",
+      "ownerName": "TEA TSINTSADZE",
+      "name": "TEA TSINTSADZE",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-24.47"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-11T08:40:23"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-24.47"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-11T08:40:23"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/card-accounts/8f9d3fc3-8c6c-53f6-8512-27f829b240b8/balances"
+       },
+       "transactions": {
+        "href": "v2/card-accounts/8f9d3fc3-8c6c-53f6-8512-27f829b240b8/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/8f9d3fc3-8c6c-53f6-8512-27f829b240b8",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "8f9d3fc3-8c6c-53f6-8512-27f829b240b8",
+     "maskedPan": "418057******6891",
+     "currency": "GEL",
+     "ownerName": "TEA TSINTSADZE",
+     "name": "TEA TSINTSADZE",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-24.47"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-11T08:40:23"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-24.47"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-11T08:40:23"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v2/card-accounts/8f9d3fc3-8c6c-53f6-8512-27f829b240b8/balances"
+      },
+      "transactions": {
+       "href": "v2/card-accounts/8f9d3fc3-8c6c-53f6-8512-27f829b240b8/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/8f9d3fc3-8c6c-53f6-8512-27f829b240b8/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "418057******6891",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-24.47"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-24.47"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-11T08:40:23"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/8f9d3fc3-8c6c-53f6-8512-27f829b240b8/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "GE63PB1208203036459310_9",
+       "transactionDate": "2026-02-11",
+       "bookingDate": "2026-02-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-17.17"
+       },
+       "acceptorTransactionDateTime": "2026-02-11T16:14:09",
+       "maskedPAN": "418057******6891",
+       "transactionDetails": "ბარათით გადახდა - APPLE.COM/BILL",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "APPLE.COM/BILL",
+       "merchantCategoryCode": "7832"
+      },
+      {
+       "cardTransactionId": "GE63PB1208203036459310_33",
+       "transactionDate": "2026-10-10",
+       "bookingDate": "2026-10-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.30"
+       },
+       "acceptorTransactionDateTime": "2026-10-10T13:04:20",
+       "maskedPAN": "418057******6891",
+       "transactionDetails": "ბარათით გადახდა - BOLT",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "BOLT",
+       "merchantCategoryCode": "4121"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/588a14e0-84de-509e-bdaf-409294d1458f"
+      },
+      "first": {
+       "href": "v2/card-accounts/8f9d3fc3-8c6c-53f6-8512-27f829b240b8/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "418057******6891",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/cards",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cards": [
+     {
+      "resourceId": "8f9d3fc3-8c6c-53f6-8512-27f829b240b8",
+      "maskedPan": "418057******6891",
+      "currency": "GEL",
+      "ownerName": "TEA TSINTSADZE",
+      "name": "TEA TSINTSADZE",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-24.47"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-11T08:40:23"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-24.47"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-11T08:40:23"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/card-accounts/8f9d3fc3-8c6c-53f6-8512-27f829b240b8/balances"
+       },
+       "transactions": {
+        "href": "v2/card-accounts/8f9d3fc3-8c6c-53f6-8512-27f829b240b8/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/cards/8f9d3fc3-8c6c-53f6-8512-27f829b240b8",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "8f9d3fc3-8c6c-53f6-8512-27f829b240b8",
+     "maskedPan": "418057******6891",
+     "currency": "GEL",
+     "ownerName": "TEA TSINTSADZE",
+     "name": "TEA TSINTSADZE",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-24.47"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-11T08:40:23"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-24.47"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-11T08:40:23"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v2/card-accounts/8f9d3fc3-8c6c-53f6-8512-27f829b240b8/balances"
+      },
+      "transactions": {
+       "href": "v2/card-accounts/8f9d3fc3-8c6c-53f6-8512-27f829b240b8/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/8f9d3fc3-8c6c-53f6-8512-27f829b240b8/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "418057******6891",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-24.47"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-24.47"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-11T08:40:23"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/8f9d3fc3-8c6c-53f6-8512-27f829b240b8/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "GE63PB1208203036459310_9",
+       "transactionDate": "2026-02-11",
+       "bookingDate": "2026-02-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-17.17"
+       },
+       "acceptorTransactionDateTime": "2026-02-11T16:14:09",
+       "maskedPAN": "418057******6891",
+       "transactionDetails": "ბარათით გადახდა - APPLE.COM/BILL",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "APPLE.COM/BILL",
+       "merchantCategoryCode": "7832"
+      },
+      {
+       "cardTransactionId": "GE63PB1208203036459310_33",
+       "transactionDate": "2026-10-10",
+       "bookingDate": "2026-10-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.30"
+       },
+       "acceptorTransactionDateTime": "2026-10-10T13:04:20",
+       "maskedPAN": "418057******6891",
+       "transactionDetails": "ბარათით გადახდა - BOLT",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "BOLT",
+       "merchantCategoryCode": "4121"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/588a14e0-84de-509e-bdaf-409294d1458f"
+      },
+      "first": {
+       "href": "v2/card-accounts/8f9d3fc3-8c6c-53f6-8512-27f829b240b8/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "418057******6891",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "3b8ce4be-30d2-5b38-82a6-9c5314bac450",
+      "iban": "GE21PB4890580210136715",
+      "currency": "GEL",
+      "ownerName": "TEA TSINTSADZE",
+      "name": "TEA TSINTSADZE",
+      "product": "Mortgage loan",
+      "cashAccountType": "LOAN",
+      "status": "enabled",
+      "bic": "PAHAGE22",
+      "usage": "PRIV",
+      "_links": {
+       "balances": {
+        "href": "v2/loans/3b8ce4be-30d2-5b38-82a6-9c5314bac450/balances"
+       },
+       "transactions": {
+        "href": "v2/loans/3b8ce4be-30d2-5b38-82a6-9c5314bac450/transactions"
+       }
+      },
+      "displayName": "Mortgage loan",
+      "other": {
+       "identification": "LN-2020-854248",
+       "schemeNameProprietary": "LOAN_CONTRACT",
+       "issuer": "PASHA Bank Georgia"
+      },
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-10689.40"
+        },
+        "balanceType": "closingBooked",
+        "referenceDate": "2026-10-18"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-231.43"
+        },
+        "balanceType": "expected",
+        "referenceDate": "2026-11-10"
+       }
+      ],
+      "interest": [
+       {
+        "type": "FIXD",
+        "rate": [
+         {
+          "percentage": "12.35"
+         }
+        ]
+       }
+      ],
+      "relatedDates": [
+       {
+        "contractStartDate": "2020-05-19",
+        "contractEndDate": "2032-01-10"
+       }
+      ],
+      "collateralsInvolved": true,
+      "guaranteeInvolved": true,
+      "tariffs": "140 monthly annuity instalments of 231.43 GEL due on day 10"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans/3b8ce4be-30d2-5b38-82a6-9c5314bac450",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "3b8ce4be-30d2-5b38-82a6-9c5314bac450",
+     "iban": "GE21PB4890580210136715",
+     "currency": "GEL",
+     "ownerName": "TEA TSINTSADZE",
+     "name": "TEA TSINTSADZE",
+     "product": "Mortgage loan",
+     "cashAccountType": "LOAN",
+     "status": "enabled",
+     "bic": "PAHAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v2/loans/3b8ce4be-30d2-5b38-82a6-9c5314bac450/balances"
+      },
+      "transactions": {
+       "href": "v2/loans/3b8ce4be-30d2-5b38-82a6-9c5314bac450/transactions"
+      }
+     },
+     "displayName": "Mortgage loan",
+     "other": {
+      "identification": "LN-2020-854248",
+      "schemeNameProprietary": "LOAN_CONTRACT",
+      "issuer": "PASHA Bank Georgia"
+     },
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-10689.40"
+       },
+       "balanceType": "closingBooked",
+       "referenceDate": "2026-10-18"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-231.43"
+       },
+       "balanceType": "expected",
+       "referenceDate": "2026-11-10"
+      }
+     ],
+     "interest": [
+      {
+       "type": "FIXD",
+       "rate": [
+        {
+         "percentage": "12.35"
+        }
+       ]
+      }
+     ],
+     "relatedDates": [
+      {
+       "contractStartDate": "2020-05-19",
+       "contractEndDate": "2032-01-10"
+      }
+     ],
+     "collateralsInvolved": true,
+     "guaranteeInvolved": true,
+     "tariffs": "140 monthly annuity instalments of 231.43 GEL due on day 10"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans/3b8ce4be-30d2-5b38-82a6-9c5314bac450/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE21PB4890580210136715",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-10689.40"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-231.43"
+      },
+      "balanceType": "expected",
+      "referenceDate": "2026-11-10"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans/3b8ce4be-30d2-5b38-82a6-9c5314bac450/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE21PB4890580210136715",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "LN-2020-854248_66",
+       "entryReference": "0000000066",
+       "bookingDate": "2025-11-18",
+       "valueDate": "2025-11-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.43"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 66"
+       ],
+       "additionalTransactionInformation": "principal 107.37; interest 124.06"
+      },
+      {
+       "transactionId": "LN-2020-854248_67",
+       "entryReference": "0000000067",
+       "bookingDate": "2025-12-10",
+       "valueDate": "2025-12-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.43"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 67"
+       ],
+       "additionalTransactionInformation": "principal 108.47; interest 122.96"
+      },
+      {
+       "transactionId": "LN-2020-854248_68",
+       "entryReference": "0000000068",
+       "bookingDate": "2026-01-10",
+       "valueDate": "2026-01-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.43"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 68"
+       ],
+       "additionalTransactionInformation": "principal 109.59; interest 121.84"
+      },
+      {
+       "transactionId": "LN-2020-854248_69",
+       "entryReference": "0000000069",
+       "bookingDate": "2026-02-12",
+       "valueDate": "2026-02-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.43"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 69"
+       ],
+       "additionalTransactionInformation": "principal 110.72; interest 120.71"
+      },
+      {
+       "transactionId": "LN-2020-854248_70",
+       "entryReference": "0000000070",
+       "bookingDate": "2026-03-25",
+       "valueDate": "2026-03-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.43"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 70"
+       ],
+       "additionalTransactionInformation": "principal 111.86; interest 119.57"
+      },
+      {
+       "transactionId": "LN-2020-854248_71",
+       "entryReference": "0000000071",
+       "bookingDate": "2026-04-10",
+       "valueDate": "2026-04-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.43"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 71"
+       ],
+       "additionalTransactionInformation": "principal 113.01; interest 118.42"
+      },
+      {
+       "transactionId": "LN-2020-854248_72",
+       "entryReference": "0000000072",
+       "bookingDate": "2026-05-10",
+       "valueDate": "2026-05-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.43"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 72"
+       ],
+       "additionalTransactionInformation": "principal 114.17; interest 117.26"
+      },
+      {
+       "transactionId": "LN-2020-854248_73",
+       "entryReference": "0000000073",
+       "bookingDate": "2026-06-10",
+       "valueDate": "2026-06-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.43"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 73"
+       ],
+       "additionalTransactionInformation": "principal 115.35; interest 116.08"
+      },
+      {
+       "transactionId": "LN-2020-854248_74",
+       "entryReference": "0000000074",
+       "bookingDate": "2026-07-14",
+       "valueDate": "2026-07-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.43"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 74"
+       ],
+       "additionalTransactionInformation": "principal 116.53; interest 114.90"
+      },
+      {
+       "transactionId": "LN-2020-854248_75",
+       "entryReference": "0000000075",
+       "bookingDate": "2026-08-21",
+       "valueDate": "2026-08-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.43"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 75"
+       ],
+       "additionalTransactionInformation": "principal 117.73; interest 113.70"
+      },
+      {
+       "transactionId": "LN-2020-854248_76",
+       "entryReference": "0000000076",
+       "bookingDate": "2026-09-23",
+       "valueDate": "2026-09-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.43"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 76"
+       ],
+       "additionalTransactionInformation": "principal 118.94; interest 112.49"
+      },
+      {
+       "transactionId": "LN-2020-854248_77",
+       "entryReference": "0000000077",
+       "bookingDate": "2026-10-11",
+       "valueDate": "2026-10-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "231.43"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 77"
+       ],
+       "additionalTransactionInformation": "principal 120.17; interest 111.26"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/loans/3b8ce4be-30d2-5b38-82a6-9c5314bac450"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/savings",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": []
+   }
+  }
+ ]
+}

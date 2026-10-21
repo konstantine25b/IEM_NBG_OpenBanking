@@ -1,0 +1,553 @@
+{
+ "bank": "paysera",
+ "customer": "C00028",
+ "dialect": "paysera",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "188885d2-9f9c-54be-872c-a17aa4102f35",
+      "iban": "GE23PS1111089549351322",
+      "currency": "GEL",
+      "product": "Current Account",
+      "cashAccountType": "CACC",
+      "name": "Main Account",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-224.05"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-05T07:37:29+03:00"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-224.05"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-05T07:37:29+03:00"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/xs2a/georgia/0.8/v1/accounts/188885d2-9f9c-54be-872c-a17aa4102f35/balances"
+       },
+       "transactions": {
+        "href": "/xs2a/georgia/0.8/v1/accounts/188885d2-9f9c-54be-872c-a17aa4102f35/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/188885d2-9f9c-54be-872c-a17aa4102f35",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "188885d2-9f9c-54be-872c-a17aa4102f35",
+     "iban": "GE23PS1111089549351322",
+     "currency": "GEL",
+     "product": "Current Account",
+     "cashAccountType": "CACC",
+     "name": "Main Account",
+     "_links": {
+      "balances": {
+       "href": "/xs2a/georgia/0.8/v1/accounts/188885d2-9f9c-54be-872c-a17aa4102f35/balances"
+      },
+      "transactions": {
+       "href": "/xs2a/georgia/0.8/v1/accounts/188885d2-9f9c-54be-872c-a17aa4102f35/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/xs2a/georgia/0.8/v1/accounts/188885d2-9f9c-54be-872c-a17aa4102f35/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE23PS1111089549351322",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-224.05"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-05T07:37:29+03:00"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-224.05"
+      },
+      "balanceType": "interimBooked",
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-05T07:37:29+03:00"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/xs2a/georgia/0.8/v1/accounts/188885d2-9f9c-54be-872c-a17aa4102f35/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE23PS1111089549351322",
+     "currency": "GEL"
+    },
+    "_links": {
+     "account": {
+      "href": "/xs2a/georgia/0.8/v1/accounts/188885d2-9f9c-54be-872c-a17aa4102f35"
+     },
+     "first": {
+      "href": "/xs2a/georgia/0.8/v1/accounts/188885d2-9f9c-54be-872c-a17aa4102f35/transactions?bookingStatus=both&dateFrom=2025-10-19"
+     }
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00000013724",
+       "bookingDate": "2025-10-27",
+       "valueDate": "2025-10-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.13"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET"
+      },
+      {
+       "transactionId": "d_00000013726",
+       "bookingDate": "2025-10-27",
+       "valueDate": "2025-10-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.17"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR"
+      },
+      {
+       "transactionId": "c_00000013739",
+       "bookingDate": "2025-11-04",
+       "valueDate": "2025-11-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "267.77"
+       },
+       "debtorName": "DATO MCHEDLISHVILI",
+       "debtorAccount": {
+        "iban": "GE41BT1055654941860046"
+       },
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "d_00000013740",
+       "bookingDate": "2025-11-05",
+       "valueDate": "2025-11-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-267.77"
+       },
+       "creditorName": "Paysera Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 0CC8E23D",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "d_00000013756",
+       "bookingDate": "2025-12-01",
+       "valueDate": "2025-11-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.40"
+       },
+       "creditorName": "MCDONALDS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MCDONALDS"
+      },
+      {
+       "transactionId": "c_00000013765",
+       "bookingDate": "2025-12-04",
+       "valueDate": "2025-12-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "267.77"
+       },
+       "debtorName": "DATO MCHEDLISHVILI",
+       "debtorAccount": {
+        "iban": "GE41BT1055654941860046"
+       },
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "d_00000013769",
+       "bookingDate": "2025-12-05",
+       "valueDate": "2025-12-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-267.77"
+       },
+       "creditorName": "Paysera Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 0CC8E23D",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "c_00000013805",
+       "bookingDate": "2026-01-02",
+       "valueDate": "2026-01-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "267.77"
+       },
+       "debtorName": "DATO MCHEDLISHVILI",
+       "debtorAccount": {
+        "iban": "GE41BT1055654941860046"
+       },
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "d_00000013809",
+       "bookingDate": "2026-01-05",
+       "valueDate": "2026-01-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-267.77"
+       },
+       "creditorName": "Paysera Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 0CC8E23D",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "c_00000013844",
+       "bookingDate": "2026-02-04",
+       "valueDate": "2026-02-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "267.77"
+       },
+       "debtorName": "DATO MCHEDLISHVILI",
+       "debtorAccount": {
+        "iban": "GE41BT1055654941860046"
+       },
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "d_00000013846",
+       "bookingDate": "2026-02-05",
+       "valueDate": "2026-02-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-180.00"
+       },
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება"
+      },
+      {
+       "transactionId": "d_00000013847",
+       "bookingDate": "2026-02-05",
+       "valueDate": "2026-02-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-267.77"
+       },
+       "creditorName": "Paysera Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 0CC8E23D",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "d_00000013845",
+       "bookingDate": "2026-02-06",
+       "valueDate": "2026-02-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-8.46"
+       },
+       "creditorName": "SUBWAY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SUBWAY"
+      },
+      {
+       "transactionId": "c_00000013876",
+       "bookingDate": "2026-03-04",
+       "valueDate": "2026-03-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "267.77"
+       },
+       "debtorName": "DATO MCHEDLISHVILI",
+       "debtorAccount": {
+        "iban": "GE41BT1055654941860046"
+       },
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "d_00000013880",
+       "bookingDate": "2026-03-05",
+       "valueDate": "2026-03-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-267.77"
+       },
+       "creditorName": "Paysera Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 0CC8E23D",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "c_00000013916",
+       "bookingDate": "2026-04-03",
+       "valueDate": "2026-04-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "267.77"
+       },
+       "debtorName": "DATO MCHEDLISHVILI",
+       "debtorAccount": {
+        "iban": "GE41BT1055654941860046"
+       },
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "d_00000013918",
+       "bookingDate": "2026-04-05",
+       "valueDate": "2026-04-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-267.77"
+       },
+       "creditorName": "Paysera Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 0CC8E23D",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "d_00000013917",
+       "bookingDate": "2026-04-06",
+       "valueDate": "2026-04-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.53"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET"
+      },
+      {
+       "transactionId": "c_00000013949",
+       "bookingDate": "2026-05-04",
+       "valueDate": "2026-05-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "267.77"
+       },
+       "debtorName": "DATO MCHEDLISHVILI",
+       "debtorAccount": {
+        "iban": "GE41BT1055654941860046"
+       },
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "d_00000013950",
+       "bookingDate": "2026-05-05",
+       "valueDate": "2026-05-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-267.77"
+       },
+       "creditorName": "Paysera Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 0CC8E23D",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "c_00000013995",
+       "bookingDate": "2026-06-04",
+       "valueDate": "2026-06-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "267.77"
+       },
+       "debtorName": "DATO MCHEDLISHVILI",
+       "debtorAccount": {
+        "iban": "GE41BT1055654941860046"
+       },
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "d_00000013997",
+       "bookingDate": "2026-06-05",
+       "valueDate": "2026-06-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-267.77"
+       },
+       "creditorName": "Paysera Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 0CC8E23D",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "c_00000014024",
+       "bookingDate": "2026-07-03",
+       "valueDate": "2026-07-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "267.77"
+       },
+       "debtorName": "DATO MCHEDLISHVILI",
+       "debtorAccount": {
+        "iban": "GE41BT1055654941860046"
+       },
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "d_00000014026",
+       "bookingDate": "2026-07-05",
+       "valueDate": "2026-07-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-267.77"
+       },
+       "creditorName": "Paysera Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 0CC8E23D",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "c_00000014045",
+       "bookingDate": "2026-08-04",
+       "valueDate": "2026-08-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "267.77"
+       },
+       "debtorName": "DATO MCHEDLISHVILI",
+       "debtorAccount": {
+        "iban": "GE41BT1055654941860046"
+       },
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "d_00000014046",
+       "bookingDate": "2026-08-05",
+       "valueDate": "2026-08-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-267.77"
+       },
+       "creditorName": "Paysera Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 0CC8E23D",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "c_00000014071",
+       "bookingDate": "2026-09-04",
+       "valueDate": "2026-09-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "267.77"
+       },
+       "debtorName": "DATO MCHEDLISHVILI",
+       "debtorAccount": {
+        "iban": "GE41BT1055654941860046"
+       },
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "d_00000014073",
+       "bookingDate": "2026-09-05",
+       "valueDate": "2026-09-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-267.77"
+       },
+       "creditorName": "Paysera Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 0CC8E23D",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "d_00000014072",
+       "bookingDate": "2026-09-07",
+       "valueDate": "2026-09-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.28"
+       },
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT"
+      },
+      {
+       "transactionId": "c_00000014091",
+       "bookingDate": "2026-10-02",
+       "valueDate": "2026-10-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "267.77"
+       },
+       "debtorName": "DATO MCHEDLISHVILI",
+       "debtorAccount": {
+        "iban": "GE41BT1055654941860046"
+       },
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      },
+      {
+       "transactionId": "d_00000014093",
+       "bookingDate": "2026-10-05",
+       "valueDate": "2026-10-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.87"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET"
+      },
+      {
+       "transactionId": "d_00000014095",
+       "bookingDate": "2026-10-05",
+       "valueDate": "2026-10-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-267.77"
+       },
+       "creditorName": "Paysera Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 0CC8E23D",
+       "proprietaryBankTransactionCode": "transfer:ge_nbg_rtgs"
+      }
+     ],
+     "pending": []
+    }
+   }
+  }
+ ]
+}

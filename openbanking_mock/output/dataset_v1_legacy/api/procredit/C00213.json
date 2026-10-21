@@ -1,0 +1,4473 @@
+{
+ "bank": "procredit",
+ "customer": "C00213",
+ "dialect": "procredit",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "27123571",
+      "iban": "GE45PC1317839491935283",
+      "currency": "GEL",
+      "name": "GE45PC1317839491935283",
+      "product": "მიმდინარე ანგარიში",
+      "status": "enabled",
+      "bic": "MIBGGE22",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": 823.25
+        },
+        "balanceType": "interimAvailable"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": 825.51
+        },
+        "balanceType": "interimBooked"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/27123571/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/27123571/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/27123571",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "27123571",
+     "iban": "GE45PC1317839491935283",
+     "currency": "GEL",
+     "name": "GE45PC1317839491935283",
+     "product": "მიმდინარე ანგარიში",
+     "status": "enabled",
+     "bic": "MIBGGE22",
+     "balances": [],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/27123571/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/27123571/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/27123571/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE45PC1317839491935283",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": 823.25
+      },
+      "balanceType": "interimAvailable"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": 825.51
+      },
+      "balanceType": "closingBooked"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/27123571/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE45PC1317839491935283",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "entryReference": "0000000001",
+       "bookingDate": "2025-10-20",
+       "valueDate": "2025-10-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -14.77
+       },
+       "creditorName": "NIKORA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, NIKORA, 545424******4582, 19/10/2025 20:48:09.-."
+      },
+      {
+       "entryReference": "0000000002",
+       "bookingDate": "2025-10-22",
+       "valueDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.02
+       },
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, GPC, 545424******4582, 21/10/2025 16:34:08.-."
+      },
+      {
+       "entryReference": "0000000003",
+       "bookingDate": "2025-10-23",
+       "valueDate": "2025-10-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -20.0
+       },
+       "creditorName": "MZIA KUPRADZE",
+       "remittanceInformationUnstructured": "საკრედიტო ბარათის დაფარვა/Credit card repayment"
+      },
+      {
+       "entryReference": "0000000004",
+       "bookingDate": "2025-10-24",
+       "valueDate": "2025-10-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 65.0
+       },
+       "debtorName": "NANA GOGICHAISHVILI",
+       "debtorAccount": {
+        "iban": "GE82PB1825961686651449"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000005",
+       "bookingDate": "2025-10-27",
+       "valueDate": "2025-10-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -488.34
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 878A1435/Loan repayment 878A1435"
+      },
+      {
+       "entryReference": "0000000006",
+       "bookingDate": "2025-10-29",
+       "valueDate": "2025-10-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 265.0
+       },
+       "debtorName": "VAKHTANG KHARAISHVILI",
+       "debtorAccount": {
+        "iban": "GE84BG1466005538315016"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000007",
+       "bookingDate": "2025-10-31",
+       "valueDate": "2025-10-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.0
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "მომსახურების საკომისიო/Service fee"
+      },
+      {
+       "entryReference": "0000000008",
+       "bookingDate": "2025-11-03",
+       "valueDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.39
+       },
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MAXIM, 545424******4582, 30/10/2025 08:16:03.-."
+      },
+      {
+       "entryReference": "0000000009",
+       "bookingDate": "2025-11-09",
+       "valueDate": "2025-11-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 620.0
+       },
+       "debtorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, None, None, 09/11/2025 11:16:45.-."
+      },
+      {
+       "entryReference": "0000000010",
+       "bookingDate": "2025-11-10",
+       "valueDate": "2025-11-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -11.3
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - ნოემბერი/Water - November"
+      },
+      {
+       "entryReference": "0000000011",
+       "bookingDate": "2025-11-10",
+       "valueDate": "2025-11-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -32.97
+       },
+       "creditorName": "TBILISI ENERGY",
+       "remittanceInformationUnstructured": "ბუნებრივი აირი - ნოემბერი/Natural gas - November"
+      },
+      {
+       "entryReference": "0000000012",
+       "bookingDate": "2025-11-11",
+       "valueDate": "2025-11-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -10.0
+       },
+       "creditorName": "WISSOL",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, WISSOL, 545424******4582, 07/11/2025 14:56:24.-."
+      },
+      {
+       "entryReference": "0000000013",
+       "bookingDate": "2025-11-11",
+       "valueDate": "2025-11-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -14.26
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, KHINKALI HOUSE, 545424******4582, 10/11/2025 17:06:29.-."
+      },
+      {
+       "entryReference": "0000000014",
+       "bookingDate": "2025-11-11",
+       "valueDate": "2025-11-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -36.93
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - ნოემბერი/Internet - November"
+      },
+      {
+       "entryReference": "0000000015",
+       "bookingDate": "2025-11-12",
+       "valueDate": "2025-11-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -2.53
+       },
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MAXIM, 545424******4582, 11/11/2025 10:22:49.-."
+      },
+      {
+       "entryReference": "0000000016",
+       "bookingDate": "2025-11-14",
+       "valueDate": "2025-11-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 1503.65
+       },
+       "debtorName": "LLC VAKE FUEL",
+       "debtorAccount": {
+        "iban": "GE18TB1679849361280830"
+       },
+       "remittanceInformationUnstructured": "ხელფასი ნოემბერი/Salary November"
+      },
+      {
+       "entryReference": "0000000017",
+       "bookingDate": "2025-11-15",
+       "valueDate": "2025-11-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -69.5
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - ნოემბერი/Electricity - November"
+      },
+      {
+       "entryReference": "0000000018",
+       "bookingDate": "2025-11-16",
+       "valueDate": "2025-11-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -15.21
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - ნოემბერი/Mobile - November"
+      },
+      {
+       "entryReference": "0000000019",
+       "bookingDate": "2025-11-17",
+       "valueDate": "2025-11-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -5.39
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - ნოემბერი/Waste collection - November"
+      },
+      {
+       "entryReference": "0000000020",
+       "bookingDate": "2025-11-18",
+       "valueDate": "2025-11-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -2.16
+       },
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, BOLT, 545424******4582, 14/11/2025 21:21:38.-."
+      },
+      {
+       "entryReference": "0000000021",
+       "bookingDate": "2025-11-18",
+       "valueDate": "2025-11-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -16.17
+       },
+       "creditorName": "PIZZA HUT",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, PIZZA HUT, 545424******4582, 17/11/2025 14:17:20.-."
+      },
+      {
+       "entryReference": "0000000022",
+       "bookingDate": "2025-11-19",
+       "valueDate": "2025-11-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -2.27
+       },
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, BOLT, 545424******4582, 18/11/2025 10:45:10.-."
+      },
+      {
+       "entryReference": "0000000023",
+       "bookingDate": "2025-11-23",
+       "valueDate": "2025-11-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -23.05
+       },
+       "creditorName": "MZIA KUPRADZE",
+       "remittanceInformationUnstructured": "საკრედიტო ბარათის დაფარვა/Credit card repayment"
+      },
+      {
+       "entryReference": "0000000024",
+       "bookingDate": "2025-11-24",
+       "valueDate": "2025-11-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.07
+       },
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MAXIM, 545424******4582, 22/11/2025 08:44:06.-."
+      },
+      {
+       "entryReference": "0000000025",
+       "bookingDate": "2025-11-24",
+       "valueDate": "2025-11-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -10.0
+       },
+       "creditorName": "IRINA BOLKVADZE",
+       "creditorAccount": {
+        "iban": "GE66CD1076463672595204"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000026",
+       "bookingDate": "2025-11-25",
+       "valueDate": "2025-11-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -36.5
+       },
+       "creditorName": "LIBRE",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, LIBRE, 545424******4582, 21/11/2025 21:22:54.-."
+      },
+      {
+       "entryReference": "0000000027",
+       "bookingDate": "2025-11-26",
+       "valueDate": "2025-11-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -9.15
+       },
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, METROMONEY, 545424******4582, 25/11/2025 20:33:42.-."
+      },
+      {
+       "entryReference": "0000000028",
+       "bookingDate": "2025-11-26",
+       "valueDate": "2025-11-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -6.95
+       },
+       "creditorName": "MACHAKHELA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MACHAKHELA, 545424******4582, 25/11/2025 23:17:29.-."
+      },
+      {
+       "entryReference": "0000000029",
+       "bookingDate": "2025-11-27",
+       "valueDate": "2025-11-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -488.34
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 878A1435/Loan repayment 878A1435"
+      },
+      {
+       "entryReference": "0000000030",
+       "bookingDate": "2025-11-27",
+       "valueDate": "2025-11-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -75.0
+       },
+       "creditorName": "LELA LOMIDZE",
+       "creditorAccount": {
+        "iban": "GE71BG1791810707894075"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000031",
+       "bookingDate": "2025-11-28",
+       "valueDate": "2025-11-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.28
+       },
+       "creditorName": "MCDONALDS",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MCDONALDS, 545424******4582, 27/11/2025 09:23:19.-."
+      },
+      {
+       "entryReference": "0000000032",
+       "bookingDate": "2025-11-28",
+       "valueDate": "2025-11-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.0
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "მომსახურების საკომისიო/Service fee"
+      },
+      {
+       "entryReference": "0000000033",
+       "bookingDate": "2025-12-01",
+       "valueDate": "2025-11-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.0
+       },
+       "creditorName": "YANDEX GO",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, YANDEX GO, 545424******4582, 29/11/2025 20:38:20.-."
+      },
+      {
+       "entryReference": "0000000034",
+       "bookingDate": "2025-12-03",
+       "valueDate": "2025-12-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.56
+       },
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, BOLT, 545424******4582, 02/12/2025 07:23:06.-."
+      },
+      {
+       "entryReference": "0000000035",
+       "bookingDate": "2025-12-05",
+       "valueDate": "2025-12-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -16.3
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 03/12/2025 13:33:28.-."
+      },
+      {
+       "entryReference": "0000000036",
+       "bookingDate": "2025-12-05",
+       "valueDate": "2025-12-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -9.95
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 04/12/2025 17:46:12.-."
+      },
+      {
+       "entryReference": "0000000037",
+       "bookingDate": "2025-12-05",
+       "valueDate": "2025-12-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.24
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DAILY MARKET, 545424******4582, 04/12/2025 19:00:39.-."
+      },
+      {
+       "entryReference": "0000000038",
+       "bookingDate": "2025-12-05",
+       "valueDate": "2025-12-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -45.0
+       },
+       "creditorName": "VAKHTANG GELASHVILI",
+       "creditorAccount": {
+        "iban": "GE02TB1019893162940929"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000039",
+       "bookingDate": "2025-12-07",
+       "valueDate": "2025-12-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -50.0
+       },
+       "creditorName": "DAVIT TSINTSADZE",
+       "creditorAccount": {
+        "iban": "GE40BG1414347374036795"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000040",
+       "bookingDate": "2025-12-08",
+       "valueDate": "2025-12-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -6.54
+       },
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, METROMONEY, 545424******4582, 04/12/2025 13:09:03.-."
+      },
+      {
+       "entryReference": "0000000041",
+       "bookingDate": "2025-12-08",
+       "valueDate": "2025-12-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.06
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 05/12/2025 07:59:38.-."
+      },
+      {
+       "entryReference": "0000000042",
+       "bookingDate": "2025-12-08",
+       "valueDate": "2025-12-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -5.61
+       },
+       "creditorName": "STARBUCKS",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, STARBUCKS, 545424******4582, 05/12/2025 16:14:19.-."
+      },
+      {
+       "entryReference": "0000000043",
+       "bookingDate": "2025-12-08",
+       "valueDate": "2025-12-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.46
+       },
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, BOLT, 545424******4582, 06/12/2025 14:03:50.-."
+      },
+      {
+       "entryReference": "0000000044",
+       "bookingDate": "2025-12-08",
+       "valueDate": "2025-12-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -3.36
+       },
+       "creditorName": "CAFE LEILA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CAFE LEILA, 545424******4582, 07/12/2025 14:41:04.-."
+      },
+      {
+       "entryReference": "0000000045",
+       "bookingDate": "2025-12-08",
+       "valueDate": "2025-12-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -75.0
+       },
+       "creditorName": "LASHA SAMKHARADZE",
+       "creditorAccount": {
+        "iban": "GE44BG1009559335783750"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000046",
+       "bookingDate": "2025-12-09",
+       "valueDate": "2025-12-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -5.28
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, AGROHUB, 545424******4582, 06/12/2025 18:32:51.-."
+      },
+      {
+       "entryReference": "0000000047",
+       "bookingDate": "2025-12-10",
+       "valueDate": "2025-12-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -3.21
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DAILY MARKET, 545424******4582, 09/12/2025 09:45:03.-."
+      },
+      {
+       "entryReference": "0000000048",
+       "bookingDate": "2025-12-10",
+       "valueDate": "2025-12-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -8.5
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - დეკემბერი/Water - December"
+      },
+      {
+       "entryReference": "0000000049",
+       "bookingDate": "2025-12-10",
+       "valueDate": "2025-12-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -89.07
+       },
+       "creditorName": "TBILISI ENERGY",
+       "remittanceInformationUnstructured": "ბუნებრივი აირი - დეკემბერი/Natural gas - December"
+      },
+      {
+       "entryReference": "0000000050",
+       "bookingDate": "2025-12-11",
+       "valueDate": "2025-12-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -18.86
+       },
+       "creditorName": "EUROPEBET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, EUROPEBET, 545424******4582, 10/12/2025 07:56:04.-."
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/27123571"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/27123571/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      },
+      "next": {
+       "href": "/0.8/v1/accounts/27123571/transactions?bookingStatus=both&dateFrom=2025-10-19&entryReferenceFrom=0000000050"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/27123571/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19",
+    "entryReferenceFrom": "0000000050"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE45PC1317839491935283",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "entryReference": "0000000051",
+       "bookingDate": "2025-12-11",
+       "valueDate": "2025-12-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -25.01
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - დეკემბერი/Internet - December"
+      },
+      {
+       "entryReference": "0000000052",
+       "bookingDate": "2025-12-12",
+       "valueDate": "2025-12-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -25.0
+       },
+       "creditorName": "GULF",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, GULF, 545424******4582, 11/12/2025 21:09:33.-."
+      },
+      {
+       "entryReference": "0000000053",
+       "bookingDate": "2025-12-15",
+       "valueDate": "2025-12-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -72.51
+       },
+       "creditorName": "ZARA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, ZARA, 545424******4582, 13/12/2025 07:43:54.-."
+      },
+      {
+       "entryReference": "0000000054",
+       "bookingDate": "2025-12-15",
+       "valueDate": "2025-12-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 1510.25
+       },
+       "debtorName": "LLC VAKE FUEL",
+       "debtorAccount": {
+        "iban": "GE85KS1322818027041998"
+       },
+       "remittanceInformationUnstructured": "ხელფასი დეკემბერი/Salary December"
+      },
+      {
+       "entryReference": "0000000055",
+       "bookingDate": "2025-12-15",
+       "valueDate": "2025-12-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -85.67
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - დეკემბერი/Electricity - December"
+      },
+      {
+       "entryReference": "0000000056",
+       "bookingDate": "2025-12-16",
+       "valueDate": "2025-12-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -6.87
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, KHINKALI HOUSE, 545424******4582, 12/12/2025 23:13:20.-."
+      },
+      {
+       "entryReference": "0000000057",
+       "bookingDate": "2025-12-16",
+       "valueDate": "2025-12-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -2.23
+       },
+       "creditorName": "YANDEX GO",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, YANDEX GO, 545424******4582, 15/12/2025 11:26:53.-."
+      },
+      {
+       "entryReference": "0000000058",
+       "bookingDate": "2025-12-16",
+       "valueDate": "2025-12-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -25.1
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - დეკემბერი/Mobile - December"
+      },
+      {
+       "entryReference": "0000000059",
+       "bookingDate": "2025-12-17",
+       "valueDate": "2025-12-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -3.6
+       },
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, METROMONEY, 545424******4582, 15/12/2025 14:27:53.-."
+      },
+      {
+       "entryReference": "0000000060",
+       "bookingDate": "2025-12-17",
+       "valueDate": "2025-12-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -17.86
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 16/12/2025 07:04:53.-."
+      },
+      {
+       "entryReference": "0000000061",
+       "bookingDate": "2025-12-17",
+       "valueDate": "2025-12-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -10.0
+       },
+       "creditorName": "WISSOL",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, WISSOL, 545424******4582, 16/12/2025 08:36:13.-."
+      },
+      {
+       "entryReference": "0000000062",
+       "bookingDate": "2025-12-17",
+       "valueDate": "2025-12-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -5.2
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - დეკემბერი/Waste collection - December"
+      },
+      {
+       "entryReference": "0000000063",
+       "bookingDate": "2025-12-18",
+       "valueDate": "2025-12-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -35.0
+       },
+       "creditorName": "KHATIA TAVADZE",
+       "creditorAccount": {
+        "iban": "GE02CD1772434457800080"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000064",
+       "bookingDate": "2025-12-19",
+       "valueDate": "2025-12-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -29.01
+       },
+       "creditorName": "NIKORA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, NIKORA, 545424******4582, 18/12/2025 19:38:28.-."
+      },
+      {
+       "entryReference": "0000000065",
+       "bookingDate": "2025-12-22",
+       "valueDate": "2025-12-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -13.11
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 18/12/2025 12:30:05.-."
+      },
+      {
+       "entryReference": "0000000066",
+       "bookingDate": "2025-12-22",
+       "valueDate": "2025-12-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -9.49
+       },
+       "creditorName": "EUROPEBET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, EUROPEBET, 545424******4582, 20/12/2025 12:58:09.-."
+      },
+      {
+       "entryReference": "0000000067",
+       "bookingDate": "2025-12-23",
+       "valueDate": "2025-12-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -9.65
+       },
+       "creditorName": "EXTRA.GE",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, EXTRA.GE, 545424******4582, 20/12/2025 11:50:02.-."
+      },
+      {
+       "entryReference": "0000000068",
+       "bookingDate": "2025-12-23",
+       "valueDate": "2025-12-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -36.01
+       },
+       "creditorName": "MZIA KUPRADZE",
+       "remittanceInformationUnstructured": "საკრედიტო ბარათის დაფარვა/Credit card repayment"
+      },
+      {
+       "entryReference": "0000000069",
+       "bookingDate": "2025-12-25",
+       "valueDate": "2025-12-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -60.0
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM BANK OF GEORGIA, 545424******4582, 25/12/2025 15:28:01.-."
+      },
+      {
+       "entryReference": "0000000070",
+       "bookingDate": "2025-12-26",
+       "valueDate": "2025-12-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 1404.71
+       },
+       "debtorName": "MZIA KUPRADZE",
+       "remittanceInformationUnstructured": "ანაბრისთვის თანხის შემოტანა/Funds for deposit"
+      },
+      {
+       "entryReference": "0000000071",
+       "bookingDate": "2025-12-26",
+       "valueDate": "2025-12-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -3000.0
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "creditorAccount": {
+        "iban": "GE32PC3741472052759011"
+       },
+       "remittanceInformationUnstructured": "ანაბრის გახსნა/Deposit opening"
+      },
+      {
+       "entryReference": "0000000072",
+       "bookingDate": "2025-12-27",
+       "valueDate": "2025-12-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -488.34
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 878A1435/Loan repayment 878A1435"
+      },
+      {
+       "entryReference": "0000000073",
+       "bookingDate": "2025-12-31",
+       "valueDate": "2025-12-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.96
+       },
+       "creditorName": "YANDEX GO",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, YANDEX GO, 545424******4582, 30/12/2025 20:02:23.-."
+      },
+      {
+       "entryReference": "0000000074",
+       "bookingDate": "2025-12-31",
+       "valueDate": "2025-12-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.0
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "მომსახურების საკომისიო/Service fee"
+      },
+      {
+       "entryReference": "0000000075",
+       "bookingDate": "2026-01-05",
+       "valueDate": "2026-01-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -2.2
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DAILY MARKET, 545424******4582, 02/01/2026 18:39:58.-."
+      },
+      {
+       "entryReference": "0000000076",
+       "bookingDate": "2026-01-10",
+       "valueDate": "2026-01-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -10.59
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - იანვარი/Water - January"
+      },
+      {
+       "entryReference": "0000000077",
+       "bookingDate": "2026-01-10",
+       "valueDate": "2026-01-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -97.66
+       },
+       "creditorName": "TBILISI ENERGY",
+       "remittanceInformationUnstructured": "ბუნებრივი აირი - იანვარი/Natural gas - January"
+      },
+      {
+       "entryReference": "0000000078",
+       "bookingDate": "2026-01-11",
+       "valueDate": "2026-01-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -23.51
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - იანვარი/Internet - January"
+      },
+      {
+       "entryReference": "0000000079",
+       "bookingDate": "2026-01-15",
+       "valueDate": "2026-01-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 1509.85
+       },
+       "debtorName": "LLC VAKE FUEL",
+       "debtorAccount": {
+        "iban": "GE15BG1563781085520452"
+       },
+       "remittanceInformationUnstructured": "ხელფასი იანვარი/Salary January"
+      },
+      {
+       "entryReference": "0000000080",
+       "bookingDate": "2026-01-15",
+       "valueDate": "2026-01-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -63.59
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - იანვარი/Electricity - January"
+      },
+      {
+       "entryReference": "0000000081",
+       "bookingDate": "2026-01-16",
+       "valueDate": "2026-01-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -19.68
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - იანვარი/Mobile - January"
+      },
+      {
+       "entryReference": "0000000082",
+       "bookingDate": "2026-01-17",
+       "valueDate": "2026-01-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.91
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - იანვარი/Waste collection - January"
+      },
+      {
+       "entryReference": "0000000083",
+       "bookingDate": "2026-01-17",
+       "valueDate": "2026-01-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -30.0
+       },
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM TBC BANK, 545424******4582, 17/01/2026 20:06:49.-."
+      },
+      {
+       "entryReference": "0000000084",
+       "bookingDate": "2026-01-18",
+       "valueDate": "2026-01-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -20.0
+       },
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM TBC BANK, 545424******4582, 18/01/2026 18:09:42.-."
+      },
+      {
+       "entryReference": "0000000085",
+       "bookingDate": "2026-01-19",
+       "valueDate": "2026-01-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -3.02
+       },
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, GPC, 545424******4582, 16/01/2026 11:25:15.-."
+      },
+      {
+       "entryReference": "0000000086",
+       "bookingDate": "2026-01-19",
+       "valueDate": "2026-01-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -12.12
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 16/01/2026 20:31:40.-."
+      },
+      {
+       "entryReference": "0000000087",
+       "bookingDate": "2026-01-19",
+       "valueDate": "2026-01-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.34
+       },
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, BOLT, 545424******4582, 17/01/2026 13:00:30.-."
+      },
+      {
+       "entryReference": "0000000088",
+       "bookingDate": "2026-01-20",
+       "valueDate": "2026-01-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -6.78
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 16/01/2026 12:29:58.-."
+      },
+      {
+       "entryReference": "0000000089",
+       "bookingDate": "2026-01-21",
+       "valueDate": "2026-01-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -3.03
+       },
+       "creditorName": "NIKORA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, NIKORA, 545424******4582, 20/01/2026 14:12:00.-."
+      },
+      {
+       "entryReference": "0000000090",
+       "bookingDate": "2026-01-22",
+       "valueDate": "2026-01-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.0
+       },
+       "creditorName": "YANDEX GO",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, YANDEX GO, 545424******4582, 21/01/2026 16:01:41.-."
+      },
+      {
+       "entryReference": "0000000091",
+       "bookingDate": "2026-01-23",
+       "valueDate": "2026-01-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -2.41
+       },
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, BOLT, 545424******4582, 22/01/2026 12:04:38.-."
+      },
+      {
+       "entryReference": "0000000092",
+       "bookingDate": "2026-01-23",
+       "valueDate": "2026-01-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.99
+       },
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, KIOSK, 545424******4582, 22/01/2026 14:44:07.-."
+      },
+      {
+       "entryReference": "0000000093",
+       "bookingDate": "2026-01-23",
+       "valueDate": "2026-01-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -9.66
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, SPAR, 545424******4582, 22/01/2026 21:07:19.-."
+      },
+      {
+       "entryReference": "0000000094",
+       "bookingDate": "2026-01-23",
+       "valueDate": "2026-01-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -36.24
+       },
+       "creditorName": "MZIA KUPRADZE",
+       "remittanceInformationUnstructured": "საკრედიტო ბარათის დაფარვა/Credit card repayment"
+      },
+      {
+       "entryReference": "0000000095",
+       "bookingDate": "2026-01-27",
+       "valueDate": "2026-01-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -3.39
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DAILY MARKET, 545424******4582, 24/01/2026 19:33:12.-."
+      },
+      {
+       "entryReference": "0000000096",
+       "bookingDate": "2026-01-27",
+       "valueDate": "2026-01-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -488.34
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 878A1435/Loan repayment 878A1435"
+      },
+      {
+       "entryReference": "0000000097",
+       "bookingDate": "2026-01-28",
+       "valueDate": "2026-01-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -60.0
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM BANK OF GEORGIA, 545424******4582, 28/01/2026 16:09:24.-."
+      },
+      {
+       "entryReference": "0000000098",
+       "bookingDate": "2026-01-29",
+       "valueDate": "2026-01-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -3.93
+       },
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, KIOSK, 545424******4582, 27/01/2026 13:15:53.-."
+      },
+      {
+       "entryReference": "0000000099",
+       "bookingDate": "2026-01-30",
+       "valueDate": "2026-01-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.0
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "მომსახურების საკომისიო/Service fee"
+      },
+      {
+       "entryReference": "0000000100",
+       "bookingDate": "2026-02-02",
+       "valueDate": "2026-01-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.58
+       },
+       "creditorName": "MACHAKHELA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MACHAKHELA, 545424******4582, 30/01/2026 16:22:07.-."
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/27123571"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/27123571/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      },
+      "next": {
+       "href": "/0.8/v1/accounts/27123571/transactions?bookingStatus=both&dateFrom=2025-10-19&entryReferenceFrom=0000000100"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/27123571/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19",
+    "entryReferenceFrom": "0000000100"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE45PC1317839491935283",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "entryReference": "0000000101",
+       "bookingDate": "2026-02-04",
+       "valueDate": "2026-02-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -6.53
+       },
+       "creditorName": "ZARA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, ZARA, 545424******4582, 02/02/2026 13:18:36.-."
+      },
+      {
+       "entryReference": "0000000102",
+       "bookingDate": "2026-02-06",
+       "valueDate": "2026-02-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -8.4
+       },
+       "creditorName": "ADJARABET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, ADJARABET, 545424******4582, 04/02/2026 09:45:34.-."
+      },
+      {
+       "entryReference": "0000000103",
+       "bookingDate": "2026-02-06",
+       "valueDate": "2026-02-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.64
+       },
+       "creditorName": "TBILISI TRANSPORT COMPANY",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, TBILISI TRANSPORT COMPANY, 545424******4582, 05/02/2026 16:45:07.-."
+      },
+      {
+       "entryReference": "0000000104",
+       "bookingDate": "2026-02-06",
+       "valueDate": "2026-02-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -40.0
+       },
+       "creditorName": "ATM PAYSERA BANK GEORGIA",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM PAYSERA BANK GEORGIA, 545424******4582, 06/02/2026 07:59:43.-."
+      },
+      {
+       "entryReference": "0000000105",
+       "bookingDate": "2026-02-07",
+       "valueDate": "2026-02-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 195.0
+       },
+       "debtorName": "NUTSA KAVTARADZE",
+       "debtorAccount": {
+        "iban": "GE28PC1212072565116460"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000106",
+       "bookingDate": "2026-02-09",
+       "valueDate": "2026-02-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -2.7
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DAILY MARKET, 545424******4582, 05/02/2026 21:08:59.-."
+      },
+      {
+       "entryReference": "0000000107",
+       "bookingDate": "2026-02-09",
+       "valueDate": "2026-02-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -30.47
+       },
+       "creditorName": "EXTRA.GE",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, EXTRA.GE, 545424******4582, 07/02/2026 08:37:33.-."
+      },
+      {
+       "entryReference": "0000000108",
+       "bookingDate": "2026-02-09",
+       "valueDate": "2026-02-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 160.0
+       },
+       "debtorName": "NANA MGELADZE",
+       "debtorAccount": {
+        "iban": "GE45PB1619797143388257"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000109",
+       "bookingDate": "2026-02-10",
+       "valueDate": "2026-02-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -5.05
+       },
+       "creditorName": "NETFLIX",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, NETFLIX, 545424******4582, 08/02/2026 12:59:08.-."
+      },
+      {
+       "entryReference": "0000000110",
+       "bookingDate": "2026-02-10",
+       "valueDate": "2026-02-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -12.12
+       },
+       "creditorName": "EUROPEBET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, EUROPEBET, 545424******4582, 08/02/2026 20:37:42.-."
+      },
+      {
+       "entryReference": "0000000111",
+       "bookingDate": "2026-02-10",
+       "valueDate": "2026-02-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -92.11
+       },
+       "creditorName": "TBILISI ENERGY",
+       "remittanceInformationUnstructured": "ბუნებრივი აირი - თებერვალი/Natural gas - February"
+      },
+      {
+       "entryReference": "0000000112",
+       "bookingDate": "2026-02-10",
+       "valueDate": "2026-02-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -13.31
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - თებერვალი/Water - February"
+      },
+      {
+       "entryReference": "0000000113",
+       "bookingDate": "2026-02-11",
+       "valueDate": "2026-02-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.43
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DAILY MARKET, 545424******4582, 10/02/2026 16:29:11.-."
+      },
+      {
+       "entryReference": "0000000114",
+       "bookingDate": "2026-02-11",
+       "valueDate": "2026-02-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -10.0
+       },
+       "creditorName": "ROMPETROL",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, ROMPETROL, 545424******4582, 10/02/2026 21:15:09.-."
+      },
+      {
+       "entryReference": "0000000115",
+       "bookingDate": "2026-02-11",
+       "valueDate": "2026-02-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -33.22
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - თებერვალი/Internet - February"
+      },
+      {
+       "entryReference": "0000000116",
+       "bookingDate": "2026-02-12",
+       "valueDate": "2026-02-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -3.46
+       },
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, BOLT, 545424******4582, 11/02/2026 17:58:49.-."
+      },
+      {
+       "entryReference": "0000000117",
+       "bookingDate": "2026-02-13",
+       "valueDate": "2026-02-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 1506.38
+       },
+       "debtorName": "LLC VAKE FUEL",
+       "debtorAccount": {
+        "iban": "GE56TB1118456837712614"
+       },
+       "remittanceInformationUnstructured": "ხელფასი თებერვალი/Salary February"
+      },
+      {
+       "entryReference": "0000000118",
+       "bookingDate": "2026-02-13",
+       "valueDate": "2026-02-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -40.0
+       },
+       "creditorName": "DATO GOGICHAISHVILI",
+       "creditorAccount": {
+        "iban": "GE71CD1871153740806277"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000119",
+       "bookingDate": "2026-02-15",
+       "valueDate": "2026-02-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -49.51
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - თებერვალი/Electricity - February"
+      },
+      {
+       "entryReference": "0000000120",
+       "bookingDate": "2026-02-16",
+       "valueDate": "2026-02-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -7.26
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, SPAR, 545424******4582, 15/02/2026 19:29:55.-."
+      },
+      {
+       "entryReference": "0000000121",
+       "bookingDate": "2026-02-16",
+       "valueDate": "2026-02-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -18.2
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - თებერვალი/Mobile - February"
+      },
+      {
+       "entryReference": "0000000122",
+       "bookingDate": "2026-02-17",
+       "valueDate": "2026-02-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -5.07
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - თებერვალი/Waste collection - February"
+      },
+      {
+       "entryReference": "0000000123",
+       "bookingDate": "2026-02-18",
+       "valueDate": "2026-02-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -70.0
+       },
+       "creditorName": "ATM HALYK BANK GEORGIA",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM HALYK BANK GEORGIA, 545424******4582, 18/02/2026 08:58:07.-."
+      },
+      {
+       "entryReference": "0000000124",
+       "bookingDate": "2026-02-22",
+       "valueDate": "2026-02-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -90.0
+       },
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM TBC BANK, 545424******4582, 22/02/2026 08:13:14.-."
+      },
+      {
+       "entryReference": "0000000125",
+       "bookingDate": "2026-02-23",
+       "valueDate": "2026-02-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.51
+       },
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MINI MARKET, 545424******4582, 20/02/2026 20:45:08.-."
+      },
+      {
+       "entryReference": "0000000126",
+       "bookingDate": "2026-02-23",
+       "valueDate": "2026-02-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -45.53
+       },
+       "creditorName": "MZIA KUPRADZE",
+       "remittanceInformationUnstructured": "საკრედიტო ბარათის დაფარვა/Credit card repayment"
+      },
+      {
+       "entryReference": "0000000127",
+       "bookingDate": "2026-02-24",
+       "valueDate": "2026-02-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -10.26
+       },
+       "creditorName": "ZARA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, ZARA, 545424******4582, 20/02/2026 09:03:11.-."
+      },
+      {
+       "entryReference": "0000000128",
+       "bookingDate": "2026-02-24",
+       "valueDate": "2026-02-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -3.26
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 23/02/2026 08:52:09.-."
+      },
+      {
+       "entryReference": "0000000129",
+       "bookingDate": "2026-02-25",
+       "valueDate": "2026-02-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -8.75
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, AGROHUB, 545424******4582, 24/02/2026 20:37:39.-."
+      },
+      {
+       "entryReference": "0000000130",
+       "bookingDate": "2026-02-27",
+       "valueDate": "2026-02-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -9.38
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 26/02/2026 08:59:59.-."
+      },
+      {
+       "entryReference": "0000000131",
+       "bookingDate": "2026-02-27",
+       "valueDate": "2026-02-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.0
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "მომსახურების საკომისიო/Service fee"
+      },
+      {
+       "entryReference": "0000000132",
+       "bookingDate": "2026-02-27",
+       "valueDate": "2026-02-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -488.34
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 878A1435/Loan repayment 878A1435"
+      },
+      {
+       "entryReference": "0000000133",
+       "bookingDate": "2026-03-02",
+       "valueDate": "2026-02-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -5.23
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 27/02/2026 12:12:40.-."
+      },
+      {
+       "entryReference": "0000000134",
+       "bookingDate": "2026-03-02",
+       "valueDate": "2026-02-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -5.78
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 27/02/2026 20:05:46.-."
+      },
+      {
+       "entryReference": "0000000135",
+       "bookingDate": "2026-03-03",
+       "valueDate": "2026-02-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.41
+       },
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, GPC, 545424******4582, 27/02/2026 18:21:36.-."
+      },
+      {
+       "entryReference": "0000000136",
+       "bookingDate": "2026-03-03",
+       "valueDate": "2026-03-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -2.26
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DAILY MARKET, 545424******4582, 02/03/2026 11:07:09.-."
+      },
+      {
+       "entryReference": "0000000137",
+       "bookingDate": "2026-03-03",
+       "valueDate": "2026-03-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.94
+       },
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, BOLT, 545424******4582, 02/03/2026 18:31:46.-."
+      },
+      {
+       "entryReference": "0000000138",
+       "bookingDate": "2026-03-04",
+       "valueDate": "2026-03-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -2.43
+       },
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, KIOSK, 545424******4582, 03/03/2026 19:58:02.-."
+      },
+      {
+       "entryReference": "0000000139",
+       "bookingDate": "2026-03-06",
+       "valueDate": "2026-03-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -40.0
+       },
+       "creditorName": "ATM TERABANK",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM TERABANK, 545424******4582, 06/03/2026 16:32:22.-."
+      },
+      {
+       "entryReference": "0000000140",
+       "bookingDate": "2026-03-07",
+       "valueDate": "2026-03-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -20.0
+       },
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM TBC BANK, 545424******4582, 07/03/2026 10:32:00.-."
+      },
+      {
+       "entryReference": "0000000141",
+       "bookingDate": "2026-03-09",
+       "valueDate": "2026-03-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.0
+       },
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, BOLT, 545424******4582, 07/03/2026 18:34:38.-."
+      },
+      {
+       "entryReference": "0000000142",
+       "bookingDate": "2026-03-09",
+       "valueDate": "2026-03-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -60.0
+       },
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM TBC BANK, 545424******4582, 09/03/2026 14:02:55.-."
+      },
+      {
+       "entryReference": "0000000143",
+       "bookingDate": "2026-03-10",
+       "valueDate": "2026-03-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -15.0
+       },
+       "creditorName": "SOCAR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, SOCAR, 545424******4582, 08/03/2026 10:55:25.-."
+      },
+      {
+       "entryReference": "0000000144",
+       "bookingDate": "2026-03-10",
+       "valueDate": "2026-03-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -91.6
+       },
+       "creditorName": "TBILISI ENERGY",
+       "remittanceInformationUnstructured": "ბუნებრივი აირი - მარტი/Natural gas - March"
+      },
+      {
+       "entryReference": "0000000145",
+       "bookingDate": "2026-03-10",
+       "valueDate": "2026-03-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -11.21
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - მარტი/Water - March"
+      },
+      {
+       "entryReference": "0000000146",
+       "bookingDate": "2026-03-11",
+       "valueDate": "2026-03-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -5.0
+       },
+       "creditorName": "WISSOL",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, WISSOL, 545424******4582, 10/03/2026 10:56:23.-."
+      },
+      {
+       "entryReference": "0000000147",
+       "bookingDate": "2026-03-11",
+       "valueDate": "2026-03-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -31.73
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - მარტი/Internet - March"
+      },
+      {
+       "entryReference": "0000000148",
+       "bookingDate": "2026-03-12",
+       "valueDate": "2026-03-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -15.0
+       },
+       "creditorName": "WISSOL",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, WISSOL, 545424******4582, 11/03/2026 14:04:36.-."
+      },
+      {
+       "entryReference": "0000000149",
+       "bookingDate": "2026-03-13",
+       "valueDate": "2026-03-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 1488.36
+       },
+       "debtorName": "LLC VAKE FUEL",
+       "debtorAccount": {
+        "iban": "GE68KS1647464407659494"
+       },
+       "remittanceInformationUnstructured": "ხელფასი მარტი/Salary March"
+      },
+      {
+       "entryReference": "0000000150",
+       "bookingDate": "2026-03-14",
+       "valueDate": "2026-03-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -20.0
+       },
+       "creditorName": "ATM HALYK BANK GEORGIA",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM HALYK BANK GEORGIA, 545424******4582, 14/03/2026 09:51:43.-."
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/27123571"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/27123571/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      },
+      "next": {
+       "href": "/0.8/v1/accounts/27123571/transactions?bookingStatus=both&dateFrom=2025-10-19&entryReferenceFrom=0000000150"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/27123571/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19",
+    "entryReferenceFrom": "0000000150"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE45PC1317839491935283",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "entryReference": "0000000151",
+       "bookingDate": "2026-03-14",
+       "valueDate": "2026-03-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -85.0
+       },
+       "creditorName": "LASHA KAVTARADZE",
+       "creditorAccount": {
+        "iban": "GE91LB1860042064316529"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000152",
+       "bookingDate": "2026-03-15",
+       "valueDate": "2026-03-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -77.27
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - მარტი/Electricity - March"
+      },
+      {
+       "entryReference": "0000000153",
+       "bookingDate": "2026-03-16",
+       "valueDate": "2026-03-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -12.45
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 14/03/2026 08:17:35.-."
+      },
+      {
+       "entryReference": "0000000154",
+       "bookingDate": "2026-03-16",
+       "valueDate": "2026-03-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -11.8
+       },
+       "creditorName": "EUROPEBET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, EUROPEBET, 545424******4582, 14/03/2026 14:28:42.-."
+      },
+      {
+       "entryReference": "0000000155",
+       "bookingDate": "2026-03-16",
+       "valueDate": "2026-03-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.46
+       },
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MAXIM, 545424******4582, 15/03/2026 09:15:16.-."
+      },
+      {
+       "entryReference": "0000000156",
+       "bookingDate": "2026-03-16",
+       "valueDate": "2026-03-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -5.63
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, SPAR, 545424******4582, 15/03/2026 21:07:35.-."
+      },
+      {
+       "entryReference": "0000000157",
+       "bookingDate": "2026-03-16",
+       "valueDate": "2026-03-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 140.0
+       },
+       "debtorName": "LASHA JAVAKHISHVILI",
+       "debtorAccount": {
+        "iban": "GE04BG1013457316131270"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000158",
+       "bookingDate": "2026-03-16",
+       "valueDate": "2026-03-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -22.55
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - მარტი/Mobile - March"
+      },
+      {
+       "entryReference": "0000000159",
+       "bookingDate": "2026-03-16",
+       "valueDate": "2026-03-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -30.0
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM BANK OF GEORGIA, 545424******4582, 16/03/2026 17:06:39.-."
+      },
+      {
+       "entryReference": "0000000160",
+       "bookingDate": "2026-03-17",
+       "valueDate": "2026-03-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -7.13
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, SPAR, 545424******4582, 14/03/2026 10:46:51.-."
+      },
+      {
+       "entryReference": "0000000161",
+       "bookingDate": "2026-03-17",
+       "valueDate": "2026-03-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 280.0
+       },
+       "debtorName": "LIZI CHIKOVANI",
+       "debtorAccount": {
+        "iban": "GE25LB1128618114969994"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000162",
+       "bookingDate": "2026-03-17",
+       "valueDate": "2026-03-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.29
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - მარტი/Waste collection - March"
+      },
+      {
+       "entryReference": "0000000163",
+       "bookingDate": "2026-03-18",
+       "valueDate": "2026-03-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.71
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, AGROHUB, 545424******4582, 17/03/2026 20:27:59.-."
+      },
+      {
+       "entryReference": "0000000164",
+       "bookingDate": "2026-03-19",
+       "valueDate": "2026-03-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -30.0
+       },
+       "creditorName": "ROMPETROL",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, ROMPETROL, 545424******4582, 18/03/2026 21:34:40.-."
+      },
+      {
+       "entryReference": "0000000165",
+       "bookingDate": "2026-03-20",
+       "valueDate": "2026-03-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.74
+       },
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MAXIM, 545424******4582, 19/03/2026 19:15:28.-."
+      },
+      {
+       "entryReference": "0000000166",
+       "bookingDate": "2026-03-21",
+       "valueDate": "2026-03-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -90.0
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM BANK OF GEORGIA, 545424******4582, 21/03/2026 14:21:07.-."
+      },
+      {
+       "entryReference": "0000000167",
+       "bookingDate": "2026-03-22",
+       "valueDate": "2026-03-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -30.0
+       },
+       "creditorName": "ELENE GVENETADZE",
+       "creditorAccount": {
+        "iban": "GE24BG1264829169626400"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000168",
+       "bookingDate": "2026-03-23",
+       "valueDate": "2026-03-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -690.03
+       },
+       "creditorName": "MZIA KUPRADZE",
+       "remittanceInformationUnstructured": "საკრედიტო ბარათის დაფარვა/Credit card repayment"
+      },
+      {
+       "entryReference": "0000000169",
+       "bookingDate": "2026-03-26",
+       "valueDate": "2026-03-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 3070.68
+       },
+       "debtorName": "ProCredit Bank Georgia",
+       "debtorAccount": {
+        "iban": "GE32PC3741472052759011"
+       },
+       "remittanceInformationUnstructured": "ანაბრის დახურვა/Deposit closing"
+      },
+      {
+       "entryReference": "0000000170",
+       "bookingDate": "2026-03-27",
+       "valueDate": "2026-03-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -488.34
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 878A1435/Loan repayment 878A1435"
+      },
+      {
+       "entryReference": "0000000171",
+       "bookingDate": "2026-03-30",
+       "valueDate": "2026-03-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -35.0
+       },
+       "creditorName": "SHALVA BOLKVADZE",
+       "creditorAccount": {
+        "iban": "GE67BG1804421603833871"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000172",
+       "bookingDate": "2026-03-31",
+       "valueDate": "2026-03-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -3.64
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, SPAR, 545424******4582, 27/03/2026 10:52:44.-."
+      },
+      {
+       "entryReference": "0000000173",
+       "bookingDate": "2026-03-31",
+       "valueDate": "2026-03-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -8.35
+       },
+       "creditorName": "EUROPEBET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, EUROPEBET, 545424******4582, 27/03/2026 17:48:15.-."
+      },
+      {
+       "entryReference": "0000000174",
+       "bookingDate": "2026-03-31",
+       "valueDate": "2026-03-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -8.78
+       },
+       "creditorName": "GOODWILL",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, GOODWILL, 545424******4582, 27/03/2026 21:51:46.-."
+      },
+      {
+       "entryReference": "0000000175",
+       "bookingDate": "2026-03-31",
+       "valueDate": "2026-03-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.82
+       },
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, BOLT, 545424******4582, 30/03/2026 15:39:46.-."
+      },
+      {
+       "entryReference": "0000000176",
+       "bookingDate": "2026-03-31",
+       "valueDate": "2026-03-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -2.54
+       },
+       "creditorName": "YANDEX GO",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, YANDEX GO, 545424******4582, 30/03/2026 21:19:39.-."
+      },
+      {
+       "entryReference": "0000000177",
+       "bookingDate": "2026-03-31",
+       "valueDate": "2026-03-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.0
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "მომსახურების საკომისიო/Service fee"
+      },
+      {
+       "entryReference": "0000000178",
+       "bookingDate": "2026-04-02",
+       "valueDate": "2026-04-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -50.0
+       },
+       "creditorName": "PORTAL",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, PORTAL, 545424******4582, 01/04/2026 11:36:42.-."
+      },
+      {
+       "entryReference": "0000000179",
+       "bookingDate": "2026-04-03",
+       "valueDate": "2026-04-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.39
+       },
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MAXIM, 545424******4582, 02/04/2026 13:08:34.-."
+      },
+      {
+       "entryReference": "0000000180",
+       "bookingDate": "2026-04-03",
+       "valueDate": "2026-04-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -5.11
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, AGROHUB, 545424******4582, 02/04/2026 16:58:35.-."
+      },
+      {
+       "entryReference": "0000000181",
+       "bookingDate": "2026-04-06",
+       "valueDate": "2026-04-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -2.49
+       },
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, KIOSK, 545424******4582, 03/04/2026 09:31:01.-."
+      },
+      {
+       "entryReference": "0000000182",
+       "bookingDate": "2026-04-06",
+       "valueDate": "2026-04-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -56.64
+       },
+       "creditorName": "ZARA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, ZARA, 545424******4582, 03/04/2026 17:52:30.-."
+      },
+      {
+       "entryReference": "0000000183",
+       "bookingDate": "2026-04-06",
+       "valueDate": "2026-04-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -28.95
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, AGROHUB, 545424******4582, 03/04/2026 21:49:50.-."
+      },
+      {
+       "entryReference": "0000000184",
+       "bookingDate": "2026-04-08",
+       "valueDate": "2026-04-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -35.0
+       },
+       "creditorName": "WISSOL",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, WISSOL, 545424******4582, 07/04/2026 16:38:26.-."
+      },
+      {
+       "entryReference": "0000000185",
+       "bookingDate": "2026-04-10",
+       "valueDate": "2026-04-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -10.81
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - აპრილი/Water - April"
+      },
+      {
+       "entryReference": "0000000186",
+       "bookingDate": "2026-04-10",
+       "valueDate": "2026-04-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -58.16
+       },
+       "creditorName": "TBILISI ENERGY",
+       "remittanceInformationUnstructured": "ბუნებრივი აირი - აპრილი/Natural gas - April"
+      },
+      {
+       "entryReference": "0000000187",
+       "bookingDate": "2026-04-11",
+       "valueDate": "2026-04-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -35.23
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - აპრილი/Internet - April"
+      },
+      {
+       "entryReference": "0000000188",
+       "bookingDate": "2026-04-14",
+       "valueDate": "2026-04-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.29
+       },
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MINI MARKET, 545424******4582, 10/04/2026 09:31:40.-."
+      },
+      {
+       "entryReference": "0000000189",
+       "bookingDate": "2026-04-15",
+       "valueDate": "2026-04-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -8.13
+       },
+       "creditorName": "MACHAKHELA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MACHAKHELA, 545424******4582, 14/04/2026 14:08:39.-."
+      },
+      {
+       "entryReference": "0000000190",
+       "bookingDate": "2026-04-15",
+       "valueDate": "2026-04-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 1507.37
+       },
+       "debtorName": "LLC VAKE FUEL",
+       "debtorAccount": {
+        "iban": "GE94KS1330822757711260"
+       },
+       "remittanceInformationUnstructured": "ხელფასი აპრილი/Salary April"
+      },
+      {
+       "entryReference": "0000000191",
+       "bookingDate": "2026-04-15",
+       "valueDate": "2026-04-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -29.27
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - აპრილი/Electricity - April"
+      },
+      {
+       "entryReference": "0000000192",
+       "bookingDate": "2026-04-16",
+       "valueDate": "2026-04-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -35.0
+       },
+       "creditorName": "WISSOL",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, WISSOL, 545424******4582, 15/04/2026 07:07:25.-."
+      },
+      {
+       "entryReference": "0000000193",
+       "bookingDate": "2026-04-16",
+       "valueDate": "2026-04-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -5.36
+       },
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MAXIM, 545424******4582, 15/04/2026 15:06:18.-."
+      },
+      {
+       "entryReference": "0000000194",
+       "bookingDate": "2026-04-16",
+       "valueDate": "2026-04-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -17.87
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - აპრილი/Mobile - April"
+      },
+      {
+       "entryReference": "0000000195",
+       "bookingDate": "2026-04-17",
+       "valueDate": "2026-04-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.45
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DAILY MARKET, 545424******4582, 16/04/2026 08:28:39.-."
+      },
+      {
+       "entryReference": "0000000196",
+       "bookingDate": "2026-04-17",
+       "valueDate": "2026-04-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.0
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - აპრილი/Waste collection - April"
+      },
+      {
+       "entryReference": "0000000197",
+       "bookingDate": "2026-04-20",
+       "valueDate": "2026-04-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -8.34
+       },
+       "creditorName": "TBILISI TRANSPORT COMPANY",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, TBILISI TRANSPORT COMPANY, 545424******4582, 16/04/2026 20:44:21.-."
+      },
+      {
+       "entryReference": "0000000198",
+       "bookingDate": "2026-04-21",
+       "valueDate": "2026-04-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -51.72
+       },
+       "creditorName": "MYPARTS.GE",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MYPARTS.GE, 545424******4582, 18/04/2026 14:55:25.-."
+      },
+      {
+       "entryReference": "0000000199",
+       "bookingDate": "2026-04-21",
+       "valueDate": "2026-04-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -10.12
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, AGROHUB, 545424******4582, 20/04/2026 09:11:14.-."
+      },
+      {
+       "entryReference": "0000000200",
+       "bookingDate": "2026-04-23",
+       "valueDate": "2026-04-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -18.28
+       },
+       "creditorName": "MACHAKHELA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MACHAKHELA, 545424******4582, 22/04/2026 12:12:13.-."
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/27123571"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/27123571/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      },
+      "next": {
+       "href": "/0.8/v1/accounts/27123571/transactions?bookingStatus=both&dateFrom=2025-10-19&entryReferenceFrom=0000000200"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/27123571/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19",
+    "entryReferenceFrom": "0000000200"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE45PC1317839491935283",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "entryReference": "0000000201",
+       "bookingDate": "2026-04-23",
+       "valueDate": "2026-04-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -5.74
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DAILY MARKET, 545424******4582, 22/04/2026 14:35:37.-."
+      },
+      {
+       "entryReference": "0000000202",
+       "bookingDate": "2026-04-23",
+       "valueDate": "2026-04-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -20.0
+       },
+       "creditorName": "MZIA KUPRADZE",
+       "remittanceInformationUnstructured": "საკრედიტო ბარათის დაფარვა/Credit card repayment"
+      },
+      {
+       "entryReference": "0000000203",
+       "bookingDate": "2026-04-24",
+       "valueDate": "2026-04-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -2.14
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 23/04/2026 16:48:24.-."
+      },
+      {
+       "entryReference": "0000000204",
+       "bookingDate": "2026-04-27",
+       "valueDate": "2026-04-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -55.05
+       },
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, GPC, 545424******4582, 25/04/2026 15:15:53.-."
+      },
+      {
+       "entryReference": "0000000205",
+       "bookingDate": "2026-04-27",
+       "valueDate": "2026-04-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -488.34
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 878A1435/Loan repayment 878A1435"
+      },
+      {
+       "entryReference": "0000000206",
+       "bookingDate": "2026-04-28",
+       "valueDate": "2026-04-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -11.16
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 25/04/2026 11:26:26.-."
+      },
+      {
+       "entryReference": "0000000207",
+       "bookingDate": "2026-04-29",
+       "valueDate": "2026-04-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -6.35
+       },
+       "creditorName": "GOODWILL",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, GOODWILL, 545424******4582, 28/04/2026 16:29:40.-."
+      },
+      {
+       "entryReference": "0000000208",
+       "bookingDate": "2026-04-30",
+       "valueDate": "2026-04-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.0
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "მომსახურების საკომისიო/Service fee"
+      },
+      {
+       "entryReference": "0000000209",
+       "bookingDate": "2026-05-04",
+       "valueDate": "2026-05-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -25.02
+       },
+       "creditorName": "PSP",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, PSP, 545424******4582, 01/05/2026 19:11:38.-."
+      },
+      {
+       "entryReference": "0000000210",
+       "bookingDate": "2026-05-04",
+       "valueDate": "2026-05-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -13.06
+       },
+       "creditorName": "TBILISI TRANSPORT COMPANY",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, TBILISI TRANSPORT COMPANY, 545424******4582, 03/05/2026 08:45:58.-."
+      },
+      {
+       "entryReference": "0000000211",
+       "bookingDate": "2026-05-08",
+       "valueDate": "2026-05-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -18.76
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, KHINKALI HOUSE, 545424******4582, 07/05/2026 18:19:42.-."
+      },
+      {
+       "entryReference": "0000000212",
+       "bookingDate": "2026-05-10",
+       "valueDate": "2026-05-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -19.77
+       },
+       "creditorName": "TBILISI ENERGY",
+       "remittanceInformationUnstructured": "ბუნებრივი აირი - მაისი/Natural gas - May"
+      },
+      {
+       "entryReference": "0000000213",
+       "bookingDate": "2026-05-10",
+       "valueDate": "2026-05-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -12.01
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - მაისი/Water - May"
+      },
+      {
+       "entryReference": "0000000214",
+       "bookingDate": "2026-05-11",
+       "valueDate": "2026-05-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -3.91
+       },
+       "creditorName": "DUNKIN",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DUNKIN, 545424******4582, 08/05/2026 10:40:08.-."
+      },
+      {
+       "entryReference": "0000000215",
+       "bookingDate": "2026-05-11",
+       "valueDate": "2026-05-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -5.6
+       },
+       "creditorName": "NETFLIX",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, NETFLIX, 545424******4582, 08/05/2026 21:20:53.-."
+      },
+      {
+       "entryReference": "0000000216",
+       "bookingDate": "2026-05-11",
+       "valueDate": "2026-05-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -35.1
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, AGROHUB, 545424******4582, 10/05/2026 12:25:23.-."
+      },
+      {
+       "entryReference": "0000000217",
+       "bookingDate": "2026-05-11",
+       "valueDate": "2026-05-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -36.98
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - მაისი/Internet - May"
+      },
+      {
+       "entryReference": "0000000218",
+       "bookingDate": "2026-05-15",
+       "valueDate": "2026-05-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 1502.22
+       },
+       "debtorName": "LLC VAKE FUEL",
+       "debtorAccount": {
+        "iban": "GE58BG1665854285046237"
+       },
+       "remittanceInformationUnstructured": "ხელფასი მაისი/Salary May"
+      },
+      {
+       "entryReference": "0000000219",
+       "bookingDate": "2026-05-15",
+       "valueDate": "2026-05-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -48.95
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - მაისი/Electricity - May"
+      },
+      {
+       "entryReference": "0000000220",
+       "bookingDate": "2026-05-16",
+       "valueDate": "2026-05-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -26.79
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - მაისი/Mobile - May"
+      },
+      {
+       "entryReference": "0000000221",
+       "bookingDate": "2026-05-17",
+       "valueDate": "2026-05-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.54
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - მაისი/Waste collection - May"
+      },
+      {
+       "entryReference": "0000000222",
+       "bookingDate": "2026-05-19",
+       "valueDate": "2026-05-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -460.23
+       },
+       "creditorName": "GEORGIAN AIRWAYS",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, GEORGIAN AIRWAYS, 545424******4582, 18/05/2026 10:08:25.-."
+      },
+      {
+       "entryReference": "0000000223",
+       "bookingDate": "2026-05-19",
+       "valueDate": "2026-05-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -2.44
+       },
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, KIOSK, 545424******4582, 18/05/2026 14:04:57.-."
+      },
+      {
+       "entryReference": "0000000224",
+       "bookingDate": "2026-05-21",
+       "valueDate": "2026-05-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -22.56
+       },
+       "creditorName": "PHARMADEPOT",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, PHARMADEPOT, 545424******4582, 20/05/2026 21:21:52.-."
+      },
+      {
+       "entryReference": "0000000225",
+       "bookingDate": "2026-05-23",
+       "valueDate": "2026-05-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -21.77
+       },
+       "creditorName": "MZIA KUPRADZE",
+       "remittanceInformationUnstructured": "საკრედიტო ბარათის დაფარვა/Credit card repayment"
+      },
+      {
+       "entryReference": "0000000226",
+       "bookingDate": "2026-05-25",
+       "valueDate": "2026-05-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -8.0
+       },
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MINI MARKET, 545424******4582, 23/05/2026 20:04:13.-."
+      },
+      {
+       "entryReference": "0000000227",
+       "bookingDate": "2026-05-26",
+       "valueDate": "2026-05-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -17.61
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, AGROHUB, 545424******4582, 24/05/2026 13:00:00.-."
+      },
+      {
+       "entryReference": "0000000228",
+       "bookingDate": "2026-05-27",
+       "valueDate": "2026-05-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -488.34
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 878A1435/Loan repayment 878A1435"
+      },
+      {
+       "entryReference": "0000000229",
+       "bookingDate": "2026-05-28",
+       "valueDate": "2026-05-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -26.34
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, SPAR, 545424******4582, 27/05/2026 15:35:33.-."
+      },
+      {
+       "entryReference": "0000000230",
+       "bookingDate": "2026-05-29",
+       "valueDate": "2026-05-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.0
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "მომსახურების საკომისიო/Service fee"
+      },
+      {
+       "entryReference": "0000000231",
+       "bookingDate": "2026-06-01",
+       "valueDate": "2026-05-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -53.6
+       },
+       "creditorName": "EVEX HOSPITALS",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, EVEX HOSPITALS, 545424******4582, 29/05/2026 07:26:41.-."
+      },
+      {
+       "entryReference": "0000000232",
+       "bookingDate": "2026-06-01",
+       "valueDate": "2026-05-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -6.88
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DAILY MARKET, 545424******4582, 29/05/2026 14:32:43.-."
+      },
+      {
+       "entryReference": "0000000233",
+       "bookingDate": "2026-06-01",
+       "valueDate": "2026-05-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -31.42
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 29/05/2026 16:59:07.-."
+      },
+      {
+       "entryReference": "0000000234",
+       "bookingDate": "2026-06-02",
+       "valueDate": "2026-05-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -31.61
+       },
+       "creditorName": "DUNKIN",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DUNKIN, 545424******4582, 31/05/2026 13:13:26.-."
+      },
+      {
+       "entryReference": "0000000235",
+       "bookingDate": "2026-06-02",
+       "valueDate": "2026-06-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -16.32
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 01/06/2026 12:25:29.-."
+      },
+      {
+       "entryReference": "0000000236",
+       "bookingDate": "2026-06-02",
+       "valueDate": "2026-06-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -360.0
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM BANK OF GEORGIA, 545424******4582, 02/06/2026 08:03:14.-."
+      },
+      {
+       "entryReference": "0000000237",
+       "bookingDate": "2026-06-03",
+       "valueDate": "2026-06-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -6.28
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DAILY MARKET, 545424******4582, 02/06/2026 10:45:23.-."
+      },
+      {
+       "entryReference": "0000000238",
+       "bookingDate": "2026-06-05",
+       "valueDate": "2026-06-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -106.75
+       },
+       "creditorName": "PSP",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, PSP, 545424******4582, 04/06/2026 08:03:23.-."
+      },
+      {
+       "entryReference": "0000000239",
+       "bookingDate": "2026-06-05",
+       "valueDate": "2026-06-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -47.05
+       },
+       "creditorName": "MACHAKHELA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MACHAKHELA, 545424******4582, 04/06/2026 12:46:11.-."
+      },
+      {
+       "entryReference": "0000000240",
+       "bookingDate": "2026-06-05",
+       "valueDate": "2026-06-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -14.82
+       },
+       "creditorName": "SUBWAY",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, SUBWAY, 545424******4582, 04/06/2026 15:11:14.-."
+      },
+      {
+       "entryReference": "0000000241",
+       "bookingDate": "2026-06-08",
+       "valueDate": "2026-06-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -7.64
+       },
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, KIOSK, 545424******4582, 04/06/2026 08:15:48.-."
+      },
+      {
+       "entryReference": "0000000242",
+       "bookingDate": "2026-06-08",
+       "valueDate": "2026-06-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -15.28
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 06/06/2026 13:11:32.-."
+      },
+      {
+       "entryReference": "0000000243",
+       "bookingDate": "2026-06-09",
+       "valueDate": "2026-06-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -30.0
+       },
+       "creditorName": "NESTAN GIORGADZE",
+       "creditorAccount": {
+        "iban": "GE71HB1731453346331304"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000244",
+       "bookingDate": "2026-06-10",
+       "valueDate": "2026-06-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -110.0
+       },
+       "creditorName": "WISSOL",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, WISSOL, 545424******4582, 08/06/2026 17:51:24.-."
+      },
+      {
+       "entryReference": "0000000245",
+       "bookingDate": "2026-06-10",
+       "valueDate": "2026-06-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -10.99
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - ივნისი/Water - June"
+      },
+      {
+       "entryReference": "0000000246",
+       "bookingDate": "2026-06-10",
+       "valueDate": "2026-06-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -23.68
+       },
+       "creditorName": "TBILISI ENERGY",
+       "remittanceInformationUnstructured": "ბუნებრივი აირი - ივნისი/Natural gas - June"
+      },
+      {
+       "entryReference": "0000000247",
+       "bookingDate": "2026-06-11",
+       "valueDate": "2026-06-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.8
+       },
+       "creditorName": "YANDEX GO",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, YANDEX GO, 545424******4582, 10/06/2026 17:10:24.-."
+      },
+      {
+       "entryReference": "0000000248",
+       "bookingDate": "2026-06-11",
+       "valueDate": "2026-06-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -30.29
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - ივნისი/Internet - June"
+      },
+      {
+       "entryReference": "0000000249",
+       "bookingDate": "2026-06-12",
+       "valueDate": "2026-06-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -8.16
+       },
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MAXIM, 545424******4582, 11/06/2026 09:41:55.-."
+      },
+      {
+       "entryReference": "0000000250",
+       "bookingDate": "2026-06-12",
+       "valueDate": "2026-06-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -27.32
+       },
+       "creditorName": "NIKORA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, NIKORA, 545424******4582, 11/06/2026 20:44:14.-."
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/27123571"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/27123571/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      },
+      "next": {
+       "href": "/0.8/v1/accounts/27123571/transactions?bookingStatus=both&dateFrom=2025-10-19&entryReferenceFrom=0000000250"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/27123571/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19",
+    "entryReferenceFrom": "0000000250"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE45PC1317839491935283",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "entryReference": "0000000251",
+       "bookingDate": "2026-06-12",
+       "valueDate": "2026-06-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -120.0
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM BANK OF GEORGIA, 545424******4582, 12/06/2026 11:06:34.-."
+      },
+      {
+       "entryReference": "0000000252",
+       "bookingDate": "2026-06-15",
+       "valueDate": "2026-06-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -13.8
+       },
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MINI MARKET, 545424******4582, 13/06/2026 11:56:20.-."
+      },
+      {
+       "entryReference": "0000000253",
+       "bookingDate": "2026-06-15",
+       "valueDate": "2026-06-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -9.26
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 13/06/2026 18:41:52.-."
+      },
+      {
+       "entryReference": "0000000254",
+       "bookingDate": "2026-06-15",
+       "valueDate": "2026-06-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -9.04
+       },
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, KIOSK, 545424******4582, 14/06/2026 15:18:44.-."
+      },
+      {
+       "entryReference": "0000000255",
+       "bookingDate": "2026-06-15",
+       "valueDate": "2026-06-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 1483.46
+       },
+       "debtorName": "LLC VAKE FUEL",
+       "debtorAccount": {
+        "iban": "GE74BG1575064372095524"
+       },
+       "remittanceInformationUnstructured": "ხელფასი ივნისი/Salary June"
+      },
+      {
+       "entryReference": "0000000256",
+       "bookingDate": "2026-06-15",
+       "valueDate": "2026-06-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -54.93
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - ივნისი/Electricity - June"
+      },
+      {
+       "entryReference": "0000000257",
+       "bookingDate": "2026-06-16",
+       "valueDate": "2026-06-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -14.58
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - ივნისი/Mobile - June"
+      },
+      {
+       "entryReference": "0000000258",
+       "bookingDate": "2026-06-17",
+       "valueDate": "2026-06-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -50.61
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, KHINKALI HOUSE, 545424******4582, 15/06/2026 12:48:48.-."
+      },
+      {
+       "entryReference": "0000000259",
+       "bookingDate": "2026-06-17",
+       "valueDate": "2026-06-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -20.5
+       },
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, GPC, 545424******4582, 15/06/2026 12:59:27.-."
+      },
+      {
+       "entryReference": "0000000260",
+       "bookingDate": "2026-06-17",
+       "valueDate": "2026-06-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.78
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - ივნისი/Waste collection - June"
+      },
+      {
+       "entryReference": "0000000261",
+       "bookingDate": "2026-06-18",
+       "valueDate": "2026-06-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -78.17
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, AGROHUB, 545424******4582, 17/06/2026 09:42:52.-."
+      },
+      {
+       "entryReference": "0000000262",
+       "bookingDate": "2026-06-18",
+       "valueDate": "2026-06-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -8.83
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DAILY MARKET, 545424******4582, 17/06/2026 17:27:16.-."
+      },
+      {
+       "entryReference": "0000000263",
+       "bookingDate": "2026-06-22",
+       "valueDate": "2026-06-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -18.72
+       },
+       "creditorName": "GOOGLE *YOUTUBE",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, GOOGLE *YOUTUBE, 545424******4582, 19/06/2026 07:24:35.-."
+      },
+      {
+       "entryReference": "0000000264",
+       "bookingDate": "2026-06-22",
+       "valueDate": "2026-06-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -13.18
+       },
+       "creditorName": "MCDONALDS",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MCDONALDS, 545424******4582, 20/06/2026 21:16:36.-."
+      },
+      {
+       "entryReference": "0000000265",
+       "bookingDate": "2026-06-22",
+       "valueDate": "2026-06-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -41.82
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 21/06/2026 20:46:22.-."
+      },
+      {
+       "entryReference": "0000000266",
+       "bookingDate": "2026-06-23",
+       "valueDate": "2026-06-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -144.09
+       },
+       "creditorName": "MZIA KUPRADZE",
+       "remittanceInformationUnstructured": "საკრედიტო ბარათის დაფარვა/Credit card repayment"
+      },
+      {
+       "entryReference": "0000000267",
+       "bookingDate": "2026-06-25",
+       "valueDate": "2026-06-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -17.14
+       },
+       "creditorName": "PSP",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, PSP, 545424******4582, 24/06/2026 10:10:17.-."
+      },
+      {
+       "entryReference": "0000000268",
+       "bookingDate": "2026-06-27",
+       "valueDate": "2026-06-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -488.34
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 878A1435/Loan repayment 878A1435"
+      },
+      {
+       "entryReference": "0000000269",
+       "bookingDate": "2026-06-29",
+       "valueDate": "2026-06-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.79
+       },
+       "creditorName": "YANDEX GO",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, YANDEX GO, 545424******4582, 25/06/2026 11:31:08.-."
+      },
+      {
+       "entryReference": "0000000270",
+       "bookingDate": "2026-06-30",
+       "valueDate": "2026-06-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -31.75
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, SPAR, 545424******4582, 27/06/2026 15:20:27.-."
+      },
+      {
+       "entryReference": "0000000271",
+       "bookingDate": "2026-06-30",
+       "valueDate": "2026-06-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.0
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "მომსახურების საკომისიო/Service fee"
+      },
+      {
+       "entryReference": "0000000272",
+       "bookingDate": "2026-07-01",
+       "valueDate": "2026-06-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -7.78
+       },
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MINI MARKET, 545424******4582, 29/06/2026 08:37:38.-."
+      },
+      {
+       "entryReference": "0000000273",
+       "bookingDate": "2026-07-02",
+       "valueDate": "2026-06-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -80.0
+       },
+       "creditorName": "PORTAL",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, PORTAL, 545424******4582, 30/06/2026 17:22:01.-."
+      },
+      {
+       "entryReference": "0000000274",
+       "bookingDate": "2026-07-03",
+       "valueDate": "2026-07-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -135.46
+       },
+       "creditorName": "ZARA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, ZARA, 545424******4582, 02/07/2026 13:03:30.-."
+      },
+      {
+       "entryReference": "0000000275",
+       "bookingDate": "2026-07-06",
+       "valueDate": "2026-07-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -42.95
+       },
+       "creditorName": "MACHAKHELA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MACHAKHELA, 545424******4582, 02/07/2026 22:03:55.-."
+      },
+      {
+       "entryReference": "0000000276",
+       "bookingDate": "2026-07-07",
+       "valueDate": "2026-07-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -300.0
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM BANK OF GEORGIA, 545424******4582, 07/07/2026 12:36:34.-."
+      },
+      {
+       "entryReference": "0000000277",
+       "bookingDate": "2026-07-08",
+       "valueDate": "2026-07-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -10.27
+       },
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, BOLT, 545424******4582, 06/07/2026 21:01:42.-."
+      },
+      {
+       "entryReference": "0000000278",
+       "bookingDate": "2026-07-10",
+       "valueDate": "2026-07-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -25.75
+       },
+       "creditorName": "TBILISI ENERGY",
+       "remittanceInformationUnstructured": "ბუნებრივი აირი - ივლისი/Natural gas - July"
+      },
+      {
+       "entryReference": "0000000279",
+       "bookingDate": "2026-07-10",
+       "valueDate": "2026-07-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -13.45
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - ივლისი/Water - July"
+      },
+      {
+       "entryReference": "0000000280",
+       "bookingDate": "2026-07-11",
+       "valueDate": "2026-07-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -24.92
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - ივლისი/Internet - July"
+      },
+      {
+       "entryReference": "0000000281",
+       "bookingDate": "2026-07-14",
+       "valueDate": "2026-07-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -22.47
+       },
+       "creditorName": "TBILISI TRANSPORT COMPANY",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, TBILISI TRANSPORT COMPANY, 545424******4582, 13/07/2026 21:25:44.-."
+      },
+      {
+       "entryReference": "0000000282",
+       "bookingDate": "2026-07-15",
+       "valueDate": "2026-07-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -55.06
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - ივლისი/Electricity - July"
+      },
+      {
+       "entryReference": "0000000283",
+       "bookingDate": "2026-07-15",
+       "valueDate": "2026-07-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 1485.39
+       },
+       "debtorName": "LLC VAKE FUEL",
+       "debtorAccount": {
+        "iban": "GE61TB1032026531776469"
+       },
+       "remittanceInformationUnstructured": "ხელფასი ივლისი/Salary July"
+      },
+      {
+       "entryReference": "0000000284",
+       "bookingDate": "2026-07-16",
+       "valueDate": "2026-07-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -150.0
+       },
+       "creditorName": "IRAKLI ABASHIDZE",
+       "creditorAccount": {
+        "iban": "GE06HB1950940497903550"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000285",
+       "bookingDate": "2026-07-16",
+       "valueDate": "2026-07-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -20.74
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - ივლისი/Mobile - July"
+      },
+      {
+       "entryReference": "0000000286",
+       "bookingDate": "2026-07-17",
+       "valueDate": "2026-07-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -360.0
+       },
+       "creditorName": "ATM LIBERTY BANK",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM LIBERTY BANK, 545424******4582, 17/07/2026 08:45:34.-."
+      },
+      {
+       "entryReference": "0000000287",
+       "bookingDate": "2026-07-17",
+       "valueDate": "2026-07-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.61
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - ივლისი/Waste collection - July"
+      },
+      {
+       "entryReference": "0000000288",
+       "bookingDate": "2026-07-20",
+       "valueDate": "2026-07-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -110.0
+       },
+       "creditorName": "NATO PANJIKIDZE",
+       "creditorAccount": {
+        "iban": "GE63TB1484851744223877"
+       },
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა/Personal transfer"
+      },
+      {
+       "entryReference": "0000000289",
+       "bookingDate": "2026-07-21",
+       "valueDate": "2026-07-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -55.49
+       },
+       "creditorName": "NIKORA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, NIKORA, 545424******4582, 19/07/2026 08:47:00.-."
+      },
+      {
+       "entryReference": "0000000290",
+       "bookingDate": "2026-07-22",
+       "valueDate": "2026-07-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -705.22
+       },
+       "creditorName": "EVEX HOSPITALS",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, EVEX HOSPITALS, 545424******4582, 20/07/2026 16:04:46.-."
+      },
+      {
+       "entryReference": "0000000291",
+       "bookingDate": "2026-07-23",
+       "valueDate": "2026-07-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -221.42
+       },
+       "creditorName": "MZIA KUPRADZE",
+       "remittanceInformationUnstructured": "საკრედიტო ბარათის დაფარვა/Credit card repayment"
+      },
+      {
+       "entryReference": "0000000292",
+       "bookingDate": "2026-07-26",
+       "valueDate": "2026-07-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -570.0
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM BANK OF GEORGIA, 545424******4582, 26/07/2026 10:51:46.-."
+      },
+      {
+       "entryReference": "0000000293",
+       "bookingDate": "2026-07-27",
+       "valueDate": "2026-07-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -241.42
+       },
+       "creditorName": "AMAZON",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, AMAZON, 545424******4582, 23/07/2026 11:01:52.-."
+      },
+      {
+       "entryReference": "0000000294",
+       "bookingDate": "2026-07-27",
+       "valueDate": "2026-07-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -57.33
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, AGROHUB, 545424******4582, 26/07/2026 10:16:13.-."
+      },
+      {
+       "entryReference": "0000000295",
+       "bookingDate": "2026-07-27",
+       "valueDate": "2026-07-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -488.34
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 878A1435/Loan repayment 878A1435"
+      },
+      {
+       "entryReference": "0000000296",
+       "bookingDate": "2026-07-28",
+       "valueDate": "2026-07-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -17.06
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DAILY MARKET, 545424******4582, 27/07/2026 07:31:11.-."
+      },
+      {
+       "entryReference": "0000000297",
+       "bookingDate": "2026-07-30",
+       "valueDate": "2026-07-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -19.76
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, KHINKALI HOUSE, 545424******4582, 28/07/2026 12:33:33.-."
+      },
+      {
+       "entryReference": "0000000298",
+       "bookingDate": "2026-07-31",
+       "valueDate": "2026-07-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -448.71
+       },
+       "creditorName": "ALTA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, ALTA, 545424******4582, 30/07/2026 15:05:22.-."
+      },
+      {
+       "entryReference": "0000000299",
+       "bookingDate": "2026-07-31",
+       "valueDate": "2026-07-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.0
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "მომსახურების საკომისიო/Service fee"
+      },
+      {
+       "entryReference": "0000000300",
+       "bookingDate": "2026-08-03",
+       "valueDate": "2026-07-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -160.16
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 31/07/2026 15:34:24.-."
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/27123571"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/27123571/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      },
+      "next": {
+       "href": "/0.8/v1/accounts/27123571/transactions?bookingStatus=both&dateFrom=2025-10-19&entryReferenceFrom=0000000300"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/27123571/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19",
+    "entryReferenceFrom": "0000000300"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE45PC1317839491935283",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "entryReference": "0000000301",
+       "bookingDate": "2026-08-03",
+       "valueDate": "2026-07-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -6.89
+       },
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, BOLT, 545424******4582, 31/07/2026 19:34:49.-."
+      },
+      {
+       "entryReference": "0000000302",
+       "bookingDate": "2026-08-03",
+       "valueDate": "2026-07-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -13.58
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, KHINKALI HOUSE, 545424******4582, 31/07/2026 22:41:19.-."
+      },
+      {
+       "entryReference": "0000000303",
+       "bookingDate": "2026-08-03",
+       "valueDate": "2026-08-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -18.74
+       },
+       "creditorName": "APPLE.COM/BILL",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, APPLE.COM/BILL, 545424******4582, 01/08/2026 08:59:58.-."
+      },
+      {
+       "entryReference": "0000000304",
+       "bookingDate": "2026-08-03",
+       "valueDate": "2026-08-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -113.26
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 01/08/2026 14:05:34.-."
+      },
+      {
+       "entryReference": "0000000305",
+       "bookingDate": "2026-08-03",
+       "valueDate": "2026-08-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -56.46
+       },
+       "creditorName": "ZARA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, ZARA, 545424******4582, 01/08/2026 14:48:15.-."
+      },
+      {
+       "entryReference": "0000000306",
+       "bookingDate": "2026-08-03",
+       "valueDate": "2026-08-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -58.41
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 01/08/2026 15:24:40.-."
+      },
+      {
+       "entryReference": "0000000307",
+       "bookingDate": "2026-08-03",
+       "valueDate": "2026-08-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -80.0
+       },
+       "creditorName": "ATM PROCREDIT BANK GEORGIA",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM PROCREDIT BANK GEORGIA, 545424******4582, 03/08/2026 16:53:42.-."
+      },
+      {
+       "entryReference": "0000000308",
+       "bookingDate": "2026-08-05",
+       "valueDate": "2026-08-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -85.0
+       },
+       "creditorName": "WISSOL",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, WISSOL, 545424******4582, 04/08/2026 21:01:57.-."
+      },
+      {
+       "entryReference": "0000000309",
+       "bookingDate": "2026-08-05",
+       "valueDate": "2026-08-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -260.0
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ნაღდი ფულის გაცემა/ATM cash withdrawal, ATM BANK OF GEORGIA, 545424******4582, 05/08/2026 12:06:31.-."
+      },
+      {
+       "entryReference": "0000000310",
+       "bookingDate": "2026-08-06",
+       "valueDate": "2026-08-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -46.85
+       },
+       "creditorName": "TBILISI TRANSPORT COMPANY",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, TBILISI TRANSPORT COMPANY, 545424******4582, 05/08/2026 10:02:31.-."
+      },
+      {
+       "entryReference": "0000000311",
+       "bookingDate": "2026-08-06",
+       "valueDate": "2026-08-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -57.13
+       },
+       "creditorName": "KFC",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, KFC, 545424******4582, 05/08/2026 19:57:44.-."
+      },
+      {
+       "entryReference": "0000000312",
+       "bookingDate": "2026-08-07",
+       "valueDate": "2026-08-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -21.43
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DAILY MARKET, 545424******4582, 06/08/2026 07:45:18.-."
+      },
+      {
+       "entryReference": "0000000313",
+       "bookingDate": "2026-08-10",
+       "valueDate": "2026-08-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -241.22
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 07/08/2026 08:32:28.-."
+      },
+      {
+       "entryReference": "0000000314",
+       "bookingDate": "2026-08-10",
+       "valueDate": "2026-08-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -26.33
+       },
+       "creditorName": "TBILISI ENERGY",
+       "remittanceInformationUnstructured": "ბუნებრივი აირი - აგვისტო/Natural gas - August"
+      },
+      {
+       "entryReference": "0000000315",
+       "bookingDate": "2026-08-10",
+       "valueDate": "2026-08-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -11.18
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - აგვისტო/Water - August"
+      },
+      {
+       "entryReference": "0000000316",
+       "bookingDate": "2026-08-11",
+       "valueDate": "2026-08-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -40.9
+       },
+       "creditorName": "SPOTIFY",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, SPOTIFY, 545424******4582, 09/08/2026 09:41:46.-."
+      },
+      {
+       "entryReference": "0000000317",
+       "bookingDate": "2026-08-11",
+       "valueDate": "2026-08-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -48.63
+       },
+       "creditorName": "MAGNITI",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MAGNITI, 545424******4582, 09/08/2026 18:48:03.-."
+      },
+      {
+       "entryReference": "0000000318",
+       "bookingDate": "2026-08-11",
+       "valueDate": "2026-08-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -36.28
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - აგვისტო/Internet - August"
+      },
+      {
+       "entryReference": "0000000319",
+       "bookingDate": "2026-08-12",
+       "valueDate": "2026-08-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -126.34
+       },
+       "creditorName": "GOODWILL",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, GOODWILL, 545424******4582, 11/08/2026 13:07:04.-."
+      },
+      {
+       "entryReference": "0000000320",
+       "bookingDate": "2026-08-14",
+       "valueDate": "2026-08-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 1492.96
+       },
+       "debtorName": "LLC VAKE FUEL",
+       "debtorAccount": {
+        "iban": "GE88PC1593087230087890"
+       },
+       "remittanceInformationUnstructured": "ხელფასი აგვისტო/Salary August"
+      },
+      {
+       "entryReference": "0000000321",
+       "bookingDate": "2026-08-15",
+       "valueDate": "2026-08-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -53.65
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - აგვისტო/Electricity - August"
+      },
+      {
+       "entryReference": "0000000322",
+       "bookingDate": "2026-08-16",
+       "valueDate": "2026-08-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -21.56
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - აგვისტო/Mobile - August"
+      },
+      {
+       "entryReference": "0000000323",
+       "bookingDate": "2026-08-17",
+       "valueDate": "2026-08-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -136.55
+       },
+       "creditorName": "EVEX HOSPITALS",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, EVEX HOSPITALS, 545424******4582, 15/08/2026 09:52:35.-."
+      },
+      {
+       "entryReference": "0000000324",
+       "bookingDate": "2026-08-17",
+       "valueDate": "2026-08-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -4.06
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - აგვისტო/Waste collection - August"
+      },
+      {
+       "entryReference": "0000000325",
+       "bookingDate": "2026-08-18",
+       "valueDate": "2026-08-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -62.22
+       },
+       "creditorName": "ALIEXPRESS",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, ALIEXPRESS, 545424******4582, 15/08/2026 17:17:09.-."
+      },
+      {
+       "entryReference": "0000000326",
+       "bookingDate": "2026-08-18",
+       "valueDate": "2026-08-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -17.17
+       },
+       "creditorName": "TBILISI TRANSPORT COMPANY",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, TBILISI TRANSPORT COMPANY, 545424******4582, 15/08/2026 17:18:00.-."
+      },
+      {
+       "entryReference": "0000000327",
+       "bookingDate": "2026-08-18",
+       "valueDate": "2026-08-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -20.6
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, AGROHUB, 545424******4582, 16/08/2026 18:07:12.-."
+      },
+      {
+       "entryReference": "0000000328",
+       "bookingDate": "2026-08-18",
+       "valueDate": "2026-08-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -21.1
+       },
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, GPC, 545424******4582, 16/08/2026 18:44:09.-."
+      },
+      {
+       "entryReference": "0000000329",
+       "bookingDate": "2026-08-19",
+       "valueDate": "2026-08-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -43.76
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, SPAR, 545424******4582, 18/08/2026 08:37:08.-."
+      },
+      {
+       "entryReference": "0000000330",
+       "bookingDate": "2026-08-23",
+       "valueDate": "2026-08-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -944.79
+       },
+       "creditorName": "MZIA KUPRADZE",
+       "remittanceInformationUnstructured": "საკრედიტო ბარათის დაფარვა/Credit card repayment"
+      },
+      {
+       "entryReference": "0000000331",
+       "bookingDate": "2026-08-24",
+       "valueDate": "2026-08-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -54.3
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, AGROHUB, 545424******4582, 20/08/2026 18:38:36.-."
+      },
+      {
+       "entryReference": "0000000332",
+       "bookingDate": "2026-08-24",
+       "valueDate": "2026-08-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -12.09
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DAILY MARKET, 545424******4582, 22/08/2026 20:41:39.-."
+      },
+      {
+       "entryReference": "0000000333",
+       "bookingDate": "2026-08-24",
+       "valueDate": "2026-08-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -54.9
+       },
+       "creditorName": "NIKORA",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, NIKORA, 545424******4582, 22/08/2026 20:42:36.-."
+      },
+      {
+       "entryReference": "0000000334",
+       "bookingDate": "2026-08-24",
+       "valueDate": "2026-08-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -86.0
+       },
+       "creditorName": "PHARMADEPOT",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, PHARMADEPOT, 545424******4582, 22/08/2026 20:43:25.-."
+      },
+      {
+       "entryReference": "0000000335",
+       "bookingDate": "2026-08-25",
+       "valueDate": "2026-08-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -18.97
+       },
+       "creditorName": "NETFLIX",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, NETFLIX, 545424******4582, 21/08/2026 10:38:52.-."
+      },
+      {
+       "entryReference": "0000000336",
+       "bookingDate": "2026-08-25",
+       "valueDate": "2026-08-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -110.0
+       },
+       "creditorName": "GULF",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, GULF, 545424******4582, 22/08/2026 21:49:22.-."
+      },
+      {
+       "entryReference": "0000000337",
+       "bookingDate": "2026-08-27",
+       "valueDate": "2026-08-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -488.34
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 878A1435/Loan repayment 878A1435"
+      },
+      {
+       "entryReference": "0000000338",
+       "bookingDate": "2026-08-31",
+       "valueDate": "2026-08-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.0
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "მომსახურების საკომისიო/Service fee"
+      },
+      {
+       "entryReference": "0000000339",
+       "bookingDate": "2026-08-31",
+       "valueDate": "2026-08-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -9.78
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "ოვერდრაფტის საკომისიო/Overdraft fee"
+      },
+      {
+       "entryReference": "0000000340",
+       "bookingDate": "2026-09-10",
+       "valueDate": "2026-09-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -26.04
+       },
+       "creditorName": "TBILISI ENERGY",
+       "remittanceInformationUnstructured": "ბუნებრივი აირი - სექტემბერი/Natural gas - September"
+      },
+      {
+       "entryReference": "0000000341",
+       "bookingDate": "2026-09-10",
+       "valueDate": "2026-09-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -8.39
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - სექტემბერი/Water - September"
+      },
+      {
+       "entryReference": "0000000342",
+       "bookingDate": "2026-09-11",
+       "valueDate": "2026-09-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -36.12
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - სექტემბერი/Internet - September"
+      },
+      {
+       "entryReference": "0000000343",
+       "bookingDate": "2026-09-15",
+       "valueDate": "2026-09-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 1534.19
+       },
+       "debtorName": "LLC VAKE FUEL",
+       "debtorAccount": {
+        "iban": "GE39CD1205514144854447"
+       },
+       "remittanceInformationUnstructured": "ხელფასი სექტემბერი/Salary September"
+      },
+      {
+       "entryReference": "0000000344",
+       "bookingDate": "2026-09-15",
+       "valueDate": "2026-09-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -48.43
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - სექტემბერი/Electricity - September"
+      },
+      {
+       "entryReference": "0000000345",
+       "bookingDate": "2026-09-16",
+       "valueDate": "2026-09-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -22.52
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - სექტემბერი/Mobile - September"
+      },
+      {
+       "entryReference": "0000000346",
+       "bookingDate": "2026-09-17",
+       "valueDate": "2026-09-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -82.14
+       },
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MINI MARKET, 545424******4582, 16/09/2026 09:23:59.-."
+      },
+      {
+       "entryReference": "0000000347",
+       "bookingDate": "2026-09-17",
+       "valueDate": "2026-09-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -3.71
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - სექტემბერი/Waste collection - September"
+      },
+      {
+       "entryReference": "0000000348",
+       "bookingDate": "2026-09-18",
+       "valueDate": "2026-09-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -28.21
+       },
+       "creditorName": "GOODWILL",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, GOODWILL, 545424******4582, 17/09/2026 13:14:26.-."
+      },
+      {
+       "entryReference": "0000000349",
+       "bookingDate": "2026-09-21",
+       "valueDate": "2026-09-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -7.0
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DAILY MARKET, 545424******4582, 19/09/2026 09:25:30.-."
+      },
+      {
+       "entryReference": "0000000350",
+       "bookingDate": "2026-09-21",
+       "valueDate": "2026-09-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -8.8
+       },
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, MAXIM, 545424******4582, 19/09/2026 21:16:36.-."
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/27123571"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/27123571/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      },
+      "next": {
+       "href": "/0.8/v1/accounts/27123571/transactions?bookingStatus=both&dateFrom=2025-10-19&entryReferenceFrom=0000000350"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/27123571/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19",
+    "entryReferenceFrom": "0000000350"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE45PC1317839491935283",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "entryReference": "0000000351",
+       "bookingDate": "2026-09-21",
+       "valueDate": "2026-09-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -57.17
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, CARREFOUR, 545424******4582, 20/09/2026 16:37:18.-."
+      },
+      {
+       "entryReference": "0000000352",
+       "bookingDate": "2026-09-22",
+       "valueDate": "2026-09-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -105.73
+       },
+       "creditorName": "PHARMADEPOT",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, PHARMADEPOT, 545424******4582, 21/09/2026 19:01:56.-."
+      },
+      {
+       "entryReference": "0000000353",
+       "bookingDate": "2026-09-23",
+       "valueDate": "2026-09-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -600.81
+       },
+       "creditorName": "MZIA KUPRADZE",
+       "remittanceInformationUnstructured": "საკრედიტო ბარათის დაფარვა/Credit card repayment"
+      },
+      {
+       "entryReference": "0000000354",
+       "bookingDate": "2026-09-27",
+       "valueDate": "2026-09-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -488.34
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 878A1435/Loan repayment 878A1435"
+      },
+      {
+       "entryReference": "0000000355",
+       "bookingDate": "2026-09-30",
+       "valueDate": "2026-09-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.0
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "მომსახურების საკომისიო/Service fee"
+      },
+      {
+       "entryReference": "0000000356",
+       "bookingDate": "2026-09-30",
+       "valueDate": "2026-09-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -9.78
+       },
+       "creditorName": "ProCredit Bank Georgia",
+       "remittanceInformationUnstructured": "ოვერდრაფტის საკომისიო/Overdraft fee"
+      },
+      {
+       "entryReference": "0000000357",
+       "bookingDate": "2026-10-10",
+       "valueDate": "2026-10-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -26.67
+       },
+       "creditorName": "TBILISI ENERGY",
+       "remittanceInformationUnstructured": "ბუნებრივი აირი - ოქტომბერი/Natural gas - October"
+      },
+      {
+       "entryReference": "0000000358",
+       "bookingDate": "2026-10-10",
+       "valueDate": "2026-10-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -11.11
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - ოქტომბერი/Water - October"
+      },
+      {
+       "entryReference": "0000000359",
+       "bookingDate": "2026-10-11",
+       "valueDate": "2026-10-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -36.06
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - ოქტომბერი/Internet - October"
+      },
+      {
+       "entryReference": "0000000360",
+       "bookingDate": "2026-10-15",
+       "valueDate": "2026-10-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": 1494.19
+       },
+       "debtorName": "LLC VAKE FUEL",
+       "debtorAccount": {
+        "iban": "GE88TB1601564407718330"
+       },
+       "remittanceInformationUnstructured": "ხელფასი ოქტომბერი/Salary October"
+      },
+      {
+       "entryReference": "0000000361",
+       "bookingDate": "2026-10-15",
+       "valueDate": "2026-10-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -55.36
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - ოქტომბერი/Electricity - October"
+      },
+      {
+       "entryReference": "0000000362",
+       "bookingDate": "2026-10-16",
+       "valueDate": "2026-10-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -1.85
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, DAILY MARKET, 545424******4582, 15/10/2026 16:09:39.-."
+      },
+      {
+       "entryReference": "0000000363",
+       "bookingDate": "2026-10-16",
+       "valueDate": "2026-10-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -33.23
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - ოქტომბერი/Mobile - October"
+      },
+      {
+       "entryReference": "0000000364",
+       "bookingDate": "2026-10-17",
+       "valueDate": "2026-10-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -5.28
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - ოქტომბერი/Waste collection - October"
+      }
+     ],
+     "pending": [
+      {
+       "entryReference": "0000000365",
+       "bookingDate": "2026-10-20",
+       "valueDate": "2026-10-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": -2.26
+       },
+       "creditorName": "YANDEX GO",
+       "remittanceInformationUnstructured": "ყიდვა/Purchase via POS terminal, YANDEX GO, 545424******4582, 17/10/2026 09:37:22.-."
+      }
+     ],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/27123571"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/27123571/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

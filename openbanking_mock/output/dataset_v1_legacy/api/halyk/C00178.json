@@ -1,0 +1,813 @@
+{
+ "bank": "halyk",
+ "customer": "C00178",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "68894845-ae19-58ee-b9da-13d0394bf656",
+      "iban": "GE87HB1310238950655311",
+      "currency": "GEL",
+      "ownerName": "GOCHA TAVADZE",
+      "name": "GOCHA TAVADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "HABGGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-230.03"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-22T07:17:55"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-230.03"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-22T07:17:55"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/68894845-ae19-58ee-b9da-13d0394bf656/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/68894845-ae19-58ee-b9da-13d0394bf656/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/68894845-ae19-58ee-b9da-13d0394bf656",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "68894845-ae19-58ee-b9da-13d0394bf656",
+     "iban": "GE87HB1310238950655311",
+     "currency": "GEL",
+     "ownerName": "GOCHA TAVADZE",
+     "name": "GOCHA TAVADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "HABGGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/68894845-ae19-58ee-b9da-13d0394bf656/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/68894845-ae19-58ee-b9da-13d0394bf656/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/68894845-ae19-58ee-b9da-13d0394bf656/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE87HB1310238950655311",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-230.03"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-230.03"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-09-22T07:17:55"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/68894845-ae19-58ee-b9da-13d0394bf656/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE87HB1310238950655311",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00000091363",
+       "entryReference": "0000000001",
+       "bookingDate": "2025-10-21",
+       "valueDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "234.38"
+       },
+       "endToEndId": "E2E0000091361",
+       "debtorName": "GOCHA TAVADZE",
+       "debtorAccount": {
+        "iban": "GE21BT1138922059940798"
+       },
+       "debtorAgent": "DISNGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000091364",
+       "entryReference": "0000000002",
+       "bookingDate": "2025-10-22",
+       "valueDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.83"
+       },
+       "creditorName": "AMAZON",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7640",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2025-10-21"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AMAZON",
+       "additionalInformation": "AMAZON 545424******9148 MCC 5999",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000091365",
+       "entryReference": "0000000003",
+       "bookingDate": "2025-10-22",
+       "valueDate": "2025-10-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-234.38"
+       },
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B3024662",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000091413",
+       "entryReference": "0000000004",
+       "bookingDate": "2025-11-21",
+       "valueDate": "2025-11-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "234.38"
+       },
+       "endToEndId": "E2E0000091411",
+       "debtorName": "GOCHA TAVADZE",
+       "debtorAccount": {
+        "iban": "GE21BT1138922059940798"
+       },
+       "debtorAgent": "DISNGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000091416",
+       "entryReference": "0000000005",
+       "bookingDate": "2025-11-22",
+       "valueDate": "2025-11-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-234.38"
+       },
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B3024662",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000091415",
+       "entryReference": "0000000006",
+       "bookingDate": "2025-11-24",
+       "valueDate": "2025-11-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.24"
+       },
+       "creditorName": "MCDONALDS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MCDONALDS",
+       "additionalInformation": "MCDONALDS Kobuleti 545424******9148 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000091463",
+       "entryReference": "0000000007",
+       "bookingDate": "2025-12-19",
+       "valueDate": "2025-12-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "234.38"
+       },
+       "endToEndId": "E2E0000091461",
+       "debtorName": "GOCHA TAVADZE",
+       "debtorAccount": {
+        "iban": "GE21BT1138922059940798"
+       },
+       "debtorAgent": "DISNGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000091464",
+       "entryReference": "0000000008",
+       "bookingDate": "2025-12-22",
+       "valueDate": "2025-12-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-209.21"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Kobuleti 545424******9148 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000091468",
+       "entryReference": "0000000009",
+       "bookingDate": "2025-12-22",
+       "valueDate": "2025-12-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-234.38"
+       },
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B3024662",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000091466",
+       "entryReference": "0000000010",
+       "bookingDate": "2025-12-23",
+       "valueDate": "2025-12-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.75"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Kobuleti 545424******9148 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000091516",
+       "entryReference": "0000000011",
+       "bookingDate": "2026-01-21",
+       "valueDate": "2026-01-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "234.38"
+       },
+       "endToEndId": "E2E0000091514",
+       "debtorName": "GOCHA TAVADZE",
+       "debtorAccount": {
+        "iban": "GE21BT1138922059940798"
+       },
+       "debtorAgent": "DISNGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000091519",
+       "entryReference": "0000000012",
+       "bookingDate": "2026-01-22",
+       "valueDate": "2026-01-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-234.38"
+       },
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B3024662",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000091566",
+       "entryReference": "0000000013",
+       "bookingDate": "2026-02-20",
+       "valueDate": "2026-02-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "234.38"
+       },
+       "endToEndId": "E2E0000091564",
+       "debtorName": "GOCHA TAVADZE",
+       "debtorAccount": {
+        "iban": "GE21BT1138922059940798"
+       },
+       "debtorAgent": "DISNGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000091571",
+       "entryReference": "0000000014",
+       "bookingDate": "2026-02-22",
+       "valueDate": "2026-02-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-234.38"
+       },
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B3024662",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000091610",
+       "entryReference": "0000000015",
+       "bookingDate": "2026-03-20",
+       "valueDate": "2026-03-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "234.38"
+       },
+       "endToEndId": "E2E0000091608",
+       "debtorName": "GOCHA TAVADZE",
+       "debtorAccount": {
+        "iban": "GE21BT1138922059940798"
+       },
+       "debtorAgent": "DISNGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000091616",
+       "entryReference": "0000000016",
+       "bookingDate": "2026-03-22",
+       "valueDate": "2026-03-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-234.38"
+       },
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B3024662",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000091668",
+       "entryReference": "0000000017",
+       "bookingDate": "2026-04-21",
+       "valueDate": "2026-04-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "234.38"
+       },
+       "endToEndId": "E2E0000091666",
+       "debtorName": "GOCHA TAVADZE",
+       "debtorAccount": {
+        "iban": "GE21BT1138922059940798"
+       },
+       "debtorAgent": "DISNGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000091669",
+       "entryReference": "0000000018",
+       "bookingDate": "2026-04-22",
+       "valueDate": "2026-04-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-234.38"
+       },
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B3024662",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000091697",
+       "entryReference": "0000000019",
+       "bookingDate": "2026-05-21",
+       "valueDate": "2026-05-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "234.38"
+       },
+       "endToEndId": "E2E0000091695",
+       "debtorName": "GOCHA TAVADZE",
+       "debtorAccount": {
+        "iban": "GE21BT1138922059940798"
+       },
+       "debtorAgent": "DISNGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000091700",
+       "entryReference": "0000000020",
+       "bookingDate": "2026-05-22",
+       "valueDate": "2026-05-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-234.38"
+       },
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B3024662",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000091725",
+       "entryReference": "0000000021",
+       "bookingDate": "2026-06-19",
+       "valueDate": "2026-06-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "234.38"
+       },
+       "endToEndId": "E2E0000091723",
+       "debtorName": "GOCHA TAVADZE",
+       "debtorAccount": {
+        "iban": "GE21BT1138922059940798"
+       },
+       "debtorAgent": "DISNGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000091731",
+       "entryReference": "0000000022",
+       "bookingDate": "2026-06-22",
+       "valueDate": "2026-06-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-234.38"
+       },
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B3024662",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000091754",
+       "entryReference": "0000000023",
+       "bookingDate": "2026-07-21",
+       "valueDate": "2026-07-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "234.38"
+       },
+       "endToEndId": "E2E0000091752",
+       "debtorName": "GOCHA TAVADZE",
+       "debtorAccount": {
+        "iban": "GE21BT1138922059940798"
+       },
+       "debtorAgent": "DISNGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000091755",
+       "entryReference": "0000000024",
+       "bookingDate": "2026-07-22",
+       "valueDate": "2026-07-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-234.38"
+       },
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B3024662",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000091777",
+       "entryReference": "0000000025",
+       "bookingDate": "2026-08-21",
+       "valueDate": "2026-08-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "234.38"
+       },
+       "endToEndId": "E2E0000091775",
+       "debtorName": "GOCHA TAVADZE",
+       "debtorAccount": {
+        "iban": "GE21BT1138922059940798"
+       },
+       "debtorAgent": "DISNGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000091779",
+       "entryReference": "0000000026",
+       "bookingDate": "2026-08-22",
+       "valueDate": "2026-08-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-234.38"
+       },
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B3024662",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000091811",
+       "entryReference": "0000000027",
+       "bookingDate": "2026-09-21",
+       "valueDate": "2026-09-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "234.38"
+       },
+       "endToEndId": "E2E0000091809",
+       "debtorName": "GOCHA TAVADZE",
+       "debtorAccount": {
+        "iban": "GE21BT1138922059940798"
+       },
+       "debtorAgent": "DISNGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000091812",
+       "entryReference": "0000000028",
+       "bookingDate": "2026-09-22",
+       "valueDate": "2026-09-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-234.38"
+       },
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B3024662",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/68894845-ae19-58ee-b9da-13d0394bf656"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/68894845-ae19-58ee-b9da-13d0394bf656/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "e0c8e041-4887-59b6-bbb2-c6aa66adb536",
+      "maskedPan": "545424******9148",
+      "currency": "GEL",
+      "ownerName": "GOCHA TAVADZE",
+      "name": "GOCHA TAVADZE",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-230.03"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-22T07:17:55"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-230.03"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-22T07:17:55"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/e0c8e041-4887-59b6-bbb2-c6aa66adb536/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/e0c8e041-4887-59b6-bbb2-c6aa66adb536/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/e0c8e041-4887-59b6-bbb2-c6aa66adb536",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "e0c8e041-4887-59b6-bbb2-c6aa66adb536",
+     "maskedPan": "545424******9148",
+     "currency": "GEL",
+     "ownerName": "GOCHA TAVADZE",
+     "name": "GOCHA TAVADZE",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-230.03"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-09-22T07:17:55"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-230.03"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-09-22T07:17:55"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/e0c8e041-4887-59b6-bbb2-c6aa66adb536/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/e0c8e041-4887-59b6-bbb2-c6aa66adb536/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/e0c8e041-4887-59b6-bbb2-c6aa66adb536/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "545424******9148",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-230.03"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-230.03"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-09-22T07:17:55"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/e0c8e041-4887-59b6-bbb2-c6aa66adb536/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00000091364",
+       "transactionDate": "2025-10-21",
+       "bookingDate": "2025-10-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.83"
+       },
+       "acceptorTransactionDateTime": "2025-10-21T11:41:59",
+       "maskedPAN": "545424******9148",
+       "transactionDetails": "ბარათით გადახდა - AMAZON",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AMAZON",
+       "merchantCategoryCode": "5999"
+      },
+      {
+       "cardTransactionId": "d_00000091415",
+       "transactionDate": "2025-11-21",
+       "bookingDate": "2025-11-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.24"
+       },
+       "acceptorTransactionDateTime": "2025-11-21T21:33:40",
+       "maskedPAN": "545424******9148",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000091464",
+       "transactionDate": "2025-12-20",
+       "bookingDate": "2025-12-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-209.21"
+       },
+       "acceptorTransactionDateTime": "2025-12-20T14:30:28",
+       "maskedPAN": "545424******9148",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000091466",
+       "transactionDate": "2025-12-20",
+       "bookingDate": "2025-12-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.75"
+       },
+       "acceptorTransactionDateTime": "2025-12-20T19:37:12",
+       "maskedPAN": "545424******9148",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/68894845-ae19-58ee-b9da-13d0394bf656"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/e0c8e041-4887-59b6-bbb2-c6aa66adb536/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "545424******9148",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

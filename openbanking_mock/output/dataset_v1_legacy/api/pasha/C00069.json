@@ -1,0 +1,1871 @@
+{
+ "bank": "pasha",
+ "customer": "C00069",
+ "dialect": "altasoft_v2",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v2/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "240b972d-f8e8-5480-b279-cbe16eb08775",
+      "iban": "GE36PB1545346570300573",
+      "currency": "GEL",
+      "ownerName": "TSIALA MAISURADZE",
+      "name": "TSIALA MAISURADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "PAHAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-84.82"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-15T08:04:12"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-84.82"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-15T08:04:12"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/accounts/240b972d-f8e8-5480-b279-cbe16eb08775/balances"
+       },
+       "transactions": {
+        "href": "v2/accounts/240b972d-f8e8-5480-b279-cbe16eb08775/transactions"
+       }
+      },
+      "displayName": "Current account",
+      "other": {
+       "identification": "1545346570300573",
+       "issuer": "PASHA Bank Georgia"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/240b972d-f8e8-5480-b279-cbe16eb08775",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "240b972d-f8e8-5480-b279-cbe16eb08775",
+     "iban": "GE36PB1545346570300573",
+     "currency": "GEL",
+     "ownerName": "TSIALA MAISURADZE",
+     "name": "TSIALA MAISURADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "PAHAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v2/accounts/240b972d-f8e8-5480-b279-cbe16eb08775/balances"
+      },
+      "transactions": {
+       "href": "v2/accounts/240b972d-f8e8-5480-b279-cbe16eb08775/transactions"
+      }
+     },
+     "displayName": "Current account",
+     "other": {
+      "identification": "1545346570300573",
+      "issuer": "PASHA Bank Georgia"
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/240b972d-f8e8-5480-b279-cbe16eb08775/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE36PB1545346570300573",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-84.82"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-84.82"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-15T08:04:12"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/240b972d-f8e8-5480-b279-cbe16eb08775/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE36PB1545346570300573",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "GE36PB1545346570300573_1",
+       "entryReference": "0000000001",
+       "bookingDate": "2026-02-19",
+       "valueDate": "2026-02-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1885.30"
+       },
+       "debtor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის გაცემა"
+       ],
+       "bankTransactionCodeProprietary": "loan_disbursement"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_2",
+       "entryReference": "0000000002",
+       "bookingDate": "2026-02-20",
+       "valueDate": "2026-02-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1734.47"
+       },
+       "creditor": {
+        "name": "SANDRO SAMKHARADZE"
+       },
+       "creditorAccount": {
+        "iban": "GE54LB1646926733013026"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "LBRTGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "გადახდა ხელშეკრულებით"
+       ],
+       "bankTransactionCodeProprietary": "disbursement_out"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_3",
+       "entryReference": "0000000003",
+       "bookingDate": "2026-02-23",
+       "valueDate": "2026-02-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-79.39"
+       },
+       "creditor": {
+        "name": "ZARA"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - ZARA"
+       ],
+       "bankTransactionCodeProprietary": "clothing",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "35025",
+        "transactionDateTime": "2026-02-22T18:51:57"
+       },
+       "additionalTransactionInformation": "ZARA Tbilisi 533286******8907 MCC 5651"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_4",
+       "entryReference": "0000000004",
+       "bookingDate": "2026-03-05",
+       "valueDate": "2026-03-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.06"
+       },
+       "creditor": {
+        "name": "CARREFOUR"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - CARREFOUR"
+       ],
+       "bankTransactionCodeProprietary": "grocery",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "35037",
+        "transactionDateTime": "2026-03-03T07:38:43"
+       },
+       "additionalTransactionInformation": "CARREFOUR Tbilisi 533286******8907 MCC 5411"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_5",
+       "entryReference": "0000000005",
+       "bookingDate": "2026-03-06",
+       "valueDate": "2026-03-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.39"
+       },
+       "creditor": {
+        "name": "KHINKALI HOUSE"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - KHINKALI HOUSE"
+       ],
+       "bankTransactionCodeProprietary": "restaurant",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "35040",
+        "transactionDateTime": "2026-03-04T22:03:13"
+       },
+       "additionalTransactionInformation": "KHINKALI HOUSE Tbilisi 533286******8907 MCC 5812"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_6",
+       "entryReference": "0000000006",
+       "bookingDate": "2026-03-11",
+       "valueDate": "2026-03-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.26"
+       },
+       "creditor": {
+        "name": "WOLT"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - WOLT"
+       ],
+       "bankTransactionCodeProprietary": "delivery",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": false
+        },
+        "sequenceNumber": "35045",
+        "transactionDateTime": "2026-03-10T15:03:41"
+       },
+       "additionalTransactionInformation": "WOLT 533286******8907 MCC 5812"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_7",
+       "entryReference": "0000000007",
+       "bookingDate": "2026-03-12",
+       "valueDate": "2026-03-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.73"
+       },
+       "creditor": {
+        "name": "KIOSK"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - KIOSK"
+       ],
+       "bankTransactionCodeProprietary": "kiosk",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "35046",
+        "transactionDateTime": "2026-03-10T21:50:07"
+       },
+       "additionalTransactionInformation": "KIOSK Tbilisi 533286******8907 MCC 5499"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_8",
+       "entryReference": "0000000008",
+       "bookingDate": "2026-03-13",
+       "valueDate": "2026-03-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "88.38"
+       },
+       "debtor": {
+        "name": "TSIALA MAISURADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE53BG1361904657445349"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "BAGAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000035050"
+       }
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_9",
+       "entryReference": "0000000009",
+       "bookingDate": "2026-03-15",
+       "valueDate": "2026-03-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-88.38"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 20139E59"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_10",
+       "entryReference": "0000000010",
+       "bookingDate": "2026-03-18",
+       "valueDate": "2026-03-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-16.01"
+       },
+       "creditor": {
+        "name": "CARREFOUR"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - CARREFOUR"
+       ],
+       "bankTransactionCodeProprietary": "grocery",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "35064",
+        "transactionDateTime": "2026-03-17T20:23:32"
+       },
+       "additionalTransactionInformation": "CARREFOUR Tbilisi 533286******8907 MCC 5411"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_11",
+       "entryReference": "0000000011",
+       "bookingDate": "2026-03-20",
+       "valueDate": "2026-03-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.11"
+       },
+       "creditor": {
+        "name": "DUNKIN"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - DUNKIN"
+       ],
+       "bankTransactionCodeProprietary": "fastfood",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "35068",
+        "transactionDateTime": "2026-03-19T10:23:24"
+       },
+       "additionalTransactionInformation": "DUNKIN Tbilisi 533286******8907 MCC 5814"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_12",
+       "entryReference": "0000000012",
+       "bookingDate": "2026-03-23",
+       "valueDate": "2026-03-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.78"
+       },
+       "creditor": {
+        "name": "KFC"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - KFC"
+       ],
+       "bankTransactionCodeProprietary": "fastfood",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "35070",
+        "transactionDateTime": "2026-03-20T14:16:18"
+       },
+       "additionalTransactionInformation": "KFC Tbilisi 533286******8907 MCC 5814"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_13",
+       "entryReference": "0000000013",
+       "bookingDate": "2026-04-14",
+       "valueDate": "2026-04-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.45"
+       },
+       "creditor": {
+        "name": "KOTON"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - KOTON"
+       ],
+       "bankTransactionCodeProprietary": "clothing",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "35113",
+        "transactionDateTime": "2026-04-13T07:35:06"
+       },
+       "additionalTransactionInformation": "KOTON Tbilisi 533286******8907 MCC 5651"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_14",
+       "entryReference": "0000000014",
+       "bookingDate": "2026-04-15",
+       "valueDate": "2026-04-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "88.46"
+       },
+       "debtor": {
+        "name": "TSIALA MAISURADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE53BG1361904657445349"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "BAGAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000035115"
+       }
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_15",
+       "entryReference": "0000000015",
+       "bookingDate": "2026-04-16",
+       "valueDate": "2026-04-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-88.38"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 20139E59"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_16",
+       "entryReference": "0000000016",
+       "bookingDate": "2026-04-16",
+       "valueDate": "2026-04-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-0.08"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "remittanceInformationUnstructured": [
+        "ჯარიმა ვადაგადაცილებაზე"
+       ],
+       "bankTransactionCodeProprietary": "loan_penalty"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_17",
+       "entryReference": "0000000017",
+       "bookingDate": "2026-05-14",
+       "valueDate": "2026-05-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "88.38"
+       },
+       "debtor": {
+        "name": "TSIALA MAISURADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE53BG1361904657445349"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "BAGAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000035144"
+       }
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_18",
+       "entryReference": "0000000018",
+       "bookingDate": "2026-05-15",
+       "valueDate": "2026-05-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-88.38"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 20139E59"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_19",
+       "entryReference": "0000000019",
+       "bookingDate": "2026-06-12",
+       "valueDate": "2026-06-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "88.38"
+       },
+       "debtor": {
+        "name": "TSIALA MAISURADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE53BG1361904657445349"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "BAGAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000035188"
+       }
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_20",
+       "entryReference": "0000000020",
+       "bookingDate": "2026-06-15",
+       "valueDate": "2026-06-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-62.47"
+       },
+       "creditor": {
+        "name": "CARREFOUR"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - CARREFOUR"
+       ],
+       "bankTransactionCodeProprietary": "grocery",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "35193",
+        "transactionDateTime": "2026-06-12T17:59:50"
+       },
+       "additionalTransactionInformation": "CARREFOUR Tbilisi 533286******8907 MCC 5411"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_21",
+       "entryReference": "0000000021",
+       "bookingDate": "2026-06-15",
+       "valueDate": "2026-06-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-88.38"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 20139E59"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_22",
+       "entryReference": "0000000022",
+       "bookingDate": "2026-07-14",
+       "valueDate": "2026-07-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "88.38"
+       },
+       "debtor": {
+        "name": "TSIALA MAISURADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE53BG1361904657445349"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "BAGAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000035229"
+       }
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_23",
+       "entryReference": "0000000023",
+       "bookingDate": "2026-07-15",
+       "valueDate": "2026-07-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-88.38"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 20139E59"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_24",
+       "entryReference": "0000000024",
+       "bookingDate": "2026-08-14",
+       "valueDate": "2026-08-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "88.38"
+       },
+       "debtor": {
+        "name": "TSIALA MAISURADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE53BG1361904657445349"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "BAGAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000035266"
+       }
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_25",
+       "entryReference": "0000000025",
+       "bookingDate": "2026-08-15",
+       "valueDate": "2026-08-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-88.38"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 20139E59"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_26",
+       "entryReference": "0000000026",
+       "bookingDate": "2026-08-18",
+       "valueDate": "2026-08-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.00"
+       },
+       "creditor": {
+        "name": "AGROHUB"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - AGROHUB"
+       ],
+       "bankTransactionCodeProprietary": "grocery",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "35269",
+        "transactionDateTime": "2026-08-14T18:23:29"
+       },
+       "additionalTransactionInformation": "AGROHUB Tbilisi 533286******8907 MCC 5411"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_27",
+       "entryReference": "0000000027",
+       "bookingDate": "2026-09-17",
+       "valueDate": "2026-09-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "88.64"
+       },
+       "debtor": {
+        "name": "TSIALA MAISURADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE53BG1361904657445349"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "BAGAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000035325"
+       }
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_28",
+       "entryReference": "0000000028",
+       "bookingDate": "2026-09-18",
+       "valueDate": "2026-09-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-88.38"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 20139E59"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_29",
+       "entryReference": "0000000029",
+       "bookingDate": "2026-09-18",
+       "valueDate": "2026-09-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-0.26"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "remittanceInformationUnstructured": [
+        "ჯარიმა ვადაგადაცილებაზე"
+       ],
+       "bankTransactionCodeProprietary": "loan_penalty"
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_30",
+       "entryReference": "0000000030",
+       "bookingDate": "2026-10-14",
+       "valueDate": "2026-10-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "88.38"
+       },
+       "debtor": {
+        "name": "TSIALA MAISURADZE"
+       },
+       "debtorAccount": {
+        "iban": "GE53BG1361904657445349"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "BAGAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000035351"
+       }
+      },
+      {
+       "transactionId": "GE36PB1545346570300573_31",
+       "entryReference": "0000000031",
+       "bookingDate": "2026-10-15",
+       "valueDate": "2026-10-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-88.38"
+       },
+       "creditor": {
+        "name": "PASHA Bank Georgia"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "PAHAGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 20139E59"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/240b972d-f8e8-5480-b279-cbe16eb08775"
+      },
+      "first": {
+       "href": "v2/accounts/240b972d-f8e8-5480-b279-cbe16eb08775/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "1194d1cf-4513-5c61-a5b7-1024a7f5d6f0",
+      "maskedPan": "533286******8907",
+      "currency": "GEL",
+      "ownerName": "TSIALA MAISURADZE",
+      "name": "TSIALA MAISURADZE",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-84.82"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-15T08:04:12"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-84.82"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-15T08:04:12"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/card-accounts/1194d1cf-4513-5c61-a5b7-1024a7f5d6f0/balances"
+       },
+       "transactions": {
+        "href": "v2/card-accounts/1194d1cf-4513-5c61-a5b7-1024a7f5d6f0/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/1194d1cf-4513-5c61-a5b7-1024a7f5d6f0",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "1194d1cf-4513-5c61-a5b7-1024a7f5d6f0",
+     "maskedPan": "533286******8907",
+     "currency": "GEL",
+     "ownerName": "TSIALA MAISURADZE",
+     "name": "TSIALA MAISURADZE",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-84.82"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-15T08:04:12"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-84.82"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-15T08:04:12"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v2/card-accounts/1194d1cf-4513-5c61-a5b7-1024a7f5d6f0/balances"
+      },
+      "transactions": {
+       "href": "v2/card-accounts/1194d1cf-4513-5c61-a5b7-1024a7f5d6f0/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/1194d1cf-4513-5c61-a5b7-1024a7f5d6f0/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "533286******8907",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-84.82"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-84.82"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-15T08:04:12"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/1194d1cf-4513-5c61-a5b7-1024a7f5d6f0/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "GE36PB1545346570300573_3",
+       "transactionDate": "2026-02-22",
+       "bookingDate": "2026-02-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-79.39"
+       },
+       "acceptorTransactionDateTime": "2026-02-22T18:51:57",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - ZARA",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "ZARA",
+       "merchantCategoryCode": "5651"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_4",
+       "transactionDate": "2026-03-03",
+       "bookingDate": "2026-03-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.06"
+       },
+       "acceptorTransactionDateTime": "2026-03-03T07:38:43",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_5",
+       "transactionDate": "2026-03-04",
+       "bookingDate": "2026-03-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.39"
+       },
+       "acceptorTransactionDateTime": "2026-03-04T22:03:13",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_6",
+       "transactionDate": "2026-03-10",
+       "bookingDate": "2026-03-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.26"
+       },
+       "acceptorTransactionDateTime": "2026-03-10T15:03:41",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - WOLT",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "WOLT",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_7",
+       "transactionDate": "2026-03-10",
+       "bookingDate": "2026-03-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.73"
+       },
+       "acceptorTransactionDateTime": "2026-03-10T21:50:07",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - KIOSK",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KIOSK",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_10",
+       "transactionDate": "2026-03-17",
+       "bookingDate": "2026-03-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-16.01"
+       },
+       "acceptorTransactionDateTime": "2026-03-17T20:23:32",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_11",
+       "transactionDate": "2026-03-19",
+       "bookingDate": "2026-03-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.11"
+       },
+       "acceptorTransactionDateTime": "2026-03-19T10:23:24",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - DUNKIN",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "DUNKIN",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_12",
+       "transactionDate": "2026-03-20",
+       "bookingDate": "2026-03-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.78"
+       },
+       "acceptorTransactionDateTime": "2026-03-20T14:16:18",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - KFC",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KFC",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_13",
+       "transactionDate": "2026-04-13",
+       "bookingDate": "2026-04-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.45"
+       },
+       "acceptorTransactionDateTime": "2026-04-13T07:35:06",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - KOTON",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KOTON",
+       "merchantCategoryCode": "5651"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_20",
+       "transactionDate": "2026-06-12",
+       "bookingDate": "2026-06-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-62.47"
+       },
+       "acceptorTransactionDateTime": "2026-06-12T17:59:50",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_26",
+       "transactionDate": "2026-08-14",
+       "bookingDate": "2026-08-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.00"
+       },
+       "acceptorTransactionDateTime": "2026-08-14T18:23:29",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/240b972d-f8e8-5480-b279-cbe16eb08775"
+      },
+      "first": {
+       "href": "v2/card-accounts/1194d1cf-4513-5c61-a5b7-1024a7f5d6f0/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "533286******8907",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/cards",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cards": [
+     {
+      "resourceId": "1194d1cf-4513-5c61-a5b7-1024a7f5d6f0",
+      "maskedPan": "533286******8907",
+      "currency": "GEL",
+      "ownerName": "TSIALA MAISURADZE",
+      "name": "TSIALA MAISURADZE",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-84.82"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-15T08:04:12"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-84.82"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-15T08:04:12"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/card-accounts/1194d1cf-4513-5c61-a5b7-1024a7f5d6f0/balances"
+       },
+       "transactions": {
+        "href": "v2/card-accounts/1194d1cf-4513-5c61-a5b7-1024a7f5d6f0/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/cards/1194d1cf-4513-5c61-a5b7-1024a7f5d6f0",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "1194d1cf-4513-5c61-a5b7-1024a7f5d6f0",
+     "maskedPan": "533286******8907",
+     "currency": "GEL",
+     "ownerName": "TSIALA MAISURADZE",
+     "name": "TSIALA MAISURADZE",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-84.82"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-15T08:04:12"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-84.82"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-15T08:04:12"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v2/card-accounts/1194d1cf-4513-5c61-a5b7-1024a7f5d6f0/balances"
+      },
+      "transactions": {
+       "href": "v2/card-accounts/1194d1cf-4513-5c61-a5b7-1024a7f5d6f0/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/1194d1cf-4513-5c61-a5b7-1024a7f5d6f0/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "533286******8907",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-84.82"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-84.82"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-15T08:04:12"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/1194d1cf-4513-5c61-a5b7-1024a7f5d6f0/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "GE36PB1545346570300573_3",
+       "transactionDate": "2026-02-22",
+       "bookingDate": "2026-02-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-79.39"
+       },
+       "acceptorTransactionDateTime": "2026-02-22T18:51:57",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - ZARA",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "ZARA",
+       "merchantCategoryCode": "5651"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_4",
+       "transactionDate": "2026-03-03",
+       "bookingDate": "2026-03-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.06"
+       },
+       "acceptorTransactionDateTime": "2026-03-03T07:38:43",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_5",
+       "transactionDate": "2026-03-04",
+       "bookingDate": "2026-03-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.39"
+       },
+       "acceptorTransactionDateTime": "2026-03-04T22:03:13",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_6",
+       "transactionDate": "2026-03-10",
+       "bookingDate": "2026-03-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.26"
+       },
+       "acceptorTransactionDateTime": "2026-03-10T15:03:41",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - WOLT",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "WOLT",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_7",
+       "transactionDate": "2026-03-10",
+       "bookingDate": "2026-03-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.73"
+       },
+       "acceptorTransactionDateTime": "2026-03-10T21:50:07",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - KIOSK",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KIOSK",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_10",
+       "transactionDate": "2026-03-17",
+       "bookingDate": "2026-03-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-16.01"
+       },
+       "acceptorTransactionDateTime": "2026-03-17T20:23:32",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_11",
+       "transactionDate": "2026-03-19",
+       "bookingDate": "2026-03-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.11"
+       },
+       "acceptorTransactionDateTime": "2026-03-19T10:23:24",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - DUNKIN",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "DUNKIN",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_12",
+       "transactionDate": "2026-03-20",
+       "bookingDate": "2026-03-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.78"
+       },
+       "acceptorTransactionDateTime": "2026-03-20T14:16:18",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - KFC",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KFC",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_13",
+       "transactionDate": "2026-04-13",
+       "bookingDate": "2026-04-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.45"
+       },
+       "acceptorTransactionDateTime": "2026-04-13T07:35:06",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - KOTON",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KOTON",
+       "merchantCategoryCode": "5651"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_20",
+       "transactionDate": "2026-06-12",
+       "bookingDate": "2026-06-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-62.47"
+       },
+       "acceptorTransactionDateTime": "2026-06-12T17:59:50",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE36PB1545346570300573_26",
+       "transactionDate": "2026-08-14",
+       "bookingDate": "2026-08-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.00"
+       },
+       "acceptorTransactionDateTime": "2026-08-14T18:23:29",
+       "maskedPAN": "533286******8907",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/240b972d-f8e8-5480-b279-cbe16eb08775"
+      },
+      "first": {
+       "href": "v2/card-accounts/1194d1cf-4513-5c61-a5b7-1024a7f5d6f0/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "533286******8907",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "5d9ed1db-7d6b-5df0-9f13-1d360bf15c3f",
+      "iban": "GE40PB4150822870547062",
+      "currency": "GEL",
+      "ownerName": "TSIALA MAISURADZE",
+      "name": "TSIALA MAISURADZE",
+      "product": "Consumer loan",
+      "cashAccountType": "LOAN",
+      "status": "enabled",
+      "bic": "PAHAGE22",
+      "usage": "PRIV",
+      "_links": {
+       "balances": {
+        "href": "v2/loans/5d9ed1db-7d6b-5df0-9f13-1d360bf15c3f/balances"
+       },
+       "transactions": {
+        "href": "v2/loans/5d9ed1db-7d6b-5df0-9f13-1d360bf15c3f/transactions"
+       }
+      },
+      "displayName": "Consumer loan",
+      "other": {
+       "identification": "LN-2026-102772",
+       "schemeNameProprietary": "LOAN_CONTRACT",
+       "issuer": "PASHA Bank Georgia"
+      },
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-1610.26"
+        },
+        "balanceType": "closingBooked",
+        "referenceDate": "2026-10-18"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-88.38"
+        },
+        "balanceType": "expected",
+        "referenceDate": "2026-11-15"
+       }
+      ],
+      "interest": [
+       {
+        "type": "FIXD",
+        "rate": [
+         {
+          "percentage": "36.60"
+         }
+        ]
+       }
+      ],
+      "relatedDates": [
+       {
+        "contractStartDate": "2026-02-19",
+        "contractEndDate": "2029-01-15"
+       }
+      ],
+      "collateralsInvolved": true,
+      "guaranteeInvolved": true,
+      "tariffs": "35 monthly annuity instalments of 88.38 GEL due on day 15"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans/5d9ed1db-7d6b-5df0-9f13-1d360bf15c3f",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "5d9ed1db-7d6b-5df0-9f13-1d360bf15c3f",
+     "iban": "GE40PB4150822870547062",
+     "currency": "GEL",
+     "ownerName": "TSIALA MAISURADZE",
+     "name": "TSIALA MAISURADZE",
+     "product": "Consumer loan",
+     "cashAccountType": "LOAN",
+     "status": "enabled",
+     "bic": "PAHAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v2/loans/5d9ed1db-7d6b-5df0-9f13-1d360bf15c3f/balances"
+      },
+      "transactions": {
+       "href": "v2/loans/5d9ed1db-7d6b-5df0-9f13-1d360bf15c3f/transactions"
+      }
+     },
+     "displayName": "Consumer loan",
+     "other": {
+      "identification": "LN-2026-102772",
+      "schemeNameProprietary": "LOAN_CONTRACT",
+      "issuer": "PASHA Bank Georgia"
+     },
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-1610.26"
+       },
+       "balanceType": "closingBooked",
+       "referenceDate": "2026-10-18"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-88.38"
+       },
+       "balanceType": "expected",
+       "referenceDate": "2026-11-15"
+      }
+     ],
+     "interest": [
+      {
+       "type": "FIXD",
+       "rate": [
+        {
+         "percentage": "36.60"
+        }
+       ]
+      }
+     ],
+     "relatedDates": [
+      {
+       "contractStartDate": "2026-02-19",
+       "contractEndDate": "2029-01-15"
+      }
+     ],
+     "collateralsInvolved": true,
+     "guaranteeInvolved": true,
+     "tariffs": "35 monthly annuity instalments of 88.38 GEL due on day 15"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans/5d9ed1db-7d6b-5df0-9f13-1d360bf15c3f/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE40PB4150822870547062",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-1610.26"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-88.38"
+      },
+      "balanceType": "expected",
+      "referenceDate": "2026-11-15"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans/5d9ed1db-7d6b-5df0-9f13-1d360bf15c3f/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE40PB4150822870547062",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "LN-2026-102772_1",
+       "entryReference": "0000000001",
+       "bookingDate": "2026-03-15",
+       "valueDate": "2026-03-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "88.38"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 1"
+       ],
+       "additionalTransactionInformation": "principal 30.87; interest 57.51"
+      },
+      {
+       "transactionId": "LN-2026-102772_2",
+       "entryReference": "0000000002",
+       "bookingDate": "2026-04-16",
+       "valueDate": "2026-04-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "88.38"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 2"
+       ],
+       "additionalTransactionInformation": "principal 31.82; interest 56.56"
+      },
+      {
+       "transactionId": "LN-2026-102772_3",
+       "entryReference": "0000000003",
+       "bookingDate": "2026-05-15",
+       "valueDate": "2026-05-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "88.38"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 3"
+       ],
+       "additionalTransactionInformation": "principal 32.79; interest 55.59"
+      },
+      {
+       "transactionId": "LN-2026-102772_4",
+       "entryReference": "0000000004",
+       "bookingDate": "2026-06-15",
+       "valueDate": "2026-06-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "88.38"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 4"
+       ],
+       "additionalTransactionInformation": "principal 33.79; interest 54.59"
+      },
+      {
+       "transactionId": "LN-2026-102772_5",
+       "entryReference": "0000000005",
+       "bookingDate": "2026-07-15",
+       "valueDate": "2026-07-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "88.38"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 5"
+       ],
+       "additionalTransactionInformation": "principal 34.82; interest 53.56"
+      },
+      {
+       "transactionId": "LN-2026-102772_6",
+       "entryReference": "0000000006",
+       "bookingDate": "2026-08-15",
+       "valueDate": "2026-08-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "88.38"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 6"
+       ],
+       "additionalTransactionInformation": "principal 35.88; interest 52.50"
+      },
+      {
+       "transactionId": "LN-2026-102772_7",
+       "entryReference": "0000000007",
+       "bookingDate": "2026-09-18",
+       "valueDate": "2026-09-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "88.38"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 7"
+       ],
+       "additionalTransactionInformation": "principal 36.97; interest 51.41"
+      },
+      {
+       "transactionId": "LN-2026-102772_8",
+       "entryReference": "0000000008",
+       "bookingDate": "2026-10-15",
+       "valueDate": "2026-10-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "88.38"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 8"
+       ],
+       "additionalTransactionInformation": "principal 38.10; interest 50.28"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/loans/5d9ed1db-7d6b-5df0-9f13-1d360bf15c3f"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/savings",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": []
+   }
+  }
+ ]
+}

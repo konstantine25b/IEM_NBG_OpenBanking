@@ -1,0 +1,3354 @@
+{
+ "bank": "basisbank",
+ "customer": "C00020",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "00fb1cc3-82b5-5e95-8210-7d6822bc9661",
+      "iban": "GE60BS1696353890386725",
+      "currency": "GEL",
+      "ownerName": "ZURAB ONIANI",
+      "name": "ZURAB ONIANI",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "CBASGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.42"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-22T07:53:50"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.42"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-22T07:53:50"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/00fb1cc3-82b5-5e95-8210-7d6822bc9661/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/00fb1cc3-82b5-5e95-8210-7d6822bc9661/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/00fb1cc3-82b5-5e95-8210-7d6822bc9661",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "00fb1cc3-82b5-5e95-8210-7d6822bc9661",
+     "iban": "GE60BS1696353890386725",
+     "currency": "GEL",
+     "ownerName": "ZURAB ONIANI",
+     "name": "ZURAB ONIANI",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "CBASGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/00fb1cc3-82b5-5e95-8210-7d6822bc9661/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/00fb1cc3-82b5-5e95-8210-7d6822bc9661/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/00fb1cc3-82b5-5e95-8210-7d6822bc9661/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE60BS1696353890386725",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.42"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.42"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-09-22T07:53:50"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/00fb1cc3-82b5-5e95-8210-7d6822bc9661/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE60BS1696353890386725",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00000009813",
+       "entryReference": "0000000001",
+       "bookingDate": "2025-10-21",
+       "valueDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "19.17"
+       },
+       "endToEndId": "E2E0000009811",
+       "debtorName": "ზურაბ ონიანი",
+       "debtorAccount": {
+        "iban": "GE39TB1031923873659583"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000009815",
+       "entryReference": "0000000002",
+       "bookingDate": "2025-10-22",
+       "valueDate": "2025-10-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.17"
+       },
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა FB1AC013",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000009829",
+       "entryReference": "0000000003",
+       "bookingDate": "2025-10-27",
+       "valueDate": "2025-10-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-410.80"
+       },
+       "creditorName": "ZOOMMER",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ZOOMMER",
+       "additionalInformation": "ZOOMMER Tbilisi 476157******5957 MCC 5732",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000009846",
+       "entryReference": "0000000004",
+       "bookingDate": "2025-11-06",
+       "valueDate": "2025-11-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-69.97"
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "additionalInformation": "SPAR Tbilisi 476157******5957 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000009848",
+       "entryReference": "0000000005",
+       "bookingDate": "2025-11-07",
+       "valueDate": "2025-11-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-39.31"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Tbilisi 476157******5957 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000009851",
+       "entryReference": "0000000006",
+       "bookingDate": "2025-11-10",
+       "valueDate": "2025-11-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-79.90"
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "additionalInformation": "SPAR Tbilisi 476157******5957 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000009855",
+       "entryReference": "0000000007",
+       "bookingDate": "2025-11-10",
+       "valueDate": "2025-11-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-66.07"
+       },
+       "creditorName": "NIKORA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - NIKORA",
+       "additionalInformation": "NIKORA Tbilisi 476157******5957 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000009860",
+       "entryReference": "0000000008",
+       "bookingDate": "2025-11-13",
+       "valueDate": "2025-11-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-75.43"
+       },
+       "creditorName": "PHARMADEPOT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - PHARMADEPOT",
+       "additionalInformation": "PHARMADEPOT Tbilisi 476157******5957 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000009876",
+       "entryReference": "0000000009",
+       "bookingDate": "2025-11-21",
+       "valueDate": "2025-11-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.66"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Tbilisi 476157******5957 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000009884",
+       "entryReference": "0000000010",
+       "bookingDate": "2025-11-21",
+       "valueDate": "2025-11-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "19.17"
+       },
+       "endToEndId": "E2E0000009882",
+       "debtorName": "ზურაბ ონიანი",
+       "debtorAccount": {
+        "iban": "GE39TB1031923873659583"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000009885",
+       "entryReference": "0000000011",
+       "bookingDate": "2025-11-22",
+       "valueDate": "2025-11-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.17"
+       },
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა FB1AC013",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000009897",
+       "entryReference": "0000000012",
+       "bookingDate": "2025-12-01",
+       "valueDate": "2025-11-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-33.28"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Tbilisi 476157******5957 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000009912",
+       "entryReference": "0000000013",
+       "bookingDate": "2025-12-11",
+       "valueDate": "2025-12-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-46.67"
+       },
+       "creditorName": "NIKORA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - NIKORA",
+       "additionalInformation": "NIKORA Tbilisi 476157******5957 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000009910",
+       "entryReference": "0000000014",
+       "bookingDate": "2025-12-12",
+       "valueDate": "2025-12-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-24.10"
+       },
+       "creditorName": "TBILISI TRANSPORT COMPANY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - TBILISI TRANSPORT COMPANY",
+       "additionalInformation": "TBILISI TRANSPORT COMPANY Tbilisi 476157******5957 MCC 4111",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000009928",
+       "entryReference": "0000000015",
+       "bookingDate": "2025-12-19",
+       "valueDate": "2025-12-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "19.17"
+       },
+       "endToEndId": "E2E0000009926",
+       "debtorName": "ზურაბ ონიანი",
+       "debtorAccount": {
+        "iban": "GE39TB1031923873659583"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000009936",
+       "entryReference": "0000000016",
+       "bookingDate": "2025-12-22",
+       "valueDate": "2025-12-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.17"
+       },
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა FB1AC013",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000009952",
+       "entryReference": "0000000017",
+       "bookingDate": "2026-01-05",
+       "valueDate": "2026-01-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.06"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Tbilisi 476157******5957 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000009967",
+       "entryReference": "0000000018",
+       "bookingDate": "2026-01-13",
+       "valueDate": "2026-01-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-17.10"
+       },
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY",
+       "additionalInformation": "METROMONEY Tbilisi 476157******5957 MCC 4111",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000009982",
+       "entryReference": "0000000019",
+       "bookingDate": "2026-01-21",
+       "valueDate": "2026-01-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "19.17"
+       },
+       "endToEndId": "E2E0000009980",
+       "debtorName": "ზურაბ ონიანი",
+       "debtorAccount": {
+        "iban": "GE39TB1031923873659583"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000009983",
+       "entryReference": "0000000020",
+       "bookingDate": "2026-01-22",
+       "valueDate": "2026-01-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.17"
+       },
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა FB1AC013",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000010039",
+       "entryReference": "0000000021",
+       "bookingDate": "2026-02-20",
+       "valueDate": "2026-02-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "19.17"
+       },
+       "endToEndId": "E2E0000010037",
+       "debtorName": "ზურაბ ონიანი",
+       "debtorAccount": {
+        "iban": "GE39TB1031923873659583"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000010043",
+       "entryReference": "0000000022",
+       "bookingDate": "2026-02-22",
+       "valueDate": "2026-02-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.17"
+       },
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა FB1AC013",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000010093",
+       "entryReference": "0000000023",
+       "bookingDate": "2026-03-20",
+       "valueDate": "2026-03-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "19.17"
+       },
+       "endToEndId": "E2E0000010091",
+       "debtorName": "ზურაბ ონიანი",
+       "debtorAccount": {
+        "iban": "GE39TB1031923873659583"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000010097",
+       "entryReference": "0000000024",
+       "bookingDate": "2026-03-22",
+       "valueDate": "2026-03-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.17"
+       },
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა FB1AC013",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000010138",
+       "entryReference": "0000000025",
+       "bookingDate": "2026-04-21",
+       "valueDate": "2026-04-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "19.17"
+       },
+       "endToEndId": "E2E0000010136",
+       "debtorName": "ზურაბ ონიანი",
+       "debtorAccount": {
+        "iban": "GE39TB1031923873659583"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000010139",
+       "entryReference": "0000000026",
+       "bookingDate": "2026-04-22",
+       "valueDate": "2026-04-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.17"
+       },
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა FB1AC013",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000010181",
+       "entryReference": "0000000027",
+       "bookingDate": "2026-05-21",
+       "valueDate": "2026-05-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "19.17"
+       },
+       "endToEndId": "E2E0000010179",
+       "debtorName": "ზურაბ ონიანი",
+       "debtorAccount": {
+        "iban": "GE39TB1031923873659583"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000010182",
+       "entryReference": "0000000028",
+       "bookingDate": "2026-05-22",
+       "valueDate": "2026-05-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.17"
+       },
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა FB1AC013",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000010233",
+       "entryReference": "0000000029",
+       "bookingDate": "2026-06-19",
+       "valueDate": "2026-06-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "19.17"
+       },
+       "endToEndId": "E2E0000010231",
+       "debtorName": "ზურაბ ონიანი",
+       "debtorAccount": {
+        "iban": "GE39TB1031923873659583"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000010238",
+       "entryReference": "0000000030",
+       "bookingDate": "2026-06-22",
+       "valueDate": "2026-06-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.17"
+       },
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა FB1AC013",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000010280",
+       "entryReference": "0000000031",
+       "bookingDate": "2026-07-21",
+       "valueDate": "2026-07-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "19.17"
+       },
+       "endToEndId": "E2E0000010278",
+       "debtorName": "ზურაბ ონიანი",
+       "debtorAccount": {
+        "iban": "GE39TB1031923873659583"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000010282",
+       "entryReference": "0000000032",
+       "bookingDate": "2026-07-22",
+       "valueDate": "2026-07-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.17"
+       },
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა FB1AC013",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000010331",
+       "entryReference": "0000000033",
+       "bookingDate": "2026-08-21",
+       "valueDate": "2026-08-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "19.17"
+       },
+       "endToEndId": "E2E0000010329",
+       "debtorName": "ზურაბ ონიანი",
+       "debtorAccount": {
+        "iban": "GE39TB1031923873659583"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000010334",
+       "entryReference": "0000000034",
+       "bookingDate": "2026-08-22",
+       "valueDate": "2026-08-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.17"
+       },
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა FB1AC013",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000010387",
+       "entryReference": "0000000035",
+       "bookingDate": "2026-09-21",
+       "valueDate": "2026-09-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "19.17"
+       },
+       "endToEndId": "E2E0000010385",
+       "debtorName": "ზურაბ ონიანი",
+       "debtorAccount": {
+        "iban": "GE39TB1031923873659583"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000010388",
+       "entryReference": "0000000036",
+       "bookingDate": "2026-09-22",
+       "valueDate": "2026-09-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.17"
+       },
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა FB1AC013",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/00fb1cc3-82b5-5e95-8210-7d6822bc9661"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/00fb1cc3-82b5-5e95-8210-7d6822bc9661/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "533356dc-6e32-53f1-a15c-2936b8837ae1",
+      "maskedPan": "476157******5957",
+      "currency": "GEL",
+      "ownerName": "ZURAB ONIANI",
+      "name": "ZURAB ONIANI",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.42"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-22T07:53:50"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.42"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-22T07:53:50"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/533356dc-6e32-53f1-a15c-2936b8837ae1/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/533356dc-6e32-53f1-a15c-2936b8837ae1/transactions"
+       }
+      }
+     },
+     {
+      "resourceId": "447ce588-6b55-584a-86c1-47a78a1e0c5f",
+      "maskedPan": "517805******2905",
+      "currency": "GEL",
+      "ownerName": "ZURAB ONIANI",
+      "name": "ZURAB ONIANI",
+      "product": "MC Credit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "creditLimit": {
+       "currency": "GEL",
+       "amount": "13400.00"
+      },
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "58.64"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": true,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-11T17:02:25"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-13341.36"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-11T17:02:25"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/447ce588-6b55-584a-86c1-47a78a1e0c5f/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/447ce588-6b55-584a-86c1-47a78a1e0c5f/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/533356dc-6e32-53f1-a15c-2936b8837ae1",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "533356dc-6e32-53f1-a15c-2936b8837ae1",
+     "maskedPan": "476157******5957",
+     "currency": "GEL",
+     "ownerName": "ZURAB ONIANI",
+     "name": "ZURAB ONIANI",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "1.42"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-09-22T07:53:50"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "1.42"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-09-22T07:53:50"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/533356dc-6e32-53f1-a15c-2936b8837ae1/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/533356dc-6e32-53f1-a15c-2936b8837ae1/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/533356dc-6e32-53f1-a15c-2936b8837ae1/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "476157******5957",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.42"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.42"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-09-22T07:53:50"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/533356dc-6e32-53f1-a15c-2936b8837ae1/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00000009829",
+       "transactionDate": "2025-10-25",
+       "bookingDate": "2025-10-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-410.80"
+       },
+       "acceptorTransactionDateTime": "2025-10-25T12:50:49",
+       "maskedPAN": "476157******5957",
+       "transactionDetails": "ბარათით გადახდა - ZOOMMER",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "ZOOMMER",
+       "merchantCategoryCode": "5732"
+      },
+      {
+       "cardTransactionId": "d_00000009846",
+       "transactionDate": "2025-11-04",
+       "bookingDate": "2025-11-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-69.97"
+       },
+       "acceptorTransactionDateTime": "2025-11-04T12:04:41",
+       "maskedPAN": "476157******5957",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009848",
+       "transactionDate": "2025-11-05",
+       "bookingDate": "2025-11-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-39.31"
+       },
+       "acceptorTransactionDateTime": "2025-11-05T15:06:20",
+       "maskedPAN": "476157******5957",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009851",
+       "transactionDate": "2025-11-06",
+       "bookingDate": "2025-11-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-79.90"
+       },
+       "acceptorTransactionDateTime": "2025-11-06T16:35:54",
+       "maskedPAN": "476157******5957",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009855",
+       "transactionDate": "2025-11-08",
+       "bookingDate": "2025-11-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-66.07"
+       },
+       "acceptorTransactionDateTime": "2025-11-08T18:12:30",
+       "maskedPAN": "476157******5957",
+       "transactionDetails": "ბარათით გადახდა - NIKORA",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "NIKORA",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009860",
+       "transactionDate": "2025-11-12",
+       "bookingDate": "2025-11-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-75.43"
+       },
+       "acceptorTransactionDateTime": "2025-11-12T09:21:34",
+       "maskedPAN": "476157******5957",
+       "transactionDetails": "ბარათით გადახდა - PHARMADEPOT",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "PHARMADEPOT",
+       "merchantCategoryCode": "5912"
+      },
+      {
+       "cardTransactionId": "d_00000009876",
+       "transactionDate": "2025-11-19",
+       "bookingDate": "2025-11-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.66"
+       },
+       "acceptorTransactionDateTime": "2025-11-19T11:20:31",
+       "maskedPAN": "476157******5957",
+       "transactionDetails": "ბარათით გადახდა - DAILY MARKET",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "DAILY MARKET",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "d_00000009897",
+       "transactionDate": "2025-11-28",
+       "bookingDate": "2025-12-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-33.28"
+       },
+       "acceptorTransactionDateTime": "2025-11-28T15:24:34",
+       "maskedPAN": "476157******5957",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009912",
+       "transactionDate": "2025-12-10",
+       "bookingDate": "2025-12-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-46.67"
+       },
+       "acceptorTransactionDateTime": "2025-12-10T21:39:06",
+       "maskedPAN": "476157******5957",
+       "transactionDetails": "ბარათით გადახდა - NIKORA",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "NIKORA",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009910",
+       "transactionDate": "2025-12-10",
+       "bookingDate": "2025-12-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-24.10"
+       },
+       "acceptorTransactionDateTime": "2025-12-10T10:09:07",
+       "maskedPAN": "476157******5957",
+       "transactionDetails": "ბარათით გადახდა - TBILISI TRANSPORT COMPANY",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "TBILISI TRANSPORT COMPANY",
+       "merchantCategoryCode": "4111"
+      },
+      {
+       "cardTransactionId": "d_00000009952",
+       "transactionDate": "2026-01-01",
+       "bookingDate": "2026-01-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.06"
+       },
+       "acceptorTransactionDateTime": "2026-01-01T07:00:36",
+       "maskedPAN": "476157******5957",
+       "transactionDetails": "ბარათით გადახდა - DAILY MARKET",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "DAILY MARKET",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "d_00000009967",
+       "transactionDate": "2026-01-10",
+       "bookingDate": "2026-01-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-17.10"
+       },
+       "acceptorTransactionDateTime": "2026-01-10T11:55:47",
+       "maskedPAN": "476157******5957",
+       "transactionDetails": "ბარათით გადახდა - METROMONEY",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "METROMONEY",
+       "merchantCategoryCode": "4111"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/00fb1cc3-82b5-5e95-8210-7d6822bc9661"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/533356dc-6e32-53f1-a15c-2936b8837ae1/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "476157******5957",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/447ce588-6b55-584a-86c1-47a78a1e0c5f",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "447ce588-6b55-584a-86c1-47a78a1e0c5f",
+     "maskedPan": "517805******2905",
+     "currency": "GEL",
+     "ownerName": "ZURAB ONIANI",
+     "name": "ZURAB ONIANI",
+     "product": "MC Credit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "creditLimit": {
+      "currency": "GEL",
+      "amount": "13400.00"
+     },
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "58.64"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": true,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-11T17:02:25"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-13341.36"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-11T17:02:25"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/447ce588-6b55-584a-86c1-47a78a1e0c5f/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/447ce588-6b55-584a-86c1-47a78a1e0c5f/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/447ce588-6b55-584a-86c1-47a78a1e0c5f/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "517805******2905",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-13341.36"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "58.64"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": true,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-11T17:02:25"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/447ce588-6b55-584a-86c1-47a78a1e0c5f/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00000009820",
+       "transactionDate": "2025-10-22",
+       "bookingDate": "2025-10-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.20"
+       },
+       "acceptorTransactionDateTime": "2025-10-22T22:16:30",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MACHAKHELA",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MACHAKHELA",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009822",
+       "transactionDate": "2025-10-23",
+       "bookingDate": "2025-10-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.98"
+       },
+       "acceptorTransactionDateTime": "2025-10-23T21:43:10",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - NETFLIX",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "NETFLIX",
+       "merchantCategoryCode": "7832"
+      },
+      {
+       "cardTransactionId": "d_00000009823",
+       "transactionDate": "2025-10-24",
+       "bookingDate": "2025-10-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-64.17"
+       },
+       "acceptorTransactionDateTime": "2025-10-24T10:35:05",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009827",
+       "transactionDate": "2025-10-24",
+       "bookingDate": "2025-10-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-108.07"
+       },
+       "acceptorTransactionDateTime": "2025-10-24T15:23:58",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - GOODWILL",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GOODWILL",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009831",
+       "transactionDate": "2025-10-27",
+       "bookingDate": "2025-10-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.36"
+       },
+       "acceptorTransactionDateTime": "2025-10-27T14:36:36",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009833",
+       "transactionDate": "2025-10-28",
+       "bookingDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-21.68"
+       },
+       "acceptorTransactionDateTime": "2025-10-28T11:18:43",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009835",
+       "transactionDate": "2025-10-30",
+       "bookingDate": "2025-11-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1256.77"
+       },
+       "acceptorTransactionDateTime": "2025-10-30T09:20:59",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - ELIT ELECTRONICS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "ELIT ELECTRONICS",
+       "merchantCategoryCode": "5732"
+      },
+      {
+       "cardTransactionId": "d_00000009836",
+       "transactionDate": "2025-10-30",
+       "bookingDate": "2025-11-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-99.80"
+       },
+       "acceptorTransactionDateTime": "2025-10-30T10:00:25",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009837",
+       "transactionDate": "2025-10-30",
+       "bookingDate": "2025-11-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.04"
+       },
+       "acceptorTransactionDateTime": "2025-10-30T20:28:33",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SUBWAY",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SUBWAY",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000009842",
+       "transactionDate": "2025-11-02",
+       "bookingDate": "2025-11-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-115.73"
+       },
+       "acceptorTransactionDateTime": "2025-11-02T10:21:51",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KOTON",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KOTON",
+       "merchantCategoryCode": "5651"
+      },
+      {
+       "cardTransactionId": "d_00000009840",
+       "transactionDate": "2025-11-01",
+       "bookingDate": "2025-11-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-69.07"
+       },
+       "acceptorTransactionDateTime": "2025-11-01T20:30:49",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MACHAKHELA",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MACHAKHELA",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009844",
+       "transactionDate": "2025-11-03",
+       "bookingDate": "2025-11-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-34.99"
+       },
+       "acceptorTransactionDateTime": "2025-11-03T11:26:19",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - GOODWILL",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GOODWILL",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009849",
+       "transactionDate": "2025-11-05",
+       "bookingDate": "2025-11-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-16.32"
+       },
+       "acceptorTransactionDateTime": "2025-11-05T21:26:21",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009852",
+       "transactionDate": "2025-11-06",
+       "bookingDate": "2025-11-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-201.35"
+       },
+       "acceptorTransactionDateTime": "2025-11-06T17:03:50",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009862",
+       "transactionDate": "2025-11-12",
+       "bookingDate": "2025-11-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-32.62"
+       },
+       "acceptorTransactionDateTime": "2025-11-12T16:54:44",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SHAVI LOMI",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SHAVI LOMI",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009866",
+       "transactionDate": "2025-11-13",
+       "bookingDate": "2025-11-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-17.30"
+       },
+       "acceptorTransactionDateTime": "2025-11-13T17:11:50",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000009867",
+       "transactionDate": "2025-11-14",
+       "bookingDate": "2025-11-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-68.42"
+       },
+       "acceptorTransactionDateTime": "2025-11-14T20:18:50",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - WOLT",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "WOLT",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009868",
+       "transactionDate": "2025-11-15",
+       "bookingDate": "2025-11-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-26.97"
+       },
+       "acceptorTransactionDateTime": "2025-11-15T13:07:57",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - NETFLIX",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "NETFLIX",
+       "merchantCategoryCode": "7832"
+      },
+      {
+       "cardTransactionId": "d_00000009870",
+       "transactionDate": "2025-11-15",
+       "bookingDate": "2025-11-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.17"
+       },
+       "acceptorTransactionDateTime": "2025-11-15T20:03:50",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009871",
+       "transactionDate": "2025-11-15",
+       "bookingDate": "2025-11-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-22.86"
+       },
+       "acceptorTransactionDateTime": "2025-11-15T20:20:25",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - GOODWILL",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GOODWILL",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009872",
+       "transactionDate": "2025-11-15",
+       "bookingDate": "2025-11-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-88.89"
+       },
+       "acceptorTransactionDateTime": "2025-11-15T21:09:04",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009869",
+       "transactionDate": "2025-11-15",
+       "bookingDate": "2025-11-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-33.23"
+       },
+       "acceptorTransactionDateTime": "2025-11-15T15:45:59",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009875",
+       "transactionDate": "2025-11-18",
+       "bookingDate": "2025-11-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-211.99"
+       },
+       "acceptorTransactionDateTime": "2025-11-18T07:10:30",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - GOODWILL",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GOODWILL",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009890",
+       "transactionDate": "2025-11-23",
+       "bookingDate": "2025-11-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-51.22"
+       },
+       "acceptorTransactionDateTime": "2025-11-23T13:59:22",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009892",
+       "transactionDate": "2025-11-25",
+       "bookingDate": "2025-11-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.40"
+       },
+       "acceptorTransactionDateTime": "2025-11-25T07:26:04",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - NIKORA",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "NIKORA",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009894",
+       "transactionDate": "2025-11-27",
+       "bookingDate": "2025-11-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-38.87"
+       },
+       "acceptorTransactionDateTime": "2025-11-27T13:59:42",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000009900",
+       "transactionDate": "2025-11-30",
+       "bookingDate": "2025-12-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-311.88"
+       },
+       "acceptorTransactionDateTime": "2025-11-30T11:40:02",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009895",
+       "transactionDate": "2025-11-28",
+       "bookingDate": "2025-12-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-25.02"
+       },
+       "acceptorTransactionDateTime": "2025-11-28T07:45:32",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SUBWAY",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SUBWAY",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000009901",
+       "transactionDate": "2025-12-01",
+       "bookingDate": "2025-12-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-27.31"
+       },
+       "acceptorTransactionDateTime": "2025-12-01T12:05:02",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KFC",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KFC",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000009902",
+       "transactionDate": "2025-12-02",
+       "bookingDate": "2025-12-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-40.02"
+       },
+       "acceptorTransactionDateTime": "2025-12-02T12:21:13",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009905",
+       "transactionDate": "2025-12-06",
+       "bookingDate": "2025-12-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-95.97"
+       },
+       "acceptorTransactionDateTime": "2025-12-06T19:55:01",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009906",
+       "transactionDate": "2025-12-07",
+       "bookingDate": "2025-12-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-94.77"
+       },
+       "acceptorTransactionDateTime": "2025-12-07T15:07:37",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - GLOVO",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GLOVO",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009903",
+       "transactionDate": "2025-12-06",
+       "bookingDate": "2025-12-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-66.26"
+       },
+       "acceptorTransactionDateTime": "2025-12-06T08:33:32",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - GLOVO",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GLOVO",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009911",
+       "transactionDate": "2025-12-10",
+       "bookingDate": "2025-12-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-40.31"
+       },
+       "acceptorTransactionDateTime": "2025-12-10T15:03:42",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009931",
+       "transactionDate": "2025-12-21",
+       "bookingDate": "2025-12-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-311.77"
+       },
+       "acceptorTransactionDateTime": "2025-12-21T08:15:46",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MANGO",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MANGO",
+       "merchantCategoryCode": "5651"
+      },
+      {
+       "cardTransactionId": "d_00000009951",
+       "transactionDate": "2025-12-31",
+       "bookingDate": "2026-01-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-72.59"
+       },
+       "acceptorTransactionDateTime": "2025-12-31T21:41:47",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - GLOVO",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GLOVO",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009953",
+       "transactionDate": "2026-01-01",
+       "bookingDate": "2026-01-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-58.60"
+       },
+       "acceptorTransactionDateTime": "2026-01-01T08:07:58",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - WOLT",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "WOLT",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009959",
+       "transactionDate": "2026-01-03",
+       "bookingDate": "2026-01-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-35.36"
+       },
+       "acceptorTransactionDateTime": "2026-01-03T07:46:59",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009961",
+       "transactionDate": "2026-01-05",
+       "bookingDate": "2026-01-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-200.54"
+       },
+       "acceptorTransactionDateTime": "2026-01-05T11:44:54",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - GLOVO",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GLOVO",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009971",
+       "transactionDate": "2026-01-15",
+       "bookingDate": "2026-01-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-158.91"
+       },
+       "acceptorTransactionDateTime": "2026-01-15T12:13:29",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009973",
+       "transactionDate": "2026-01-16",
+       "bookingDate": "2026-01-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-41.11"
+       },
+       "acceptorTransactionDateTime": "2026-01-16T13:28:59",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009975",
+       "transactionDate": "2026-01-17",
+       "bookingDate": "2026-01-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-101.35"
+       },
+       "acceptorTransactionDateTime": "2026-01-17T15:10:16",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009977",
+       "transactionDate": "2026-01-19",
+       "bookingDate": "2026-01-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-45.44"
+       },
+       "acceptorTransactionDateTime": "2026-01-19T10:16:42",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009979",
+       "transactionDate": "2026-01-19",
+       "bookingDate": "2026-01-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-128.22"
+       },
+       "acceptorTransactionDateTime": "2026-01-19T21:32:20",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009988",
+       "transactionDate": "2026-01-23",
+       "bookingDate": "2026-01-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-297.69"
+       },
+       "acceptorTransactionDateTime": "2026-01-23T22:48:32",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009991",
+       "transactionDate": "2026-01-25",
+       "bookingDate": "2026-01-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-83.42"
+       },
+       "acceptorTransactionDateTime": "2026-01-25T13:03:24",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SHAVI LOMI",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SHAVI LOMI",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009996",
+       "transactionDate": "2026-01-27",
+       "bookingDate": "2026-01-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-105.34"
+       },
+       "acceptorTransactionDateTime": "2026-01-27T16:42:56",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SHAVI LOMI",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SHAVI LOMI",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000009998",
+       "transactionDate": "2026-01-28",
+       "bookingDate": "2026-01-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-133.74"
+       },
+       "acceptorTransactionDateTime": "2026-01-28T18:57:09",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000009999",
+       "transactionDate": "2026-01-29",
+       "bookingDate": "2026-02-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-77.71"
+       },
+       "acceptorTransactionDateTime": "2026-01-29T20:03:51",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010003",
+       "transactionDate": "2026-01-31",
+       "bookingDate": "2026-02-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-87.08"
+       },
+       "acceptorTransactionDateTime": "2026-01-31T16:48:05",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/bf3b7ba2-4a3f-51d5-8aea-882983f87875"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/447ce588-6b55-584a-86c1-47a78a1e0c5f/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      },
+      "next": {
+       "href": "/0.8/v1/card-accounts/447ce588-6b55-584a-86c1-47a78a1e0c5f/transactions?bookingStatus=both&dateFrom=2025-10-19&entryReferenceFrom=0000000057"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "517805******2905",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/447ce588-6b55-584a-86c1-47a78a1e0c5f/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19",
+    "entryReferenceFrom": "0000000057"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00000010005",
+       "transactionDate": "2026-02-01",
+       "bookingDate": "2026-02-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-285.42"
+       },
+       "acceptorTransactionDateTime": "2026-02-01T19:53:09",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MACHAKHELA",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MACHAKHELA",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010004",
+       "transactionDate": "2026-02-01",
+       "bookingDate": "2026-02-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-402.93"
+       },
+       "acceptorTransactionDateTime": "2026-02-01T12:19:06",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - LC WAIKIKI",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "LC WAIKIKI",
+       "merchantCategoryCode": "5651"
+      },
+      {
+       "cardTransactionId": "d_00000010008",
+       "transactionDate": "2026-02-04",
+       "bookingDate": "2026-02-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-402.36"
+       },
+       "acceptorTransactionDateTime": "2026-02-04T21:53:57",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010012",
+       "transactionDate": "2026-02-06",
+       "bookingDate": "2026-02-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-413.89"
+       },
+       "acceptorTransactionDateTime": "2026-02-06T09:55:43",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010013",
+       "transactionDate": "2026-02-07",
+       "bookingDate": "2026-02-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-377.53"
+       },
+       "acceptorTransactionDateTime": "2026-02-07T21:04:10",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010014",
+       "transactionDate": "2026-02-07",
+       "bookingDate": "2026-02-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-53.79"
+       },
+       "acceptorTransactionDateTime": "2026-02-07T21:27:35",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010022",
+       "transactionDate": "2026-02-10",
+       "bookingDate": "2026-02-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-43.40"
+       },
+       "acceptorTransactionDateTime": "2026-02-10T19:02:56",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - GLOVO",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GLOVO",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010035",
+       "transactionDate": "2026-02-19",
+       "bookingDate": "2026-02-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-125.29"
+       },
+       "acceptorTransactionDateTime": "2026-02-19T10:05:42",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010053",
+       "transactionDate": "2026-02-25",
+       "bookingDate": "2026-02-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-316.08"
+       },
+       "acceptorTransactionDateTime": "2026-02-25T12:06:00",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010058",
+       "transactionDate": "2026-02-27",
+       "bookingDate": "2026-03-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-44.13"
+       },
+       "acceptorTransactionDateTime": "2026-02-27T18:12:39",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - STARBUCKS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "STARBUCKS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010061",
+       "transactionDate": "2026-03-01",
+       "bookingDate": "2026-03-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-193.20"
+       },
+       "acceptorTransactionDateTime": "2026-03-01T19:15:09",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - ZARA",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "ZARA",
+       "merchantCategoryCode": "5651"
+      },
+      {
+       "cardTransactionId": "d_00000010060",
+       "transactionDate": "2026-02-28",
+       "bookingDate": "2026-03-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-62.85"
+       },
+       "acceptorTransactionDateTime": "2026-02-28T18:42:46",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010063",
+       "transactionDate": "2026-03-03",
+       "bookingDate": "2026-03-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-109.27"
+       },
+       "acceptorTransactionDateTime": "2026-03-03T10:36:38",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010065",
+       "transactionDate": "2026-03-06",
+       "bookingDate": "2026-03-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1800.41"
+       },
+       "acceptorTransactionDateTime": "2026-03-06T19:06:49",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - ZARA",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "ZARA",
+       "merchantCategoryCode": "5651"
+      },
+      {
+       "cardTransactionId": "d_00000010068",
+       "transactionDate": "2026-03-08",
+       "bookingDate": "2026-03-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-677.46"
+       },
+       "acceptorTransactionDateTime": "2026-03-08T18:36:17",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010072",
+       "transactionDate": "2026-03-10",
+       "bookingDate": "2026-03-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-102.80"
+       },
+       "acceptorTransactionDateTime": "2026-03-10T08:25:23",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010073",
+       "transactionDate": "2026-03-10",
+       "bookingDate": "2026-03-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-115.38"
+       },
+       "acceptorTransactionDateTime": "2026-03-10T15:33:53",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MACHAKHELA",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MACHAKHELA",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010077",
+       "transactionDate": "2026-03-14",
+       "bookingDate": "2026-03-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-130.67"
+       },
+       "acceptorTransactionDateTime": "2026-03-14T10:40:00",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - GLOVO",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GLOVO",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010095",
+       "transactionDate": "2026-03-20",
+       "bookingDate": "2026-03-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-129.79"
+       },
+       "acceptorTransactionDateTime": "2026-03-20T18:28:14",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010102",
+       "transactionDate": "2026-03-23",
+       "bookingDate": "2026-03-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-459.19"
+       },
+       "acceptorTransactionDateTime": "2026-03-23T13:13:22",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010105",
+       "transactionDate": "2026-03-29",
+       "bookingDate": "2026-03-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-266.61"
+       },
+       "acceptorTransactionDateTime": "2026-03-29T14:25:40",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - BARBARESTAN",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "BARBARESTAN",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010111",
+       "transactionDate": "2026-04-02",
+       "bookingDate": "2026-04-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-331.59"
+       },
+       "acceptorTransactionDateTime": "2026-04-02T07:58:16",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010112",
+       "transactionDate": "2026-04-04",
+       "bookingDate": "2026-04-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-88.52"
+       },
+       "acceptorTransactionDateTime": "2026-04-04T11:30:15",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010115",
+       "transactionDate": "2026-04-05",
+       "bookingDate": "2026-04-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-67.45"
+       },
+       "acceptorTransactionDateTime": "2026-04-05T10:59:10",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010130",
+       "transactionDate": "2026-04-15",
+       "bookingDate": "2026-04-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-38.40"
+       },
+       "acceptorTransactionDateTime": "2026-04-15T18:10:38",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SHAVI LOMI",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SHAVI LOMI",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010144",
+       "transactionDate": "2026-04-27",
+       "bookingDate": "2026-04-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-100.48"
+       },
+       "acceptorTransactionDateTime": "2026-04-27T20:50:31",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010149",
+       "transactionDate": "2026-04-30",
+       "bookingDate": "2026-05-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-383.93"
+       },
+       "acceptorTransactionDateTime": "2026-04-30T18:10:47",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010151",
+       "transactionDate": "2026-05-01",
+       "bookingDate": "2026-05-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-83.39"
+       },
+       "acceptorTransactionDateTime": "2026-05-01T23:26:56",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CAFE GALLERY",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CAFE GALLERY",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010152",
+       "transactionDate": "2026-05-02",
+       "bookingDate": "2026-05-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-67.66"
+       },
+       "acceptorTransactionDateTime": "2026-05-02T20:31:07",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010153",
+       "transactionDate": "2026-05-04",
+       "bookingDate": "2026-05-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-387.97"
+       },
+       "acceptorTransactionDateTime": "2026-05-04T14:45:49",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - GLOVO",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GLOVO",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010155",
+       "transactionDate": "2026-05-07",
+       "bookingDate": "2026-05-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-152.33"
+       },
+       "acceptorTransactionDateTime": "2026-05-07T07:49:36",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010156",
+       "transactionDate": "2026-05-08",
+       "bookingDate": "2026-05-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-53.72"
+       },
+       "acceptorTransactionDateTime": "2026-05-08T08:44:24",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010158",
+       "transactionDate": "2026-05-08",
+       "bookingDate": "2026-05-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-91.65"
+       },
+       "acceptorTransactionDateTime": "2026-05-08T14:06:34",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010160",
+       "transactionDate": "2026-05-08",
+       "bookingDate": "2026-05-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-51.13"
+       },
+       "acceptorTransactionDateTime": "2026-05-08T17:47:37",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010183",
+       "transactionDate": "2026-05-22",
+       "bookingDate": "2026-05-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-47.53"
+       },
+       "acceptorTransactionDateTime": "2026-05-22T09:09:24",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010190",
+       "transactionDate": "2026-05-28",
+       "bookingDate": "2026-05-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-26.55"
+       },
+       "acceptorTransactionDateTime": "2026-05-28T14:38:54",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010192",
+       "transactionDate": "2026-05-28",
+       "bookingDate": "2026-06-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-382.00"
+       },
+       "acceptorTransactionDateTime": "2026-05-28T15:41:23",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010194",
+       "transactionDate": "2026-05-29",
+       "bookingDate": "2026-06-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-58.81"
+       },
+       "acceptorTransactionDateTime": "2026-05-29T13:29:34",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010195",
+       "transactionDate": "2026-05-30",
+       "bookingDate": "2026-06-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-234.03"
+       },
+       "acceptorTransactionDateTime": "2026-05-30T17:02:09",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010196",
+       "transactionDate": "2026-05-30",
+       "bookingDate": "2026-06-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-163.87"
+       },
+       "acceptorTransactionDateTime": "2026-05-30T19:55:52",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010201",
+       "transactionDate": "2026-06-02",
+       "bookingDate": "2026-06-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-135.76"
+       },
+       "acceptorTransactionDateTime": "2026-06-02T14:18:39",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - GLOVO",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GLOVO",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010210",
+       "transactionDate": "2026-06-09",
+       "bookingDate": "2026-06-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-264.71"
+       },
+       "acceptorTransactionDateTime": "2026-06-09T13:46:06",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010215",
+       "transactionDate": "2026-06-11",
+       "bookingDate": "2026-06-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-61.64"
+       },
+       "acceptorTransactionDateTime": "2026-06-11T13:33:24",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KFC",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KFC",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010224",
+       "transactionDate": "2026-06-17",
+       "bookingDate": "2026-06-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-157.72"
+       },
+       "acceptorTransactionDateTime": "2026-06-17T15:07:07",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010225",
+       "transactionDate": "2026-06-17",
+       "bookingDate": "2026-06-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-259.96"
+       },
+       "acceptorTransactionDateTime": "2026-06-17T21:51:12",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MACHAKHELA",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MACHAKHELA",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010230",
+       "transactionDate": "2026-06-18",
+       "bookingDate": "2026-06-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-166.64"
+       },
+       "acceptorTransactionDateTime": "2026-06-18T20:24:50",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010237",
+       "transactionDate": "2026-06-21",
+       "bookingDate": "2026-06-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1191.74"
+       },
+       "acceptorTransactionDateTime": "2026-06-21T20:40:45",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KOTON",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KOTON",
+       "merchantCategoryCode": "5651"
+      },
+      {
+       "cardTransactionId": "d_00000010250",
+       "transactionDate": "2026-06-28",
+       "bookingDate": "2026-06-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-75.25"
+       },
+       "acceptorTransactionDateTime": "2026-06-28T09:25:52",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - NETFLIX",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "NETFLIX",
+       "merchantCategoryCode": "7832"
+      },
+      {
+       "cardTransactionId": "d_00000010257",
+       "transactionDate": "2026-07-05",
+       "bookingDate": "2026-07-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-86.43"
+       },
+       "acceptorTransactionDateTime": "2026-07-05T10:16:43",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010259",
+       "transactionDate": "2026-07-06",
+       "bookingDate": "2026-07-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-79.82"
+       },
+       "acceptorTransactionDateTime": "2026-07-06T17:01:19",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - WOLT",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "WOLT",
+       "merchantCategoryCode": "5812"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/bf3b7ba2-4a3f-51d5-8aea-882983f87875"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/447ce588-6b55-584a-86c1-47a78a1e0c5f/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      },
+      "next": {
+       "href": "/0.8/v1/card-accounts/447ce588-6b55-584a-86c1-47a78a1e0c5f/transactions?bookingStatus=both&dateFrom=2025-10-19&entryReferenceFrom=0000000117"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "517805******2905",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/447ce588-6b55-584a-86c1-47a78a1e0c5f/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19",
+    "entryReferenceFrom": "0000000117"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00000010262",
+       "transactionDate": "2026-07-09",
+       "bookingDate": "2026-07-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-69.23"
+       },
+       "acceptorTransactionDateTime": "2026-07-09T14:53:00",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010265",
+       "transactionDate": "2026-07-10",
+       "bookingDate": "2026-07-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-181.42"
+       },
+       "acceptorTransactionDateTime": "2026-07-10T07:57:50",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010272",
+       "transactionDate": "2026-07-18",
+       "bookingDate": "2026-07-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-119.21"
+       },
+       "acceptorTransactionDateTime": "2026-07-18T08:56:47",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010276",
+       "transactionDate": "2026-07-19",
+       "bookingDate": "2026-07-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-132.58"
+       },
+       "acceptorTransactionDateTime": "2026-07-19T14:46:59",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - WOLT",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "WOLT",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010277",
+       "transactionDate": "2026-07-20",
+       "bookingDate": "2026-07-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-120.61"
+       },
+       "acceptorTransactionDateTime": "2026-07-20T09:47:14",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010287",
+       "transactionDate": "2026-07-22",
+       "bookingDate": "2026-07-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-124.25"
+       },
+       "acceptorTransactionDateTime": "2026-07-22T12:47:17",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010292",
+       "transactionDate": "2026-07-28",
+       "bookingDate": "2026-07-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-117.34"
+       },
+       "acceptorTransactionDateTime": "2026-07-28T17:40:11",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - GLOVO",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GLOVO",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010294",
+       "transactionDate": "2026-07-30",
+       "bookingDate": "2026-07-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-251.17"
+       },
+       "acceptorTransactionDateTime": "2026-07-30T15:52:20",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010296",
+       "transactionDate": "2026-08-01",
+       "bookingDate": "2026-08-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-70.79"
+       },
+       "acceptorTransactionDateTime": "2026-08-01T14:27:47",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KFC",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KFC",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010300",
+       "transactionDate": "2026-08-03",
+       "bookingDate": "2026-08-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-152.93"
+       },
+       "acceptorTransactionDateTime": "2026-08-03T23:28:04",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MACHAKHELA",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MACHAKHELA",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010303",
+       "transactionDate": "2026-08-07",
+       "bookingDate": "2026-08-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-304.19"
+       },
+       "acceptorTransactionDateTime": "2026-08-07T10:18:58",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - NIKORA",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "NIKORA",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010315",
+       "transactionDate": "2026-08-13",
+       "bookingDate": "2026-08-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-79.88"
+       },
+       "acceptorTransactionDateTime": "2026-08-13T08:32:22",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010317",
+       "transactionDate": "2026-08-13",
+       "bookingDate": "2026-08-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-38.57"
+       },
+       "acceptorTransactionDateTime": "2026-08-13T18:56:38",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010322",
+       "transactionDate": "2026-08-17",
+       "bookingDate": "2026-08-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-64.39"
+       },
+       "acceptorTransactionDateTime": "2026-08-17T14:07:11",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010325",
+       "transactionDate": "2026-08-19",
+       "bookingDate": "2026-08-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-506.41"
+       },
+       "acceptorTransactionDateTime": "2026-08-19T13:28:08",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - NIKORA",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "NIKORA",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010328",
+       "transactionDate": "2026-08-20",
+       "bookingDate": "2026-08-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-43.57"
+       },
+       "acceptorTransactionDateTime": "2026-08-20T20:33:32",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010339",
+       "transactionDate": "2026-08-22",
+       "bookingDate": "2026-08-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-159.86"
+       },
+       "acceptorTransactionDateTime": "2026-08-22T13:01:51",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - WOLT",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "WOLT",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010341",
+       "transactionDate": "2026-08-23",
+       "bookingDate": "2026-08-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-71.86"
+       },
+       "acceptorTransactionDateTime": "2026-08-23T13:14:37",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010333",
+       "transactionDate": "2026-08-21",
+       "bookingDate": "2026-08-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-103.30"
+       },
+       "acceptorTransactionDateTime": "2026-08-21T19:58:09",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010353",
+       "transactionDate": "2026-09-04",
+       "bookingDate": "2026-09-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4765.31"
+       },
+       "acceptorTransactionDateTime": "2026-09-04T08:14:35",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - ZOOMMER",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "ZOOMMER",
+       "merchantCategoryCode": "5732"
+      },
+      {
+       "cardTransactionId": "d_00000010354",
+       "transactionDate": "2026-09-04",
+       "bookingDate": "2026-09-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-93.15"
+       },
+       "acceptorTransactionDateTime": "2026-09-04T20:42:59",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010355",
+       "transactionDate": "2026-09-05",
+       "bookingDate": "2026-09-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-259.21"
+       },
+       "acceptorTransactionDateTime": "2026-09-05T11:58:02",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - GLOVO",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GLOVO",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010356",
+       "transactionDate": "2026-09-06",
+       "bookingDate": "2026-09-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-117.17"
+       },
+       "acceptorTransactionDateTime": "2026-09-06T08:38:58",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010357",
+       "transactionDate": "2026-09-09",
+       "bookingDate": "2026-09-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-121.88"
+       },
+       "acceptorTransactionDateTime": "2026-09-09T13:49:14",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010361",
+       "transactionDate": "2026-09-11",
+       "bookingDate": "2026-09-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-450.74"
+       },
+       "acceptorTransactionDateTime": "2026-09-11T13:44:53",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010363",
+       "transactionDate": "2026-09-11",
+       "bookingDate": "2026-09-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-555.57"
+       },
+       "acceptorTransactionDateTime": "2026-09-11T20:39:56",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SHAVI LOMI",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SHAVI LOMI",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010362",
+       "transactionDate": "2026-09-11",
+       "bookingDate": "2026-09-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-310.44"
+       },
+       "acceptorTransactionDateTime": "2026-09-11T17:16:52",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - WOLT",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "WOLT",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010365",
+       "transactionDate": "2026-09-12",
+       "bookingDate": "2026-09-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-157.81"
+       },
+       "acceptorTransactionDateTime": "2026-09-12T23:00:38",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010368",
+       "transactionDate": "2026-09-14",
+       "bookingDate": "2026-09-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-105.56"
+       },
+       "acceptorTransactionDateTime": "2026-09-14T18:03:32",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - WOLT",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "WOLT",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010379",
+       "transactionDate": "2026-09-19",
+       "bookingDate": "2026-09-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-195.14"
+       },
+       "acceptorTransactionDateTime": "2026-09-19T12:01:45",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010384",
+       "transactionDate": "2026-09-20",
+       "bookingDate": "2026-09-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-57.15"
+       },
+       "acceptorTransactionDateTime": "2026-09-20T13:52:25",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010377",
+       "transactionDate": "2026-09-18",
+       "bookingDate": "2026-09-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-262.65"
+       },
+       "acceptorTransactionDateTime": "2026-09-18T17:33:18",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010382",
+       "transactionDate": "2026-09-20",
+       "bookingDate": "2026-09-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-55.62"
+       },
+       "acceptorTransactionDateTime": "2026-09-20T08:33:16",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00000010395",
+       "transactionDate": "2026-09-24",
+       "bookingDate": "2026-09-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-405.94"
+       },
+       "acceptorTransactionDateTime": "2026-09-24T21:29:14",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010400",
+       "transactionDate": "2026-09-28",
+       "bookingDate": "2026-09-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-104.67"
+       },
+       "acceptorTransactionDateTime": "2026-09-28T19:09:41",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010409",
+       "transactionDate": "2026-10-05",
+       "bookingDate": "2026-10-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-371.10"
+       },
+       "acceptorTransactionDateTime": "2026-10-05T18:51:32",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010415",
+       "transactionDate": "2026-10-08",
+       "bookingDate": "2026-10-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-133.60"
+       },
+       "acceptorTransactionDateTime": "2026-10-08T21:43:22",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - GLOVO",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GLOVO",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000010418",
+       "transactionDate": "2026-10-10",
+       "bookingDate": "2026-10-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-152.36"
+       },
+       "acceptorTransactionDateTime": "2026-10-10T13:17:44",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010419",
+       "transactionDate": "2026-10-11",
+       "bookingDate": "2026-10-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-60.22"
+       },
+       "acceptorTransactionDateTime": "2026-10-11T12:49:30",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000010420",
+       "transactionDate": "2026-10-11",
+       "bookingDate": "2026-10-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-386.52"
+       },
+       "acceptorTransactionDateTime": "2026-10-11T17:02:25",
+       "maskedPAN": "517805******2905",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/bf3b7ba2-4a3f-51d5-8aea-882983f87875"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/447ce588-6b55-584a-86c1-47a78a1e0c5f/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "517805******2905",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

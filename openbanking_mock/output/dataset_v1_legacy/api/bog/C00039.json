@@ -1,0 +1,4901 @@
+{
+ "bank": "bog",
+ "customer": "C00039",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "802ac29c-1772-50b0-931b-a37077183687",
+      "iban": "GE38BG1086003348976459",
+      "currency": "GEL",
+      "ownerName": "NUTSA ZARKUA",
+      "name": "NUTSA ZARKUA",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "257.18"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-18T19:34:23"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "257.18"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-18T19:34:23"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/802ac29c-1772-50b0-931b-a37077183687",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "802ac29c-1772-50b0-931b-a37077183687",
+     "iban": "GE38BG1086003348976459",
+     "currency": "GEL",
+     "ownerName": "NUTSA ZARKUA",
+     "name": "NUTSA ZARKUA",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE38BG1086003348976459",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "266.85"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "257.18"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-18T19:34:23"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE38BG1086003348976459",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00000019266",
+       "entryReference": "0000000001",
+       "bookingDate": "2025-10-20",
+       "valueDate": "2025-10-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "2022.42"
+       },
+       "debtorName": "LLC CAUCASUS SERVICES",
+       "debtorAccount": {
+        "iban": "GE98BG1460336192892824"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "ხელფასი ოქტომბერი",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019267",
+       "entryReference": "0000000002",
+       "bookingDate": "2025-10-20",
+       "valueDate": "2025-10-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.98"
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - ოქტომბერი",
+       "additionalInformation": "MAGTICOM MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019265",
+       "entryReference": "0000000003",
+       "bookingDate": "2025-10-21",
+       "valueDate": "2025-10-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.02"
+       },
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "additionalInformation": "MINI MARKET Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019270",
+       "entryReference": "0000000004",
+       "bookingDate": "2025-10-22",
+       "valueDate": "2025-10-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-42.06"
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - ოქტომბერი",
+       "additionalInformation": "TELASI MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019268",
+       "entryReference": "0000000005",
+       "bookingDate": "2025-10-23",
+       "valueDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.65"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019269",
+       "entryReference": "0000000006",
+       "bookingDate": "2025-10-23",
+       "valueDate": "2025-10-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.90"
+       },
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GPC",
+       "additionalInformation": "GPC Tbilisi 533286******6101 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019271",
+       "entryReference": "0000000007",
+       "bookingDate": "2025-10-27",
+       "valueDate": "2025-10-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.55"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019272",
+       "entryReference": "0000000008",
+       "bookingDate": "2025-10-27",
+       "valueDate": "2025-10-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-16.45"
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "additionalInformation": "SPAR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019273",
+       "entryReference": "0000000009",
+       "bookingDate": "2025-10-27",
+       "valueDate": "2025-10-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.82"
+       },
+       "creditorName": "MCDONALDS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MCDONALDS",
+       "additionalInformation": "MCDONALDS Tbilisi 533286******6101 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019274",
+       "entryReference": "0000000010",
+       "bookingDate": "2025-10-27",
+       "valueDate": "2025-10-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.13"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019275",
+       "entryReference": "0000000011",
+       "bookingDate": "2025-10-27",
+       "valueDate": "2025-10-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-15.44"
+       },
+       "creditorName": "PSP",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - PSP",
+       "additionalInformation": "PSP Tbilisi 533286******6101 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019277",
+       "entryReference": "0000000012",
+       "bookingDate": "2025-10-27",
+       "valueDate": "2025-10-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.56"
+       },
+       "creditorName": "SUBWAY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SUBWAY",
+       "additionalInformation": "SUBWAY Tbilisi 533286******6101 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019278",
+       "entryReference": "0000000013",
+       "bookingDate": "2025-10-28",
+       "valueDate": "2025-10-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-40.00"
+       },
+       "creditorName": "OTAR BARATASHVILI",
+       "creditorAccount": {
+        "iban": "GE90TB1463859459243504"
+       },
+       "creditorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019279",
+       "entryReference": "0000000014",
+       "bookingDate": "2025-10-29",
+       "valueDate": "2025-10-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.55"
+       },
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GPC",
+       "additionalInformation": "GPC Tbilisi 533286******6101 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019281",
+       "entryReference": "0000000015",
+       "bookingDate": "2025-10-29",
+       "valueDate": "2025-10-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "90.00"
+       },
+       "debtorName": "TAMAR TAVADZE",
+       "debtorAccount": {
+        "iban": "GE13BG1256687605054641"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019280",
+       "entryReference": "0000000016",
+       "bookingDate": "2025-10-30",
+       "valueDate": "2025-10-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.04"
+       },
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KIOSK",
+       "additionalInformation": "KIOSK Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019282",
+       "entryReference": "0000000017",
+       "bookingDate": "2025-11-03",
+       "valueDate": "2025-11-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-390.00"
+       },
+       "creditorName": "NUGZAR MEGRELISHVILI",
+       "creditorAccount": {
+        "iban": "GE52TB1615073305341772"
+       },
+       "creditorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "ბინის ქირა ნოემბერი",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019283",
+       "entryReference": "0000000018",
+       "bookingDate": "2025-11-04",
+       "valueDate": "2025-11-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-13.30"
+       },
+       "creditorName": "TBILISI TRANSPORT COMPANY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - TBILISI TRANSPORT COMPANY",
+       "additionalInformation": "TBILISI TRANSPORT COMPANY Tbilisi 533286******6101 MCC 4111",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019284",
+       "entryReference": "0000000019",
+       "bookingDate": "2025-11-07",
+       "valueDate": "2025-11-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.26"
+       },
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KIOSK",
+       "additionalInformation": "KIOSK Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019287",
+       "entryReference": "0000000020",
+       "bookingDate": "2025-11-12",
+       "valueDate": "2025-11-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-35.14"
+       },
+       "creditorName": "LIBRE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - LIBRE",
+       "additionalInformation": "LIBRE Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019289",
+       "entryReference": "0000000021",
+       "bookingDate": "2025-11-13",
+       "valueDate": "2025-11-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.76"
+       },
+       "creditorName": "PHARMADEPOT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - PHARMADEPOT",
+       "additionalInformation": "PHARMADEPOT Tbilisi 533286******6101 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019291",
+       "entryReference": "0000000022",
+       "bookingDate": "2025-11-13",
+       "valueDate": "2025-11-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-34.17"
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - ნოემბერი",
+       "additionalInformation": "SILKNET MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019290",
+       "entryReference": "0000000023",
+       "bookingDate": "2025-11-14",
+       "valueDate": "2025-11-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-24.50"
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "additionalInformation": "SPAR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019294",
+       "entryReference": "0000000024",
+       "bookingDate": "2025-11-14",
+       "valueDate": "2025-11-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-60.00"
+       },
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM TBC BANK Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019297",
+       "entryReference": "0000000025",
+       "bookingDate": "2025-11-16",
+       "valueDate": "2025-11-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-60.00"
+       },
+       "creditorName": "ATM BASISBANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM BASISBANK Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019295",
+       "entryReference": "0000000026",
+       "bookingDate": "2025-11-17",
+       "valueDate": "2025-11-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.52"
+       },
+       "creditorName": "KFC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KFC",
+       "additionalInformation": "KFC Tbilisi 533286******6101 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019301",
+       "entryReference": "0000000027",
+       "bookingDate": "2025-11-17",
+       "valueDate": "2025-11-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.67"
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - ნოემბერი",
+       "additionalInformation": "TBILSERVICE GROUP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019292",
+       "entryReference": "0000000028",
+       "bookingDate": "2025-11-18",
+       "valueDate": "2025-11-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-46.19"
+       },
+       "creditorName": "NIKORA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - NIKORA",
+       "additionalInformation": "NIKORA Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019296",
+       "entryReference": "0000000029",
+       "bookingDate": "2025-11-18",
+       "valueDate": "2025-11-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.92"
+       },
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KIOSK",
+       "additionalInformation": "KIOSK Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019299",
+       "entryReference": "0000000030",
+       "bookingDate": "2025-11-18",
+       "valueDate": "2025-11-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-15.79"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019302",
+       "entryReference": "0000000031",
+       "bookingDate": "2025-11-18",
+       "valueDate": "2025-11-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-11.10"
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - ნოემბერი",
+       "additionalInformation": "GWP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019303",
+       "entryReference": "0000000032",
+       "bookingDate": "2025-11-20",
+       "valueDate": "2025-11-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-120.00"
+       },
+       "creditorName": "ATM PASHA BANK GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM PASHA BANK GEORGIA Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019304",
+       "entryReference": "0000000033",
+       "bookingDate": "2025-11-20",
+       "valueDate": "2025-11-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "2020.85"
+       },
+       "debtorName": "LLC CAUCASUS SERVICES",
+       "debtorAccount": {
+        "iban": "GE52HB1321503925477985"
+       },
+       "debtorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "ხელფასი ნოემბერი",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019306",
+       "entryReference": "0000000034",
+       "bookingDate": "2025-11-20",
+       "valueDate": "2025-11-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.53"
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - ნოემბერი",
+       "additionalInformation": "MAGTICOM MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019305",
+       "entryReference": "0000000035",
+       "bookingDate": "2025-11-21",
+       "valueDate": "2025-11-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-21.71"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019307",
+       "entryReference": "0000000036",
+       "bookingDate": "2025-11-21",
+       "valueDate": "2025-11-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-240.00"
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM BANK OF GEORGIA Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019309",
+       "entryReference": "0000000037",
+       "bookingDate": "2025-11-22",
+       "valueDate": "2025-11-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-63.68"
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - ნოემბერი",
+       "additionalInformation": "TELASI MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019308",
+       "entryReference": "0000000038",
+       "bookingDate": "2025-11-24",
+       "valueDate": "2025-11-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-31.77"
+       },
+       "creditorName": "MACHAKHELA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MACHAKHELA",
+       "additionalInformation": "MACHAKHELA Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019310",
+       "entryReference": "0000000039",
+       "bookingDate": "2025-11-27",
+       "valueDate": "2025-11-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.25"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019312",
+       "entryReference": "0000000040",
+       "bookingDate": "2025-12-01",
+       "valueDate": "2025-11-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-11.06"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019313",
+       "entryReference": "0000000041",
+       "bookingDate": "2025-12-01",
+       "valueDate": "2025-11-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.61"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019314",
+       "entryReference": "0000000042",
+       "bookingDate": "2025-12-01",
+       "valueDate": "2025-11-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.71"
+       },
+       "creditorName": "CAVEA CINEMA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CAVEA CINEMA",
+       "additionalInformation": "CAVEA CINEMA 533286******6101 MCC 7832",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019315",
+       "entryReference": "0000000043",
+       "bookingDate": "2025-12-01",
+       "valueDate": "2025-11-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.91"
+       },
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KIOSK",
+       "additionalInformation": "KIOSK Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019316",
+       "entryReference": "0000000044",
+       "bookingDate": "2025-12-02",
+       "valueDate": "2025-12-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-25.32"
+       },
+       "creditorName": "SUBWAY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SUBWAY",
+       "additionalInformation": "SUBWAY Tbilisi 533286******6101 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019317",
+       "entryReference": "0000000045",
+       "bookingDate": "2025-12-04",
+       "valueDate": "2025-12-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-8.43"
+       },
+       "creditorName": "MCDONALDS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MCDONALDS",
+       "additionalInformation": "MCDONALDS Tbilisi 533286******6101 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019318",
+       "entryReference": "0000000046",
+       "bookingDate": "2025-12-04",
+       "valueDate": "2025-12-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-493.58"
+       },
+       "creditorName": "ELIT ELECTRONICS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ELIT ELECTRONICS",
+       "additionalInformation": "ELIT ELECTRONICS Tbilisi 533286******6101 MCC 5732",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019320",
+       "entryReference": "0000000047",
+       "bookingDate": "2025-12-05",
+       "valueDate": "2025-12-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-27.85"
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "additionalInformation": "SPAR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019323",
+       "entryReference": "0000000048",
+       "bookingDate": "2025-12-08",
+       "valueDate": "2025-12-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-16.19"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019325",
+       "entryReference": "0000000049",
+       "bookingDate": "2025-12-08",
+       "valueDate": "2025-12-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-134.69"
+       },
+       "creditorName": "MACHAKHELA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MACHAKHELA",
+       "additionalInformation": "MACHAKHELA Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019326",
+       "entryReference": "0000000050",
+       "bookingDate": "2025-12-08",
+       "valueDate": "2025-12-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-390.00"
+       },
+       "creditorName": "LEVAN KAVTARADZE",
+       "creditorAccount": {
+        "iban": "GE49TB1306258753206388"
+       },
+       "creditorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "ბინის ქირა დეკემბერი",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      },
+      "next": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions?bookingStatus=both&dateFrom=2025-10-19&entryReferenceFrom=0000000050"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19",
+    "entryReferenceFrom": "0000000050"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE38BG1086003348976459",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00000019322",
+       "entryReference": "0000000051",
+       "bookingDate": "2025-12-09",
+       "valueDate": "2025-12-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-134.23"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019329",
+       "entryReference": "0000000052",
+       "bookingDate": "2025-12-13",
+       "valueDate": "2025-12-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-31.79"
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - დეკემბერი",
+       "additionalInformation": "SILKNET MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019328",
+       "entryReference": "0000000053",
+       "bookingDate": "2025-12-15",
+       "valueDate": "2025-12-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-109.10"
+       },
+       "creditorName": "EVEX HOSPITALS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - EVEX HOSPITALS",
+       "additionalInformation": "EVEX HOSPITALS Tbilisi 533286******6101 MCC 8011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019332",
+       "entryReference": "0000000054",
+       "bookingDate": "2025-12-17",
+       "valueDate": "2025-12-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-35.00"
+       },
+       "creditorName": "VAZHA TSINTSADZE",
+       "creditorAccount": {
+        "iban": "GE58BG1668068078532651"
+       },
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019333",
+       "entryReference": "0000000055",
+       "bookingDate": "2025-12-17",
+       "valueDate": "2025-12-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.56"
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - დეკემბერი",
+       "additionalInformation": "TBILSERVICE GROUP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019330",
+       "entryReference": "0000000056",
+       "bookingDate": "2025-12-18",
+       "valueDate": "2025-12-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-16.59"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019331",
+       "entryReference": "0000000057",
+       "bookingDate": "2025-12-18",
+       "valueDate": "2025-12-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.64"
+       },
+       "creditorName": "MCDONALDS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MCDONALDS",
+       "additionalInformation": "MCDONALDS Tbilisi 533286******6101 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019334",
+       "entryReference": "0000000058",
+       "bookingDate": "2025-12-18",
+       "valueDate": "2025-12-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.56"
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - დეკემბერი",
+       "additionalInformation": "GWP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019335",
+       "entryReference": "0000000059",
+       "bookingDate": "2025-12-19",
+       "valueDate": "2025-12-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "2064.42"
+       },
+       "debtorName": "LLC CAUCASUS SERVICES",
+       "debtorAccount": {
+        "iban": "GE63TB1480853698166954"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "ხელფასი დეკემბერი",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019336",
+       "entryReference": "0000000060",
+       "bookingDate": "2025-12-20",
+       "valueDate": "2025-12-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.63"
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - დეკემბერი",
+       "additionalInformation": "MAGTICOM MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019338",
+       "entryReference": "0000000061",
+       "bookingDate": "2025-12-22",
+       "valueDate": "2025-12-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-17.23"
+       },
+       "creditorName": "MCDONALDS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MCDONALDS",
+       "additionalInformation": "MCDONALDS Tbilisi 533286******6101 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019341",
+       "entryReference": "0000000062",
+       "bookingDate": "2025-12-22",
+       "valueDate": "2025-12-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-70.07"
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - დეკემბერი",
+       "additionalInformation": "TELASI MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019337",
+       "entryReference": "0000000063",
+       "bookingDate": "2025-12-23",
+       "valueDate": "2025-12-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-32.64"
+       },
+       "creditorName": "MACHAKHELA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MACHAKHELA",
+       "additionalInformation": "MACHAKHELA Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019340",
+       "entryReference": "0000000064",
+       "bookingDate": "2025-12-24",
+       "valueDate": "2025-12-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-17.26"
+       },
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GPC",
+       "additionalInformation": "GPC Tbilisi 533286******6101 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019342",
+       "entryReference": "0000000065",
+       "bookingDate": "2025-12-24",
+       "valueDate": "2025-12-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-53.69"
+       },
+       "creditorName": "TEMU",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7644",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2025-12-23"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - TEMU",
+       "additionalInformation": "TEMU 533286******6101 MCC 5999",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019343",
+       "entryReference": "0000000066",
+       "bookingDate": "2025-12-26",
+       "valueDate": "2025-12-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-36.23"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019344",
+       "entryReference": "0000000067",
+       "bookingDate": "2025-12-29",
+       "valueDate": "2025-12-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-25.36"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019345",
+       "entryReference": "0000000068",
+       "bookingDate": "2025-12-29",
+       "valueDate": "2025-12-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-13.80"
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "additionalInformation": "SPAR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019346",
+       "entryReference": "0000000069",
+       "bookingDate": "2025-12-29",
+       "valueDate": "2025-12-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.84"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019347",
+       "entryReference": "0000000070",
+       "bookingDate": "2025-12-30",
+       "valueDate": "2025-12-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-195.00"
+       },
+       "creditorName": "DALI GIORGADZE",
+       "creditorAccount": {
+        "iban": "GE44KS1054495261656865"
+       },
+       "creditorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019349",
+       "entryReference": "0000000071",
+       "bookingDate": "2025-12-30",
+       "valueDate": "2025-12-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-240.00"
+       },
+       "creditorName": "MZIA BOLKVADZE",
+       "creditorAccount": {
+        "iban": "GE48BG1849354307100959"
+       },
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019348",
+       "entryReference": "0000000072",
+       "bookingDate": "2025-12-31",
+       "valueDate": "2025-12-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-74.46"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019350",
+       "entryReference": "0000000073",
+       "bookingDate": "2026-01-02",
+       "valueDate": "2025-12-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.42"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019355",
+       "entryReference": "0000000074",
+       "bookingDate": "2026-01-03",
+       "valueDate": "2026-01-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-390.00"
+       },
+       "creditorName": "SANDRO TSINTSADZE",
+       "creditorAccount": {
+        "iban": "GE14TB1570955861839608"
+       },
+       "creditorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "ბინის ქირა იანვარი",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019351",
+       "entryReference": "0000000075",
+       "bookingDate": "2026-01-05",
+       "valueDate": "2026-01-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-96.18"
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "additionalInformation": "SPAR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019354",
+       "entryReference": "0000000076",
+       "bookingDate": "2026-01-05",
+       "valueDate": "2026-01-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-33.90"
+       },
+       "creditorName": "KFC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KFC",
+       "additionalInformation": "KFC Tbilisi 533286******6101 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019352",
+       "entryReference": "0000000077",
+       "bookingDate": "2026-01-06",
+       "valueDate": "2026-01-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-24.73"
+       },
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "additionalInformation": "MINI MARKET Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019353",
+       "entryReference": "0000000078",
+       "bookingDate": "2026-01-06",
+       "valueDate": "2026-01-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-123.34"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019356",
+       "entryReference": "0000000079",
+       "bookingDate": "2026-01-07",
+       "valueDate": "2026-01-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-520.01"
+       },
+       "creditorName": "ALIEXPRESS",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7719",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-01-06"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ALIEXPRESS",
+       "additionalInformation": "ALIEXPRESS 533286******6101 MCC 5999",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019358",
+       "entryReference": "0000000080",
+       "bookingDate": "2026-01-09",
+       "valueDate": "2026-01-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-65.25"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019357",
+       "entryReference": "0000000081",
+       "bookingDate": "2026-01-12",
+       "valueDate": "2026-01-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.22"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019360",
+       "entryReference": "0000000082",
+       "bookingDate": "2026-01-12",
+       "valueDate": "2026-01-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-240.00"
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM BANK OF GEORGIA Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019359",
+       "entryReference": "0000000083",
+       "bookingDate": "2026-01-13",
+       "valueDate": "2026-01-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-42.77"
+       },
+       "creditorName": "NIKORA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - NIKORA",
+       "additionalInformation": "NIKORA Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019361",
+       "entryReference": "0000000084",
+       "bookingDate": "2026-01-13",
+       "valueDate": "2026-01-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-29.92"
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - იანვარი",
+       "additionalInformation": "SILKNET MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019362",
+       "entryReference": "0000000085",
+       "bookingDate": "2026-01-14",
+       "valueDate": "2026-01-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-82.29"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019363",
+       "entryReference": "0000000086",
+       "bookingDate": "2026-01-14",
+       "valueDate": "2026-01-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-40.00"
+       },
+       "creditorName": "BADRI MEGRELISHVILI",
+       "creditorAccount": {
+        "iban": "GE61BG1488948052520430"
+       },
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019365",
+       "entryReference": "0000000087",
+       "bookingDate": "2026-01-17",
+       "valueDate": "2026-01-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.59"
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - იანვარი",
+       "additionalInformation": "TBILSERVICE GROUP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019366",
+       "entryReference": "0000000088",
+       "bookingDate": "2026-01-18",
+       "valueDate": "2026-01-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-195.00"
+       },
+       "creditorName": "BEKA BERIDZE",
+       "creditorAccount": {
+        "iban": "GE24TB1443623933473524"
+       },
+       "creditorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019367",
+       "entryReference": "0000000089",
+       "bookingDate": "2026-01-18",
+       "valueDate": "2026-01-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.04"
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - იანვარი",
+       "additionalInformation": "GWP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019368",
+       "entryReference": "0000000090",
+       "bookingDate": "2026-01-18",
+       "valueDate": "2026-01-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-300.00"
+       },
+       "creditorName": "ATM PAYSERA BANK GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM PAYSERA BANK GEORGIA Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019364",
+       "entryReference": "0000000091",
+       "bookingDate": "2026-01-19",
+       "valueDate": "2026-01-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-39.99"
+       },
+       "creditorName": "LIBRE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - LIBRE",
+       "additionalInformation": "LIBRE Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019369",
+       "entryReference": "0000000092",
+       "bookingDate": "2026-01-19",
+       "valueDate": "2026-01-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "11772.47"
+       },
+       "debtorName": "Bank of Georgia",
+       "remittanceInformationUnstructured": "სესხის გაცემა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "c_00000019370",
+       "entryReference": "0000000093",
+       "bookingDate": "2026-01-20",
+       "valueDate": "2026-01-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "2032.09"
+       },
+       "debtorName": "LLC CAUCASUS SERVICES",
+       "debtorAccount": {
+        "iban": "GE09CR1660631606247952"
+       },
+       "debtorAgent": "CRTUGE22",
+       "remittanceInformationUnstructured": "ხელფასი იანვარი",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019371",
+       "entryReference": "0000000094",
+       "bookingDate": "2026-01-20",
+       "valueDate": "2026-01-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.20"
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - იანვარი",
+       "additionalInformation": "MAGTICOM MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019372",
+       "entryReference": "0000000095",
+       "bookingDate": "2026-01-20",
+       "valueDate": "2026-01-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10830.67"
+       },
+       "creditorName": "TORNIKE BOLKVADZE",
+       "creditorAccount": {
+        "iban": "GE54CR1723874416558050"
+       },
+       "creditorAgent": "CRTUGE22",
+       "remittanceInformationUnstructured": "გადახდა ხელშეკრულებით",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019374",
+       "entryReference": "0000000096",
+       "bookingDate": "2026-01-22",
+       "valueDate": "2026-01-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-50.81"
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - იანვარი",
+       "additionalInformation": "TELASI MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019373",
+       "entryReference": "0000000097",
+       "bookingDate": "2026-01-23",
+       "valueDate": "2026-01-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-22.29"
+       },
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY",
+       "additionalInformation": "METROMONEY Tbilisi 533286******6101 MCC 4111",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019376",
+       "entryReference": "0000000098",
+       "bookingDate": "2026-01-26",
+       "valueDate": "2026-01-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-402.58"
+       },
+       "creditorName": "ELIT ELECTRONICS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ELIT ELECTRONICS",
+       "additionalInformation": "ELIT ELECTRONICS Tbilisi 533286******6101 MCC 5732",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019379",
+       "entryReference": "0000000099",
+       "bookingDate": "2026-01-26",
+       "valueDate": "2026-01-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "90.00"
+       },
+       "debtorName": "IRAKLI KAPANADZE",
+       "debtorAccount": {
+        "iban": "GE50TB1829487066392549"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019380",
+       "entryReference": "0000000100",
+       "bookingDate": "2026-01-26",
+       "valueDate": "2026-01-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-360.00"
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM BANK OF GEORGIA Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      },
+      "next": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions?bookingStatus=both&dateFrom=2025-10-19&entryReferenceFrom=0000000100"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19",
+    "entryReferenceFrom": "0000000100"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE38BG1086003348976459",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00000019375",
+       "entryReference": "0000000101",
+       "bookingDate": "2026-01-27",
+       "valueDate": "2026-01-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-30.71"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019377",
+       "entryReference": "0000000102",
+       "bookingDate": "2026-01-27",
+       "valueDate": "2026-01-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-8.98"
+       },
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "additionalInformation": "MINI MARKET Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019378",
+       "entryReference": "0000000103",
+       "bookingDate": "2026-01-27",
+       "valueDate": "2026-01-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-74.85"
+       },
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GPC",
+       "additionalInformation": "GPC Tbilisi 533286******6101 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019381",
+       "entryReference": "0000000104",
+       "bookingDate": "2026-01-29",
+       "valueDate": "2026-01-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-40.00"
+       },
+       "creditorName": "NATIA MEGRELISHVILI",
+       "creditorAccount": {
+        "iban": "GE46LB1688087245033081"
+       },
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019383",
+       "entryReference": "0000000105",
+       "bookingDate": "2026-01-30",
+       "valueDate": "2026-01-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-215.00"
+       },
+       "creditorName": "ZAZA KHVEDELIDZE",
+       "creditorAccount": {
+        "iban": "GE77BG1551376083383022"
+       },
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019385",
+       "entryReference": "0000000106",
+       "bookingDate": "2026-02-02",
+       "valueDate": "2026-01-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-134.51"
+       },
+       "creditorName": "MEDICLUB GEORGIA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MEDICLUB GEORGIA",
+       "additionalInformation": "MEDICLUB GEORGIA Tbilisi 533286******6101 MCC 8011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019386",
+       "entryReference": "0000000107",
+       "bookingDate": "2026-02-02",
+       "valueDate": "2026-01-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-53.88"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019382",
+       "entryReference": "0000000108",
+       "bookingDate": "2026-02-03",
+       "valueDate": "2026-01-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-359.77"
+       },
+       "creditorName": "ALIEXPRESS",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7866",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-01-30"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ALIEXPRESS",
+       "additionalInformation": "ALIEXPRESS 533286******6101 MCC 5999",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019384",
+       "entryReference": "0000000109",
+       "bookingDate": "2026-02-03",
+       "valueDate": "2026-01-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-31.61"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019387",
+       "entryReference": "0000000110",
+       "bookingDate": "2026-02-03",
+       "valueDate": "2026-02-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.48"
+       },
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "additionalInformation": "MINI MARKET Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019388",
+       "entryReference": "0000000111",
+       "bookingDate": "2026-02-03",
+       "valueDate": "2026-02-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.73"
+       },
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "additionalInformation": "MINI MARKET Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019389",
+       "entryReference": "0000000112",
+       "bookingDate": "2026-02-03",
+       "valueDate": "2026-02-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-366.27"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8BE630E6",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019391",
+       "entryReference": "0000000113",
+       "bookingDate": "2026-02-05",
+       "valueDate": "2026-02-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-18.52"
+       },
+       "creditorName": "BARBARESTAN",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BARBARESTAN",
+       "additionalInformation": "BARBARESTAN Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019390",
+       "entryReference": "0000000114",
+       "bookingDate": "2026-02-06",
+       "valueDate": "2026-02-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-135.95"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019392",
+       "entryReference": "0000000115",
+       "bookingDate": "2026-02-08",
+       "valueDate": "2026-02-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-390.00"
+       },
+       "creditorName": "TAMAZ SULABERIDZE",
+       "creditorAccount": {
+        "iban": "GE07BG1675989117518700"
+       },
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "ბინის ქირა თებერვალი",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019393",
+       "entryReference": "0000000116",
+       "bookingDate": "2026-02-08",
+       "valueDate": "2026-02-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "40.00"
+       },
+       "debtorName": "KAKHA KAPANADZE",
+       "debtorAccount": {
+        "iban": "GE54BG1666537286228603"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019394",
+       "entryReference": "0000000117",
+       "bookingDate": "2026-02-10",
+       "valueDate": "2026-02-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-72.10"
+       },
+       "creditorName": "MACHAKHELA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MACHAKHELA",
+       "additionalInformation": "MACHAKHELA Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019395",
+       "entryReference": "0000000118",
+       "bookingDate": "2026-02-10",
+       "valueDate": "2026-02-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-76.25"
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "additionalInformation": "SPAR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019396",
+       "entryReference": "0000000119",
+       "bookingDate": "2026-02-10",
+       "valueDate": "2026-02-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-200.00"
+       },
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM TBC BANK Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019397",
+       "entryReference": "0000000120",
+       "bookingDate": "2026-02-11",
+       "valueDate": "2026-02-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-439.45"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019398",
+       "entryReference": "0000000121",
+       "bookingDate": "2026-02-13",
+       "valueDate": "2026-02-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-494.11"
+       },
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GPC",
+       "additionalInformation": "GPC Tbilisi 533286******6101 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019399",
+       "entryReference": "0000000122",
+       "bookingDate": "2026-02-13",
+       "valueDate": "2026-02-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-83.56"
+       },
+       "creditorName": "PSP",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - PSP",
+       "additionalInformation": "PSP Tbilisi 533286******6101 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019400",
+       "entryReference": "0000000123",
+       "bookingDate": "2026-02-13",
+       "valueDate": "2026-02-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-28.85"
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - თებერვალი",
+       "additionalInformation": "SILKNET MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019401",
+       "entryReference": "0000000124",
+       "bookingDate": "2026-02-16",
+       "valueDate": "2026-02-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-22.70"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019403",
+       "entryReference": "0000000125",
+       "bookingDate": "2026-02-17",
+       "valueDate": "2026-02-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.00"
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - თებერვალი",
+       "additionalInformation": "TBILSERVICE GROUP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019402",
+       "entryReference": "0000000126",
+       "bookingDate": "2026-02-18",
+       "valueDate": "2026-02-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-38.40"
+       },
+       "creditorName": "LIBRE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - LIBRE",
+       "additionalInformation": "LIBRE Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019404",
+       "entryReference": "0000000127",
+       "bookingDate": "2026-02-18",
+       "valueDate": "2026-02-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-196.34"
+       },
+       "creditorName": "CAFE LEILA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CAFE LEILA",
+       "additionalInformation": "CAFE LEILA Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019405",
+       "entryReference": "0000000128",
+       "bookingDate": "2026-02-18",
+       "valueDate": "2026-02-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-13.48"
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - თებერვალი",
+       "additionalInformation": "GWP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019406",
+       "entryReference": "0000000129",
+       "bookingDate": "2026-02-20",
+       "valueDate": "2026-02-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "2022.35"
+       },
+       "debtorName": "LLC CAUCASUS SERVICES",
+       "debtorAccount": {
+        "iban": "GE37BG1102637085710186"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "ხელფასი თებერვალი",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019407",
+       "entryReference": "0000000130",
+       "bookingDate": "2026-02-20",
+       "valueDate": "2026-02-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-29.90"
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - თებერვალი",
+       "additionalInformation": "MAGTICOM MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019411",
+       "entryReference": "0000000131",
+       "bookingDate": "2026-02-22",
+       "valueDate": "2026-02-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-56.81"
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - თებერვალი",
+       "additionalInformation": "TELASI MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019408",
+       "entryReference": "0000000132",
+       "bookingDate": "2026-02-23",
+       "valueDate": "2026-02-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-317.09"
+       },
+       "creditorName": "MEDICLUB GEORGIA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MEDICLUB GEORGIA",
+       "additionalInformation": "MEDICLUB GEORGIA Tbilisi 533286******6101 MCC 8011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019409",
+       "entryReference": "0000000133",
+       "bookingDate": "2026-02-23",
+       "valueDate": "2026-02-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-60.03"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019410",
+       "entryReference": "0000000134",
+       "bookingDate": "2026-02-23",
+       "valueDate": "2026-02-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-134.94"
+       },
+       "creditorName": "LIBRE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - LIBRE",
+       "additionalInformation": "LIBRE Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019412",
+       "entryReference": "0000000135",
+       "bookingDate": "2026-02-23",
+       "valueDate": "2026-02-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-230.00"
+       },
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM TBC BANK Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019413",
+       "entryReference": "0000000136",
+       "bookingDate": "2026-02-26",
+       "valueDate": "2026-02-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-400.00"
+       },
+       "creditorName": "ATM HALYK BANK GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM HALYK BANK GEORGIA Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019414",
+       "entryReference": "0000000137",
+       "bookingDate": "2026-02-27",
+       "valueDate": "2026-02-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-43.41"
+       },
+       "creditorName": "CAVEA CINEMA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CAVEA CINEMA",
+       "additionalInformation": "CAVEA CINEMA 533286******6101 MCC 7832",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019415",
+       "entryReference": "0000000138",
+       "bookingDate": "2026-02-27",
+       "valueDate": "2026-02-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-282.19"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019416",
+       "entryReference": "0000000139",
+       "bookingDate": "2026-02-27",
+       "valueDate": "2026-02-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-540.00"
+       },
+       "creditorName": "ATM PROCREDIT BANK GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM PROCREDIT BANK GEORGIA Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019417",
+       "entryReference": "0000000140",
+       "bookingDate": "2026-02-28",
+       "valueDate": "2026-02-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-590.00"
+       },
+       "creditorName": "ATM PASHA BANK GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM PASHA BANK GEORGIA Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019418",
+       "entryReference": "0000000141",
+       "bookingDate": "2026-03-02",
+       "valueDate": "2026-02-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-60.82"
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "additionalInformation": "SPAR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019420",
+       "entryReference": "0000000142",
+       "bookingDate": "2026-03-02",
+       "valueDate": "2026-03-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-390.00"
+       },
+       "creditorName": "REVAZ LOMIDZE",
+       "creditorAccount": {
+        "iban": "GE91TB1193591613550515"
+       },
+       "creditorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "ბინის ქირა მარტი",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019419",
+       "entryReference": "0000000143",
+       "bookingDate": "2026-03-03",
+       "valueDate": "2026-03-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-42.23"
+       },
+       "creditorName": "MCDONALDS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MCDONALDS",
+       "additionalInformation": "MCDONALDS Tbilisi 533286******6101 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019421",
+       "entryReference": "0000000144",
+       "bookingDate": "2026-03-03",
+       "valueDate": "2026-03-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-366.27"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8BE630E6",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019423",
+       "entryReference": "0000000145",
+       "bookingDate": "2026-03-03",
+       "valueDate": "2026-03-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "20.00"
+       },
+       "debtorName": "KAKHA MACHAVARIANI",
+       "debtorAccount": {
+        "iban": "GE14TB1111679574982317"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019422",
+       "entryReference": "0000000146",
+       "bookingDate": "2026-03-04",
+       "valueDate": "2026-03-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-28.70"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019425",
+       "entryReference": "0000000147",
+       "bookingDate": "2026-03-06",
+       "valueDate": "2026-03-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-51.03"
+       },
+       "creditorName": "NIKORA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - NIKORA",
+       "additionalInformation": "NIKORA Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019428",
+       "entryReference": "0000000148",
+       "bookingDate": "2026-03-06",
+       "valueDate": "2026-03-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-500.00"
+       },
+       "creditorName": "KRISTINE ABASHIDZE",
+       "creditorAccount": {
+        "iban": "GE28TB1464861472334846"
+       },
+       "creditorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019424",
+       "entryReference": "0000000149",
+       "bookingDate": "2026-03-09",
+       "valueDate": "2026-03-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.88"
+       },
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "additionalInformation": "MINI MARKET Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019429",
+       "entryReference": "0000000150",
+       "bookingDate": "2026-03-09",
+       "valueDate": "2026-03-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-131.54"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      },
+      "next": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions?bookingStatus=both&dateFrom=2025-10-19&entryReferenceFrom=0000000150"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19",
+    "entryReferenceFrom": "0000000150"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE38BG1086003348976459",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00000019426",
+       "entryReference": "0000000151",
+       "bookingDate": "2026-03-10",
+       "valueDate": "2026-03-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-47.89"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019427",
+       "entryReference": "0000000152",
+       "bookingDate": "2026-03-10",
+       "valueDate": "2026-03-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-267.62"
+       },
+       "creditorName": "AVERSI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AVERSI",
+       "additionalInformation": "AVERSI Tbilisi 533286******6101 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019430",
+       "entryReference": "0000000153",
+       "bookingDate": "2026-03-11",
+       "valueDate": "2026-03-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-397.32"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019431",
+       "entryReference": "0000000154",
+       "bookingDate": "2026-03-13",
+       "valueDate": "2026-03-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-27.45"
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - მარტი",
+       "additionalInformation": "SILKNET MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019432",
+       "entryReference": "0000000155",
+       "bookingDate": "2026-03-16",
+       "valueDate": "2026-03-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-34.92"
+       },
+       "creditorName": "KFC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KFC",
+       "additionalInformation": "KFC Tbilisi 533286******6101 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019433",
+       "entryReference": "0000000156",
+       "bookingDate": "2026-03-17",
+       "valueDate": "2026-03-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-461.39"
+       },
+       "creditorName": "TEMU",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.8274",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-03-15"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - TEMU",
+       "additionalInformation": "TEMU 533286******6101 MCC 5999",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019434",
+       "entryReference": "0000000157",
+       "bookingDate": "2026-03-17",
+       "valueDate": "2026-03-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.31"
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - მარტი",
+       "additionalInformation": "TBILSERVICE GROUP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019435",
+       "entryReference": "0000000158",
+       "bookingDate": "2026-03-18",
+       "valueDate": "2026-03-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.98"
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - მარტი",
+       "additionalInformation": "GWP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019436",
+       "entryReference": "0000000159",
+       "bookingDate": "2026-03-19",
+       "valueDate": "2026-03-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-31.44"
+       },
+       "creditorName": "CAVEA CINEMA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CAVEA CINEMA",
+       "additionalInformation": "CAVEA CINEMA 533286******6101 MCC 7832",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019437",
+       "entryReference": "0000000160",
+       "bookingDate": "2026-03-20",
+       "valueDate": "2026-03-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-46.51"
+       },
+       "creditorName": "SUBWAY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SUBWAY",
+       "additionalInformation": "SUBWAY Tbilisi 533286******6101 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019438",
+       "entryReference": "0000000161",
+       "bookingDate": "2026-03-20",
+       "valueDate": "2026-03-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "2024.19"
+       },
+       "debtorName": "LLC CAUCASUS SERVICES",
+       "debtorAccount": {
+        "iban": "GE63BG1577723274197209"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "ხელფასი მარტი",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019439",
+       "entryReference": "0000000162",
+       "bookingDate": "2026-03-20",
+       "valueDate": "2026-03-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-22.28"
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - მარტი",
+       "additionalInformation": "MAGTICOM MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019443",
+       "entryReference": "0000000163",
+       "bookingDate": "2026-03-21",
+       "valueDate": "2026-03-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-370.00"
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM BANK OF GEORGIA Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019444",
+       "entryReference": "0000000164",
+       "bookingDate": "2026-03-22",
+       "valueDate": "2026-03-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-69.71"
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - მარტი",
+       "additionalInformation": "TELASI MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019440",
+       "entryReference": "0000000165",
+       "bookingDate": "2026-03-23",
+       "valueDate": "2026-03-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-108.65"
+       },
+       "creditorName": "PSP",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - PSP",
+       "additionalInformation": "PSP Tbilisi 533286******6101 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019441",
+       "entryReference": "0000000166",
+       "bookingDate": "2026-03-23",
+       "valueDate": "2026-03-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-65.11"
+       },
+       "creditorName": "SPOTIFY",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "EUR",
+         "exchangeRate": "3.1597",
+         "unitCurrency": "EUR",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-03-21"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPOTIFY",
+       "additionalInformation": "SPOTIFY 533286******6101 MCC 7832",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019442",
+       "entryReference": "0000000167",
+       "bookingDate": "2026-03-23",
+       "valueDate": "2026-03-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-59.01"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019445",
+       "entryReference": "0000000168",
+       "bookingDate": "2026-03-23",
+       "valueDate": "2026-03-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-93.05"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019446",
+       "entryReference": "0000000169",
+       "bookingDate": "2026-03-23",
+       "valueDate": "2026-03-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-370.00"
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM BANK OF GEORGIA Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019447",
+       "entryReference": "0000000170",
+       "bookingDate": "2026-03-25",
+       "valueDate": "2026-03-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-260.10"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019448",
+       "entryReference": "0000000171",
+       "bookingDate": "2026-03-30",
+       "valueDate": "2026-03-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-39.86"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019449",
+       "entryReference": "0000000172",
+       "bookingDate": "2026-03-30",
+       "valueDate": "2026-03-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-41.76"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019450",
+       "entryReference": "0000000173",
+       "bookingDate": "2026-03-30",
+       "valueDate": "2026-03-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-285.00"
+       },
+       "creditorName": "LELA ABASHIDZE",
+       "creditorAccount": {
+        "iban": "GE18LB1011416593259768"
+       },
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019451",
+       "entryReference": "0000000174",
+       "bookingDate": "2026-04-02",
+       "valueDate": "2026-04-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-26.69"
+       },
+       "creditorName": "MCDONALDS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MCDONALDS",
+       "additionalInformation": "MCDONALDS Tbilisi 533286******6101 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019452",
+       "entryReference": "0000000175",
+       "bookingDate": "2026-04-03",
+       "valueDate": "2026-04-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-366.27"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8BE630E6",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019453",
+       "entryReference": "0000000176",
+       "bookingDate": "2026-04-10",
+       "valueDate": "2026-04-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-390.00"
+       },
+       "creditorName": "MARIKA LOMIDZE",
+       "creditorAccount": {
+        "iban": "GE24TB1403481575315030"
+       },
+       "creditorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "ბინის ქირა აპრილი",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019454",
+       "entryReference": "0000000177",
+       "bookingDate": "2026-04-13",
+       "valueDate": "2026-04-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-26.94"
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - აპრილი",
+       "additionalInformation": "SILKNET MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019455",
+       "entryReference": "0000000178",
+       "bookingDate": "2026-04-17",
+       "valueDate": "2026-04-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.87"
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - აპრილი",
+       "additionalInformation": "TBILSERVICE GROUP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019456",
+       "entryReference": "0000000179",
+       "bookingDate": "2026-04-18",
+       "valueDate": "2026-04-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.76"
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - აპრილი",
+       "additionalInformation": "GWP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019457",
+       "entryReference": "0000000180",
+       "bookingDate": "2026-04-20",
+       "valueDate": "2026-04-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "2054.93"
+       },
+       "debtorName": "LLC CAUCASUS SERVICES",
+       "debtorAccount": {
+        "iban": "GE13PC1919677597808786"
+       },
+       "debtorAgent": "MIBGGE22",
+       "remittanceInformationUnstructured": "ხელფასი აპრილი",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019458",
+       "entryReference": "0000000181",
+       "bookingDate": "2026-04-20",
+       "valueDate": "2026-04-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-26.20"
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - აპრილი",
+       "additionalInformation": "MAGTICOM MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019459",
+       "entryReference": "0000000182",
+       "bookingDate": "2026-04-21",
+       "valueDate": "2026-04-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-25.28"
+       },
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY",
+       "additionalInformation": "METROMONEY Tbilisi 533286******6101 MCC 4111",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019460",
+       "entryReference": "0000000183",
+       "bookingDate": "2026-04-22",
+       "valueDate": "2026-04-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-54.56"
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - აპრილი",
+       "additionalInformation": "TELASI MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019461",
+       "entryReference": "0000000184",
+       "bookingDate": "2026-04-24",
+       "valueDate": "2026-04-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-720.00"
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM BANK OF GEORGIA Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019462",
+       "entryReference": "0000000185",
+       "bookingDate": "2026-04-27",
+       "valueDate": "2026-04-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-24.77"
+       },
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KIOSK",
+       "additionalInformation": "KIOSK Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019463",
+       "entryReference": "0000000186",
+       "bookingDate": "2026-04-27",
+       "valueDate": "2026-04-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-61.06"
+       },
+       "creditorName": "MCDONALDS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MCDONALDS",
+       "additionalInformation": "MCDONALDS Tbilisi 533286******6101 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019464",
+       "entryReference": "0000000187",
+       "bookingDate": "2026-04-27",
+       "valueDate": "2026-04-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.69"
+       },
+       "creditorName": "PSP",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - PSP",
+       "additionalInformation": "PSP Tbilisi 533286******6101 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019465",
+       "entryReference": "0000000188",
+       "bookingDate": "2026-04-27",
+       "valueDate": "2026-04-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-33.55"
+       },
+       "creditorName": "CAFE LEILA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CAFE LEILA",
+       "additionalInformation": "CAFE LEILA Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019466",
+       "entryReference": "0000000189",
+       "bookingDate": "2026-04-29",
+       "valueDate": "2026-04-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-44.04"
+       },
+       "creditorName": "ZARA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ZARA",
+       "additionalInformation": "ZARA Tbilisi 533286******6101 MCC 5651",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019467",
+       "entryReference": "0000000190",
+       "bookingDate": "2026-04-30",
+       "valueDate": "2026-04-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "25.00"
+       },
+       "debtorName": "DALI GIORGADZE",
+       "debtorAccount": {
+        "iban": "GE80BG1539414506177437"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019469",
+       "entryReference": "0000000191",
+       "bookingDate": "2026-05-03",
+       "valueDate": "2026-05-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-366.27"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8BE630E6",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019468",
+       "entryReference": "0000000192",
+       "bookingDate": "2026-05-04",
+       "valueDate": "2026-05-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-364.01"
+       },
+       "creditorName": "ZARA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ZARA",
+       "additionalInformation": "ZARA Tbilisi 533286******6101 MCC 5651",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019470",
+       "entryReference": "0000000193",
+       "bookingDate": "2026-05-07",
+       "valueDate": "2026-05-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-390.00"
+       },
+       "creditorName": "KAKHA ABASHIDZE",
+       "creditorAccount": {
+        "iban": "GE78LB1944693386856751"
+       },
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "ბინის ქირა მაისი",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019471",
+       "entryReference": "0000000194",
+       "bookingDate": "2026-05-13",
+       "valueDate": "2026-05-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-26.98"
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - მაისი",
+       "additionalInformation": "SILKNET MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019472",
+       "entryReference": "0000000195",
+       "bookingDate": "2026-05-17",
+       "valueDate": "2026-05-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.21"
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - მაისი",
+       "additionalInformation": "TBILSERVICE GROUP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019473",
+       "entryReference": "0000000196",
+       "bookingDate": "2026-05-18",
+       "valueDate": "2026-05-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.74"
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - მაისი",
+       "additionalInformation": "GWP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019474",
+       "entryReference": "0000000197",
+       "bookingDate": "2026-05-20",
+       "valueDate": "2026-05-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "2002.72"
+       },
+       "debtorName": "LLC CAUCASUS SERVICES",
+       "debtorAccount": {
+        "iban": "GE53TB1223688076559833"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "ხელფასი მაისი",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019475",
+       "entryReference": "0000000198",
+       "bookingDate": "2026-05-20",
+       "valueDate": "2026-05-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-18.77"
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - მაისი",
+       "additionalInformation": "MAGTICOM MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019476",
+       "entryReference": "0000000199",
+       "bookingDate": "2026-05-21",
+       "valueDate": "2026-05-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.74"
+       },
+       "creditorName": "TBILISI TRANSPORT COMPANY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - TBILISI TRANSPORT COMPANY",
+       "additionalInformation": "TBILISI TRANSPORT COMPANY Tbilisi 533286******6101 MCC 4111",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019477",
+       "entryReference": "0000000200",
+       "bookingDate": "2026-05-22",
+       "valueDate": "2026-05-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-39.63"
+       },
+       "creditorName": "MCDONALDS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MCDONALDS",
+       "additionalInformation": "MCDONALDS Tbilisi 533286******6101 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      },
+      "next": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions?bookingStatus=both&dateFrom=2025-10-19&entryReferenceFrom=0000000200"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19",
+    "entryReferenceFrom": "0000000200"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE38BG1086003348976459",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00000019478",
+       "entryReference": "0000000201",
+       "bookingDate": "2026-05-22",
+       "valueDate": "2026-05-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-41.73"
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - მაისი",
+       "additionalInformation": "TELASI MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019479",
+       "entryReference": "0000000202",
+       "bookingDate": "2026-05-26",
+       "valueDate": "2026-05-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-27.28"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019480",
+       "entryReference": "0000000203",
+       "bookingDate": "2026-05-28",
+       "valueDate": "2026-05-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-39.28"
+       },
+       "creditorName": "MCDONALDS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MCDONALDS",
+       "additionalInformation": "MCDONALDS Tbilisi 533286******6101 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019482",
+       "entryReference": "0000000204",
+       "bookingDate": "2026-06-03",
+       "valueDate": "2026-06-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-366.27"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8BE630E6",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019483",
+       "entryReference": "0000000205",
+       "bookingDate": "2026-06-04",
+       "valueDate": "2026-06-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-69.19"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019484",
+       "entryReference": "0000000206",
+       "bookingDate": "2026-06-04",
+       "valueDate": "2026-06-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-450.00"
+       },
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM TBC BANK Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019481",
+       "entryReference": "0000000207",
+       "bookingDate": "2026-06-05",
+       "valueDate": "2026-06-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-93.15"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019486",
+       "entryReference": "0000000208",
+       "bookingDate": "2026-06-07",
+       "valueDate": "2026-06-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-390.00"
+       },
+       "creditorName": "MARIAM SAMKHARADZE",
+       "creditorAccount": {
+        "iban": "GE40LB1938421898715031"
+       },
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "ბინის ქირა ივნისი",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019485",
+       "entryReference": "0000000209",
+       "bookingDate": "2026-06-08",
+       "valueDate": "2026-06-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-17.99"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019487",
+       "entryReference": "0000000210",
+       "bookingDate": "2026-06-10",
+       "valueDate": "2026-06-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-27.85"
+       },
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY",
+       "additionalInformation": "METROMONEY Tbilisi 533286******6101 MCC 4111",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019489",
+       "entryReference": "0000000211",
+       "bookingDate": "2026-06-13",
+       "valueDate": "2026-06-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-27.68"
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - ივნისი",
+       "additionalInformation": "SILKNET MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019488",
+       "entryReference": "0000000212",
+       "bookingDate": "2026-06-15",
+       "valueDate": "2026-06-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-38.54"
+       },
+       "creditorName": "SPOTIFY",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "EUR",
+         "exchangeRate": "3.1155",
+         "unitCurrency": "EUR",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-06-12"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPOTIFY",
+       "additionalInformation": "SPOTIFY 533286******6101 MCC 7832",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019490",
+       "entryReference": "0000000213",
+       "bookingDate": "2026-06-17",
+       "valueDate": "2026-06-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.47"
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - ივნისი",
+       "additionalInformation": "TBILSERVICE GROUP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019491",
+       "entryReference": "0000000214",
+       "bookingDate": "2026-06-18",
+       "valueDate": "2026-06-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-11.26"
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - ივნისი",
+       "additionalInformation": "GWP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019492",
+       "entryReference": "0000000215",
+       "bookingDate": "2026-06-19",
+       "valueDate": "2026-06-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "2060.85"
+       },
+       "debtorName": "LLC CAUCASUS SERVICES",
+       "debtorAccount": {
+        "iban": "GE52TB1689893656550878"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "ხელფასი ივნისი",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019494",
+       "entryReference": "0000000216",
+       "bookingDate": "2026-06-20",
+       "valueDate": "2026-06-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-300.00"
+       },
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM TBC BANK Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019495",
+       "entryReference": "0000000217",
+       "bookingDate": "2026-06-20",
+       "valueDate": "2026-06-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-18.82"
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - ივნისი",
+       "additionalInformation": "MAGTICOM MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019496",
+       "entryReference": "0000000218",
+       "bookingDate": "2026-06-21",
+       "valueDate": "2026-06-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-45.00"
+       },
+       "creditorName": "MAIA CHKHEIDZE",
+       "creditorAccount": {
+        "iban": "GE78LB1205310037501762"
+       },
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019493",
+       "entryReference": "0000000219",
+       "bookingDate": "2026-06-22",
+       "valueDate": "2026-06-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1532.99"
+       },
+       "creditorName": "ELIT ELECTRONICS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ELIT ELECTRONICS",
+       "additionalInformation": "ELIT ELECTRONICS Tbilisi 533286******6101 MCC 5732",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019498",
+       "entryReference": "0000000220",
+       "bookingDate": "2026-06-22",
+       "valueDate": "2026-06-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-53.82"
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - ივნისი",
+       "additionalInformation": "TELASI MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019497",
+       "entryReference": "0000000221",
+       "bookingDate": "2026-06-23",
+       "valueDate": "2026-06-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-17.37"
+       },
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KIOSK",
+       "additionalInformation": "KIOSK Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019499",
+       "entryReference": "0000000222",
+       "bookingDate": "2026-06-26",
+       "valueDate": "2026-06-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-122.56"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019500",
+       "entryReference": "0000000223",
+       "bookingDate": "2026-07-02",
+       "valueDate": "2026-07-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-390.00"
+       },
+       "creditorName": "ALEKSANDRE KHUTSISHVILI",
+       "creditorAccount": {
+        "iban": "GE35TB1839053915537024"
+       },
+       "creditorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "ბინის ქირა ივლისი",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019501",
+       "entryReference": "0000000224",
+       "bookingDate": "2026-07-03",
+       "valueDate": "2026-07-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-366.27"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8BE630E6",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019502",
+       "entryReference": "0000000225",
+       "bookingDate": "2026-07-13",
+       "valueDate": "2026-07-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-40.28"
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - ივლისი",
+       "additionalInformation": "SILKNET MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019503",
+       "entryReference": "0000000226",
+       "bookingDate": "2026-07-17",
+       "valueDate": "2026-07-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.27"
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - ივლისი",
+       "additionalInformation": "TBILSERVICE GROUP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019504",
+       "entryReference": "0000000227",
+       "bookingDate": "2026-07-18",
+       "valueDate": "2026-07-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.22"
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - ივლისი",
+       "additionalInformation": "GWP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019505",
+       "entryReference": "0000000228",
+       "bookingDate": "2026-07-20",
+       "valueDate": "2026-07-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "2057.10"
+       },
+       "debtorName": "LLC CAUCASUS SERVICES",
+       "debtorAccount": {
+        "iban": "GE25BG1619033267274441"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "ხელფასი ივლისი",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019507",
+       "entryReference": "0000000229",
+       "bookingDate": "2026-07-20",
+       "valueDate": "2026-07-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-21.01"
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - ივლისი",
+       "additionalInformation": "MAGTICOM MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019506",
+       "entryReference": "0000000230",
+       "bookingDate": "2026-07-21",
+       "valueDate": "2026-07-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-46.46"
+       },
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "additionalInformation": "MINI MARKET Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019508",
+       "entryReference": "0000000231",
+       "bookingDate": "2026-07-22",
+       "valueDate": "2026-07-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-65.47"
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - ივლისი",
+       "additionalInformation": "TELASI MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019509",
+       "entryReference": "0000000232",
+       "bookingDate": "2026-07-23",
+       "valueDate": "2026-07-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-16.82"
+       },
+       "creditorName": "TBILISI TRANSPORT COMPANY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - TBILISI TRANSPORT COMPANY",
+       "additionalInformation": "TBILISI TRANSPORT COMPANY Tbilisi 533286******6101 MCC 4111",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019510",
+       "entryReference": "0000000233",
+       "bookingDate": "2026-07-24",
+       "valueDate": "2026-07-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-16.17"
+       },
+       "creditorName": "COFFEE LAB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - COFFEE LAB",
+       "additionalInformation": "COFFEE LAB Tbilisi 533286******6101 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019511",
+       "entryReference": "0000000234",
+       "bookingDate": "2026-07-27",
+       "valueDate": "2026-07-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-64.38"
+       },
+       "creditorName": "TEMU",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7811",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-07-24"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - TEMU",
+       "additionalInformation": "TEMU 533286******6101 MCC 5999",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019512",
+       "entryReference": "0000000235",
+       "bookingDate": "2026-07-27",
+       "valueDate": "2026-07-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-121.51"
+       },
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GPC",
+       "additionalInformation": "GPC Tbilisi 533286******6101 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019513",
+       "entryReference": "0000000236",
+       "bookingDate": "2026-07-27",
+       "valueDate": "2026-07-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-163.78"
+       },
+       "creditorName": "LC WAIKIKI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - LC WAIKIKI",
+       "additionalInformation": "LC WAIKIKI Tbilisi 533286******6101 MCC 5651",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019514",
+       "entryReference": "0000000237",
+       "bookingDate": "2026-07-30",
+       "valueDate": "2026-07-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-228.52"
+       },
+       "creditorName": "ZARA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ZARA",
+       "additionalInformation": "ZARA Tbilisi 533286******6101 MCC 5651",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019515",
+       "entryReference": "0000000238",
+       "bookingDate": "2026-08-01",
+       "valueDate": "2026-08-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "590.00"
+       },
+       "debtorName": "Bank of Georgia",
+       "remittanceInformationUnstructured": "ნაღდი ფულის შეტანა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019516",
+       "entryReference": "0000000239",
+       "bookingDate": "2026-08-01",
+       "valueDate": "2026-08-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-35.00"
+       },
+       "creditorName": "DATO KVARATSKHELIA",
+       "creditorAccount": {
+        "iban": "GE47BG1622667889238843"
+       },
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019517",
+       "entryReference": "0000000240",
+       "bookingDate": "2026-08-03",
+       "valueDate": "2026-08-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-366.27"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8BE630E6",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019518",
+       "entryReference": "0000000241",
+       "bookingDate": "2026-08-06",
+       "valueDate": "2026-08-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.34"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019520",
+       "entryReference": "0000000242",
+       "bookingDate": "2026-08-09",
+       "valueDate": "2026-08-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-390.00"
+       },
+       "creditorName": "KHATIA MGELADZE",
+       "creditorAccount": {
+        "iban": "GE60BG1695888855747410"
+       },
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "ბინის ქირა აგვისტო",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019519",
+       "entryReference": "0000000243",
+       "bookingDate": "2026-08-11",
+       "valueDate": "2026-08-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-242.88"
+       },
+       "creditorName": "ALIEXPRESS",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7722",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-08-08"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ALIEXPRESS",
+       "additionalInformation": "ALIEXPRESS 533286******6101 MCC 5999",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019521",
+       "entryReference": "0000000244",
+       "bookingDate": "2026-08-12",
+       "valueDate": "2026-08-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-11.08"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019522",
+       "entryReference": "0000000245",
+       "bookingDate": "2026-08-13",
+       "valueDate": "2026-08-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-24.57"
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - აგვისტო",
+       "additionalInformation": "SILKNET MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019524",
+       "entryReference": "0000000246",
+       "bookingDate": "2026-08-17",
+       "valueDate": "2026-08-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.79"
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - აგვისტო",
+       "additionalInformation": "TBILSERVICE GROUP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019523",
+       "entryReference": "0000000247",
+       "bookingDate": "2026-08-18",
+       "valueDate": "2026-08-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-69.29"
+       },
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GPC",
+       "additionalInformation": "GPC Tbilisi 533286******6101 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019525",
+       "entryReference": "0000000248",
+       "bookingDate": "2026-08-18",
+       "valueDate": "2026-08-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.27"
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - აგვისტო",
+       "additionalInformation": "GWP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019526",
+       "entryReference": "0000000249",
+       "bookingDate": "2026-08-20",
+       "valueDate": "2026-08-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1994.23"
+       },
+       "debtorName": "LLC CAUCASUS SERVICES",
+       "debtorAccount": {
+        "iban": "GE07TB1293988746766230"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "ხელფასი აგვისტო",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019527",
+       "entryReference": "0000000250",
+       "bookingDate": "2026-08-20",
+       "valueDate": "2026-08-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-22.59"
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - აგვისტო",
+       "additionalInformation": "MAGTICOM MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      },
+      "next": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions?bookingStatus=both&dateFrom=2025-10-19&entryReferenceFrom=0000000250"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19",
+    "entryReferenceFrom": "0000000250"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE38BG1086003348976459",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00000019528",
+       "entryReference": "0000000251",
+       "bookingDate": "2026-08-22",
+       "valueDate": "2026-08-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-41.25"
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - აგვისტო",
+       "additionalInformation": "TELASI MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019529",
+       "entryReference": "0000000252",
+       "bookingDate": "2026-08-24",
+       "valueDate": "2026-08-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-158.53"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019531",
+       "entryReference": "0000000253",
+       "bookingDate": "2026-08-24",
+       "valueDate": "2026-08-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-38.31"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019532",
+       "entryReference": "0000000254",
+       "bookingDate": "2026-08-24",
+       "valueDate": "2026-08-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-45.64"
+       },
+       "creditorName": "GOODWILL",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GOODWILL",
+       "additionalInformation": "GOODWILL Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019533",
+       "entryReference": "0000000255",
+       "bookingDate": "2026-08-24",
+       "valueDate": "2026-08-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-360.00"
+       },
+       "creditorName": "ATM TBC BANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM TBC BANK Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019530",
+       "entryReference": "0000000256",
+       "bookingDate": "2026-08-25",
+       "valueDate": "2026-08-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.08"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019534",
+       "entryReference": "0000000257",
+       "bookingDate": "2026-08-27",
+       "valueDate": "2026-08-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-187.30"
+       },
+       "creditorName": "LC WAIKIKI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - LC WAIKIKI",
+       "additionalInformation": "LC WAIKIKI Tbilisi 533286******6101 MCC 5651",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019535",
+       "entryReference": "0000000258",
+       "bookingDate": "2026-08-27",
+       "valueDate": "2026-08-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-21.86"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019536",
+       "entryReference": "0000000259",
+       "bookingDate": "2026-08-28",
+       "valueDate": "2026-08-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-73.88"
+       },
+       "creditorName": "ALIEXPRESS",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7712",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-08-27"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ALIEXPRESS",
+       "additionalInformation": "ALIEXPRESS 533286******6101 MCC 5999",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019537",
+       "entryReference": "0000000260",
+       "bookingDate": "2026-08-31",
+       "valueDate": "2026-08-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-35.55"
+       },
+       "creditorName": "TBILISI TRANSPORT COMPANY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - TBILISI TRANSPORT COMPANY",
+       "additionalInformation": "TBILISI TRANSPORT COMPANY Tbilisi 533286******6101 MCC 4111",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019538",
+       "entryReference": "0000000261",
+       "bookingDate": "2026-08-31",
+       "valueDate": "2026-08-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-50.55"
+       },
+       "creditorName": "PSP",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - PSP",
+       "additionalInformation": "PSP Tbilisi 533286******6101 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019539",
+       "entryReference": "0000000262",
+       "bookingDate": "2026-08-31",
+       "valueDate": "2026-08-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-270.20"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019540",
+       "entryReference": "0000000263",
+       "bookingDate": "2026-09-02",
+       "valueDate": "2026-08-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-47.97"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019541",
+       "entryReference": "0000000264",
+       "bookingDate": "2026-09-02",
+       "valueDate": "2026-09-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-13.29"
+       },
+       "creditorName": "SUBWAY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SUBWAY",
+       "additionalInformation": "SUBWAY Tbilisi 533286******6101 MCC 5814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019542",
+       "entryReference": "0000000265",
+       "bookingDate": "2026-09-02",
+       "valueDate": "2026-09-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-270.00"
+       },
+       "creditorName": "ATM TERABANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM TERABANK Tbilisi 533286******6101 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019544",
+       "entryReference": "0000000266",
+       "bookingDate": "2026-09-03",
+       "valueDate": "2026-09-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-366.27"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8BE630E6",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019543",
+       "entryReference": "0000000267",
+       "bookingDate": "2026-09-04",
+       "valueDate": "2026-09-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-31.02"
+       },
+       "creditorName": "ALIEXPRESS",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7552",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-09-02"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ALIEXPRESS",
+       "additionalInformation": "ALIEXPRESS 533286******6101 MCC 5999",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019545",
+       "entryReference": "0000000268",
+       "bookingDate": "2026-09-06",
+       "valueDate": "2026-09-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "75.00"
+       },
+       "debtorName": "LIZI NODIA",
+       "debtorAccount": {
+        "iban": "GE16BG1310076719914259"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019546",
+       "entryReference": "0000000269",
+       "bookingDate": "2026-09-09",
+       "valueDate": "2026-09-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-390.00"
+       },
+       "creditorName": "IRAKLI GELASHVILI",
+       "creditorAccount": {
+        "iban": "GE42TB1416174835399730"
+       },
+       "creditorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "ბინის ქირა სექტემბერი",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019547",
+       "entryReference": "0000000270",
+       "bookingDate": "2026-09-13",
+       "valueDate": "2026-09-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-37.45"
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - სექტემბერი",
+       "additionalInformation": "SILKNET MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019548",
+       "entryReference": "0000000271",
+       "bookingDate": "2026-09-17",
+       "valueDate": "2026-09-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.45"
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - სექტემბერი",
+       "additionalInformation": "TBILSERVICE GROUP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019549",
+       "entryReference": "0000000272",
+       "bookingDate": "2026-09-18",
+       "valueDate": "2026-09-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "2031.09"
+       },
+       "debtorName": "LLC CAUCASUS SERVICES",
+       "debtorAccount": {
+        "iban": "GE09HB1766105176036207"
+       },
+       "debtorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "ხელფასი სექტემბერი",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019551",
+       "entryReference": "0000000273",
+       "bookingDate": "2026-09-18",
+       "valueDate": "2026-09-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-11.03"
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - სექტემბერი",
+       "additionalInformation": "GWP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019555",
+       "entryReference": "0000000274",
+       "bookingDate": "2026-09-20",
+       "valueDate": "2026-09-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-26.06"
+       },
+       "creditorName": "MAGTICOM",
+       "remittanceInformationUnstructured": "მობილური კავშირი - სექტემბერი",
+       "additionalInformation": "MAGTICOM MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019550",
+       "entryReference": "0000000275",
+       "bookingDate": "2026-09-21",
+       "valueDate": "2026-09-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-28.18"
+       },
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GPC",
+       "additionalInformation": "GPC Tbilisi 533286******6101 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019552",
+       "entryReference": "0000000276",
+       "bookingDate": "2026-09-21",
+       "valueDate": "2026-09-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-61.96"
+       },
+       "creditorName": "TEMU",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7210",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-09-18"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - TEMU",
+       "additionalInformation": "TEMU 533286******6101 MCC 5999",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019553",
+       "entryReference": "0000000277",
+       "bookingDate": "2026-09-21",
+       "valueDate": "2026-09-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-33.74"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019554",
+       "entryReference": "0000000278",
+       "bookingDate": "2026-09-21",
+       "valueDate": "2026-09-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-69.78"
+       },
+       "creditorName": "PHARMADEPOT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - PHARMADEPOT",
+       "additionalInformation": "PHARMADEPOT Tbilisi 533286******6101 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019556",
+       "entryReference": "0000000279",
+       "bookingDate": "2026-09-22",
+       "valueDate": "2026-09-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-105.48"
+       },
+       "creditorName": "ZARA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ZARA",
+       "additionalInformation": "ZARA Tbilisi 533286******6101 MCC 5651",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019557",
+       "entryReference": "0000000280",
+       "bookingDate": "2026-09-22",
+       "valueDate": "2026-09-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-13.56"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019558",
+       "entryReference": "0000000281",
+       "bookingDate": "2026-09-22",
+       "valueDate": "2026-09-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-35.56"
+       },
+       "creditorName": "TELASI",
+       "remittanceInformationUnstructured": "ელექტროენერგია - სექტემბერი",
+       "additionalInformation": "TELASI MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019559",
+       "entryReference": "0000000282",
+       "bookingDate": "2026-09-24",
+       "valueDate": "2026-09-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-28.37"
+       },
+       "creditorName": "CAVEA CINEMA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CAVEA CINEMA",
+       "additionalInformation": "CAVEA CINEMA 533286******6101 MCC 7832",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019562",
+       "entryReference": "0000000283",
+       "bookingDate": "2026-09-24",
+       "valueDate": "2026-09-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "120.00"
+       },
+       "debtorName": "ARCHIL TAVADZE",
+       "debtorAccount": {
+        "iban": "GE98BG1046424249272964"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019560",
+       "entryReference": "0000000284",
+       "bookingDate": "2026-09-25",
+       "valueDate": "2026-09-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-18.70"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019561",
+       "entryReference": "0000000285",
+       "bookingDate": "2026-09-25",
+       "valueDate": "2026-09-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.85"
+       },
+       "creditorName": "MAGNITI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MAGNITI",
+       "additionalInformation": "MAGNITI Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019563",
+       "entryReference": "0000000286",
+       "bookingDate": "2026-09-28",
+       "valueDate": "2026-09-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-144.59"
+       },
+       "creditorName": "ACADEMIK ZURAB ZHVANIA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ACADEMIK ZURAB ZHVANIA",
+       "additionalInformation": "ACADEMIK ZURAB ZHVANIA Tbilisi 533286******6101 MCC 8011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019564",
+       "entryReference": "0000000287",
+       "bookingDate": "2026-09-29",
+       "valueDate": "2026-09-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-70.00"
+       },
+       "creditorName": "BEKA GVENETADZE",
+       "creditorAccount": {
+        "iban": "GE42CD1274264139021789"
+       },
+       "creditorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "პირადი გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019565",
+       "entryReference": "0000000288",
+       "bookingDate": "2026-09-30",
+       "valueDate": "2026-09-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-22.97"
+       },
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY",
+       "additionalInformation": "METROMONEY Tbilisi 533286******6101 MCC 4111",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000019566",
+       "entryReference": "0000000289",
+       "bookingDate": "2026-10-01",
+       "valueDate": "2026-10-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "500.00"
+       },
+       "debtorName": "Bank of Georgia",
+       "remittanceInformationUnstructured": "ნაღდი ფულის შეტანა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000019568",
+       "entryReference": "0000000290",
+       "bookingDate": "2026-10-03",
+       "valueDate": "2026-10-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-366.27"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 8BE630E6",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019567",
+       "entryReference": "0000000291",
+       "bookingDate": "2026-10-05",
+       "valueDate": "2026-10-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-246.00"
+       },
+       "creditorName": "OPTIMAL",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - OPTIMAL",
+       "additionalInformation": "OPTIMAL Tbilisi 533286******6101 MCC 5732",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019569",
+       "entryReference": "0000000292",
+       "bookingDate": "2026-10-05",
+       "valueDate": "2026-10-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-13.33"
+       },
+       "creditorName": "APPLE.COM/BILL",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7268",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-10-04"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - APPLE.COM/BILL",
+       "additionalInformation": "APPLE.COM/BILL 533286******6101 MCC 7832",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019570",
+       "entryReference": "0000000293",
+       "bookingDate": "2026-10-05",
+       "valueDate": "2026-10-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.25"
+       },
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "additionalInformation": "MINI MARKET Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019571",
+       "entryReference": "0000000294",
+       "bookingDate": "2026-10-05",
+       "valueDate": "2026-10-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-16.00"
+       },
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "additionalInformation": "KHINKALI HOUSE Tbilisi 533286******6101 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019572",
+       "entryReference": "0000000295",
+       "bookingDate": "2026-10-07",
+       "valueDate": "2026-10-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-390.00"
+       },
+       "creditorName": "GOGA KHARAISHVILI",
+       "creditorAccount": {
+        "iban": "GE13TB1625261507562152"
+       },
+       "creditorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "ბინის ქირა ოქტომბერი",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019574",
+       "entryReference": "0000000296",
+       "bookingDate": "2026-10-12",
+       "valueDate": "2026-10-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-30.42"
+       },
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GPC",
+       "additionalInformation": "GPC Tbilisi 533286******6101 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019573",
+       "entryReference": "0000000297",
+       "bookingDate": "2026-10-13",
+       "valueDate": "2026-10-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-24.22"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019575",
+       "entryReference": "0000000298",
+       "bookingDate": "2026-10-13",
+       "valueDate": "2026-10-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-52.25"
+       },
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "additionalInformation": "AGROHUB Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019577",
+       "entryReference": "0000000299",
+       "bookingDate": "2026-10-13",
+       "valueDate": "2026-10-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-30.75"
+       },
+       "creditorName": "SILKNET",
+       "remittanceInformationUnstructured": "ინტერნეტი - ოქტომბერი",
+       "additionalInformation": "SILKNET MCC 4814",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019576",
+       "entryReference": "0000000300",
+       "bookingDate": "2026-10-14",
+       "valueDate": "2026-10-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-22.00"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      },
+      "next": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions?bookingStatus=both&dateFrom=2025-10-19&entryReferenceFrom=0000000300"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19",
+    "entryReferenceFrom": "0000000300"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE38BG1086003348976459",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00000019578",
+       "entryReference": "0000000301",
+       "bookingDate": "2026-10-14",
+       "valueDate": "2026-10-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.32"
+       },
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KIOSK",
+       "additionalInformation": "KIOSK Tbilisi 533286******6101 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019580",
+       "entryReference": "0000000302",
+       "bookingDate": "2026-10-15",
+       "valueDate": "2026-10-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.27"
+       },
+       "creditorName": "NETFLIX",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7358",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-10-14"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - NETFLIX",
+       "additionalInformation": "NETFLIX 533286******6101 MCC 7832",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019581",
+       "entryReference": "0000000303",
+       "bookingDate": "2026-10-15",
+       "valueDate": "2026-10-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-78.09"
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "additionalInformation": "SPAR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019579",
+       "entryReference": "0000000304",
+       "bookingDate": "2026-10-16",
+       "valueDate": "2026-10-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-48.34"
+       },
+       "creditorName": "FRESCO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - FRESCO",
+       "additionalInformation": "FRESCO Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019582",
+       "entryReference": "0000000305",
+       "bookingDate": "2026-10-16",
+       "valueDate": "2026-10-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-25.44"
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "additionalInformation": "SPAR Tbilisi 533286******6101 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019584",
+       "entryReference": "0000000306",
+       "bookingDate": "2026-10-17",
+       "valueDate": "2026-10-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.14"
+       },
+       "creditorName": "TBILSERVICE GROUP",
+       "remittanceInformationUnstructured": "დასუფთავება - ოქტომბერი",
+       "additionalInformation": "TBILSERVICE GROUP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019585",
+       "entryReference": "0000000307",
+       "bookingDate": "2026-10-18",
+       "valueDate": "2026-10-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.00"
+       },
+       "creditorName": "GWP",
+       "remittanceInformationUnstructured": "წყალი - ოქტომბერი",
+       "additionalInformation": "GWP MCC 4900",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000019583",
+       "entryReference": "0000000308",
+       "bookingDate": "2026-10-19",
+       "valueDate": "2026-10-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.67"
+       },
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY",
+       "additionalInformation": "METROMONEY Tbilisi 533286******6101 MCC 4111",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/802ac29c-1772-50b0-931b-a37077183687/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

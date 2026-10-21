@@ -1,0 +1,232 @@
+{
+ "bank": "bog",
+ "customer": "C00117",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "5c0843c4-62b0-5f15-98d4-0b0cad9473b5",
+      "iban": "GE41BG1829193875961440",
+      "currency": "GEL",
+      "ownerName": "SOPO SAMKHARADZE",
+      "name": "SOPO SAMKHARADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.04"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-30T16:43:38"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.04"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-30T16:43:38"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/5c0843c4-62b0-5f15-98d4-0b0cad9473b5/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/5c0843c4-62b0-5f15-98d4-0b0cad9473b5/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/5c0843c4-62b0-5f15-98d4-0b0cad9473b5",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "5c0843c4-62b0-5f15-98d4-0b0cad9473b5",
+     "iban": "GE41BG1829193875961440",
+     "currency": "GEL",
+     "ownerName": "SOPO SAMKHARADZE",
+     "name": "SOPO SAMKHARADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/5c0843c4-62b0-5f15-98d4-0b0cad9473b5/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/5c0843c4-62b0-5f15-98d4-0b0cad9473b5/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/5c0843c4-62b0-5f15-98d4-0b0cad9473b5/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE41BG1829193875961440",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.04"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.04"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-11-30T16:43:38"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/5c0843c4-62b0-5f15-98d4-0b0cad9473b5/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE41BG1829193875961440",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00000060400",
+       "entryReference": "0000000001",
+       "bookingDate": "2025-10-22",
+       "valueDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-22.38"
+       },
+       "creditorName": "ELIT ELECTRONICS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ELIT ELECTRONICS",
+       "additionalInformation": "ELIT ELECTRONICS Marneuli 439020******0342 MCC 5732",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000060403",
+       "entryReference": "0000000002",
+       "bookingDate": "2025-10-24",
+       "valueDate": "2025-10-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.70"
+       },
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MAXIM",
+       "additionalInformation": "MAXIM 439020******0342 MCC 4121",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000060411",
+       "entryReference": "0000000003",
+       "bookingDate": "2025-10-31",
+       "valueDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.89"
+       },
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MAXIM",
+       "additionalInformation": "MAXIM 439020******0342 MCC 4121",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000060417",
+       "entryReference": "0000000004",
+       "bookingDate": "2025-11-04",
+       "valueDate": "2025-11-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.71"
+       },
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY",
+       "additionalInformation": "METROMONEY Tbilisi 439020******0342 MCC 4111",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000060415",
+       "entryReference": "0000000005",
+       "bookingDate": "2025-11-05",
+       "valueDate": "2025-11-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-19.95"
+       },
+       "creditorName": "PSP",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - PSP",
+       "additionalInformation": "PSP Marneuli 439020******0342 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000060455",
+       "entryReference": "0000000006",
+       "bookingDate": "2025-12-01",
+       "valueDate": "2025-11-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.23"
+       },
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT",
+       "additionalInformation": "BOLT 439020******0342 MCC 4121",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/5c0843c4-62b0-5f15-98d4-0b0cad9473b5"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/5c0843c4-62b0-5f15-98d4-0b0cad9473b5/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,1666 @@
+{
+ "bank": "silk",
+ "customer": "C00017",
+ "dialect": "altasoft_v2",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v2/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "b90eea81-937a-52d1-b947-77b34b3dbcda",
+      "iban": "GE37BT1292240347683412",
+      "currency": "GEL",
+      "ownerName": "KRISTINE PANJIKIDZE",
+      "name": "KRISTINE PANJIKIDZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "DISNGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-608.50"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-03T08:00:03"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-608.50"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-03T08:00:03"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/accounts/b90eea81-937a-52d1-b947-77b34b3dbcda/balances"
+       },
+       "transactions": {
+        "href": "v2/accounts/b90eea81-937a-52d1-b947-77b34b3dbcda/transactions"
+       }
+      },
+      "displayName": "Current account",
+      "other": {
+       "identification": "1292240347683412",
+       "issuer": "Silk Bank"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/b90eea81-937a-52d1-b947-77b34b3dbcda",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "b90eea81-937a-52d1-b947-77b34b3dbcda",
+     "iban": "GE37BT1292240347683412",
+     "currency": "GEL",
+     "ownerName": "KRISTINE PANJIKIDZE",
+     "name": "KRISTINE PANJIKIDZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "DISNGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v2/accounts/b90eea81-937a-52d1-b947-77b34b3dbcda/balances"
+      },
+      "transactions": {
+       "href": "v2/accounts/b90eea81-937a-52d1-b947-77b34b3dbcda/transactions"
+      }
+     },
+     "displayName": "Current account",
+     "other": {
+      "identification": "1292240347683412",
+      "issuer": "Silk Bank"
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/b90eea81-937a-52d1-b947-77b34b3dbcda/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE37BT1292240347683412",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-608.50"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-608.50"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-03T08:00:03"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/b90eea81-937a-52d1-b947-77b34b3dbcda/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE37BT1292240347683412",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "GE37BT1292240347683412_1",
+       "entryReference": "0000000001",
+       "bookingDate": "2025-10-31",
+       "valueDate": "2025-10-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "debtor": {
+        "name": "KRISTINE PANJIKIDZE"
+       },
+       "debtorAccount": {
+        "iban": "GE65PC1408377403281194"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "MIBGGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000008356"
+       }
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_2",
+       "entryReference": "0000000002",
+       "bookingDate": "2025-11-03",
+       "valueDate": "2025-11-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-651.56"
+       },
+       "creditor": {
+        "name": "Silk Bank"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "DISNGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 277BCEBA"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_3",
+       "entryReference": "0000000003",
+       "bookingDate": "2025-12-02",
+       "valueDate": "2025-12-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "debtor": {
+        "name": "KRISTINE PANJIKIDZE"
+       },
+       "debtorAccount": {
+        "iban": "GE65PC1408377403281194"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "MIBGGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000008408"
+       }
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_4",
+       "entryReference": "0000000004",
+       "bookingDate": "2025-12-03",
+       "valueDate": "2025-12-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-651.56"
+       },
+       "creditor": {
+        "name": "Silk Bank"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "DISNGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 277BCEBA"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_5",
+       "entryReference": "0000000005",
+       "bookingDate": "2026-01-02",
+       "valueDate": "2026-01-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "debtor": {
+        "name": "KRISTINE PANJIKIDZE"
+       },
+       "debtorAccount": {
+        "iban": "GE65PC1408377403281194"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "MIBGGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000008464"
+       }
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_6",
+       "entryReference": "0000000006",
+       "bookingDate": "2026-01-03",
+       "valueDate": "2026-01-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-651.56"
+       },
+       "creditor": {
+        "name": "Silk Bank"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "DISNGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 277BCEBA"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_7",
+       "entryReference": "0000000007",
+       "bookingDate": "2026-02-02",
+       "valueDate": "2026-02-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "debtor": {
+        "name": "KRISTINE PANJIKIDZE"
+       },
+       "debtorAccount": {
+        "iban": "GE65PC1408377403281194"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "MIBGGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000008515"
+       }
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_8",
+       "entryReference": "0000000008",
+       "bookingDate": "2026-02-03",
+       "valueDate": "2026-02-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-651.56"
+       },
+       "creditor": {
+        "name": "Silk Bank"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "DISNGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 277BCEBA"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_9",
+       "entryReference": "0000000009",
+       "bookingDate": "2026-03-02",
+       "valueDate": "2026-03-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "debtor": {
+        "name": "KRISTINE PANJIKIDZE"
+       },
+       "debtorAccount": {
+        "iban": "GE65PC1408377403281194"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "MIBGGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000008564"
+       }
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_10",
+       "entryReference": "0000000010",
+       "bookingDate": "2026-03-03",
+       "valueDate": "2026-03-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-651.56"
+       },
+       "creditor": {
+        "name": "Silk Bank"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "DISNGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 277BCEBA"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_11",
+       "entryReference": "0000000011",
+       "bookingDate": "2026-04-02",
+       "valueDate": "2026-04-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "debtor": {
+        "name": "KRISTINE PANJIKIDZE"
+       },
+       "debtorAccount": {
+        "iban": "GE65PC1408377403281194"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "MIBGGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000008613"
+       }
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_12",
+       "entryReference": "0000000012",
+       "bookingDate": "2026-04-03",
+       "valueDate": "2026-04-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-651.56"
+       },
+       "creditor": {
+        "name": "Silk Bank"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "DISNGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 277BCEBA"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_13",
+       "entryReference": "0000000013",
+       "bookingDate": "2026-05-01",
+       "valueDate": "2026-05-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "debtor": {
+        "name": "KRISTINE PANJIKIDZE"
+       },
+       "debtorAccount": {
+        "iban": "GE65PC1408377403281194"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "MIBGGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000008653"
+       }
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_14",
+       "entryReference": "0000000014",
+       "bookingDate": "2026-05-03",
+       "valueDate": "2026-05-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-651.56"
+       },
+       "creditor": {
+        "name": "Silk Bank"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "DISNGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 277BCEBA"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_15",
+       "entryReference": "0000000015",
+       "bookingDate": "2026-05-04",
+       "valueDate": "2026-05-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-147.09"
+       },
+       "creditor": {
+        "name": "CARREFOUR"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - CARREFOUR"
+       ],
+       "bankTransactionCodeProprietary": "grocery",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "8656",
+        "transactionDateTime": "2026-05-01T19:29:39"
+       },
+       "additionalTransactionInformation": "CARREFOUR Tbilisi 476157******4118 MCC 5411"
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_16",
+       "entryReference": "0000000016",
+       "bookingDate": "2026-05-04",
+       "valueDate": "2026-05-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-41.40"
+       },
+       "creditor": {
+        "name": "EUROPRODUCT"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - EUROPRODUCT"
+       ],
+       "bankTransactionCodeProprietary": "grocery",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "8657",
+        "transactionDateTime": "2026-05-02T09:43:16"
+       },
+       "additionalTransactionInformation": "EUROPRODUCT Senaki 476157******4118 MCC 5411"
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_17",
+       "entryReference": "0000000017",
+       "bookingDate": "2026-05-04",
+       "valueDate": "2026-05-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-375.93"
+       },
+       "creditor": {
+        "name": "KHINKALI HOUSE"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - KHINKALI HOUSE"
+       ],
+       "bankTransactionCodeProprietary": "restaurant",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "8659",
+        "transactionDateTime": "2026-05-02T14:07:00"
+       },
+       "additionalTransactionInformation": "KHINKALI HOUSE Senaki 476157******4118 MCC 5812"
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_18",
+       "entryReference": "0000000018",
+       "bookingDate": "2026-06-02",
+       "valueDate": "2026-06-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "debtor": {
+        "name": "KRISTINE PANJIKIDZE"
+       },
+       "debtorAccount": {
+        "iban": "GE65PC1408377403281194"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "MIBGGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000008706"
+       }
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_19",
+       "entryReference": "0000000019",
+       "bookingDate": "2026-06-03",
+       "valueDate": "2026-06-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-651.56"
+       },
+       "creditor": {
+        "name": "Silk Bank"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "DISNGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 277BCEBA"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_20",
+       "entryReference": "0000000020",
+       "bookingDate": "2026-07-02",
+       "valueDate": "2026-07-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "debtor": {
+        "name": "KRISTINE PANJIKIDZE"
+       },
+       "debtorAccount": {
+        "iban": "GE65PC1408377403281194"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "MIBGGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000008753"
+       }
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_21",
+       "entryReference": "0000000021",
+       "bookingDate": "2026-07-03",
+       "valueDate": "2026-07-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-651.56"
+       },
+       "creditor": {
+        "name": "Silk Bank"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "DISNGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 277BCEBA"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_22",
+       "entryReference": "0000000022",
+       "bookingDate": "2026-07-31",
+       "valueDate": "2026-07-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "debtor": {
+        "name": "KRISTINE PANJIKIDZE"
+       },
+       "debtorAccount": {
+        "iban": "GE65PC1408377403281194"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "MIBGGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000008793"
+       }
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_23",
+       "entryReference": "0000000023",
+       "bookingDate": "2026-08-03",
+       "valueDate": "2026-08-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-651.56"
+       },
+       "creditor": {
+        "name": "Silk Bank"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "DISNGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 277BCEBA"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_24",
+       "entryReference": "0000000024",
+       "bookingDate": "2026-09-02",
+       "valueDate": "2026-09-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "debtor": {
+        "name": "KRISTINE PANJIKIDZE"
+       },
+       "debtorAccount": {
+        "iban": "GE65PC1408377403281194"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "MIBGGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000008840"
+       }
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_25",
+       "entryReference": "0000000025",
+       "bookingDate": "2026-09-03",
+       "valueDate": "2026-09-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-651.56"
+       },
+       "creditor": {
+        "name": "Silk Bank"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "DISNGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 277BCEBA"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_26",
+       "entryReference": "0000000026",
+       "bookingDate": "2026-10-02",
+       "valueDate": "2026-10-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "debtor": {
+        "name": "KRISTINE PANJIKIDZE"
+       },
+       "debtorAccount": {
+        "iban": "GE65PC1408377403281194"
+       },
+       "debtorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "MIBGGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "საკუთარ ანგარიშზე გადარიცხვა"
+       ],
+       "bankTransactionCodeProprietary": "own_transfer_in",
+       "references": {
+        "endToEndId": "E2E0000008884"
+       }
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_27",
+       "entryReference": "0000000027",
+       "bookingDate": "2026-10-03",
+       "valueDate": "2026-10-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-651.56"
+       },
+       "creditor": {
+        "name": "Silk Bank"
+       },
+       "creditorAgent": {
+        "financialInstitutionId": {
+         "bicfi": "DISNGE22"
+        }
+       },
+       "remittanceInformationUnstructured": [
+        "სესხის დაფარვა 277BCEBA"
+       ],
+       "bankTransactionCodeProprietary": "loan_payment"
+      },
+      {
+       "transactionId": "GE37BT1292240347683412_28",
+       "entryReference": "0000000028",
+       "bookingDate": "2026-10-05",
+       "valueDate": "2026-10-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-44.08"
+       },
+       "creditor": {
+        "name": "MAXIM"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - MAXIM"
+       ],
+       "bankTransactionCodeProprietary": "rideshare",
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": false
+        },
+        "sequenceNumber": "8887",
+        "transactionDateTime": "2026-10-02T19:47:32"
+       },
+       "additionalTransactionInformation": "MAXIM 476157******4118 MCC 4121"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/b90eea81-937a-52d1-b947-77b34b3dbcda"
+      },
+      "first": {
+       "href": "v2/accounts/b90eea81-937a-52d1-b947-77b34b3dbcda/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "01a4182f-d054-5c8d-972d-60e903831371",
+      "maskedPan": "476157******4118",
+      "currency": "GEL",
+      "ownerName": "KRISTINE PANJIKIDZE",
+      "name": "KRISTINE PANJIKIDZE",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-608.50"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-03T08:00:03"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-608.50"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-03T08:00:03"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/card-accounts/01a4182f-d054-5c8d-972d-60e903831371/balances"
+       },
+       "transactions": {
+        "href": "v2/card-accounts/01a4182f-d054-5c8d-972d-60e903831371/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/01a4182f-d054-5c8d-972d-60e903831371",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "01a4182f-d054-5c8d-972d-60e903831371",
+     "maskedPan": "476157******4118",
+     "currency": "GEL",
+     "ownerName": "KRISTINE PANJIKIDZE",
+     "name": "KRISTINE PANJIKIDZE",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-608.50"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-03T08:00:03"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-608.50"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-03T08:00:03"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v2/card-accounts/01a4182f-d054-5c8d-972d-60e903831371/balances"
+      },
+      "transactions": {
+       "href": "v2/card-accounts/01a4182f-d054-5c8d-972d-60e903831371/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/01a4182f-d054-5c8d-972d-60e903831371/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "476157******4118",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-608.50"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-608.50"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-03T08:00:03"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/01a4182f-d054-5c8d-972d-60e903831371/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "GE37BT1292240347683412_15",
+       "transactionDate": "2026-05-01",
+       "bookingDate": "2026-05-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-147.09"
+       },
+       "acceptorTransactionDateTime": "2026-05-01T19:29:39",
+       "maskedPAN": "476157******4118",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE37BT1292240347683412_16",
+       "transactionDate": "2026-05-02",
+       "bookingDate": "2026-05-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-41.40"
+       },
+       "acceptorTransactionDateTime": "2026-05-02T09:43:16",
+       "maskedPAN": "476157******4118",
+       "transactionDetails": "ბარათით გადახდა - EUROPRODUCT",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "EUROPRODUCT",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE37BT1292240347683412_17",
+       "transactionDate": "2026-05-02",
+       "bookingDate": "2026-05-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-375.93"
+       },
+       "acceptorTransactionDateTime": "2026-05-02T14:07:00",
+       "maskedPAN": "476157******4118",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "GE37BT1292240347683412_28",
+       "transactionDate": "2026-10-02",
+       "bookingDate": "2026-10-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-44.08"
+       },
+       "acceptorTransactionDateTime": "2026-10-02T19:47:32",
+       "maskedPAN": "476157******4118",
+       "transactionDetails": "ბარათით გადახდა - MAXIM",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MAXIM",
+       "merchantCategoryCode": "4121"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/b90eea81-937a-52d1-b947-77b34b3dbcda"
+      },
+      "first": {
+       "href": "v2/card-accounts/01a4182f-d054-5c8d-972d-60e903831371/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "476157******4118",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/cards",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cards": [
+     {
+      "resourceId": "01a4182f-d054-5c8d-972d-60e903831371",
+      "maskedPan": "476157******4118",
+      "currency": "GEL",
+      "ownerName": "KRISTINE PANJIKIDZE",
+      "name": "KRISTINE PANJIKIDZE",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-608.50"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-03T08:00:03"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-608.50"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-03T08:00:03"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/card-accounts/01a4182f-d054-5c8d-972d-60e903831371/balances"
+       },
+       "transactions": {
+        "href": "v2/card-accounts/01a4182f-d054-5c8d-972d-60e903831371/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/cards/01a4182f-d054-5c8d-972d-60e903831371",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "01a4182f-d054-5c8d-972d-60e903831371",
+     "maskedPan": "476157******4118",
+     "currency": "GEL",
+     "ownerName": "KRISTINE PANJIKIDZE",
+     "name": "KRISTINE PANJIKIDZE",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-608.50"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-03T08:00:03"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-608.50"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-03T08:00:03"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v2/card-accounts/01a4182f-d054-5c8d-972d-60e903831371/balances"
+      },
+      "transactions": {
+       "href": "v2/card-accounts/01a4182f-d054-5c8d-972d-60e903831371/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/01a4182f-d054-5c8d-972d-60e903831371/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "476157******4118",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-608.50"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-608.50"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-03T08:00:03"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/01a4182f-d054-5c8d-972d-60e903831371/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "GE37BT1292240347683412_15",
+       "transactionDate": "2026-05-01",
+       "bookingDate": "2026-05-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-147.09"
+       },
+       "acceptorTransactionDateTime": "2026-05-01T19:29:39",
+       "maskedPAN": "476157******4118",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE37BT1292240347683412_16",
+       "transactionDate": "2026-05-02",
+       "bookingDate": "2026-05-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-41.40"
+       },
+       "acceptorTransactionDateTime": "2026-05-02T09:43:16",
+       "maskedPAN": "476157******4118",
+       "transactionDetails": "ბარათით გადახდა - EUROPRODUCT",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "EUROPRODUCT",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE37BT1292240347683412_17",
+       "transactionDate": "2026-05-02",
+       "bookingDate": "2026-05-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-375.93"
+       },
+       "acceptorTransactionDateTime": "2026-05-02T14:07:00",
+       "maskedPAN": "476157******4118",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "GE37BT1292240347683412_28",
+       "transactionDate": "2026-10-02",
+       "bookingDate": "2026-10-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-44.08"
+       },
+       "acceptorTransactionDateTime": "2026-10-02T19:47:32",
+       "maskedPAN": "476157******4118",
+       "transactionDetails": "ბარათით გადახდა - MAXIM",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MAXIM",
+       "merchantCategoryCode": "4121"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/b90eea81-937a-52d1-b947-77b34b3dbcda"
+      },
+      "first": {
+       "href": "v2/card-accounts/01a4182f-d054-5c8d-972d-60e903831371/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "476157******4118",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "37e7f654-f7b7-582a-bd22-6184da0ce997",
+      "iban": "GE88BT4730549401519291",
+      "currency": "GEL",
+      "ownerName": "KRISTINE PANJIKIDZE",
+      "name": "KRISTINE PANJIKIDZE",
+      "product": "Consumer loan",
+      "cashAccountType": "LOAN",
+      "status": "enabled",
+      "bic": "DISNGE22",
+      "usage": "PRIV",
+      "_links": {
+       "balances": {
+        "href": "v2/loans/37e7f654-f7b7-582a-bd22-6184da0ce997/balances"
+       },
+       "transactions": {
+        "href": "v2/loans/37e7f654-f7b7-582a-bd22-6184da0ce997/transactions"
+       }
+      },
+      "displayName": "Consumer loan",
+      "other": {
+       "identification": "LN-2025-494908",
+       "schemeNameProprietary": "LOAN_CONTRACT",
+       "issuer": "Silk Bank"
+      },
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-19336.54"
+        },
+        "balanceType": "closingBooked",
+        "referenceDate": "2026-10-18"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-651.56"
+        },
+        "balanceType": "expected",
+        "referenceDate": "2026-11-03"
+       }
+      ],
+      "interest": [
+       {
+        "type": "FIXD",
+        "rate": [
+         {
+          "percentage": "14.54"
+         }
+        ]
+       }
+      ],
+      "relatedDates": [
+       {
+        "contractStartDate": "2025-07-19",
+        "contractEndDate": "2029-11-03"
+       }
+      ],
+      "collateralsInvolved": true,
+      "guaranteeInvolved": true,
+      "tariffs": "52 monthly annuity instalments of 651.56 GEL due on day 3"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans/37e7f654-f7b7-582a-bd22-6184da0ce997",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "37e7f654-f7b7-582a-bd22-6184da0ce997",
+     "iban": "GE88BT4730549401519291",
+     "currency": "GEL",
+     "ownerName": "KRISTINE PANJIKIDZE",
+     "name": "KRISTINE PANJIKIDZE",
+     "product": "Consumer loan",
+     "cashAccountType": "LOAN",
+     "status": "enabled",
+     "bic": "DISNGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v2/loans/37e7f654-f7b7-582a-bd22-6184da0ce997/balances"
+      },
+      "transactions": {
+       "href": "v2/loans/37e7f654-f7b7-582a-bd22-6184da0ce997/transactions"
+      }
+     },
+     "displayName": "Consumer loan",
+     "other": {
+      "identification": "LN-2025-494908",
+      "schemeNameProprietary": "LOAN_CONTRACT",
+      "issuer": "Silk Bank"
+     },
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-19336.54"
+       },
+       "balanceType": "closingBooked",
+       "referenceDate": "2026-10-18"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-651.56"
+       },
+       "balanceType": "expected",
+       "referenceDate": "2026-11-03"
+      }
+     ],
+     "interest": [
+      {
+       "type": "FIXD",
+       "rate": [
+        {
+         "percentage": "14.54"
+        }
+       ]
+      }
+     ],
+     "relatedDates": [
+      {
+       "contractStartDate": "2025-07-19",
+       "contractEndDate": "2029-11-03"
+      }
+     ],
+     "collateralsInvolved": true,
+     "guaranteeInvolved": true,
+     "tariffs": "52 monthly annuity instalments of 651.56 GEL due on day 3"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans/37e7f654-f7b7-582a-bd22-6184da0ce997/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE88BT4730549401519291",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-19336.54"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-651.56"
+      },
+      "balanceType": "expected",
+      "referenceDate": "2026-11-03"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans/37e7f654-f7b7-582a-bd22-6184da0ce997/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE88BT4730549401519291",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "LN-2025-494908_4",
+       "entryReference": "0000000004",
+       "bookingDate": "2025-11-03",
+       "valueDate": "2025-11-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 4"
+       ],
+       "additionalTransactionInformation": "principal 361.18; interest 290.38"
+      },
+      {
+       "transactionId": "LN-2025-494908_5",
+       "entryReference": "0000000005",
+       "bookingDate": "2025-12-03",
+       "valueDate": "2025-12-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 5"
+       ],
+       "additionalTransactionInformation": "principal 365.55; interest 286.01"
+      },
+      {
+       "transactionId": "LN-2025-494908_6",
+       "entryReference": "0000000006",
+       "bookingDate": "2026-01-03",
+       "valueDate": "2026-01-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 6"
+       ],
+       "additionalTransactionInformation": "principal 369.98; interest 281.58"
+      },
+      {
+       "transactionId": "LN-2025-494908_7",
+       "entryReference": "0000000007",
+       "bookingDate": "2026-02-03",
+       "valueDate": "2026-02-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 7"
+       ],
+       "additionalTransactionInformation": "principal 374.46; interest 277.10"
+      },
+      {
+       "transactionId": "LN-2025-494908_8",
+       "entryReference": "0000000008",
+       "bookingDate": "2026-03-03",
+       "valueDate": "2026-03-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 8"
+       ],
+       "additionalTransactionInformation": "principal 379.00; interest 272.56"
+      },
+      {
+       "transactionId": "LN-2025-494908_9",
+       "entryReference": "0000000009",
+       "bookingDate": "2026-04-03",
+       "valueDate": "2026-04-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 9"
+       ],
+       "additionalTransactionInformation": "principal 383.59; interest 267.97"
+      },
+      {
+       "transactionId": "LN-2025-494908_10",
+       "entryReference": "0000000010",
+       "bookingDate": "2026-05-03",
+       "valueDate": "2026-05-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 10"
+       ],
+       "additionalTransactionInformation": "principal 388.24; interest 263.32"
+      },
+      {
+       "transactionId": "LN-2025-494908_11",
+       "entryReference": "0000000011",
+       "bookingDate": "2026-06-03",
+       "valueDate": "2026-06-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 11"
+       ],
+       "additionalTransactionInformation": "principal 392.94; interest 258.62"
+      },
+      {
+       "transactionId": "LN-2025-494908_12",
+       "entryReference": "0000000012",
+       "bookingDate": "2026-07-03",
+       "valueDate": "2026-07-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 12"
+       ],
+       "additionalTransactionInformation": "principal 397.70; interest 253.86"
+      },
+      {
+       "transactionId": "LN-2025-494908_13",
+       "entryReference": "0000000013",
+       "bookingDate": "2026-08-03",
+       "valueDate": "2026-08-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 13"
+       ],
+       "additionalTransactionInformation": "principal 402.52; interest 249.04"
+      },
+      {
+       "transactionId": "LN-2025-494908_14",
+       "entryReference": "0000000014",
+       "bookingDate": "2026-09-03",
+       "valueDate": "2026-09-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 14"
+       ],
+       "additionalTransactionInformation": "principal 407.39; interest 244.17"
+      },
+      {
+       "transactionId": "LN-2025-494908_15",
+       "entryReference": "0000000015",
+       "bookingDate": "2026-10-03",
+       "valueDate": "2026-10-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "651.56"
+       },
+       "remittanceInformationUnstructured": [
+        "Loan repayment instalment 15"
+       ],
+       "additionalTransactionInformation": "principal 412.33; interest 239.23"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/loans/37e7f654-f7b7-582a-bd22-6184da0ce997"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/savings",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": []
+   }
+  }
+ ]
+}

@@ -1,0 +1,162 @@
+{
+ "bank": "bog",
+ "customer": "C00122",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "0d105283-ac17-5a87-9ddd-db03e9bc0f8f",
+      "iban": "GE56BG1033506842518247",
+      "currency": "GEL",
+      "ownerName": "LAMARA BOLKVADZE",
+      "name": "LAMARA BOLKVADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.19"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-03T07:11:46"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.19"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-03T07:11:46"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/0d105283-ac17-5a87-9ddd-db03e9bc0f8f/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/0d105283-ac17-5a87-9ddd-db03e9bc0f8f/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/0d105283-ac17-5a87-9ddd-db03e9bc0f8f",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "0d105283-ac17-5a87-9ddd-db03e9bc0f8f",
+     "iban": "GE56BG1033506842518247",
+     "currency": "GEL",
+     "ownerName": "LAMARA BOLKVADZE",
+     "name": "LAMARA BOLKVADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/0d105283-ac17-5a87-9ddd-db03e9bc0f8f/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/0d105283-ac17-5a87-9ddd-db03e9bc0f8f/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/0d105283-ac17-5a87-9ddd-db03e9bc0f8f/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE56BG1033506842518247",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.19"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.19"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-11-03T07:11:46"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/0d105283-ac17-5a87-9ddd-db03e9bc0f8f/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE56BG1033506842518247",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00000062344",
+       "entryReference": "0000000001",
+       "bookingDate": "2025-11-04",
+       "valueDate": "2025-11-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-8.08"
+       },
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GPC",
+       "additionalInformation": "GPC Tbilisi 439020******0346 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/0d105283-ac17-5a87-9ddd-db03e9bc0f8f"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/0d105283-ac17-5a87-9ddd-db03e9bc0f8f/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,452 @@
+{
+ "bank": "bog",
+ "customer": "C00005",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "920a2c07-a9dc-5783-ba7d-77a8b3d0618a",
+      "iban": "GE51BG1351388335415281",
+      "currency": "GEL",
+      "ownerName": "EMZAR LORTKIPANIDZE",
+      "name": "EMZAR LORTKIPANIDZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "4.66"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-12T07:52:47"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "4.66"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-12T07:52:47"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/920a2c07-a9dc-5783-ba7d-77a8b3d0618a/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/920a2c07-a9dc-5783-ba7d-77a8b3d0618a/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/920a2c07-a9dc-5783-ba7d-77a8b3d0618a",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "920a2c07-a9dc-5783-ba7d-77a8b3d0618a",
+     "iban": "GE51BG1351388335415281",
+     "currency": "GEL",
+     "ownerName": "EMZAR LORTKIPANIDZE",
+     "name": "EMZAR LORTKIPANIDZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/920a2c07-a9dc-5783-ba7d-77a8b3d0618a/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/920a2c07-a9dc-5783-ba7d-77a8b3d0618a/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/920a2c07-a9dc-5783-ba7d-77a8b3d0618a/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE51BG1351388335415281",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "4.66"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "4.66"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-12T07:52:47"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/920a2c07-a9dc-5783-ba7d-77a8b3d0618a/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE51BG1351388335415281",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00000002049",
+       "entryReference": "0000000001",
+       "bookingDate": "2025-11-05",
+       "valueDate": "2025-11-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-91.88"
+       },
+       "creditorName": "LC WAIKIKI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - LC WAIKIKI",
+       "additionalInformation": "LC WAIKIKI Rustavi 439020******9486 MCC 5651",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000002050",
+       "entryReference": "0000000002",
+       "bookingDate": "2025-11-07",
+       "valueDate": "2025-11-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-117.15"
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "additionalInformation": "SPAR Rustavi 439020******9486 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000002058",
+       "entryReference": "0000000003",
+       "bookingDate": "2025-11-10",
+       "valueDate": "2025-11-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-26.03"
+       },
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MAXIM",
+       "additionalInformation": "MAXIM 439020******9486 MCC 4121",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000002052",
+       "entryReference": "0000000004",
+       "bookingDate": "2025-11-11",
+       "valueDate": "2025-11-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-26.23"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 439020******9486 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000002066",
+       "entryReference": "0000000005",
+       "bookingDate": "2025-11-12",
+       "valueDate": "2025-11-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-50.10"
+       },
+       "creditorName": "NIKORA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - NIKORA",
+       "additionalInformation": "NIKORA Tbilisi 439020******9486 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000002071",
+       "entryReference": "0000000006",
+       "bookingDate": "2025-11-17",
+       "valueDate": "2025-11-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-69.37"
+       },
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MAXIM",
+       "additionalInformation": "MAXIM 439020******9486 MCC 4121",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000002080",
+       "entryReference": "0000000007",
+       "bookingDate": "2025-11-24",
+       "valueDate": "2025-11-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.70"
+       },
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MAXIM",
+       "additionalInformation": "MAXIM 439020******9486 MCC 4121",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000002083",
+       "entryReference": "0000000008",
+       "bookingDate": "2025-11-24",
+       "valueDate": "2025-11-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-8.29"
+       },
+       "creditorName": "YANDEX GO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - YANDEX GO",
+       "additionalInformation": "YANDEX GO 439020******9486 MCC 4121",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000002084",
+       "entryReference": "0000000009",
+       "bookingDate": "2025-11-24",
+       "valueDate": "2025-11-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.40"
+       },
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "additionalInformation": "MINI MARKET Rustavi 439020******9486 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000002114",
+       "entryReference": "0000000010",
+       "bookingDate": "2025-12-11",
+       "valueDate": "2025-12-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-24.21"
+       },
+       "creditorName": "TBILISI TRANSPORT COMPANY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - TBILISI TRANSPORT COMPANY",
+       "additionalInformation": "TBILISI TRANSPORT COMPANY Rustavi 439020******9486 MCC 4111",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000002116",
+       "entryReference": "0000000011",
+       "bookingDate": "2025-12-12",
+       "valueDate": "2025-12-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.27"
+       },
+       "creditorName": "YANDEX GO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - YANDEX GO",
+       "additionalInformation": "YANDEX GO 439020******9486 MCC 4121",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000002121",
+       "entryReference": "0000000012",
+       "bookingDate": "2025-12-15",
+       "valueDate": "2025-12-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-259.07"
+       },
+       "creditorName": "ZARA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ZARA",
+       "additionalInformation": "ZARA Rustavi 439020******9486 MCC 5651",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000002123",
+       "entryReference": "0000000013",
+       "bookingDate": "2025-12-17",
+       "valueDate": "2025-12-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-22.23"
+       },
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "additionalInformation": "SPAR Tbilisi 439020******9486 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000002474",
+       "entryReference": "0000000014",
+       "bookingDate": "2026-08-19",
+       "valueDate": "2026-08-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "585.48"
+       },
+       "debtorName": "Bank of Georgia",
+       "remittanceInformationUnstructured": "სესხის გაცემა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000002476",
+       "entryReference": "0000000015",
+       "bookingDate": "2026-08-20",
+       "valueDate": "2026-08-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-538.64"
+       },
+       "creditorName": "MERAB JAVAKHISHVILI",
+       "creditorAccount": {
+        "iban": "GE55BG1628968524510202"
+       },
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "გადახდა ხელშეკრულებით",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000002501",
+       "entryReference": "0000000016",
+       "bookingDate": "2026-09-04",
+       "valueDate": "2026-09-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-25.32"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Rustavi 439020******9486 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000002504",
+       "entryReference": "0000000017",
+       "bookingDate": "2026-09-07",
+       "valueDate": "2026-09-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.55"
+       },
+       "creditorName": "YANDEX GO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - YANDEX GO",
+       "additionalInformation": "YANDEX GO 439020******9486 MCC 4121",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000002517",
+       "entryReference": "0000000018",
+       "bookingDate": "2026-09-11",
+       "valueDate": "2026-09-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "151.48"
+       },
+       "endToEndId": "E2E0000002515",
+       "debtorName": "EMZAR LORTKIPANIDZE",
+       "debtorAccount": {
+        "iban": "GE50CD1740604534578975"
+       },
+       "debtorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000002518",
+       "entryReference": "0000000019",
+       "bookingDate": "2026-09-12",
+       "valueDate": "2026-09-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-151.48"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 6DC006F8",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000002567",
+       "entryReference": "0000000020",
+       "bookingDate": "2026-10-09",
+       "valueDate": "2026-10-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "151.48"
+       },
+       "endToEndId": "E2E0000002565",
+       "debtorName": "EMZAR LORTKIPANIDZE",
+       "debtorAccount": {
+        "iban": "GE50CD1740604534578975"
+       },
+       "debtorAgent": "JSCRGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000002571",
+       "entryReference": "0000000021",
+       "bookingDate": "2026-10-12",
+       "valueDate": "2026-10-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-151.48"
+       },
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 6DC006F8",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/920a2c07-a9dc-5783-ba7d-77a8b3d0618a"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/920a2c07-a9dc-5783-ba7d-77a8b3d0618a/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

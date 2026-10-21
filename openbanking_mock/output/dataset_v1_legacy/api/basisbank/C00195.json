@@ -1,0 +1,739 @@
+{
+ "bank": "basisbank",
+ "customer": "C00195",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "9e99b179-1fbd-549b-8b04-b816598222b2",
+      "iban": "GE04BS1387926023798020",
+      "currency": "GEL",
+      "ownerName": "NESTAN MGELADZE",
+      "name": "NESTAN MGELADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "CBASGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.37"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-01-11T18:58:32"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.37"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-01-11T18:58:32"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/9e99b179-1fbd-549b-8b04-b816598222b2/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/9e99b179-1fbd-549b-8b04-b816598222b2/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/9e99b179-1fbd-549b-8b04-b816598222b2",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "9e99b179-1fbd-549b-8b04-b816598222b2",
+     "iban": "GE04BS1387926023798020",
+     "currency": "GEL",
+     "ownerName": "NESTAN MGELADZE",
+     "name": "NESTAN MGELADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "CBASGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/9e99b179-1fbd-549b-8b04-b816598222b2/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/9e99b179-1fbd-549b-8b04-b816598222b2/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/9e99b179-1fbd-549b-8b04-b816598222b2/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE04BS1387926023798020",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.37"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.37"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-01-11T18:58:32"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/9e99b179-1fbd-549b-8b04-b816598222b2/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE04BS1387926023798020",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00000100361",
+       "entryReference": "0000000001",
+       "bookingDate": "2025-11-03",
+       "valueDate": "2025-11-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.78"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Tbilisi 476157******4130 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000100364",
+       "entryReference": "0000000002",
+       "bookingDate": "2025-11-11",
+       "valueDate": "2025-11-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.71"
+       },
+       "creditorName": "SHAVI LOMI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SHAVI LOMI",
+       "additionalInformation": "SHAVI LOMI Tbilisi 476157******4130 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000100373",
+       "entryReference": "0000000003",
+       "bookingDate": "2025-11-14",
+       "valueDate": "2025-11-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-130.00"
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM BANK OF GEORGIA Tbilisi 476157******4130 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000100383",
+       "entryReference": "0000000004",
+       "bookingDate": "2025-11-18",
+       "valueDate": "2025-11-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.73"
+       },
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MAXIM",
+       "additionalInformation": "MAXIM 476157******4130 MCC 4121",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000100388",
+       "entryReference": "0000000005",
+       "bookingDate": "2025-11-20",
+       "valueDate": "2025-11-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-8.73"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Tbilisi 476157******4130 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000100396",
+       "entryReference": "0000000006",
+       "bookingDate": "2025-11-28",
+       "valueDate": "2025-11-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.83"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Tbilisi 476157******4130 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000100400",
+       "entryReference": "0000000007",
+       "bookingDate": "2025-12-01",
+       "valueDate": "2025-11-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.83"
+       },
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT",
+       "additionalInformation": "BOLT 476157******4130 MCC 4121",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000100405",
+       "entryReference": "0000000008",
+       "bookingDate": "2025-12-04",
+       "valueDate": "2025-12-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.90"
+       },
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "additionalInformation": "CARREFOUR Tbilisi 476157******4130 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000100413",
+       "entryReference": "0000000009",
+       "bookingDate": "2025-12-12",
+       "valueDate": "2025-12-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.00"
+       },
+       "creditorName": "GULF",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GULF",
+       "additionalInformation": "GULF Tbilisi 476157******4130 MCC 5541",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000100422",
+       "entryReference": "0000000010",
+       "bookingDate": "2025-12-16",
+       "valueDate": "2025-12-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.86"
+       },
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT",
+       "additionalInformation": "BOLT 476157******4130 MCC 4121",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000100423",
+       "entryReference": "0000000011",
+       "bookingDate": "2025-12-16",
+       "valueDate": "2025-12-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.86"
+       },
+       "creditorName": "YANDEX GO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - YANDEX GO",
+       "additionalInformation": "YANDEX GO 476157******4130 MCC 4121",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000100433",
+       "entryReference": "0000000012",
+       "bookingDate": "2025-12-29",
+       "valueDate": "2025-12-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.10"
+       },
+       "creditorName": "PHARMADEPOT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - PHARMADEPOT",
+       "additionalInformation": "PHARMADEPOT Tbilisi 476157******4130 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000100446",
+       "entryReference": "0000000013",
+       "bookingDate": "2026-01-06",
+       "valueDate": "2026-01-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-98.96"
+       },
+       "creditorName": "MEDICLUB GEORGIA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MEDICLUB GEORGIA",
+       "additionalInformation": "MEDICLUB GEORGIA Tbilisi 476157******4130 MCC 8011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000100453",
+       "entryReference": "0000000014",
+       "bookingDate": "2026-01-13",
+       "valueDate": "2026-01-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.54"
+       },
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "additionalInformation": "MINI MARKET Tbilisi 476157******4130 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000100454",
+       "entryReference": "0000000015",
+       "bookingDate": "2026-01-13",
+       "valueDate": "2026-01-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.62"
+       },
+       "creditorName": "YANDEX GO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - YANDEX GO",
+       "additionalInformation": "YANDEX GO 476157******4130 MCC 4121",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/9e99b179-1fbd-549b-8b04-b816598222b2"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/9e99b179-1fbd-549b-8b04-b816598222b2/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "77d4cf90-771e-5102-b28f-2ccc016d6292",
+      "maskedPan": "476157******4130",
+      "currency": "GEL",
+      "ownerName": "NESTAN MGELADZE",
+      "name": "NESTAN MGELADZE",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.37"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-01-11T18:58:32"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.37"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-01-11T18:58:32"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/77d4cf90-771e-5102-b28f-2ccc016d6292/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/77d4cf90-771e-5102-b28f-2ccc016d6292/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/77d4cf90-771e-5102-b28f-2ccc016d6292",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "77d4cf90-771e-5102-b28f-2ccc016d6292",
+     "maskedPan": "476157******4130",
+     "currency": "GEL",
+     "ownerName": "NESTAN MGELADZE",
+     "name": "NESTAN MGELADZE",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "1.37"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-01-11T18:58:32"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "1.37"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-01-11T18:58:32"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/77d4cf90-771e-5102-b28f-2ccc016d6292/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/77d4cf90-771e-5102-b28f-2ccc016d6292/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/77d4cf90-771e-5102-b28f-2ccc016d6292/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "476157******4130",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.37"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1.37"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-01-11T18:58:32"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/77d4cf90-771e-5102-b28f-2ccc016d6292/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00000100361",
+       "transactionDate": "2025-11-01",
+       "bookingDate": "2025-11-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.78"
+       },
+       "acceptorTransactionDateTime": "2025-11-01T16:00:48",
+       "maskedPAN": "476157******4130",
+       "transactionDetails": "ბარათით გადახდა - DAILY MARKET",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "DAILY MARKET",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "d_00000100364",
+       "transactionDate": "2025-11-07",
+       "bookingDate": "2025-11-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.71"
+       },
+       "acceptorTransactionDateTime": "2025-11-07T20:36:17",
+       "maskedPAN": "476157******4130",
+       "transactionDetails": "ბარათით გადახდა - SHAVI LOMI",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SHAVI LOMI",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000100373",
+       "transactionDate": "2025-11-13",
+       "bookingDate": "2025-11-14",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-130.00"
+       },
+       "acceptorTransactionDateTime": "2025-11-13T13:54:53",
+       "maskedPAN": "476157******4130",
+       "transactionDetails": "ბანკომატიდან განაღდება",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "ATM BANK OF GEORGIA",
+       "merchantCategoryCode": "6011"
+      },
+      {
+       "cardTransactionId": "d_00000100383",
+       "transactionDate": "2025-11-16",
+       "bookingDate": "2025-11-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.73"
+       },
+       "acceptorTransactionDateTime": "2025-11-16T10:54:34",
+       "maskedPAN": "476157******4130",
+       "transactionDetails": "ბარათით გადახდა - MAXIM",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MAXIM",
+       "merchantCategoryCode": "4121"
+      },
+      {
+       "cardTransactionId": "d_00000100388",
+       "transactionDate": "2025-11-18",
+       "bookingDate": "2025-11-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-8.73"
+       },
+       "acceptorTransactionDateTime": "2025-11-18T09:59:24",
+       "maskedPAN": "476157******4130",
+       "transactionDetails": "ბარათით გადახდა - DAILY MARKET",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "DAILY MARKET",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "d_00000100396",
+       "transactionDate": "2025-11-27",
+       "bookingDate": "2025-11-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.83"
+       },
+       "acceptorTransactionDateTime": "2025-11-27T20:58:18",
+       "maskedPAN": "476157******4130",
+       "transactionDetails": "ბარათით გადახდა - DAILY MARKET",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "DAILY MARKET",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "d_00000100400",
+       "transactionDate": "2025-11-29",
+       "bookingDate": "2025-12-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.83"
+       },
+       "acceptorTransactionDateTime": "2025-11-29T14:16:22",
+       "maskedPAN": "476157******4130",
+       "transactionDetails": "ბარათით გადახდა - BOLT",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "BOLT",
+       "merchantCategoryCode": "4121"
+      },
+      {
+       "cardTransactionId": "d_00000100405",
+       "transactionDate": "2025-12-02",
+       "bookingDate": "2025-12-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.90"
+       },
+       "acceptorTransactionDateTime": "2025-12-02T19:29:20",
+       "maskedPAN": "476157******4130",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000100413",
+       "transactionDate": "2025-12-11",
+       "bookingDate": "2025-12-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.00"
+       },
+       "acceptorTransactionDateTime": "2025-12-11T13:03:00",
+       "maskedPAN": "476157******4130",
+       "transactionDetails": "ბარათით გადახდა - GULF",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GULF",
+       "merchantCategoryCode": "5541"
+      },
+      {
+       "cardTransactionId": "d_00000100422",
+       "transactionDate": "2025-12-15",
+       "bookingDate": "2025-12-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.86"
+       },
+       "acceptorTransactionDateTime": "2025-12-15T19:36:01",
+       "maskedPAN": "476157******4130",
+       "transactionDetails": "ბარათით გადახდა - BOLT",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "BOLT",
+       "merchantCategoryCode": "4121"
+      },
+      {
+       "cardTransactionId": "d_00000100423",
+       "transactionDate": "2025-12-15",
+       "bookingDate": "2025-12-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.86"
+       },
+       "acceptorTransactionDateTime": "2025-12-15T20:15:20",
+       "maskedPAN": "476157******4130",
+       "transactionDetails": "ბარათით გადახდა - YANDEX GO",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "YANDEX GO",
+       "merchantCategoryCode": "4121"
+      },
+      {
+       "cardTransactionId": "d_00000100433",
+       "transactionDate": "2025-12-25",
+       "bookingDate": "2025-12-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.10"
+       },
+       "acceptorTransactionDateTime": "2025-12-25T08:01:34",
+       "maskedPAN": "476157******4130",
+       "transactionDetails": "ბარათით გადახდა - PHARMADEPOT",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "PHARMADEPOT",
+       "merchantCategoryCode": "5912"
+      },
+      {
+       "cardTransactionId": "d_00000100446",
+       "transactionDate": "2026-01-04",
+       "bookingDate": "2026-01-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-98.96"
+       },
+       "acceptorTransactionDateTime": "2026-01-04T13:25:35",
+       "maskedPAN": "476157******4130",
+       "transactionDetails": "ბარათით გადახდა - MEDICLUB GEORGIA",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MEDICLUB GEORGIA",
+       "merchantCategoryCode": "8011"
+      },
+      {
+       "cardTransactionId": "d_00000100453",
+       "transactionDate": "2026-01-10",
+       "bookingDate": "2026-01-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.54"
+       },
+       "acceptorTransactionDateTime": "2026-01-10T07:41:22",
+       "maskedPAN": "476157******4130",
+       "transactionDetails": "ბარათით გადახდა - MINI MARKET",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MINI MARKET",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "d_00000100454",
+       "transactionDate": "2026-01-11",
+       "bookingDate": "2026-01-13",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.62"
+       },
+       "acceptorTransactionDateTime": "2026-01-11T18:58:32",
+       "maskedPAN": "476157******4130",
+       "transactionDetails": "ბარათით გადახდა - YANDEX GO",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "YANDEX GO",
+       "merchantCategoryCode": "4121"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/9e99b179-1fbd-549b-8b04-b816598222b2"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/77d4cf90-771e-5102-b28f-2ccc016d6292/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "476157******4130",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

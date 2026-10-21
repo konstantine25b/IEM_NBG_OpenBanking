@@ -1,0 +1,880 @@
+{
+ "bank": "liberty",
+ "customer": "C00041",
+ "dialect": "altasoft_v08",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "2f46ccef-0db1-50bf-b967-a816ce4fc882",
+      "iban": "GE95LB1599303051841486",
+      "currency": "GEL",
+      "ownerName": "ZURAB KAPANADZE",
+      "name": "ZURAB KAPANADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "LBRTGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "56.26"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-18T18:44:29"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "56.26"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-18T18:44:29"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v1/accounts/2f46ccef-0db1-50bf-b967-a816ce4fc882/balances"
+       },
+       "transactions": {
+        "href": "v1/accounts/2f46ccef-0db1-50bf-b967-a816ce4fc882/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/2f46ccef-0db1-50bf-b967-a816ce4fc882",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "2f46ccef-0db1-50bf-b967-a816ce4fc882",
+     "iban": "GE95LB1599303051841486",
+     "currency": "GEL",
+     "ownerName": "ZURAB KAPANADZE",
+     "name": "ZURAB KAPANADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "LBRTGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v1/accounts/2f46ccef-0db1-50bf-b967-a816ce4fc882/balances"
+      },
+      "transactions": {
+       "href": "v1/accounts/2f46ccef-0db1-50bf-b967-a816ce4fc882/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/2f46ccef-0db1-50bf-b967-a816ce4fc882/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE95LB1599303051841486",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "82.48"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "56.26"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-18T18:44:29"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/2f46ccef-0db1-50bf-b967-a816ce4fc882/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE95LB1599303051841486",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00000020692",
+       "entryReference": "0000000001",
+       "bookingDate": "2026-07-19",
+       "valueDate": "2026-07-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "26343.49"
+       },
+       "debtorName": "Liberty Bank",
+       "remittanceInformationUnstructured": "სესხის გაცემა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000020695",
+       "entryReference": "0000000002",
+       "bookingDate": "2026-07-20",
+       "valueDate": "2026-07-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-24236.01"
+       },
+       "creditorName": "REVAZ BAKRADZE",
+       "creditorAccount": {
+        "iban": "GE87BG1538983718523122"
+       },
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "გადახდა ხელშეკრულებით",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000020696",
+       "entryReference": "0000000003",
+       "bookingDate": "2026-07-21",
+       "valueDate": "2026-07-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.21"
+       },
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "additionalInformation": "DAILY MARKET Kobuleti 418057******6232 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000020701",
+       "entryReference": "0000000004",
+       "bookingDate": "2026-07-27",
+       "valueDate": "2026-07-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-500.00"
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM BANK OF GEORGIA Kobuleti 418057******6232 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000020706",
+       "entryReference": "0000000005",
+       "bookingDate": "2026-07-29",
+       "valueDate": "2026-07-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-34.71"
+       },
+       "creditorName": "AVERSI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AVERSI",
+       "additionalInformation": "AVERSI Kobuleti 418057******6232 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000020711",
+       "entryReference": "0000000006",
+       "bookingDate": "2026-07-31",
+       "valueDate": "2026-07-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-142.91"
+       },
+       "creditorName": "AVERSI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AVERSI",
+       "additionalInformation": "AVERSI Kobuleti 418057******6232 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000020720",
+       "entryReference": "0000000007",
+       "bookingDate": "2026-08-04",
+       "valueDate": "2026-08-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-39.43"
+       },
+       "creditorName": "AVERSI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AVERSI",
+       "additionalInformation": "AVERSI Tbilisi 418057******6232 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000020721",
+       "entryReference": "0000000008",
+       "bookingDate": "2026-08-04",
+       "valueDate": "2026-08-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-375.00"
+       },
+       "creditorName": "SOCAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SOCAR",
+       "additionalInformation": "SOCAR Kobuleti 418057******6232 MCC 5541",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000020727",
+       "entryReference": "0000000009",
+       "bookingDate": "2026-08-05",
+       "valueDate": "2026-08-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1439.84"
+       },
+       "endToEndId": "E2E0000020725",
+       "debtorName": "ZURAB KAPANADZE",
+       "debtorAccount": {
+        "iban": "GE96PB1250920051794419"
+       },
+       "debtorAgent": "PAHAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000020729",
+       "entryReference": "0000000010",
+       "bookingDate": "2026-08-06",
+       "valueDate": "2026-08-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1435.54"
+       },
+       "creditorName": "Liberty Bank",
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 594F5711",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000020730",
+       "entryReference": "0000000011",
+       "bookingDate": "2026-08-06",
+       "valueDate": "2026-08-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.30"
+       },
+       "creditorName": "Liberty Bank",
+       "remittanceInformationUnstructured": "ჯარიმა ვადაგადაცილებაზე",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000020731",
+       "entryReference": "0000000012",
+       "bookingDate": "2026-08-10",
+       "valueDate": "2026-08-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-227.25"
+       },
+       "creditorName": "GPC",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GPC",
+       "additionalInformation": "GPC Kobuleti 418057******6232 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000020749",
+       "entryReference": "0000000013",
+       "bookingDate": "2026-09-02",
+       "valueDate": "2026-09-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1435.54"
+       },
+       "endToEndId": "E2E0000020747",
+       "debtorName": "ZURAB KAPANADZE",
+       "debtorAccount": {
+        "iban": "GE96PB1250920051794419"
+       },
+       "debtorAgent": "PAHAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000020750",
+       "entryReference": "0000000014",
+       "bookingDate": "2026-09-03",
+       "valueDate": "2026-09-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1435.54"
+       },
+       "creditorName": "Liberty Bank",
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 594F5711",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000020753",
+       "entryReference": "0000000015",
+       "bookingDate": "2026-09-07",
+       "valueDate": "2026-09-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-570.00"
+       },
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "additionalInformation": "ATM BANK OF GEORGIA Kobuleti 418057******6232 MCC 6011",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000020761",
+       "entryReference": "0000000016",
+       "bookingDate": "2026-09-21",
+       "valueDate": "2026-09-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.65"
+       },
+       "creditorName": "AVERSI",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AVERSI",
+       "additionalInformation": "AVERSI Kobuleti 418057******6232 MCC 5912",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "c_00000020770",
+       "entryReference": "0000000017",
+       "bookingDate": "2026-10-02",
+       "valueDate": "2026-10-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "1438.41"
+       },
+       "endToEndId": "E2E0000020768",
+       "debtorName": "ZURAB KAPANADZE",
+       "debtorAccount": {
+        "iban": "GE96PB1250920051794419"
+       },
+       "debtorAgent": "PAHAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "proprietaryBankTransactionCode": "GMI"
+      },
+      {
+       "transactionId": "d_00000020775",
+       "entryReference": "0000000018",
+       "bookingDate": "2026-10-05",
+       "valueDate": "2026-10-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1435.54"
+       },
+       "creditorName": "Liberty Bank",
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 594F5711",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000020776",
+       "entryReference": "0000000019",
+       "bookingDate": "2026-10-05",
+       "valueDate": "2026-10-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.87"
+       },
+       "creditorName": "Liberty Bank",
+       "remittanceInformationUnstructured": "ჯარიმა ვადაგადაცილებაზე",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000020771",
+       "entryReference": "0000000020",
+       "bookingDate": "2026-10-06",
+       "valueDate": "2026-10-03",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.53"
+       },
+       "creditorName": "GOOGLE *YOUTUBE",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7165",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-10-03"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GOOGLE *YOUTUBE",
+       "additionalInformation": "GOOGLE *YOUTUBE 418057******6232 MCC 7832",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000020777",
+       "entryReference": "0000000021",
+       "bookingDate": "2026-10-06",
+       "valueDate": "2026-10-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-16.31"
+       },
+       "creditorName": "NETFLIX",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7292",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-10-05"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - NETFLIX",
+       "additionalInformation": "NETFLIX 418057******6232 MCC 7832",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000020789",
+       "entryReference": "0000000022",
+       "bookingDate": "2026-10-16",
+       "valueDate": "2026-10-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-58.00"
+       },
+       "creditorName": "LIBRE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - LIBRE",
+       "additionalInformation": "LIBRE Kobuleti 418057******6232 MCC 5411",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000020794",
+       "entryReference": "0000000023",
+       "bookingDate": "2026-10-19",
+       "valueDate": "2026-10-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-11.94"
+       },
+       "creditorName": "GLOVO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GLOVO",
+       "additionalInformation": "GLOVO 418057******6232 MCC 5812",
+       "proprietaryBankTransactionCode": "GMB"
+      },
+      {
+       "transactionId": "d_00000020795",
+       "entryReference": "0000000024",
+       "bookingDate": "2026-10-19",
+       "valueDate": "2026-10-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.28"
+       },
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KIOSK",
+       "additionalInformation": "KIOSK Tbilisi 418057******6232 MCC 5499",
+       "proprietaryBankTransactionCode": "GMB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v1/accounts/2f46ccef-0db1-50bf-b967-a816ce4fc882"
+      },
+      "first": {
+       "href": "v1/accounts/2f46ccef-0db1-50bf-b967-a816ce4fc882/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "4c0781ac-d11d-5c10-bc2f-5701e8720281",
+      "maskedPan": "418057******6232",
+      "currency": "GEL",
+      "ownerName": "ZURAB KAPANADZE",
+      "name": "ZURAB KAPANADZE",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "56.26"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-18T18:44:29"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "56.26"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-18T18:44:29"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v1/card-accounts/4c0781ac-d11d-5c10-bc2f-5701e8720281/balances"
+       },
+       "transactions": {
+        "href": "v1/card-accounts/4c0781ac-d11d-5c10-bc2f-5701e8720281/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/4c0781ac-d11d-5c10-bc2f-5701e8720281",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "4c0781ac-d11d-5c10-bc2f-5701e8720281",
+     "maskedPan": "418057******6232",
+     "currency": "GEL",
+     "ownerName": "ZURAB KAPANADZE",
+     "name": "ZURAB KAPANADZE",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "56.26"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-18T18:44:29"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "56.26"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-18T18:44:29"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v1/card-accounts/4c0781ac-d11d-5c10-bc2f-5701e8720281/balances"
+      },
+      "transactions": {
+       "href": "v1/card-accounts/4c0781ac-d11d-5c10-bc2f-5701e8720281/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/4c0781ac-d11d-5c10-bc2f-5701e8720281/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "418057******6232",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "82.48"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "56.26"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-18T18:44:29"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/4c0781ac-d11d-5c10-bc2f-5701e8720281/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00000020696",
+       "transactionDate": "2026-07-20",
+       "bookingDate": "2026-07-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.21"
+       },
+       "acceptorTransactionDateTime": "2026-07-20T14:05:15",
+       "maskedPAN": "418057******6232",
+       "transactionDetails": "ბარათით გადახდა - DAILY MARKET",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "DAILY MARKET",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "d_00000020701",
+       "transactionDate": "2026-07-24",
+       "bookingDate": "2026-07-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-500.00"
+       },
+       "acceptorTransactionDateTime": "2026-07-24T16:32:27",
+       "maskedPAN": "418057******6232",
+       "transactionDetails": "ბანკომატიდან განაღდება",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "ATM BANK OF GEORGIA",
+       "merchantCategoryCode": "6011"
+      },
+      {
+       "cardTransactionId": "d_00000020706",
+       "transactionDate": "2026-07-27",
+       "bookingDate": "2026-07-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-34.71"
+       },
+       "acceptorTransactionDateTime": "2026-07-27T18:19:25",
+       "maskedPAN": "418057******6232",
+       "transactionDetails": "ბარათით გადახდა - AVERSI",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AVERSI",
+       "merchantCategoryCode": "5912"
+      },
+      {
+       "cardTransactionId": "d_00000020711",
+       "transactionDate": "2026-07-29",
+       "bookingDate": "2026-07-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-142.91"
+       },
+       "acceptorTransactionDateTime": "2026-07-29T19:58:33",
+       "maskedPAN": "418057******6232",
+       "transactionDetails": "ბარათით გადახდა - AVERSI",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AVERSI",
+       "merchantCategoryCode": "5912"
+      },
+      {
+       "cardTransactionId": "d_00000020720",
+       "transactionDate": "2026-08-03",
+       "bookingDate": "2026-08-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-39.43"
+       },
+       "acceptorTransactionDateTime": "2026-08-03T18:10:00",
+       "maskedPAN": "418057******6232",
+       "transactionDetails": "ბარათით გადახდა - AVERSI",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AVERSI",
+       "merchantCategoryCode": "5912"
+      },
+      {
+       "cardTransactionId": "d_00000020721",
+       "transactionDate": "2026-08-03",
+       "bookingDate": "2026-08-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-375.00"
+       },
+       "acceptorTransactionDateTime": "2026-08-03T20:45:29",
+       "maskedPAN": "418057******6232",
+       "transactionDetails": "ბარათით გადახდა - SOCAR",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SOCAR",
+       "merchantCategoryCode": "5541"
+      },
+      {
+       "cardTransactionId": "d_00000020731",
+       "transactionDate": "2026-08-07",
+       "bookingDate": "2026-08-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-227.25"
+       },
+       "acceptorTransactionDateTime": "2026-08-07T09:09:50",
+       "maskedPAN": "418057******6232",
+       "transactionDetails": "ბარათით გადახდა - GPC",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GPC",
+       "merchantCategoryCode": "5912"
+      },
+      {
+       "cardTransactionId": "d_00000020753",
+       "transactionDate": "2026-09-06",
+       "bookingDate": "2026-09-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-570.00"
+       },
+       "acceptorTransactionDateTime": "2026-09-06T13:29:42",
+       "maskedPAN": "418057******6232",
+       "transactionDetails": "ბანკომატიდან განაღდება",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "ATM BANK OF GEORGIA",
+       "merchantCategoryCode": "6011"
+      },
+      {
+       "cardTransactionId": "d_00000020761",
+       "transactionDate": "2026-09-20",
+       "bookingDate": "2026-09-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.65"
+       },
+       "acceptorTransactionDateTime": "2026-09-20T14:59:07",
+       "maskedPAN": "418057******6232",
+       "transactionDetails": "ბარათით გადახდა - AVERSI",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "AVERSI",
+       "merchantCategoryCode": "5912"
+      },
+      {
+       "cardTransactionId": "d_00000020771",
+       "transactionDate": "2026-10-03",
+       "bookingDate": "2026-10-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-23.53"
+       },
+       "acceptorTransactionDateTime": "2026-10-03T08:19:04",
+       "maskedPAN": "418057******6232",
+       "transactionDetails": "ბარათით გადახდა - GOOGLE *YOUTUBE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GOOGLE *YOUTUBE",
+       "merchantCategoryCode": "7832"
+      },
+      {
+       "cardTransactionId": "d_00000020777",
+       "transactionDate": "2026-10-05",
+       "bookingDate": "2026-10-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-16.31"
+       },
+       "acceptorTransactionDateTime": "2026-10-05T16:19:05",
+       "maskedPAN": "418057******6232",
+       "transactionDetails": "ბარათით გადახდა - NETFLIX",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "NETFLIX",
+       "merchantCategoryCode": "7832"
+      },
+      {
+       "cardTransactionId": "d_00000020789",
+       "transactionDate": "2026-10-15",
+       "bookingDate": "2026-10-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-58.00"
+       },
+       "acceptorTransactionDateTime": "2026-10-15T07:33:22",
+       "maskedPAN": "418057******6232",
+       "transactionDetails": "ბარათით გადახდა - LIBRE",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "LIBRE",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00000020794",
+       "transactionDate": "2026-10-18",
+       "bookingDate": "2026-10-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-11.94"
+       },
+       "acceptorTransactionDateTime": "2026-10-18T18:29:32",
+       "maskedPAN": "418057******6232",
+       "transactionDetails": "ბარათით გადახდა - GLOVO",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GLOVO",
+       "merchantCategoryCode": "5812"
+      },
+      {
+       "cardTransactionId": "d_00000020795",
+       "transactionDate": "2026-10-18",
+       "bookingDate": "2026-10-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.28"
+       },
+       "acceptorTransactionDateTime": "2026-10-18T18:44:29",
+       "maskedPAN": "418057******6232",
+       "transactionDetails": "ბარათით გადახდა - KIOSK",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KIOSK",
+       "merchantCategoryCode": "5499"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v1/accounts/2f46ccef-0db1-50bf-b967-a816ce4fc882"
+      },
+      "first": {
+       "href": "v1/card-accounts/4c0781ac-d11d-5c10-bc2f-5701e8720281/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "418057******6232",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}
