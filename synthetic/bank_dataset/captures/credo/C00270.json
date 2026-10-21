@@ -1,0 +1,349 @@
+{
+ "bank": "credo",
+ "customer": "C00270",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "d62609c6-196b-5464-924b-1180a03d4dee",
+      "iban": "GE04CD1768192812766101",
+      "currency": "GEL",
+      "ownerName": "MARIKA SULABERIDZE",
+      "name": "MARIKA SULABERIDZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "JSCRGE22",
+      "usage": "ORGA",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1401.17"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-06-10T10:09:03"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1401.17"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-06-10T10:09:03"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/d62609c6-196b-5464-924b-1180a03d4dee/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/d62609c6-196b-5464-924b-1180a03d4dee/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/d62609c6-196b-5464-924b-1180a03d4dee",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "d62609c6-196b-5464-924b-1180a03d4dee",
+     "iban": "GE04CD1768192812766101",
+     "currency": "GEL",
+     "ownerName": "MARIKA SULABERIDZE",
+     "name": "MARIKA SULABERIDZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "JSCRGE22",
+     "usage": "ORGA",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/d62609c6-196b-5464-924b-1180a03d4dee/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/d62609c6-196b-5464-924b-1180a03d4dee/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/d62609c6-196b-5464-924b-1180a03d4dee/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE04CD1768192812766101",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1401.17"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1401.17"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-06-10T10:09:03"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/d62609c6-196b-5464-924b-1180a03d4dee/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE04CD1768192812766101",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00107600001",
+       "entryReference": "00107600001",
+       "valueDate": "2026-06-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "37901.17"
+       },
+       "bookingDate": "2026-06-10",
+       "debtorName": "MARIKA SULABERIDZE",
+       "remittanceInformationUnstructured": "ანაბრისთვის თანხის შემოტანა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "37901.17"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-10"
+       }
+      },
+      {
+       "transactionId": "d_00107600002",
+       "entryReference": "00107600002",
+       "valueDate": "2026-06-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-36500.00"
+       },
+       "bookingDate": "2026-06-10",
+       "endToEndId": "E2E9E536AF97964",
+       "creditorName": "Credo Bank",
+       "creditorAccount": {
+        "iban": "GE80CD3234857924392162"
+       },
+       "remittanceInformationUnstructured": "ანაბრის გახსნა",
+       "bankTransactionCode": "PMNT-ICDT-BOOK",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1401.17"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-10"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/d62609c6-196b-5464-924b-1180a03d4dee"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/d62609c6-196b-5464-924b-1180a03d4dee/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "e22454e2-ffe1-5e9f-a9a9-94d1f250f103",
+      "maskedPan": "545424******3210",
+      "currency": "GEL",
+      "ownerName": "MARIKA SULABERIDZE",
+      "name": "MARIKA SULABERIDZE",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "ORGA",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1401.17"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-06-10T10:09:03"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1401.17"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-06-10T10:09:03"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/e22454e2-ffe1-5e9f-a9a9-94d1f250f103/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/e22454e2-ffe1-5e9f-a9a9-94d1f250f103/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/e22454e2-ffe1-5e9f-a9a9-94d1f250f103",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "e22454e2-ffe1-5e9f-a9a9-94d1f250f103",
+     "maskedPan": "545424******3210",
+     "currency": "GEL",
+     "ownerName": "MARIKA SULABERIDZE",
+     "name": "MARIKA SULABERIDZE",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "ORGA",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "1401.17"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-06-10T10:09:03"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "1401.17"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-06-10T10:09:03"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/e22454e2-ffe1-5e9f-a9a9-94d1f250f103/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/e22454e2-ffe1-5e9f-a9a9-94d1f250f103/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/e22454e2-ffe1-5e9f-a9a9-94d1f250f103/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "545424******3210",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1401.17"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "1401.17"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-06-10T10:09:03"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/e22454e2-ffe1-5e9f-a9a9-94d1f250f103/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/d62609c6-196b-5464-924b-1180a03d4dee"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/e22454e2-ffe1-5e9f-a9a9-94d1f250f103/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "545424******3210",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

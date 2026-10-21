@@ -1,0 +1,732 @@
+{
+ "bank": "pasha",
+ "customer": "C00768",
+ "dialect": "altasoft_v2",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v2/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "5ecf532d-3703-5306-b25b-f454e020285c",
+      "iban": "GE15PB1291113988367517",
+      "currency": "GEL",
+      "ownerName": "LAMARA KHARAISHVILI",
+      "name": "LAMARA KHARAISHVILI",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "PAHAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.13"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-10T08:20:59"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.13"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-10T08:20:59"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/accounts/5ecf532d-3703-5306-b25b-f454e020285c/balances"
+       },
+       "transactions": {
+        "href": "v2/accounts/5ecf532d-3703-5306-b25b-f454e020285c/transactions"
+       }
+      },
+      "displayName": "Current account",
+      "other": {
+       "identification": "1291113988367517",
+       "issuer": "PASHA Bank Georgia"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/5ecf532d-3703-5306-b25b-f454e020285c",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "5ecf532d-3703-5306-b25b-f454e020285c",
+     "iban": "GE15PB1291113988367517",
+     "currency": "GEL",
+     "ownerName": "LAMARA KHARAISHVILI",
+     "name": "LAMARA KHARAISHVILI",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "PAHAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v2/accounts/5ecf532d-3703-5306-b25b-f454e020285c/balances"
+      },
+      "transactions": {
+       "href": "v2/accounts/5ecf532d-3703-5306-b25b-f454e020285c/transactions"
+      }
+     },
+     "displayName": "Current account",
+     "other": {
+      "identification": "1291113988367517",
+      "issuer": "PASHA Bank Georgia"
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/5ecf532d-3703-5306-b25b-f454e020285c/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE15PB1291113988367517",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.13"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.13"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-11-10T08:20:59"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/5ecf532d-3703-5306-b25b-f454e020285c/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE15PB1291113988367517",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "GE15PB1291113988367517_306800001",
+       "entryReference": "00306800001",
+       "valueDate": "2025-10-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.90"
+       },
+       "bookingDate": "2025-10-22",
+       "creditor": {
+        "name": "AGROHUB"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - AGROHUB"
+       ],
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "12.56"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-22"
+       },
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "76700004",
+        "transactionDateTime": "2025-10-20T20:00:50"
+       },
+       "additionalTransactionInformation": "AGROHUB"
+      },
+      {
+       "transactionId": "GE15PB1291113988367517_306800002",
+       "entryReference": "00306800002",
+       "valueDate": "2025-10-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.79"
+       },
+       "bookingDate": "2025-10-27",
+       "creditor": {
+        "name": "CARREFOUR"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - CARREFOUR"
+       ],
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "6.77"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-27"
+       },
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "76700019",
+        "transactionDateTime": "2025-10-26T11:05:12"
+       },
+       "additionalTransactionInformation": "CARREFOUR"
+      },
+      {
+       "transactionId": "GE15PB1291113988367517_306800003",
+       "entryReference": "00306800003",
+       "valueDate": "2025-10-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.52"
+       },
+       "bookingDate": "2025-10-28",
+       "creditor": {
+        "name": "PSP"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - PSP"
+       ],
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "1.25"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-28"
+       },
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "76700014",
+        "transactionDateTime": "2025-10-24T18:18:33"
+       },
+       "additionalTransactionInformation": "PSP"
+      },
+      {
+       "transactionId": "GE15PB1291113988367517_306800004",
+       "entryReference": "00306800004",
+       "valueDate": "2025-11-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.12"
+       },
+       "bookingDate": "2025-11-12",
+       "creditor": {
+        "name": "KIOSK"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - KIOSK"
+       ],
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.13"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-12"
+       },
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "76700034",
+        "transactionDateTime": "2025-11-10T08:20:59"
+       },
+       "additionalTransactionInformation": "KIOSK"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/5ecf532d-3703-5306-b25b-f454e020285c"
+      },
+      "first": {
+       "href": "v2/accounts/5ecf532d-3703-5306-b25b-f454e020285c/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "4c0e4e22-30a1-56e5-afcb-56f20f8e78f8",
+      "maskedPan": "533286******2725",
+      "currency": "GEL",
+      "ownerName": "LAMARA KHARAISHVILI",
+      "name": "LAMARA KHARAISHVILI",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.13"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-10T08:20:59"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.13"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-10T08:20:59"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/card-accounts/4c0e4e22-30a1-56e5-afcb-56f20f8e78f8/balances"
+       },
+       "transactions": {
+        "href": "v2/card-accounts/4c0e4e22-30a1-56e5-afcb-56f20f8e78f8/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/4c0e4e22-30a1-56e5-afcb-56f20f8e78f8",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "4c0e4e22-30a1-56e5-afcb-56f20f8e78f8",
+     "maskedPan": "533286******2725",
+     "currency": "GEL",
+     "ownerName": "LAMARA KHARAISHVILI",
+     "name": "LAMARA KHARAISHVILI",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.13"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-11-10T08:20:59"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.13"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-11-10T08:20:59"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v2/card-accounts/4c0e4e22-30a1-56e5-afcb-56f20f8e78f8/balances"
+      },
+      "transactions": {
+       "href": "v2/card-accounts/4c0e4e22-30a1-56e5-afcb-56f20f8e78f8/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/4c0e4e22-30a1-56e5-afcb-56f20f8e78f8/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "533286******2725",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.13"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.13"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-11-10T08:20:59"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/4c0e4e22-30a1-56e5-afcb-56f20f8e78f8/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "GE15PB1291113988367517_306800001",
+       "transactionDate": "2025-10-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.90"
+       },
+       "acceptorTransactionDateTime": "2025-10-20T20:00:50",
+       "maskedPAN": "533286******2725",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "bookingDate": "2025-10-22",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE15PB1291113988367517_306800002",
+       "transactionDate": "2025-10-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.79"
+       },
+       "acceptorTransactionDateTime": "2025-10-26T11:05:12",
+       "maskedPAN": "533286******2725",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "bookingDate": "2025-10-27",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE15PB1291113988367517_306800003",
+       "transactionDate": "2025-10-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.52"
+       },
+       "acceptorTransactionDateTime": "2025-10-24T18:18:33",
+       "maskedPAN": "533286******2725",
+       "transactionDetails": "ბარათით გადახდა - PSP",
+       "bookingDate": "2025-10-28",
+       "cardAcceptorId": "PSP",
+       "merchantCategoryCode": "5912"
+      },
+      {
+       "cardTransactionId": "GE15PB1291113988367517_306800004",
+       "transactionDate": "2025-11-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.12"
+       },
+       "acceptorTransactionDateTime": "2025-11-10T08:20:59",
+       "maskedPAN": "533286******2725",
+       "transactionDetails": "ბარათით გადახდა - KIOSK",
+       "bookingDate": "2025-11-12",
+       "cardAcceptorId": "KIOSK",
+       "merchantCategoryCode": "5499"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/5ecf532d-3703-5306-b25b-f454e020285c"
+      },
+      "first": {
+       "href": "v2/card-accounts/4c0e4e22-30a1-56e5-afcb-56f20f8e78f8/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "533286******2725",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/cards",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cards": [
+     {
+      "resourceId": "4c0e4e22-30a1-56e5-afcb-56f20f8e78f8",
+      "maskedPan": "533286******2725",
+      "currency": "GEL",
+      "ownerName": "LAMARA KHARAISHVILI",
+      "name": "LAMARA KHARAISHVILI",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.13"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-10T08:20:59"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.13"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-11-10T08:20:59"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/card-accounts/4c0e4e22-30a1-56e5-afcb-56f20f8e78f8/balances"
+       },
+       "transactions": {
+        "href": "v2/card-accounts/4c0e4e22-30a1-56e5-afcb-56f20f8e78f8/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/cards/4c0e4e22-30a1-56e5-afcb-56f20f8e78f8",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "4c0e4e22-30a1-56e5-afcb-56f20f8e78f8",
+     "maskedPan": "533286******2725",
+     "currency": "GEL",
+     "ownerName": "LAMARA KHARAISHVILI",
+     "name": "LAMARA KHARAISHVILI",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.13"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-11-10T08:20:59"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.13"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-11-10T08:20:59"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v2/card-accounts/4c0e4e22-30a1-56e5-afcb-56f20f8e78f8/balances"
+      },
+      "transactions": {
+       "href": "v2/card-accounts/4c0e4e22-30a1-56e5-afcb-56f20f8e78f8/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/4c0e4e22-30a1-56e5-afcb-56f20f8e78f8/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "533286******2725",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.13"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.13"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-11-10T08:20:59"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/4c0e4e22-30a1-56e5-afcb-56f20f8e78f8/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "GE15PB1291113988367517_306800001",
+       "transactionDate": "2025-10-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.90"
+       },
+       "acceptorTransactionDateTime": "2025-10-20T20:00:50",
+       "maskedPAN": "533286******2725",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "bookingDate": "2025-10-22",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE15PB1291113988367517_306800002",
+       "transactionDate": "2025-10-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.79"
+       },
+       "acceptorTransactionDateTime": "2025-10-26T11:05:12",
+       "maskedPAN": "533286******2725",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "bookingDate": "2025-10-27",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE15PB1291113988367517_306800003",
+       "transactionDate": "2025-10-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.52"
+       },
+       "acceptorTransactionDateTime": "2025-10-24T18:18:33",
+       "maskedPAN": "533286******2725",
+       "transactionDetails": "ბარათით გადახდა - PSP",
+       "bookingDate": "2025-10-28",
+       "cardAcceptorId": "PSP",
+       "merchantCategoryCode": "5912"
+      },
+      {
+       "cardTransactionId": "GE15PB1291113988367517_306800004",
+       "transactionDate": "2025-11-10",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.12"
+       },
+       "acceptorTransactionDateTime": "2025-11-10T08:20:59",
+       "maskedPAN": "533286******2725",
+       "transactionDetails": "ბარათით გადახდა - KIOSK",
+       "bookingDate": "2025-11-12",
+       "cardAcceptorId": "KIOSK",
+       "merchantCategoryCode": "5499"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/5ecf532d-3703-5306-b25b-f454e020285c"
+      },
+      "first": {
+       "href": "v2/card-accounts/4c0e4e22-30a1-56e5-afcb-56f20f8e78f8/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "533286******2725",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": []
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/savings",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": []
+   }
+  }
+ ]
+}

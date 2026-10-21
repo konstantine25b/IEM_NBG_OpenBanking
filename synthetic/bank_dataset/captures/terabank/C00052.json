@@ -1,0 +1,294 @@
+{
+ "bank": "terabank",
+ "customer": "C00052",
+ "dialect": "altasoft_v08",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "27a5b0b0-e8d0-5682-bd8e-784f2c66cf92",
+      "iban": "GE90KS1214430621715702",
+      "currency": "GEL",
+      "owner": "DAVIT ASATIANI",
+      "name": "DAVIT ASATIANI",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "TEBAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v1/accounts/27a5b0b0-e8d0-5682-bd8e-784f2c66cf92/balances"
+       },
+       "transactions": {
+        "href": "v1/accounts/27a5b0b0-e8d0-5682-bd8e-784f2c66cf92/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/27a5b0b0-e8d0-5682-bd8e-784f2c66cf92",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "27a5b0b0-e8d0-5682-bd8e-784f2c66cf92",
+     "iban": "GE90KS1214430621715702",
+     "currency": "GEL",
+     "owner": "DAVIT ASATIANI",
+     "name": "DAVIT ASATIANI",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "TEBAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v1/accounts/27a5b0b0-e8d0-5682-bd8e-784f2c66cf92/balances"
+      },
+      "transactions": {
+       "href": "v1/accounts/27a5b0b0-e8d0-5682-bd8e-784f2c66cf92/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/27a5b0b0-e8d0-5682-bd8e-784f2c66cf92/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE90KS1214430621715702",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/27a5b0b0-e8d0-5682-bd8e-784f2c66cf92/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE90KS1214430621715702",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v1/accounts/27a5b0b0-e8d0-5682-bd8e-784f2c66cf92"
+      },
+      "first": {
+       "href": "v1/accounts/27a5b0b0-e8d0-5682-bd8e-784f2c66cf92/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "5c233333-f2f5-54e5-83e8-a4e74e2ed328",
+      "maskedPan": "439020******7996",
+      "currency": "GEL",
+      "ownerName": "DAVIT ASATIANI",
+      "name": "DAVIT ASATIANI",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v1/card-accounts/5c233333-f2f5-54e5-83e8-a4e74e2ed328/balances"
+       },
+       "transactions": {
+        "href": "v1/card-accounts/5c233333-f2f5-54e5-83e8-a4e74e2ed328/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/5c233333-f2f5-54e5-83e8-a4e74e2ed328",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "5c233333-f2f5-54e5-83e8-a4e74e2ed328",
+     "maskedPan": "439020******7996",
+     "currency": "GEL",
+     "ownerName": "DAVIT ASATIANI",
+     "name": "DAVIT ASATIANI",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.00"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.00"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v1/card-accounts/5c233333-f2f5-54e5-83e8-a4e74e2ed328/balances"
+      },
+      "transactions": {
+       "href": "v1/card-accounts/5c233333-f2f5-54e5-83e8-a4e74e2ed328/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/5c233333-f2f5-54e5-83e8-a4e74e2ed328/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "439020******7996",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/5c233333-f2f5-54e5-83e8-a4e74e2ed328/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v1/accounts/27a5b0b0-e8d0-5682-bd8e-784f2c66cf92"
+      },
+      "first": {
+       "href": "v1/card-accounts/5c233333-f2f5-54e5-83e8-a4e74e2ed328/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "439020******7996",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

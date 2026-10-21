@@ -1,0 +1,294 @@
+{
+ "bank": "credo",
+ "customer": "C00406",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "b88af973-4c62-5cc3-8e30-e9e4755cd98a",
+      "iban": "GE79CD1561742602386293",
+      "currency": "GEL",
+      "ownerName": "LIZI ONIANI",
+      "name": "LIZI ONIANI",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "JSCRGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "672.60"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "672.60"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/b88af973-4c62-5cc3-8e30-e9e4755cd98a/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/b88af973-4c62-5cc3-8e30-e9e4755cd98a/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/b88af973-4c62-5cc3-8e30-e9e4755cd98a",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "b88af973-4c62-5cc3-8e30-e9e4755cd98a",
+     "iban": "GE79CD1561742602386293",
+     "currency": "GEL",
+     "ownerName": "LIZI ONIANI",
+     "name": "LIZI ONIANI",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "JSCRGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/b88af973-4c62-5cc3-8e30-e9e4755cd98a/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/b88af973-4c62-5cc3-8e30-e9e4755cd98a/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/b88af973-4c62-5cc3-8e30-e9e4755cd98a/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE79CD1561742602386293",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "672.60"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "672.60"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/b88af973-4c62-5cc3-8e30-e9e4755cd98a/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE79CD1561742602386293",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/b88af973-4c62-5cc3-8e30-e9e4755cd98a"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/b88af973-4c62-5cc3-8e30-e9e4755cd98a/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "b1417213-8c2e-5b5f-96d9-f0224645129d",
+      "maskedPan": "545424******5404",
+      "currency": "GEL",
+      "ownerName": "LIZI ONIANI",
+      "name": "LIZI ONIANI",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "672.60"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "672.60"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/b1417213-8c2e-5b5f-96d9-f0224645129d/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/b1417213-8c2e-5b5f-96d9-f0224645129d/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/b1417213-8c2e-5b5f-96d9-f0224645129d",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "b1417213-8c2e-5b5f-96d9-f0224645129d",
+     "maskedPan": "545424******5404",
+     "currency": "GEL",
+     "ownerName": "LIZI ONIANI",
+     "name": "LIZI ONIANI",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "672.60"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "672.60"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/b1417213-8c2e-5b5f-96d9-f0224645129d/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/b1417213-8c2e-5b5f-96d9-f0224645129d/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/b1417213-8c2e-5b5f-96d9-f0224645129d/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "545424******5404",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "672.60"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "672.60"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/b1417213-8c2e-5b5f-96d9-f0224645129d/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/b88af973-4c62-5cc3-8e30-e9e4755cd98a"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/b1417213-8c2e-5b5f-96d9-f0224645129d/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "545424******5404",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,528 @@
+{
+ "bank": "tbc",
+ "customer": "C00048",
+ "dialect": "tbc",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "10d2986d-bb30-572f-8042-308f4fc7afff",
+      "iban": "GE40TB1605343631580295",
+      "currency": "GEL",
+      "ownerName": "გურამ ცინცაძე",
+      "name": "გურამ ცინცაძე",
+      "product": "Current account",
+      "cashAccountType": "CARD",
+      "status": "enabled",
+      "bic": "TBCBGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3.96"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-01-04T13:31:58"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3.96"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-01-04T13:31:58"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/10d2986d-bb30-572f-8042-308f4fc7afff/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/10d2986d-bb30-572f-8042-308f4fc7afff/transactions"
+       }
+      },
+      "msisdn": "598426810",
+      "ownerIdentification": {
+       "privateId": {
+        "others": [
+         {
+          "identification": "PNOGE-69097199103"
+         }
+        ]
+       }
+      },
+      "displayName": "Concept"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/10d2986d-bb30-572f-8042-308f4fc7afff",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "10d2986d-bb30-572f-8042-308f4fc7afff",
+     "iban": "GE40TB1605343631580295",
+     "currency": "GEL",
+     "ownerName": "გურამ ცინცაძე",
+     "name": "გურამ ცინცაძე",
+     "product": "Current account",
+     "cashAccountType": "CARD",
+     "status": "enabled",
+     "bic": "TBCBGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/10d2986d-bb30-572f-8042-308f4fc7afff/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/10d2986d-bb30-572f-8042-308f4fc7afff/transactions"
+      }
+     },
+     "msisdn": "598426810",
+     "ownerIdentification": {
+      "privateId": {
+       "others": [
+        {
+         "identification": "PNOGE-69097199103"
+        }
+       ]
+      }
+     },
+     "displayName": "Concept"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/10d2986d-bb30-572f-8042-308f4fc7afff/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE40TB1605343631580295",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "3.96"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "3.96"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-01-04T13:31:58"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/10d2986d-bb30-572f-8042-308f4fc7afff/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE40TB1605343631580295",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00018800001",
+       "entryReference": "00018800001",
+       "valueDate": "2025-10-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-205.00"
+       },
+       "bookingDate": "2025-10-20",
+       "creditorName": "SOCAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SOCAR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "45.01"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-20"
+       },
+       "proprietaryBankTransactionCode": "GMB",
+       "debtorIdentification": {
+        "privateId": {
+         "others": [
+          {
+           "identification": "PNOGE-69097199103"
+          }
+         ]
+        }
+       },
+       "additionalInformation": "ბარათით გადახდა - SOCAR"
+      },
+      {
+       "transactionId": "d_00018800002",
+       "entryReference": "00018800002",
+       "valueDate": "2025-11-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.29"
+       },
+       "bookingDate": "2025-11-13",
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "41.72"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-13"
+       },
+       "proprietaryBankTransactionCode": "GMB",
+       "debtorIdentification": {
+        "privateId": {
+         "others": [
+          {
+           "identification": "PNOGE-69097199103"
+          }
+         ]
+        }
+       },
+       "additionalInformation": "ბარათით გადახდა - MINI MARKET"
+      },
+      {
+       "transactionId": "d_00018800003",
+       "entryReference": "00018800003",
+       "valueDate": "2025-11-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-33.10"
+       },
+       "bookingDate": "2025-11-18",
+       "creditorName": "KHINKALI HOUSE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KHINKALI HOUSE",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "8.62"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-18"
+       },
+       "proprietaryBankTransactionCode": "GMB",
+       "debtorIdentification": {
+        "privateId": {
+         "others": [
+          {
+           "identification": "PNOGE-69097199103"
+          }
+         ]
+        }
+       },
+       "additionalInformation": "ბარათით გადახდა - KHINKALI HOUSE"
+      },
+      {
+       "transactionId": "d_00018800004",
+       "entryReference": "00018800004",
+       "valueDate": "2026-01-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.66"
+       },
+       "bookingDate": "2026-01-05",
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KIOSK",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3.96"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-05"
+       },
+       "proprietaryBankTransactionCode": "GMB",
+       "debtorIdentification": {
+        "privateId": {
+         "others": [
+          {
+           "identification": "PNOGE-69097199103"
+          }
+         ]
+        }
+       },
+       "additionalInformation": "ბარათით გადახდა - KIOSK"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/10d2986d-bb30-572f-8042-308f4fc7afff"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/10d2986d-bb30-572f-8042-308f4fc7afff/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "b019a16b-9f9d-5935-acda-d2c00063eba9",
+      "maskedPan": "418057******6453",
+      "currency": "GEL",
+      "ownerName": "გურამ ცინცაძე",
+      "name": "გურამ ცინცაძე",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3.96"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-01-04T13:31:58"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3.96"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-01-04T13:31:58"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/b019a16b-9f9d-5935-acda-d2c00063eba9/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/b019a16b-9f9d-5935-acda-d2c00063eba9/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/b019a16b-9f9d-5935-acda-d2c00063eba9",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "b019a16b-9f9d-5935-acda-d2c00063eba9",
+     "maskedPan": "418057******6453",
+     "currency": "GEL",
+     "ownerName": "გურამ ცინცაძე",
+     "name": "გურამ ცინცაძე",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "3.96"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-01-04T13:31:58"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "3.96"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-01-04T13:31:58"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/b019a16b-9f9d-5935-acda-d2c00063eba9/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/b019a16b-9f9d-5935-acda-d2c00063eba9/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/b019a16b-9f9d-5935-acda-d2c00063eba9/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "418057******6453",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "3.96"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "3.96"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-01-04T13:31:58"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/b019a16b-9f9d-5935-acda-d2c00063eba9/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00018800001",
+       "transactionDate": "2025-10-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-205.00"
+       },
+       "acceptorTransactionDateTime": "2025-10-19T20:56:21",
+       "transactionDetails": "ბარათით გადახდა - SOCAR",
+       "bookingDate": "2025-10-20",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "SOCAR",
+       "maskedPan": "418057******6453"
+      },
+      {
+       "cardTransactionId": "d_00018800002",
+       "transactionDate": "2025-11-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.29"
+       },
+       "acceptorTransactionDateTime": "2025-11-11T10:12:34",
+       "transactionDetails": "ბარათით გადახდა - MINI MARKET",
+       "bookingDate": "2025-11-13",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "MINI MARKET",
+       "maskedPan": "418057******6453"
+      },
+      {
+       "cardTransactionId": "d_00018800003",
+       "transactionDate": "2025-11-15",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-33.10"
+       },
+       "acceptorTransactionDateTime": "2025-11-15T12:13:13",
+       "transactionDetails": "ბარათით გადახდა - KHINKALI HOUSE",
+       "bookingDate": "2025-11-18",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KHINKALI HOUSE",
+       "maskedPan": "418057******6453"
+      },
+      {
+       "cardTransactionId": "d_00018800004",
+       "transactionDate": "2026-01-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-4.66"
+       },
+       "acceptorTransactionDateTime": "2026-01-04T13:31:58",
+       "transactionDetails": "ბარათით გადახდა - KIOSK",
+       "bookingDate": "2026-01-05",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KIOSK",
+       "maskedPan": "418057******6453"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/10d2986d-bb30-572f-8042-308f4fc7afff"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/b019a16b-9f9d-5935-acda-d2c00063eba9/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "418057******6453",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": []
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/savings",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": []
+   }
+  }
+ ]
+}

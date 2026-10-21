@@ -1,0 +1,409 @@
+{
+ "bank": "halyk",
+ "customer": "C01574",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "b7d5ffc3-924c-5c23-9dea-ae1e0c8c733a",
+      "iban": "GE28HB1283414969143528",
+      "currency": "GEL",
+      "ownerName": "DAVIT MEGRELISHVILI",
+      "name": "DAVIT MEGRELISHVILI",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "HABGGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.19"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-10-30T21:14:07"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.19"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-10-30T21:14:07"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/b7d5ffc3-924c-5c23-9dea-ae1e0c8c733a/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/b7d5ffc3-924c-5c23-9dea-ae1e0c8c733a/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/b7d5ffc3-924c-5c23-9dea-ae1e0c8c733a",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "b7d5ffc3-924c-5c23-9dea-ae1e0c8c733a",
+     "iban": "GE28HB1283414969143528",
+     "currency": "GEL",
+     "ownerName": "DAVIT MEGRELISHVILI",
+     "name": "DAVIT MEGRELISHVILI",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "HABGGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/b7d5ffc3-924c-5c23-9dea-ae1e0c8c733a/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/b7d5ffc3-924c-5c23-9dea-ae1e0c8c733a/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/b7d5ffc3-924c-5c23-9dea-ae1e0c8c733a/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE28HB1283414969143528",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.19"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.19"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-10-30T21:14:07"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/b7d5ffc3-924c-5c23-9dea-ae1e0c8c733a/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE28HB1283414969143528",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00629200001",
+       "entryReference": "00629200001",
+       "valueDate": "2025-10-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.60"
+       },
+       "bookingDate": "2025-10-27",
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "16.75"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-27"
+       }
+      },
+      {
+       "transactionId": "d_00629200002",
+       "entryReference": "00629200002",
+       "valueDate": "2025-10-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.60"
+       },
+       "bookingDate": "2025-10-30",
+       "creditorName": "DAILY MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - DAILY MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "7.15"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-30"
+       }
+      },
+      {
+       "transactionId": "d_00629200003",
+       "entryReference": "00629200003",
+       "valueDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.96"
+       },
+       "bookingDate": "2025-10-31",
+       "creditorName": "MAXIM",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MAXIM",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.19"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-31"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/b7d5ffc3-924c-5c23-9dea-ae1e0c8c733a"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/b7d5ffc3-924c-5c23-9dea-ae1e0c8c733a/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "3f0aa705-002f-54b0-b4ff-65c6fec89102",
+      "maskedPan": "517805******9173",
+      "currency": "GEL",
+      "ownerName": "DAVIT MEGRELISHVILI",
+      "name": "DAVIT MEGRELISHVILI",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.19"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-10-30T21:14:07"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.19"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-10-30T21:14:07"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/3f0aa705-002f-54b0-b4ff-65c6fec89102/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/3f0aa705-002f-54b0-b4ff-65c6fec89102/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/3f0aa705-002f-54b0-b4ff-65c6fec89102",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "3f0aa705-002f-54b0-b4ff-65c6fec89102",
+     "maskedPan": "517805******9173",
+     "currency": "GEL",
+     "ownerName": "DAVIT MEGRELISHVILI",
+     "name": "DAVIT MEGRELISHVILI",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.19"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-10-30T21:14:07"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.19"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-10-30T21:14:07"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/3f0aa705-002f-54b0-b4ff-65c6fec89102/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/3f0aa705-002f-54b0-b4ff-65c6fec89102/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/3f0aa705-002f-54b0-b4ff-65c6fec89102/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "517805******9173",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.19"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.19"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-10-30T21:14:07"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/3f0aa705-002f-54b0-b4ff-65c6fec89102/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00629200001",
+       "transactionDate": "2025-10-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.60"
+       },
+       "acceptorTransactionDateTime": "2025-10-26T11:37:43",
+       "maskedPAN": "517805******9173",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "bookingDate": "2025-10-27",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00629200002",
+       "transactionDate": "2025-10-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-9.60"
+       },
+       "acceptorTransactionDateTime": "2025-10-29T18:34:07",
+       "maskedPAN": "517805******9173",
+       "transactionDetails": "ბარათით გადახდა - DAILY MARKET",
+       "bookingDate": "2025-10-30",
+       "cardAcceptorId": "DAILY MARKET",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "d_00629200003",
+       "transactionDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.96"
+       },
+       "acceptorTransactionDateTime": "2025-10-30T21:14:07",
+       "maskedPAN": "517805******9173",
+       "transactionDetails": "ბარათით გადახდა - MAXIM",
+       "bookingDate": "2025-10-31",
+       "cardAcceptorId": "MAXIM",
+       "merchantCategoryCode": "4121"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/b7d5ffc3-924c-5c23-9dea-ae1e0c8c733a"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/3f0aa705-002f-54b0-b4ff-65c6fec89102/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "517805******9173",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

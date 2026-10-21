@@ -1,0 +1,610 @@
+{
+ "bank": "cartu",
+ "customer": "C00639",
+ "dialect": "altasoft_v2",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v2/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "c908f0de-5392-577b-b590-e1082a4fb41b",
+      "iban": "GE38CR1129163985317392",
+      "currency": "GEL",
+      "ownerName": "IRAKLI LOMIDZE",
+      "name": "IRAKLI LOMIDZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "CRTUGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "4.95"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-10-30T21:15:38"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "4.95"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-10-30T21:15:38"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/accounts/c908f0de-5392-577b-b590-e1082a4fb41b/balances"
+       },
+       "transactions": {
+        "href": "v2/accounts/c908f0de-5392-577b-b590-e1082a4fb41b/transactions"
+       }
+      },
+      "displayName": "Current account",
+      "other": {
+       "identification": "1129163985317392",
+       "issuer": "Cartu Bank"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/c908f0de-5392-577b-b590-e1082a4fb41b",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "c908f0de-5392-577b-b590-e1082a4fb41b",
+     "iban": "GE38CR1129163985317392",
+     "currency": "GEL",
+     "ownerName": "IRAKLI LOMIDZE",
+     "name": "IRAKLI LOMIDZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "CRTUGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v2/accounts/c908f0de-5392-577b-b590-e1082a4fb41b/balances"
+      },
+      "transactions": {
+       "href": "v2/accounts/c908f0de-5392-577b-b590-e1082a4fb41b/transactions"
+      }
+     },
+     "displayName": "Current account",
+     "other": {
+      "identification": "1129163985317392",
+      "issuer": "Cartu Bank"
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/c908f0de-5392-577b-b590-e1082a4fb41b/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE38CR1129163985317392",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "4.95"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "4.95"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-10-30T21:15:38"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/accounts/c908f0de-5392-577b-b590-e1082a4fb41b/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE38CR1129163985317392",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "GE38CR1129163985317392_255200001",
+       "entryReference": "00255200001",
+       "valueDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-18.50"
+       },
+       "bookingDate": "2025-10-23",
+       "creditor": {
+        "name": "CARREFOUR"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - CARREFOUR"
+       ],
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "15.44"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-23"
+       },
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "63800001",
+        "transactionDateTime": "2025-10-21T13:56:25"
+       },
+       "additionalTransactionInformation": "CARREFOUR"
+      },
+      {
+       "transactionId": "GE38CR1129163985317392_255200002",
+       "entryReference": "00255200002",
+       "valueDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.49"
+       },
+       "bookingDate": "2025-10-31",
+       "creditor": {
+        "name": "COFFEE LAB"
+       },
+       "remittanceInformationUnstructured": [
+        "ბარათით გადახდა - COFFEE LAB"
+       ],
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "4.95"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-31"
+       },
+       "cardTransaction": {
+        "paymentContext": {
+         "cardPresent": true
+        },
+        "sequenceNumber": "63800015",
+        "transactionDateTime": "2025-10-30T21:15:38"
+       },
+       "additionalTransactionInformation": "COFFEE LAB"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/c908f0de-5392-577b-b590-e1082a4fb41b"
+      },
+      "first": {
+       "href": "v2/accounts/c908f0de-5392-577b-b590-e1082a4fb41b/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "b2dda137-587c-5c38-8d51-a5e326a68aec",
+      "maskedPan": "533286******5528",
+      "currency": "GEL",
+      "ownerName": "IRAKLI LOMIDZE",
+      "name": "IRAKLI LOMIDZE",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "4.95"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-10-30T21:15:38"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "4.95"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-10-30T21:15:38"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/card-accounts/b2dda137-587c-5c38-8d51-a5e326a68aec/balances"
+       },
+       "transactions": {
+        "href": "v2/card-accounts/b2dda137-587c-5c38-8d51-a5e326a68aec/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/b2dda137-587c-5c38-8d51-a5e326a68aec",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "b2dda137-587c-5c38-8d51-a5e326a68aec",
+     "maskedPan": "533286******5528",
+     "currency": "GEL",
+     "ownerName": "IRAKLI LOMIDZE",
+     "name": "IRAKLI LOMIDZE",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "4.95"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-10-30T21:15:38"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "4.95"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-10-30T21:15:38"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v2/card-accounts/b2dda137-587c-5c38-8d51-a5e326a68aec/balances"
+      },
+      "transactions": {
+       "href": "v2/card-accounts/b2dda137-587c-5c38-8d51-a5e326a68aec/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/b2dda137-587c-5c38-8d51-a5e326a68aec/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "533286******5528",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "4.95"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "4.95"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-10-30T21:15:38"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/b2dda137-587c-5c38-8d51-a5e326a68aec/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "GE38CR1129163985317392_255200001",
+       "transactionDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-18.50"
+       },
+       "acceptorTransactionDateTime": "2025-10-21T13:56:25",
+       "maskedPAN": "533286******5528",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "bookingDate": "2025-10-23",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE38CR1129163985317392_255200002",
+       "transactionDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.49"
+       },
+       "acceptorTransactionDateTime": "2025-10-30T21:15:38",
+       "maskedPAN": "533286******5528",
+       "transactionDetails": "ბარათით გადახდა - COFFEE LAB",
+       "bookingDate": "2025-10-31",
+       "cardAcceptorId": "COFFEE LAB",
+       "merchantCategoryCode": "5814"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/c908f0de-5392-577b-b590-e1082a4fb41b"
+      },
+      "first": {
+       "href": "v2/card-accounts/b2dda137-587c-5c38-8d51-a5e326a68aec/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "533286******5528",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/cards",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cards": [
+     {
+      "resourceId": "b2dda137-587c-5c38-8d51-a5e326a68aec",
+      "maskedPan": "533286******5528",
+      "currency": "GEL",
+      "ownerName": "IRAKLI LOMIDZE",
+      "name": "IRAKLI LOMIDZE",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "4.95"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-10-30T21:15:38"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "4.95"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-10-30T21:15:38"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v2/card-accounts/b2dda137-587c-5c38-8d51-a5e326a68aec/balances"
+       },
+       "transactions": {
+        "href": "v2/card-accounts/b2dda137-587c-5c38-8d51-a5e326a68aec/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/cards/b2dda137-587c-5c38-8d51-a5e326a68aec",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "b2dda137-587c-5c38-8d51-a5e326a68aec",
+     "maskedPan": "533286******5528",
+     "currency": "GEL",
+     "ownerName": "IRAKLI LOMIDZE",
+     "name": "IRAKLI LOMIDZE",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "4.95"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-10-30T21:15:38"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "4.95"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-10-30T21:15:38"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v2/card-accounts/b2dda137-587c-5c38-8d51-a5e326a68aec/balances"
+      },
+      "transactions": {
+       "href": "v2/card-accounts/b2dda137-587c-5c38-8d51-a5e326a68aec/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/b2dda137-587c-5c38-8d51-a5e326a68aec/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "533286******5528",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "4.95"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "4.95"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-10-30T21:15:38"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/card-accounts/b2dda137-587c-5c38-8d51-a5e326a68aec/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "GE38CR1129163985317392_255200001",
+       "transactionDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-18.50"
+       },
+       "acceptorTransactionDateTime": "2025-10-21T13:56:25",
+       "maskedPAN": "533286******5528",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "bookingDate": "2025-10-23",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "GE38CR1129163985317392_255200002",
+       "transactionDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-10.49"
+       },
+       "acceptorTransactionDateTime": "2025-10-30T21:15:38",
+       "maskedPAN": "533286******5528",
+       "transactionDetails": "ბარათით გადახდა - COFFEE LAB",
+       "bookingDate": "2025-10-31",
+       "cardAcceptorId": "COFFEE LAB",
+       "merchantCategoryCode": "5814"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v2/accounts/c908f0de-5392-577b-b590-e1082a4fb41b"
+      },
+      "first": {
+       "href": "v2/card-accounts/b2dda137-587c-5c38-8d51-a5e326a68aec/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "533286******5528",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": []
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/savings",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": []
+   }
+  }
+ ]
+}

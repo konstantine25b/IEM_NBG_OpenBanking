@@ -1,0 +1,316 @@
+{
+ "bank": "bog",
+ "customer": "C00016",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "7760ab98-00e3-5407-8778-93c0533c18c3",
+      "iban": "GE47BG1943192868577458",
+      "currency": "GEL",
+      "ownerName": "MAIA GVENETADZE",
+      "name": "MAIA GVENETADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "18.36"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-25T07:10:39"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "18.36"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-25T07:10:39"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "7760ab98-00e3-5407-8778-93c0533c18c3",
+     "iban": "GE47BG1943192868577458",
+     "currency": "GEL",
+     "ownerName": "MAIA GVENETADZE",
+     "name": "MAIA GVENETADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE47BG1943192868577458",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "18.36"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "18.36"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-09-25T07:10:39"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE47BG1943192868577458",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00006000001",
+       "entryReference": "00006000001",
+       "valueDate": "2026-07-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "442.18"
+       },
+       "bookingDate": "2026-07-19",
+       "debtorName": "Bank of Georgia",
+       "remittanceInformationUnstructured": "სესხის გაცემა",
+       "bankTransactionCode": "PMNT-RCDT-BOOK",
+       "purposeCode": "LOAN",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "442.18"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-19"
+       }
+      },
+      {
+       "transactionId": "d_00006000002",
+       "entryReference": "00006000002",
+       "valueDate": "2026-07-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-406.80"
+       },
+       "bookingDate": "2026-07-20",
+       "creditorName": "NUTSA JAVAKHISHVILI",
+       "creditorAccount": {
+        "iban": "GE11LB1785675913719982"
+       },
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "გადახდა ხელშეკრულებით",
+       "bankTransactionCode": "PMNT-ICDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "35.38"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-20"
+       }
+      },
+      {
+       "transactionId": "d_00006000003",
+       "entryReference": "00006000003",
+       "valueDate": "2026-07-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-17.02"
+       },
+       "bookingDate": "2026-08-03",
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "18.36"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-03"
+       }
+      },
+      {
+       "transactionId": "c_00006000004",
+       "entryReference": "00006000004",
+       "valueDate": "2026-08-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "115.14"
+       },
+       "bookingDate": "2026-08-24",
+       "endToEndId": "E2E777AB99C0F8F",
+       "debtorName": "MAIA GVENETADZE",
+       "debtorAccount": {
+        "iban": "GE78KS1378842651138739"
+       },
+       "debtorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "133.50"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-24"
+       }
+      },
+      {
+       "transactionId": "d_00006000005",
+       "entryReference": "00006000005",
+       "valueDate": "2026-08-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-115.14"
+       },
+       "bookingDate": "2026-08-25",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 925E7252",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT985E8B30F2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "18.36"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-25"
+       }
+      },
+      {
+       "transactionId": "c_00006000006",
+       "entryReference": "00006000006",
+       "valueDate": "2026-09-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "115.14"
+       },
+       "bookingDate": "2026-09-24",
+       "endToEndId": "E2EB7843FA9DAE2",
+       "debtorName": "MAIA GVENETADZE",
+       "debtorAccount": {
+        "iban": "GE78KS1378842651138739"
+       },
+       "debtorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "133.50"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-24"
+       }
+      },
+      {
+       "transactionId": "d_00006000007",
+       "entryReference": "00006000007",
+       "valueDate": "2026-09-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-115.14"
+       },
+       "bookingDate": "2026-09-25",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 925E7252",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT985E8B30F2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "18.36"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-25"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/7760ab98-00e3-5407-8778-93c0533c18c3/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

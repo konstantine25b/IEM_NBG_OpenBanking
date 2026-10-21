@@ -1,0 +1,144 @@
+{
+ "bank": "bog",
+ "customer": "C00253",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "12c64a44-b6e6-55b3-98e8-1f719e2782f8",
+      "iban": "GE48BG1946196673638970",
+      "currency": "GEL",
+      "ownerName": "KHATIA KAVTARADZE",
+      "name": "KHATIA KAVTARADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "ORGA",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/12c64a44-b6e6-55b3-98e8-1f719e2782f8/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/12c64a44-b6e6-55b3-98e8-1f719e2782f8/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/12c64a44-b6e6-55b3-98e8-1f719e2782f8",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "12c64a44-b6e6-55b3-98e8-1f719e2782f8",
+     "iban": "GE48BG1946196673638970",
+     "currency": "GEL",
+     "ownerName": "KHATIA KAVTARADZE",
+     "name": "KHATIA KAVTARADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "ORGA",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/12c64a44-b6e6-55b3-98e8-1f719e2782f8/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/12c64a44-b6e6-55b3-98e8-1f719e2782f8/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/12c64a44-b6e6-55b3-98e8-1f719e2782f8/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE48BG1946196673638970",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/12c64a44-b6e6-55b3-98e8-1f719e2782f8/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE48BG1946196673638970",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/12c64a44-b6e6-55b3-98e8-1f719e2782f8"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/12c64a44-b6e6-55b3-98e8-1f719e2782f8/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

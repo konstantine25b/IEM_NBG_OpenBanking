@@ -1,0 +1,1149 @@
+{
+ "bank": "halyk",
+ "customer": "C00724",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "86e2a16f-a536-5b1b-8060-7736f5e96ae1",
+      "iban": "GE22HB1474909489299481",
+      "currency": "GEL",
+      "ownerName": "REVAZ ABASHIDZE",
+      "name": "REVAZ ABASHIDZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "HABGGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-13.85"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-08T08:01:35"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-13.85"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-08T08:01:35"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/86e2a16f-a536-5b1b-8060-7736f5e96ae1/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/86e2a16f-a536-5b1b-8060-7736f5e96ae1/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/86e2a16f-a536-5b1b-8060-7736f5e96ae1",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "86e2a16f-a536-5b1b-8060-7736f5e96ae1",
+     "iban": "GE22HB1474909489299481",
+     "currency": "GEL",
+     "ownerName": "REVAZ ABASHIDZE",
+     "name": "REVAZ ABASHIDZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "HABGGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/86e2a16f-a536-5b1b-8060-7736f5e96ae1/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/86e2a16f-a536-5b1b-8060-7736f5e96ae1/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/86e2a16f-a536-5b1b-8060-7736f5e96ae1/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE22HB1474909489299481",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-13.85"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-13.85"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-08T08:01:35"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/86e2a16f-a536-5b1b-8060-7736f5e96ae1/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE22HB1474909489299481",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00289200001",
+       "entryReference": "00289200001",
+       "valueDate": "2025-11-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "730.45"
+       },
+       "bookingDate": "2025-11-07",
+       "endToEndId": "E2E0A2F96DB590B",
+       "debtorName": "REVAZ ABASHIDZE",
+       "debtorAccount": {
+        "iban": "GE57BG1996969128378846"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "730.45"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-07"
+       }
+      },
+      {
+       "transactionId": "d_00289200002",
+       "entryReference": "00289200002",
+       "valueDate": "2025-11-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-730.45"
+       },
+       "bookingDate": "2025-11-08",
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B9EE2D62",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTC862CF8E2D",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-08"
+       }
+      },
+      {
+       "transactionId": "c_00289200003",
+       "entryReference": "00289200003",
+       "valueDate": "2025-12-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "730.45"
+       },
+       "bookingDate": "2025-12-05",
+       "endToEndId": "E2EAE02E28E2B25",
+       "debtorName": "REVAZ ABASHIDZE",
+       "debtorAccount": {
+        "iban": "GE57BG1996969128378846"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "730.45"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-05"
+       }
+      },
+      {
+       "transactionId": "d_00289200004",
+       "entryReference": "00289200004",
+       "valueDate": "2025-12-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.82"
+       },
+       "bookingDate": "2025-12-08",
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "728.63"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-08"
+       }
+      },
+      {
+       "transactionId": "d_00289200005",
+       "entryReference": "00289200005",
+       "valueDate": "2025-12-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-730.45"
+       },
+       "bookingDate": "2025-12-08",
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B9EE2D62",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTC862CF8E2D",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-1.82"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-08"
+       }
+      },
+      {
+       "transactionId": "d_00289200006",
+       "entryReference": "00289200006",
+       "valueDate": "2025-12-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.14"
+       },
+       "bookingDate": "2025-12-09",
+       "creditorName": "SPAR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - SPAR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-4.96"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-09"
+       }
+      },
+      {
+       "transactionId": "c_00289200007",
+       "entryReference": "00289200007",
+       "valueDate": "2026-01-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "730.45"
+       },
+       "bookingDate": "2026-01-06",
+       "endToEndId": "E2EE9B9B1AF6A1C",
+       "debtorName": "REVAZ ABASHIDZE",
+       "debtorAccount": {
+        "iban": "GE57BG1996969128378846"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "725.49"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-06"
+       }
+      },
+      {
+       "transactionId": "d_00289200008",
+       "entryReference": "00289200008",
+       "valueDate": "2026-01-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-730.45"
+       },
+       "bookingDate": "2026-01-08",
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B9EE2D62",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTC862CF8E2D",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-4.96"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-08"
+       }
+      },
+      {
+       "transactionId": "d_00289200009",
+       "entryReference": "00289200009",
+       "valueDate": "2026-01-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.00"
+       },
+       "bookingDate": "2026-01-09",
+       "creditorName": "MCDONALDS",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MCDONALDS",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-5.96"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-09"
+       }
+      },
+      {
+       "transactionId": "c_00289200010",
+       "entryReference": "00289200010",
+       "valueDate": "2026-02-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "730.45"
+       },
+       "bookingDate": "2026-02-06",
+       "endToEndId": "E2E7A2D33AFEF39",
+       "debtorName": "REVAZ ABASHIDZE",
+       "debtorAccount": {
+        "iban": "GE57BG1996969128378846"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "724.49"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-06"
+       }
+      },
+      {
+       "transactionId": "d_00289200011",
+       "entryReference": "00289200011",
+       "valueDate": "2026-02-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-730.45"
+       },
+       "bookingDate": "2026-02-08",
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B9EE2D62",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTC862CF8E2D",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-5.96"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-08"
+       }
+      },
+      {
+       "transactionId": "d_00289200012",
+       "entryReference": "00289200012",
+       "valueDate": "2026-02-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.60"
+       },
+       "bookingDate": "2026-02-10",
+       "creditorName": "NIKORA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - NIKORA",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-7.56"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-10"
+       }
+      },
+      {
+       "transactionId": "c_00289200013",
+       "entryReference": "00289200013",
+       "valueDate": "2026-03-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "730.45"
+       },
+       "bookingDate": "2026-03-06",
+       "endToEndId": "E2E23A0AC0D0F39",
+       "debtorName": "REVAZ ABASHIDZE",
+       "debtorAccount": {
+        "iban": "GE57BG1996969128378846"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "722.89"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-06"
+       }
+      },
+      {
+       "transactionId": "d_00289200014",
+       "entryReference": "00289200014",
+       "valueDate": "2026-03-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-730.45"
+       },
+       "bookingDate": "2026-03-08",
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B9EE2D62",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTC862CF8E2D",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-7.56"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-08"
+       }
+      },
+      {
+       "transactionId": "c_00289200015",
+       "entryReference": "00289200015",
+       "valueDate": "2026-04-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "730.45"
+       },
+       "bookingDate": "2026-04-07",
+       "endToEndId": "E2E83E764C9C0B1",
+       "debtorName": "REVAZ ABASHIDZE",
+       "debtorAccount": {
+        "iban": "GE57BG1996969128378846"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "722.89"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-07"
+       }
+      },
+      {
+       "transactionId": "d_00289200016",
+       "entryReference": "00289200016",
+       "valueDate": "2026-04-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.92"
+       },
+       "bookingDate": "2026-04-08",
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "720.97"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-08"
+       }
+      },
+      {
+       "transactionId": "d_00289200017",
+       "entryReference": "00289200017",
+       "valueDate": "2026-04-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-730.45"
+       },
+       "bookingDate": "2026-04-08",
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B9EE2D62",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTC862CF8E2D",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-9.48"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-08"
+       }
+      },
+      {
+       "transactionId": "c_00289200018",
+       "entryReference": "00289200018",
+       "valueDate": "2026-05-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "730.45"
+       },
+       "bookingDate": "2026-05-07",
+       "endToEndId": "E2E90996C7683CB",
+       "debtorName": "REVAZ ABASHIDZE",
+       "debtorAccount": {
+        "iban": "GE57BG1996969128378846"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "720.97"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-07"
+       }
+      },
+      {
+       "transactionId": "d_00289200019",
+       "entryReference": "00289200019",
+       "valueDate": "2026-05-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-730.45"
+       },
+       "bookingDate": "2026-05-08",
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B9EE2D62",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTC862CF8E2D",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-9.48"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-08"
+       }
+      },
+      {
+       "transactionId": "c_00289200020",
+       "entryReference": "00289200020",
+       "valueDate": "2026-06-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "730.45"
+       },
+       "bookingDate": "2026-06-05",
+       "endToEndId": "E2ECA50C0B990AB",
+       "debtorName": "REVAZ ABASHIDZE",
+       "debtorAccount": {
+        "iban": "GE57BG1996969128378846"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "720.97"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-05"
+       }
+      },
+      {
+       "transactionId": "d_00289200021",
+       "entryReference": "00289200021",
+       "valueDate": "2026-06-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-730.45"
+       },
+       "bookingDate": "2026-06-08",
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B9EE2D62",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTC862CF8E2D",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-9.48"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-08"
+       }
+      },
+      {
+       "transactionId": "c_00289200022",
+       "entryReference": "00289200022",
+       "valueDate": "2026-07-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "730.45"
+       },
+       "bookingDate": "2026-07-07",
+       "endToEndId": "E2EEDF2B845C11D",
+       "debtorName": "REVAZ ABASHIDZE",
+       "debtorAccount": {
+        "iban": "GE57BG1996969128378846"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "720.97"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-07"
+       }
+      },
+      {
+       "transactionId": "d_00289200023",
+       "entryReference": "00289200023",
+       "valueDate": "2026-07-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-730.45"
+       },
+       "bookingDate": "2026-07-08",
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B9EE2D62",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTC862CF8E2D",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-9.48"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-08"
+       }
+      },
+      {
+       "transactionId": "d_00289200024",
+       "entryReference": "00289200024",
+       "valueDate": "2026-07-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.37"
+       },
+       "bookingDate": "2026-07-09",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-12.85"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-09"
+       }
+      },
+      {
+       "transactionId": "c_00289200025",
+       "entryReference": "00289200025",
+       "valueDate": "2026-08-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "730.45"
+       },
+       "bookingDate": "2026-08-07",
+       "endToEndId": "E2E1440FD55E07A",
+       "debtorName": "REVAZ ABASHIDZE",
+       "debtorAccount": {
+        "iban": "GE57BG1996969128378846"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "717.60"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-07"
+       }
+      },
+      {
+       "transactionId": "d_00289200026",
+       "entryReference": "00289200026",
+       "valueDate": "2026-08-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-730.45"
+       },
+       "bookingDate": "2026-08-08",
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B9EE2D62",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTC862CF8E2D",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-12.85"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-08"
+       }
+      },
+      {
+       "transactionId": "c_00289200027",
+       "entryReference": "00289200027",
+       "valueDate": "2026-09-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "730.45"
+       },
+       "bookingDate": "2026-09-07",
+       "endToEndId": "E2E62B2CAD50848",
+       "debtorName": "REVAZ ABASHIDZE",
+       "debtorAccount": {
+        "iban": "GE57BG1996969128378846"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "717.60"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-07"
+       }
+      },
+      {
+       "transactionId": "d_00289200028",
+       "entryReference": "00289200028",
+       "valueDate": "2026-09-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.00"
+       },
+       "bookingDate": "2026-09-08",
+       "creditorName": "AGROHUB",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - AGROHUB",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "716.60"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-08"
+       }
+      },
+      {
+       "transactionId": "d_00289200029",
+       "entryReference": "00289200029",
+       "valueDate": "2026-09-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-730.45"
+       },
+       "bookingDate": "2026-09-08",
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B9EE2D62",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTC862CF8E2D",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-13.85"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-08"
+       }
+      },
+      {
+       "transactionId": "c_00289200030",
+       "entryReference": "00289200030",
+       "valueDate": "2026-10-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "730.45"
+       },
+       "bookingDate": "2026-10-07",
+       "endToEndId": "E2E7D68F729DBFF",
+       "debtorName": "REVAZ ABASHIDZE",
+       "debtorAccount": {
+        "iban": "GE57BG1996969128378846"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "716.60"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-07"
+       }
+      },
+      {
+       "transactionId": "d_00289200031",
+       "entryReference": "00289200031",
+       "valueDate": "2026-10-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-730.45"
+       },
+       "bookingDate": "2026-10-08",
+       "creditorName": "Halyk Bank Georgia",
+       "creditorAgent": "HABGGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა B9EE2D62",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTC862CF8E2D",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-13.85"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-08"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/86e2a16f-a536-5b1b-8060-7736f5e96ae1"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/86e2a16f-a536-5b1b-8060-7736f5e96ae1/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "6a5f9c2f-09de-5dd2-8a3b-7f352d0bff91",
+      "maskedPan": "545424******4341",
+      "currency": "GEL",
+      "ownerName": "REVAZ ABASHIDZE",
+      "name": "REVAZ ABASHIDZE",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-13.85"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-08T08:01:35"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-13.85"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-08T08:01:35"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/6a5f9c2f-09de-5dd2-8a3b-7f352d0bff91/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/6a5f9c2f-09de-5dd2-8a3b-7f352d0bff91/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/6a5f9c2f-09de-5dd2-8a3b-7f352d0bff91",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "6a5f9c2f-09de-5dd2-8a3b-7f352d0bff91",
+     "maskedPan": "545424******4341",
+     "currency": "GEL",
+     "ownerName": "REVAZ ABASHIDZE",
+     "name": "REVAZ ABASHIDZE",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-13.85"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-08T08:01:35"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-13.85"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-08T08:01:35"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/6a5f9c2f-09de-5dd2-8a3b-7f352d0bff91/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/6a5f9c2f-09de-5dd2-8a3b-7f352d0bff91/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/6a5f9c2f-09de-5dd2-8a3b-7f352d0bff91/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "545424******4341",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-13.85"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-13.85"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-08T08:01:35"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/6a5f9c2f-09de-5dd2-8a3b-7f352d0bff91/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00289200004",
+       "transactionDate": "2025-12-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.82"
+       },
+       "acceptorTransactionDateTime": "2025-12-06T11:37:32",
+       "maskedPAN": "545424******4341",
+       "transactionDetails": "ბარათით გადახდა - MINI MARKET",
+       "bookingDate": "2025-12-08",
+       "cardAcceptorId": "MINI MARKET",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "d_00289200006",
+       "transactionDate": "2025-12-06",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.14"
+       },
+       "acceptorTransactionDateTime": "2025-12-06T09:23:47",
+       "maskedPAN": "545424******4341",
+       "transactionDetails": "ბარათით გადახდა - SPAR",
+       "bookingDate": "2025-12-09",
+       "cardAcceptorId": "SPAR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00289200009",
+       "transactionDate": "2026-01-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.00"
+       },
+       "acceptorTransactionDateTime": "2026-01-07T13:23:46",
+       "maskedPAN": "545424******4341",
+       "transactionDetails": "ბარათით გადახდა - MCDONALDS",
+       "bookingDate": "2026-01-09",
+       "cardAcceptorId": "MCDONALDS",
+       "merchantCategoryCode": "5814"
+      },
+      {
+       "cardTransactionId": "d_00289200012",
+       "transactionDate": "2026-02-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.60"
+       },
+       "acceptorTransactionDateTime": "2026-02-07T09:46:27",
+       "maskedPAN": "545424******4341",
+       "transactionDetails": "ბარათით გადახდა - NIKORA",
+       "bookingDate": "2026-02-10",
+       "cardAcceptorId": "NIKORA",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00289200016",
+       "transactionDate": "2026-04-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.92"
+       },
+       "acceptorTransactionDateTime": "2026-04-07T10:21:32",
+       "maskedPAN": "545424******4341",
+       "transactionDetails": "ბარათით გადახდა - METROMONEY",
+       "bookingDate": "2026-04-08",
+       "cardAcceptorId": "METROMONEY",
+       "merchantCategoryCode": "4111"
+      },
+      {
+       "cardTransactionId": "d_00289200024",
+       "transactionDate": "2026-07-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.37"
+       },
+       "acceptorTransactionDateTime": "2026-07-07T14:27:16",
+       "maskedPAN": "545424******4341",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "bookingDate": "2026-07-09",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00289200028",
+       "transactionDate": "2026-09-07",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.00"
+       },
+       "acceptorTransactionDateTime": "2026-09-07T13:18:06",
+       "maskedPAN": "545424******4341",
+       "transactionDetails": "ბარათით გადახდა - AGROHUB",
+       "bookingDate": "2026-09-08",
+       "cardAcceptorId": "AGROHUB",
+       "merchantCategoryCode": "5411"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/86e2a16f-a536-5b1b-8060-7736f5e96ae1"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/6a5f9c2f-09de-5dd2-8a3b-7f352d0bff91/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "545424******4341",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,383 @@
+{
+ "bank": "credo",
+ "customer": "C00340",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "3f7c2901-2736-52c5-9d80-25127c91d9f6",
+      "iban": "GE42CD1717346673410203",
+      "currency": "GEL",
+      "ownerName": "SANDRO PANJIKIDZE",
+      "name": "SANDRO PANJIKIDZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "JSCRGE22",
+      "usage": "ORGA",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "24259.51"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-08-12T03:06:41"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "24259.51"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-08-12T03:06:41"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/3f7c2901-2736-52c5-9d80-25127c91d9f6/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/3f7c2901-2736-52c5-9d80-25127c91d9f6/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/3f7c2901-2736-52c5-9d80-25127c91d9f6",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "3f7c2901-2736-52c5-9d80-25127c91d9f6",
+     "iban": "GE42CD1717346673410203",
+     "currency": "GEL",
+     "ownerName": "SANDRO PANJIKIDZE",
+     "name": "SANDRO PANJIKIDZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "JSCRGE22",
+     "usage": "ORGA",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/3f7c2901-2736-52c5-9d80-25127c91d9f6/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/3f7c2901-2736-52c5-9d80-25127c91d9f6/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/3f7c2901-2736-52c5-9d80-25127c91d9f6/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE42CD1717346673410203",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "24259.51"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "24259.51"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-08-12T03:06:41"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/3f7c2901-2736-52c5-9d80-25127c91d9f6/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE42CD1717346673410203",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00135600001",
+       "entryReference": "00135600001",
+       "valueDate": "2026-02-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "24543.53"
+       },
+       "bookingDate": "2026-02-12",
+       "debtorName": "SANDRO PANJIKIDZE",
+       "remittanceInformationUnstructured": "ანაბრისთვის თანხის შემოტანა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "26012.47"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-12"
+       }
+      },
+      {
+       "transactionId": "d_00135600002",
+       "entryReference": "00135600002",
+       "valueDate": "2026-02-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-25983.58"
+       },
+       "bookingDate": "2026-02-12",
+       "endToEndId": "E2EF2BB0EAA242F",
+       "creditorName": "Credo Bank",
+       "creditorAccount": {
+        "iban": "GE57CD3770169180497720"
+       },
+       "remittanceInformationUnstructured": "ანაბრის გახსნა",
+       "bankTransactionCode": "PMNT-ICDT-BOOK",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "28.89"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-12"
+       }
+      },
+      {
+       "transactionId": "c_00135600003",
+       "entryReference": "00135600003",
+       "valueDate": "2026-08-12",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "24230.62"
+       },
+       "bookingDate": "2026-08-12",
+       "endToEndId": "E2ED35E831E1D17",
+       "debtorName": "Credo Bank",
+       "debtorAccount": {
+        "iban": "GE57CD3770169180497720"
+       },
+       "currencyExchange": [
+        {
+         "sourceCurrency": "EUR",
+         "exchangeRate": "2.9851",
+         "unitCurrency": "EUR",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-08-12"
+        }
+       ],
+       "remittanceInformationUnstructured": "ანაბრის დახურვა",
+       "bankTransactionCode": "PMNT-RCDT-BOOK",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "24259.51"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-12"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/3f7c2901-2736-52c5-9d80-25127c91d9f6"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/3f7c2901-2736-52c5-9d80-25127c91d9f6/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "11683b41-2b9a-5039-af9b-cb408bddee26",
+      "maskedPan": "517805******1076",
+      "currency": "GEL",
+      "ownerName": "SANDRO PANJIKIDZE",
+      "name": "SANDRO PANJIKIDZE",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "ORGA",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "24259.51"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-08-12T03:06:41"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "24259.51"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-08-12T03:06:41"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/11683b41-2b9a-5039-af9b-cb408bddee26/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/11683b41-2b9a-5039-af9b-cb408bddee26/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/11683b41-2b9a-5039-af9b-cb408bddee26",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "11683b41-2b9a-5039-af9b-cb408bddee26",
+     "maskedPan": "517805******1076",
+     "currency": "GEL",
+     "ownerName": "SANDRO PANJIKIDZE",
+     "name": "SANDRO PANJIKIDZE",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "ORGA",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "24259.51"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-08-12T03:06:41"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "24259.51"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-08-12T03:06:41"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/11683b41-2b9a-5039-af9b-cb408bddee26/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/11683b41-2b9a-5039-af9b-cb408bddee26/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/11683b41-2b9a-5039-af9b-cb408bddee26/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "517805******1076",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "24259.51"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "24259.51"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-08-12T03:06:41"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/11683b41-2b9a-5039-af9b-cb408bddee26/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/3f7c2901-2736-52c5-9d80-25127c91d9f6"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/11683b41-2b9a-5039-af9b-cb408bddee26/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "517805******1076",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

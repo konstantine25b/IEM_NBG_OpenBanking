@@ -1,0 +1,574 @@
+{
+ "bank": "tbc",
+ "customer": "C00241",
+ "dialect": "tbc",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "56b26996-63ce-5bd3-a8c4-409c696c4ec2",
+      "iban": "GE94TB1340185953428619",
+      "currency": "GEL",
+      "ownerName": "ვაჟა აბაშიძე",
+      "name": "ვაჟა აბაშიძე",
+      "product": "Current account",
+      "cashAccountType": "CARD",
+      "status": "enabled",
+      "bic": "TBCBGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.76"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-02-11T21:00:13"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.76"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-02-11T21:00:13"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/56b26996-63ce-5bd3-a8c4-409c696c4ec2/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/56b26996-63ce-5bd3-a8c4-409c696c4ec2/transactions"
+       }
+      },
+      "msisdn": "577918880",
+      "ownerIdentification": {
+       "privateId": {
+        "others": [
+         {
+          "identification": "PNOGE-80012019755"
+         }
+        ]
+       }
+      },
+      "displayName": "Concept"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/56b26996-63ce-5bd3-a8c4-409c696c4ec2",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "56b26996-63ce-5bd3-a8c4-409c696c4ec2",
+     "iban": "GE94TB1340185953428619",
+     "currency": "GEL",
+     "ownerName": "ვაჟა აბაშიძე",
+     "name": "ვაჟა აბაშიძე",
+     "product": "Current account",
+     "cashAccountType": "CARD",
+     "status": "enabled",
+     "bic": "TBCBGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/56b26996-63ce-5bd3-a8c4-409c696c4ec2/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/56b26996-63ce-5bd3-a8c4-409c696c4ec2/transactions"
+      }
+     },
+     "msisdn": "577918880",
+     "ownerIdentification": {
+      "privateId": {
+       "others": [
+        {
+         "identification": "PNOGE-80012019755"
+        }
+       ]
+      }
+     },
+     "displayName": "Concept"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/56b26996-63ce-5bd3-a8c4-409c696c4ec2/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE94TB1340185953428619",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.76"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.76"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-02-11T21:00:13"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/56b26996-63ce-5bd3-a8c4-409c696c4ec2/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE94TB1340185953428619",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00096000001",
+       "entryReference": "00096000001",
+       "valueDate": "2025-10-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-150.00"
+       },
+       "bookingDate": "2025-10-24",
+       "creditorName": "ATM BANK OF GEORGIA",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "bankTransactionCode": "PMNT-CCRD-CWDL",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "139.49"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-24"
+       },
+       "proprietaryBankTransactionCode": "GMB",
+       "debtorIdentification": {
+        "privateId": {
+         "others": [
+          {
+           "identification": "PNOGE-80012019755"
+          }
+         ]
+        }
+       },
+       "additionalInformation": "ბანკომატიდან განაღდება"
+      },
+      {
+       "transactionId": "d_00096000002",
+       "entryReference": "00096000002",
+       "valueDate": "2025-10-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.32"
+       },
+       "bookingDate": "2025-10-27",
+       "creditorName": "METROMONEY",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - METROMONEY",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "127.17"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-27"
+       },
+       "proprietaryBankTransactionCode": "GMB",
+       "debtorIdentification": {
+        "privateId": {
+         "others": [
+          {
+           "identification": "PNOGE-80012019755"
+          }
+         ]
+        }
+       },
+       "additionalInformation": "ბარათით გადახდა - METROMONEY"
+      },
+      {
+       "transactionId": "d_00096000003",
+       "entryReference": "00096000003",
+       "valueDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-35.33"
+       },
+       "bookingDate": "2025-10-31",
+       "creditorName": "LIBRE",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - LIBRE",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "91.84"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-31"
+       },
+       "proprietaryBankTransactionCode": "GMB",
+       "debtorIdentification": {
+        "privateId": {
+         "others": [
+          {
+           "identification": "PNOGE-80012019755"
+          }
+         ]
+        }
+       },
+       "additionalInformation": "ბარათით გადახდა - LIBRE"
+      },
+      {
+       "transactionId": "d_00096000004",
+       "entryReference": "00096000004",
+       "valueDate": "2025-10-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-87.56"
+       },
+       "bookingDate": "2025-11-04",
+       "creditorName": "GLOVO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GLOVO",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "4.28"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-04"
+       },
+       "proprietaryBankTransactionCode": "GMB",
+       "debtorIdentification": {
+        "privateId": {
+         "others": [
+          {
+           "identification": "PNOGE-80012019755"
+          }
+         ]
+        }
+       },
+       "additionalInformation": "ბარათით გადახდა - GLOVO"
+      },
+      {
+       "transactionId": "d_00096000005",
+       "entryReference": "00096000005",
+       "valueDate": "2026-02-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.52"
+       },
+       "bookingDate": "2026-02-12",
+       "creditorName": "KIOSK",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - KIOSK",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.76"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-12"
+       },
+       "proprietaryBankTransactionCode": "GMB",
+       "debtorIdentification": {
+        "privateId": {
+         "others": [
+          {
+           "identification": "PNOGE-80012019755"
+          }
+         ]
+        }
+       },
+       "additionalInformation": "ბარათით გადახდა - KIOSK"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/56b26996-63ce-5bd3-a8c4-409c696c4ec2"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/56b26996-63ce-5bd3-a8c4-409c696c4ec2/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "6322a393-535f-55f9-9265-f381dd08a03e",
+      "maskedPan": "418057******4894",
+      "currency": "GEL",
+      "ownerName": "ვაჟა აბაშიძე",
+      "name": "ვაჟა აბაშიძე",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.76"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-02-11T21:00:13"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.76"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-02-11T21:00:13"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/6322a393-535f-55f9-9265-f381dd08a03e/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/6322a393-535f-55f9-9265-f381dd08a03e/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/6322a393-535f-55f9-9265-f381dd08a03e",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "6322a393-535f-55f9-9265-f381dd08a03e",
+     "maskedPan": "418057******4894",
+     "currency": "GEL",
+     "ownerName": "ვაჟა აბაშიძე",
+     "name": "ვაჟა აბაშიძე",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.76"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-02-11T21:00:13"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.76"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-02-11T21:00:13"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/6322a393-535f-55f9-9265-f381dd08a03e/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/6322a393-535f-55f9-9265-f381dd08a03e/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/6322a393-535f-55f9-9265-f381dd08a03e/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "418057******4894",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.76"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.76"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-02-11T21:00:13"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/6322a393-535f-55f9-9265-f381dd08a03e/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00096000001",
+       "transactionDate": "2025-10-23",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-150.00"
+       },
+       "acceptorTransactionDateTime": "2025-10-23T15:57:42",
+       "transactionDetails": "ბანკომატიდან განაღდება",
+       "bookingDate": "2025-10-24",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "ATM BANK OF GEORGIA",
+       "maskedPan": "418057******4894"
+      },
+      {
+       "cardTransactionId": "d_00096000002",
+       "transactionDate": "2025-10-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-12.32"
+       },
+       "acceptorTransactionDateTime": "2025-10-26T21:47:42",
+       "transactionDetails": "ბარათით გადახდა - METROMONEY",
+       "bookingDate": "2025-10-27",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "METROMONEY",
+       "maskedPan": "418057******4894"
+      },
+      {
+       "cardTransactionId": "d_00096000003",
+       "transactionDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-35.33"
+       },
+       "acceptorTransactionDateTime": "2025-10-30T15:20:11",
+       "transactionDetails": "ბარათით გადახდა - LIBRE",
+       "bookingDate": "2025-10-31",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "LIBRE",
+       "maskedPan": "418057******4894"
+      },
+      {
+       "cardTransactionId": "d_00096000004",
+       "transactionDate": "2025-10-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-87.56"
+       },
+       "acceptorTransactionDateTime": "2025-10-31T08:21:10",
+       "transactionDetails": "ბარათით გადახდა - GLOVO",
+       "bookingDate": "2025-11-04",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "GLOVO",
+       "maskedPan": "418057******4894"
+      },
+      {
+       "cardTransactionId": "d_00096000005",
+       "transactionDate": "2026-02-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.52"
+       },
+       "acceptorTransactionDateTime": "2026-02-11T21:00:13",
+       "transactionDetails": "ბარათით გადახდა - KIOSK",
+       "bookingDate": "2026-02-12",
+       "proprietaryBankTransactionCode": "GMB",
+       "cardAcceptorId": "KIOSK",
+       "maskedPan": "418057******4894"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/56b26996-63ce-5bd3-a8c4-409c696c4ec2"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/6322a393-535f-55f9-9265-f381dd08a03e/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "418057******4894",
+     "currency": "GEL"
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/loans",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": []
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v2/savings",
+   "query": {},
+   "status": 200,
+   "body": {
+    "accounts": []
+   }
+  }
+ ]
+}

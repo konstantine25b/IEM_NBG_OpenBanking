@@ -1,0 +1,764 @@
+{
+ "bank": "bog",
+ "customer": "C00252",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "8c43c839-bb97-5218-9872-9481ccb3d273",
+      "iban": "GE02BG1712014747748808",
+      "currency": "GEL",
+      "ownerName": "LASHA KHARAISHVILI",
+      "name": "LASHA KHARAISHVILI",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-282.67"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-20T08:10:17"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-282.67"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-20T08:10:17"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/8c43c839-bb97-5218-9872-9481ccb3d273/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/8c43c839-bb97-5218-9872-9481ccb3d273/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/8c43c839-bb97-5218-9872-9481ccb3d273",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "8c43c839-bb97-5218-9872-9481ccb3d273",
+     "iban": "GE02BG1712014747748808",
+     "currency": "GEL",
+     "ownerName": "LASHA KHARAISHVILI",
+     "name": "LASHA KHARAISHVILI",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/8c43c839-bb97-5218-9872-9481ccb3d273/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/8c43c839-bb97-5218-9872-9481ccb3d273/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/8c43c839-bb97-5218-9872-9481ccb3d273/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE02BG1712014747748808",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-282.67"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-282.67"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-09-20T08:10:17"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/8c43c839-bb97-5218-9872-9481ccb3d273/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE02BG1712014747748808",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00100400001",
+       "entryReference": "00100400001",
+       "valueDate": "2025-10-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-7.91"
+       },
+       "bookingDate": "2025-10-20",
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "101.14"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-20"
+       }
+      },
+      {
+       "transactionId": "d_00100400002",
+       "entryReference": "00100400002",
+       "valueDate": "2025-10-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-311.57"
+       },
+       "bookingDate": "2025-10-20",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 2B48F466",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT9D1FD58BB2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-210.43"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-20"
+       }
+      },
+      {
+       "transactionId": "c_00100400003",
+       "entryReference": "00100400003",
+       "valueDate": "2025-11-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "311.57"
+       },
+       "bookingDate": "2025-11-19",
+       "endToEndId": "E2EF63A1533A397",
+       "debtorName": "LASHA KHARAISHVILI",
+       "debtorAccount": {
+        "iban": "GE33LB1073604069022527"
+       },
+       "debtorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "101.14"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-19"
+       }
+      },
+      {
+       "transactionId": "d_00100400004",
+       "entryReference": "00100400004",
+       "valueDate": "2025-11-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-311.57"
+       },
+       "bookingDate": "2025-11-20",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 2B48F466",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT9D1FD58BB2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-210.43"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-20"
+       }
+      },
+      {
+       "transactionId": "c_00100400005",
+       "entryReference": "00100400005",
+       "valueDate": "2025-12-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "311.57"
+       },
+       "bookingDate": "2025-12-19",
+       "endToEndId": "E2E90D414868DE5",
+       "debtorName": "LASHA KHARAISHVILI",
+       "debtorAccount": {
+        "iban": "GE33LB1073604069022527"
+       },
+       "debtorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "101.14"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-19"
+       }
+      },
+      {
+       "transactionId": "d_00100400006",
+       "entryReference": "00100400006",
+       "valueDate": "2025-12-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-311.57"
+       },
+       "bookingDate": "2025-12-20",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 2B48F466",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT9D1FD58BB2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-210.43"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-20"
+       }
+      },
+      {
+       "transactionId": "c_00100400007",
+       "entryReference": "00100400007",
+       "valueDate": "2026-01-16",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "311.57"
+       },
+       "bookingDate": "2026-01-16",
+       "endToEndId": "E2E93401BCD4CA4",
+       "debtorName": "LASHA KHARAISHVILI",
+       "debtorAccount": {
+        "iban": "GE33LB1073604069022527"
+       },
+       "debtorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "101.14"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-16"
+       }
+      },
+      {
+       "transactionId": "d_00100400008",
+       "entryReference": "00100400008",
+       "valueDate": "2026-01-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-311.57"
+       },
+       "bookingDate": "2026-01-20",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 2B48F466",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT9D1FD58BB2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-210.43"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-20"
+       }
+      },
+      {
+       "transactionId": "c_00100400009",
+       "entryReference": "00100400009",
+       "valueDate": "2026-02-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "311.57"
+       },
+       "bookingDate": "2026-02-19",
+       "endToEndId": "E2EFAA600C95014",
+       "debtorName": "LASHA KHARAISHVILI",
+       "debtorAccount": {
+        "iban": "GE33LB1073604069022527"
+       },
+       "debtorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "101.14"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-19"
+       }
+      },
+      {
+       "transactionId": "d_00100400010",
+       "entryReference": "00100400010",
+       "valueDate": "2026-02-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-311.57"
+       },
+       "bookingDate": "2026-02-20",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 2B48F466",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT9D1FD58BB2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-210.43"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-20"
+       }
+      },
+      {
+       "transactionId": "c_00100400011",
+       "entryReference": "00100400011",
+       "valueDate": "2026-03-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "311.57"
+       },
+       "bookingDate": "2026-03-19",
+       "endToEndId": "E2E025097D065E9",
+       "debtorName": "LASHA KHARAISHVILI",
+       "debtorAccount": {
+        "iban": "GE33LB1073604069022527"
+       },
+       "debtorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "101.14"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-19"
+       }
+      },
+      {
+       "transactionId": "d_00100400012",
+       "entryReference": "00100400012",
+       "valueDate": "2026-03-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-311.57"
+       },
+       "bookingDate": "2026-03-20",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 2B48F466",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT9D1FD58BB2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-210.43"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-20"
+       }
+      },
+      {
+       "transactionId": "c_00100400013",
+       "entryReference": "00100400013",
+       "valueDate": "2026-04-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "311.57"
+       },
+       "bookingDate": "2026-04-17",
+       "endToEndId": "E2ED64061631C33",
+       "debtorName": "LASHA KHARAISHVILI",
+       "debtorAccount": {
+        "iban": "GE33LB1073604069022527"
+       },
+       "debtorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "101.14"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-17"
+       }
+      },
+      {
+       "transactionId": "d_00100400014",
+       "entryReference": "00100400014",
+       "valueDate": "2026-04-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-72.24"
+       },
+       "bookingDate": "2026-04-20",
+       "creditorName": "GLOVO",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GLOVO",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "28.90"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-20"
+       }
+      },
+      {
+       "transactionId": "d_00100400015",
+       "entryReference": "00100400015",
+       "valueDate": "2026-04-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-311.57"
+       },
+       "bookingDate": "2026-04-20",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 2B48F466",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT9D1FD58BB2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-282.67"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-20"
+       }
+      },
+      {
+       "transactionId": "c_00100400016",
+       "entryReference": "00100400016",
+       "valueDate": "2026-05-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "311.57"
+       },
+       "bookingDate": "2026-05-19",
+       "endToEndId": "E2EE40D95A99ABE",
+       "debtorName": "LASHA KHARAISHVILI",
+       "debtorAccount": {
+        "iban": "GE33LB1073604069022527"
+       },
+       "debtorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "28.90"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-19"
+       }
+      },
+      {
+       "transactionId": "d_00100400017",
+       "entryReference": "00100400017",
+       "valueDate": "2026-05-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-311.57"
+       },
+       "bookingDate": "2026-05-20",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 2B48F466",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT9D1FD58BB2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-282.67"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-20"
+       }
+      },
+      {
+       "transactionId": "c_00100400018",
+       "entryReference": "00100400018",
+       "valueDate": "2026-06-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "311.57"
+       },
+       "bookingDate": "2026-06-19",
+       "endToEndId": "E2EDB0879698A50",
+       "debtorName": "LASHA KHARAISHVILI",
+       "debtorAccount": {
+        "iban": "GE33LB1073604069022527"
+       },
+       "debtorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "28.90"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-19"
+       }
+      },
+      {
+       "transactionId": "d_00100400019",
+       "entryReference": "00100400019",
+       "valueDate": "2026-06-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-311.57"
+       },
+       "bookingDate": "2026-06-20",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 2B48F466",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT9D1FD58BB2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-282.67"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-20"
+       }
+      },
+      {
+       "transactionId": "c_00100400020",
+       "entryReference": "00100400020",
+       "valueDate": "2026-07-17",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "311.57"
+       },
+       "bookingDate": "2026-07-17",
+       "endToEndId": "E2E2F9C5C098D37",
+       "debtorName": "LASHA KHARAISHVILI",
+       "debtorAccount": {
+        "iban": "GE33LB1073604069022527"
+       },
+       "debtorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "28.90"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-17"
+       }
+      },
+      {
+       "transactionId": "d_00100400021",
+       "entryReference": "00100400021",
+       "valueDate": "2026-07-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-311.57"
+       },
+       "bookingDate": "2026-07-20",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 2B48F466",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT9D1FD58BB2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-282.67"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-20"
+       }
+      },
+      {
+       "transactionId": "c_00100400022",
+       "entryReference": "00100400022",
+       "valueDate": "2026-08-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "311.57"
+       },
+       "bookingDate": "2026-08-19",
+       "endToEndId": "E2EF250790CEE9B",
+       "debtorName": "LASHA KHARAISHVILI",
+       "debtorAccount": {
+        "iban": "GE33LB1073604069022527"
+       },
+       "debtorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "28.90"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-19"
+       }
+      },
+      {
+       "transactionId": "d_00100400023",
+       "entryReference": "00100400023",
+       "valueDate": "2026-08-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-311.57"
+       },
+       "bookingDate": "2026-08-20",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 2B48F466",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT9D1FD58BB2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-282.67"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-20"
+       }
+      },
+      {
+       "transactionId": "c_00100400024",
+       "entryReference": "00100400024",
+       "valueDate": "2026-09-18",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "311.57"
+       },
+       "bookingDate": "2026-09-18",
+       "endToEndId": "E2E842D79A2C9BB",
+       "debtorName": "LASHA KHARAISHVILI",
+       "debtorAccount": {
+        "iban": "GE33LB1073604069022527"
+       },
+       "debtorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "28.90"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-18"
+       }
+      },
+      {
+       "transactionId": "d_00100400025",
+       "entryReference": "00100400025",
+       "valueDate": "2026-09-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-311.57"
+       },
+       "bookingDate": "2026-09-20",
+       "creditorName": "Bank of Georgia",
+       "creditorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა 2B48F466",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT9D1FD58BB2",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-282.67"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-20"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/8c43c839-bb97-5218-9872-9481ccb3d273"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/8c43c839-bb97-5218-9872-9481ccb3d273/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

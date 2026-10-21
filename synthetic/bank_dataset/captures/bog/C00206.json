@@ -1,0 +1,144 @@
+{
+ "bank": "bog",
+ "customer": "C00206",
+ "dialect": "bog",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "b7aa233f-5fcc-5aba-b8ab-a687e2d33a29",
+      "iban": "GE26BG1589840091492827",
+      "currency": "GEL",
+      "ownerName": "MERAB NODIA",
+      "name": "MERAB NODIA",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "BAGAGE22",
+      "usage": "ORGA",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/b7aa233f-5fcc-5aba-b8ab-a687e2d33a29/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/b7aa233f-5fcc-5aba-b8ab-a687e2d33a29/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/b7aa233f-5fcc-5aba-b8ab-a687e2d33a29",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "b7aa233f-5fcc-5aba-b8ab-a687e2d33a29",
+     "iban": "GE26BG1589840091492827",
+     "currency": "GEL",
+     "ownerName": "MERAB NODIA",
+     "name": "MERAB NODIA",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "BAGAGE22",
+     "usage": "ORGA",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/b7aa233f-5fcc-5aba-b8ab-a687e2d33a29/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/b7aa233f-5fcc-5aba-b8ab-a687e2d33a29/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/b7aa233f-5fcc-5aba-b8ab-a687e2d33a29/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE26BG1589840091492827",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.00"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/b7aa233f-5fcc-5aba-b8ab-a687e2d33a29/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE26BG1589840091492827",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/b7aa233f-5fcc-5aba-b8ab-a687e2d33a29"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/b7aa233f-5fcc-5aba-b8ab-a687e2d33a29/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

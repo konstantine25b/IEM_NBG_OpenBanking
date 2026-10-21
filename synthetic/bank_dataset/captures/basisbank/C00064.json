@@ -1,0 +1,931 @@
+{
+ "bank": "basisbank",
+ "customer": "C00064",
+ "dialect": "obhome",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "c8ee5cd7-940e-5656-b33d-17e724250a35",
+      "iban": "GE31BS1269364218981498",
+      "currency": "GEL",
+      "ownerName": "LEVAN MAISURADZE",
+      "name": "LEVAN MAISURADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "CBASGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-11.38"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-08-27T07:32:40"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-11.38"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-08-27T07:32:40"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/accounts/c8ee5cd7-940e-5656-b33d-17e724250a35/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/accounts/c8ee5cd7-940e-5656-b33d-17e724250a35/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/accounts/c8ee5cd7-940e-5656-b33d-17e724250a35",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "c8ee5cd7-940e-5656-b33d-17e724250a35",
+     "iban": "GE31BS1269364218981498",
+     "currency": "GEL",
+     "ownerName": "LEVAN MAISURADZE",
+     "name": "LEVAN MAISURADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "CBASGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/accounts/c8ee5cd7-940e-5656-b33d-17e724250a35/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/accounts/c8ee5cd7-940e-5656-b33d-17e724250a35/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/c8ee5cd7-940e-5656-b33d-17e724250a35/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE31BS1269364218981498",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-11.38"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-11.38"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-08-27T07:32:40"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/accounts/c8ee5cd7-940e-5656-b33d-17e724250a35/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE31BS1269364218981498",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00025200001",
+       "entryReference": "00025200001",
+       "valueDate": "2025-10-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "54.80"
+       },
+       "bookingDate": "2025-10-29",
+       "endToEndId": "E2E72DA212018E4",
+       "debtorName": "LEVAN MAISURADZE",
+       "debtorAccount": {
+        "iban": "GE66PC1227618518207729"
+       },
+       "debtorAgent": "MIBGGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "54.80"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-29"
+       }
+      },
+      {
+       "transactionId": "d_00025200002",
+       "entryReference": "00025200002",
+       "valueDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-54.64"
+       },
+       "bookingDate": "2025-10-30",
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა D90D5E5C",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT82E0384A2C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.16"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-30"
+       }
+      },
+      {
+       "transactionId": "d_00025200003",
+       "entryReference": "00025200003",
+       "valueDate": "2025-10-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-0.16"
+       },
+       "bookingDate": "2025-10-30",
+       "creditorName": "Basisbank",
+       "remittanceInformationUnstructured": "ჯარიმა ვადაგადაცილებაზე",
+       "bankTransactionCode": "ACMT-MDOP-CHRG",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-30"
+       }
+      },
+      {
+       "transactionId": "d_00025200004",
+       "entryReference": "00025200004",
+       "valueDate": "2025-10-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-11.38"
+       },
+       "bookingDate": "2025-10-31",
+       "creditorName": "NIKORA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - NIKORA",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-11.38"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-31"
+       }
+      },
+      {
+       "transactionId": "c_00025200005",
+       "entryReference": "00025200005",
+       "valueDate": "2025-11-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "54.64"
+       },
+       "bookingDate": "2025-11-26",
+       "endToEndId": "E2EE5117FBD5A13",
+       "debtorName": "LEVAN MAISURADZE",
+       "debtorAccount": {
+        "iban": "GE66PC1227618518207729"
+       },
+       "debtorAgent": "MIBGGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "43.26"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-26"
+       }
+      },
+      {
+       "transactionId": "d_00025200006",
+       "entryReference": "00025200006",
+       "valueDate": "2025-11-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-54.64"
+       },
+       "bookingDate": "2025-11-27",
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა D90D5E5C",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT82E0384A2C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-11.38"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-27"
+       }
+      },
+      {
+       "transactionId": "c_00025200007",
+       "entryReference": "00025200007",
+       "valueDate": "2025-12-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "54.80"
+       },
+       "bookingDate": "2025-12-29",
+       "endToEndId": "E2E478FDAFF5E95",
+       "debtorName": "LEVAN MAISURADZE",
+       "debtorAccount": {
+        "iban": "GE66PC1227618518207729"
+       },
+       "debtorAgent": "MIBGGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "43.42"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-29"
+       }
+      },
+      {
+       "transactionId": "d_00025200008",
+       "entryReference": "00025200008",
+       "valueDate": "2025-12-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-54.64"
+       },
+       "bookingDate": "2025-12-30",
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა D90D5E5C",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT82E0384A2C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-11.22"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-30"
+       }
+      },
+      {
+       "transactionId": "d_00025200009",
+       "entryReference": "00025200009",
+       "valueDate": "2025-12-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-0.16"
+       },
+       "bookingDate": "2025-12-30",
+       "creditorName": "Basisbank",
+       "remittanceInformationUnstructured": "ჯარიმა ვადაგადაცილებაზე",
+       "bankTransactionCode": "ACMT-MDOP-CHRG",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-11.38"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-30"
+       }
+      },
+      {
+       "transactionId": "c_00025200010",
+       "entryReference": "00025200010",
+       "valueDate": "2026-01-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "54.64"
+       },
+       "bookingDate": "2026-01-26",
+       "endToEndId": "E2EE2C27D2D2EFD",
+       "debtorName": "LEVAN MAISURADZE",
+       "debtorAccount": {
+        "iban": "GE66PC1227618518207729"
+       },
+       "debtorAgent": "MIBGGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "43.26"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-26"
+       }
+      },
+      {
+       "transactionId": "d_00025200011",
+       "entryReference": "00025200011",
+       "valueDate": "2026-01-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-54.64"
+       },
+       "bookingDate": "2026-01-27",
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა D90D5E5C",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT82E0384A2C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-11.38"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-27"
+       }
+      },
+      {
+       "transactionId": "c_00025200012",
+       "entryReference": "00025200012",
+       "valueDate": "2026-02-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "54.64"
+       },
+       "bookingDate": "2026-02-26",
+       "endToEndId": "E2E68F237A34825",
+       "debtorName": "LEVAN MAISURADZE",
+       "debtorAccount": {
+        "iban": "GE66PC1227618518207729"
+       },
+       "debtorAgent": "MIBGGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "43.26"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-26"
+       }
+      },
+      {
+       "transactionId": "d_00025200013",
+       "entryReference": "00025200013",
+       "valueDate": "2026-02-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-54.64"
+       },
+       "bookingDate": "2026-02-27",
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა D90D5E5C",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT82E0384A2C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-11.38"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-27"
+       }
+      },
+      {
+       "transactionId": "c_00025200014",
+       "entryReference": "00025200014",
+       "valueDate": "2026-03-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "54.64"
+       },
+       "bookingDate": "2026-03-26",
+       "endToEndId": "E2E237C132AA13E",
+       "debtorName": "LEVAN MAISURADZE",
+       "debtorAccount": {
+        "iban": "GE66PC1227618518207729"
+       },
+       "debtorAgent": "MIBGGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "43.26"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-26"
+       }
+      },
+      {
+       "transactionId": "d_00025200015",
+       "entryReference": "00025200015",
+       "valueDate": "2026-03-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-54.64"
+       },
+       "bookingDate": "2026-03-27",
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა D90D5E5C",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT82E0384A2C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-11.38"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-27"
+       }
+      },
+      {
+       "transactionId": "c_00025200016",
+       "entryReference": "00025200016",
+       "valueDate": "2026-04-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "54.64"
+       },
+       "bookingDate": "2026-04-24",
+       "endToEndId": "E2ED8B2C4E67C99",
+       "debtorName": "LEVAN MAISURADZE",
+       "debtorAccount": {
+        "iban": "GE66PC1227618518207729"
+       },
+       "debtorAgent": "MIBGGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "43.26"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-24"
+       }
+      },
+      {
+       "transactionId": "d_00025200017",
+       "entryReference": "00025200017",
+       "valueDate": "2026-04-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-54.64"
+       },
+       "bookingDate": "2026-04-27",
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა D90D5E5C",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT82E0384A2C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-11.38"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-27"
+       }
+      },
+      {
+       "transactionId": "c_00025200018",
+       "entryReference": "00025200018",
+       "valueDate": "2026-05-25",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "54.64"
+       },
+       "bookingDate": "2026-05-25",
+       "endToEndId": "E2ED274421B6849",
+       "debtorName": "LEVAN MAISURADZE",
+       "debtorAccount": {
+        "iban": "GE66PC1227618518207729"
+       },
+       "debtorAgent": "MIBGGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "43.26"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-25"
+       }
+      },
+      {
+       "transactionId": "d_00025200019",
+       "entryReference": "00025200019",
+       "valueDate": "2026-05-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-54.64"
+       },
+       "bookingDate": "2026-05-27",
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა D90D5E5C",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT82E0384A2C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-11.38"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-27"
+       }
+      },
+      {
+       "transactionId": "c_00025200020",
+       "entryReference": "00025200020",
+       "valueDate": "2026-06-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "54.64"
+       },
+       "bookingDate": "2026-06-26",
+       "endToEndId": "E2E3B99F921B732",
+       "debtorName": "LEVAN MAISURADZE",
+       "debtorAccount": {
+        "iban": "GE66PC1227618518207729"
+       },
+       "debtorAgent": "MIBGGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "43.26"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-26"
+       }
+      },
+      {
+       "transactionId": "d_00025200021",
+       "entryReference": "00025200021",
+       "valueDate": "2026-06-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-54.64"
+       },
+       "bookingDate": "2026-06-27",
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა D90D5E5C",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT82E0384A2C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-11.38"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-27"
+       }
+      },
+      {
+       "transactionId": "c_00025200022",
+       "entryReference": "00025200022",
+       "valueDate": "2026-07-24",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "54.64"
+       },
+       "bookingDate": "2026-07-24",
+       "endToEndId": "E2E855BE153795B",
+       "debtorName": "LEVAN MAISURADZE",
+       "debtorAccount": {
+        "iban": "GE66PC1227618518207729"
+       },
+       "debtorAgent": "MIBGGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "43.26"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-24"
+       }
+      },
+      {
+       "transactionId": "d_00025200023",
+       "entryReference": "00025200023",
+       "valueDate": "2026-07-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-54.64"
+       },
+       "bookingDate": "2026-07-27",
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა D90D5E5C",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT82E0384A2C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-11.38"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-27"
+       }
+      },
+      {
+       "transactionId": "c_00025200024",
+       "entryReference": "00025200024",
+       "valueDate": "2026-08-26",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "54.64"
+       },
+       "bookingDate": "2026-08-26",
+       "endToEndId": "E2E3BE5DE5A5BC5",
+       "debtorName": "LEVAN MAISURADZE",
+       "debtorAccount": {
+        "iban": "GE66PC1227618518207729"
+       },
+       "debtorAgent": "MIBGGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "43.26"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-26"
+       }
+      },
+      {
+       "transactionId": "d_00025200025",
+       "entryReference": "00025200025",
+       "valueDate": "2026-08-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-54.64"
+       },
+       "bookingDate": "2026-08-27",
+       "creditorName": "Basisbank",
+       "creditorAgent": "CBASGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა D90D5E5C",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT82E0384A2C",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-11.38"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-27"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/c8ee5cd7-940e-5656-b33d-17e724250a35"
+      },
+      "first": {
+       "href": "/0.8/v1/accounts/c8ee5cd7-940e-5656-b33d-17e724250a35/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "6c8b85f5-9aa3-5389-aa57-ab4aea820864",
+      "maskedPan": "533286******6618",
+      "currency": "GEL",
+      "ownerName": "LEVAN MAISURADZE",
+      "name": "LEVAN MAISURADZE",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-11.38"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-08-27T07:32:40"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-11.38"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-08-27T07:32:40"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "/0.8/v1/card-accounts/6c8b85f5-9aa3-5389-aa57-ab4aea820864/balances"
+       },
+       "transactions": {
+        "href": "/0.8/v1/card-accounts/6c8b85f5-9aa3-5389-aa57-ab4aea820864/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/card-accounts/6c8b85f5-9aa3-5389-aa57-ab4aea820864",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "6c8b85f5-9aa3-5389-aa57-ab4aea820864",
+     "maskedPan": "533286******6618",
+     "currency": "GEL",
+     "ownerName": "LEVAN MAISURADZE",
+     "name": "LEVAN MAISURADZE",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-11.38"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-08-27T07:32:40"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-11.38"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-08-27T07:32:40"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "/0.8/v1/card-accounts/6c8b85f5-9aa3-5389-aa57-ab4aea820864/balances"
+      },
+      "transactions": {
+       "href": "/0.8/v1/card-accounts/6c8b85f5-9aa3-5389-aa57-ab4aea820864/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/6c8b85f5-9aa3-5389-aa57-ab4aea820864/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "533286******6618",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-11.38"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-11.38"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-08-27T07:32:40"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/0.8/v1/card-accounts/6c8b85f5-9aa3-5389-aa57-ab4aea820864/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00025200004",
+       "transactionDate": "2025-10-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-11.38"
+       },
+       "acceptorTransactionDateTime": "2025-10-29T16:50:31",
+       "maskedPAN": "533286******6618",
+       "transactionDetails": "ბარათით გადახდა - NIKORA",
+       "bookingDate": "2025-10-31",
+       "cardAcceptorId": "NIKORA",
+       "merchantCategoryCode": "5411"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "/0.8/v1/accounts/c8ee5cd7-940e-5656-b33d-17e724250a35"
+      },
+      "first": {
+       "href": "/0.8/v1/card-accounts/6c8b85f5-9aa3-5389-aa57-ab4aea820864/transactions?bookingStatus=both&dateFrom=2025-10-19"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "533286******6618",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

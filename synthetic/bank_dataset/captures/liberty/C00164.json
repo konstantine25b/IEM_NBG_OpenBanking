@@ -1,0 +1,488 @@
+{
+ "bank": "liberty",
+ "customer": "C00164",
+ "dialect": "altasoft_v08",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "f1fb16ea-3e78-526c-a87e-b988b4ad2a31",
+      "iban": "GE95LB1696038500695007",
+      "currency": "GEL",
+      "ownerName": "NUTSA MAISURADZE",
+      "name": "NUTSA MAISURADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "LBRTGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.41"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-12-09T11:15:56"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.41"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-12-09T11:15:56"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v1/accounts/f1fb16ea-3e78-526c-a87e-b988b4ad2a31/balances"
+       },
+       "transactions": {
+        "href": "v1/accounts/f1fb16ea-3e78-526c-a87e-b988b4ad2a31/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/f1fb16ea-3e78-526c-a87e-b988b4ad2a31",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "f1fb16ea-3e78-526c-a87e-b988b4ad2a31",
+     "iban": "GE95LB1696038500695007",
+     "currency": "GEL",
+     "ownerName": "NUTSA MAISURADZE",
+     "name": "NUTSA MAISURADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "LBRTGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v1/accounts/f1fb16ea-3e78-526c-a87e-b988b4ad2a31/balances"
+      },
+      "transactions": {
+       "href": "v1/accounts/f1fb16ea-3e78-526c-a87e-b988b4ad2a31/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/f1fb16ea-3e78-526c-a87e-b988b4ad2a31/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE95LB1696038500695007",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.41"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.41"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-12-09T11:15:56"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/f1fb16ea-3e78-526c-a87e-b988b4ad2a31/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE95LB1696038500695007",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "d_00065200001",
+       "entryReference": "00065200001",
+       "valueDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.43"
+       },
+       "bookingDate": "2025-10-22",
+       "creditorName": "NETFLIX",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7401",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2025-10-21"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - NETFLIX",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "29.42"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-22"
+       }
+      },
+      {
+       "transactionId": "d_00065200002",
+       "entryReference": "00065200002",
+       "valueDate": "2025-11-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.48"
+       },
+       "bookingDate": "2025-11-06",
+       "creditorName": "MINI MARKET",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - MINI MARKET",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "27.94"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-06"
+       }
+      },
+      {
+       "transactionId": "d_00065200003",
+       "entryReference": "00065200003",
+       "valueDate": "2025-11-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.79"
+       },
+       "bookingDate": "2025-11-10",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "22.15"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-10"
+       }
+      },
+      {
+       "transactionId": "d_00065200004",
+       "entryReference": "00065200004",
+       "valueDate": "2025-11-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.00"
+       },
+       "bookingDate": "2025-11-12",
+       "creditorName": "ATM BASISBANK",
+       "remittanceInformationUnstructured": "ბანკომატიდან განაღდება",
+       "bankTransactionCode": "PMNT-CCRD-CWDL",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "2.15"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-12"
+       }
+      },
+      {
+       "transactionId": "d_00065200005",
+       "entryReference": "00065200005",
+       "valueDate": "2025-12-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.74"
+       },
+       "bookingDate": "2025-12-10",
+       "creditorName": "NIKORA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - NIKORA",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.41"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-10"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v1/accounts/f1fb16ea-3e78-526c-a87e-b988b4ad2a31"
+      },
+      "first": {
+       "href": "v1/accounts/f1fb16ea-3e78-526c-a87e-b988b4ad2a31/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "757db906-5016-5feb-a8dc-165be75a8c42",
+      "maskedPan": "418057******7636",
+      "currency": "GEL",
+      "ownerName": "NUTSA MAISURADZE",
+      "name": "NUTSA MAISURADZE",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.41"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-12-09T11:15:56"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.41"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2025-12-09T11:15:56"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v1/card-accounts/757db906-5016-5feb-a8dc-165be75a8c42/balances"
+       },
+       "transactions": {
+        "href": "v1/card-accounts/757db906-5016-5feb-a8dc-165be75a8c42/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/757db906-5016-5feb-a8dc-165be75a8c42",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "757db906-5016-5feb-a8dc-165be75a8c42",
+     "maskedPan": "418057******7636",
+     "currency": "GEL",
+     "ownerName": "NUTSA MAISURADZE",
+     "name": "NUTSA MAISURADZE",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.41"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-12-09T11:15:56"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "0.41"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2025-12-09T11:15:56"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v1/card-accounts/757db906-5016-5feb-a8dc-165be75a8c42/balances"
+      },
+      "transactions": {
+       "href": "v1/card-accounts/757db906-5016-5feb-a8dc-165be75a8c42/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/757db906-5016-5feb-a8dc-165be75a8c42/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "418057******7636",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.41"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "0.41"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2025-12-09T11:15:56"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/757db906-5016-5feb-a8dc-165be75a8c42/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00065200001",
+       "transactionDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3.43"
+       },
+       "acceptorTransactionDateTime": "2025-10-21T21:35:47",
+       "maskedPAN": "418057******7636",
+       "transactionDetails": "ბარათით გადახდა - NETFLIX",
+       "bookingDate": "2025-10-22",
+       "cardAcceptorId": "NETFLIX",
+       "merchantCategoryCode": "7832"
+      },
+      {
+       "cardTransactionId": "d_00065200002",
+       "transactionDate": "2025-11-05",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.48"
+       },
+       "acceptorTransactionDateTime": "2025-11-05T15:19:16",
+       "maskedPAN": "418057******7636",
+       "transactionDetails": "ბარათით გადახდა - MINI MARKET",
+       "bookingDate": "2025-11-06",
+       "cardAcceptorId": "MINI MARKET",
+       "merchantCategoryCode": "5499"
+      },
+      {
+       "cardTransactionId": "d_00065200003",
+       "transactionDate": "2025-11-08",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-5.79"
+       },
+       "acceptorTransactionDateTime": "2025-11-08T21:34:37",
+       "maskedPAN": "418057******7636",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "bookingDate": "2025-11-10",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00065200004",
+       "transactionDate": "2025-11-11",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-20.00"
+       },
+       "acceptorTransactionDateTime": "2025-11-11T09:28:16",
+       "maskedPAN": "418057******7636",
+       "transactionDetails": "ბანკომატიდან განაღდება",
+       "bookingDate": "2025-11-12",
+       "cardAcceptorId": "ATM BASISBANK",
+       "merchantCategoryCode": "6011"
+      },
+      {
+       "cardTransactionId": "d_00065200005",
+       "transactionDate": "2025-12-09",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-1.74"
+       },
+       "acceptorTransactionDateTime": "2025-12-09T11:15:56",
+       "maskedPAN": "418057******7636",
+       "transactionDetails": "ბარათით გადახდა - NIKORA",
+       "bookingDate": "2025-12-10",
+       "cardAcceptorId": "NIKORA",
+       "merchantCategoryCode": "5411"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v1/accounts/f1fb16ea-3e78-526c-a87e-b988b4ad2a31"
+      },
+      "first": {
+       "href": "v1/card-accounts/757db906-5016-5feb-a8dc-165be75a8c42/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "418057******7636",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

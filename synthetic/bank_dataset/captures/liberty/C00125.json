@@ -1,0 +1,1004 @@
+{
+ "bank": "liberty",
+ "customer": "C00125",
+ "dialect": "altasoft_v08",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "7d1d4ef2-43e3-52a3-8c1b-697e4b0a6739",
+      "iban": "GE25LB1106973754275548",
+      "currency": "GEL",
+      "ownerName": "MERAB KUPRADZE",
+      "name": "MERAB KUPRADZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "LBRTGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-21.51"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-04T08:46:08"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-21.51"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-04T08:46:08"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v1/accounts/7d1d4ef2-43e3-52a3-8c1b-697e4b0a6739/balances"
+       },
+       "transactions": {
+        "href": "v1/accounts/7d1d4ef2-43e3-52a3-8c1b-697e4b0a6739/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/7d1d4ef2-43e3-52a3-8c1b-697e4b0a6739",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "7d1d4ef2-43e3-52a3-8c1b-697e4b0a6739",
+     "iban": "GE25LB1106973754275548",
+     "currency": "GEL",
+     "ownerName": "MERAB KUPRADZE",
+     "name": "MERAB KUPRADZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "LBRTGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v1/accounts/7d1d4ef2-43e3-52a3-8c1b-697e4b0a6739/balances"
+      },
+      "transactions": {
+       "href": "v1/accounts/7d1d4ef2-43e3-52a3-8c1b-697e4b0a6739/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/7d1d4ef2-43e3-52a3-8c1b-697e4b0a6739/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE25LB1106973754275548",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-21.51"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-21.51"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-04T08:46:08"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/7d1d4ef2-43e3-52a3-8c1b-697e4b0a6739/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE25LB1106973754275548",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00049600001",
+       "entryReference": "00049600001",
+       "valueDate": "2025-10-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "673.54"
+       },
+       "bookingDate": "2025-10-31",
+       "endToEndId": "E2E71A4966C09B2",
+       "debtorName": "MERAB KUPRADZE",
+       "debtorAccount": {
+        "iban": "GE81BG1975385082755970"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "673.54"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-31"
+       }
+      },
+      {
+       "transactionId": "d_00049600002",
+       "entryReference": "00049600002",
+       "valueDate": "2025-11-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-673.54"
+       },
+       "bookingDate": "2025-11-01",
+       "creditorName": "Liberty Bank",
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა CFCCE79D",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTEBEA6E2176",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-01"
+       }
+      },
+      {
+       "transactionId": "c_00049600003",
+       "entryReference": "00049600003",
+       "valueDate": "2025-11-28",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "673.54"
+       },
+       "bookingDate": "2025-11-28",
+       "endToEndId": "E2E07702920F19F",
+       "debtorName": "MERAB KUPRADZE",
+       "debtorAccount": {
+        "iban": "GE81BG1975385082755970"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "673.54"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-28"
+       }
+      },
+      {
+       "transactionId": "d_00049600004",
+       "entryReference": "00049600004",
+       "valueDate": "2025-12-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-673.54"
+       },
+       "bookingDate": "2025-12-01",
+       "creditorName": "Liberty Bank",
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა CFCCE79D",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTEBEA6E2176",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-01"
+       }
+      },
+      {
+       "transactionId": "c_00049600005",
+       "entryReference": "00049600005",
+       "valueDate": "2025-12-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "673.54"
+       },
+       "bookingDate": "2025-12-31",
+       "endToEndId": "E2E7D31B3EC0180",
+       "debtorName": "MERAB KUPRADZE",
+       "debtorAccount": {
+        "iban": "GE81BG1975385082755970"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "673.54"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-31"
+       }
+      },
+      {
+       "transactionId": "d_00049600006",
+       "entryReference": "00049600006",
+       "valueDate": "2026-01-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-673.54"
+       },
+       "bookingDate": "2026-01-01",
+       "creditorName": "Liberty Bank",
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა CFCCE79D",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTEBEA6E2176",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-01"
+       }
+      },
+      {
+       "transactionId": "c_00049600007",
+       "entryReference": "00049600007",
+       "valueDate": "2026-01-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "673.54"
+       },
+       "bookingDate": "2026-01-30",
+       "endToEndId": "E2E1708E9E19B65",
+       "debtorName": "MERAB KUPRADZE",
+       "debtorAccount": {
+        "iban": "GE81BG1975385082755970"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "673.54"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-30"
+       }
+      },
+      {
+       "transactionId": "d_00049600008",
+       "entryReference": "00049600008",
+       "valueDate": "2026-02-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-673.54"
+       },
+       "bookingDate": "2026-02-01",
+       "creditorName": "Liberty Bank",
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა CFCCE79D",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTEBEA6E2176",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-01"
+       }
+      },
+      {
+       "transactionId": "d_00049600009",
+       "entryReference": "00049600009",
+       "valueDate": "2026-01-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.72"
+       },
+       "bookingDate": "2026-02-03",
+       "creditorName": "GOOGLE *YOUTUBE",
+       "currencyExchange": [
+        {
+         "sourceCurrency": "USD",
+         "exchangeRate": "2.7231",
+         "unitCurrency": "USD",
+         "targetCurrency": "GEL",
+         "quotationDate": "2026-01-31"
+        }
+       ],
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GOOGLE *YOUTUBE",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-6.72"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-03"
+       }
+      },
+      {
+       "transactionId": "c_00049600010",
+       "entryReference": "00049600010",
+       "valueDate": "2026-02-27",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "673.54"
+       },
+       "bookingDate": "2026-02-27",
+       "endToEndId": "E2E496C4A3EB713",
+       "debtorName": "MERAB KUPRADZE",
+       "debtorAccount": {
+        "iban": "GE81BG1975385082755970"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "666.82"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-27"
+       }
+      },
+      {
+       "transactionId": "d_00049600011",
+       "entryReference": "00049600011",
+       "valueDate": "2026-03-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-673.54"
+       },
+       "bookingDate": "2026-03-01",
+       "creditorName": "Liberty Bank",
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა CFCCE79D",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTEBEA6E2176",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-6.72"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-01"
+       }
+      },
+      {
+       "transactionId": "c_00049600012",
+       "entryReference": "00049600012",
+       "valueDate": "2026-03-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "673.54"
+       },
+       "bookingDate": "2026-03-31",
+       "endToEndId": "E2EF48DED6AC731",
+       "debtorName": "MERAB KUPRADZE",
+       "debtorAccount": {
+        "iban": "GE81BG1975385082755970"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "666.82"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-31"
+       }
+      },
+      {
+       "transactionId": "d_00049600013",
+       "entryReference": "00049600013",
+       "valueDate": "2026-04-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-673.54"
+       },
+       "bookingDate": "2026-04-01",
+       "creditorName": "Liberty Bank",
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა CFCCE79D",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTEBEA6E2176",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-6.72"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-01"
+       }
+      },
+      {
+       "transactionId": "c_00049600014",
+       "entryReference": "00049600014",
+       "valueDate": "2026-04-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "673.54"
+       },
+       "bookingDate": "2026-04-30",
+       "endToEndId": "E2E88E2658B5D10",
+       "debtorName": "MERAB KUPRADZE",
+       "debtorAccount": {
+        "iban": "GE81BG1975385082755970"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "666.82"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-30"
+       }
+      },
+      {
+       "transactionId": "d_00049600015",
+       "entryReference": "00049600015",
+       "valueDate": "2026-05-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-673.54"
+       },
+       "bookingDate": "2026-05-01",
+       "creditorName": "Liberty Bank",
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა CFCCE79D",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTEBEA6E2176",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-6.72"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-01"
+       }
+      },
+      {
+       "transactionId": "c_00049600016",
+       "entryReference": "00049600016",
+       "valueDate": "2026-05-29",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "673.54"
+       },
+       "bookingDate": "2026-05-29",
+       "endToEndId": "E2E7D77DD6CF2EE",
+       "debtorName": "MERAB KUPRADZE",
+       "debtorAccount": {
+        "iban": "GE81BG1975385082755970"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "666.82"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-29"
+       }
+      },
+      {
+       "transactionId": "d_00049600017",
+       "entryReference": "00049600017",
+       "valueDate": "2026-06-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-673.54"
+       },
+       "bookingDate": "2026-06-01",
+       "creditorName": "Liberty Bank",
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა CFCCE79D",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTEBEA6E2176",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-6.72"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-01"
+       }
+      },
+      {
+       "transactionId": "c_00049600018",
+       "entryReference": "00049600018",
+       "valueDate": "2026-06-30",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "673.54"
+       },
+       "bookingDate": "2026-06-30",
+       "endToEndId": "E2E58DD047155C6",
+       "debtorName": "MERAB KUPRADZE",
+       "debtorAccount": {
+        "iban": "GE81BG1975385082755970"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "666.82"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-30"
+       }
+      },
+      {
+       "transactionId": "d_00049600019",
+       "entryReference": "00049600019",
+       "valueDate": "2026-07-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-673.54"
+       },
+       "bookingDate": "2026-07-01",
+       "creditorName": "Liberty Bank",
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა CFCCE79D",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTEBEA6E2176",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-6.72"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-01"
+       }
+      },
+      {
+       "transactionId": "c_00049600020",
+       "entryReference": "00049600020",
+       "valueDate": "2026-07-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "673.54"
+       },
+       "bookingDate": "2026-07-31",
+       "endToEndId": "E2EDAFE172120E6",
+       "debtorName": "MERAB KUPRADZE",
+       "debtorAccount": {
+        "iban": "GE81BG1975385082755970"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "666.82"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-31"
+       }
+      },
+      {
+       "transactionId": "d_00049600021",
+       "entryReference": "00049600021",
+       "valueDate": "2026-08-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-673.54"
+       },
+       "bookingDate": "2026-08-01",
+       "creditorName": "Liberty Bank",
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა CFCCE79D",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTEBEA6E2176",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-6.72"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-01"
+       }
+      },
+      {
+       "transactionId": "d_00049600022",
+       "entryReference": "00049600022",
+       "valueDate": "2026-07-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.79"
+       },
+       "bookingDate": "2026-08-03",
+       "creditorName": "BOLT",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - BOLT",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-21.51"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-03"
+       }
+      },
+      {
+       "transactionId": "c_00049600023",
+       "entryReference": "00049600023",
+       "valueDate": "2026-08-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "673.54"
+       },
+       "bookingDate": "2026-08-31",
+       "endToEndId": "E2EDE5F0FF748EB",
+       "debtorName": "MERAB KUPRADZE",
+       "debtorAccount": {
+        "iban": "GE81BG1975385082755970"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "652.03"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-31"
+       }
+      },
+      {
+       "transactionId": "d_00049600024",
+       "entryReference": "00049600024",
+       "valueDate": "2026-09-01",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-673.54"
+       },
+       "bookingDate": "2026-09-01",
+       "creditorName": "Liberty Bank",
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა CFCCE79D",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTEBEA6E2176",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-21.51"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-01"
+       }
+      },
+      {
+       "transactionId": "c_00049600025",
+       "entryReference": "00049600025",
+       "valueDate": "2026-10-02",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "675.56"
+       },
+       "bookingDate": "2026-10-02",
+       "endToEndId": "E2EC3BC28EBAB74",
+       "debtorName": "MERAB KUPRADZE",
+       "debtorAccount": {
+        "iban": "GE81BG1975385082755970"
+       },
+       "debtorAgent": "BAGAGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "654.05"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-02"
+       }
+      },
+      {
+       "transactionId": "d_00049600026",
+       "entryReference": "00049600026",
+       "valueDate": "2026-10-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-673.54"
+       },
+       "bookingDate": "2026-10-04",
+       "creditorName": "Liberty Bank",
+       "creditorAgent": "LBRTGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა CFCCE79D",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDTEBEA6E2176",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-19.49"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-04"
+       }
+      },
+      {
+       "transactionId": "d_00049600027",
+       "entryReference": "00049600027",
+       "valueDate": "2026-10-04",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-2.02"
+       },
+       "bookingDate": "2026-10-04",
+       "creditorName": "Liberty Bank",
+       "remittanceInformationUnstructured": "ჯარიმა ვადაგადაცილებაზე",
+       "bankTransactionCode": "ACMT-MDOP-CHRG",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-21.51"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-04"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v1/accounts/7d1d4ef2-43e3-52a3-8c1b-697e4b0a6739"
+      },
+      "first": {
+       "href": "v1/accounts/7d1d4ef2-43e3-52a3-8c1b-697e4b0a6739/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "b92e3447-feff-5f47-87a4-3d239166a365",
+      "maskedPan": "533286******0898",
+      "currency": "GEL",
+      "ownerName": "MERAB KUPRADZE",
+      "name": "MERAB KUPRADZE",
+      "product": "MC Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-21.51"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-04T08:46:08"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-21.51"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-10-04T08:46:08"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v1/card-accounts/b92e3447-feff-5f47-87a4-3d239166a365/balances"
+       },
+       "transactions": {
+        "href": "v1/card-accounts/b92e3447-feff-5f47-87a4-3d239166a365/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/b92e3447-feff-5f47-87a4-3d239166a365",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "b92e3447-feff-5f47-87a4-3d239166a365",
+     "maskedPan": "533286******0898",
+     "currency": "GEL",
+     "ownerName": "MERAB KUPRADZE",
+     "name": "MERAB KUPRADZE",
+     "product": "MC Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-21.51"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-04T08:46:08"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-21.51"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-10-04T08:46:08"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v1/card-accounts/b92e3447-feff-5f47-87a4-3d239166a365/balances"
+      },
+      "transactions": {
+       "href": "v1/card-accounts/b92e3447-feff-5f47-87a4-3d239166a365/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/b92e3447-feff-5f47-87a4-3d239166a365/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "533286******0898",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-21.51"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-21.51"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-10-04T08:46:08"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/b92e3447-feff-5f47-87a4-3d239166a365/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00049600009",
+       "transactionDate": "2026-01-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-6.72"
+       },
+       "acceptorTransactionDateTime": "2026-01-31T17:54:13",
+       "maskedPAN": "533286******0898",
+       "transactionDetails": "ბარათით გადახდა - GOOGLE *YOUTUBE",
+       "bookingDate": "2026-02-03",
+       "cardAcceptorId": "GOOGLE *YOUTUBE",
+       "merchantCategoryCode": "7832"
+      },
+      {
+       "cardTransactionId": "d_00049600022",
+       "transactionDate": "2026-07-31",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-14.79"
+       },
+       "acceptorTransactionDateTime": "2026-07-31T20:02:40",
+       "maskedPAN": "533286******0898",
+       "transactionDetails": "ბარათით გადახდა - BOLT",
+       "bookingDate": "2026-08-03",
+       "cardAcceptorId": "BOLT",
+       "merchantCategoryCode": "4121"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v1/accounts/7d1d4ef2-43e3-52a3-8c1b-697e4b0a6739"
+      },
+      "first": {
+       "href": "v1/card-accounts/b92e3447-feff-5f47-87a4-3d239166a365/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "533286******0898",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}

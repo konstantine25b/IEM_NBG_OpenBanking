@@ -1,0 +1,1009 @@
+{
+ "bank": "terabank",
+ "customer": "C00370",
+ "dialect": "altasoft_v08",
+ "calls": [
+  {
+   "method": "GET",
+   "path": "/v1/accounts",
+   "query": {
+    "withBalance": "true"
+   },
+   "status": 200,
+   "body": {
+    "accounts": [
+     {
+      "resourceId": "2d1dd835-96e6-5926-91c9-4e9bcc6f082a",
+      "iban": "GE43KS1627812702943399",
+      "currency": "GEL",
+      "owner": "EKA ABASHIDZE",
+      "name": "EKA ABASHIDZE",
+      "product": "Current account",
+      "cashAccountType": "CACC",
+      "status": "enabled",
+      "bic": "TEBAGE22",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-398.41"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-22T08:12:03"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-398.41"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-22T08:12:03"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v1/accounts/2d1dd835-96e6-5926-91c9-4e9bcc6f082a/balances"
+       },
+       "transactions": {
+        "href": "v1/accounts/2d1dd835-96e6-5926-91c9-4e9bcc6f082a/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/2d1dd835-96e6-5926-91c9-4e9bcc6f082a",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "resourceId": "2d1dd835-96e6-5926-91c9-4e9bcc6f082a",
+     "iban": "GE43KS1627812702943399",
+     "currency": "GEL",
+     "owner": "EKA ABASHIDZE",
+     "name": "EKA ABASHIDZE",
+     "product": "Current account",
+     "cashAccountType": "CACC",
+     "status": "enabled",
+     "bic": "TEBAGE22",
+     "usage": "PRIV",
+     "_links": {
+      "balances": {
+       "href": "v1/accounts/2d1dd835-96e6-5926-91c9-4e9bcc6f082a/balances"
+      },
+      "transactions": {
+       "href": "v1/accounts/2d1dd835-96e6-5926-91c9-4e9bcc6f082a/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/2d1dd835-96e6-5926-91c9-4e9bcc6f082a/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE43KS1627812702943399",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-398.41"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-398.41"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-09-22T08:12:03"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/accounts/2d1dd835-96e6-5926-91c9-4e9bcc6f082a/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "account": {
+     "iban": "GE43KS1627812702943399",
+     "currency": "GEL"
+    },
+    "transactions": {
+     "booked": [
+      {
+       "transactionId": "c_00147600001",
+       "entryReference": "00147600001",
+       "valueDate": "2025-10-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "3546.77"
+       },
+       "bookingDate": "2025-10-21",
+       "endToEndId": "E2E564C1348761E",
+       "debtorName": "ეკა აბაშიძე",
+       "debtorAccount": {
+        "iban": "GE12TB1538522417951277"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3546.77"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-21"
+       }
+      },
+      {
+       "transactionId": "d_00147600002",
+       "entryReference": "00147600002",
+       "valueDate": "2025-10-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3546.77"
+       },
+       "bookingDate": "2025-10-22",
+       "creditorName": "TeraBank",
+       "creditorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა E0B6E5B7",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT25C0DCF490",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-10-22"
+       }
+      },
+      {
+       "transactionId": "c_00147600003",
+       "entryReference": "00147600003",
+       "valueDate": "2025-11-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "3546.77"
+       },
+       "bookingDate": "2025-11-21",
+       "endToEndId": "E2EC86C23654066",
+       "debtorName": "ეკა აბაშიძე",
+       "debtorAccount": {
+        "iban": "GE12TB1538522417951277"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3546.77"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-21"
+       }
+      },
+      {
+       "transactionId": "d_00147600004",
+       "entryReference": "00147600004",
+       "valueDate": "2025-11-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3546.77"
+       },
+       "bookingDate": "2025-11-22",
+       "creditorName": "TeraBank",
+       "creditorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა E0B6E5B7",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT25C0DCF490",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-11-22"
+       }
+      },
+      {
+       "transactionId": "c_00147600005",
+       "entryReference": "00147600005",
+       "valueDate": "2025-12-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "3546.77"
+       },
+       "bookingDate": "2025-12-19",
+       "endToEndId": "E2E6141E4979162",
+       "debtorName": "ეკა აბაშიძე",
+       "debtorAccount": {
+        "iban": "GE12TB1538522417951277"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3546.77"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-19"
+       }
+      },
+      {
+       "transactionId": "d_00147600006",
+       "entryReference": "00147600006",
+       "valueDate": "2025-12-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3546.77"
+       },
+       "bookingDate": "2025-12-22",
+       "creditorName": "TeraBank",
+       "creditorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა E0B6E5B7",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT25C0DCF490",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2025-12-22"
+       }
+      },
+      {
+       "transactionId": "c_00147600007",
+       "entryReference": "00147600007",
+       "valueDate": "2026-01-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "3546.77"
+       },
+       "bookingDate": "2026-01-21",
+       "endToEndId": "E2E692B6960E660",
+       "debtorName": "ეკა აბაშიძე",
+       "debtorAccount": {
+        "iban": "GE12TB1538522417951277"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3546.77"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-21"
+       }
+      },
+      {
+       "transactionId": "d_00147600008",
+       "entryReference": "00147600008",
+       "valueDate": "2026-01-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3546.77"
+       },
+       "bookingDate": "2026-01-22",
+       "creditorName": "TeraBank",
+       "creditorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა E0B6E5B7",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT25C0DCF490",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "0.00"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-22"
+       }
+      },
+      {
+       "transactionId": "d_00147600009",
+       "entryReference": "00147600009",
+       "valueDate": "2026-01-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-316.25"
+       },
+       "bookingDate": "2026-01-23",
+       "creditorName": "ZARA",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - ZARA",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-316.25"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-01-23"
+       }
+      },
+      {
+       "transactionId": "c_00147600010",
+       "entryReference": "00147600010",
+       "valueDate": "2026-02-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "3546.77"
+       },
+       "bookingDate": "2026-02-20",
+       "endToEndId": "E2EC5C9DFED685D",
+       "debtorName": "ეკა აბაშიძე",
+       "debtorAccount": {
+        "iban": "GE12TB1538522417951277"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3230.52"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-20"
+       }
+      },
+      {
+       "transactionId": "d_00147600011",
+       "entryReference": "00147600011",
+       "valueDate": "2026-02-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3546.77"
+       },
+       "bookingDate": "2026-02-22",
+       "creditorName": "TeraBank",
+       "creditorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა E0B6E5B7",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT25C0DCF490",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-316.25"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-22"
+       }
+      },
+      {
+       "transactionId": "d_00147600012",
+       "entryReference": "00147600012",
+       "valueDate": "2026-02-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-17.16"
+       },
+       "bookingDate": "2026-02-23",
+       "creditorName": "CARREFOUR",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - CARREFOUR",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-333.41"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-23"
+       }
+      },
+      {
+       "transactionId": "d_00147600013",
+       "entryReference": "00147600013",
+       "valueDate": "2026-02-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-65.00"
+       },
+       "bookingDate": "2026-02-24",
+       "creditorName": "GULF",
+       "remittanceInformationUnstructured": "ბარათით გადახდა - GULF",
+       "bankTransactionCode": "PMNT-CCRD-POSD",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-398.41"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-02-24"
+       }
+      },
+      {
+       "transactionId": "c_00147600014",
+       "entryReference": "00147600014",
+       "valueDate": "2026-03-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "3546.77"
+       },
+       "bookingDate": "2026-03-20",
+       "endToEndId": "E2E60B870AABCD4",
+       "debtorName": "ეკა აბაშიძე",
+       "debtorAccount": {
+        "iban": "GE12TB1538522417951277"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3148.36"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-20"
+       }
+      },
+      {
+       "transactionId": "d_00147600015",
+       "entryReference": "00147600015",
+       "valueDate": "2026-03-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3546.77"
+       },
+       "bookingDate": "2026-03-22",
+       "creditorName": "TeraBank",
+       "creditorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა E0B6E5B7",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT25C0DCF490",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-398.41"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-03-22"
+       }
+      },
+      {
+       "transactionId": "c_00147600016",
+       "entryReference": "00147600016",
+       "valueDate": "2026-04-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "3546.77"
+       },
+       "bookingDate": "2026-04-21",
+       "endToEndId": "E2EFAA45F5DF997",
+       "debtorName": "ეკა აბაშიძე",
+       "debtorAccount": {
+        "iban": "GE12TB1538522417951277"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3148.36"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-21"
+       }
+      },
+      {
+       "transactionId": "d_00147600017",
+       "entryReference": "00147600017",
+       "valueDate": "2026-04-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3546.77"
+       },
+       "bookingDate": "2026-04-22",
+       "creditorName": "TeraBank",
+       "creditorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა E0B6E5B7",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT25C0DCF490",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-398.41"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-04-22"
+       }
+      },
+      {
+       "transactionId": "c_00147600018",
+       "entryReference": "00147600018",
+       "valueDate": "2026-05-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "3546.77"
+       },
+       "bookingDate": "2026-05-21",
+       "endToEndId": "E2EAAB642799099",
+       "debtorName": "ეკა აბაშიძე",
+       "debtorAccount": {
+        "iban": "GE12TB1538522417951277"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3148.36"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-21"
+       }
+      },
+      {
+       "transactionId": "d_00147600019",
+       "entryReference": "00147600019",
+       "valueDate": "2026-05-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3546.77"
+       },
+       "bookingDate": "2026-05-22",
+       "creditorName": "TeraBank",
+       "creditorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა E0B6E5B7",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT25C0DCF490",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-398.41"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-05-22"
+       }
+      },
+      {
+       "transactionId": "c_00147600020",
+       "entryReference": "00147600020",
+       "valueDate": "2026-06-19",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "3546.77"
+       },
+       "bookingDate": "2026-06-19",
+       "endToEndId": "E2E6CA30197FD0D",
+       "debtorName": "ეკა აბაშიძე",
+       "debtorAccount": {
+        "iban": "GE12TB1538522417951277"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3148.36"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-19"
+       }
+      },
+      {
+       "transactionId": "d_00147600021",
+       "entryReference": "00147600021",
+       "valueDate": "2026-06-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3546.77"
+       },
+       "bookingDate": "2026-06-22",
+       "creditorName": "TeraBank",
+       "creditorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა E0B6E5B7",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT25C0DCF490",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-398.41"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-06-22"
+       }
+      },
+      {
+       "transactionId": "c_00147600022",
+       "entryReference": "00147600022",
+       "valueDate": "2026-07-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "3546.77"
+       },
+       "bookingDate": "2026-07-21",
+       "endToEndId": "E2E3CB7A6AC046A",
+       "debtorName": "ეკა აბაშიძე",
+       "debtorAccount": {
+        "iban": "GE12TB1538522417951277"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3148.36"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-21"
+       }
+      },
+      {
+       "transactionId": "d_00147600023",
+       "entryReference": "00147600023",
+       "valueDate": "2026-07-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3546.77"
+       },
+       "bookingDate": "2026-07-22",
+       "creditorName": "TeraBank",
+       "creditorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა E0B6E5B7",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT25C0DCF490",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-398.41"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-07-22"
+       }
+      },
+      {
+       "transactionId": "c_00147600024",
+       "entryReference": "00147600024",
+       "valueDate": "2026-08-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "3546.77"
+       },
+       "bookingDate": "2026-08-21",
+       "endToEndId": "E2E57BCD462FFC3",
+       "debtorName": "ეკა აბაშიძე",
+       "debtorAccount": {
+        "iban": "GE12TB1538522417951277"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3148.36"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-21"
+       }
+      },
+      {
+       "transactionId": "d_00147600025",
+       "entryReference": "00147600025",
+       "valueDate": "2026-08-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3546.77"
+       },
+       "bookingDate": "2026-08-22",
+       "creditorName": "TeraBank",
+       "creditorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა E0B6E5B7",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT25C0DCF490",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-398.41"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-08-22"
+       }
+      },
+      {
+       "transactionId": "c_00147600026",
+       "entryReference": "00147600026",
+       "valueDate": "2026-09-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "3546.77"
+       },
+       "bookingDate": "2026-09-21",
+       "endToEndId": "E2E242266C64CEA",
+       "debtorName": "ეკა აბაშიძე",
+       "debtorAccount": {
+        "iban": "GE12TB1538522417951277"
+       },
+       "debtorAgent": "TBCBGE22",
+       "remittanceInformationUnstructured": "საკუთარ ანგარიშზე გადარიცხვა",
+       "bankTransactionCode": "PMNT-RCDT-DMCT",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "3148.36"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-21"
+       }
+      },
+      {
+       "transactionId": "d_00147600027",
+       "entryReference": "00147600027",
+       "valueDate": "2026-09-22",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-3546.77"
+       },
+       "bookingDate": "2026-09-22",
+       "creditorName": "TeraBank",
+       "creditorAgent": "TEBAGE22",
+       "remittanceInformationUnstructured": "სესხის დაფარვა E0B6E5B7",
+       "bankTransactionCode": "PMNT-RDDT-PMDD",
+       "purposeCode": "LOAR",
+       "mandateId": "MNDT25C0DCF490",
+       "balanceAfterTransaction": {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-398.41"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-09-22"
+       }
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v1/accounts/2d1dd835-96e6-5926-91c9-4e9bcc6f082a"
+      },
+      "first": {
+       "href": "v1/accounts/2d1dd835-96e6-5926-91c9-4e9bcc6f082a/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccounts": [
+     {
+      "resourceId": "24e2f7de-17c7-59e7-aa2f-c67e5938112c",
+      "maskedPan": "439020******1334",
+      "currency": "GEL",
+      "ownerName": "EKA ABASHIDZE",
+      "name": "EKA ABASHIDZE",
+      "product": "VISA Debit",
+      "status": "enabled",
+      "usage": "PRIV",
+      "balances": [
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-398.41"
+        },
+        "balanceType": "interimAvailable",
+        "creditLimitIncluded": false,
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-22T08:12:03"
+       },
+       {
+        "balanceAmount": {
+         "currency": "GEL",
+         "amount": "-398.41"
+        },
+        "balanceType": "interimBooked",
+        "referenceDate": "2026-10-19",
+        "lastChangeDateTime": "2026-09-22T08:12:03"
+       }
+      ],
+      "_links": {
+       "balances": {
+        "href": "v1/card-accounts/24e2f7de-17c7-59e7-aa2f-c67e5938112c/balances"
+       },
+       "transactions": {
+        "href": "v1/card-accounts/24e2f7de-17c7-59e7-aa2f-c67e5938112c/transactions"
+       }
+      }
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/24e2f7de-17c7-59e7-aa2f-c67e5938112c",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "resourceId": "24e2f7de-17c7-59e7-aa2f-c67e5938112c",
+     "maskedPan": "439020******1334",
+     "currency": "GEL",
+     "ownerName": "EKA ABASHIDZE",
+     "name": "EKA ABASHIDZE",
+     "product": "VISA Debit",
+     "status": "enabled",
+     "usage": "PRIV",
+     "balances": [
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-398.41"
+       },
+       "balanceType": "interimAvailable",
+       "creditLimitIncluded": false,
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-09-22T08:12:03"
+      },
+      {
+       "balanceAmount": {
+        "currency": "GEL",
+        "amount": "-398.41"
+       },
+       "balanceType": "interimBooked",
+       "referenceDate": "2026-10-19",
+       "lastChangeDateTime": "2026-09-22T08:12:03"
+      }
+     ],
+     "_links": {
+      "balances": {
+       "href": "v1/card-accounts/24e2f7de-17c7-59e7-aa2f-c67e5938112c/balances"
+      },
+      "transactions": {
+       "href": "v1/card-accounts/24e2f7de-17c7-59e7-aa2f-c67e5938112c/transactions"
+      }
+     }
+    }
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/24e2f7de-17c7-59e7-aa2f-c67e5938112c/balances",
+   "query": {},
+   "status": 200,
+   "body": {
+    "cardAccount": {
+     "maskedPan": "439020******1334",
+     "currency": "GEL"
+    },
+    "balances": [
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-398.41"
+      },
+      "balanceType": "closingBooked",
+      "referenceDate": "2026-10-18"
+     },
+     {
+      "balanceAmount": {
+       "currency": "GEL",
+       "amount": "-398.41"
+      },
+      "balanceType": "interimAvailable",
+      "creditLimitIncluded": false,
+      "referenceDate": "2026-10-19",
+      "lastChangeDateTime": "2026-09-22T08:12:03"
+     }
+    ]
+   }
+  },
+  {
+   "method": "GET",
+   "path": "/v1/card-accounts/24e2f7de-17c7-59e7-aa2f-c67e5938112c/transactions",
+   "query": {
+    "bookingStatus": "both",
+    "dateFrom": "2025-10-19"
+   },
+   "status": 200,
+   "body": {
+    "cardTransactions": {
+     "booked": [
+      {
+       "cardTransactionId": "d_00147600009",
+       "transactionDate": "2026-01-21",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-316.25"
+       },
+       "acceptorTransactionDateTime": "2026-01-21T14:35:04",
+       "maskedPAN": "439020******1334",
+       "transactionDetails": "ბარათით გადახდა - ZARA",
+       "bookingDate": "2026-01-23",
+       "cardAcceptorId": "ZARA",
+       "merchantCategoryCode": "5651"
+      },
+      {
+       "cardTransactionId": "d_00147600012",
+       "transactionDate": "2026-02-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-17.16"
+       },
+       "acceptorTransactionDateTime": "2026-02-20T21:20:35",
+       "maskedPAN": "439020******1334",
+       "transactionDetails": "ბარათით გადახდა - CARREFOUR",
+       "bookingDate": "2026-02-23",
+       "cardAcceptorId": "CARREFOUR",
+       "merchantCategoryCode": "5411"
+      },
+      {
+       "cardTransactionId": "d_00147600013",
+       "transactionDate": "2026-02-20",
+       "transactionAmount": {
+        "currency": "GEL",
+        "amount": "-65.00"
+       },
+       "acceptorTransactionDateTime": "2026-02-20T18:12:52",
+       "maskedPAN": "439020******1334",
+       "transactionDetails": "ბარათით გადახდა - GULF",
+       "bookingDate": "2026-02-24",
+       "cardAcceptorId": "GULF",
+       "merchantCategoryCode": "5541"
+      }
+     ],
+     "pending": [],
+     "_links": {
+      "account": {
+       "href": "v1/accounts/2d1dd835-96e6-5926-91c9-4e9bcc6f082a"
+      },
+      "first": {
+       "href": "v1/card-accounts/24e2f7de-17c7-59e7-aa2f-c67e5938112c/transactions?state=eyJicyI6ImJvdGgiLCJkZiI6IjIwMjUtMTAtMTkiLCJkdCI6bnVsbCwid2IiOmZhbHNlLCJyZWYiOm51bGwsIm9mZiI6MH0"
+      }
+     }
+    },
+    "cardAccount": {
+     "maskedPan": "439020******1334",
+     "currency": "GEL"
+    }
+   }
+  }
+ ]
+}
