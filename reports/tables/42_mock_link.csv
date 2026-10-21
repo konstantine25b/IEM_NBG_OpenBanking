@@ -1,0 +1,9 @@
+check,result,reading
+mock customers,"50,000",rows of truth.customers read
+... found among the loaded loans (exact match on 8 columns),100.0%,100% means every mock customer IS a supplied loan
+loaded loans that are mock customers,50.0%,"a random subset of 50,000 out of 100,000 loans would give 50.0%"
+duplicate keys among the loaded loans,0,0 = the key identifies a loan row uniquely
+target rate: mock customers,3.64%  (95% CI 3.48% - 3.80%),label taken from the loan row
+target rate: loans that are not mock customers,3.48%,difference test p = 0.19
+"largest PSI of the 57 loan columns, mock vs the rest",0.0257,pure-noise ceiling 0.0292
+a model's AUC for telling mock customers from the rest,0.496,"0.5 = impossible, i.e. a random subset"

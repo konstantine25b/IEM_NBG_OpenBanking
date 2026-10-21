@@ -1,0 +1,59 @@
+column,family,kind,dtype,unique,role (hypothesis),meaning,where the code numbers come from,dictionary (Georgian)
+addNegStatus,Target,binary,int64,2,Target,Negative-record / additional status flag (candidate target),,ნეგატიური ჩანაწერის სტატუსები/დამატებითი სტატუსები
+CLIENT_GEOGRAPHICAL_REGION,Customer profile,nominal,float64,12,Known at origination,Client's region code (1-12; name mapping not provided),mapping not provided,რეგიონი
+CLIENT_LEGAL_FORM,Customer profile,nominal,int64,2,Known at origination,"Client legal form (1 = sole proprietor, 7 = private individual; see lookup)",from the dictionary's look-up sheet,კლიენტის ორგანიზაციულ სამართლებრივი ფორმა.იხ ჩანონათვალის გვერდი
+SEX,Customer profile,binary,int64,2,Sensitive attribute,Sex code (1 / 2; mapping not provided),mapping not provided,სქესი
+Age,Customer profile,count,float64,60,Sensitive attribute,Age in years,,ასაკი
+INCOME_AMOUNT_TOTAL,Income,amount,float64,99171,Known at origination,"Income amount (total); period, currency and gross/net are not stated",,შემოსავლის თანხა
+INCOME_AMOUNT_SOI04,Income,amount,float64,16354,Known at origination,"Income received from remittances (the dictionary code is 'SOI04', not explained)",,გზავნილებიდან მიღებული შემოსავალი
+DEBT_DISBURSED_REGION,Loan terms & product,nominal,float64,2393,Known at origination,Code of the city / district centre where the loan was disbursed (thousands of distinct codes; the thousands digit gives about 12 buckets),mapping not provided,"ქალაქი / რაიონული ცენტრი, სადაც გაიცა სესხი"
+IS_NEW_FOR_BANK,Customer profile,binary,bool,2,Known at origination,Customer is new to the bank,,ახალი ბანკისთვის: 1 - კი 0 - არა
+DISBURSED_AMOUNT,Loan terms & product,amount,float64,96936,Known at origination,"Amount disbursed, in nominal terms (currency / unit not stated)",,გაცემული თანხა: გაცემული თანხა ნომინალში
+PRINCIPAL_PAYMENT_FREQUENCY,Loan terms & product,nominal,float64,7,Known at origination,How often principal is repaid (1 twice a month ... 7 other),"names listed in the dictionary, numbers assigned in list order (unverified; code 1 behaves like a distress state, not 'twice a month')","ძირის დაფარვის პერიოდულობა :  თვეში ორჯერ,თვიური,კვარტლური,ნახევარწლიური,წლიური, სეზონური ,სხვა"
+INTEREST_RATE_TYPE,Loan terms & product,nominal,float64,3,Known at origination,"Interest-rate type (1 fixed, 2 variable, 3 mixed)","names listed in the dictionary, numbers assigned in list order (unverified)","საპროცენტი განაკვეთის ტიპი :  ფიქსირებული, ცვლადი, შერეული"
+INTEREST_RATE_NOMINAL,Loan terms & product,rate,float64,97509,Known at origination,Nominal interest rate fixed at disbursement (fraction),,ნომინალური საპროცენტო განაკვეთი: გაცემის მომენტში დაფიქსირებული ნომინალური განაკვეთი
+INTEREST_RATE_PAYMENT_FREQUENCY,Loan terms & product,nominal,float64,7,Known at origination,How often interest is paid (1 twice a month ... 7 other),"names listed in the dictionary, numbers assigned in list order (unverified)","პროცენტის დაფარის პერიოდულობა:თვეში ორჯერ,თვიური,კვარტლური,ნახევარწლიური,წლიური, სეზონური ,სხვა"
+AVERAGE_MONTHLY_PAYMENT,Instalment schedule,amount,float64,90388,Measured at the snapshot,Average monthly payment,,საშუალო ყოველთვიური შენატანი
+PRODUCT_PURPOSE,Loan terms & product,nominal,float64,5,Known at origination,"Product / purpose code (2 consumer, 4 instant instalment, 7/10/13 mortgage)",from the dictionary's look-up sheet (only a subset of its ids is translated here),პროდუქტი/მიზნობრიობა :იხ ჩამონათვალის გვერდი
+ECONOMIC_SECTORS,Loan terms & product,nominal,float64,26,Known at origination,Activity sector of the repayment source (National Bank list 0-26),from the dictionary's look-up sheet (National Bank list),საქმიანობის სექტორი (დაფარვის წყაროს მიხედვით): იხ ჩანონათვალის გვერდი
+ECONOMIC_SECTORS_PURPOSE,Loan terms & product,nominal,float64,26,Known at origination,"Sector the loan is used for (the sheet has one sector list, assumed to apply)",from the dictionary's look-up sheet (assumed to be the same list),მიზნობრიობის სექტორი: იხ ჩამონათვალის გვერდი
+DEBT_SEGMENT,Loan terms & product,nominal,float64,4,Known at origination,"Obligation segment (1 corporate, 2 SME, 3 micro, 4 retail)",from the dictionary's look-up sheet,ვალდებულების სეგმენტი. იხ ჩამონათვალის გვერდი
+PTI_RATIO,Affordability & collateral,ratio,float64,94380,Known at origination,Ratio of monthly payment(s) to income (which payments are included is not stated),,ყოველთვიური გადასახადისა და შემოსავლის ფარდობა
+LTV_RATIO,Affordability & collateral,ratio,float64,48936,Known at origination,Ratio of the loan to its security / collateral (basis and direction not stated),,სესხისა და უზრუნველყოფის ფარდობა
+instalmentType,Loan terms & product,binary,str,2,Known at origination,Regular-payment type (Fixed / Variable),,რეგულარული გადახდის ტიპი
+OverduePrincipalAm,Delinquency & penalties,amount,float64,79116,Delinquency columns (tier 0),Current overdue principal,,მიმდინარე ვადაგადაცილებულ ძირი თანხა
+OverdueInterestCommission,Delinquency & penalties,amount,float64,54873,Delinquency columns (tier 0),Current overdue interest + commission,,მიმდინარე ვადაგადაცილებული პროცენტი და საკომისიო
+overdueInstalmentsCount,Delinquency & penalties,count,int64,10,Delinquency columns (tier 0),Number of overdue instalments,,ვადაგადაცილებული შენატანების რაოდენობა
+overdueAmount,Delinquency & penalties,amount,float64,77365,Delinquency columns (tier 0),Overdue amount (dictionary: overdue principal + interest / commission),,"ვადაგადაცილებული თანხა,  ვადაგადაცილებულ ძირ თანხას + ვადაგადაცილებული პროცენტი და საკომისიო"
+MaximumNumberDelinquencyDays,Delinquency & penalties,days,int64,263,Delinquency columns (tier 0),Maximum number of overdue days on this loan ('consecutive' is not stated),,მაქსიმალური ვადაგადაცილებული დღეების რაოდენობა კონკრეტულ სესხზე
+TotalNumberDelinquencyDays,Delinquency & penalties,days,int64,1644,Delinquency columns (tier 0),Total overdue days since the loan started,,"ჯამური ვადაგადაცილებული დღეების რაოდენობა კონკრეტულ სესხზე, სესხის დაწყებიდან დარეპორტების თარიღამდე."
+TotalNumberDelinquencyDaysLastYear,Delinquency & penalties,days,int64,281,Delinquency columns (tier 0),Total overdue days in the last 12 months,,ბოლო ერთი წლის განმავლობაში ჯამური ვადაგადაცილებული დღეების რაოდენობა კონკრეტულ სესხზე.
+TotalNumberOverdueInst,Delinquency & penalties,count,int64,50,Delinquency columns (tier 0),Instalments ever paid late (closed + current),,"TotalNumberOfOverdueInstallments-ში იწერება სესხზე ისტორიის განმავლობაში (სესხის დაწყებიდან) გრაფიკით განსაზღვრული შენატანების რაოდენობა, რომლის გადახდა მომხმარებელმა დააგვიანა. იგულისხმება უკვე დახურ…"
+OutstandingPrincipalAm,Balances & term-to-go,amount,float64,93047,Measured at the snapshot,Not-overdue principal still owed,,არავადაგადაცილებული ძირი თანხა
+outstandingAmount,Balances & term-to-go,amount,float64,96060,Measured at the snapshot,Balance = not-overdue principal + interest / commission,,"ნაშთი, არავადაგადაცილებული ძირ თანხას + არავადაგადაცილებული პროცენტი და საკომისიო"
+standardInstalmentCount,Instalment schedule,count,int64,241,Measured at the snapshot,Number of instalments in the original schedule,,თავდაპირველი გრაფიკის განსაზღვრული შენატანების საერთო რაოდენობა
+standardInstalmentAmount,Instalment schedule,amount,float64,95299,Measured at the snapshot,Standard instalment amount,,სტანდარტული შენატანის ოდენობა
+RefinancingStatusBool,Loan events,binary,bool,2,Measured at the snapshot,Refinancing status (direction - this loan refinanced or was refinanced - is not stated),,რეფინანსირების სტატუსი
+RestructuringStatusBool,Loan events,binary,bool,2,Measured at the snapshot,Restructuring status (a forbearance / credit-event flag),,რესტრუქტურიზაციის სტატუსი
+LoanSegment,Loan terms & product,binary,str,2,Known at origination,Loan segment (Retail / Business),,სესხის სეგმენტი
+RemainingTerm,Balances & term-to-go,days,int64,5434,Measured at the snapshot,Days left until the contractual end date,,კონტრაქტით გათვალისწინებული დასრულების თარიღამდე დაჩენილი დღეების რაოდენობა
+GeoCitizen,Customer profile,binary,str,2,Sensitive attribute,Citizen of Georgia (Yes / No),,საქართველოს მოქალაქე
+last1Month,Credit-bureau inquiries,count,int64,40,Bureau snapshot - timing unknown,Number of searches (inquiries) in the last 1 month; who searched is not stated,,ძიებების რაოდენობა ბოლო 1 თვის განმავლობაში
+last3Month,Credit-bureau inquiries,count,int64,133,Bureau snapshot - timing unknown,Number of searches (inquiries) in the last 3 months,,ძიებების რაოდენობა ბოლო 3 თვის განმავლობაში
+last6Month,Credit-bureau inquiries,count,int64,223,Bureau snapshot - timing unknown,Number of searches (inquiries) in the last 6 months,,ძიებების რაოდენობა ბოლო 6 თვის განმავლობაში
+last12Month,Credit-bureau inquiries,count,int64,383,Bureau snapshot - timing unknown,Number of searches (inquiries) in the last 12 months,,ძიებების რაოდენობა ბოლო 12 თვის განმავლობაში
+ExistingOperationsDebtor,Borrower's other contracts,count,int64,67,Bureau snapshot - timing unknown,"Current contracts where the subject is (co-)debtor; the minimum is 1 in every row, so it counts this loan too",,მიმდინარე კონტრაქტების რაოდენობა სადაც სუბიექტი არის მთავარი მოვალე ან თანამოვალე
+TerminatedOperationsDebtor,Borrower's other contracts,count,int64,302,Bureau snapshot - timing unknown,Closed contracts where the subject was (co-)debtor,,დახურული კონტრაქტების რაოდენობა სადაც სუბიექტი არის მთავარი მოვალე ან თანამოვალე
+MaximumAmountOfInstalmentBySchedule,Instalment schedule,amount,float64,98407,Measured at the snapshot,Largest instalment in the schedule,,მაქსიმალური გადასახადი
+probabilityOfDefault,Supplied score / PD,rate,float64,7387,Supplied score / PD,"Probability of default in PERCENT (producer, horizon and default definition not stated)",,ვალდებულების შეუსრულებლობის ალბათობა
+guaranteeAmount,Affordability & collateral,amount,float64,66101,Known at origination,Collateral / security amount,,უზრუნველყოფის თანხა
+ContractTermMonth,Loan terms & product,count,int64,208,Known at origination,Contractual term in months,,სესხის საკონტრაქტო ვადა (თვეებში)
+score,Supplied score / PD,score,int64,271,Supplied score / PD,"Credit score (producer, scale and horizon not stated; lower = riskier in this data)",,საკრედიტო ქულა
+daysInDeliquency,Delinquency & penalties,days,int64,242,Delinquency columns (tier 0),"Overdue days of the latest 30+ day delinquency (the data contain only 0, 1 and values of 30 or more)",,30 ან 30 დღეზე მეტხნიან ვადაგადაცილებიანი სესხის უკანასკნელი ვადაგადაცილებული დღეების რაოდენობა
+ShortDaysInDeliquency,Delinquency & penalties,days,int64,21,Delinquency columns (tier 0),Days of minor overdue (short delinquency; unit assumed to be days),,მცირე ვადაგადაცილება
+loanType,Loan terms & product,binary,str,2,Known at origination,Contract sub-type (ConsumerLoan / MortgageLoan),,კონტრაქტის ქვეტიპი
+penaltySum,Delinquency & penalties,amount,float64,68779,Delinquency columns (tier 0),Penalties accrued on the loan,,დარიცხული ჯარიმის ჯამური თანხა.
+penaltyPaid,Delinquency & penalties,amount,float64,57978,Delinquency columns (tier 0),Penalties paid on the loan,,ჯამურად გადახდილი ჯარიმის მოცულობა კონკრეტულ სესხზე.
+TotalOutstandingAmount,Balances & term-to-go,amount,float64,96735,Measured at the snapshot,Borrower's total current balance over all loans,,ჯამური მსესხებლის მიმდინარე სესხის ნაშთი
+TotalUnpaidInstalments,Delinquency & penalties,count,int64,68,Delinquency columns (tier 0),Total unpaid payments (the dictionary does not say whether this loan only or all of the borrower's loans),,ჯამური გადაუხდელი ფეიმენთი
+TotalDebtOverdue,Delinquency & penalties,amount,float64,71143,Delinquency columns (tier 0),Total overdue debt (this loan only or all of the borrower's loans: not stated),,ჯამური ვადაგადაცილებული სესხი

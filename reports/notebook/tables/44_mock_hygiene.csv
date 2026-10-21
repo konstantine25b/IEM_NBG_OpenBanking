@@ -1,0 +1,14 @@
+check,result,expected / meaning,status
+API transaction rows scanned,"38,552,934",,
+card-mirror rows (copies of a card entry),"10,519,354 (27.3%)",drop before summing,info
+pending entries,"97,702 (0.25%)",not yet booked: excluded from flows,info
+rows with an ISO 20022 code,"26,634,466 (69%)",banks without codes need the remittance text,info
+booked entries in a currency without an NBG rate,0,counted 1:1 in GEL; expected 0,ok
+"duplicate entries within a (bank, endpoint)",0,expected 0,ok
+booked entries without a booking date,0,expected 0,ok
+pending entries with a booking date,0,expected 0,ok
+booked entries outside the 12-month window,0,expected 0,ok
+entries with amount 0,3,expected 0; a handful is harmless,ok
+debit-type code on a credit,0,expected 0,ok
+credit-type code on a debit,0,expected 0,ok
+the generator's own quality checks (quality.json),23 of 23 pass on every row,"ISO 13616 / 20022 / 9362 / 4217, balances, booking rules",ok

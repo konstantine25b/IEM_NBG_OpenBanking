@@ -1,0 +1,12 @@
+check,result,status
+Missing values,0 cells,pass
+Duplicate rows,0 rows,pass
+Constant columns,none,pass
+Near-constant columns (>= 99% one value),none,pass
+"Negative amounts or counts, PD > 100, Age < 18",none,pass
+Category agreement (see the table below),7 of 7 checks flag at least 1% of the rows,note
+Caps / floors (censored values),"probabilityOfDefault @ 0.24, INCOME_AMOUNT_TOTAL @ 10,000, INCOME_AMOUNT_TOTAL @ 300",warn
+Default / sentinel values (non-zero),none,pass
+Zero-inflated continuous columns,29 of 41 (normal for counts / days / amounts),note
+Categorical levels with < 20 rows,"2,010 levels in DEBT_DISBURSED_REGION (2,005), ECONOMIC_SECTORS_PURPOSE (2), CLIENT_GEOGRAPHICAL_REGION (1)",warn
+Dictionary relationships violated in > 5% of rows,14 of 17,fail

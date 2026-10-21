@@ -1,0 +1,50 @@
+feature,family,definition,coverage,median
+n_banks,footprint,banks where the customer has any product visible through the APIs,1.0,1.0
+n_current_accounts,footprint,"accounts listed by the accounts endpoint (all currencies, without the XXX parent aggregate)",1.0,1.0
+n_fx_accounts,footprint,current accounts in a foreign currency,1.0,0.0
+n_cards,footprint,card accounts listed by the card-accounts endpoint (0 at banks whose API has none),1.0,1.0
+has_credit_card,footprint,1 if any product is a credit card,1.0,0.0
+credit_limit_ratio,footprint,sum of the credit limits of the card accounts / monthly inflow,1.0,0.0
+has_savings,footprint,1 if a savings / deposit resource is visible,1.0,0.0
+inflow_month,cash flow,"average monthly inflow in GEL (salary, remittances, transfers in, cash in)",1.0,2918.944580078125
+spend_month,cash flow,"average monthly spending in GEL (cards, ATM, transfers out, bills, rent)",1.0,2762.41748046875
+net_flow_ratio,cash flow,(inflow - spending - loan and micro-loan repayments - fees) / inflow over the 12 months; credit-card repayments are not subtracted again (their purchases are in spending when the card account is visible); loans paid out as a lump sum are not spending,1.0,-0.0418463796377182
+spend_to_inflow,cash flow,spending / inflow,1.0,0.9723509550094604
+inflow_cv,cash flow,coefficient of variation of the 12 monthly inflows,1.0,0.1176077127456665
+spend_cv,cash flow,coefficient of variation of the 12 monthly spending totals,1.0,0.4430049657821655
+neg_months,cash flow,months (of 12) in which outflows exceeded inflows,1.0,6.0
+tx_per_month,cash flow,booked entries per month (own-account moves included),1.0,46.58333206176758
+inflow_trend,cash flow,inflow of the last 3 months / inflow of the first 3 months,1.0,0.9839524030685425
+salary_month,income,average salary credit (entries typed salary) in GEL; missing if none,0.94078,2562.544189453125
+salary_months,income,months (of 12) with a salary credit,1.0,12.0
+salary_cv,income,coefficient of variation of the salary credits,0.94078,0.011857305653393269
+salary_day_std,income,standard deviation of the booking day-of-month of the salary credits,0.94078,0.759202778339386
+remit_month,income,average monthly cross-border / remittance inflow in GEL,1.0,0.0
+p2p_in_share,income,personal transfers in / inflow,1.0,0.03577812761068344
+card_spend_month,spending,average monthly card purchases in GEL,1.0,1528.811279296875
+card_ticket,spending,average card purchase in GEL,0.99998,48.30063247680664
+atm_share,spending,ATM cash / spending,1.0,0.2019449919462204
+bills_share,spending,"utility bills, taxes, service payments and rent / spending",1.0,0.14299356937408447
+rent_month,spending,average monthly rent payment in GEL (0 if none),1.0,0.0
+p2p_out_share,spending,personal transfers out / spending,1.0,0.034374162554740906
+n_merchants,spending,distinct merchants named in card purchases (only banks that print them),1.0,49.0
+gambling_n,spending,card purchases at betting / casino merchants (name or MCC 7995),1.0,2.0
+debt_service_ratio,debt signals,"loan, micro-loan and credit-card repayments paid from the account / inflow",1.0,0.11888360977172852
+loan_repay_month,debt signals,"average monthly loan repayment seen as a debit text, in GEL",1.0,158.1316680908203
+quick_loan_n,debt signals,micro-loan ('quick loan') disbursements received,1.0,0.0
+penalty_n,debt signals,late-payment penalty entries ('fine for overdue'),1.0,0.0
+overdraft_fee_n,debt signals,overdraft-fee entries,1.0,0.0
+fee_share,debt signals,bank fees and penalties / inflow,1.0,0.0005893558263778687
+bal_min_ratio,balance,"lowest running balance after any entry / monthly inflow (current accounts, GEL)",0.98374,-0.06610847264528275
+bal_mean_ratio,balance,"average running balance after an entry (entry-weighted, not time-weighted) / monthly inflow",0.98374,1.0681699514389038
+bal_neg_share,balance,share of entries after which the running balance is negative,0.98374,0.009041591547429562
+end_balance_ratio,balance,closing balance of the current accounts today / monthly inflow,0.99558,0.4235266447067261
+savings_ratio,balance,balance of the savings resources / monthly inflow,1.0,0.0
+loan_visible,loan seen via API,1 if a loan resource is visible at a connected bank,1.0,0.0
+loan_rate_pct,loan seen via API,interest rate of the visible loan (%),0.27538,15.779999732971191
+loan_age_months,loan seen via API,months since the visible loan's contract start,0.27538,16.0
+loan_remaining_months,loan seen via API,months until the visible loan's contract end,0.27538,20.468172073364258
+loan_repaid_share,loan seen via API,1 - closing balance / opening balance of the visible loan,0.27538,0.35375335812568665
+loan_outstanding_ratio,loan seen via API,outstanding loan balance / annual inflow,0.29712,0.11029520630836487
+loan_overdue_visible,loan seen via API,1 if the API shows an OVERDUE_AMOUNT balance,1.0,0.0
+loan_acct_repay_month,loan seen via API,"average monthly repayments recorded on the loan resource, in GEL",0.29712,0.0

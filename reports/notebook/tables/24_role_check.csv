@@ -1,0 +1,7 @@
+role,what it means,columns,median AUC,max AUC,share above leak threshold,verdict from the data
+Delinquency columns (tier 0),arrears facts recorded at the same snapshot as the label (no dates): a model that uses them detects the negative status instead of predicting it,14,0.9247971435245577,0.9606844509666292,0.8571428571428571,confirmed: strong fingerprints of the label
+Supplied score / PD,"a score / PD shipped with the data (producer unknown): a benchmark, not a feature",2,0.9332055858578054,0.9343296767101638,1.0,confirmed: very predictive
+Measured at the snapshot,"balances, contract schedule and loan events as they stand at the snapshot; many change as a loan ages and their timing at application is unverified",10,0.8377411448581682,0.8751514568504792,0.0,carries a lot of signal
+Bureau snapshot - timing unknown,"inquiry / other-contract counts measured at the snapshot date, not necessarily at application",6,0.7181713877513476,0.8115952944145035,0.0,"informative, but without dates it cannot be certified as pre-application"
+Known at origination,"terms, product, income and region fixed when the loan was granted",22,0.630711902189282,0.8349041003700886,0.0,"NOT certified: no single column reaches AUC 0.9, but 7 have IV > 0.5 (e.g. DISBURSED_AMOUNT, PRINCIPAL_PAYMENT_FREQUENCY, INTEREST_RATE_NOMINAL) - their levels may encode the loan's state (see the state-tracking check below)"
+Sensitive attribute,"legally or ethically delicate: audit fairness, usually exclude",3,0.5988549123631045,0.6298926936184848,0.0,informative - audit fairness

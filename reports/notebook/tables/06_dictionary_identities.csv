@@ -1,0 +1,18 @@
+relationship that must hold,rows it applies to,rows violating,share violating,why it must hold
+monthly loans: ContractTermMonth = standardInstalmentCount (+-1),86177,48969,0.5682374647527763,one instalment per month
+standardInstalmentAmount <= MaximumAmountOfInstalmentBySchedule,100000,50670,0.5067,the standard instalment cannot exceed the largest one
+OutstandingPrincipalAm <= outstandingAmount,100000,42347,0.42347,"balance = principal + interest, so it is at least the principal"
+OutstandingPrincipalAm <= DISBURSED_AMOUNT,100000,30925,0.30925,principal still owed cannot exceed what was lent
+last6Month <= last12Month,100000,14221,0.14221,a 6-month window lies inside the 12-month window
+outstandingAmount <= TotalOutstandingAmount,100000,13130,0.1313,the borrower's total over all loans includes this loan
+last3Month <= last6Month,100000,13034,0.13034,a 3-month window lies inside the 6-month window
+penaltyPaid <= penaltySum,100000,10907,0.10907,you cannot pay more penalty than was accrued
+overdueAmount = OverduePrincipalAm + OverdueInterestCommission,100000,10072,0.10072,the dictionary defines it as that sum (within 1 currency unit)
+RemainingTerm (days) <= whole contract,100000,8832,0.08832,days left cannot exceed the contract length
+material overdue money but zero overdue instalments,100000,6341,0.06341,material overdue money (>= 1 unit) must belong to at least one instalment
+MaximumNumberDelinquencyDays <= TotalNumberDelinquencyDays,100000,6136,0.06136,the longest spell cannot exceed the total overdue days
+daysInDeliquency <= MaximumNumberDelinquencyDays,100000,5669,0.05669,the latest delinquency cannot be longer than the longest one
+TotalNumberDelinquencyDaysLastYear <= TotalNumberDelinquencyDays,100000,5439,0.05439,last-year days are part of the lifetime total
+last1Month <= last3Month,100000,4673,0.04673,a 1-month inquiry window lies inside the 3-month window
+overdueAmount <= TotalDebtOverdue,100000,3886,0.03886,the borrower's total overdue includes this loan's overdue
+overdueInstalmentsCount <= TotalNumberOverdueInst,100000,630,0.0063,overdue instalments are a subset of all instalments ever late
