@@ -92,7 +92,8 @@ class IncomeModel:
         return X.reindex(columns=s["feature_names"]).astype(np.float32)
 
     # ---- prediction -------------------------------------------------------------------------------------------
-    def predict(self, data: dict | list[dict] | pd.DataFrame) -> pd.DataFrame:
+    def prepare(self, data: dict | list[dict] | pd.DataFrame) -> pd.DataFrame:
+        """Raw rows as a frame, ready for transform()."""
         if isinstance(data, dict):
             data = [data]
         raw = data if isinstance(data, pd.DataFrame) else pd.DataFrame(data)
@@ -101,6 +102,10 @@ class IncomeModel:
         for col in self.state["numeric_cols"]:
             if col in raw:
                 raw[col] = pd.to_numeric(raw[col], errors="coerce")
+        return raw
+
+    def predict(self, data: dict | list[dict] | pd.DataFrame) -> pd.DataFrame:
+        raw = self.prepare(data)
         X = self.transform(raw)
         q = np.sort(self.booster.predict(X), axis=1)
         p10, p50, p90 = (np.clip(q[:, i], 0, None) for i in range(3))

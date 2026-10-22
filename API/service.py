@@ -22,6 +22,7 @@ was trained on.
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 import time
 import uuid
@@ -38,10 +39,11 @@ for p in (HERE, REPO / "income", REPO / "eda", REPO / "openbanking_mock"):
 import httpx  # noqa: E402
 import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
+from explain import explain_p50  # noqa: E402
 from fastapi import FastAPI  # noqa: E402
 from fastapi.middleware.cors import CORSMiddleware  # noqa: E402
 from fastapi.responses import JSONResponse  # noqa: E402
-from income_pipeline import predict_person  # noqa: E402
+from income_pipeline import build_row  # noqa: E402
 from income_predictor import IncomeModel  # noqa: E402
 from obmock.config import WorldConfig  # noqa: E402
 from obmock.dialects.registry import build_dialects  # noqa: E402
@@ -62,6 +64,8 @@ HISTORY_MONTHS = 12
 MIN_MONTHS_COVERED = 3.0
 MIN_TRANSACTIONS = 30
 TPP_KEYS = {"procredit": {"Ocp-Apim-Subscription-Key": "demo-tpp-key"}}  # issued to the TPP at onboarding (APIM)
+CALIBRATION = REPO / "income" / "models" / "confidence_calibration.json"  # income/confidence_calibration.py
+DEMO_CLIENTS = HERE / "demo_clients.json"  # API/pick_demo_clients.py
 BANK_LABELS = {"tbc": "TBC", "bog": "Bank of Georgia"}
 
 
@@ -169,6 +173,7 @@ class Service:
     def __init__(self, banks: httpx.Client, registries: httpx.Client, model: IncomeModel | None = None) -> None:
         self.banks, self.registries = banks, registries
         self.model = model or IncomeModel.load()
+        self.calibration = json.loads(CALIBRATION.read_text()) if CALIBRATION.exists() else None
         self.pool = ThreadPoolExecutor(max_workers=24)
         self.consent_sets: dict[str, dict] = {}
         self.jobs: dict[str, dict] = {}
@@ -379,8 +384,11 @@ class Service:
             kyc = {**(record["kyc"] or {}), **(applicant or {})}
             registry = to_registry(kyc, rs_body, ci_body)
             open_banking = tables if got else None
-            out = predict_person(registry, open_banking, self.model, as_of=as_of.date().isoformat())
-            features = self._features(registry, open_banking, as_of)
+            row = build_row(registry, open_banking, self.model, as_of=as_of.date().isoformat())
+            matrix = self.model.transform(self.model.prepare(row))
+            out = self.model.predict(row).iloc[0]
+            features = {k: v for k, v in row.items() if k.startswith("ob_")}
+            explanation = explain_p50(self.model, matrix, float(out["p50"]))
 
             tx = tables["transactions"]
             booked = (
@@ -394,13 +402,15 @@ class Service:
             if not rs_body:
                 warnings.append("No Revenue Service data: the estimate uses bank data only.")
             job["result"] = {
-                "income": {k: out[k] for k in ("p10", "p50", "p90")} | {"currency": "GEL", "period": "monthly"},
+                "income": {k: float(out[k]) for k in ("p10", "p50", "p90")} | {"currency": "GEL", "period": "monthly"},
                 "confidence": {
                     "level": level,
-                    "model_level": out["confidence"],
-                    "band_share": out["band_share"],
+                    "model_level": str(out["confidence"]),
+                    "band_share": float(out["band_share"]),
                     "downgrade_reasons": reasons,
+                    "measured": self._measured(level, reasons),
                 },
+                "explanation": explanation,
                 "warnings": warnings,
                 "data": {
                     "banks_used": sorted(got),
@@ -415,10 +425,15 @@ class Service:
         except Exception as e:  # noqa: BLE001
             job["status"], job["stage"], job["error"] = "failed", "failed", f"{type(e).__name__}: {e}"
 
-    def _features(self, registry: dict, open_banking: dict | None, as_of: pd.Timestamp) -> dict:
-        from income_pipeline import open_banking_features
-
-        return open_banking_features(open_banking, self.model, as_of.date().isoformat())
+    def _measured(self, level: str, downgrade_reasons: list[str]) -> dict | None:
+        """What this confidence level has meant on held-out clients. A downgrade for thin data was never measured."""
+        if not self.calibration or downgrade_reasons:
+            return None
+        return {
+            **self.calibration["levels"][level],
+            "interval": self.calibration["interval"],
+            "basis": self.calibration["basis"],
+        }
 
     @staticmethod
     def public_job(job: dict) -> dict:
@@ -446,6 +461,10 @@ def create_app(
             "model_window": svc.model.state["ob_window"]["as_of"],
             "today": date.today().isoformat(),
         }
+
+    @app.get("/v1/demo/clients")
+    def demo_clients():
+        return json.loads(DEMO_CLIENTS.read_text()) if DEMO_CLIENTS.exists() else []
 
     @app.post("/v1/consents", status_code=201)
     def create_consents(body: ConsentRequest):

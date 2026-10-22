@@ -132,3 +132,20 @@ def test_a_dead_consent_is_reported_and_the_others_still_count(stack):
     assert liberty["state"] == "failed"
     assert state["status"] == "done" and "liberty" not in state["result"]["data"]["banks_used"]
     assert any("Liberty" in w for w in state["result"]["warnings"])
+
+
+def test_result_has_shap_drivers_and_measured_confidence(stack):
+    result = _estimate(stack, _consents(stack, "C00012")["consent_set_id"])["result"]
+    explanation = result["explanation"]
+    # TreeSHAP is additive: the starting point plus every driver is the model's P50
+    total = explanation["starting_point_gel"] + sum(d["effect_gel"] for d in explanation["drivers"])
+    assert abs(total - result["income"]["p50"]) <= 8  # rounding of each term to whole GEL
+    assert explanation["drivers"][0]["driver"] and len(explanation["drivers"]) <= 7
+    measured = result["confidence"]["measured"]
+    assert measured is None or 0 <= measured["inside_p10_p90_pct"] <= 100
+
+
+def test_demo_clients_are_ten_known_clients(stack):
+    clients = stack.get("/v1/demo/clients").json()
+    assert len(clients) == 10 and len({c["id"] for c in clients}) == 10
+    assert _consents(stack, clients[0]["id"])["connected_banks"] >= 1
