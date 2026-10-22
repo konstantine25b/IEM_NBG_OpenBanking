@@ -15,7 +15,7 @@ from fastapi.testclient import TestClient
 
 ROOT = Path(__file__).resolve().parents[1]
 DATASET = ROOT / "openbanking_mock" / "output" / "dataset"
-sys.path[:0] = [str(ROOT / "income"), str(ROOT / "eda"), str(ROOT / "openbanking_mock")]
+sys.path[:0] = [str(ROOT / "API"), str(ROOT / "income"), str(ROOT / "eda"), str(ROOT / "openbanking_mock")]
 
 pytestmark = pytest.mark.skipif(
     not (DATASET / "api" / "transactions" / "part-00000.parquet").exists(), reason="dataset missing"

@@ -7,16 +7,16 @@
   GET  /v1/income-estimates/{job_id}    progress per source, then the P10 / P50 / P90 result with confidence
 
 The three processes of the demo (each one also works alone):
-  income/mock_banks.py       :8000  12 bank APIs, all customers          (--banks-url)
-  income/mock_registries.py  :8001  RS + Creditinfo                      (--registries-url)
-  income/service.py          :9000  this API
+  API/mock_banks.py       :8000  12 bank APIs, all customers          (--banks-url)
+  API/mock_registries.py  :8001  RS + Creditinfo                      (--registries-url)
+  API/service.py          :9000  this API
 
 The fetch is what a TPP does: for every bank with an approved consent, accounts -> balances -> every transaction page
 (+ cards, loans, savings where the bank has them), using the bank dialects' own routes. The responses are flattened
 by obmock.harvest and turned into features by the same code that built income_dataset.csv, so the model sees what it
 was trained on.
 
-    uv run python income/service.py --port 9000
+    uv run python API/service.py --port 9000
 """
 
 from __future__ import annotations
@@ -32,7 +32,7 @@ from typing import Any
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
-for p in (HERE, REPO / "eda", REPO / "openbanking_mock"):
+for p in (HERE, REPO / "income", REPO / "eda", REPO / "openbanking_mock"):
     sys.path.insert(0, str(p))
 
 import httpx  # noqa: E402

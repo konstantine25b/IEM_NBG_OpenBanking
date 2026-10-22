@@ -9,7 +9,7 @@ registry fields of nbg_synthetic_data/, one row per customer). The consent / tok
 
 Never served: INCOME_AMOUNT_TOTAL (the label) and PTI_RATIO.
 
-    uv run python income/mock_registries.py --port 8001
+    uv run python API/mock_registries.py --port 8001
     curl -X POST 'localhost:8001/_mock/session/rs?customer=C00012'        # pre-authorised consent + token
     curl localhost:8001/rs/v1/income-declarations -H 'Authorization: Bearer ...' -H 'Consent-ID: ...'
 """

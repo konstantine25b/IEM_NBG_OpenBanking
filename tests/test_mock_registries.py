@@ -10,7 +10,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "income"))
+sys.path[:0] = [str(ROOT / "API"), str(ROOT / "income")]
 
 import mock_registries as mr  # noqa: E402
 from registry_adapter import to_registry  # noqa: E402

@@ -15,7 +15,7 @@ equals the stored api/ parquet rows.
 A customer with no account at a bank gets a valid consent and an empty account list, like a real bank would answer.
 Real consent / SCA / OAuth routes are not wired up here (the consent-id header picks the customer): use the session.
 
-    uv run python income/mock_banks.py --port 8000
+    uv run python API/mock_banks.py --port 8000
 """
 
 from __future__ import annotations
