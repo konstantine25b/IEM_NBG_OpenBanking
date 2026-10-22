@@ -408,6 +408,7 @@ class Service:
                     "model_level": str(out["confidence"]),
                     "band_share": float(out["band_share"]),
                     "downgrade_reasons": reasons,
+                    "score": self._score(float(out["band_share"]), bool(reasons)),
                     "measured": self._measured(level, reasons),
                 },
                 "explanation": explanation,
@@ -424,6 +425,16 @@ class Service:
             job["status"], job["stage"] = "done", "done"
         except Exception as e:  # noqa: BLE001
             job["status"], job["stage"], job["error"] = "failed", "failed", f"{type(e).__name__}: {e}"
+
+    def _score(self, band_share: float, downgraded: bool) -> int | None:
+        """0-100: how much narrower this P10-P90 band is than the bands of the held-out clients (100 = narrower than
+        all of them). A rank, not a probability. Thin data caps it inside the 'very low' range (below 20)."""
+        if not self.calibration:
+            return None
+        quantiles = np.asarray(self.calibration["band_share_quantiles"])
+        score = int(round(100 * (1 - np.searchsorted(quantiles, band_share, side="left") / (len(quantiles) - 1))))
+        score = max(0, min(100, score))
+        return min(score, 19) if downgraded else score
 
     def _measured(self, level: str, downgrade_reasons: list[str]) -> dict | None:
         """What this confidence level has meant on held-out clients. A downgrade for thin data was never measured."""

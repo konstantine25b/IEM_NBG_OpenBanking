@@ -21,12 +21,31 @@ sys.path[:0] = [str(HERE.parent / "income"), str(HERE.parent / "eda")]
 from income_predictor import DATA, LABEL, IncomeModel, split_indices  # noqa: E402
 
 OUT = HERE / "demo_clients.json"
+TRUTH = HERE.parent / "openbanking_mock" / "output" / "dataset" / "truth" / "customers"
+SHARD_SIZE = 250
 BIG_CITIES = {"Tbilisi", "Batumi", "Kutaisi", "Rustavi"}
+
+
+BANK_NAMES = {"tbc": "TBC", "bog": "BoG", "basisbank": "Basisbank", "terabank": "TeraBank", "procredit": "ProCredit"}
+
+
+def personal_id_of(cid: str) -> str:
+    """The client's 11-digit personal number, as the lender would have it from the ID card."""
+    shard = TRUTH / f"part-{(int(cid[1:]) - 1) // SHARD_SIZE:05d}.parquet"
+    people = pd.read_parquet(shard, columns=["cid", "person_id"]).set_index("cid")
+    return str(people.loc[cid, "person_id"])
+
+
+def bank_list(banks: str) -> list[str]:
+    return [BANK_NAMES.get(b, b.title()) for b in str(banks).split("|") if b]
 
 
 def archetypes(t: pd.DataFrame) -> list[tuple[str, str, pd.Series]]:
     salary = t["ob_salary_month"].fillna(0) > 0
     income = t[LABEL]
+    banks = t["banks"].fillna("").str.split("|")
+    uses = lambda k: banks.apply(lambda lst: k in lst)  # noqa: E731
+    deposit = (t.ob_has_savings == 1) & (t.ob_savings_ratio > 1)
     return [
         (
             "Salaried, Tbilisi, one bank",
@@ -34,21 +53,25 @@ def archetypes(t: pd.DataFrame) -> list[tuple[str, str, pd.Series]]:
             salary & (t.region_name == "Tbilisi") & (t.ob_n_banks == 1) & income.between(2000, 3500),
         ),
         (
-            "Salaried, two banks",
-            "Salary at one bank, everyday spending at another.",
-            salary & (t.ob_n_banks == 2) & income.between(3500, 6000),
+            "Saver with a deposit",
+            "Salary plus a savings / deposit account.",
+            salary & deposit & uses("tbc") & income.between(2500, 6000),
         ),
-        ("Salaried, three banks", "Uses three banks at once.", salary & (t.ob_n_banks == 3)),
+        ("Three banks, not TBC", "Uses three banks, none of them TBC.", salary & (t.ob_n_banks == 3) & ~uses("tbc")),
         ("Young, low income", "Under 26, early in working life.", (t.Age < 26) & (income < 1500)),
         (
-            "Lives outside the big cities",
-            "Small town or village, regional salary.",
-            salary & ~t.city.isin(BIG_CITIES) & income.between(1000, 3000),
+            "Outside the big cities, not BoG",
+            "Small town or village; Bank of Georgia is not one of the banks.",
+            salary & ~t.city.isin(BIG_CITIES) & ~uses("bog") & income.between(1000, 3000),
         ),
         ("Sole proprietor", "Registered individual entrepreneur.", (t.CLIENT_LEGAL_FORM == 1) & (t.ob_n_banks >= 1)),
         ("No salary credits", "Income does not arrive as a salary: the hard, informal case.", ~salary & (income > 800)),
         ("Receives remittances", "Regular transfers from abroad.", (t.ob_remit_month.fillna(0) > 100) & salary),
-        ("High earner", "Top of the income range.", salary & (income > 8000)),
+        (
+            "Small banks only, with a deposit",
+            "No TBC, no BoG, no Liberty: only smaller banks, and a savings account.",
+            salary & deposit & ~uses("tbc") & ~uses("bog") & ~uses("liberty"),
+        ),
         (
             "Wide, uncertain band",
             "Model is unsure: shows a low confidence label.",
@@ -76,9 +99,12 @@ def main() -> None:
         picked.append(
             {
                 "id": r.cid,
+                "personal_id": personal_id_of(r.cid),
                 "title": title,
                 "story": story,
-                "facts": f"age {int(r.Age)}, {r.city}, {int(r.ob_n_banks)} bank{'s' if r.ob_n_banks != 1 else ''}",
+                "facts": f"age {int(r.Age)}, {r.city}",
+                "banks": bank_list(r.banks),
+                "has_deposit": bool(r.ob_has_savings == 1),
                 "model_confidence": r.confidence,
             }
         )

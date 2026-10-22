@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { connectAll, getDemoClients, getEstimate, startEstimate } from './api.js'
 import ConsentTable from './components/ConsentTable.jsx'
 import Progress from './components/Progress.jsx'
 import Result from './components/Result.jsx'
+import { pace, wait } from './hooks.js'
 import './app.css'
 
 const POLL_MS = 700
@@ -14,6 +15,7 @@ export default function App() {
   const [job, setJob] = useState(null)
   const [error, setError] = useState(null)
   const [demoClients, setDemoClients] = useState([])
+  const [revealed, setRevealed] = useState(false)
   const timer = useRef(null)
 
   useEffect(() => {
@@ -25,6 +27,7 @@ export default function App() {
     clearTimeout(timer.current)
     setConsents(null)
     setJob(null)
+    setRevealed(false)
     setError(null)
   }
 
@@ -33,7 +36,9 @@ export default function App() {
     reset()
     setConnecting(true)
     try {
-      setConsents(await connectAll(personalId.trim()))
+      // the call answers in a blink; hold the spinner a moment so the click visibly does something
+      const [result] = await Promise.all([connectAll(personalId.trim()), wait(pace(900))])
+      setConsents(result)
     } catch (e) {
       setError(e.status === 404 ? 'No bank knows this personal ID.' : e.message)
     } finally {
@@ -52,8 +57,11 @@ export default function App() {
       .catch((e) => setError(e.message))
   }
 
+  const onFinished = useCallback(() => setRevealed(true), [])
+
   const onEstimate = async () => {
     setError(null)
+    setRevealed(false)
     setJob({ status: 'queued', stage: 'queued', progress: [] })
     try {
       const { job_id } = await startEstimate(consents.consent_set_id)
@@ -79,7 +87,7 @@ export default function App() {
           <input
             value={personalId}
             onChange={(e) => setPersonalId(e.target.value)}
-            placeholder="Personal ID, e.g. 09754421550"
+            placeholder="11-digit personal ID, e.g. 09754421550"
             aria-label="Personal ID"
             disabled={connecting || running}
           />
@@ -95,14 +103,18 @@ export default function App() {
                 <button
                   key={c.id}
                   type="button"
-                  className={`demo-card ${personalId === c.id ? 'active' : ''}`}
-                  onClick={() => setPersonalId(c.id)}
+                  className={`demo-card ${personalId === c.personal_id ? 'active' : ''}`}
+                  onClick={() => setPersonalId(c.personal_id)}
                   disabled={connecting || running}
                   title={c.story}
                 >
                   <strong>{c.title}</strong>
                   <span>{c.facts}</span>
-                  <code>{c.id}</code>
+                  <span className="tags">
+                    {c.banks.map((b) => <em key={b} className="tag">{b}</em>)}
+                    {c.has_deposit && <em className="tag deposit">deposit</em>}
+                  </span>
+                  <code>{c.personal_id}</code>
                 </button>
               ))}
             </div>
@@ -121,14 +133,14 @@ export default function App() {
       </section>
 
       {job && (
-        <section className="card">
+        <section className="card enter">
           <h2><span className="num">2</span> Collecting data</h2>
-          <Progress job={job} />
+          <Progress job={job} onFinished={onFinished} />
         </section>
       )}
 
-      {job?.status === 'done' && (
-        <section className="card">
+      {job?.status === 'done' && revealed && (
+        <section className="card enter">
           <h2><span className="num">3</span> Result</h2>
           <Result result={job.result} />
         </section>

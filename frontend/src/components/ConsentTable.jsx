@@ -29,10 +29,10 @@ export default function ConsentTable({ consents }) {
           <tr><th>Bank</th><th>Result</th><th className="num-col">Accounts</th><th>Consent ID</th></tr>
         </thead>
         <tbody>
-          {banks.map((b) => {
+          {banks.map((b, i) => {
             const s = STATUS[b.status] ?? STATUS.error
             return (
-              <tr key={b.bank} className={b.status === 'connected' ? '' : 'dim'}>
+              <tr key={b.bank} className={`row-in ${b.status === 'connected' ? '' : 'dim'}`} style={{ animationDelay: `${i * 110}ms` }}>
                 <td>{b.name}</td>
                 <td><span className={`pill ${s.cls}`}>{b.status === 'connected' ? '✓ ' : ''}{s.text}</span></td>
                 <td className="num-col">{b.status === 'connected' ? plural(b.accounts, 'account') : '—'}</td>

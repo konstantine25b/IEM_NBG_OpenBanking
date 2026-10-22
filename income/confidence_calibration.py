@@ -47,6 +47,10 @@ def measure(model: IncomeModel, df: pd.DataFrame) -> dict:
     return {
         "basis": f"{len(test):,} held-out clients (20% of the data, never seen in training); synthetic data",
         "interval": "P10-P90 (nominal 80%)",
+        # band width at each percentile 0..100 of the held-out clients: turns a band into a 0-100 score
+        "band_share_quantiles": [
+            round(float(v), 5) for v in np.quantile(pred["band_share"].to_numpy(), np.linspace(0, 1, 101))
+        ],
         "overall": stats(np.ones(len(test), bool)),
         "levels": {lv: stats(levels == lv) for lv in CONFIDENCE_LEVELS},
     }
