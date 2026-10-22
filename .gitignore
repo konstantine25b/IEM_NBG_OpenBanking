@@ -6,19 +6,18 @@ __pycache__/
 .pytest_cache/
 .ipynb_checkpoints/
 
-# nbg_synthetic_data/, synthetic/, reports/ and openbanking_mock/output/dataset are committed on purpose
-# (the team shares them through git). They can still be re-created with
-# `uv run python EDA.py`, `uv run python synthgen.py` and `uv run python -m obmock generate`.
+# nbg_synthetic_data/, synthetic/, reports/ and the smaller open-banking tables
+# are committed on purpose. The two largest tables and the raw API captures
+# stay on disk only; regenerate them with `uv run python -m obmock generate`.
+# Kept in git: nbg_synthetic_data/income_dataset.csv and income/income_model.ipynb.
 
 # Local copy of the previous 50,000-customer run. Kept on disk, not uploaded.
 openbanking_mock/output/dataset_50k/
 
-# Shards 200-399 of the two large tables. Restored locally after the upload;
-# shards 0-199 of these tables are already in git and stay tracked.
-openbanking_mock/output/dataset/api/transactions/part-002*.parquet
-openbanking_mock/output/dataset/api/transactions/part-003*.parquet
-openbanking_mock/output/dataset/truth/ledger/part-002*.parquet
-openbanking_mock/output/dataset/truth/ledger/part-003*.parquet
+# Transaction and ledger shards, plus the raw API captures. Too large to upload.
+openbanking_mock/output/dataset/api/transactions/
+openbanking_mock/output/dataset/truth/ledger/
+openbanking_mock/output/dataset/captures/
 
 # --- OS / editor ----------------------------------------------------------
 .DS_Store
