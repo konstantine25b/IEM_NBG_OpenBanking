@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { connectAll, getDemoClients, getEstimate, startEstimate } from './api.js'
+import { connectAll, getDemoClients, getEstimate, getSources, startEstimate } from './api.js'
 import ClientPicker from './components/ClientPicker.jsx'
+import ConnectingPanel from './components/ConnectingPanel.jsx'
 import ConsentTable from './components/ConsentTable.jsx'
 import Progress from './components/Progress.jsx'
 import Result from './components/Result.jsx'
-import { pace, wait } from './hooks.js'
 import './app.css'
 
 const POLL_MS = 700
@@ -31,12 +31,16 @@ export default function App() {
   const [error, setError] = useState(null)
   const [demoClients, setDemoClients] = useState([])
   const [revealed, setRevealed] = useState(false)
+  const [sources, setSources] = useState([])
+  const [reply, setReply] = useState(null) // the connect reply, shown row by row before it becomes the table
+  const played = useRef(null)
   const timer = useRef(null)
   const autoRan = useRef(false)
 
   const reset = () => {
     clearTimeout(timer.current)
     setConsents(null)
+    setReply(null)
     setJob(null)
     setRevealed(false)
     setError(null)
@@ -57,8 +61,10 @@ export default function App() {
     reset()
     setConnecting(true)
     try {
-      // the call answers in a blink; hold the spinner a moment so the click visibly does something
-      const [result] = await Promise.all([connectAll(id), wait(pace(900))])
+      const result = await connectAll(id)
+      setReply(result)
+      // wait until the per-bank animation has played out, then show the table
+      await new Promise((resolve) => { played.current = resolve })
       setConsents(result)
       return result
     } catch (e) {
@@ -66,6 +72,7 @@ export default function App() {
       return null
     } finally {
       setConnecting(false)
+      setReply(null)
     }
   }
 
@@ -88,9 +95,11 @@ export default function App() {
   }
 
   const onFinished = useCallback(() => setRevealed(true), [])
+  const onPlayed = useCallback(() => played.current?.(), [])
 
   useEffect(() => {
     getDemoClients().then(setDemoClients).catch(() => setDemoClients([]))
+    getSources().then(setSources).catch(() => setSources([]))
     // /?client=<personal id> runs the whole flow, so a demo can be opened from a link
     const auto = new URLSearchParams(window.location.search).get('client')
     if (auto && !autoRan.current) {
@@ -137,6 +146,13 @@ export default function App() {
             <section className="card empty">
               <h2>Start with a client</h2>
               <p>Pick a demo client on the left, or type a personal ID, then press <strong>Connect all banks</strong>.</p>
+            </section>
+          )}
+
+          {connecting && sources.length > 0 && (
+            <section className="card enter">
+              <h2>Connecting to the client&apos;s banks</h2>
+              <ConnectingPanel sources={sources} result={reply} onDone={onPlayed} />
             </section>
           )}
 

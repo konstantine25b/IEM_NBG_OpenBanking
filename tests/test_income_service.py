@@ -167,3 +167,9 @@ def test_result_confidence_matches_its_band(stack):
     c = _estimate(stack, _consents(stack, "C00012")["consent_set_id"])["result"]["confidence"]
     assert c["level"] == level_of(c["band_share"]) and c["score"] == score_of(c["band_share"])
     assert c["plus_minus_pct"] == pytest.approx(50 * c["band_share"], abs=0.06)
+
+
+def test_sources_lists_every_consent_target(stack):
+    sources = stack.get("/v1/sources").json()
+    assert [s["key"] for s in sources if s["kind"] == "registry"] == ["rs", "creditinfo"]
+    assert sum(s["kind"] == "bank" for s in sources) == 12

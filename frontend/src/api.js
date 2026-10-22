@@ -26,3 +26,6 @@ export const getEstimate = (jobId) => call('GET', `/v1/income-estimates/${jobId}
 
 // Ten hand-picked demo clients (API/pick_demo_clients.py).
 export const getDemoClients = () => call('GET', '/v1/demo/clients')
+
+// The 12 banks + RS + Creditinfo that a consent request goes to.
+export const getSources = () => call('GET', '/v1/sources')

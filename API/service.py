@@ -462,6 +462,15 @@ def create_app(
             "today": date.today().isoformat(),
         }
 
+    @app.get("/v1/sources")
+    def sources():
+        """Everything a consent request goes to, so a portal can show all of them while it waits."""
+        banks = [{"key": b["bank"], "label": b["name"], "kind": "bank"} for b in svc.catalog()]
+        return banks + [
+            {"key": "rs", "label": "Revenue Service", "kind": "registry"},
+            {"key": "creditinfo", "label": "Creditinfo", "kind": "registry"},
+        ]
+
     @app.get("/v1/demo/clients")
     def demo_clients():
         return json.loads(DEMO_CLIENTS.read_text()) if DEMO_CLIENTS.exists() else []
