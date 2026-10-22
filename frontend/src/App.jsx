@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { connectAll, getDemoClients, getEstimate, startEstimate } from './api.js'
+import ClientPicker from './components/ClientPicker.jsx'
 import ConsentTable from './components/ConsentTable.jsx'
 import Progress from './components/Progress.jsx'
 import Result from './components/Result.jsx'
@@ -7,6 +8,20 @@ import { pace, wait } from './hooks.js'
 import './app.css'
 
 const POLL_MS = 700
+const STEPS = ['Connect banks', 'Collect data', 'Result']
+
+function Stepper({ current }) {
+  return (
+    <ol className="stepper" aria-label="Progress">
+      {STEPS.map((label, i) => (
+        <li key={label} className={i < current ? 'done' : i === current ? 'active' : ''} aria-current={i === current ? 'step' : undefined}>
+          <span className="dot">{i < current ? '✓' : i + 1}</span>
+          {label}
+        </li>
+      ))}
+    </ol>
+  )
+}
 
 export default function App() {
   const [personalId, setPersonalId] = useState('')
@@ -17,11 +32,7 @@ export default function App() {
   const [demoClients, setDemoClients] = useState([])
   const [revealed, setRevealed] = useState(false)
   const timer = useRef(null)
-
-  useEffect(() => {
-    getDemoClients().then(setDemoClients).catch(() => setDemoClients([]))
-    return () => clearTimeout(timer.current)
-  }, [])
+  const autoRan = useRef(false)
 
   const reset = () => {
     clearTimeout(timer.current)
@@ -29,21 +40,6 @@ export default function App() {
     setJob(null)
     setRevealed(false)
     setError(null)
-  }
-
-  const onConnect = async (event) => {
-    event.preventDefault()
-    reset()
-    setConnecting(true)
-    try {
-      // the call answers in a blink; hold the spinner a moment so the click visibly does something
-      const [result] = await Promise.all([connectAll(personalId.trim()), wait(pace(900))])
-      setConsents(result)
-    } catch (e) {
-      setError(e.status === 404 ? 'No bank knows this personal ID.' : e.message)
-    } finally {
-      setConnecting(false)
-    }
   }
 
   const poll = (jobId) => {
@@ -57,14 +53,28 @@ export default function App() {
       .catch((e) => setError(e.message))
   }
 
-  const onFinished = useCallback(() => setRevealed(true), [])
+  const connect = async (id) => {
+    reset()
+    setConnecting(true)
+    try {
+      // the call answers in a blink; hold the spinner a moment so the click visibly does something
+      const [result] = await Promise.all([connectAll(id), wait(pace(900))])
+      setConsents(result)
+      return result
+    } catch (e) {
+      setError(e.status === 404 ? 'No bank knows this personal ID.' : e.message)
+      return null
+    } finally {
+      setConnecting(false)
+    }
+  }
 
-  const onEstimate = async () => {
+  const estimate = async (consentSetId) => {
     setError(null)
     setRevealed(false)
     setJob({ status: 'queued', stage: 'queued', progress: [] })
     try {
-      const { job_id } = await startEstimate(consents.consent_set_id)
+      const { job_id } = await startEstimate(consentSetId)
       poll(job_id)
     } catch (e) {
       setJob(null)
@@ -72,85 +82,95 @@ export default function App() {
     }
   }
 
-  const running = job && job.status !== 'done' && job.status !== 'failed'
+  const onConnect = (event) => {
+    event.preventDefault()
+    connect(personalId.trim())
+  }
+
+  const onFinished = useCallback(() => setRevealed(true), [])
+
+  useEffect(() => {
+    getDemoClients().then(setDemoClients).catch(() => setDemoClients([]))
+    // /?client=<personal id> runs the whole flow, so a demo can be opened from a link
+    const auto = new URLSearchParams(window.location.search).get('client')
+    if (auto && !autoRan.current) {
+      autoRan.current = true
+      setPersonalId(auto)
+      connect(auto).then((r) => r?.connected_banks && estimate(r.consent_set_id))
+    }
+    return () => clearTimeout(timer.current)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const running = Boolean(job) && job.status !== 'done' && job.status !== 'failed'
+  const showResult = job?.status === 'done' && revealed
+  const current = showResult ? 3 : job ? 1 : consents ? 1 : 0
 
   return (
-    <main className="page">
-      <header className="top">
-        <h1>Income check</h1>
-        <p>Estimate a client&apos;s sustainable monthly income from their open-banking data, RS and Creditinfo.</p>
+    <div className="shell">
+      <header className="bar">
+        <div className="brand">
+          <span className="logo" aria-hidden="true">₾</span>
+          <div>
+            <h1>Income Check</h1>
+            <p>Income estimate from open banking, RS and Creditinfo</p>
+          </div>
+        </div>
+        <span className="demo-flag">Demo · synthetic data</span>
       </header>
 
-      <section className="card">
-        <h2><span className="num">1</span> Connect the client&apos;s banks</h2>
-        <form className="row" onSubmit={onConnect}>
-          <input
-            value={personalId}
-            onChange={(e) => setPersonalId(e.target.value)}
-            placeholder="11-digit personal ID, e.g. 09754421550"
-            aria-label="Personal ID"
-            disabled={connecting || running}
-          />
-          <button type="submit" disabled={!personalId.trim() || connecting || running}>
-            {connecting ? 'Connecting…' : 'Connect all banks'}
-          </button>
-        </form>
-        {demoClients.length > 0 && (
-          <div className="demo">
-            <p className="hint">Demo clients (ten different kinds of person, none used to train the model):</p>
-            <div className="demo-grid">
-              {demoClients.map((c) => (
-                <button
-                  key={c.id}
-                  type="button"
-                  className={`demo-card ${personalId === c.personal_id ? 'active' : ''}`}
-                  onClick={() => setPersonalId(c.personal_id)}
-                  disabled={connecting || running}
-                  title={c.story}
-                >
-                  <strong>{c.title}</strong>
-                  <span>{c.facts}</span>
-                  <span className="tags">
-                    {c.banks.map((b) => <em key={b} className="tag">{b}</em>)}
-                    {c.has_deposit && <em className="tag deposit">deposit</em>}
-                  </span>
-                  <code>{c.personal_id}</code>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-        {error && <p className="error" role="alert">{error}</p>}
-        {consents && <ConsentTable consents={consents} />}
-        {consents && !job && (
-          <div className="actions">
-            <button type="button" onClick={onEstimate} disabled={consents.connected_banks === 0}>
-              Estimate income
-            </button>
-            {consents.connected_banks === 0 && <span className="hint">The client has no account at any of the 12 banks.</span>}
-          </div>
-        )}
-      </section>
+      <div className="layout">
+        <ClientPicker
+          personalId={personalId}
+          onChange={setPersonalId}
+          onSubmit={onConnect}
+          busy={connecting || running}
+          connecting={connecting}
+          clients={demoClients}
+        />
 
-      {job && (
-        <section className="card enter">
-          <h2><span className="num">2</span> Collecting data</h2>
-          <Progress job={job} onFinished={onFinished} />
-        </section>
-      )}
+        <main className="main">
+          <Stepper current={current} />
+          {error && <p className="error" role="alert">{error}</p>}
 
-      {job?.status === 'done' && revealed && (
-        <section className="card enter">
-          <h2><span className="num">3</span> Result</h2>
-          <Result result={job.result} />
-        </section>
-      )}
+          {!consents && !connecting && !error && (
+            <section className="card empty">
+              <h2>Start with a client</h2>
+              <p>Pick a demo client on the left, or type a personal ID, then press <strong>Connect all banks</strong>.</p>
+            </section>
+          )}
 
-      {job?.status === 'failed' && (
-        <section className="card">
-          <p className="error" role="alert">The estimate failed: {job.error}</p>
-        </section>
-      )}
-    </main>
+          {consents && (
+            <section className="card enter">
+              <h2>Connected sources</h2>
+              <ConsentTable consents={consents} />
+              {!job && (
+                <div className="actions">
+                  <button type="button" onClick={() => estimate(consents.consent_set_id)} disabled={consents.connected_banks === 0}>
+                    Estimate income
+                  </button>
+                  {consents.connected_banks === 0 && <span className="hint">The client has no account at any of the 12 banks.</span>}
+                </div>
+              )}
+            </section>
+          )}
+
+          {job && !showResult && job.status !== 'failed' && (
+            <section className="card enter">
+              <h2>Collecting data</h2>
+              <Progress job={job} onFinished={onFinished} />
+            </section>
+          )}
+
+          {job?.status === 'failed' && (
+            <section className="card">
+              <p className="error" role="alert">The estimate failed: {job.error}</p>
+            </section>
+          )}
+
+          {showResult && <Result result={job.result} />}
+        </main>
+      </div>
+    </div>
   )
 }

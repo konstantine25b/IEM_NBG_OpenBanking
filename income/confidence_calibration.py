@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """What each confidence level means in numbers, measured on the held-out 20% of clients (never seen in training).
 
-The model's level (very high ... very low) is only a rank of the P10-P90 band width. This script predicts the
+The level (income/confidence.py) is read off the P10-P90 band width. This script predicts the
 held-out clients and, per level, records how often the real income fell inside [P10, P90] and how far P50 was off.
 The API shows these next to the label.   uv run python income/confidence_calibration.py   ->  models/confidence_calibration.json
 
@@ -20,7 +20,8 @@ import pandas as pd
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from income_predictor import CONFIDENCE_LEVELS, DATA, LABEL, IncomeModel, split_indices  # noqa: E402
+from confidence import LEVELS, level_of, scale  # noqa: E402
+from income_predictor import DATA, LABEL, IncomeModel, split_indices  # noqa: E402
 
 OUT = HERE / "models" / "confidence_calibration.json"
 
@@ -43,16 +44,13 @@ def measure(model: IncomeModel, df: pd.DataFrame) -> dict:
             "median_band_pct": round(100 * float(np.median(pred["band_share"].to_numpy()[mask])), 1),
         }
 
-    levels = pred["confidence"].to_numpy()
+    levels = np.array([level_of(b) for b in pred["band_share"]])
     return {
         "basis": f"{len(test):,} held-out clients (20% of the data, never seen in training); synthetic data",
         "interval": "P10-P90 (nominal 80%)",
-        # band width at each percentile 0..100 of the held-out clients: turns a band into a 0-100 score
-        "band_share_quantiles": [
-            round(float(v), 5) for v in np.quantile(pred["band_share"].to_numpy(), np.linspace(0, 1, 101))
-        ],
         "overall": stats(np.ones(len(test), bool)),
-        "levels": {lv: stats(levels == lv) for lv in CONFIDENCE_LEVELS},
+        "scale": scale(),
+        "levels": {lv: stats(levels == lv) for lv in LEVELS},
     }
 
 

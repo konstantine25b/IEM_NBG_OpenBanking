@@ -39,6 +39,8 @@ for p in (HERE, REPO / "income", REPO / "eda", REPO / "openbanking_mock"):
 import httpx  # noqa: E402
 import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
+from confidence import LOWEST, level_of, score_of  # noqa: E402
+from confidence import scale as confidence_scale  # noqa: E402
 from explain import explain_p50  # noqa: E402
 from fastapi import FastAPI  # noqa: E402
 from fastapi.middleware.cors import CORSMiddleware  # noqa: E402
@@ -155,7 +157,7 @@ def judge_confidence(
         warnings.append(
             "No salary credits found. The bank that pays the salary may not be connected; ask the client to connect it."
         )
-    return ("very low" if reasons else model_level), reasons, warnings
+    return (LOWEST if reasons else model_level), reasons, warnings
 
 
 # ----------------------------------------------------------------------------- the service
@@ -382,7 +384,8 @@ class Service:
                 tx[(tx["status"] == "booked") & ~tx["is_card_mirror"].fillna(False).astype(bool)] if len(tx) else tx
             )
             months = float((as_of - pd.to_datetime(booked["booking_date"]).min()).days / 30.44) if len(booked) else 0.0
-            level, reasons, warnings = judge_confidence(out["confidence"], months, len(booked), features, len(got))
+            band = float(out["band_share"])
+            level, reasons, warnings = judge_confidence(level_of(band), months, len(booked), features, len(got))
             for step in job["progress"]:
                 if step["state"] == "failed":
                     warnings.append(f"{step['label']}: {step['detail']}")
@@ -392,10 +395,12 @@ class Service:
                 "income": {k: float(out[k]) for k in ("p10", "p50", "p90")} | {"currency": "GEL", "period": "monthly"},
                 "confidence": {
                     "level": level,
-                    "model_level": str(out["confidence"]),
-                    "band_share": float(out["band_share"]),
+                    "model_level": level_of(band),
+                    "band_share": band,
+                    "plus_minus_pct": round(50 * band, 1),
+                    "scale": confidence_scale(),
                     "downgrade_reasons": reasons,
-                    "score": self._score(float(out["band_share"]), bool(reasons)),
+                    "score": self._score(band, bool(reasons)),
                     "measured": self._measured(level, reasons),
                 },
                 "explanation": explanation,
@@ -413,15 +418,12 @@ class Service:
         except Exception as e:  # noqa: BLE001
             job["status"], job["stage"], job["error"] = "failed", "failed", f"{type(e).__name__}: {e}"
 
-    def _score(self, band_share: float, downgraded: bool) -> int | None:
-        """0-100: how much narrower this P10-P90 band is than the bands of the held-out clients (100 = narrower than
-        all of them). A rank, not a probability. Thin data caps it inside the 'very low' range (below 20)."""
-        if not self.calibration:
-            return None
-        quantiles = np.asarray(self.calibration["band_share_quantiles"])
-        score = int(round(100 * (1 - np.searchsorted(quantiles, band_share, side="left") / (len(quantiles) - 1))))
-        score = max(0, min(100, score))
-        return min(score, 19) if downgraded else score
+    @staticmethod
+    def _score(band_share: float, downgraded: bool) -> int:
+        """100% minus the band width (income/confidence.py). Thin data forces the 'very low' label, so the score
+        is also kept inside that label's range (a band wider than 20%, i.e. below 80%)."""
+        score = score_of(band_share)
+        return min(score, 79) if downgraded else score
 
     def _measured(self, level: str, downgrade_reasons: list[str]) -> dict | None:
         """What this confidence level has meant on held-out clients. A downgrade for thin data was never measured."""

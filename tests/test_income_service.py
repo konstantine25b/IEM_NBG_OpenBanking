@@ -149,3 +149,21 @@ def test_demo_clients_are_ten_known_clients(stack):
     clients = stack.get("/v1/demo/clients").json()
     assert len(clients) == 10 and len({c["id"] for c in clients}) == 10
     assert _consents(stack, clients[0]["id"])["connected_banks"] >= 1
+
+
+def test_confidence_is_read_off_the_band_width():
+    from confidence import LEVELS, level_of, score_of
+
+    assert [level_of(b) for b in (0.0, 0.03, 0.031, 0.06, 0.10, 0.20, 0.21)] == [
+        "very high", "very high", "high", "high", "medium", "low", "very low",
+    ]  # fmt: skip
+    assert score_of(0.174) == 83 and score_of(0.0) == 100 and score_of(1.5) == 0
+    assert LEVELS[0] == "very high" and LEVELS[-1] == "very low"
+
+
+def test_result_confidence_matches_its_band(stack):
+    from confidence import level_of, score_of
+
+    c = _estimate(stack, _consents(stack, "C00012")["consent_set_id"])["result"]["confidence"]
+    assert c["level"] == level_of(c["band_share"]) and c["score"] == score_of(c["band_share"])
+    assert c["plus_minus_pct"] == pytest.approx(50 * c["band_share"], abs=0.06)

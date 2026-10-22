@@ -30,12 +30,12 @@ function RangeBar({ p10, p50, p90 }) {
   )
 }
 
-function ConfidenceDetail({ confidence }) {
+function ConfidenceDetail({ confidence, income }) {
   const m = confidence.measured
   const shown = useCountUp(confidence.score ?? 0, 1600)
   const grown = useMounted(400)
   return (
-    <div className="panel rise">
+    <section className="card rise">
       <h3>How sure is this?</h3>
       {confidence.score != null && (
         <div className="score">
@@ -44,8 +44,19 @@ function ConfidenceDetail({ confidence }) {
             <div className={`score-fill ${LEVEL_CLASS[confidence.level] ?? 'warn'}`} style={{ width: grown ? `${confidence.score}%` : '0%' }} />
           </div>
           <p className="hint">
-            The P10–P90 band is {(confidence.band_share * 100).toFixed(1)}% of the P50 wide, which is narrower than{' '}
-            {confidence.score}% of the test clients. It ranks how tight the estimate is; it is not the chance of being right.
+            Score = 100% − band width. The P10–P90 band spans <strong>{gel(income.p90 - income.p10)} GEL</strong>{' '}
+            ({(confidence.band_share * 100).toFixed(1)}% of the P50), so the estimate is{' '}
+            <strong>P50 ±{confidence.plus_minus_pct}%</strong>. It shows how precise the range is; it is not the chance of
+            being right.
+          </p>
+          <p className="hint scale">
+            Labels by band width:{' '}
+            {confidence.scale.map((l, i) => (
+              <span key={l.level} className={l.level === confidence.level ? 'on' : ''}>
+                {i > 0 && ' · '}
+                {l.level} {l.max_band_pct == null ? `>${confidence.scale[i - 1].max_band_pct}%` : `≤${l.max_band_pct}%`}
+              </span>
+            ))}
           </p>
         </div>
       )}
@@ -61,7 +72,7 @@ function ConfidenceDetail({ confidence }) {
       ) : (
         <p className="hint">This label comes from the data-sufficiency rules, not from the model, so no accuracy has been measured for it.</p>
       )}
-    </div>
+    </section>
   )
 }
 
@@ -70,9 +81,12 @@ function Drivers({ explanation }) {
   if (!explanation) return null
   const { drivers, starting_point_gel: start } = explanation
   const max = Math.max(...drivers.map((d) => Math.abs(d.effect_gel)), 1)
+  // when every driver pushes the same way, the bars use the whole width instead of half of it
+  const hasNeg = drivers.some((d) => d.effect_gel < 0)
+  const hasPos = drivers.some((d) => d.effect_gel > 0)
   const width = (d) => (grown ? `${(Math.abs(d.effect_gel) / max) * 100}%` : '0%')
   return (
-    <div className="panel rise late">
+    <section className="card rise late">
       <h3>Why this estimate</h3>
       <p className="hint">
         Starts from the average client ({gel(start)} GEL); each factor moves it up or down (SHAP values of the P50 model).
@@ -82,71 +96,81 @@ function Drivers({ explanation }) {
           <li key={d.driver}>
             <span className="name">{d.driver}</span>
             <span className="bars" aria-hidden="true">
-              <span className="half left">{d.effect_gel < 0 && <i className="neg" style={{ width: width(d), transitionDelay: `${i * 140}ms` }} />}</span>
-              <span className="half right">{d.effect_gel > 0 && <i className="pos" style={{ width: width(d), transitionDelay: `${i * 140}ms` }} />}</span>
+              <span className="half left" style={{ flex: hasNeg ? 1 : 0 }}>{d.effect_gel < 0 && <i className="neg" style={{ width: width(d), transitionDelay: `${i * 140}ms` }} />}</span>
+              <span className="half right" style={{ flex: hasPos ? 1 : 0 }}>{d.effect_gel > 0 && <i className="pos" style={{ width: width(d), transitionDelay: `${i * 140}ms` }} />}</span>
             </span>
             <span className={`val ${d.effect_gel < 0 ? 'neg' : 'pos'}`}>{d.effect_gel > 0 ? '+' : '−'}{gel(Math.abs(d.effect_gel))}</span>
           </li>
         ))}
       </ul>
       <p className="hint">= {gel(explanation.reported_p50_gel)} GEL (P50)</p>
-    </div>
+    </section>
   )
 }
 
 export default function Result({ result }) {
   const { income, confidence, warnings, data, cleaning, explanation } = result
   const p50 = useCountUp(income.p50, 1500)
+  const levelClass = LEVEL_CLASS[confidence.level] ?? 'warn'
   return (
     <div className="result">
-      <div className="headline">
-        <div>
-          <div className="big">{gel(p50)} <small>GEL / month</small></div>
-          <div className="muted">Estimated sustainable income</div>
+      <section className="card hero enter">
+        <div className="headline">
+          <div>
+            <div className="eyebrow">Estimated sustainable income</div>
+            <div className="big">{gel(p50)} <small>GEL / month</small></div>
+          </div>
+          <span className={`badge ${levelClass}`}>
+            Confidence: {confidence.level}{confidence.score != null && ` · ${confidence.score}%`}
+          </span>
         </div>
-        <span className={`badge ${LEVEL_CLASS[confidence.level] ?? 'warn'}`}>
-          Confidence: {confidence.level}{confidence.score != null && ` · ${confidence.score}%`}
-        </span>
+        <RangeBar p10={income.p10} p50={income.p50} p90={income.p90} />
+      </section>
+
+      {(confidence.downgrade_reasons.length > 0 || warnings.length > 0) && (
+        <section className="notices">
+          {confidence.downgrade_reasons.length > 0 && (
+            <div className="notice bad">
+              <strong>Confidence lowered to “very low”</strong>
+              <ul>{confidence.downgrade_reasons.map((r) => <li key={r}>{r}</li>)}</ul>
+            </div>
+          )}
+          {warnings.length > 0 && (
+            <div className="notice warn">
+              <strong>Warnings</strong>
+              <ul>{warnings.map((w) => <li key={w}>{w}</li>)}</ul>
+            </div>
+          )}
+        </section>
+      )}
+
+      <div className="two">
+        <ConfidenceDetail confidence={confidence} income={income} />
+        <Drivers explanation={explanation} />
       </div>
 
-      <RangeBar p10={income.p10} p50={income.p50} p90={income.p90} />
-      <ConfidenceDetail confidence={confidence} />
-      <Drivers explanation={explanation} />
-
-      {confidence.downgrade_reasons.length > 0 && (
-        <div className="notice bad rise late">
-          <strong>Confidence lowered to “very low”</strong>
-          <ul>{confidence.downgrade_reasons.map((r) => <li key={r}>{r}</li>)}</ul>
-        </div>
-      )}
-      {warnings.length > 0 && (
-        <div className="notice warn rise late">
-          <strong>Warnings</strong>
-          <ul>{warnings.map((w) => <li key={w}>{w}</li>)}</ul>
-        </div>
-      )}
-
-      <dl className="facts">
-        <div><dt>Banks used</dt><dd>{data.banks_used.length ? data.banks_used.join(', ').toUpperCase() : 'none'}</dd></div>
-        <div><dt>History</dt><dd>{data.months_covered} months</dd></div>
-        <div><dt>Transactions used</dt><dd>{gel(data.transactions_used)}</dd></div>
-      </dl>
-
-      <details>
-        <summary>How the data was cleaned</summary>
-        <table className="small">
-          <tbody>
-            <tr><td>Transactions received</td><td className="num-col">{gel(cleaning.received)}</td></tr>
-            <tr><td>Pending (not counted)</td><td className="num-col">{gel(cleaning.pending)}</td></tr>
-            <tr><td>Card mirror entries</td><td className="num-col">{gel(cleaning.card_mirrors)}</td></tr>
-            <tr><td>Transfers between own accounts</td><td className="num-col">{gel(cleaning.own_account_transfers)}</td></tr>
-            <tr><td>Loan disbursements</td><td className="num-col">{gel(cleaning.loan_disbursements)}</td></tr>
-            <tr><td>Refunds</td><td className="num-col">{gel(cleaning.refunds)}</td></tr>
-            <tr><td><strong>Used for income</strong></td><td className="num-col"><strong>{gel(cleaning.used_for_income)}</strong></td></tr>
-          </tbody>
-        </table>
-      </details>
-      <p className="hint">All data is synthetic; the estimate shows how the method works, not real-world accuracy.</p>
+      <section className="card rise late">
+        <dl className="facts">
+          <div><dt>Banks used</dt><dd>{data.banks_used.length ? data.banks_used.join(', ').toUpperCase() : 'none'}</dd></div>
+          <div><dt>History</dt><dd>{data.months_covered} months</dd></div>
+          <div><dt>Transactions used</dt><dd>{gel(data.transactions_used)}</dd></div>
+        </dl>
+        <details>
+          <summary>How the data was cleaned</summary>
+          <table className="small">
+            <tbody>
+              <tr><td>Transactions received</td><td className="num-col">{gel(cleaning.received)}</td></tr>
+              <tr><td>Pending (not counted)</td><td className="num-col">{gel(cleaning.pending)}</td></tr>
+              <tr><td>Card mirror entries</td><td className="num-col">{gel(cleaning.card_mirrors)}</td></tr>
+              <tr><td>Transfers between own accounts</td><td className="num-col">{gel(cleaning.own_account_transfers)}</td></tr>
+              <tr><td>Loan disbursements</td><td className="num-col">{gel(cleaning.loan_disbursements)}</td></tr>
+              <tr><td>Refunds</td><td className="num-col">{gel(cleaning.refunds)}</td></tr>
+              <tr><td><strong>Used for income</strong></td><td className="num-col"><strong>{gel(cleaning.used_for_income)}</strong></td></tr>
+            </tbody>
+          </table>
+        </details>
+        <p className="hint">All data is synthetic; the estimate shows how the method works, not real-world accuracy.</p>
+      </section>
     </div>
   )
 }

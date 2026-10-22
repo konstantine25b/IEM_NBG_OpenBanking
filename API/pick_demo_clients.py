@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Choose the demo clients: ten different kinds of person, taken from the 20% the model never trained on.
 
-For each archetype, among the held-out clients that fit it, take the one whose P50 is closest to the registry income.
-So these are the best-case examples of each type, picked on purpose for the demo: do not read them as typical accuracy
-(the measured accuracy per confidence level is in income/models/confidence_calibration.json).
+For each kind of person, among the held-out clients that fit, the pick is a typical one: the confidence level most
+of them get, and an error close to the middle of that group (not the luckiest case). The list is ordered from the
+tightest band to the widest, so it reads as a gradient from easy to hard cases.
+The measured accuracy per confidence level is in income/models/confidence_calibration.json.
 
     uv run python API/pick_demo_clients.py     ->  API/demo_clients.json
 """
@@ -18,6 +19,7 @@ import pandas as pd
 
 HERE = Path(__file__).resolve().parent
 sys.path[:0] = [str(HERE.parent / "income"), str(HERE.parent / "eda")]
+from confidence import level_of  # noqa: E402
 from income_predictor import DATA, LABEL, IncomeModel, split_indices  # noqa: E402
 
 OUT = HERE / "demo_clients.json"
@@ -73,9 +75,9 @@ def archetypes(t: pd.DataFrame) -> list[tuple[str, str, pd.Series]]:
             salary & deposit & ~uses("tbc") & ~uses("bog") & ~uses("liberty"),
         ),
         (
-            "Wide, uncertain band",
-            "Model is unsure: shows a low confidence label.",
-            t.confidence.isin(["low", "very low"]) & salary,
+            "Hardest case: very wide band",
+            "The model finds little to go on, so the band is very wide.",
+            t.band_share > 0.20,
         ),
     ]
 
@@ -87,14 +89,17 @@ def main() -> None:
     t = pd.concat([t, model.predict(t)[["p10", "p50", "p90", "band_share", "confidence"]]], axis=1)
     t["error_pct"] = 100 * (t.p50 - t[LABEL]).abs() / t[LABEL]
 
+    t["level"] = [level_of(b) for b in t.band_share]
     picked: list[dict] = []
     used: set[str] = set()
     for title, story, mask in archetypes(t):
-        pool = t[mask & ~t.cid.isin(used)].sort_values("error_pct")
+        pool = t[mask & ~t.cid.isin(used)]
         if pool.empty:
             print(f"no client for: {title}")
             continue
-        r = pool.iloc[0]
+        modal = pool.level.value_counts().idxmax()  # what most people of this kind get
+        pool = pool[pool.level == modal]
+        r = pool.iloc[(pool.error_pct - pool.error_pct.median()).abs().argsort().iloc[0]]
         used.add(r.cid)
         picked.append(
             {
@@ -105,10 +110,15 @@ def main() -> None:
                 "facts": f"age {int(r.Age)}, {r.city}",
                 "banks": bank_list(r.banks),
                 "has_deposit": bool(r.ob_has_savings == 1),
-                "model_confidence": r.confidence,
+                "band_share": round(float(r.band_share), 4),
+                "model_confidence": r.level,
             }
         )
-        print(f"{r.cid}  {title:32s} actual {r[LABEL]:7.0f}  P50 {r.p50:7.0f}  err {r.error_pct:4.1f}%  {r.confidence}")
+        print(
+            f"{r.cid}  {title:32s} actual {r[LABEL]:7.0f}  P50 {r.p50:7.0f}  err {r.error_pct:4.1f}%  "
+            f"band {100 * r.band_share:4.1f}%  {r.level}"
+        )
+    picked.sort(key=lambda c: c["band_share"])
     OUT.write_text(json.dumps(picked, indent=2, ensure_ascii=False))
     print(f"wrote {OUT}")
 
