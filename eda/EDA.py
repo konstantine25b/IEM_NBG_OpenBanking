@@ -4,21 +4,21 @@ EDA.py - pre-modeling exploratory data analysis of the bank loan-portfolio datas
 ===================================================================================
 
 What is this?
-    A one-command EDA of the credit-registry style loan data in ./Data (10 CSV files x
+    A one-command EDA of the credit-registry style loan data in ./nbg_synthetic_data (10 CSV files x
     10,000 rows + a Georgian data dictionary), written from a *data scientist before
     modeling* point of view:  What is in here?  Can I trust it?  What is the target?
     What leaks?  How should I split / encode / validate?  What score is realistic?
 
 How to run (uv creates and manages the virtual environment for you):
     uv sync                                  # once: build .venv from uv.lock
-    uv run python EDA.py                     # full run   -> reports/eda_report.html  (a few minutes)
-    uv run python EDA.py --fast              # 20k-row smoke run (about a minute)
-    uv run python EDA.py --sections 1,2,8    # only some sections
-    uv run python EDA.py --target RestructuringStatusBool        # another binary column
-    uv run python EDA.py --target score --binarize "<=150"       # binarise a numeric column
-    uv run python EDA.py --no-mock                               # skip the mock / synthetic bank data (sections 11-14)
+    uv run python eda/EDA.py                     # full run   -> reports/eda_report.html  (a few minutes)
+    uv run python eda/EDA.py --fast              # 20k-row smoke run (about a minute)
+    uv run python eda/EDA.py --sections 1,2,8    # only some sections
+    uv run python eda/EDA.py --target RestructuringStatusBool        # another binary column
+    uv run python eda/EDA.py --target score --binarize "<=150"       # binarise a numeric column
+    uv run python eda/EDA.py --no-mock                               # skip the mock / synthetic bank data (sections 11-14)
 
-What you get (always inside ./reports, never inside ./Data or ./openbanking_mock):
+What you get (always inside ./reports, never inside ./nbg_synthetic_data or ./openbanking_mock):
     eda_report.html    ONE self-contained page: executive summary + one block per section
     summary.md         the same executive summary as plain text
     feature_roles.csv  hand-off table: every column's role, advice and feature sets A / A_strict / B / C
@@ -108,8 +108,8 @@ from threadpoolctl import threadpool_limits
 # ══════════════════════════════════════════════════════════════════════════════════
 # 0. CONFIG - the only knobs you normally touch
 # ══════════════════════════════════════════════════════════════════════════════════
-ROOT = Path(__file__).resolve().parent
-DEFAULT_DATA_DIR = ROOT / "Data"
+ROOT = Path(__file__).resolve().parent.parent  # repo root (this file lives in eda/)
+DEFAULT_DATA_DIR = ROOT / "nbg_synthetic_data"
 DEFAULT_OUT_DIR = ROOT / "reports"
 DEFAULT_TARGET = "addNegStatus"  # dictionary: "negative record statuses" (binary, ~3.6% = 1)
 SEED = 42
@@ -1472,7 +1472,7 @@ class Ctx:
 def discover_files(data_dir: Path) -> list[Path]:
     files = sorted(data_dir.glob("df_*.csv"), key=lambda p: int(re.sub(r"\D", "", p.stem) or 0))
     if not files:
-        sys.exit(f"No df_*.csv files found in {data_dir}. Pass --data-dir /path/to/Data.")
+        sys.exit(f"No df_*.csv files found in {data_dir}. Pass --data-dir /path/to/nbg_synthetic_data.")
     return files
 
 
@@ -5978,7 +5978,7 @@ from sklearn.metrics import average_precision_score, roc_auc_score
 from sklearn.model_selection import StratifiedKFold, cross_val_predict
 
 # 1) data + the column set chosen in section 10:  A = application (A_strict = without state-tracking codes), B = monitoring, C = status detection
-df = pd.concat([pd.read_csv(f"Data/df_{{i}}.csv") for i in range(1, 11)], ignore_index=True)
+df = pd.concat([pd.read_csv(f"nbg_synthetic_data/df_{{i}}.csv") for i in range(1, 11)], ignore_index=True)
 roles = pd.read_csv("reports/feature_roles.csv", index_col="feature")
 features = list(roles.index[roles["in_A_application"]])   # or "in_A_strict" / "in_B_monitoring" / "in_C_status_detection"
 y = df["{ctx.target}"]
@@ -6009,7 +6009,7 @@ print(f"ROC-AUC {{roc_auc_score(y, oof):.3f}}   PR-AUC {{average_precision_score
 
 # ══════════════════════════════════════════════════════════════════════════════════
 # PART II · MOCK & SYNTHETIC BANK DATA (sections 11-14)
-#   openbanking_mock/ simulates the 12 Georgian banks' open-banking APIs for 50,000 customers who are rows of Data/.
+#   openbanking_mock/ simulates the 12 Georgian banks' open-banking APIs for 50,000 customers who are rows of nbg_synthetic_data/.
 #   Everything here is READ-ONLY and aggregated: customer names, ids, phone numbers and IBANs are never read (the
 #   counterparty columns of the transactions are only counted, never kept or shown), and nothing is
 #   written inside the mock folder.  The one pass over the shards (scan_mock) runs once and feeds sections 11-14.
@@ -6025,7 +6025,7 @@ MOCK_LAYER_NOTE = {
     "api": "what a lender could retrieve through the 12 banks' APIs",
     "truth": "the simulator's hidden state - for evaluation only, never a feature",
 }
-# columns of Data/ that identify a loan row exactly (the mock stores the loan columns of its customers as df_*)
+# columns of nbg_synthetic_data/ that identify a loan row exactly (the mock stores the loan columns of its customers as df_*)
 LINK_COLS = (
     "DISBURSED_AMOUNT", "Age", "INCOME_AMOUNT_TOTAL", "score", "TotalNumberDelinquencyDays",
     "OutstandingPrincipalAm", "AVERAGE_MONTHLY_PAYMENT", "addNegStatus",
@@ -6642,7 +6642,7 @@ def binarize_flag(s: pd.Series, spec: str) -> pd.Series:
 
 
 def mock_ctx(ctx: Ctx) -> Ctx | None:
-    """A Ctx over the mock customers - their loan columns (the df_* copies of Data/) plus the API features - so
+    """A Ctx over the mock customers - their loan columns (the df_* copies of nbg_synthetic_data/) plus the API features - so
     every model helper of sections 1-10 works on them unchanged.  None if the target is not one of the loan columns."""
     st = ctx.store
     if "mock_ctx" in st:
@@ -6676,7 +6676,7 @@ MOCK_TABLE_NOTE = {
     ("api", "accounts"): "accounts, cards, loans and savings resources a TPP can list",
     ("api", "balances"): "balances of those resources (Berlin Group types)",
     ("api", "transactions"): "booked and pending entries, flattened from the API responses",
-    ("truth", "customers"): "the simulated people: the loan columns of Data/ (df_*), income, hidden drivers",
+    ("truth", "customers"): "the simulated people: the loan columns of nbg_synthetic_data/ (df_*), income, hidden drivers",
     ("truth", "accounts"): "every simulated account, including those no API shows",
     ("truth", "ledger"): "the full internal ledger the API views are cut from",
     ("truth", "loans"): "loan terms and arrears as simulated",
@@ -6730,7 +6730,7 @@ def section_mock_overview(ctx: Ctx) -> None:
     built = f", built in {man['seconds'] / 60:.0f} min" if man.get("seconds") else ""
     rep.callout(
         "info",
-        f"**What this is.** `{world.name}/` is a *generated* banking world: the sibling `obmock` tool took the loans in `Data/` as its "
+        f"**What this is.** `{world.name}/` is a *generated* banking world: the sibling `obmock` tool took the loans in `nbg_synthetic_data/` as its "
         f"customers and simulated what {n_bank_names} Georgian banks' open-banking APIs would return for them "
         f"({'`synthetic: true` in its manifest' if man.get('synthetic') else 'no `synthetic` flag in its manifest'}). "
         f"{int(cfg.get('customers', len(cust))):,} customers, {win['months']} months of history up to {win['as_of']:%d %b %Y}, "
@@ -6875,7 +6875,7 @@ def section_mock_overview(ctx: Ctx) -> None:
                     "warning",
                     "Most mock customers are not rows of the supplied loan table",
                     f"Only {pct(link['found'], 0)} were found by an exact match: this mock dataset was probably generated from a different loan file.",
-                    "regenerate the mock from this Data/, or treat its labels as unrelated to the supplied ones",
+                    "regenerate the mock from this nbg_synthetic_data/, or treat its labels as unrelated to the supplied ones",
                     priority=2,
                 )
 
@@ -7824,7 +7824,7 @@ def section_mock_features(ctx: Ctx) -> None:
     rep.code(
         "Load the API features next to the loan columns (starter code)",
         "import pandas as pd\n\n"
-        "# 1. run:  uv run python EDA.py --export-mock-features   -> reports/mock_customer_features.csv\n"
+        "# 1. run:  uv run python eda/EDA.py --export-mock-features   -> reports/mock_customer_features.csv\n"
         "feats = pd.read_csv('reports/mock_customer_features.csv', index_col='cid')\n"
         "# 2. columns: the target, the API features (see the dictionary above) and 'shard' (250 customers per shard)\n"
         "X, y = feats.drop(columns=['target', 'shard']), feats['target']\n"
@@ -8094,8 +8094,8 @@ def thread_limit(requested: int) -> int:
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     p = argparse.ArgumentParser(
         description="Pre-modeling EDA of the loan-portfolio dataset -> one HTML report + figures + tables.",
-        epilog="examples:\n  uv run python EDA.py\n  uv run python EDA.py --fast\n  uv run python EDA.py --target RestructuringStatusBool\n"
-        '  uv run python EDA.py --target score --binarize "<=150"\n  uv run python EDA.py --sections 1,2,8 --no-models',
+        epilog="examples:\n  uv run python eda/EDA.py\n  uv run python eda/EDA.py --fast\n  uv run python eda/EDA.py --target RestructuringStatusBool\n"
+        '  uv run python eda/EDA.py --target score --binarize "<=150"\n  uv run python eda/EDA.py --sections 1,2,8 --no-models',
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     p.add_argument(

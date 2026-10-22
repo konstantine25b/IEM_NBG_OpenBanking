@@ -11,7 +11,7 @@ PROJECT_ROOT = ROOT.parent  # hakathon/
 SPEC_DIR = ROOT / "specs"
 FIXTURE_DIR = ROOT / "fixtures"
 OUTPUT_DIR = ROOT / "output"
-DEFAULT_DATA_DIR = PROJECT_ROOT / "Data"
+DEFAULT_DATA_DIR = PROJECT_ROOT / "nbg_synthetic_data"
 
 # Fixed so that two runs produce the same dataset; override with --as-of.
 DEFAULT_AS_OF = date(2026, 10, 19)

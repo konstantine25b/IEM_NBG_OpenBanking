@@ -1,15 +1,15 @@
 """Synthetic loan-population generator.
 
-Writes NEW customers / loans with exactly the schema of ``Data/df_*.csv`` (58 columns, same dtypes, same
-event rate), so the result is a drop-in replacement for ``Data/``:
+Writes NEW customers / loans with exactly the schema of ``nbg_synthetic_data/df_*.csv`` (58 columns, same dtypes, same
+event rate), so the result is a drop-in replacement for ``nbg_synthetic_data/``:
 
-    uv run python synthgen.py                     # 100,000 synthetic loans -> synthetic/loans/df_1..10.csv
-    uv run python synthgen.py generate --rows 1000000 --seed 7
-    uv run python synthgen.py check               # fidelity / privacy / utility gates on synthetic/loans
-    uv run python synthgen.py bank --customers 2000   # bank API data for them, through the unchanged obmock chain
+    uv run python synthetic/synthgen.py                     # 100,000 synthetic loans -> synthetic/loans/df_1..10.csv
+    uv run python synthetic/synthgen.py generate --rows 1000000 --seed 7
+    uv run python synthetic/synthgen.py check               # fidelity / privacy / utility gates on synthetic/loans
+    uv run python synthetic/synthgen.py bank --customers 2000   # bank API data for them, through the unchanged obmock chain
 
 Why this exists.  ``openbanking_mock/`` simulates the 12 Georgian banks' API data for customers that are
-*rows of Data/* (bootstrap without replacement), so it can never exceed the 100,000 supplied rows and every
+*rows of nbg_synthetic_data/* (bootstrap without replacement), so it can never exceed the 100,000 supplied rows and every
 customer is a copy.  This module supplies fresh rows.  Nothing in ``openbanking_mock/`` is changed: the bank
 data is produced by pointing its ``--data-dir`` at the folder written here, so every rule of the previous
 generation (Georgian market shares with BoG + TBC at 78%, only fields the 12 APIs can return, ISO 13616 / 9362 /
@@ -58,8 +58,8 @@ from scipy import stats
 from scipy.spatial import cKDTree
 from scipy.special import ndtr, ndtri
 
-ROOT = Path(__file__).resolve().parent
-DATA_DIR = ROOT / "Data"
+ROOT = Path(__file__).resolve().parent.parent  # repo root (this file lives in synthetic/)
+DATA_DIR = ROOT / "nbg_synthetic_data"
 OUT_DIR = ROOT / "synthetic" / "loans"
 BANK_OUT_DIR = ROOT / "synthetic" / "bank_dataset"
 OBMOCK_DIR = ROOT / "openbanking_mock"
@@ -1366,7 +1366,7 @@ def cmd_bank(a: argparse.Namespace) -> int:
         raise SystemExit("--out must be outside openbanking_mock/ (this tool never writes there)")
     rows = sum(len(pd.read_csv(f, usecols=[TARGET])) for f in list_loan_files(data))
     if not rows:
-        raise SystemExit(f"no synthetic loans in {data}: run `python synthgen.py` first")
+        raise SystemExit(f"no synthetic loans in {data}: run `python synthetic/synthgen.py` first")
     if a.customers > rows:
         raise SystemExit(f"--customers {a.customers} exceeds the {rows} synthetic loans (one customer per loan row)")
     if out.exists() and any(out.iterdir()):
@@ -1387,11 +1387,11 @@ def cmd_bank(a: argparse.Namespace) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
-        prog="synthgen", description="Synthetic loan population with the schema of Data/df_*.csv"
+        prog="synthgen", description="Synthetic loan population with the schema of nbg_synthetic_data/df_*.csv"
     )
     sub = p.add_subparsers(dest="cmd")
     g = sub.add_parser("generate", help="write new synthetic loans and check them (the default command)")
-    g.add_argument("--rows", type=int, default=100_000, help="loans to generate (default 100,000, like Data/)")
+    g.add_argument("--rows", type=int, default=100_000, help="loans to generate (default 100,000, like nbg_synthetic_data/)")
     g.add_argument("--seed", type=int, default=SEED, help="same seed and data => identical files")
     g.add_argument("--data-dir", type=Path, default=DATA_DIR, help="the real df_*.csv the generator is fitted on")
     g.add_argument("--out", type=Path, default=OUT_DIR, help=f"output folder (default {OUT_DIR.relative_to(ROOT)})")

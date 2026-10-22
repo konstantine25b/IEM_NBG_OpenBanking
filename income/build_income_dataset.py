@@ -26,12 +26,12 @@ import pandas as pd
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
-sys.path.insert(0, str(REPO))
+sys.path.insert(0, str(REPO / "eda"))
 
 from EDA import MOCK_FEATURE_NAMES, scan_shard
 
 ROOT = REPO / "openbanking_mock" / "output" / "dataset"
-OUT = HERE / "income_dataset.csv"
+OUT = REPO / "nbg_synthetic_data" / "income_dataset.csv"
 
 # Registry columns that are the label, or the label divided into something else.
 DROP_DF = {"df_INCOME_AMOUNT_TOTAL", "df_PTI_RATIO"}

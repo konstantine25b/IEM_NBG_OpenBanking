@@ -32,7 +32,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 RULE = re.compile(r"^# ═{20,}\s*$")
-ROOT_LINE = "ROOT = Path(__file__).resolve().parent"
+ROOT_LINE = "ROOT = Path(__file__).resolve().parent.parent  # repo root (this file lives in eda/)"
 ROOT_REPLACEMENT = (
     "ROOT = Path.cwd().resolve()  # notebook: the folder the kernel runs in (EDA.py: the script's folder)"
 )
@@ -55,7 +55,7 @@ section's text, tables and charts appear right below its own cell instead of in 
 memory (`ctx`, `rep`) so you can poke at it afterwards.
 
 **How to use**
-1. **Kernel:** the project's `.venv` (it needs `ipykernel`). Open the notebook from the project folder, the one that holds `Data/`.
+1. **Kernel:** the project's `.venv` (it needs `ipykernel`). Open the notebook from the project folder, the one that holds `nbg_synthetic_data/`.
 2. **Parameters:** edit the next cell (`FAST = True` gives a quick first pass).
 3. **Run all** (about 5 minutes for the full data, about 2 minutes with `FAST = True`) or go step by step: *support code → Start → sections*. \
 Sections hand results forward through `ctx.store`, so run them in order.
@@ -67,7 +67,7 @@ Sections hand results forward through `ctx.store`, so run them in order.
 `uv run python tools/make_notebook.py`. The generator refuses to overwrite a notebook whose cells you edited unless you pass `--force`; \
 `--out other.ipynb` writes a copy instead.
 - Code cells of the support code and of the sections are collapsed in JupyterLab; click the cell to expand.
-- Nothing is written into `Data/` or `openbanking_mock/`.
+- Nothing is written into `nbg_synthetic_data/` or `openbanking_mock/`.
 """
 
 PARAMS = """\
@@ -79,7 +79,7 @@ ONLY_SECTIONS = ""  # e.g. "1,2,8" to run only those sections; "" = all (EDA.py'
 TARGET = None  # another binary column, e.g. "RestructuringStatusBool"; None = the documented outcome flag
 BINARIZE = None  # with a numeric TARGET: "<=150" or ">=85"
 N_JOBS = 4  # upper bound of CPU threads for models / BLAS
-DATA_DIR = None  # None = ./Data
+DATA_DIR = None  # None = ./nbg_synthetic_data
 MOCK_DIR = None  # None = ./openbanking_mock/output/dataset when it exists
 OUT_DIR = "reports/notebook"  # figures/, tables/, eda_report.html ... (reports/ itself belongs to `python EDA.py`)
 EXPORT_MOCK_FEATURES = False  # True: also write mock_customer_features.csv (one row per mock customer, synthetic)
@@ -708,7 +708,7 @@ def comparable(nb: dict) -> list:
 
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description="Generate EDA.ipynb from EDA.py.")
-    p.add_argument("--src", default=str(ROOT / "EDA.py"), help="the script to convert [default: EDA.py]")
+    p.add_argument("--src", default=str(ROOT / "eda" / "EDA.py"), help="the script to convert [default: eda/EDA.py]")
     p.add_argument("--out", default=None, help="notebook to write [default: EDA.ipynb next to --src]")
     p.add_argument("--check", action="store_true", help="exit 1 when the notebook is out of date; writes nothing")
     p.add_argument(

@@ -2,8 +2,8 @@
 
 The fast tests fit the generator on a small fake loan table that has the real 58 columns and dtypes (planted
 delinquency regimes, an equality atom between term and instalment count, zero inflation, caps), so nothing here
-reads ./Data.  Two tests need more: the one that feeds the output to openbanking_mock builds a tiny world, and the
-one marked `slow` fits on the real ./Data (skipped when it is absent):  uv run pytest -m slow
+reads nbg_synthetic_data/.  Two tests need more: the one that feeds the output to openbanking_mock builds a tiny world, and the
+one marked `slow` fits on the real nbg_synthetic_data/ (skipped when it is absent):  uv run pytest -m slow
 """
 
 from __future__ import annotations
@@ -22,7 +22,7 @@ TARGET = "addNegStatus"
 
 
 def _load():
-    spec = importlib.util.spec_from_file_location("synthgen", ROOT / "synthgen.py")
+    spec = importlib.util.spec_from_file_location("synthgen", ROOT / "synthetic" / "synthgen.py")
     module = importlib.util.module_from_spec(spec)
     sys.modules["synthgen"] = module  # dataclasses need the module to be registered while it executes
     spec.loader.exec_module(module)
@@ -418,7 +418,7 @@ def test_openbanking_mock_builds_a_world_from_the_synthetic_loans(syn, tmp_path)
 
 
 @pytest.mark.slow
-@pytest.mark.skipif(not (ROOT / "Data" / "df_1.csv").exists(), reason="the real ./Data is not here")
+@pytest.mark.skipif(not (ROOT / "nbg_synthetic_data" / "df_1.csv").exists(), reason="nbg_synthetic_data/df_1.csv is not here")
 def test_real_data_passes_every_gate_including_privacy_and_utility(tmp_path):
     out = tmp_path / "loans"
     code = S.main(["generate", "--out", str(out), "--rows", "30000", "--rows-per-file", "10000", "--full-check"])

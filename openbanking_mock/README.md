@@ -22,7 +22,7 @@ uv run pytest                                       # every documented route of 
                                                     # operation is routable, fidelity + pipeline + ISO 20022 tests
 ```
 
-The server resolves `Data/df_*.csv` (the supplied loan dataset) to seed customers; override with `--data-dir`.
+The server resolves `nbg_synthetic_data/df_*.csv` (the supplied loan dataset) to seed customers; override with `--data-dir`.
 Same `--seed/--customers/--months/--as-of` gives an identical world. The world's "today" is fixed at 2026-10-19 so runs are reproducible
 (card entries of the last two days are therefore `pending` in the past); pass `--as-of today` for a live-looking clock. Useful flags:
 `--auth off` (pick the customer with `X-Mock-Customer` or `?psu=`), `--chaos errors|kpi` (inject failures / latency from each bank's
@@ -106,7 +106,7 @@ channel...) and also holds entries no API exposes (e.g. BoG credit-card spend). 
 ```
 obmock/banks.py              12 bank profiles (verified IBAN/BIC, dialect, KPIs, URLs, evidence, market-share weight)
 obmock/reference.py          Georgian names, merchants/MCC, billers, remittance corridors, narratives, rates (flagged where assumed)
-obmock/calibration.py        Data/df_*.csv loader, stress score
+obmock/calibration.py        nbg_synthetic_data/df_*.csv loader, stress score
 obmock/calibration_sources.py  every calibrated real-world number with status (verified/derived/assumed) and source
 obmock/iso20022.py           simulator transaction kind -> ISO 20022 bankTransactionCode / purposeCode
 obmock/world/                model.py (ledger domain) + simulate.py (plan_population, build_shard, daily cash-flow engine)
@@ -125,4 +125,4 @@ tests/                       route exerciser, spec-inventory, fidelity, ISO 2002
 **Verified from sources:** routes, version prefixes, header names, auth models, error shapes, field names and enums of each bank's published spec/examples; IBAN codes and BICs (NBG table); published KPIs; ISO 20022 code tables; NBG daily FX rates; Georgian public holidays; market shares, remittance corridors, deposit rates, card counts and the household spend mix (each with its status in `docs/CALIBRATION.md`).
 **Assumed (flagged in code and docs):** statement narratives, merchants and ticket sizes, multi-banking rates, pay-day mix, which ISO 20022 code each internal transaction kind gets, the internal digit layout of IBANs, which optional schema fields TBC/BoG fill in production, the loan `OVERDUE_AMOUNT` sub-type, Georgian-vs-Latin name script per bank.
 **Not enforced:** mTLS / QWAC certificates and JWS signatures are accepted but not verified. No bank publishes sandbox test data, so no mock claims to equal a real sandbox dataset.
-**By design not realistic:** the supplied `Data/` is already synthetic and every customer is a borrower with a df-driven default rate far above real retail NPL (1.3-1.5%); incomes run ~1.4x above Geostat's mean wage (reported, not corrected); loans are GEL-only.
+**By design not realistic:** the supplied `nbg_synthetic_data/` is already synthetic and every customer is a borrower with a df-driven default rate far above real retail NPL (1.3-1.5%); incomes run ~1.4x above Geostat's mean wage (reported, not corrected); loans are GEL-only.

@@ -1,6 +1,6 @@
 """Calibration of the simulated population to the supplied loan-level dataset.
 
-The hackathon data (Data/df_*.csv, 100k rows x 58 columns) is a loan-level credit table. We use
+The hackathon data (nbg_synthetic_data/df_*.csv, 100k rows x 58 columns) is a loan-level credit table. We use
 its rows as seeds: each simulated customer is a bootstrap draw (without replacement) of one row,
 so marginals and joint structure (age/income/region/product/rate/term/delinquency/PD) follow the
 data. The row itself is kept as hidden ground truth and never appears in API payloads.

@@ -1,18 +1,18 @@
 # Loan-portfolio EDA (pre-modeling)
 
-One command turns the ten CSV files in `Data/` (+ the Georgian data dictionary) into a **self-contained HTML
+One command turns the ten CSV files in `nbg_synthetic_data/` (+ the Georgian data dictionary) into a **self-contained HTML
 report** that answers the questions a data scientist asks *before* modeling: what is in here, can I trust it,
 what is the target, what leaks, how should I split / encode / validate, and what score is realistic.
 
 When the generated bank dataset of `openbanking_mock/` (mock open-banking APIs of 12 Georgian banks + 50,000 synthetic
-customers who are rows of `Data/`) is present, the same report also covers it, in sections 11-14: what it is, what a
+customers who are rows of `nbg_synthetic_data/`) is present, the same report also covers it, in sections 11-14: what it is, what a
 lender would really see through the bank APIs, how realistic it is, and what can (and cannot) be learned from it.
 
 ```
 uv sync                         # once: creates .venv from uv.lock (Python 3.12)
-uv run python EDA.py            # full run  -> reports/eda_report.html   (about 5 minutes; 3.5 without the mock part)
-uv run python EDA.py --fast     # 20k loans + 5,000 mock customers, about 2 minutes
-uv run python EDA.py --no-mock  # sections 1-10 only (the loan data), about 3.5 minutes
+uv run python eda/EDA.py            # full run  -> reports/eda_report.html   (about 5 minutes; 3.5 without the mock part)
+uv run python eda/EDA.py --fast     # 20k loans + 5,000 mock customers, about 2 minutes
+uv run python eda/EDA.py --no-mock  # sections 1-10 only (the loan data), about 3.5 minutes
 ```
 
 Open `reports/eda_report.html` in a browser: it starts with **five things to know**, then the fourteen sections.
@@ -20,7 +20,7 @@ The terminal prints the same five points at the end, and `reports/summary.md` ha
 
 > No `uv` yet? Install it with `curl -LsSf https://astral.sh/uv/install.sh | sh`. Without uv, any Python 3.12+
 > virtualenv works: `python -m venv .venv && .venv/bin/pip install pandas numpy scipy scikit-learn matplotlib openpyxl threadpoolctl`
-> and then `.venv/bin/python EDA.py`.
+> and then `.venv/bin/python eda/EDA.py`.
 
 ## What you get
 
@@ -34,7 +34,7 @@ reports/
 └── mock_customer_features.csv   only with --export-mock-features (see below)
 ```
 
-`reports/` is regenerated on every run (and git-ignored). `Data/` is only ever read. A re-run replaces only the
+`reports/` is regenerated on every run (and git-ignored). EDA only reads `nbg_synthetic_data/`. A re-run replaces only the
 files the previous run wrote (listed in `reports/.eda_manifest.json`), never your own files in the same folder.
 
 ## The ten sections (each one answers a single question)
@@ -81,7 +81,7 @@ data.
 
 ## What the mock & synthetic bank data looks like (sections 11-14)
 
-- All 50,000 mock customers are **exact rows of `Data/`** (a random 50% subset, same label, 3.64% positive). The folder
+- All 50,000 mock customers are **exact rows of `nbg_synthetic_data/`** (a random 50% subset, same label, 3.64% positive). The folder
   has two layers: `api/` (what a lender could retrieve: 38.6M transactions, accounts, balances) and `truth/` (the
   simulator's hidden state, for evaluation only). Names, ids, phone numbers and IBANs in `truth/` are never read.
 - A lender would see the **loan itself for only about 30%** of the customers (15% of loans sit at a bank outside the
@@ -154,15 +154,15 @@ preprocessing recipe, a validation plan and starter code.
 
 ## Synthetic loan generator (`synthgen.py`)
 
-`openbanking_mock/` can only simulate bank data for customers that are *rows of `Data/`* (a bootstrap: at most 100,000
-customers, every one a copy). `synthgen.py` writes **new** loans with the exact schema of `Data/df_*.csv` (58 columns, same
-dtypes, same event rate), so they can replace `Data/` anywhere - the EDA, a model, or `openbanking_mock --data-dir`.
+`openbanking_mock/` can only simulate bank data for customers that are *rows of `nbg_synthetic_data/`* (a bootstrap: at most 100,000
+customers, every one a copy). `synthgen.py` writes **new** loans with the exact schema of `nbg_synthetic_data/df_*.csv` (58 columns, same
+dtypes, same event rate), so they can replace `nbg_synthetic_data/` anywhere - the EDA, a model, or `openbanking_mock --data-dir`.
 
 ```
-uv run python synthgen.py                         # 100,000 new loans -> synthetic/loans/df_1..10.csv + FIDELITY_REPORT.md (~45 s)
-uv run python synthgen.py generate --rows 1000000 --seed 7 --no-check   # 1M loans in ~1 min, then `check` them
-uv run python synthgen.py check --full            # gates (+ privacy, train-synthetic/test-real) on an existing folder
-uv run python synthgen.py bank --customers 2000   # openbanking_mock validate -> generate -> report on those loans (~1 min)
+uv run python synthetic/synthgen.py                         # 100,000 new loans -> synthetic/loans/df_1..10.csv + FIDELITY_REPORT.md (~45 s)
+uv run python synthetic/synthgen.py generate --rows 1000000 --seed 7 --no-check   # 1M loans in ~1 min, then `check` them
+uv run python synthetic/synthgen.py check --full            # gates (+ privacy, train-synthetic/test-real) on an existing folder
+uv run python synthetic/synthgen.py bank --customers 2000   # openbanking_mock validate -> generate -> report on those loans (~1 min)
 ```
 
 **How the previous generation's rules are kept.** The Georgian-market rules (BoG 46% + TBC 32% = 78% of customers, only
@@ -171,13 +171,13 @@ booking) live in `openbanking_mock`, which is **not touched**: `bank` just point
 (2,000 customers): its ledger validation passes, 52 of 52 quality checks pass, BoG + TBC = 78.00%. The loan table's own
 rules are reproduced from the real data and *checked*, not assumed:
 
-| what | how | last full run (100,000 rows vs `Data/`) |
+| what | how | last full run (100,000 rows vs `nbg_synthetic_data/`) |
 |---|---|---|
 | schema, dtypes, supports, exact event rate | cells of (delinquency regime x class x mortgage) with a Gaussian copula and empirical marginals | identical header / dtypes, 3.56% events, KS <= 0.003, code shares TV <= 0.006 |
 | spikes, caps, floors (zero inflation, income 300-10,000, PD floor 0.24) | empirical marginals, constants inside a cell | dominant-value share off by <= 0.003 |
 | rank correlation, code-to-code and code-to-quantity association | moment-matched copula; codes borrowed jointly from nearby real rows | mean abs gap 0.006 (max 0.056); Cramer's V 0.005 (max 0.029); eta 0.017 |
 | "run-off" loans: balance / schedule columns that are 0 *together* (EDA 9c) | their zero pattern is borrowed jointly with the codes; non-zero values keep the copula's order | event rate by number of zeros within 1.7 pp (1.2% -> 67% at five zeros; AUC of the count 0.813 vs 0.812) |
-| the 16 dictionary rules the data breaks (14 of 17 fail) | **not enforced**; three relations a copula cannot express are re-paired to their real rate | every violation share within 1.5 pp of `Data/` |
+| the 16 dictionary rules the data breaks (14 of 17 fail) | **not enforced**; three relations a copula cannot express are re-paired to their real rate | every violation share within 1.5 pp of `nbg_synthetic_data/` |
 | the label's signal | per-class cells | single-column AUC within 0.016; train-on-synthetic / test-on-real AUC 0.970 (real/real 0.994) |
 | "too evenly mixed" 500-row blocks (EDA section 3) | stratified draws on the leading factors per batch | block variance ratio 0.48 (real 0.46; it moves by +-0.05 with the seed) |
 | new, not copied rows | no row is copied | 0 exact copies; closest-real-row distance 1.08 x the real-to-real one (measured on the quantity columns: the codes of a row are borrowed from a real row by design) |
@@ -188,35 +188,32 @@ Things to know:
   banking. Decoupling them would change the mock's rules and is deliberately not done here.
 - `bank` makes one customer per loan row (`--customers` <= rows), writes to `synthetic/bank_dataset` (never inside
   `openbanking_mock/`) and refuses a non-empty folder it did not write.
-- Same data + seed => identical bytes. Output folders are replaced only if `synthgen` wrote them; `Data/` is read-only.
+- Same data + seed => identical bytes. Output folders are replaced only if `synthgen` wrote them; `nbg_synthetic_data/` is read-only.
 - Scale: fitting takes about 25 s; 100,000 loans take about 30 s, 1,000,000 about 1 minute and 3 GB of memory
   (418 MB of CSV in 100 files; use `--no-check` or `check` on the result, the gates read everything into memory).
   `bank --customers 50000` mirrors the previous generation's scale (`openbanking_mock`'s own estimate: about 10 minutes on
   16 cores and 2 GB; not run here - the largest bank run was 2,000 customers).
-- Checked with the project's own EDA (`EDA.py --data-dir synthetic/loans --no-mock`, full run vs the full run on `Data/`): 3,558
+- Checked with the project's own EDA (`EDA.py --data-dir synthetic/loans --no-mock`, full run vs the full run on `nbg_synthetic_data/`): 3,558
   positives, 12 of 14 arrears columns at AUC >= 0.9, the one-cut-off rule (1,246 vs 1,253 days, 86% vs 85% precision, 78%
   recall), 14 of 17 dictionary relations failing, the run-off curve (1.2% -> 67% vs 68%) and the "templated" delinquency
   values all reappear.
-- **Known residual gaps.** The origination-time codes follow the arrears state about 70% as strongly as in `Data/` (sector 0
+- **Known residual gaps.** The origination-time codes follow the arrears state about 70% as strongly as in `nbg_synthetic_data/` (sector 0
   = "no business" in 26% of the extreme-arrears non-events vs 37%; the EDA's state-tracking check flags 2 columns where it
-  flags 4 on `Data/`), the no-model marker count scores AUC 0.89 vs 0.93, the application-time AUC is 0.957 vs 0.969, and a
+  flags 4 on `nbg_synthetic_data/`), the no-model marker count scores AUC 0.89 vs 0.93, the application-time AUC is 0.957 vs 0.969, and a
   few rank correlations differ by up to 0.056 (instalment count with other columns, after its atom was restored). A model
-  trained on the synthetic loans therefore reaches slightly lower AUCs than one trained on `Data/` (0.970 vs 0.994).
+  trained on the synthetic loans therefore reaches slightly lower AUCs than one trained on `nbg_synthetic_data/` (0.970 vs 0.994).
 - Not modelled: anything outside the 58 columns (no dates, no ids), and relationships the EDA could not see.
 
 ## Project layout
 
 ```
-synthgen.py       synthetic loan generator: new loans with the schema of Data/, its gates, hand-over to openbanking_mock
-synthetic/        generated by synthgen.py (git-ignored): loans/ (df_*.csv + FIDELITY_REPORT.md), bank_dataset/
-EDA.py            the whole analysis (one file; search for the banners listed in its docstring)
-EDA.ipynb         the same analysis as a notebook, generated from EDA.py (make notebook)
-income/           one row per person for income estimation (built from Data/ + the open-banking APIs)
-                  build_income_dataset.py, income_dataset.csv, income_eda.ipynb
+eda/              loan-portfolio analysis: EDA.py and EDA.ipynb (the notebook is generated from EDA.py)
+synthetic/        synthgen.py, plus the loans and bank data it writes (loans/, bank_dataset/)
+nbg_synthetic_data/  NBG loan files (df_*.csv, dictionary) and the modeling table income_dataset.csv
+income/           income estimation: build_income_dataset.py, income_eda.ipynb, income_model.ipynb
 tools/            make_notebook.py: EDA.py -> EDA.ipynb
 tests/            unit tests for the statistics + end-to-end runs on a synthetic dataset (uv run pytest)
-Data/             raw input - never modified
-openbanking_mock/ the mock bank APIs + generator (a separate tool); only its generated dataset is read, read-only
+openbanking_mock/ mock bank APIs, the generator, and tbc_api_examples.py
 reports/          generated output
 pyproject.toml    dependencies + ruff / pytest settings (managed with uv)
 uv.lock           exact versions, so everyone gets the same environment
@@ -230,7 +227,7 @@ Add one with `uv add <package>`; run tooling with `uv run ruff check .` and `uv 
 
 ## Notes
 
-- The repository is https://github.com/konstantine25b/IEM_NBG_OpenBanking (public). `Data/`, `synthetic/`, `reports/` and
+- The repository is https://github.com/konstantine25b/IEM_NBG_OpenBanking (public). `nbg_synthetic_data/`, `synthetic/`, `reports/` and
   `openbanking_mock/output/` are committed on purpose; `.gitignore` only keeps `.venv/` and tool caches out.
 - Resources: one process. Sections 1-10 alone (`--no-mock`) peak at about 0.7 GB and take about 3.5 minutes on 4 threads
   (`--fast`: 0.4 GB, 1.5 minutes). With the mock part the peak is about 1.2 GB (one shard of the 2 GB Parquet dataset is in
@@ -241,5 +238,5 @@ Add one with `uv add <package>`; run tooling with `uv run ruff check .` and `uv 
 - Sections 11-14 only **read** `openbanking_mock/output/dataset` (Parquet shards, `MANIFEST.json`, `quality.json`): nothing
   is written there and the mock's code is not imported. From `truth/customers` only a whitelist of columns is read (no
   names, person ids, phone numbers, birth dates), the counterparty fields of the transactions are only counted (never kept
-  or shown), and the report shows aggregates only; `tbc_api_examples.py` is not used.
+  or shown), and the report shows aggregates only; `openbanking_mock/tbc_api_examples.py` is not used.
   The older `output/dataset_v1_legacy`, the raw `captures/` and `fixtures/` are not analysed.

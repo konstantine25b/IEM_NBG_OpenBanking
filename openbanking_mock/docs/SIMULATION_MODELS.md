@@ -22,7 +22,7 @@ loans linked to transactions) as a structural reference. None of these is requir
 `obmock/world/simulate.py` (deterministic per `--seed`; about 0.1 CPU-seconds per customer × 12 months, ~600 ledger entries each). `obmock/pipeline.py` shards the population and runs the shards in parallel: 50,000 customers, 29 M ledger entries and 38.6 M API rows take ~10 minutes on 16 cores, and the result is identical for any worker count because a customer depends only on (config, its plan, the FX series).
 
 ```
-L1 population   bootstrap rows of Data/df_*.csv (without replacement)  -> persona + loan terms
+L1 population   bootstrap rows of nbg_synthetic_data/df_*.csv (without replacement)  -> persona + loan terms
 L2 latent       stress ∈ [0,1] = 0.65·rank(PD) + 0.15·min(1, maxDelinqDays/90) + 0.20·addNegStatus
 L3 products     primary bank by quota allocation of the sourced market shares (BoG 46 / TBC 32 / ...), 30% a 2nd bank, 3% a 3rd;
                 current/FX/credit-card/savings/loan accounts, cards (debit Mastercard 66 / Visa 34)
@@ -32,7 +32,7 @@ L6 credit       annuity schedule back-cast from RemainingTerm; per-instalment pa
 L7 views        one ledger -> 7 bank dialects (obmock/dialects)
 ```
 
-### 2.1 Population (from `Data/df_*.csv`, 100k loan rows, 58 columns)
+### 2.1 Population (from `nbg_synthetic_data/df_*.csv`, 100k loan rows, 58 columns)
 Each customer is one sampled row. Mapping: `Age`→birth date, `SEX` (1=male, 2=female, **ASSUMED**), `CLIENT_GEOGRAPHICAL_REGION`→region/city (labels **ASSUMED**),
 `CLIENT_LEGAL_FORM=1`→sole proprietor (`usage ORGA`, turnover instead of salary), `INCOME_AMOUNT_TOTAL`→monthly net income, `INCOME_AMOUNT_SOI04`→remittance income
 (values < 5 are noise in the source, 49.5 % of rows, and are treated as 0), `ECONOMIC_SECTORS`→employer name, `PRODUCT_PURPOSE` {2,4,7,10,13}→consumer / instalment /

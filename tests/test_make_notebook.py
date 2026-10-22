@@ -1,6 +1,6 @@
 """Tests for tools/make_notebook.py (EDA.py -> EDA.ipynb).
 
-They read the real EDA.py (nothing here touches ./Data) and write only into pytest's tmp_path.  Whether the committed
+They read the real EDA.py (nothing here touches nbg_synthetic_data/) and write only into pytest's tmp_path.  Whether the committed
 EDA.ipynb is up to date is not a test on purpose - that is `make notebook-check`.
 """
 
@@ -25,7 +25,7 @@ def _load_generator():
 
 
 mn = _load_generator()
-SRC = (ROOT / "EDA.py").read_text(encoding="utf-8")
+SRC = (ROOT / "eda" / "EDA.py").read_text(encoding="utf-8")
 
 
 @pytest.fixture

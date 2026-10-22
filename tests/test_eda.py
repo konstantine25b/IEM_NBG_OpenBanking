@@ -1,7 +1,7 @@
 """Tests for EDA.py.
 
 Fast tests check the statistical helpers against cases with known answers and run the whole
-script on a small synthetic dataset that has the real schema (so nothing here reads ./Data).
+script on a small synthetic dataset that has the real schema (so nothing here reads nbg_synthetic_data/).
 The one test that also trains models is marked `slow`:  uv run pytest -m slow
 """
 
@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def _load_eda():
-    spec = importlib.util.spec_from_file_location("EDA", ROOT / "EDA.py")
+    spec = importlib.util.spec_from_file_location("EDA", ROOT / "eda" / "EDA.py")
     module = importlib.util.module_from_spec(spec)
     sys.modules["EDA"] = module  # dataclasses need the module to be registered while it executes
     spec.loader.exec_module(module)
