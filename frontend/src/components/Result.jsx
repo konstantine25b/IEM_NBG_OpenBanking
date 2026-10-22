@@ -21,10 +21,10 @@ function RangeBar({ p10, p50, p90 }) {
         <div className="band" style={band} />
         <div className={`median ${grown ? 'in' : ''}`} style={{ left: `${pct(p50)}%` }} />
       </div>
-      <div className={`ticks ${grown ? 'in' : ''}`}>
-        <span style={{ left: `${pct(p10)}%` }}><b>{gel(p10)}</b><small>P10 · conservative</small></span>
-        <span style={{ left: `${pct(p50)}%` }} className="mid"><b>{gel(p50)}</b><small>P50 · most likely</small></span>
-        <span style={{ left: `${pct(p90)}%` }}><b>{gel(p90)}</b><small>P90 · optimistic</small></span>
+      <div className={`legend ${grown ? 'in' : ''}`}>
+        <span className="lo"><b>{gel(p10)}</b><small>P10 · conservative</small></span>
+        <span className="mid"><b>{gel(p50)}</b><small>P50 · most likely</small></span>
+        <span className="hi"><b>{gel(p90)}</b><small>P90 · optimistic</small></span>
       </div>
     </div>
   )

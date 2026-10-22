@@ -56,11 +56,6 @@ tr.dim td { color: var(--muted); }
 .track { position: relative; height: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 7px; }
 .band { position: absolute; top: -1px; bottom: -1px; background: var(--band); border-radius: 7px; }
 .median { position: absolute; top: -6px; width: 4px; height: 24px; margin-left: -2px; background: var(--accent); border-radius: 2px; }
-.ticks { position: relative; height: 40px; margin-top: 8px; }
-.ticks span { position: absolute; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; white-space: nowrap; }
-.ticks b { font-variant-numeric: tabular-nums; }
-.ticks small { color: var(--muted); font-size: 12px; }
-.ticks .mid b { color: var(--accent); }
 
 .notice { margin: 12px 0; padding: 10px 14px; border-radius: 8px; font-size: 14px; }
 .notice ul { margin: 6px 0 0; padding-left: 18px; }
@@ -123,8 +118,6 @@ summary { cursor: pointer; color: var(--accent); font-size: 14px; }
 .band { transition: left 1.3s cubic-bezier(0.22, 1, 0.36, 1), width 1.3s cubic-bezier(0.22, 1, 0.36, 1); }
 .median { opacity: 0; transition: opacity 0.6s ease 0.3s; }
 .median.in { opacity: 1; }
-.ticks { opacity: 0; transition: opacity 0.8s ease 0.9s; }
-.ticks.in { opacity: 1; }
 .half i { transition: width 1s cubic-bezier(0.22, 1, 0.36, 1); }
 
 .score-num { font-size: 15px; margin-bottom: 6px; }
@@ -142,3 +135,15 @@ summary { cursor: pointer; color: var(--accent); font-size: 14px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0ms !important; transition-duration: 0.01ms !important; transition-delay: 0ms !important; }
 }
+
+/* the three values sit in a fixed row under the bar, so a narrow P10-P90 band cannot make them overlap */
+.legend { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 14px; opacity: 0; transition: opacity 0.8s ease 0.9s; }
+.legend.in { opacity: 1; }
+.legend span { display: flex; flex-direction: column; }
+.legend .lo { align-items: flex-start; }
+.legend .mid { align-items: center; }
+.legend .hi { align-items: flex-end; }
+.legend b { font-size: 18px; font-variant-numeric: tabular-nums; }
+.legend small { color: var(--muted); font-size: 12px; }
+.legend .mid b { color: var(--accent); }
+.range { margin-bottom: 28px; }

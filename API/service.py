@@ -326,7 +326,7 @@ class Service:
             }
         )
         n_tx = sum(1 for r in rows["transactions"] if not r["is_card_mirror"] and r["status"] == "booked")
-        self._set(job, bank, "done", f"{n_acc} accounts, {n_tx} transactions")
+        self._set(job, bank, "done", f"{n_acc} account{'' if n_acc == 1 else 's'}, {n_tx} transactions")
         return bank, rows
 
     def _pull_registry(self, job: dict, service: str, entry: dict, path: str):
@@ -340,21 +340,8 @@ class Service:
         if reply.status_code != 200:
             self._set(job, service, "failed", f"answered {reply.status_code}")
             return None
-        body = reply.json()
-        if service == "rs":
-            amount = next((i["amount"] for i in body["incomeItems"] if i["code"] == "SOI04"), None)
-            self._set(
-                job,
-                service,
-                "done",
-                f"remittance income item SOI04 = {amount:g}" if amount is not None else "no income items",
-            )
-        else:
-            c = body["contracts"]
-            self._set(
-                job, service, "done", f"{c['existingAsDebtor']} open and {c['terminatedAsDebtor']} closed contracts"
-            )
-        return body
+        self._set(job, service, "done", "data gathered")
+        return reply.json()
 
     def _run(self, job: dict, record: dict, applicant: dict | None) -> None:
         try:
