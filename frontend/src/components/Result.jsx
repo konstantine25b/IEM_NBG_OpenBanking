@@ -1,4 +1,5 @@
 import { useCountUp, useMounted } from '../hooks.js'
+import WarningLabel from './WarningLabel.jsx'
 
 const gel = (n) => new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(n)
 
@@ -70,7 +71,7 @@ function ConfidenceDetail({ confidence, income }) {
           <p className="hint">Measured on {m.basis}.</p>
         </>
       ) : (
-        <p className="hint">No matched calibration is available for this source combination or data-sufficiency outcome.</p>
+        <p className="hint"><WarningLabel />: No matched calibration is available for this source combination or data-sufficiency outcome.</p>
       )}
     </section>
   )
@@ -121,24 +122,23 @@ export default function Result({ result }) {
             <div className="big">{gel(p50)} <small>GEL / month</small></div>
           </div>
           <span className={`badge ${levelClass}`}>
-            Confidence: {confidence.level}{confidence.score != null && ` · ${confidence.score}/100`}
+            {levelClass !== 'ok' && <><WarningLabel />: </>}Confidence: {confidence.level}{confidence.score != null && ` · ${confidence.score}/100`}
           </span>
         </div>
         <RangeBar p10={income.p10} p50={income.p50} p90={income.p90} />
-      </section> : <section className="card notice bad"><h2>Insufficient evidence — estimate withheld</h2><p>Request more bank evidence. An officer cannot accept an estimate that was not produced.</p></section>}
+      </section> : <section className="card notice bad"><h2><WarningLabel />: Insufficient evidence — estimate withheld</h2><p>Request more bank evidence. An officer cannot accept an estimate that was not produced.</p></section>}
 
       {(confidence.downgrade_reasons.length > 0 || warnings.length > 0) && (
         <section className="notices">
           {confidence.downgrade_reasons.length > 0 && (
             <div className="notice bad">
-              <strong>Confidence lowered to “very low”</strong>
+              <strong><WarningLabel />: Confidence lowered to “very low”</strong>
               <ul>{confidence.downgrade_reasons.map((r) => <li key={r}>{r}</li>)}</ul>
             </div>
           )}
           {warnings.length > 0 && (
             <div className="notice warn">
-              <strong>Warnings</strong>
-              <ul>{warnings.map((w) => <li key={w}>{w}</li>)}</ul>
+              <ul>{warnings.map((w) => <li key={w}><WarningLabel />: {w}</li>)}</ul>
             </div>
           )}
         </section>

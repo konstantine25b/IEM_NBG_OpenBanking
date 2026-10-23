@@ -6,6 +6,7 @@ import ConsentTable from './components/ConsentTable.jsx'
 import { AnimatedProgress } from './components/Progress.jsx'
 import CaseWorkspace from './components/CaseWorkspace.jsx'
 import Evaluation from './components/Evaluation.jsx'
+import WarningLabel from './components/WarningLabel.jsx'
 import './app.css'
 
 const STEPS = ['Connect banks', 'Collect data', 'Result']
@@ -80,14 +81,14 @@ export default function App() {
       <div className="sidebar-stack"><ClientPicker personalId={personalId} onChange={setPersonalId} onSubmit={(event) => { event.preventDefault(); connect(personalId.trim()) }} busy={connecting || running} connecting={connecting} clients={demoClients} />
         <button className="secondary" onClick={() => setShowEvaluation(!showEvaluation)}>{showEvaluation ? 'Hide' : 'Show'} model-risk evaluation</button>
       </div>
-      <main className="main"><Stepper current={current} />{error && <p className="error" role="alert">{error}</p>}
+      <main className="main"><Stepper current={current} />{error && <p className="error" role="alert"><WarningLabel />: {error}</p>}
         {!consents && !job && !connecting && <section className="card empty"><h2>Start with a client</h2><p>Assess recurring income and inspect the evidence. Lending decisions remain outside this prototype.</p></section>}
         {connecting && <section className="card enter"><h2>Connecting financial sources</h2><ConnectingPanel sources={sources} result={reply} onDone={onPlayed} /></section>}
         {consents && <section className="card enter"><h2>Connected sources</h2><ConsentTable consents={consents} />
           <div className="toolbar"><button disabled={running || consents.connected_banks === 0} onClick={() => estimate(consents.consent_set_id)}>{running ? 'Processing…' : job ? 'Run another assessment' : 'Estimate income'}</button></div>
         </section>}
         {running && <section className="card enter"><h2>Collecting and processing evidence</h2><AnimatedProgress job={job} onFinished={onFinished} /></section>}
-        {job?.status === 'failed' && <p className="error" role="alert">Assessment failed: {job.error}</p>}
+        {job?.status === 'failed' && <p className="error" role="alert"><WarningLabel />: Assessment failed: {job.error}</p>}
         {job?.status === 'done' && revealed && <CaseWorkspace key={job.job_id} initialJob={job} />}
         {showEvaluation && <Evaluation />}
       </main>

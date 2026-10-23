@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react'
 import { getAudit } from '../api.js'
 import Result from './Result.jsx'
 import Progress from './Progress.jsx'
+import WarningLabel from './WarningLabel.jsx'
 
 const money = (n) => n == null ? '—' : new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(n)
 
 function RegistryRecords({ source, registries }) {
   const label = source === 'rs' ? 'Revenue Service' : 'Creditinfo'
-  if (!registries) return <p className="hint">Registry evidence was not saved for this case. Run another assessment to inspect these source records.</p>
+  if (!registries) return <p className="hint"><WarningLabel />: Registry evidence was not saved for this case. Run another assessment to inspect these source records.</p>
   const data = registries[source]
-  if (!data) return <p className="hint">No {label} records were collected for this assessment. See Source outcomes for details.</p>
+  if (!data) return <p className="hint"><WarningLabel />: No {label} records were collected for this assessment. See Source outcomes for details.</p>
   const records = source === 'rs' ? [
     ...(data.incomeItems || []).map((item) => ({ reference: item.code, description: item.description, value: item.amount, unit: item.currency })),
     { reference: 'legalForm', description: 'Taxpayer legal form', value: data.taxpayer?.legalForm },
@@ -26,7 +27,7 @@ function RegistryRecords({ source, registries }) {
 }
 
 function Statement({ transactions, registries, annotated = true }) {
-  const [filter, setFilter] = useState(annotated ? 'service' : 'all')
+  const [filter, setFilter] = useState('all')
   const [source, setSource] = useState('openbanking')
   const [page, setPage] = useState(0)
   const registrySelected = source !== 'openbanking'
@@ -49,20 +50,35 @@ function Evidence({ evidence }) {
   return <section className="card"><h2>Underlying transaction evidence</h2>
     <dl className="facts"><div><dt>Service payments</dt><dd>{service.count}</dd></div><div><dt>Total service receipts</dt><dd>{money(service.total_gel)} GEL</dd></div><div><dt>Receipts / {evidence.window.months} months</dt><dd>{money(service.monthly_gel)} GEL / month</dd></div><div><dt>Observation window</dt><dd>{evidence.window.from} – {evidence.window.to}</dd></div></dl>
     <p className="hint">{evidence.rules}</p>
-    <div className="notice warn baseline"><strong>Salary-only baseline: {baseline.status === 'abstains' ? 'cannot estimate income' : `${money(baseline.monthly_gel)} GEL / month`}</strong><p>{baseline.message} {baseline.count} salary credits identified. Zero salary credits does not establish zero income or zero officially declared salary.</p></div>
+    <div className="notice warn baseline"><strong>{baseline.status === 'abstains' && <><WarningLabel />: </>}Salary-only baseline: {baseline.status === 'abstains' ? 'cannot estimate income' : `${money(baseline.monthly_gel)} GEL / month`}</strong><p>{baseline.message} {baseline.count} salary credits identified. Zero salary credits does not establish zero income or zero officially declared salary.</p></div>
     <details open><summary>Inspect transactions and exclusion reasons</summary><Statement transactions={evidence.transactions} registries={evidence.registries} /></details>
   </section>
 }
 
-function Trace({ job }) {
-  const events = job.trace || []
+function EventTime({ at }) {
+  const date = at ? new Date(at) : null
+  if (!date || Number.isNaN(date.getTime())) return <span className="hint">Not recorded</span>
+  const iso = date.toISOString()
+  return <time dateTime={iso} title={iso}>{iso.slice(0, 10)}<br />{iso.slice(11, -1)} UTC</time>
+}
+
+function ProcessingAudit({ job, audit }) {
+  const events = audit?.events ? audit.events.map((event) => {
+    const trace = event.detail?.stage ? event.detail : null
+    return { at: trace?.at || event.at, elapsed_ms: trace?.elapsed_ms, stage: event.kind,
+      detail: trace?.detail || event.detail, actor: event.actor, key: event.event_hash }
+  }) : (job.trace || []).map((event, i) => ({ ...event, actor: 'system', key: i }))
   const stages = events.filter((e) => e.stage !== 'Bank API call')
   const calls = events.filter((e) => e.stage === 'Bank API call')
-  return <section className="card"><h2>Measured processing evidence</h2>
-    <dl className="facts"><div><dt>Backend processing</dt><dd>{money(job.processing_ms)} ms</dd></div><div><dt>Recorded bank API calls</dt><dd>{calls.length}</dd></div></dl>
-    <p className="hint">Backend timestamps and wall-clock durations; presentation animation and browser polling are excluded. Sources run in parallel.</p>
-    <details open><summary>Execution trace</summary><div className="table-scroll"><table><thead><tr><th>Elapsed</th><th>Event</th><th>Evidence</th></tr></thead><tbody>{stages.map((event, i) => <tr key={i}><td className="mono">{event.elapsed_ms} ms</td><td>{event.stage}</td><td className="mono trace-detail">{event.stage === 'Case created' ? `Scenario: ${event.detail.scenario}; ${event.detail.consents.sources.length} consent outcomes; model ${event.detail.model_sha256.slice(0, 12)}…` : JSON.stringify(event.detail)}</td></tr>)}</tbody></table></div></details>
-    <details><summary>Individual bank API responses</summary><div className="table-scroll"><table><thead><tr><th>Source</th><th>Request</th><th>Status</th><th>Duration</th></tr></thead><tbody>{calls.map(({ detail }, i) => <tr key={i}><td>{detail.source}</td><td className="mono">{detail.method} {detail.route}</td><td>{detail.http_status}</td><td>{detail.duration_ms} ms</td></tr>)}</tbody></table></div></details>
+  const verified = audit?.chain_valid && audit?.case_matches_audit
+  return <section className="card"><h2>Processing evidence and audit trail</h2>
+    <div className="toolbar"><span className={`pill ${verified ? 'ok' : 'bad'}`}>{verified ? 'Hash chain and case result verified' : <><WarningLabel />: Audit unavailable or invalid</>}</span></div>
+    <dl className="facts"><div><dt>Started (UTC)</dt><dd className="mono"><EventTime at={events.find((event) => event.stage === 'Case created')?.at} /></dd></div><div><dt>Completed (UTC)</dt><dd className="mono"><EventTime at={events.find((event) => event.stage === 'Case ready for human review')?.at} /></dd></div><div><dt>Backend processing</dt><dd>{money(job.processing_ms)} ms</dd></div><div><dt>Recorded bank API calls</dt><dd>{calls.length}</dd></div><div><dt>Recorded events</dt><dd>{events.length}</dd></div></dl>
+    <p className="hint">Exact backend event dates and times in UTC, including milliseconds. Processing durations exclude presentation animation and browser polling. Sources run in parallel.</p>
+    <details open><summary>Processing and audit events</summary><div className="table-scroll"><table><thead><tr><th>Date / time (UTC)</th><th>Elapsed</th><th>Actor</th><th>Event</th><th>Evidence</th></tr></thead><tbody>{stages.map((event) => <tr key={event.key}><td className="mono"><EventTime at={event.at} /></td><td className="mono">{event.elapsed_ms == null ? '—' : `${event.elapsed_ms} ms`}</td><td>{event.actor}</td><td>{event.stage}</td><td className="mono trace-detail">{event.stage === 'Case created' ? `Scenario: ${event.detail.scenario}; ${event.detail.consents.sources.length} consent outcomes; model ${event.detail.model_sha256.slice(0, 12)}…` : JSON.stringify(event.detail)}</td></tr>)}</tbody></table></div></details>
+    <details><summary>Individual bank API responses</summary><div className="table-scroll"><table><thead><tr><th>Date / time (UTC)</th><th>Source</th><th>Request</th><th>Status</th><th>Duration</th></tr></thead><tbody>{calls.map(({ at, detail, key }) => <tr key={key}><td className="mono"><EventTime at={at} /></td><td>{detail.source}</td><td className="mono">{detail.method} {detail.route}</td><td>{detail.http_status}</td><td>{detail.duration_ms} ms</td></tr>)}</tbody></table></div></details>
+    <p className="hint">{audit?.limitation} Source tokens, full personal identifiers and bank credentials are not included in the audit.</p>
+    <p className="hint mono">Model SHA-256: {job.model_sha256}<br />Evidence SHA-256: {job.result.evidence.snapshot_sha256}</p>
   </section>
 }
 
@@ -71,12 +87,9 @@ export default function CaseWorkspace({ initialJob: job }) {
   const [error, setError] = useState(null)
   useEffect(() => { getAudit(job.job_id).then(setAudit).catch((e) => setError(e.message)) }, [job.job_id])
   return <div className="case-workspace enter">
-    <section className="card case-heading"><h2>Case {job.job_id} · {job.subject}</h2><p className="hint">Identifiers masked in evidence. Assessments are kept in memory; audit events are saved locally.</p>{job.scenario !== 'none' && <p className="notice warn">Explicit fault simulation: {job.scenario === 'rs_unavailable' ? 'Revenue Service returns HTTP 503' : 'Connected banks return HTTP 503'}.</p>}</section>
-    {error && <p className="error" role="alert">{error}</p>}
+    <section className="card case-heading"><h2>Case {job.job_id} · {job.subject}</h2><p className="hint">Identifiers masked in evidence. Assessments are kept in memory; audit events are saved locally.</p>{job.scenario !== 'none' && <p className="notice warn"><WarningLabel />: Explicit fault simulation: {job.scenario === 'rs_unavailable' ? 'Revenue Service returns HTTP 503' : 'Connected banks return HTTP 503'}.</p>}</section>
+    {error && <p className="error" role="alert"><WarningLabel />: {error}</p>}
     <section className="card"><h3>Source outcomes</h3><Progress job={job} /><details><summary>Consent scope and source authorization</summary><p className="hint">{job.consent_summary.mode}</p><p>{job.consent_summary.scope.join(' · ')}</p><ul>{job.consent_summary.sources.map((s) => <li key={s.source}>{s.source}: {s.status} · consent {s.consent}</li>)}</ul></details></section>
-    <Result result={job.result} /><Evidence evidence={job.result.evidence} /><Trace job={job} />
-    <section className="card"><h2>Persistent audit trail</h2><div className="toolbar"><span className={`pill ${audit?.chain_valid && audit?.case_matches_audit ? 'ok' : 'bad'}`}>{audit?.chain_valid && audit?.case_matches_audit ? 'Hash chain and case result verified' : 'Audit unavailable or invalid'}</span></div><p className="hint">{audit?.limitation} Source tokens, full personal identifiers and bank credentials are not included in the audit.</p>
-      <details><summary>{audit?.events.length || 0} recorded events</summary><div className="table-scroll"><table><thead><tr><th>UTC timestamp</th><th>Actor</th><th>Event</th></tr></thead><tbody>{audit?.events.map((e) => <tr key={e.event_hash}><td className="mono">{e.at}</td><td>{e.actor}</td><td>{e.kind}</td></tr>)}</tbody></table></div></details><p className="hint mono">Model SHA-256: {job.model_sha256}<br />Evidence SHA-256: {job.result.evidence.snapshot_sha256}</p>
-    </section>
+    <Result result={job.result} /><Evidence evidence={job.result.evidence} /><ProcessingAudit job={job} audit={audit} />
   </div>
 }

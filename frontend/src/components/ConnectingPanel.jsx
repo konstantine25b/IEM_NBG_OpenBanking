@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { pace } from '../hooks.js'
+import WarningLabel from './WarningLabel.jsx'
 
 const ICON = { pending: '○', running: null, done: '✓', skipped: '–', failed: '✕' }
 const FIRST_MS = 600
@@ -40,7 +41,7 @@ export default function ConnectingPanel({ sources, result, onDone }) {
     <ul className="progress sources">{sources.map((source) => {
       const answer = result && ready[source.key] ? outcome(source, result) : { state: 'running', text: 'requesting consent…' }
       return <li key={source.key} className={answer.state}>
-        <span className="icon" aria-hidden="true">{ICON[answer.state] ?? <span className="spinner" />}</span><span className="label">{source.label}</span><span className="detail">{answer.text}</span>
+        <span className="icon" aria-hidden="true">{ICON[answer.state] ?? <span className="spinner" />}</span><span className="label">{source.label}</span><span className="detail">{answer.state === 'failed' && <><WarningLabel />: </>}{answer.text}</span>
       </li>
     })}</ul>
     <div className="meter" aria-hidden="true"><i style={{ width: `${sources.length ? answered / sources.length * 100 : 0}%` }} /></div>

@@ -1,8 +1,10 @@
+import WarningLabel from './WarningLabel.jsx'
+
 const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`
 
 function SourceChip({ label, entry }) {
   const ok = entry.status === 'connected'
-  return <span className={`pill ${ok ? 'ok' : 'bad'}`}>{label} {ok ? '✓' : '✕'}</span>
+  return <span className={`pill ${ok ? 'ok' : 'bad'}`}>{!ok && <><WarningLabel />: </>}{label} {ok ? '✓' : '✕'}</span>
 }
 
 export default function ConsentTable({ consents }) {
@@ -33,7 +35,7 @@ export default function ConsentTable({ consents }) {
                 <td>{b.name}</td>
                 <td>
                   <span className={`pill ${b.status === 'connected' ? 'ok' : 'bad'}`}>
-                    {b.status === 'connected' ? '✓ Consent valid' : 'Error'}
+                    {b.status === 'connected' ? '✓ Consent valid' : <><WarningLabel />: Error</>}
                   </span>
                 </td>
                 <td className="num-col">{b.status === 'connected' ? plural(b.accounts, 'account') : '—'}</td>

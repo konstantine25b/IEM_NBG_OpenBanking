@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { pace } from '../hooks.js'
+import WarningLabel from './WarningLabel.jsx'
 
 const ICON = { pending: '○', running: '↻', done: '✓', failed: '✕' }
 
@@ -27,7 +28,7 @@ export function AnimatedProgress({ job, onFinished }) {
     <ul className="progress">{items.map((item, i) => {
       const state = i < step ? item.state : i === step ? 'running' : 'pending'
       return <li key={item.source} className={state}>
-        <span className="icon" aria-hidden="true">{state === 'running' ? <span className="spinner" /> : ICON[state]}</span><span className="label">{item.label}</span><span className="detail">{state === 'running' ? 'contacting…' : state === 'pending' ? '' : item.detail}</span>
+        <span className="icon" aria-hidden="true">{state === 'running' ? <span className="spinner" /> : ICON[state]}</span><span className="label">{item.label}</span><span className="detail">{state === 'failed' && <><WarningLabel />: </>}{state === 'running' ? 'contacting…' : state === 'pending' ? '' : item.detail}</span>
       </li>
     })}</ul>
     <div className="meter" aria-hidden="true"><i style={{ width: `${items.length ? Math.min(step, items.length) / items.length * 100 : 0}%` }} /></div>
@@ -39,7 +40,7 @@ export default function Progress({ job }) {
   return <div>
     <p className="hint">Actual source status. Requests run in parallel; completed events remain available in the case trace.</p>
     <ul className="progress">{(job.progress || []).map((p) => <li key={p.source} className={p.state}>
-      <span className="icon" aria-hidden="true">{ICON[p.state]}</span><span className="label">{p.label}</span><span className="detail">{p.detail || p.state}</span>
+      <span className="icon" aria-hidden="true">{ICON[p.state]}</span><span className="label">{p.label}</span><span className="detail">{p.state === 'failed' && <><WarningLabel />: </>}{p.detail || p.state}</span>
     </li>)}</ul>
     <ol className="trace-preview">{(job.trace || []).slice(-5).map((event, i) => <li key={i}><span className="mono">{event.elapsed_ms} ms</span> {event.stage}</li>)}</ol>
   </div>
