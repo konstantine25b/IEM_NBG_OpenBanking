@@ -178,6 +178,14 @@ def judge_confidence(
 
 
 # ----------------------------------------------------------------------------- the service
+def mask_name(text: str | None) -> str | None:
+    """Show the first two letters of every word and hide the rest: 'Salome Abashidze' -> 'Sa**** Ab*******'.
+    Works for any script (Georgian included). The full name stays inside the service."""
+    if not text:
+        return text
+    return " ".join(w[: (2 if len(w) > 2 else 1)] + "*" * (len(w) - (2 if len(w) > 2 else 1)) for w in str(text).split())
+
+
 def _same_name(kyc: dict, owner_name: str | None) -> bool:
     """Does a bank's account owner name match the KYC name (either script, any word order)?"""
     words = lambda text: sorted(str(text).replace(",", " ").upper().split())  # noqa: E731
@@ -344,9 +352,11 @@ class Service:
             for b in bank_results
             if b["status"] == "connected" and b.get("owner_name")
         ]
-        record["name_check"] = seen
+        # the names were compared in full above; from here on only the partly hidden form leaves the service
+        record["name_check"] = [{**c, "owner_name": mask_name(c["owner_name"])} for c in seen]
+        record["name_en"], record["name_ka"] = mask_name(record["name_en"]), mask_name(record["name_ka"])
         record["provenance"] = {
-            "name": "Lender's KYC record (ID card at onboarding)",
+            "name": "Lender's KYC record (ID card at onboarding); shown partly hidden",
             "birth_date": "Lender's KYC record (ID card at onboarding)",
             "age": f"Calculated from the date of birth on {today.isoformat()}",
             "place": "Lender's KYC record (registered address)",

@@ -298,3 +298,23 @@ def test_one_failing_bank_does_not_fail_the_consent_call(stack, modules):
     failed = next(b for b in table["banks"] if b["bank"] == victim)
     assert failed["status"] == "error" and f"{victim} is down" in failed["message"]
     assert table["connected_banks"] >= 0 and len(table["banks"]) == 12  # every other bank still answered
+
+
+def test_mask_name_keeps_two_letters_per_word_in_any_script(modules):
+    mask = modules[2].mask_name
+    assert mask("Salome Abashidze") == "Sa**** Ab*******"
+    assert mask("სალომე აბაშიძე") == "სა**** აბ*****"  # Georgian
+    assert mask("Li Bo") == "L* B*" and mask("") == "" and mask(None) is None
+
+
+def test_the_portal_only_gets_partly_hidden_names(stack, clients):
+    table = _consents(stack, CID)
+    full = clients[0].get(f"/_mock/kyc/{CID}").json()  # what the bank mock holds
+    kyc = table["kyc"]
+    for field in ("name_en", "name_ka"):
+        assert kyc[field] != full[field] and "*" in kyc[field]
+        assert all(w[:2] == f[:2] for w, f in zip(kyc[field].split(), full[field].split(), strict=True))
+        assert full[field] not in str(table)  # the full name is nowhere in the response
+    # the check against the banks' owner names still ran on the full names, and the names shown there are hidden too
+    assert kyc["name_check"] and all(c["matches"] and "*" in c["owner_name"] for c in kyc["name_check"])
+    assert "partly hidden" in kyc["provenance"]["name"]

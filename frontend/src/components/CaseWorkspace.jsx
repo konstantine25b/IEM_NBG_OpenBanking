@@ -47,8 +47,8 @@ function Statement({ transactions, registries, annotated = true }) {
 function Evidence({ evidence }) {
   const service = evidence.service_payments
   return <section className="card"><h2>Underlying transaction evidence</h2>
-    <dl className="facts"><div><dt>Service payments</dt><dd>{service.count}</dd></div><div><dt>Total service receipts</dt><dd>{money(service.total_gel)} GEL</dd></div><div><dt>Receipts / {evidence.window.months} months</dt><dd>{money(service.monthly_gel)} GEL / month</dd></div><div><dt>Observation window</dt><dd>{evidence.window.from} – {evidence.window.to}</dd></div></dl>
-    <p className="hint">{evidence.rules}</p>
+    {service.count > 0 && <><dl className="facts"><div><dt>Service payments</dt><dd>{service.count}</dd></div><div><dt>Total service receipts</dt><dd>{money(service.total_gel)} GEL</dd></div><div><dt>Receipts / {evidence.window.months} months</dt><dd>{money(service.monthly_gel)} GEL / month</dd></div><div><dt>Observation window</dt><dd>{evidence.window.from} – {evidence.window.to}</dd></div></dl>
+    <p className="hint">{evidence.rules}</p></>}
     <details open><summary>Inspect transactions and exclusion reasons</summary><Statement transactions={evidence.transactions} registries={evidence.registries} /></details>
   </section>
 }
