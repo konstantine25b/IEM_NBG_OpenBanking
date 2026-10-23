@@ -116,7 +116,7 @@ def test_direct_access_without_accounts_history_or_downloads(stack, normal):
         assert anonymous.post("/v1/auth/logout").status_code == 404
         assert anonymous.get("/v1/cases").status_code == 404
         assert anonymous.get(f"/v1/cases/{normal['job_id']}/export").status_code == 404
-        assert anonymous.get("/v1/evaluation").status_code == 200
+        assert anonymous.get("/v1/evaluation").status_code == 404  # the model-risk evaluation was removed
     assert (
         stack[0]
         .post("/v1/consents", json={"personal_id": "C50811"}, headers={"Origin": "https://untrusted.example"})
@@ -225,7 +225,13 @@ def test_both_catalogs_and_customer_profile_are_preserved(stack):
     api = stack[0]
     clients = api.get("/v1/demo/clients").json()
     assert len(clients) == len({c["id"] for c in clients}) == 20
-    assert clients[0]["id"] == "C50811"
+    # two sets of 10: the main-branch clients first, then the baka_ui clients
+    assert [c["id"] for c in clients[:10]] == [
+        "C21414", "C36932", "C69864", "C49277", "C47546", "C52456", "C97789", "C16949", "C09761", "C86618",
+    ]  # fmt: skip
+    assert [c["id"] for c in clients[10:]] == [
+        "C60184", "C67705", "C37777", "C52528", "C40788", "C83158", "C02186", "C46126", "C50811", "C78014",
+    ]  # fmt: skip
     kyc = api.post("/v1/consents", json={"personal_id": "91038618469"}).json()["kyc"]
     assert kyc["name_en"] and kyc["birth_date"] and kyc["age"] > 0
     assert {"name", "age", "birth_date", "name_check"} <= kyc["provenance"].keys()

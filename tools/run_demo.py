@@ -22,9 +22,6 @@ def main() -> int:
     parser.add_argument(
         "--check", action="store_true", help="validate runtimes, data and the committed model without starting servers"
     )
-    parser.add_argument(
-        "--evaluate", action="store_true", help="also generate the actual held-out synthetic evaluation report"
-    )
     args = parser.parse_args()
     if sys.version_info < (3, 12):  # noqa: UP036 -- this entry point can be invoked with a system Python
         raise SystemExit("Use Python 3.12+: uv run python tools/run_demo.py")
@@ -59,11 +56,6 @@ def main() -> int:
     print(
         f"Python {sys.version.split()[0]}, Node {version}; committed model loaded ({model.booster.get_booster().num_features()} features)."
     )
-    if args.evaluate:
-        from demo_evaluation import generate
-
-        report = generate(model)
-        print(f"Evaluated {report['population']:,} held-out synthetic customers; report saved in .runtime/.")
     if args.check:
         print("Demo setup checks passed.")
         return 0

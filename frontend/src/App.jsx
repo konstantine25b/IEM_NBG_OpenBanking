@@ -5,7 +5,6 @@ import ConnectingPanel from './components/ConnectingPanel.jsx'
 import ConsentTable from './components/ConsentTable.jsx'
 import { AnimatedProgress } from './components/Progress.jsx'
 import CaseWorkspace from './components/CaseWorkspace.jsx'
-import Evaluation from './components/Evaluation.jsx'
 import WarningLabel from './components/WarningLabel.jsx'
 import './app.css'
 
@@ -27,7 +26,6 @@ export default function App() {
   const [error, setError] = useState(null)
   const [demoClients, setDemoClients] = useState([])
   const [sources, setSources] = useState([])
-  const [showEvaluation, setShowEvaluation] = useState(false)
   const timer = useRef(null)
   const generation = useRef(0)
   const autoRan = useRef(false)
@@ -81,12 +79,11 @@ export default function App() {
     if ((connecting || showResult) && window.matchMedia('(max-width: 980px)').matches) mainRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [connecting, showResult])
   return <div className="shell">
-    <header className="bar"><div className="brand"><span className="logo" aria-hidden="true">₾</span><div><h1>Income Check</h1><p>Income assessment from open banking, RS and Creditinfo</p></div></div>
+    <header className="bar"><div className="brand"><span className="logo" aria-hidden="true">₾</span><div><h1>Income Estimation ML model</h1><p>Income assessment from open banking, RS and Creditinfo</p></div></div>
       <div className="toolbar"><span className="demo-flag">Demo · synthetic data · automatic mock consent</span></div>
     </header>
     <div className="layout">
       <div className="sidebar-stack"><ClientPicker personalId={personalId} onChange={setPersonalId} onSubmit={(event) => { event.preventDefault(); connect(personalId.trim()) }} busy={connecting || running} connecting={connecting} clients={demoClients} />
-        <button className="secondary" onClick={() => setShowEvaluation(!showEvaluation)}>{showEvaluation ? 'Hide' : 'Show'} model-risk evaluation</button>
       </div>
       <main className="main" ref={mainRef}><Stepper states={stepStates} />{error && <p className="error" role="alert"><WarningLabel />: {error}</p>}
         {!consents && !job && !connecting && <section className="card empty"><h2>Start with a client</h2><p>Assess recurring income and inspect the evidence. Lending decisions remain outside this prototype.</p></section>}
@@ -97,7 +94,6 @@ export default function App() {
         {running && <section className="card enter"><h2>Collecting and processing evidence</h2><AnimatedProgress job={job} onFinished={onFinished} /></section>}
         {job?.status === 'failed' && <p className="error" role="alert"><WarningLabel />: Assessment failed: {job.error}</p>}
         {job?.status === 'done' && revealed && <CaseWorkspace key={job.job_id} initialJob={job} />}
-        {showEvaluation && <Evaluation />}
       </main>
     </div>
   </div>

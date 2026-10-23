@@ -811,30 +811,6 @@ def create_app(
         svc.store.append(case_id, "Manual aggregation completed", "demo", case["benchmark"])
         return case["benchmark"]
 
-    @app.get("/v1/evaluation")
-    def evaluation():
-        from demo_evaluation import OUT
-        if OUT.exists():
-            report = json.loads(OUT.read_text(encoding="utf-8"))
-            if report.get("model_sha256") == getattr(svc.model, "artifact_sha256", None):
-                return {"status": "done", "report": report}
-        return getattr(svc, "evaluation_status", {"status": "not_run"})
-
-    @app.post("/v1/evaluation", status_code=202)
-    def run_evaluation(request: WebRequest):
-        check_write_origin(request)
-        if getattr(svc, "evaluation_status", {}).get("status") != "running":
-            svc.evaluation_status = {"status": "running"}
-            def run():
-                try:
-                    from demo_evaluation import generate
-                    generate(svc.model)
-                    svc.evaluation_status = {"status": "done"}
-                except Exception as exc:
-                    svc.evaluation_status = {"status": "failed", "error": type(exc).__name__}
-            svc.pool.submit(run)
-        return svc.evaluation_status
-
     return app
 
 

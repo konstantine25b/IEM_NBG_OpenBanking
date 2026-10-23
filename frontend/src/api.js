@@ -36,5 +36,3 @@ export const reviewCase = (caseId, decision, reason, acknowledge) =>
 export const startBenchmark = (caseId) => call('POST', `/v1/cases/${caseId}/benchmark/start`)
 export const finishBenchmark = (caseId, paymentCount, totalGel) =>
   call('POST', `/v1/cases/${caseId}/benchmark/finish`, { payment_count: paymentCount, total_gel: totalGel })
-export const getEvaluation = () => call('GET', '/v1/evaluation')
-export const runEvaluation = () => call('POST', '/v1/evaluation')

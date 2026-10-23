@@ -46,11 +46,9 @@ function Statement({ transactions, registries, annotated = true }) {
 
 function Evidence({ evidence }) {
   const service = evidence.service_payments
-  const baseline = evidence.salary_baseline
   return <section className="card"><h2>Underlying transaction evidence</h2>
     <dl className="facts"><div><dt>Service payments</dt><dd>{service.count}</dd></div><div><dt>Total service receipts</dt><dd>{money(service.total_gel)} GEL</dd></div><div><dt>Receipts / {evidence.window.months} months</dt><dd>{money(service.monthly_gel)} GEL / month</dd></div><div><dt>Observation window</dt><dd>{evidence.window.from} – {evidence.window.to}</dd></div></dl>
     <p className="hint">{evidence.rules}</p>
-    <div className="notice warn baseline"><strong>{baseline.status === 'abstains' && <><WarningLabel />: </>}Salary-only baseline: {baseline.status === 'abstains' ? 'cannot estimate income' : `${money(baseline.monthly_gel)} GEL / month`}</strong><p>{baseline.message} {baseline.count} salary credits identified. Zero salary credits does not establish zero income or zero officially declared salary.</p></div>
     <details open><summary>Inspect transactions and exclusion reasons</summary><Statement transactions={evidence.transactions} registries={evidence.registries} /></details>
   </section>
 }
@@ -87,7 +85,7 @@ export default function CaseWorkspace({ initialJob: job }) {
   const [error, setError] = useState(null)
   useEffect(() => { getAudit(job.job_id).then(setAudit).catch((e) => setError(e.message)) }, [job.job_id])
   return <div className="case-workspace enter">
-    <section className="card case-heading"><h2>Case {job.job_id} · {job.subject}</h2><p className="hint">Identifiers masked in evidence. Assessments are kept in memory; audit events are saved locally.</p>{job.scenario !== 'none' && <p className="notice warn"><WarningLabel />: Explicit fault simulation: {job.scenario === 'rs_unavailable' ? 'Revenue Service returns HTTP 503' : 'Connected banks return HTTP 503'}.</p>}</section>
+    {job.scenario !== 'none' && <section className="card"><p className="notice warn"><WarningLabel />: Explicit fault simulation: {job.scenario === 'rs_unavailable' ? 'Revenue Service returns HTTP 503' : 'Connected banks return HTTP 503'}.</p></section>}
     {error && <p className="error" role="alert"><WarningLabel />: {error}</p>}
     <section className="card"><h3>Source outcomes</h3><Progress job={job} /><details><summary>Consent scope and source authorization</summary><p className="hint">{job.consent_summary.mode}</p><p>{job.consent_summary.scope.join(' · ')}</p><ul>{job.consent_summary.sources.map((s) => <li key={s.source}>{s.source}: {s.status} · consent {s.consent}</li>)}</ul></details></section>
     <Result result={job.result} /><Evidence evidence={job.result.evidence} /><ProcessingAudit job={job} audit={audit} />

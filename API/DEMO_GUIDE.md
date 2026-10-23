@@ -12,7 +12,6 @@ cd frontend
 npm ci
 cd ..
 uv run python tools/run_demo.py --check
-uv run python tools/run_demo.py --evaluate
 ```
 
 Open http://127.0.0.1:5173. The launcher starts the 12-bank mock on port 8000, registry mock on 8001, income API on 9000, and Vite on 5173. Ctrl+C stops the processes it created. Existing services on those ports must be stopped first. Logs and persistent audit events live under git-ignored `.runtime/`. Assessments remain in memory and cannot be reopened after a server restart.
@@ -26,18 +25,17 @@ The local demo opens directly without accounts, passwords or roles. The service 
 1. Select **Sole proprietor**, C50811, personal ID `91038618469`, then **Connect all banks**. Consent is automatically authorized in the mocks; source APIs subsequently validate tokens and consent. Liberty holds the account; eleven banks return no relationship.
 2. Click **Estimate income**. The trace records actual parallel source requests, normalization, evidence generation, feature generation, inference and TreeSHAP durations. Backend timings exclude the paced presentation animations.
 3. Inspect **Underlying transaction evidence**. Its rules run on retrieved API records, not customer labels. This case has 76 service credits totaling 21,694.69 GEL over a 12-month window. Monthly gross service receipts are 1,807.89 GEL; these are not a statement of net earnings. Cash deposits, P2P receipts, loans and own-account movements are not counted as service receipts.
-4. The normal model result is P10 1,746 / P50 1,878 / P90 2,104 GEL, low confidence, 81/100 interval-precision score. These values should be verified in the running app; partial-source scenarios may produce different results. The score is not a correctness probability.
+4. The normal model result is P10 1,746 / P50 1,878 / P90 2,104 GEL, low confidence, 81% confidence score. These values should be verified in the running app; partial-source scenarios may produce different results. The score is not a correctness probability.
 5. Show **RS remittance income (SOI04)** in SHAP. RS exposes remittance income, not a salary declaration. The input is zero for this customer; its positive SHAP contribution describes a model effect, not received or declared salary.
 6. Expand **Show all factors** and inspect the underlying SHAP feature values and shares. The estimate supports income assessment and does not approve a loan.
 7. Inspect the current assessment's audit events and hash verification in **Processing evidence and audit trail**. SQLite stores audit events only; assessment results are not saved for reopening.
 
 The removed recording-scenario, officer-review and manual-comparison controls remain absent. API regression tests exercise actual simulated RS and bank outages, missing-source warnings and withheld estimates.
 
-## Benchmarks and model risk
+## Benchmarks
 
-The salary-only baseline reports a lack of identified payroll credits as **abstention**, not zero actual income. No human time saving has been measured. The 20-entry catalog preserves both branches' existing customers, with C50811 first; no model or dataset is regenerated during integration.
+The salary-only baseline reports a lack of identified payroll credits as **abstention**, not zero actual income. No human time saving has been measured. The 20-entry catalog is two sets of 10: the first 10 are the main-branch clients, the next 10 the baka_ui clients, each from the clearest estimate to the hardest; no model or dataset is regenerated during integration.
 
-`uv run python income/demo_evaluation.py` evaluates the existing model on the fixed 20% held-out split and writes `.runtime/model-evaluation.json`. The UI can also run and display it. Metrics include MAE, interval coverage, salary-baseline abstention and matched-case comparisons, income-profile, sex-code, age-band and region diagnostics, sample sizes, and observed group gaps. Age, sex, citizenship and location are currently model inputs; feature justification and sensitivity review remain necessary. These synthetic diagnostics do not certify fairness or predict real-world performance because bank behaviour and target labels share a simulator.
 
 ## Architecture, records and limits
 

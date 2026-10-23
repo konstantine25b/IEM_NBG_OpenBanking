@@ -41,12 +41,12 @@ function ConfidenceDetail({ confidence, income }) {
       <h3>How sure is this?</h3>
       {confidence.score != null && (
         <div className="score">
-          <div className="score-num"><strong>{Math.round(shown)}/100</strong> confidence score</div>
-          <div className="score-track" role="img" aria-label={`Confidence score ${confidence.score} out of 100`}>
+          <div className="score-num"><strong>{Math.round(shown)}%</strong> confidence score</div>
+          <div className="score-track" role="img" aria-label={`Confidence score ${confidence.score} percent`}>
             <div className={`score-fill ${LEVEL_CLASS[confidence.level] ?? 'warn'}`} style={{ width: grown ? `${confidence.score}%` : '0%' }} />
           </div>
           <p className="hint">
-            Score out of 100 = 100 × (1 − relative band width). The P10–P90 band spans <strong>{gel(income.p90 - income.p10)} GEL</strong>{' '}
+            Score = 100% − band width. The P10–P90 band spans <strong>{gel(income.p90 - income.p10)} GEL</strong>{' '}
             ({(confidence.band_share * 100).toFixed(1)}% of the P50), so the estimate is{' '}
             <strong>P50 ±{confidence.plus_minus_pct}%</strong>. It shows how precise the range is; it is not the chance of
             being right.
@@ -159,7 +159,7 @@ function Drivers({ explanation }) {
 }
 
 export default function Result({ result }) {
-  const { income, confidence, warnings, data, cleaning, explanation } = result
+  const { income, confidence, warnings, explanation } = result
   const p50 = useCountUp(income?.p50 ?? 0, 1500)
   const levelClass = LEVEL_CLASS[confidence.level] ?? 'warn'
   return (
@@ -171,7 +171,7 @@ export default function Result({ result }) {
             <div className="big">{gel(p50)} <small>GEL / month</small></div>
           </div>
           <span className={`badge ${levelClass}`}>
-            {levelClass !== 'ok' && <><WarningLabel />: </>}Confidence: {confidence.level}{confidence.score != null && ` · ${confidence.score}/100`}
+            {levelClass !== 'ok' && <><WarningLabel />: </>}Confidence: {confidence.level}{confidence.score != null && ` · ${confidence.score}%`}
           </span>
         </div>
         <RangeBar p10={income.p10} p50={income.p50} p90={income.p90} />
@@ -197,29 +197,6 @@ export default function Result({ result }) {
         {income && <ConfidenceDetail confidence={confidence} income={income} />}
         <Drivers explanation={explanation} />
       </div>
-
-      <section className="card rise late">
-        <dl className="facts">
-          <div><dt>Banks used</dt><dd>{data.banks_used_names.length ? data.banks_used_names.join(', ') : 'none'}</dd></div>
-          <div><dt>History</dt><dd>{data.months_covered} months</dd></div>
-          <div><dt>Transactions used</dt><dd>{gel(data.transactions_used)}</dd></div>
-        </dl>
-        <details>
-          <summary>How the data was cleaned</summary>
-          <table className="small">
-            <tbody>
-              <tr><td>Transactions received</td><td className="num-col">{gel(cleaning.received)}</td></tr>
-              <tr><td>Pending (not counted)</td><td className="num-col">{gel(cleaning.pending)}</td></tr>
-              <tr><td>Card mirror entries</td><td className="num-col">{gel(cleaning.card_mirrors)}</td></tr>
-              <tr><td>Transfers between own accounts</td><td className="num-col">{gel(cleaning.own_account_transfers)}</td></tr>
-              <tr><td>Loan disbursements</td><td className="num-col">{gel(cleaning.loan_disbursements)}</td></tr>
-              <tr><td>Refunds</td><td className="num-col">{gel(cleaning.refunds)}</td></tr>
-              <tr><td><strong>Transactions retained for analysis</strong></td><td className="num-col"><strong>{gel(cleaning.used_for_income)}</strong></td></tr>
-            </tbody>
-          </table>
-        </details>
-        <p className="hint">All data is synthetic; the estimate shows how the method works, not real-world accuracy.</p>
-      </section>
     </div>
   )
 }

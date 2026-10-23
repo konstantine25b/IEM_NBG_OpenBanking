@@ -91,6 +91,8 @@ def check_browser():
     with sync_playwright() as pw:
         browser = pw.chromium.launch(**({"channel": "msedge"} if os.name == "nt" else {}), headless=True)
 
+        job_ids = []  # ids of the assessments the page started, read from the API replies
+
         def page_for(*, failure="none", mobile=False):
             page = browser.new_page(viewport={"width": 390 if mobile else 1440, "height": 1000}, reduced_motion="reduce")
             page.on("pageerror", lambda error: errors.append(str(error)))
@@ -103,7 +105,10 @@ def check_browser():
                 options = {"url": f"http://127.0.0.1:19000{path}", "headers": headers}
                 if path == "/v1/income-estimates" and route.request.method == "POST":
                     options["post_data"] = json.dumps({**route.request.post_data_json, "demo_failure": failure})
-                route.fulfill(response=route.fetch(**options))
+                response = route.fetch(**options)
+                if path == "/v1/income-estimates" and route.request.method == "POST":
+                    job_ids.append(response.json()["job_id"])
+                route.fulfill(response=response)
 
             page.route("**/api/**", forward)
             return page
@@ -123,7 +128,7 @@ def check_browser():
         page.get_by_role("button", name="Estimate income", exact=True).click()
         completed(page)
         expect(page.locator(".hero .big")).to_contain_text("1,878", timeout=10000)
-        expect(page.locator(".score-num strong")).to_have_text("81/100", timeout=10000)
+        expect(page.locator(".score-num strong")).to_have_text("81%", timeout=10000)
         evidence = page.get_by_role("heading", name="Underlying transaction evidence").locator("..")
         expect(evidence.get_by_label("Activity filter", exact=True)).to_have_value("all")
         expect(evidence).to_contain_text("1015 records")
@@ -142,12 +147,11 @@ def check_browser():
         times = combined.locator("time").all()
         assert len(times) > 15
         assert all(re.fullmatch(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3}Z", t.get_attribute("datetime")) for t in times)
-        case_id = re.search(r"Case ([a-f0-9]+)", page.locator(".case-heading h2").inner_text()).group(1)
+        case_id = job_ids[-1]
         case = page.request.get(f"http://127.0.0.1:19000/v1/income-estimates/{case_id}").json()
         expected_times = {datetime.fromisoformat(e["at"]).isoformat(timespec="milliseconds").replace("+00:00", "Z") for e in case["trace"]}
         assert expected_times <= {t.get_attribute("datetime") for t in times}
-        page.get_by_role("button", name="Show model-risk evaluation").click()
-        expect(page.get_by_text(re.compile("20,000 held-out customers"))).to_be_visible(timeout=10000)
+        expect(page.get_by_role("button", name=re.compile("model-risk evaluation"))).to_have_count(0)
         for listing in page.locator(".notice ul").all():
             assert listing.evaluate("el => getComputedStyle(el).listStyleType") == "none"
         for name in ("Saved cases", "Human review of the income estimate", "Measured manual-task comparison"):

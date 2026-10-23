@@ -32,7 +32,6 @@ export function AnimatedProgress({ job, onFinished }) {
       </li>
     })}</ul>
     <div className="meter" aria-hidden="true"><i style={{ width: `${items.length ? Math.min(step, items.length) / items.length * 100 : 0}%` }} /></div>
-    <ol className="trace-preview">{(job.trace || []).slice(-5).map((event, i) => <li key={i}><span className="mono">{event.elapsed_ms} ms</span> {event.stage}</li>)}</ol>
   </div>
 }
 
