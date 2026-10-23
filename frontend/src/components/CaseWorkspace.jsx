@@ -50,7 +50,6 @@ function Evidence({ evidence }) {
     <dl className="facts"><div><dt>Service payments</dt><dd>{service.count}</dd></div><div><dt>Total service receipts</dt><dd>{money(service.total_gel)} GEL</dd></div><div><dt>Receipts / {evidence.window.months} months</dt><dd>{money(service.monthly_gel)} GEL / month</dd></div><div><dt>Observation window</dt><dd>{evidence.window.from} – {evidence.window.to}</dd></div></dl>
     <p className="hint">{evidence.rules}</p>
     <div className="notice warn baseline"><strong>Salary-only baseline: {baseline.status === 'abstains' ? 'cannot estimate income' : `${money(baseline.monthly_gel)} GEL / month`}</strong><p>{baseline.message} {baseline.count} salary credits identified. Zero salary credits does not establish zero income or zero officially declared salary.</p></div>
-    <details><summary>Service receipts by calendar month</summary><table><thead><tr><th>Month</th><th className="num-col">Payments</th><th className="num-col">GEL</th></tr></thead><tbody>{Object.entries(service.monthly).map(([month, value]) => <tr key={month}><td>{month}</td><td className="num-col">{value.count}</td><td className="num-col">{money(value.total_gel)}</td></tr>)}</tbody></table><p className="hint">Boundary months are partial. Monthly receipts divide the total by the observation-window length.</p></details>
     <details open><summary>Inspect transactions and exclusion reasons</summary><Statement transactions={evidence.transactions} registries={evidence.registries} /></details>
   </section>
 }
