@@ -1,258 +1,223 @@
-# Income check demo (start here)
+# Income Check
 
-A loan officer picks a client; the API asks all 12 mock banks, the Revenue Service and Creditinfo for consent, pulls
-the data, and the model returns a monthly income range with a confidence score and the reasons.
+**Estimate how much a person really earns each month, for lending decisions in Georgia, from their open-banking data.**
+Built for the GITA Hackathon (theme: AI and Open Banking in finance). All data in this repository is synthetic.
 
-```
-uv sync                  # once
-make frontend-setup      # once (needs Node.js: brew install node)
-make demo                # bank mock :8000, RS+Creditinfo :8001, income API :9000, page http://localhost:5173
-```
-
-Swagger for the income API: http://localhost:9000/docs. Details: `API/README.md`, `frontend/README.md`.
-Everything here is synthetic data. `make test` builds its own small dataset (about 10 s) and needs nothing else.
+A loan officer picks a client, one click asks all banks (and the Revenue Service and the credit bureau) for the client's
+consent, and a few seconds later the officer sees the monthly income as a range, how precise that range is, which facts
+drove it, and what is missing.
 
 ---
 
-# Loan-portfolio EDA (pre-modeling)
+## 1. The problem
 
-One command turns the ten CSV files in `nbg_synthetic_data/` (+ the Georgian data dictionary) into a **self-contained HTML
-report** that answers the questions a data scientist asks *before* modeling: what is in here, can I trust it,
-what is the target, what leaks, how should I split / encode / validate, and what score is realistic.
+Georgian banks must verify income before lending: the National Bank's responsible-lending rules cap the payment-to-income
+ratio, and loans without verified income are limited. But the Revenue Service (RS) only shows *declared* income, and about
+40% of workers in Georgia are informal (ILO Working Paper 159, from the Geostat labour force survey 2022). Young people,
+the self-employed, rural households and small businesses often have real income that is invisible or heavily discounted,
+so they are rejected or under-lent.
 
-When the generated bank dataset of `openbanking_mock/` (mock open-banking APIs of 12 Georgian banks + 50,000 synthetic
-customers who are rows of `nbg_synthetic_data/`) is present, the same report also covers it, in sections 11-14: what it is, what a
-lender would really see through the bank APIs, how realistic it is, and what can (and cannot) be learned from it.
+## 2. The solution
 
-```
-uv sync                         # once: creates .venv from uv.lock (Python 3.12)
-uv run python eda/EDA.py            # full run  -> reports/eda_report.html   (about 5 minutes; 3.5 without the mock part)
-uv run python eda/EDA.py --fast     # 20k loans + 5,000 mock customers, about 2 minutes
-uv run python eda/EDA.py --no-mock  # sections 1-10 only (the loan data), about 3.5 minutes
-```
+With the client's consent, the lending bank combines:
 
-Open `reports/eda_report.html` in a browser: it starts with **five things to know**, then the fourteen sections.
-The terminal prints the same five points at the end, and `reports/summary.md` has them as plain text.
-
-> No `uv` yet? Install it with `curl -LsSf https://astral.sh/uv/install.sh | sh`. Without uv, any Python 3.12+
-> virtualenv works: `python -m venv .venv && .venv/bin/pip install pandas numpy scipy scikit-learn matplotlib openpyxl threadpoolctl`
-> and then `.venv/bin/python eda/EDA.py`.
-
-## What you get
-
-```
-reports/
-├── eda_report.html     one page: executive summary + 14 sections (charts are embedded)
-├── summary.md          the executive summary as plain text
-├── feature_roles.csv   hand-off table: every column's role, advice, feature sets A / A_strict / B / C
-├── figures/*.png       every chart as a stand-alone image
-├── tables/*.csv        every table in the report
-└── mock_customer_features.csv   only with --export-mock-features (see below)
-```
-
-`reports/` is regenerated on every run (and git-ignored). EDA only reads `nbg_synthetic_data/`. A re-run replaces only the
-files the previous run wrote (listed in `reports/.eda_manifest.json`), never your own files in the same folder.
-
-## The ten sections (each one answers a single question)
-
-| # | Section | Question it answers |
-|---|---------|---------------------|
-| 1 | Overview & inventory | What exactly did we receive - and does it match the documentation? |
-| 2 | Data-quality scorecard | Can I trust these numbers - and where are the traps? |
-| 3 | Can the files be pooled? | Are the files random chunks of one population? |
-| 4 | The target | What are we predicting, how rare is it, and does one cut-off explain it? |
-| 5 | Feature distributions | What does each column look like, and how do events differ? |
-| 6 | Features vs the target | Which columns separate events from non-events? |
-| 7 | Multivariate structure | Which columns say the same thing? |
-| 8 | Leakage & feature roles | Which columns must NOT be used to predict - and how do I know? |
-| 9 | Baseline signal check | If I model this today, how well can I do, and what does the work? |
-| 10 | Modeling blueprint | What should I build, with which columns, validated how? |
-| 11 | Mock & synthetic bank data | What is the generated bank dataset, and how does it connect to the loan table? |
-| 12 | Mock bank APIs: what a lender sees | What do the 12 banks' APIs return - and what is missing by design? |
-| 13 | Mock data: realistic or planted? | Where does the synthetic data give itself away, and what did its generator build in? |
-| 14 | Bank-data features & how to use them | What can be built from the APIs, and what may (not) be concluded from it? |
-
-Sections 11-14 are skipped (with a one-line reason on the console) when the mock folder is absent, with `--no-mock`, or
-when `--data-dir` is not the default one. Ask for them explicitly with `--sections 11,12` and a missing mock is an error.
-
-Every number in the text is computed when the script runs (the rules of thumb it compares them with are named
-constants at the top of `EDA.py`). Only the column glossary (English translation of the Georgian dictionary),
-the column families and the *hypothesised* roles are hand-written, and section 8 re-tests the roles against the
-data.
-
-## What the supplied data looks like (headline findings of the last full run)
-
-- 100,000 loans x 57 columns, 3.56% positive (`addNegStatus`), no missing values; the ten files are random
-  chunks of one population (pool them), but rows inside a file are assembled in balanced 500-row batches.
-- **The label tracks the arrears state.** 12 of the 14 delinquency / penalty columns reach AUC >= 0.9 alone; one
-  threshold (`TotalNumberDelinquencyDays` > 1,253) already reproduces most of the label (precision 85%, recall 78%).
-  The supplied score / PD is a recoding of the same state: AUC 0.93 overall, 0.59 on loans without arrears.
-- **No single leak:** without delinquency columns and score a boosted-tree model still reaches AUC 0.99, and the
-  22 columns "known at origination" alone reach 0.97 - far above the 0.65-0.80 of a real application scorecard.
-  Four of those columns follow the loan's arrears state (`ECONOMIC_SECTORS`, `PRINCIPAL_PAYMENT_FREQUENCY`, ...).
-- **The columns do not obey the dictionary** (14 of 17 relationships fail) in a way a statistical generator
-  reproduces, so the data is probably synthetic or heavily perturbed: a high score here is not proof of a good model.
-- Questions for the organisers (metric, what the label means, whether score / delinquency columns are allowed
-  inputs, snapshot date ...) are listed at the end of section 10.
-
-## What the mock & synthetic bank data looks like (sections 11-14)
-
-- All 50,000 mock customers are **exact rows of `nbg_synthetic_data/`** (a random 50% subset, same label, 3.64% positive). The folder
-  has two layers: `api/` (what a lender could retrieve: 38.6M transactions, accounts, balances) and `truth/` (the
-  simulator's hidden state, for evaluation only). Names, ids, phone numbers and IBANs in `truth/` are never read.
-- A lender would see the **loan itself for only about 30%** of the customers (15% of loans sit at a bank outside the
-  twelve, and most banks' APIs list no loans); every bank exposes a different subset of fields, so missing = "not
-  exposed", not "unknown". 56% of the loans started before the 12-month window, so these are monitoring features, not
-  application-time features.
-- **The simulated behaviour is generated from the label.** The generator's latent stress is, to R² = 1.0000,
-  0.65 x rank(PD) + 0.15 x delinquency days + 0.20 x `addNegStatus`; spending, balances, lateness, micro-loans and
-  gambling follow it. Bank-data AUCs (behaviour alone ~0.96) therefore measure planted signal, never whether
-  open-banking data predicts default; they are kept out of the five headline points on purpose.
-- Where it **is** useful: ground truth is known, so feature code can be unit-tested (a salary-based income estimate lands
-  within ±10% of the truth for ~94% of salaried customers), and the 7 bank dialects, the cross-bank join and the missing-
-  by-design fields can be developed against 38M rows.
-
-## Options
-
-| flag | meaning |
-|------|---------|
-| `--fast` | stratified 20,000-row sample and lighter models |
-| `--target COL` | analyse another binary column (default `addNegStatus`, the dictionary's outcome flag) |
-| `--binarize "<=150"` | turn the numeric `--target` into 0/1, e.g. `--target score --binarize "<=150"` |
-| `--sections 1,2,8` | run only these sections (the report then contains only them; later sections may need earlier ones for context) |
-| `--no-models` | skip the model-based checks (adversarial validation, score reverse-engineering, section 9) |
-| `--n-jobs N` | upper bound of CPU threads for models / BLAS (default 4; a lower `OMP_NUM_THREADS` wins) |
-| `--data-dir`, `--out-dir` | non-default locations |
-| `--mock-dir DIR` | the generated mock dataset (`MANIFEST.json`, `api/`, `truth/`); default `openbanking_mock/output/dataset` when `--data-dir` is the default and the folder exists |
-| `--no-mock` | skip sections 11-14 even if the mock folder exists |
-| `--export-mock-features` | also write `reports/mock_customer_features.csv`: one row per mock customer (target, shard, 49 API features); row-level synthetic data, so do not share the folder blindly |
-| `--open` | open the report in the browser when done |
-
-Bad arguments (unknown target, `--binarize` on a text column, a threshold that leaves one class ...) stop the
-script with a readable message *before* anything in the output folder is touched. If a part of the analysis
-crashes, the report is still written, the failure is listed under "needs your attention", and the exit code is 1.
-
-Shortcuts: `make setup`, `make eda`, `make eda-fast`, `make notebook`, `make test`, `make test-all`, `make lint`,
-`make format`, `make clean` (`make help` lists them).
-
-## Notebook edition
-
-`EDA.ipynb` is the same analysis as a Jupyter notebook: the code of `EDA.py` cut into cells, one heading + code cell +
-`run(n)` cell per section, and each section's text, tables and charts shown right under its cell. Everything stays in
-memory afterwards (`ctx`, `rep`), so it is the easy way to explore further or to re-run a single section.
-
-- It is **generated** from `EDA.py` by `tools/make_notebook.py` (standard library only), so `EDA.py` stays the source of
-  truth (tests, `make eda`). After changing `EDA.py` run `make notebook`; `make notebook-check` fails when the notebook is
-  out of date. The generator refuses to overwrite a notebook whose cells you edited (`--force` overrides, `--out copy.ipynb`
-  writes a copy), and it fails loudly if `EDA.py`'s layout (banners, `main()`, `@register`) stops matching what it expects.
-- Open it from the project folder with the project's `.venv` as the kernel (`ipykernel` is in the `dev` group; VS Code:
-  *Select Kernel -> Python Environments -> .venv*; JupyterLab: `uv run --with jupyterlab jupyter lab`).
-- The first code cell holds the parameters (`FAST`, `NO_MOCK`, `ONLY_SECTIONS`, `TARGET`, `OUT_DIR` ...), the equivalents of
-  the flags above. The notebook writes to `reports/notebook/` by default, never over the `reports/` files of `python EDA.py`.
-- The notebook is saved without outputs; a full run takes about 5 minutes, `FAST = True` about 2.
-
-## Using the results for modeling
-
-```python
-import pandas as pd
-
-roles = pd.read_csv("reports/feature_roles.csv", index_col="feature")
-set_a = roles.index[roles["in_A_application"]]        # known at origination (according to the dictionary)
-set_a2 = roles.index[roles["in_A_strict"]]            # A without the columns that follow the loan's arrears state
-set_b = roles.index[roles["in_B_monitoring"]]         # + balances / schedule / loan events (no delinquency columns)
-set_c = roles.index[roles["in_C_status_detection"]]   # + delinquency columns (reconstructs the label!)
-print(roles[["role", "recommended_use", "single_column_AUC", "tracks_loan_state", "notes"]])
-```
-
-Section 10 explains which framing (application scorecard, monitoring, status detection, beating the supplied score,
-reconstructing the label) each set supports, with an honest AUC for the exact columns and loans of each one, a
-preprocessing recipe, a validation plan and starter code.
-
-## Synthetic loan generator (`synthgen.py`)
-
-`openbanking_mock/` can only simulate bank data for customers that are *rows of `nbg_synthetic_data/`* (a bootstrap: at most 100,000
-customers, every one a copy). `synthgen.py` writes **new** loans with the exact schema of `nbg_synthetic_data/df_*.csv` (58 columns, same
-dtypes, same event rate), so they can replace `nbg_synthetic_data/` anywhere - the EDA, a model, or `openbanking_mock --data-dir`.
-
-```
-uv run python synthetic/synthgen.py                         # 100,000 new loans -> synthetic/loans/df_1..10.csv + FIDELITY_REPORT.md (~45 s)
-uv run python synthetic/synthgen.py generate --rows 1000000 --seed 7 --no-check   # 1M loans in ~1 min, then `check` them
-uv run python synthetic/synthgen.py check --full            # gates (+ privacy, train-synthetic/test-real) on an existing folder
-uv run python synthetic/synthgen.py bank --customers 2000   # openbanking_mock validate -> generate -> report on those loans (~1 min)
-```
-
-**How the previous generation's rules are kept.** The Georgian-market rules (BoG 46% + TBC 32% = 78% of customers, only
-what the 12 banks' APIs can return, ISO 13616 / 9362 / 4217 / 20022 and Berlin Group standards, NBG FX rates, business-day
-booking) live in `openbanking_mock`, which is **not touched**: `bank` just points its `--data-dir` at the new loans. Last run
-(2,000 customers): its ledger validation passes, 52 of 52 quality checks pass, BoG + TBC = 78.00%. The loan table's own
-rules are reproduced from the real data and *checked*, not assumed:
-
-| what | how | last full run (100,000 rows vs `nbg_synthetic_data/`) |
+| Source | What it gives | Mock in this repo |
 |---|---|---|
-| schema, dtypes, supports, exact event rate | cells of (delinquency regime x class x mortgage) with a Gaussian copula and empirical marginals | identical header / dtypes, 3.56% events, KS <= 0.003, code shares TV <= 0.006 |
-| spikes, caps, floors (zero inflation, income 300-10,000, PD floor 0.24) | empirical marginals, constants inside a cell | dominant-value share off by <= 0.003 |
-| rank correlation, code-to-code and code-to-quantity association | moment-matched copula; codes borrowed jointly from nearby real rows | mean abs gap 0.006 (max 0.056); Cramer's V 0.005 (max 0.029); eta 0.017 |
-| "run-off" loans: balance / schedule columns that are 0 *together* (EDA 9c) | their zero pattern is borrowed jointly with the codes; non-zero values keep the copula's order | event rate by number of zeros within 1.7 pp (1.2% -> 67% at five zeros; AUC of the count 0.813 vs 0.812) |
-| the 16 dictionary rules the data breaks (14 of 17 fail) | **not enforced**; three relations a copula cannot express are re-paired to their real rate | every violation share within 1.5 pp of `nbg_synthetic_data/` |
-| the label's signal | per-class cells | single-column AUC within 0.016; train-on-synthetic / test-on-real AUC 0.970 (real/real 0.994) |
-| "too evenly mixed" 500-row blocks (EDA section 3) | stratified draws on the leading factors per batch | block variance ratio 0.48 (real 0.46; it moves by +-0.05 with the seed) |
-| new, not copied rows | no row is copied | 0 exact copies; closest-real-row distance 1.08 x the real-to-real one (measured on the quantity columns: the codes of a row are borrowed from a real row by design) |
+| **Open banking** (the client's other banks) | accounts, balances, up to 12 months of transactions, over the standard Georgian API (Berlin Group NextGenPSD2 XS2A v0.8, consent valid at most 90 days) | 12 bank APIs, one per bank, 7 wire dialects |
+| **Revenue Service** | the client's taxpayer data and income items | `API/mock_registries.py` |
+| **Creditinfo** (credit bureau) | existing loans and credit searches (no income) | `API/mock_registries.py` |
+| **The lender's own KYC** | name, birth date, place | `/_mock/kyc` on the bank mock |
 
-Things to know:
-- The label-driven behaviour of the supplied data is reproduced on purpose (that *is* its rule), so the bank data built from
-  these loans keeps `openbanking_mock`'s label-driven "stress"; AUCs computed on it are still not evidence about real open
-  banking. Decoupling them would change the mock's rules and is deliberately not done here.
-- `bank` makes one customer per loan row (`--customers` <= rows), writes to `synthetic/bank_dataset` (never inside
-  `openbanking_mock/`) and refuses a non-empty folder it did not write.
-- Same data + seed => identical bytes. Output folders are replaced only if `synthgen` wrote them; `nbg_synthetic_data/` is read-only.
-- Scale: fitting takes about 25 s; 100,000 loans take about 30 s, 1,000,000 about 1 minute and 3 GB of memory
-  (418 MB of CSV in 100 files; use `--no-check` or `check` on the result, the gates read everything into memory).
-  `bank --customers 50000` mirrors the previous generation's scale (`openbanking_mock`'s own estimate: about 10 minutes on
-  16 cores and 2 GB; not run here - the largest bank run was 2,000 customers).
-- Checked with the project's own EDA (`EDA.py --data-dir synthetic/loans --no-mock`, full run vs the full run on `nbg_synthetic_data/`): 3,558
-  positives, 12 of 14 arrears columns at AUC >= 0.9, the one-cut-off rule (1,246 vs 1,253 days, 86% vs 85% precision, 78%
-  recall), 14 of 17 dictionary relations failing, the run-off curve (1.2% -> 67% vs 68%) and the "templated" delinquency
-  values all reappear.
-- **Known residual gaps.** The origination-time codes follow the arrears state about 70% as strongly as in `nbg_synthetic_data/` (sector 0
-  = "no business" in 26% of the extreme-arrears non-events vs 37%; the EDA's state-tracking check flags 2 columns where it
-  flags 4 on `nbg_synthetic_data/`), the no-model marker count scores AUC 0.89 vs 0.93, the application-time AUC is 0.957 vs 0.969, and a
-  few rank correlations differ by up to 0.056 (instalment count with other columns, after its atom was restored). A model
-  trained on the synthetic loans therefore reaches slightly lower AUCs than one trained on `nbg_synthetic_data/` (0.970 vs 0.994).
-- Not modelled: anything outside the 58 columns (no dates, no ids), and relationships the EDA could not see.
+A machine-learning model turns this into **estimated sustainable monthly income as a range**: P10 (conservative),
+P50 (most likely), P90 (optimistic). It works for clients with RS-verified income (refining it) and for clients without
+(estimating from bank data alone). The range is returned with:
+- a **confidence label and score** read from the width of the range,
+- the **measured hit rate** of that label on clients the model never saw,
+- **SHAP explanations** of what pushed the estimate up or down,
+- **warnings** when data is missing (for example no salary credits found, or a bank that refused its consent).
 
-## Project layout
+## 3. How it works
 
 ```
-eda/              loan-portfolio analysis: EDA.py and EDA.ipynb (the notebook is generated from EDA.py)
-synthetic/        synthgen.py, plus the loans and bank data it writes (loans/, bank_dataset/)
-nbg_synthetic_data/  NBG loan files (df_*.csv, dictionary) and the modeling table income_dataset.csv
-income/           income estimation: build_income_dataset.py, income_eda.ipynb, income_model.ipynb
-tools/            make_notebook.py: EDA.py -> EDA.ipynb
-tests/            unit tests for the statistics + end-to-end runs on a synthetic dataset (uv run pytest)
-openbanking_mock/ mock bank APIs, the generator, and tbc_api_examples.py
-reports/          generated output
-pyproject.toml    dependencies + ruff / pytest settings (managed with uv)
-uv.lock           exact versions, so everyone gets the same environment
-.python-version   3.12
-Makefile          shortcuts
+ Loan officer (React page, :5173)
+        │  POST /v1/consents        one click: consent to every source, in parallel
+        │  POST /v1/income-estimates → job id          GET /v1/income-estimates/{id}  (progress, then result)
+        ▼
+ Income API (FastAPI, :9000)  ──►  12 mock bank APIs (:8000)   accounts → balances → every transaction page
+        │                     ──►  mock RS + Creditinfo (:8001)
+        ▼
+  clean the data ─► the same features the model was trained on ─► XGBoost quantile model (P10 / P50 / P90)
+                                                                 ─► confidence + SHAP + warnings
 ```
 
-Dependencies used by the EDA: pandas, numpy, scipy, scikit-learn, matplotlib, openpyxl, threadpoolctl, and pyarrow
-(only to read the mock dataset's Parquet files; it is also needed by `openbanking_mock/`).
-Add one with `uv add <package>`; run tooling with `uv run ruff check .` and `uv run pytest`.
+1. **Consent.** The API asks the 12 banks, RS and Creditinfo for consent at once (the mock approves immediately).
+   A bank where the client has no account is marked "no relationship" and left out. A source that fails is marked failed;
+   the others carry on.
+2. **Fetch.** For every bank with a valid consent the API replays what a TPP does: accounts, balances, every transaction
+   page, plus cards, loans and savings where the bank has them, using each bank's own routes and headers.
+3. **Clean.** Card mirror entries, transfers between the client's own accounts and loan disbursements are kept out of the
+   income and spending features.
+4. **Features and model.** The raw bank data is turned into about 120 model inputs by the same code that built the training set,
+   and an XGBoost quantile regression returns P10, P50 and P90.
+5. **Judge.** Confidence comes from the band width; thin data (no bank data, under 3 months of history, fewer than 30
+   transactions, no inflow) forces "very low" with the reasons.
 
-## Notes
+## 4. Quick start
 
-- The repository is https://github.com/konstantine25b/IEM_NBG_OpenBanking (public). `nbg_synthetic_data/`, `synthetic/`, `reports/` and
-  `openbanking_mock/output/` are committed on purpose; `.gitignore` only keeps `.venv/` and tool caches out.
-- Resources: one process. Sections 1-10 alone (`--no-mock`) peak at about 0.7 GB and take about 3.5 minutes on 4 threads
-  (`--fast`: 0.4 GB, 1.5 minutes). With the mock part the peak is about 1.2 GB (one shard of the 2 GB Parquet dataset is in
-  memory at a time, only per-customer rows are kept) and the full run takes about 5 minutes (`--fast`: about 1 GB, 2 minutes);
-  up to 6 when the machine is busy.
-- Chart colours follow one code: **blue = target 0, orange = target 1** (the event rate is drawn in orange),
-  every column role has its own colour and is also written next to the label, and grey is everything else.
-- Sections 11-14 only **read** `openbanking_mock/output/dataset` (Parquet shards, `MANIFEST.json`, `quality.json`): nothing
-  is written there and the mock's code is not imported. From `truth/customers` only a whitelist of columns is read (no
-  names, person ids, phone numbers, birth dates), the counterparty fields of the transactions are only counted (never kept
-  or shown), and the report shows aggregates only; `openbanking_mock/tbc_api_examples.py` is not used.
-  The older `output/dataset_v1_legacy`, the raw `captures/` and `fixtures/` are not analysed.
+**You need:** Python 3.12 with [uv](https://docs.astral.sh/uv/) (`curl -LsSf https://astral.sh/uv/install.sh | sh`) and
+[Node.js](https://nodejs.org) (`brew install node` on a Mac). Nothing else: the demo runs from a fresh checkout.
+
+```bash
+uv sync                  # Python packages, once
+make frontend-setup      # web page packages, once
+make demo                # starts everything; Ctrl-C stops it
+```
+
+Then open **http://localhost:5173**. Swagger for the income API is at http://localhost:9000/docs.
+
+`make demo` runs four processes. You can also start them one by one (start the income API after the two mocks):
+
+| Command | What | Port |
+|---|---|---|
+| `make api-banks` | the 12 mock bank APIs for all 100,000 customers, built on demand | 8000 |
+| `make api-registries` | mock RS and Creditinfo | 8001 |
+| `make api-service` | the income estimation API | 9000 |
+| `make frontend` | the web page (proxies `/api` to 9000) | 5173 |
+
+**Tests:** `make test` (or `uv run pytest`). The API tests build their own 240-customer dataset in a temporary folder
+(about 10 s), so no other data is needed. `make lint` runs ruff.
+
+## 5. Using the demo
+
+1. Pick one of the **ten demo clients** on the left (or type an 11-digit personal ID, or a client code `C00001` to
+   `C100000`). The list runs from the clearest estimate to the hardest, and covers different bank mixes (BoG + TBC + a
+   third bank, no TBC, small banks only), deposits, young, rural, sole proprietors, no salary credits, and remittances.
+2. **Connect all banks.** Every bank, RS and Creditinfo gets its own animated request. The client profile appears
+   (name, birth date, place, with the source of each; the name is checked against each bank's account owner name).
+3. **Estimate income.** Each source shows its progress, then the result: the P50 on a P10 to P90 bar, the confidence
+   badge, "How sure is this?" (score, band width, measured hit rate), and "Why this estimate" (SHAP factors; **Show all
+   factors** opens every group and the model features inside it, with each one's share of the impact in %).
+
+`http://localhost:5173/?client=<personal id>` runs the whole flow from a link.
+
+## 6. API
+
+### The income API (`API/service.py`, port 9000)
+
+| Call | What it does |
+|---|---|
+| `POST /v1/consents` `{"personal_id": "…"}` | Consent requests to all 12 banks, RS and Creditinfo, in parallel. Returns the table of banks (`connected`, `no_relationship`, `error`), the RS and Creditinfo results and the client profile with its provenance. Accepts an 11-digit personal ID, `PNOGE-` + the ID, or a client code. `404` if no bank knows the client; `502` if the bank gateway is unreachable. |
+| `POST /v1/income-estimates` `{"consent_set_id": "…"}` | Starts the job and returns `202` with a `job_id` at once. |
+| `GET /v1/income-estimates/{job_id}` | `status` (`queued`, `running`, `done`, `failed`), `stage`, one progress line per source, and when done the `result`. |
+| `GET /v1/sources` | The 12 banks plus RS and Creditinfo (what a consent request goes to). |
+| `GET /v1/demo/clients` | The ten demo clients. |
+| `GET /health` | Model date and the end of the history window. |
+
+```bash
+curl -s -X POST localhost:9000/v1/consents -H 'content-type: application/json' -d '{"personal_id":"50334745589"}'
+curl -s -X POST localhost:9000/v1/income-estimates -H 'content-type: application/json' -d '{"consent_set_id":"<id from above>"}'
+curl -s localhost:9000/v1/income-estimates/<job_id>
+```
+
+The result, abridged:
+
+```jsonc
+{
+  "income": {"p10": 4295, "p50": 4327, "p90": 4423, "currency": "GEL", "period": "monthly"},
+  "confidence": {
+    "level": "very high", "score": 97, "band_share": 0.03, "plus_minus_pct": 1.5,
+    "downgrade_reasons": [],                       // filled when thin data forces "very low"
+    "measured": {"inside_p10_p90_pct": 83.7, "median_error_pct": 0.45, "within_10pct_pct": 100.0, "basis": "…"}
+  },
+  "explanation": {"starting_point_gel": 2717, "drivers": [{"driver": "Total money coming in", "effect_gel": 1053,
+                  "share_pct": 64.0, "pct_of_p50": 24.3}, …], "all_drivers": [ /* every group, with its model features */ ]},
+  "warnings": [],                                  // e.g. "No salary credits found. …", a failed source
+  "data": {"banks_used_names": ["Bank of Georgia", "Liberty Bank", "TBC Bank"], "months_covered": 12.0, "transactions_used": 585},
+  "sources_used": {"rs": true, "creditinfo": true}
+}
+```
+
+Behaviour worth knowing:
+- A source without a granted consent (RS, Creditinfo or a bank) is skipped with a warning; the estimate still runs.
+- The **history window** ends where the bank data ends: `--as-of YYYY-MM-DD` if given, else the mock banks' own clock
+  (2026-10-19). Real banks have data up to today; the mock banks stop on the day they were generated.
+- Options: `uv run python API/service.py --port 9000 --banks-url … --registries-url … --as-of …`.
+- Consent sets and jobs live in memory and reset on restart.
+
+### The mock services
+
+| Service | Notes |
+|---|---|
+| **Bank mock** (`API/mock_banks.py`, :8000) | Serves all 100,000 generated customers through the unchanged bank dialects by replaying a customer's plan on demand (about 10 ms). `POST /_mock/session/{bank}?customer=…` gives an approved consent and token (skip mode); the bank routes (`/{bank}/…`) need `Authorization` and `Consent-ID`. Also `/_mock/banks`, `/_mock/kyc/{customer}`, `/_mock/clock`. |
+| **RS and Creditinfo mock** (`API/mock_registries.py`, :8001) | Read from the generated customer records; nothing is simulated. Real consent flow (`POST …/v1/consents`, status, authorise) plus `/_mock/session/{service}`. RS serves legal form, citizenship and the `SOI04` income item (the data dictionary defines it as income from remittances); Creditinfo serves search counts and counts of open and closed contracts. The income label is never served. |
+
+More in [`API/README.md`](API/README.md); the 12 bank dialects are documented in
+[`openbanking_mock/README.md`](openbanking_mock/README.md) and `openbanking_mock/docs/`.
+
+## 7. The model and the confidence score
+
+- **Model:** XGBoost quantile regression (P10 / P50 / P90) on 100,000 synthetic clients, 80/20 split by person.
+  Train with `uv run python income/income_predictor.py train`; the saved model is `income/models/income_model.joblib`.
+- **Confidence** (`income/confidence.py`): `band_share = (P90 - P10) / P50`; **score = 100% minus band_share**;
+  labels by fixed cut-offs: very high up to 3%, high up to 6%, medium up to 10%, low up to 20%, very low above.
+  The score measures how *precise* the range is; it is **not the chance of being right**.
+- **Measured hit rate** (`uv run python income/confidence_calibration.py` writes
+  `income/models/confidence_calibration.json`): on the 20,000 clients the model never trained on, the real income fell
+  inside P10 to P90 for 80.5% of clients overall (the band is built for 80%), with a median error of 0.78%. Per label:
+
+  | Label | Share of clients | Inside P10–P90 | Median error |
+  |---|---|---|---|
+  | very high | 50% | 83.7% | 0.45% |
+  | high | 19% | 81.5% | 0.96% |
+  | medium | 20% | 73.9% | 2.47% |
+  | low | 10% | 77.2% | 3.63% |
+  | very low | 0.6% | 62.1% | 7.30% |
+
+  The range never always contains the real income; the demo clients are chosen to show that (8 of 10 inside).
+- **Explanations:** exact TreeSHAP values from XGBoost (`pred_contribs`) for the P50 head, grouped into readable drivers
+  in `API/explain.py`. They add up: the average client's 2,717 GEL plus all factors equals the P50.
+- **Demo clients:** `uv run python API/pick_demo_clients.py` re-picks ten typical clients from the held-out 20%.
+
+## 8. Repository map
+
+| Folder | What is in it |
+|---|---|
+| `API/` | the three FastAPI services, the SHAP explainer, the demo-client picker, `demo_clients.json` |
+| `frontend/` | the React + Vite page ([`frontend/README.md`](frontend/README.md)) |
+| `income/` | the modelling: dataset builder, notebooks, `income_predictor.py` (train / predict), `income_pipeline.py` (raw bank data to estimate), `confidence.py`, calibration |
+| `openbanking_mock/` | the generator and mock servers for 12 Georgian banks over 100,000 simulated customers (`obmock` package) |
+| `nbg_synthetic_data/` | the organisers' loan and credit-registry data (`df_1..10.csv`, data dictionary) and `income_dataset.csv` (one row per person with the label) |
+| `eda/` | pre-modelling EDA of the loan and bank data ([`eda/README.md`](eda/README.md)) |
+| `synthetic/`, `tools/`, `tests/` | synthetic loan generator, helper scripts (`tools/demo.sh`), tests |
+
+## 9. Rebuilding data and model
+
+Only needed if you change the generator or the model; the demo needs none of this.
+
+```bash
+cd openbanking_mock && uv run python -m obmock generate        # 100,000 customers -> output/dataset (~10 min on 16 cores, ~2 GB)
+uv run python income/build_income_dataset.py                    # api/ shards -> nbg_synthetic_data/income_dataset.csv
+uv run python income/income_predictor.py train                  # -> income/models/income_model.joblib
+uv run python income/confidence_calibration.py                  # -> income/models/confidence_calibration.json
+uv run python API/pick_demo_clients.py                          # -> API/demo_clients.json
+```
+
+The large generated files (`api/transactions`, `truth/ledger`, `captures`) are not in git; the demo does not need them
+because the bank mock simulates each customer on demand.
+
+## 10. Honest limits
+
+- **Everything is synthetic.** The income label and the bank data come from the same simulator, so the model finds income
+  almost directly in the salary credits. The accuracy figures above compare confidence levels with each other; they are
+  not real-world accuracy, and a real bank would see much wider errors.
+- **RS data is thin.** The only RS-like field in the data is `SOI04`, defined as income from remittances and stored on a
+  mixed scale; the mock serves it as it is and does not invent salary, dividends or rent.
+- **Mocks, not the real thing.** mTLS, JWS signatures and real SCA / OAuth redirects are not enforced; the consent is
+  approved in "skip mode". No bank publishes sandbox test data, so no mock claims to equal one.
+- **Not built yet:** the affordability step (maximum loan payment from the P10 end and the National Bank's limits).
+- Georgian bank API fields follow each bank's published spec; what is assumed is flagged in `openbanking_mock/docs/`.
+
+## 11. More documentation
+
+[`API/README.md`](API/README.md) · [`frontend/README.md`](frontend/README.md) · [`eda/README.md`](eda/README.md) ·
+[`openbanking_mock/README.md`](openbanking_mock/README.md) · `CLAUDE.md` (project context for the coding assistant)
