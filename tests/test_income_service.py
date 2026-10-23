@@ -39,8 +39,14 @@ def clients(modules):
 
 
 @pytest.fixture(scope="module")
-def stack(modules, clients):
-    return TestClient(modules[2].create_app(*clients, as_of=AS_OF))
+def stack(modules, clients, tmp_path_factory):
+    store = modules[2].CaseStore(tmp_path_factory.mktemp("integration-audit") / "audit.sqlite3")
+    api = TestClient(modules[2].create_app(*clients, as_of=AS_OF, store=store))
+    yield api
+    api.app.state.service.pool.shutdown(wait=True)
+    api.close()
+    for client in clients:
+        client.close()
 
 
 def _consents(api, who):
@@ -147,7 +153,8 @@ def test_no_bank_data_gives_very_low_confidence_with_a_warning(stack):
     result = _estimate(stack, table["consent_set_id"])["result"]
     assert result["confidence"]["level"] == "very low" and result["data"]["banks_used"] == []
     assert any("no bank data" in r for r in result["confidence"]["downgrade_reasons"])
-    assert result["confidence"]["measured"] is None and result["confidence"]["score"] <= 79
+    assert result["confidence"]["measured"] is None and result["confidence"]["score"] is None
+    assert result["income"] is None and result["outcome"] == "abstained"
     assert result["warnings"]
 
 
@@ -217,7 +224,7 @@ def test_all_factors_add_up_and_carry_percentages(stack):
 
 def test_response_carries_only_what_the_portal_shows(stack):
     result = _estimate(stack, _consents(stack, CID)["consent_set_id"])["result"]
-    assert not {"cleaning", "loan_request", "rs_declared"} & set(result)
+    assert {"cleaning", "evidence", "rs_declared"} <= set(result)
     assert result["sources_used"] == {"rs": True, "creditinfo": True}
     assert len(result["data"]["banks_used_names"]) == len(result["data"]["banks_used"])
 
@@ -248,13 +255,17 @@ def test_sources_lists_every_consent_target(stack):
 
 def test_demo_clients_file_is_ten_distinct_clients():
     clients = json.loads((ROOT / "API" / "demo_clients.json").read_text())
-    assert len(clients) == 10 and len({c["personal_id"] for c in clients}) == 10
+    assert len(clients) == 20 and len({c["personal_id"] for c in clients}) == 20
     assert all({"title", "story", "facts", "banks", "has_deposit", "personal_id"} <= set(c) for c in clients)
 
 
 def test_history_window_follows_as_of_or_else_where_the_bank_data_ends(stack, modules, clients):
     health = stack.get("/health").json()
     assert health["history_window_ends"] == AS_OF.isoformat() and health["model_trained_to"].startswith("2026-10-19")
+    result = _estimate(stack, _consents(stack, CID)["consent_set_id"])["result"]
+    assert result["evidence"]["window"]["to"] == AS_OF.isoformat()
+    assert result["evidence"]["window"]["from"] == "2025-10-22"
+    assert health["model_window"] == health["model_trained_to"]
     default = TestClient(modules[2].create_app(*clients))  # no --as-of: the mock banks say their data ends 2026-10-19
     assert default.get("/health").json()["history_window_ends"] == "2026-10-19"
 

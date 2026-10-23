@@ -89,7 +89,7 @@ Then open **http://localhost:5173**. Swagger for the income API is at http://loc
 
 ## 5. Using the demo
 
-1. Pick one of the **ten demo clients** on the left (or type an 11-digit personal ID, or a client code `C00001` to
+1. Pick one of the **20 existing demo clients** on the left (or type an 11-digit personal ID, or a client code `C00001` to
    `C100000`). The list runs from the clearest estimate to the hardest, and covers different bank mixes (BoG + TBC + a
    third bank, no TBC, small banks only), deposits, young, rural, sole proprietors, no salary credits, and remittances.
 2. **Connect all banks.** Every bank, RS and Creditinfo gets its own animated request. The client profile appears
@@ -110,7 +110,7 @@ Then open **http://localhost:5173**. Swagger for the income API is at http://loc
 | `POST /v1/income-estimates` `{"consent_set_id": "…"}` | Starts the job and returns `202` with a `job_id` at once. |
 | `GET /v1/income-estimates/{job_id}` | `status` (`queued`, `running`, `done`, `failed`), `stage`, one progress line per source, and when done the `result`. |
 | `GET /v1/sources` | The 12 banks plus RS and Creditinfo (what a consent request goes to). |
-| `GET /v1/demo/clients` | The ten demo clients. |
+| `GET /v1/demo/clients` | The 20 existing demo clients. |
 | `GET /health` | Model date and the end of the history window. |
 
 ```bash
@@ -173,10 +173,10 @@ More in [`API/README.md`](API/README.md); the 12 bank dialects are documented in
   | low | 10% | 77.2% | 3.63% |
   | very low | 0.6% | 62.1% | 7.30% |
 
-  The range never always contains the real income; the demo clients are chosen to show that (8 of 10 inside).
+  The range does not always contain actual income. The ten clients added on main include eight hits and two near-misses; the combined catalog also preserves the ten original clients.
 - **Explanations:** exact TreeSHAP values from XGBoost (`pred_contribs`) for the P50 head, grouped into readable drivers
   in `API/explain.py`. They add up: the average client's 2,717 GEL plus all factors equals the P50.
-- **Demo clients:** `uv run python API/pick_demo_clients.py` re-picks ten typical clients from the held-out 20%.
+- **Demo clients:** `uv run python API/pick_demo_clients.py` selects ten typical clients from the held-out 20% and retains existing catalog entries, including C50811.
 
 ## 8. Repository map
 
@@ -221,3 +221,5 @@ because the bank mock simulates each customer on demand.
 
 [`API/README.md`](API/README.md) · [`frontend/README.md`](frontend/README.md) · [`eda/README.md`](eda/README.md) ·
 [`openbanking_mock/README.md`](openbanking_mock/README.md) · `CLAUDE.md` (project context for the coding assistant)
+
+Integration demo details, audit limitations and the Python launcher: [API/DEMO_GUIDE.md](API/DEMO_GUIDE.md).

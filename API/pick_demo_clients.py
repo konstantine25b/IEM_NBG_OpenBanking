@@ -135,7 +135,9 @@ def main() -> None:
             f"{r.cid}  {title:32s} actual {r[LABEL]:7.0f}  P50 {r.p50:7.0f}  err {r.error_pct:4.1f}%  "
             f"band {100 * r.band_share:4.1f}%  {r.level}  {'inside' if r[LABEL] >= r.p10 and r[LABEL] <= r.p90 else 'OUTSIDE'}"
         )
-    picked.sort(key=lambda c: c["band_share"])
+    previous = json.loads(OUT.read_text()) if OUT.exists() else []
+    catalog = {c["id"]: c for c in previous + picked}
+    picked = sorted(catalog.values(), key=lambda c: (c["id"] != "C50811", c["band_share"]))
     OUT.write_text(json.dumps(picked, indent=2, ensure_ascii=False))
     print(f"wrote {OUT}")
 

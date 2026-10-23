@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useCountUp, useMounted } from '../hooks.js'
+import WarningLabel from './WarningLabel.jsx'
 
 const gel = (n) => new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(n)
 
@@ -40,12 +41,12 @@ function ConfidenceDetail({ confidence, income }) {
       <h3>How sure is this?</h3>
       {confidence.score != null && (
         <div className="score">
-          <div className="score-num"><strong>{Math.round(shown)}%</strong> confidence score</div>
+          <div className="score-num"><strong>{Math.round(shown)}/100</strong> confidence score</div>
           <div className="score-track" role="img" aria-label={`Confidence score ${confidence.score} out of 100`}>
             <div className={`score-fill ${LEVEL_CLASS[confidence.level] ?? 'warn'}`} style={{ width: grown ? `${confidence.score}%` : '0%' }} />
           </div>
           <p className="hint">
-            Score = 100% − band width. The P10–P90 band spans <strong>{gel(income.p90 - income.p10)} GEL</strong>{' '}
+            Score out of 100 = 100 × (1 − relative band width). The P10–P90 band spans <strong>{gel(income.p90 - income.p10)} GEL</strong>{' '}
             ({(confidence.band_share * 100).toFixed(1)}% of the P50), so the estimate is{' '}
             <strong>P50 ±{confidence.plus_minus_pct}%</strong>. It shows how precise the range is; it is not the chance of
             being right.
@@ -71,7 +72,7 @@ function ConfidenceDetail({ confidence, income }) {
           <p className="hint">Measured on {m.basis}.</p>
         </>
       ) : (
-        <p className="hint">This label comes from the data-sufficiency rules, not from the model, so no accuracy has been measured for it.</p>
+        <p className="hint"><WarningLabel />: No matched calibration is available for this source combination or data-sufficiency outcome.</p>
       )}
     </section>
   )
@@ -158,43 +159,42 @@ function Drivers({ explanation }) {
 }
 
 export default function Result({ result }) {
-  const { income, confidence, warnings, data, explanation } = result
-  const p50 = useCountUp(income.p50, 1500)
+  const { income, confidence, warnings, data, cleaning, explanation } = result
+  const p50 = useCountUp(income?.p50 ?? 0, 1500)
   const levelClass = LEVEL_CLASS[confidence.level] ?? 'warn'
   return (
     <div className="result">
-      <section className="card hero enter">
+      {income ? <section className="card hero enter">
         <div className="headline">
           <div>
             <div className="eyebrow">Estimated sustainable income</div>
             <div className="big">{gel(p50)} <small>GEL / month</small></div>
           </div>
           <span className={`badge ${levelClass}`}>
-            Confidence: {confidence.level}{confidence.score != null && ` · ${confidence.score}%`}
+            {levelClass !== 'ok' && <><WarningLabel />: </>}Confidence: {confidence.level}{confidence.score != null && ` · ${confidence.score}/100`}
           </span>
         </div>
         <RangeBar p10={income.p10} p50={income.p50} p90={income.p90} />
-      </section>
+      </section> : <section className="card notice bad"><h2><WarningLabel />: Insufficient evidence — estimate withheld</h2><p>Request more bank evidence. An officer cannot accept an estimate that was not produced.</p></section>}
 
       {(confidence.downgrade_reasons.length > 0 || warnings.length > 0) && (
         <section className="notices">
           {confidence.downgrade_reasons.length > 0 && (
             <div className="notice bad">
-              <strong>Confidence lowered to “very low”</strong>
+              <strong><WarningLabel />: Confidence lowered to “very low”</strong>
               <ul>{confidence.downgrade_reasons.map((r) => <li key={r}>{r}</li>)}</ul>
             </div>
           )}
           {warnings.length > 0 && (
             <div className="notice warn">
-              <strong>Warnings</strong>
-              <ul>{warnings.map((w) => <li key={w}>{w}</li>)}</ul>
+              <ul>{warnings.map((w) => <li key={w}><WarningLabel />: {w}</li>)}</ul>
             </div>
           )}
         </section>
       )}
 
       <div className="two">
-        <ConfidenceDetail confidence={confidence} income={income} />
+        {income && <ConfidenceDetail confidence={confidence} income={income} />}
         <Drivers explanation={explanation} />
       </div>
 
@@ -204,6 +204,20 @@ export default function Result({ result }) {
           <div><dt>History</dt><dd>{data.months_covered} months</dd></div>
           <div><dt>Transactions used</dt><dd>{gel(data.transactions_used)}</dd></div>
         </dl>
+        <details>
+          <summary>How the data was cleaned</summary>
+          <table className="small">
+            <tbody>
+              <tr><td>Transactions received</td><td className="num-col">{gel(cleaning.received)}</td></tr>
+              <tr><td>Pending (not counted)</td><td className="num-col">{gel(cleaning.pending)}</td></tr>
+              <tr><td>Card mirror entries</td><td className="num-col">{gel(cleaning.card_mirrors)}</td></tr>
+              <tr><td>Transfers between own accounts</td><td className="num-col">{gel(cleaning.own_account_transfers)}</td></tr>
+              <tr><td>Loan disbursements</td><td className="num-col">{gel(cleaning.loan_disbursements)}</td></tr>
+              <tr><td>Refunds</td><td className="num-col">{gel(cleaning.refunds)}</td></tr>
+              <tr><td><strong>Transactions retained for analysis</strong></td><td className="num-col"><strong>{gel(cleaning.used_for_income)}</strong></td></tr>
+            </tbody>
+          </table>
+        </details>
         <p className="hint">All data is synthetic; the estimate shows how the method works, not real-world accuracy.</p>
       </section>
     </div>

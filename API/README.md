@@ -17,7 +17,7 @@ Swagger: http://localhost:9000/docs (also :8000/docs, :8001/docs). All state is 
 | `POST /v1/consents {"personal_id"}` | Consent requests to all 12 banks, RS and Creditinfo in parallel (the mock approves at once). Returns the bank table (accounts, "no relationship" banks) and the client profile with the source of each field. A bank that fails is marked `error`; the rest carry on. |
 | `POST /v1/income-estimates {"consent_set_id"}` | Starts the job, returns `job_id` at once. |
 | `GET /v1/income-estimates/{job_id}` | Progress per source, then the result: P10/P50/P90, confidence (label, precision score, measured hit rate), warnings, SHAP drivers. |
-| `GET /v1/sources`, `GET /v1/demo/clients`, `GET /health` | The consent targets, the ten demo clients, and the window the history is taken from. |
+| `GET /v1/sources`, `GET /v1/demo/clients`, `GET /health` | The consent targets, the 20 existing demo clients, and the window the history is taken from. |
 
 A source without consent (RS, Creditinfo or a bank) is skipped with a warning; the estimate still runs.
 

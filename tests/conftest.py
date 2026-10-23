@@ -25,7 +25,7 @@ def mini_dataset(tmp_path_factory) -> Path:
     return out
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="module")
 def mock_registries_on_mini(mini_dataset):
     """mock_registries reading the 240-customer truth tables instead of the full dataset."""
     import mock_registries as mr

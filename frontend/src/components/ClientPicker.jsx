@@ -26,7 +26,7 @@ export default function ClientPicker({ personalId, onChange, onSubmit, busy, con
       {clients.length > 0 && (
         <details className="demo-list" open={open} onToggle={(e) => setOpen(e.currentTarget.open)}>
           <summary>Demo clients ({clients.length})</summary>
-          <p className="hint">Ten kinds of person, from the clearest estimate to the hardest. None of them was used to train the model.</p>
+          <p className="hint">{clients.length} existing demo clients, from the clearest estimate to the hardest. None of them was used to train the model.</p>
           <ul className="clients">
             {clients.map((c) => (
               <li key={c.id}>
@@ -41,6 +41,7 @@ export default function ClientPicker({ personalId, onChange, onSubmit, busy, con
                   title={c.story}
                 >
                   <strong>{c.title}</strong>
+                  <span className="meta mono">{c.id}</span>
                   <span className="meta">{c.facts}</span>
                   <span className="tags">
                     {c.banks.map((b) => <em key={b} className="tag">{b}</em>)}

@@ -16,7 +16,7 @@ GROUPS: list[tuple[str, tuple[str, ...]]] = [
     ("Salary credits", ("ob_salary",)),
     ("Total money coming in", ("ob_inflow",)),
     ("Transfers and remittances", ("ob_remit", "ob_p2p")),
-    ("RS income item (SOI04)", ("INCOME_AMOUNT_SOI04",)),
+    ("RS remittance income (SOI04)", ("INCOME_AMOUNT_SOI04",)),
     (
         "Credit bureau (Creditinfo)",
         ("last1Month", "last3Month", "last6Month", "last12Month", "ExistingOperations", "TerminatedOperations"),
@@ -71,7 +71,7 @@ FEATURE_LABELS = {
     "ob_fee_share": "Share of spending on fees", "ob_credit_limit_ratio": "Credit card limit (vs. income)",
     "ob_has_credit_card": "Has a credit card", "ob_n_banks": "Number of banks", "ob_n_current_accounts": "Current accounts",
     "ob_n_fx_accounts": "Foreign-currency accounts", "ob_n_cards": "Cards", "ob_tx_per_month": "Transactions per month",
-    "INCOME_AMOUNT_SOI04": "RS income item (SOI04)", "last1Month": "Credit searches, last month",
+    "INCOME_AMOUNT_SOI04": "RS remittance income (SOI04)", "last1Month": "Credit searches, last month",
     "last3Month": "Credit searches, last 3 months", "last6Month": "Credit searches, last 6 months",
     "last12Month": "Credit searches, last 12 months", "ExistingOperationsDebtor": "Open loans and contracts",
     "TerminatedOperationsDebtor": "Closed loans and contracts", "Age": "Age",

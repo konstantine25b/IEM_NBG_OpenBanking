@@ -22,14 +22,17 @@ was trained on.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import re
 import sys
+import threading
 import time
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
@@ -39,10 +42,13 @@ for p in (HERE, REPO / "income", REPO / "eda", REPO / "openbanking_mock"):
 import httpx  # noqa: E402
 import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
+from case_store import CaseStore, canonical, timestamp  # noqa: E402
 from confidence import LOWEST, level_of, score_of  # noqa: E402
 from confidence import scale as confidence_scale  # noqa: E402
+from demo_evidence import mask, transaction_evidence  # noqa: E402
 from explain import explain_p50  # noqa: E402
-from fastapi import FastAPI  # noqa: E402
+from fastapi import FastAPI, HTTPException  # noqa: E402
+from fastapi import Request as WebRequest  # noqa: E402
 from fastapi.middleware.cors import CORSMiddleware  # noqa: E402
 from fastapi.responses import JSONResponse  # noqa: E402
 from income_pipeline import build_row  # noqa: E402
@@ -79,6 +85,8 @@ class HttpGateway:
         self.client = client
         self.credentials = credentials  # bank -> (Authorization header, consent id)
         self.dialects = build_dialects(World(WorldConfig()))  # the routes of each bank's API, no data
+        self.demo_unavailable = False
+        self.on_call = None
 
     def handle(self, bank: str, req: Request) -> Response:
         authorization, consent_id = self.credentials[bank]
@@ -90,7 +98,14 @@ class HttpGateway:
             "Accept": "application/json",
             **TPP_KEYS.get(bank, {}),
         }
+        if self.demo_unavailable:
+            headers["X-Demo-Failure"] = "unavailable"
+        start = time.perf_counter()
         r = self.client.request(req.method, f"/{bank}{req.path}", params=req.query, headers=headers)
+        if self.on_call:
+            self.on_call({"source": bank, "method": req.method,
+                          "route": re.sub(r"/[0-9a-f-]{20,}", "/{resource}", req.path),
+                          "http_status": r.status_code, "duration_ms": round((time.perf_counter()-start)*1000, 2)})
         return Response(r.status_code, r.json() if r.content else None)
 
 
@@ -100,6 +115,8 @@ def fetch_bank(gateway: HttpGateway, bank: str, subject: str, date_from: str) ->
     denied = [c for c in capture["calls"] if c["status"] in (401, 403)]
     if denied:
         raise PermissionError(f"{bank} refused the consent ({denied[0]['status']})")
+    if any(c["status"] >= 500 for c in capture["calls"]):
+        raise ConnectionError(f"{bank} returned an unavailable response")
     d = gateway.dialects[bank]
     return harvest(capture, Router(d.routes()), d.normalize_path)
 
@@ -170,10 +187,23 @@ def _same_name(kyc: dict, owner_name: str | None) -> bool:
 class EstimateRequest(BaseModel):
     consent_set_id: str
     applicant: dict[str, Any] | None = None  # overrides the KYC record: age, sex, region_name, city
+    loan_request: dict[str, Any] | None = None  # echoed back; the affordability step is not part of this API yet
+    demo_failure: Literal["none", "rs_unavailable", "banks_unavailable"] = "none"
 
 
 class ConsentRequest(BaseModel):
     personal_id: str
+
+
+class ReviewRequest(BaseModel):
+    decision: Literal["accepted", "more_evidence", "rejected"]
+    reason: str
+    acknowledge_uncertainty: bool = False
+
+
+class BenchmarkAnswer(BaseModel):
+    payment_count: int
+    total_gel: float
 
 
 class Service:
@@ -183,10 +213,12 @@ class Service:
         registries: httpx.Client,
         model: IncomeModel | None = None,
         as_of: date | None = None,
+        store: CaseStore | None = None,
     ) -> None:
         self.banks, self.registries = banks, registries
         self.as_of = as_of  # None: the window ends where the banks' data ends
         self.model = model or IncomeModel.load()
+        self.store = store or CaseStore(REPO / ".runtime" / "audit.sqlite3")
         self.calibration = json.loads(CALIBRATION.read_text()) if CALIBRATION.exists() else None
         self.pool = ThreadPoolExecutor(max_workers=24)
         self.consent_sets: dict[str, dict] = {}
@@ -338,7 +370,7 @@ class Service:
         }
 
     # ---- phase 2: the estimate ----
-    def start(self, req: EstimateRequest) -> dict | None:
+    def start(self, req: EstimateRequest, owner: str = "demo") -> dict | None:
         record = self.consent_sets.get(req.consent_set_id)
         if record is None:
             return None
@@ -359,10 +391,36 @@ class Service:
             ],
             "result": None,
             "error": None,
+            "subject": next((d["id"] for d in json.loads(DEMO_CLIENTS.read_text()) if d["personal_id"] == record["personal_id"]), mask(record["personal_id"])),
+            "scenario": req.demo_failure,
+            "model_sha256": getattr(self.model, "artifact_sha256", "unavailable"),
+            "trace": [], "review": None,
+            "consent_summary": {"mode": "Simulated automatic authorization; subsequent source calls validate consent",
+                                "scope": ["accounts", "balances", "transactions (12 months)", "RS remittances", "Creditinfo"],
+                                "sources": [{"source": b["bank"], "status": b["status"], "accounts": b["accounts"],
+                                             "consent": mask(b.get("consent_id")), "valid_until": b.get("valid_until")}
+                                            for b in record["banks"]] +
+                                    [{"source": key, "status": record[key]["status"], "consent": mask(record[key].get("consent_id"))}
+                                     for key in ("rs", "creditinfo")]},
+            "_owner": owner, "_started": time.perf_counter(), "_lock": threading.RLock(),
         }
         self.jobs[job_id] = job
+        self._save(job)
+        self._event(job, "Case created", {"scenario": req.demo_failure, "model_sha256": job["model_sha256"],
+                                          "consents": job["consent_summary"]})
         self.pool.submit(self._run, job, record, req.applicant)
         return job
+
+    def _save(self, job: dict) -> None:
+        self.store.save(self.public_job(job), job["_owner"])
+
+    def _event(self, job: dict, stage: str, detail: dict | None = None) -> None:
+        with job["_lock"]:
+            event = {"at": timestamp(), "elapsed_ms": round((time.perf_counter() - job["_started"]) * 1000, 2),
+                     "stage": stage, "detail": detail or {}}
+            job["trace"].append(event)
+            self.store.append(job["job_id"], stage, "system", event)
+            self._save(job)
 
     @staticmethod
     def _set(job: dict, source: str, state: str, detail: str = "") -> None:
@@ -370,8 +428,11 @@ class Service:
             if step["source"] == source:
                 step["state"], step["detail"] = state, detail
 
-    def _check_consent(self, client: httpx.Client, path: str) -> str | None:
-        reply = client.get(path, headers={"X-Request-ID": str(uuid.uuid4())})
+    def _check_consent(self, client: httpx.Client, path: str, extra_headers: dict | None = None) -> str | None:
+        try:
+            reply = client.get(path, headers={"X-Request-ID": str(uuid.uuid4()), **(extra_headers or {})})
+        except httpx.HTTPError as exc:
+            return type(exc).__name__
         if reply.status_code != 200:
             return f"consent status call answered {reply.status_code}"
         status = reply.json().get("consentStatus")
@@ -383,26 +444,33 @@ class Service:
             return self._pull_bank_call(job, gateway, entry, date_from, personal_id)
         except Exception as e:  # noqa: BLE001  one failing bank must not sink the estimate
             self._set(job, bank, "failed", f"{type(e).__name__}: {e}")
+            self._event(job, "Source request failed", {"source": bank, "reason": type(e).__name__})
             return bank, None
 
     def _pull_bank_call(self, job: dict, gateway: HttpGateway, entry: dict, date_from: str, personal_id: str):
+        start = time.perf_counter()
         bank = entry["bank"]
         self._set(job, bank, "running", "checking consent")
+        self._event(job, "Source request started", {"source": bank})
         d = gateway.dialects[bank]
         status_route = next((t for m, t, op in d.route_table() if m == "GET" and op == "consent_status"), None)
         problem = (
-            self._check_consent(self.banks, f"/{bank}{status_route.format(consentId=entry['consent_id'])}")
+            self._check_consent(self.banks, f"/{bank}{status_route.format(consentId=entry['consent_id'])}",
+                                {"X-Demo-Failure": "unavailable"} if job["scenario"] == "banks_unavailable" else {})
             if status_route
             else None
         )
         if problem:
             self._set(job, bank, "failed", problem)
+            self._event(job, "Source request failed", {"source": bank, "reason": problem,
+                                                       "duration_ms": round((time.perf_counter()-start)*1000, 2)})
             return bank, None
         self._set(job, bank, "running", "fetching accounts and transactions")
         try:
             rows = fetch_bank(gateway, bank, personal_id, date_from)
         except Exception as e:  # noqa: BLE001  one failing bank must not sink the estimate
-            self._set(job, bank, "failed", str(e))
+            self._set(job, bank, "failed", type(e).__name__)
+            self._event(job, "Source request failed", {"source": bank, "reason": type(e).__name__})
             return bank, None
         n_acc = len(
             {
@@ -413,38 +481,49 @@ class Service:
         )
         n_tx = sum(1 for r in rows["transactions"] if not r["is_card_mirror"] and r["status"] == "booked")
         self._set(job, bank, "done", f"{n_acc} account{'' if n_acc == 1 else 's'}, {n_tx} transactions")
+        self._event(job, "Source request completed", {"source": bank, "accounts": n_acc, "transactions": n_tx,
+                                                     "balances": len(rows["balances"]),
+                                                     "duration_ms": round((time.perf_counter()-start)*1000, 2)})
         return bank, rows
 
     def _pull_registry(self, job: dict, service: str, entry: dict, path: str):
-        """RS or Creditinfo. Without a granted consent, or on any failure, this source is skipped and the estimate goes on."""
-        if entry.get("status") != "connected":
-            self._set(job, service, "failed", "consent was not granted")
-            return None
+        start = time.perf_counter()
+        self._set(job, service, "running", "checking consent")
+        self._event(job, "Source request started", {"source": service})
         try:
-            self._set(job, service, "running", "checking consent")
+            if entry.get("status") != "connected":
+                raise PermissionError("consent was not granted")
             headers = {"Authorization": entry["authorization"], "Consent-ID": entry["consent_id"]}
+            if service == "rs" and job["scenario"] == "rs_unavailable":
+                headers["X-Demo-Failure"] = "unavailable"
             problem = self._check_consent(self.registries, f"/{service}/v1/consents/{entry['consent_id']}/status")
             if problem:
-                self._set(job, service, "failed", problem)
-                return None
+                raise PermissionError(problem)
             reply = self.registries.get(path, headers=headers)
-            if reply.status_code != 200:
-                self._set(job, service, "failed", f"answered {reply.status_code}")
-                return None
+            reply.raise_for_status()
             body = reply.json()
-        except (httpx.HTTPError, ValueError, KeyError, TypeError) as e:
-            self._set(job, service, "failed", f"{type(e).__name__}: {e}")
+        except Exception as exc:
+            detail = f"HTTP {exc.response.status_code}" if isinstance(exc, httpx.HTTPStatusError) else type(exc).__name__
+            self._set(job, service, "failed", detail)
+            self._event(job, "Source request failed", {"source": service, "reason": detail,
+                                                       "duration_ms": round((time.perf_counter()-start)*1000, 2)})
             return None
         self._set(job, service, "done", "data gathered")
+        self._event(job, "Source request completed", {"source": service, "http_status": reply.status_code,
+                                                     "duration_ms": round((time.perf_counter()-start)*1000, 2)})
         return body
 
     def _run(self, job: dict, record: dict, applicant: dict | None) -> None:
         try:
             job["status"], job["stage"] = "running", "fetching"
-            as_of = pd.Timestamp(self.today())  # the window ends today, not where the model was trained
+            collection_start = time.perf_counter()
+            self._event(job, "Parallel collection started", {"sources": [p["source"] for p in job["progress"]]})
+            as_of = pd.Timestamp(self.today())
             date_from = (as_of - pd.DateOffset(months=HISTORY_MONTHS)).date().isoformat()
             connected = {b["bank"]: b for b in record["banks"] if b["status"] == "connected"}
             gateway = self._gateway_for(connected)
+            gateway.demo_unavailable = job["scenario"] == "banks_unavailable"
+            gateway.on_call = lambda detail: self._event(job, "Bank API call", detail)
             pid = record["personal_id"]
             bank_jobs = [self.pool.submit(self._pull_bank, job, gateway, e, date_from, pid) for e in connected.values()]
             rs_job = self.pool.submit(self._pull_registry, job, "rs", record["rs"], "/rs/v1/income-declarations")
@@ -453,32 +532,64 @@ class Service:
             )
             pulled = dict(f.result() for f in bank_jobs)
             rs_body, ci_body = rs_job.result(), ci_job.result()
+            self._event(job, "Parallel collection completed", {"duration_ms": round((time.perf_counter()-collection_start)*1000, 2)})
 
             job["stage"] = "cleaning"
+            normalize_start = time.perf_counter()
             got = {b: r for b, r in pulled.items() if r is not None}
             tables = {
                 t: to_table(t, [row for r in got.values() for row in r[t]]).to_pandas()
                 for t in ("accounts", "balances", "transactions")
             }
+            self._event(job, "Bank dialects normalized", {"rows": {t: len(frame) for t, frame in tables.items()},
+                                                        "duration_ms": round((time.perf_counter()-normalize_start)*1000, 2)})
+            evidence_start = time.perf_counter()
             cleaning = clean(tables)
+            evidence = transaction_evidence(tables, {**self.model.state["ob_window"], "as_of": as_of.date().isoformat()})
+            evidence["registries"] = {
+                "rs": {key: rs_body[key] for key in ("taxpayer", "incomeItems")} if rs_body else None,
+                "creditinfo": {key: ci_body[key] for key in ("inquiries", "contracts")} if ci_body else None,
+            }
+            evidence["aggregation_ms"] = round((time.perf_counter()-evidence_start)*1000, 3)
+            self._event(job, "Transaction evidence generated", {"cleaning": cleaning,
+                                                              "service_payments": evidence["service_payments"]["count"],
+                                                              "snapshot_sha256": evidence["snapshot_sha256"],
+                                                              "duration_ms": evidence["aggregation_ms"]})
 
             job["stage"] = "scoring"
+            feature_start = time.perf_counter()
             kyc = {**(record["kyc"] or {}), **(applicant or {})}
             registry = to_registry(kyc, rs_body, ci_body)
             open_banking = tables if got else None
             row = build_row(registry, open_banking, self.model, as_of=as_of.date().isoformat())
-            matrix = self.model.transform(self.model.prepare(row))
-            out = self.model.predict(row).iloc[0]
             features = {k: v for k, v in row.items() if k.startswith("ob_")}
-            explanation = explain_p50(self.model, matrix, float(out["p50"]))
+            self._event(job, "Model features generated", {
+                "feature_count": len(self.model.state["feature_names"]),
+                "salary_credits_gel": float(row["ob_salary_month"]) if pd.notna(row.get("ob_salary_month")) else None,
+                "rs_remittances_gel": registry.get("INCOME_AMOUNT_SOI04"),
+                "duration_ms": round((time.perf_counter()-feature_start)*1000, 2)})
 
             tx = tables["transactions"]
             booked = (
                 tx[(tx["status"] == "booked") & ~tx["is_card_mirror"].fillna(False).astype(bool)] if len(tx) else tx
             )
             months = float((as_of - pd.to_datetime(booked["booking_date"]).min()).days / 30.44) if len(booked) else 0.0
-            band = float(out["band_share"])
-            level, reasons, warnings = judge_confidence(level_of(band), months, len(booked), features, len(got))
+            _, reasons, warnings = judge_confidence(LOWEST, months, len(booked), features, len(got))
+            if reasons:
+                income, explanation, band, level = None, None, None, LOWEST
+                self._event(job, "Inference withheld", {"reasons": reasons})
+            else:
+                infer_start = time.perf_counter()
+                out = self.model.predict(row).iloc[0]
+                income = {k: float(out[k]) for k in ("p10", "p50", "p90")} | {"currency": "GEL", "period": "monthly"}
+                band = float(out["band_share"])
+                level = level_of(band)
+                self._event(job, "ML inference completed", {"duration_ms": round((time.perf_counter()-infer_start)*1000, 2),
+                                                          "p50_gel": income["p50"]})
+                explain_start = time.perf_counter()
+                matrix = self.model.transform(self.model.prepare(row))
+                explanation = explain_p50(self.model, matrix, income["p50"])
+                self._event(job, "TreeSHAP explanation completed", {"duration_ms": round((time.perf_counter()-explain_start)*1000, 2)})
             for step in job["progress"]:
                 if step["state"] == "failed":
                     warnings.append(f"{step['label']}: {step['detail']}")
@@ -487,16 +598,17 @@ class Service:
             if not ci_body:
                 warnings.append("No Creditinfo data: the estimate does not use it.")
             job["result"] = {
-                "income": {k: float(out[k]) for k in ("p10", "p50", "p90")} | {"currency": "GEL", "period": "monthly"},
+                "income": income,
+                "outcome": "abstained" if reasons else "estimated",
                 "confidence": {
                     "level": level,
-                    "model_level": level_of(band),
+                    "model_level": level if band is not None else None,
                     "band_share": band,
-                    "plus_minus_pct": round(50 * band, 1),
+                    "plus_minus_pct": round(50 * band, 1) if band is not None else None,
                     "scale": confidence_scale(),
                     "downgrade_reasons": reasons,
-                    "score": self._score(band, bool(reasons)),
-                    "measured": self._measured(level, reasons),
+                    "score": self._score(band, bool(reasons)) if band is not None else None,
+                    "measured": self._measured(level, reasons) if all(p["state"] == "done" for p in job["progress"]) else None,
                 },
                 "explanation": explanation,
                 "warnings": warnings,
@@ -507,10 +619,21 @@ class Service:
                     "transactions_used": cleaning["used_for_income"],
                 },
                 "sources_used": {"rs": bool(rs_body), "creditinfo": bool(ci_body)},
+                "cleaning": cleaning,
+                "rs_declared": {"SOI04": registry.get("INCOME_AMOUNT_SOI04")} if rs_body else None,
+                "loan_request": job.get("loan_request"),
+                "evidence": evidence,
+                "review_required": True,
+                "partial_sources": any(p["state"] == "failed" for p in job["progress"]),
             }
+            job["processing_ms"] = round((time.perf_counter()-job["_started"])*1000, 2)
+            self._event(job, "Case ready for human review", {"outcome": job["result"]["outcome"], "processing_ms": job["processing_ms"],
+                                                           "result_sha256": hashlib.sha256(canonical(job["result"]).encode()).hexdigest()})
             job["status"], job["stage"] = "done", "done"
+            self._save(job)
         except Exception as e:  # noqa: BLE001
-            job["status"], job["stage"], job["error"] = "failed", "failed", f"{type(e).__name__}: {e}"
+            job["status"], job["stage"], job["error"] = "failed", "failed", f"{type(e).__name__}: {re.sub(r'\d{11}', '[redacted]', str(e))[:200]}"
+            self._event(job, "Case failed", {"error": job["error"]})
 
     @staticmethod
     def _score(band_share: float, downgraded: bool) -> int:
@@ -531,34 +654,47 @@ class Service:
 
     @staticmethod
     def public_job(job: dict) -> dict:
-        return {k: v for k, v in job.items() if k != "created"}
+        return {k: v for k, v in job.items() if not k.startswith("_") and k not in ("created", "loan_request")}
 
 
 def create_app(
-    banks: httpx.Client | None = None,
-    registries: httpx.Client | None = None,
-    model: IncomeModel | None = None,
-    as_of: date | None = None,
+    banks: httpx.Client | None = None, registries: httpx.Client | None = None, model: IncomeModel | None = None,
+    store: CaseStore | None = None,
+    *, as_of: date | None = None,
 ) -> FastAPI:
     svc = Service(
         banks or httpx.Client(base_url=BANKS_URL, timeout=60),
         registries or httpx.Client(base_url=REGISTRIES_URL, timeout=60),
         model,
-        as_of,
+        store=store, as_of=as_of,
     )
     app = FastAPI(
         title="Income estimation API", description="Open banking + RS + Creditinfo -> P10 / P50 / P90 monthly income."
     )
-    app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+    app.add_middleware(CORSMiddleware, allow_origins=["http://127.0.0.1:5173", "http://localhost:5173"],
+                       allow_credentials=True, allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
     app.state.service = svc
+    def case_for(case_id: str) -> dict:
+        case = svc.jobs.get(case_id) or svc.store.get(case_id)
+        if case is None:
+            raise HTTPException(404, "Case not found")
+        return case
+
+    def check_write_origin(request: WebRequest) -> None:
+        if request.headers.get("origin") and request.headers["origin"] not in {
+            "http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:9000", "http://127.0.0.1:9000"
+        }:
+            raise HTTPException(403, "Cross-origin write rejected")
 
     @app.get("/health")
     def health():
         return {
             "status": "ok",
             "model_trained_to": svc.model.state["ob_window"]["as_of"],
+            "model_window": svc.model.state["ob_window"]["as_of"],
             "history_window_ends": svc.today().isoformat(),
             "today": date.today().isoformat(),
+            "demo_version": "case-review-v1",
         }
 
     @app.get("/v1/sources")
@@ -575,7 +711,8 @@ def create_app(
         return json.loads(DEMO_CLIENTS.read_text()) if DEMO_CLIENTS.exists() else []
 
     @app.post("/v1/consents", status_code=201)
-    def create_consents(body: ConsentRequest):
+    def create_consents(body: ConsentRequest, request: WebRequest):
+        check_write_origin(request)
         try:
             record = svc.create_consents(body.personal_id.strip())
         except httpx.HTTPError as e:
@@ -592,7 +729,8 @@ def create_app(
         )
 
     @app.post("/v1/income-estimates", status_code=202)
-    def create_estimate(body: EstimateRequest):
+    def create_estimate(body: EstimateRequest, request: WebRequest):
+        check_write_origin(request)
         job = svc.start(body)
         if job is None:
             return JSONResponse({"error": "UNKNOWN_CONSENT_SET"}, status_code=404)
@@ -600,8 +738,102 @@ def create_app(
 
     @app.get("/v1/income-estimates/{job_id}")
     def get_estimate(job_id: str):
-        job = svc.jobs.get(job_id)
-        return svc.public_job(job) if job else JSONResponse({"error": "UNKNOWN_JOB"}, status_code=404)
+        return svc.public_job(case_for(job_id))
+
+    @app.get("/v1/cases/{case_id}")
+    def case(case_id: str):
+        return svc.public_job(case_for(case_id))
+
+    @app.get("/v1/cases/{case_id}/audit")
+    def audit(case_id: str):
+        case_for(case_id)
+        return svc.store.audit(case_id)
+
+    @app.post("/v1/cases/{case_id}/review")
+    def review(case_id: str, body: ReviewRequest, request: WebRequest):
+        check_write_origin(request)
+        with svc.store.lock:
+            case = case_for(case_id)
+            if case["status"] != "done":
+                raise HTTPException(409, "Only completed assessments can be reviewed")
+            if len(body.reason.strip()) < 10:
+                raise HTTPException(422, "Record a review reason of at least 10 characters")
+            result = case["result"]
+            if body.decision == "accepted":
+                if result["outcome"] == "abstained":
+                    raise HTTPException(409, "No estimate is available; request more evidence instead")
+                if (result["confidence"]["level"] in ("low", "very low") or result["partial_sources"]) and not body.acknowledge_uncertainty:
+                    raise HTTPException(409, "Acknowledge the low confidence or missing-source limitation before accepting")
+            case["review"] = {"decision": body.decision, "reason": body.reason.strip(), "reviewer": "demo",
+                              "at": timestamp(), "acknowledge_uncertainty": body.acknowledge_uncertainty,
+                              "scope": "Income estimate review, not loan approval"}
+            svc.store.append(case_id, "Officer review recorded", "demo", case["review"])
+            svc.store.save(svc.public_job(case), case.get("_owner", case.get("owner")))
+        return case["review"]
+
+    @app.post("/v1/cases/{case_id}/benchmark/start")
+    def benchmark_start(case_id: str, request: WebRequest):
+        check_write_origin(request)
+        case = case_for(case_id)
+        if case["status"] != "done" or not case["result"]["evidence"]["transactions"]:
+            raise HTTPException(409, "A collected statement is required")
+        challenge = {"started_unix": time.time(), "started_at": timestamp(), "operator": "demo"}
+        case["benchmark_active"] = challenge
+        svc.store.save(svc.public_job(case), "demo")
+        svc.store.append(case_id, "Manual aggregation started", "demo", {"started_at": challenge["started_at"]})
+        evidence = case["result"]["evidence"]
+        return {"started_at": challenge["started_at"], "window": evidence["window"],
+                "task": "Count and sum positive service-payment credits in the retained normalized statement. "
+                        "Do not count cash deposits or generic P2P receipts. Model output and classifications are hidden during this task.",
+                "transactions": [{k: row[k] for k in ("reference", "bank", "date", "amount", "currency", "amount_gel", "description", "counterparty")}
+                                 for row in evidence["transactions"] if row["retained"]]}
+
+    @app.post("/v1/cases/{case_id}/benchmark/finish")
+    def benchmark_finish(case_id: str, body: BenchmarkAnswer, request: WebRequest):
+        check_write_origin(request)
+        case = case_for(case_id)
+        active = case.get("benchmark_active")
+        if not active:
+            raise HTTPException(409, "Start the manual aggregation task first")
+        evidence = case["result"]["evidence"]
+        expected = evidence["service_payments"]
+        if body.payment_count != expected["count"] or not np.isfinite(body.total_gel) or abs(body.total_gel-expected["total_gel"]) > .01:
+            svc.store.append(case_id, "Manual aggregation answer incorrect", "demo", {})
+            raise HTTPException(422, "The count or total does not match the statement. The timer continues.")
+        manual_ms = round((time.time()-active["started_unix"])*1000, 2)
+        case["benchmark"] = {"manual_ms": manual_ms, "automated_ms": evidence["aggregation_ms"],
+                             "payment_count": body.payment_count, "total_gel": round(body.total_gel, 2),
+                             "operator": "demo", "completed_at": timestamp(),
+                             "limitation": "One self-timed operator run on a normalized synthetic statement; "
+                                           "automation includes filtering and aggregation. Not an independent manual-process study."}
+        case.pop("benchmark_active", None)
+        svc.store.save(svc.public_job(case), "demo")
+        svc.store.append(case_id, "Manual aggregation completed", "demo", case["benchmark"])
+        return case["benchmark"]
+
+    @app.get("/v1/evaluation")
+    def evaluation():
+        from demo_evaluation import OUT
+        if OUT.exists():
+            report = json.loads(OUT.read_text(encoding="utf-8"))
+            if report.get("model_sha256") == getattr(svc.model, "artifact_sha256", None):
+                return {"status": "done", "report": report}
+        return getattr(svc, "evaluation_status", {"status": "not_run"})
+
+    @app.post("/v1/evaluation", status_code=202)
+    def run_evaluation(request: WebRequest):
+        check_write_origin(request)
+        if getattr(svc, "evaluation_status", {}).get("status") != "running":
+            svc.evaluation_status = {"status": "running"}
+            def run():
+                try:
+                    from demo_evaluation import generate
+                    generate(svc.model)
+                    svc.evaluation_status = {"status": "done"}
+                except Exception as exc:
+                    svc.evaluation_status = {"status": "failed", "error": type(exc).__name__}
+            svc.pool.submit(run)
+        return svc.evaluation_status
 
     return app
 

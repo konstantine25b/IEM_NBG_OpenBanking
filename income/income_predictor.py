@@ -16,6 +16,7 @@ Output per row: p10 / p50 / p90 monthly income in GEL, band_share = (p90 - p10) 
 
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -24,6 +25,7 @@ import joblib
 import numpy as np
 import pandas as pd
 import xgboost as xgb
+from joblib.numpy_pickle import NumpyUnpickler
 from sklearn.model_selection import train_test_split
 
 HERE = Path(__file__).resolve().parent
@@ -31,6 +33,27 @@ sys.path.insert(0, str(HERE))
 REPO = HERE.parent
 DATA = REPO / "nbg_synthetic_data" / "income_dataset.csv"
 MODEL_PATH = HERE / "models" / "income_model.joblib"
+
+
+class _PortableBooster(xgb.Booster):
+    """Recover the portable UBJ model from a trusted, incompatible XGBoost snapshot."""
+
+    def __setstate__(self, state):
+        raw = bytes(state["handle"])
+        marker = b"L" + (5).to_bytes(8, "big") + b"Model"
+        offset = raw.find(marker)
+        if offset < 0 or raw[offset + len(marker):offset + len(marker) + 1] != b"{":
+            raise ValueError("The saved XGBoost snapshot has no portable model")
+        super().__init__()
+        self.load_model(bytearray(raw[offset + len(marker):-1]))
+        self.set_param({"nthread": 4})
+
+
+class _PortableUnpickler(NumpyUnpickler):
+    def find_class(self, module, name):
+        if module == "xgboost.core" and name == "Booster":
+            return _PortableBooster
+        return super().find_class(module, name)
 
 SEED = 20261020
 LABEL = "INCOME_AMOUNT_TOTAL"
@@ -133,8 +156,17 @@ class IncomeModel:
 
     @classmethod
     def load(cls, path: Path = MODEL_PATH) -> IncomeModel:
-        blob = joblib.load(path)
-        return cls(blob["booster"], blob["state"])
+        path = Path(path)
+        try:
+            blob = joblib.load(path)
+        except xgb.core.XGBoostError:
+            # XGBoost memory snapshots are platform dependent; their embedded UBJ weights are portable.
+            # Never rewrite the supplied artifact or retrain the model during startup.
+            with path.open("rb") as stream:
+                blob = _PortableUnpickler(str(path), stream, ensure_native_byte_order=True).load()
+        model = cls(blob["booster"], blob["state"])
+        model.artifact_sha256 = hashlib.sha256(path.read_bytes()).hexdigest()
+        return model
 
 
 # ---- training -------------------------------------------------------------------------------------------------
