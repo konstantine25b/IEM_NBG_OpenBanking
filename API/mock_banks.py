@@ -171,6 +171,8 @@ def create_app(population: Population | None = None) -> FastAPI:
         cid = pop.owner_of_consent.get(consent_id or "")
         if cid is None:
             return error(401, "CONSENT_UNKNOWN", "send Authorization and Consent-ID from POST /_mock/session/{bank}")
+        if headers.get("x-demo-failure") == "unavailable":
+            return error(503, "SIMULATED_BANK_OUTAGE", "Explicit demo fault: bank unavailable")
         base = f"{str(request.base_url).rstrip('/')}/{bank}"
         try:
             body = await _parse_body(request)

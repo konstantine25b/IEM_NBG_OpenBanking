@@ -1,5 +1,8 @@
 # Loan-portfolio EDA (pre-modeling)
 
+The income-assessment website, local startup command, officer/auditor demo accounts, recording steps, model-risk evidence,
+and control limitations are documented in [API/DEMO_GUIDE.md](API/DEMO_GUIDE.md).
+
 One command turns the ten CSV files in `nbg_synthetic_data/` (+ the Georgian data dictionary) into a **self-contained HTML
 report** that answers the questions a data scientist asks *before* modeling: what is in here, can I trust it,
 what is the target, what leaks, how should I split / encode / validate, and what score is realistic.

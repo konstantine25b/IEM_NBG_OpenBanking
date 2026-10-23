@@ -28,11 +28,17 @@ from income_pipeline import load_open_banking, predict_person, registry_of  # no
 
 
 @pytest.fixture(scope="module")
-def stack():
+def stack(tmp_path_factory):
     banks = TestClient(mock_banks.create_app(), base_url="http://banks")
     registries = TestClient(mock_registries.create_app(), base_url="http://registries")
-    api = TestClient(service.create_app(banks, registries))
-    return api
+    store = service.CaseStore(tmp_path_factory.mktemp("income-service") / "cases.sqlite3")
+    api = TestClient(service.create_app(banks, registries, store=store))
+    assert api.post("/v1/auth/login", json={"username": "officer", "password": "demo-review-only"}).status_code == 200
+    yield api
+    api.app.state.service.pool.shutdown(wait=True)
+    api.close()
+    banks.close()
+    registries.close()
 
 
 def _consents(api, who):

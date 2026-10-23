@@ -16,7 +16,7 @@ GROUPS: list[tuple[str, tuple[str, ...]]] = [
     ("Salary credits", ("ob_salary",)),
     ("Total money coming in", ("ob_inflow",)),
     ("Transfers and remittances", ("ob_remit", "ob_p2p")),
-    ("RS declared income", ("INCOME_AMOUNT_SOI04",)),
+    ("RS remittance income (SOI04)", ("INCOME_AMOUNT_SOI04",)),
     (
         "Credit bureau (Creditinfo)",
         ("last1Month", "last3Month", "last6Month", "last12Month", "ExistingOperations", "TerminatedOperations"),

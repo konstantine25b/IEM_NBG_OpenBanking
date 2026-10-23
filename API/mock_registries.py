@@ -185,8 +185,11 @@ def create_app() -> FastAPI:
         add_consent_routes(svc)
 
     @app.get(f"{prefix['rs']}/income-declarations")
-    def income_declarations(authorization: str | None = Header(None), consent_id: str | None = Header(None)):
+    def income_declarations(authorization: str | None = Header(None), consent_id: str | None = Header(None),
+                            x_demo_failure: str | None = Header(None)):
         consent, error = consents.check("rs", consent_id, authorization)
+        if not error and x_demo_failure == "unavailable":
+            return JSONResponse({"error": "SIMULATED_RS_OUTAGE", "text": "Explicit demo fault: Revenue Service unavailable"}, status_code=503)
         return error or rs_declarations(consent["cid"])
 
     @app.get(f"{prefix['creditinfo']}/credit-report")
