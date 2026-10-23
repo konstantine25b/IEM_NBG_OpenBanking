@@ -1,6 +1,6 @@
 # Loan-portfolio EDA (pre-modeling)
 
-The income-assessment website, local startup command, officer/auditor demo accounts, recording steps, model-risk evidence,
+The income-assessment website, local startup command, recording steps, model-risk evidence,
 and control limitations are documented in [API/DEMO_GUIDE.md](API/DEMO_GUIDE.md).
 
 One command turns the ten CSV files in `nbg_synthetic_data/` (+ the Georgian data dictionary) into a **self-contained HTML

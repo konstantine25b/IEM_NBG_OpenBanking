@@ -1,4 +1,4 @@
-"""Local case persistence. Audit events have no update/delete API and form a verifiable hash chain."""
+"""In-memory assessments and persistent, hash-linked audit events with no update/delete API."""
 
 from __future__ import annotations
 
@@ -24,11 +24,9 @@ class CaseStore:
         self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.lock = threading.RLock()
+        self._cases: dict[str, tuple[str, str]] = {}
         with self.connect() as db:
             db.executescript("""
-                CREATE TABLE IF NOT EXISTS cases (
-                    case_id TEXT PRIMARY KEY, owner TEXT NOT NULL, updated_at TEXT NOT NULL, payload TEXT NOT NULL
-                );
                 CREATE TABLE IF NOT EXISTS events (
                     id INTEGER PRIMARY KEY AUTOINCREMENT, case_id TEXT NOT NULL, payload TEXT NOT NULL,
                     previous_hash TEXT NOT NULL, event_hash TEXT NOT NULL
@@ -46,39 +44,13 @@ class CaseStore:
             db.close()
 
     def save(self, case: dict, owner: str):
-        with self.lock, self.connect() as db:
-            db.execute(
-                "INSERT INTO cases VALUES (?, ?, ?, ?) ON CONFLICT(case_id) DO UPDATE SET "
-                "updated_at=excluded.updated_at, payload=excluded.payload",
-                (case["job_id"], owner, timestamp(), canonical(case)),
-            )
+        with self.lock:
+            self._cases[case["job_id"]] = (owner, canonical(case))
 
     def get(self, case_id: str) -> dict | None:
-        with self.connect() as db:
-            row = db.execute("SELECT owner, payload FROM cases WHERE case_id=?", (case_id,)).fetchone()
+        with self.lock:
+            row = self._cases.get(case_id)
         return {"owner": row[0], **json.loads(row[1])} if row else None
-
-    def list(self, owner: str | None = None) -> list[dict]:
-        with self.connect() as db:
-            rows = db.execute(
-                "SELECT owner, updated_at, payload FROM cases "
-                + ("WHERE owner=? " if owner else "")
-                + "ORDER BY updated_at DESC LIMIT 50",
-                (owner,) if owner else (),
-            ).fetchall()
-        return [
-            {
-                "case_id": c["job_id"],
-                "owner": who,
-                "updated_at": when,
-                "status": c["status"],
-                "subject": c.get("subject"),
-                "scenario": c.get("scenario", "none"),
-                "review": c.get("review"),
-            }
-            for who, when, raw in rows
-            for c in [json.loads(raw)]
-        ]
 
     def append(self, case_id: str, kind: str, actor: str, detail: dict | None = None) -> dict:
         with self.lock, self.connect() as db:

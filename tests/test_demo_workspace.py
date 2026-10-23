@@ -27,7 +27,6 @@ def stack(tmp_path_factory):
     registries = TestClient(mock_registries.create_app(), base_url="http://registries")
     model = IncomeModel.load()
     api = TestClient(service.create_app(banks, registries, model, store))
-    assert api.post("/v1/auth/login", json={"username": "officer", "password": "demo-review-only"}).status_code == 200
     yield api, banks, registries, model, store
     api.app.state.service.pool.shutdown(wait=True)
     api.close()
@@ -73,6 +72,16 @@ def test_default_model_and_transaction_evidence(normal):
     assert any(e["stage"] == "Bank API call" and e["detail"]["http_status"] == 200 for e in normal["trace"])
 
 
+def test_registry_evidence_preserves_actual_records_without_person_identifiers(normal):
+    registries = normal["result"]["evidence"]["registries"]
+    for name, body in (("rs", mock_registries.rs_declarations("C50811")),
+                       ("creditinfo", mock_registries.creditinfo_report("C50811"))):
+        expected = {key: value for key, value in body.items() if key != "personId"}
+        assert registries[name] == expected
+    assert registries["rs"]["incomeItems"][0]["amount"] == 0
+    assert "91038618469" not in json.dumps(registries)
+
+
 @pytest.mark.parametrize(
     "cid", ["C60184", "C67705", "C37777", "C52528", "C40788", "C83158", "C02186", "C46126", "C78014"]
 )
@@ -92,27 +101,21 @@ def test_review_is_enforced_by_api(stack, normal):
     review = {"decision": "accepted", "reason": "Reviewed the service payments and the prediction uncertainty."}
     assert api.post(url, json=review).status_code == 409
     assert api.post(url, json={**review, "acknowledge_uncertainty": True}).status_code == 200
-    assert api.get(f"/v1/cases/{normal['job_id']}").json()["review"]["reviewer"] == "officer"
+    assert api.get(f"/v1/cases/{normal['job_id']}").json()["review"]["reviewer"] == "demo"
 
 
-def test_authentication_roles_and_cross_origin(stack, normal):
+def test_direct_access_without_accounts_history_or_downloads(stack, normal):
     app = stack[0].app
     with TestClient(app) as anonymous:
-        assert anonymous.get(f"/v1/cases/{normal['job_id']}").status_code == 401
-        assert anonymous.post("/v1/consents", json={"personal_id": "C50811"}).status_code == 401
-        assert anonymous.post("/v1/auth/login", json={"username": "officer", "password": "wrong"}).status_code == 401
-        assert (
-            anonymous.post("/v1/auth/login", json={"username": "auditor", "password": "demo-audit-only"}).status_code
-            == 200
-        )
-        assert anonymous.get(f"/v1/cases/{normal['job_id']}/export").status_code == 200
-        assert (
-            anonymous.post(
-                f"/v1/cases/{normal['job_id']}/review",
-                json={"decision": "rejected", "reason": "Auditor cannot decide this case."},
-            ).status_code
-            == 403
-        )
+        response = anonymous.get(f"/v1/income-estimates/{normal['job_id']}")
+        assert response.status_code == 200
+        assert "set-cookie" not in response.headers
+        assert anonymous.get("/v1/auth/me").status_code == 404
+        assert anonymous.post("/v1/auth/login", json={"username": "officer", "password": "demo-review-only"}).status_code == 404
+        assert anonymous.post("/v1/auth/logout").status_code == 404
+        assert anonymous.get("/v1/cases").status_code == 404
+        assert anonymous.get(f"/v1/cases/{normal['job_id']}/export").status_code == 404
+        assert anonymous.get("/v1/evaluation").status_code == 200
     assert (
         stack[0]
         .post("/v1/consents", json={"personal_id": "C50811"}, headers={"Origin": "https://untrusted.example"})
@@ -126,6 +129,8 @@ def test_real_mock_source_outage_and_abstention(stack):
     assert next(p for p in partial["progress"] if p["source"] == "rs")["state"] == "failed"
     assert partial["result"]["income"] is not None
     assert partial["result"]["rs_declared"] is None
+    assert partial["result"]["evidence"]["registries"]["rs"] is None
+    assert partial["result"]["evidence"]["registries"]["creditinfo"] is not None
     assert partial["result"]["confidence"]["measured"] is None
     assert any("HTTP 503" in w for w in partial["result"]["warnings"])
     empty = estimate(stack[0], "banks_unavailable")
@@ -138,17 +143,24 @@ def test_real_mock_source_outage_and_abstention(stack):
     assert response.status_code == 409
 
 
-def test_persistence_audit_integrity_and_export_privacy(stack, normal):
+def test_assessments_are_not_saved_but_audit_events_persist(stack, normal):
     api, banks, registries, model, store = stack
-    reopened = TestClient(service.create_app(banks, registries, model, CaseStore(store.path)))
+    restarted_store = CaseStore(store.path)
+    assert restarted_store.get(normal["job_id"]) is None
+    assert restarted_store.audit(normal["job_id"])["chain_valid"]
+    assert restarted_store.audit(normal["job_id"])["events"] == store.audit(normal["job_id"])["events"]
+    with store.connect() as db:
+        assert db.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='cases'").fetchone() is None
+    reopened = TestClient(service.create_app(banks, registries, model, restarted_store))
     try:
-        reopened.post("/v1/auth/login", json={"username": "officer", "password": "demo-review-only"})
-        assert reopened.get(f"/v1/cases/{normal['job_id']}").json()["result"]["income"]["p50"] == 1878
-        exported = reopened.get(f"/v1/cases/{normal['job_id']}/export")
-        assert exported.json()["audit"]["chain_valid"]
-        assert exported.json()["audit"]["case_matches_audit"]
+        assert reopened.get(f"/v1/income-estimates/{normal['job_id']}").status_code == 404
+        assert reopened.get(f"/v1/cases/{normal['job_id']}").status_code == 404
+        audit = api.get(f"/v1/cases/{normal['job_id']}/audit")
+        assert audit.json()["chain_valid"]
+        assert audit.json()["case_matches_audit"]
+        evidence = api.get(f"/v1/income-estimates/{normal['job_id']}").text + audit.text
         for secret in ("91038618469", "GE39LB1567090146776894", "Bearer ", "demo-tpp-key"):
-            assert secret not in exported.text
+            assert secret not in evidence
     finally:
         reopened.app.state.service.pool.shutdown(wait=True)
         reopened.close()

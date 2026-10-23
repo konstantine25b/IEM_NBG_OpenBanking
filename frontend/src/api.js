@@ -30,11 +30,6 @@ export const getDemoClients = () => call('GET', '/v1/demo/clients')
 // The 12 banks + RS + Creditinfo that a consent request goes to.
 export const getSources = () => call('GET', '/v1/sources')
 
-export const signIn = (username, password) => call('POST', '/v1/auth/login', { username, password })
-export const getSession = () => call('GET', '/v1/auth/me')
-export const signOut = () => call('POST', '/v1/auth/logout')
-export const getCases = () => call('GET', '/v1/cases')
-export const getCase = (caseId) => call('GET', `/v1/cases/${caseId}`)
 export const getAudit = (caseId) => call('GET', `/v1/cases/${caseId}/audit`)
 export const reviewCase = (caseId, decision, reason, acknowledge) =>
   call('POST', `/v1/cases/${caseId}/review`, { decision, reason, acknowledge_uncertainty: acknowledge })

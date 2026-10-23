@@ -15,28 +15,21 @@ uv run python tools/run_demo.py --check
 uv run python tools/run_demo.py --evaluate
 ```
 
-Open http://127.0.0.1:5173. The launcher starts the 12-bank mock on port 8000, registry mock on 8001, income API on 9000, and Vite on 5173. Ctrl+C stops the processes it created. Existing services on those ports must be stopped first. Logs and local case records live under git-ignored `.runtime/`.
+Open http://127.0.0.1:5173. The launcher starts the 12-bank mock on port 8000, registry mock on 8001, income API on 9000, and Vite on 5173. Ctrl+C stops the processes it created. Existing services on those ports must be stopped first. Logs and persistent audit events live under git-ignored `.runtime/`. Assessments remain in memory and cannot be reopened after a server restart.
 
 The committed XGBoost joblib is loaded normally when supported. For an incompatible native snapshot, the loader reads its embedded portable UBJ model in memory. It does not rewrite the artifact or retrain. No file inside `.venv/` is needed as a model artifact.
 
-Local demo accounts:
-
-| Account | Default password | Access |
-| --- | --- | --- |
-| officer | `demo-review-only` | Create assessments, run evaluations and record review decisions |
-| auditor | `demo-audit-only` | Read saved cases, evidence and exports |
-
-Override passwords with `DEMO_OFFICER_PASSWORD` / `DEMO_AUDITOR_PASSWORD`. These shared demo accounts are not production bank SSO. The service binds to loopback by default. Sessions use HttpOnly, SameSite=Strict cookies; set `DEMO_HTTPS=1` only behind HTTPS. Cross-origin writes are restricted to the documented local origins.
+The local demo opens directly without accounts, passwords or roles. The service binds to loopback by default. Cross-origin writes remain restricted to the documented local origins. There is no saved-case sidebar or downloadable case-and-audit JSON.
 
 ## Recording the existing sole proprietor
 
-1. Sign in as officer. Select **Sole proprietor**, C50811, personal ID `91038618469`, then **Connect all banks**. Consent is automatically authorized in the mocks; source APIs subsequently validate tokens and consent. Liberty holds the account; eleven banks return no relationship.
+1. Select **Sole proprietor**, C50811, personal ID `91038618469`, then **Connect all banks**. Consent is automatically authorized in the mocks; source APIs subsequently validate tokens and consent. Liberty holds the account; eleven banks return no relationship.
 2. Leave the recording scenario at **Normal collection**, then click **Estimate income**. The trace records actual parallel source requests, normalization, evidence generation, feature generation, inference and TreeSHAP durations. There are no fake processing delays.
 3. Inspect **Underlying transaction evidence**. Its rules run on retrieved API records, not customer labels. This case has 76 service credits totaling 21,694.69 GEL over a 12-month window. Monthly gross service receipts are 1,807.89 GEL; these are not a statement of net earnings. Cash deposits, P2P receipts, loans and own-account movements are not counted as service receipts.
 4. The normal model result is P10 1,746 / P50 1,878 / P90 2,104 GEL, low confidence, 81/100 interval-precision score. These values should be verified in the running app; partial-source scenarios may produce different results. The score is not a correctness probability.
 5. Show **RS remittance income (SOI04)** in SHAP. RS exposes remittance income, not a salary declaration. The input is zero for this customer; its positive SHAP contribution describes a model effect, not received or declared salary.
 6. Record an officer decision with a reason. Accepting a low-confidence or partial-source estimate requires acknowledgment. An abstained assessment cannot be accepted. No decision approves a loan.
-7. Reopen the case from **Saved cases**, inspect the audit events and download the JSON record. Auditor sign-in can view the record but cannot create assessments or submit decisions.
+7. Inspect the current assessment's audit events and hash verification in **Persistent audit trail**. SQLite stores audit events only; assessment results are not saved for reopening.
 
 For a visible fallback, select **Simulate RS HTTP 503** and run another assessment. The mock returns an actual 503 to the source request; the service warns and continues with missing RS features. Matched calibration is withheld. **Simulate bank HTTP 503** demonstrates abstention: no estimate is produced without adequate bank evidence. Neither option changes customer data or stops services.
 
@@ -48,9 +41,9 @@ The salary-only baseline reports a lack of identified payroll credits as **abste
 
 ## Architecture, records and limits
 
-Browser → Vite `/api` proxy → authenticated income API → parallel mock banks / RS / Creditinfo → bank-dialect normalization → unchanged model feature pipeline → XGBoost quantiles and TreeSHAP → officer review → SQLite case record and audit export.
+Browser → Vite `/api` proxy → income API → parallel mock banks / RS / Creditinfo → bank-dialect normalization → unchanged model feature pipeline → XGBoost quantiles and TreeSHAP → in-memory assessment and persistent audit events.
 
-Cases store masked statement identifiers, source statuses and masked consent references, observation window, evidence hash, model artifact hash, processing trace, predictions, warnings and review history. Source access tokens and full personal IDs are not stored in case exports. The audit has no update/delete endpoint; hash-linked events detect edits. A local database administrator can still rewrite a database, so this is not an externally immutable archive. Review reasons are free text: operators must not enter credentials or personal data. Local sessions expire after eight hours and reset on server restart; saved case records remain.
+The current assessment contains masked statement identifiers, source statuses and masked consent references, observation window, evidence hash, model artifact hash, processing trace, predictions, warnings and review history. These assessment snapshots remain in memory. Audit events persist separately in `.runtime/audit.sqlite3`, without source access tokens or full personal identifiers. The audit has no update/delete endpoint; hash-linked events detect edits. A local database administrator can still rewrite a database, so this is not an externally immutable archive. Review reasons are free text: operators must not enter credentials or personal data.
 
 Before adoption: bank SSO and tenant isolation, durable consent lifecycle/revocation, a retention/deletion policy, an independently secured audit archive, live API onboarding, representative real-data validation, model-risk and demographic-feature review, and regulatory assessment are still required. No production readiness or NBG compliance claim is made.
 
@@ -62,6 +55,6 @@ cd frontend
 npm run build
 ```
 
-`test_demo_workspace.py` uses the actual on-demand mock stack and committed model; it does not require the omitted transaction shards. It verifies the existing customer, roles, review gates, faults, abstention, restart persistence, export privacy, audit tampering detection and benchmark answer checking.
+`test_demo_workspace.py` uses the actual on-demand mock stack and committed model; it does not require the omitted transaction shards. It verifies the existing customer, direct access without accounts, removal of saved-case and download routes, review gates, faults, abstention, non-persistence of assessments, audit privacy and tampering detection, and benchmark answer checking.
 
 Primary third-party components: React / Vite / FastAPI (MIT), HTTPX / NumPy / pandas / scikit-learn / joblib (BSD-3-Clause), XGBoost / Apache Arrow (Apache-2.0), and Matplotlib (Matplotlib license based on PSF). Exact dependency versions are recorded in `uv.lock` and `frontend/package-lock.json`; distribution notices must accompany a packaged deployment.

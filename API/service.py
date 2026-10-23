@@ -24,7 +24,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import os
 import re
 import sys
 import threading
@@ -46,12 +45,10 @@ import pandas as pd  # noqa: E402
 from case_store import CaseStore, canonical, timestamp  # noqa: E402
 from confidence import LOWEST, level_of, score_of  # noqa: E402
 from confidence import scale as confidence_scale  # noqa: E402
-from demo_access import DemoAccess  # noqa: E402
 from demo_evidence import mask, transaction_evidence  # noqa: E402
 from explain import explain_p50  # noqa: E402
 from fastapi import FastAPI, HTTPException  # noqa: E402
 from fastapi import Request as WebRequest  # noqa: E402
-from fastapi import Response as WebResponse  # noqa: E402
 from fastapi.middleware.cors import CORSMiddleware  # noqa: E402
 from fastapi.responses import JSONResponse  # noqa: E402
 from income_pipeline import build_row  # noqa: E402
@@ -192,11 +189,6 @@ class ConsentRequest(BaseModel):
     personal_id: str
 
 
-class LoginRequest(BaseModel):
-    username: str
-    password: str
-
-
 class ReviewRequest(BaseModel):
     decision: Literal["accepted", "more_evidence", "rejected"]
     reason: str
@@ -213,7 +205,7 @@ class Service:
                  store: CaseStore | None = None) -> None:
         self.banks, self.registries = banks, registries
         self.model = model or IncomeModel.load()
-        self.store = store or CaseStore(REPO / ".runtime" / "cases.sqlite3")
+        self.store = store or CaseStore(REPO / ".runtime" / "audit.sqlite3")
         self.calibration = json.loads(CALIBRATION.read_text()) if CALIBRATION.exists() else None
         self.pool = ThreadPoolExecutor(max_workers=24)
         self.consent_sets: dict[str, dict] = {}
@@ -300,7 +292,7 @@ class Service:
         }
 
     # ---- phase 2: the estimate ----
-    def start(self, req: EstimateRequest, owner: str = "officer") -> dict | None:
+    def start(self, req: EstimateRequest, owner: str = "demo") -> dict | None:
         record = self.consent_sets.get(req.consent_set_id)
         if record is None:
             return None
@@ -465,6 +457,10 @@ class Service:
             evidence_start = time.perf_counter()
             cleaning = clean(tables)
             evidence = transaction_evidence(tables, self.model.state["ob_window"])
+            evidence["registries"] = {
+                "rs": {key: rs_body[key] for key in ("taxpayer", "incomeItems")} if rs_body else None,
+                "creditinfo": {key: ci_body[key] for key in ("inquiries", "contracts")} if ci_body else None,
+            }
             evidence["aggregation_ms"] = round((time.perf_counter()-evidence_start)*1000, 3)
             self._event(job, "Transaction evidence generated", {"cleaning": cleaning,
                                                               "service_payments": evidence["service_payments"]["count"],
@@ -584,38 +580,17 @@ def create_app(
     app.add_middleware(CORSMiddleware, allow_origins=["http://127.0.0.1:5173", "http://localhost:5173"],
                        allow_credentials=True, allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
     app.state.service = svc
-    access = DemoAccess()
-    app.state.access = access
-
-    def case_for(case_id: str, principal: dict) -> dict:
+    def case_for(case_id: str) -> dict:
         case = svc.jobs.get(case_id) or svc.store.get(case_id)
         if case is None:
             raise HTTPException(404, "Case not found")
-        if case.get("_owner", case.get("owner")) != principal["username"] and principal["role"] != "auditor":
-            raise HTTPException(403, "Case belongs to another officer")
         return case
 
-    @app.post("/v1/auth/login")
-    def login(body: LoginRequest, request: WebRequest, response: WebResponse):
+    def check_write_origin(request: WebRequest) -> None:
         if request.headers.get("origin") and request.headers["origin"] not in {
             "http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:9000", "http://127.0.0.1:9000"
         }:
-            raise HTTPException(403, "Cross-origin sign-in rejected")
-        token, principal = access.login(body.username, body.password)
-        response.set_cookie("income_session", token, httponly=True, samesite="strict", max_age=8*3600,
-                            secure=os.getenv("DEMO_HTTPS") == "1", path="/")
-        return principal
-
-    @app.get("/v1/auth/me")
-    def me(request: WebRequest):
-        return access.require(request)
-
-    @app.post("/v1/auth/logout")
-    def logout(request: WebRequest, response: WebResponse):
-        principal = access.require(request)
-        access.sessions.pop(request.cookies.get("income_session"), None)
-        response.delete_cookie("income_session", path="/")
-        return {"signed_out": principal["username"]}
+            raise HTTPException(403, "Cross-origin write rejected")
 
     @app.get("/health")
     def health():
@@ -641,65 +616,45 @@ def create_app(
 
     @app.post("/v1/consents", status_code=201)
     def create_consents(body: ConsentRequest, request: WebRequest):
-        principal = access.require(request, write=True)
+        check_write_origin(request)
         record = svc.create_consents(body.personal_id.strip())
         if record is None:
             return JSONResponse({"error": "UNKNOWN_CLIENT", "text": "no bank knows this personal id"}, status_code=404)
-        record["_owner"] = principal["username"]
         return svc.public_consents(record)
 
     @app.get("/v1/consents/{consent_set_id}")
-    def get_consents(consent_set_id: str, request: WebRequest):
-        principal = access.require(request)
+    def get_consents(consent_set_id: str):
         record = svc.consent_sets.get(consent_set_id)
-        if record and record.get("_owner") != principal["username"]:
-            raise HTTPException(403, "Consent belongs to another officer")
         return (
             svc.public_consents(record) if record else JSONResponse({"error": "UNKNOWN_CONSENT_SET"}, status_code=404)
         )
 
     @app.post("/v1/income-estimates", status_code=202)
     def create_estimate(body: EstimateRequest, request: WebRequest):
-        principal = access.require(request, write=True)
-        record = svc.consent_sets.get(body.consent_set_id)
-        if record and record.get("_owner") != principal["username"]:
-            raise HTTPException(403, "Consent belongs to another officer")
-        job = svc.start(body, principal["username"])
+        check_write_origin(request)
+        job = svc.start(body)
         if job is None:
             return JSONResponse({"error": "UNKNOWN_CONSENT_SET"}, status_code=404)
         return {"job_id": job["job_id"], "status": job["status"], "status_url": f"/v1/income-estimates/{job['job_id']}"}
 
     @app.get("/v1/income-estimates/{job_id}")
-    def get_estimate(job_id: str, request: WebRequest):
-        return svc.public_job(case_for(job_id, access.require(request)))
-
-    @app.get("/v1/cases")
-    def cases(request: WebRequest):
-        principal = access.require(request)
-        return svc.store.list(None if principal["role"] == "auditor" else principal["username"])
+    def get_estimate(job_id: str):
+        return svc.public_job(case_for(job_id))
 
     @app.get("/v1/cases/{case_id}")
-    def case(case_id: str, request: WebRequest):
-        return svc.public_job(case_for(case_id, access.require(request)))
+    def case(case_id: str):
+        return svc.public_job(case_for(case_id))
 
     @app.get("/v1/cases/{case_id}/audit")
-    def audit(case_id: str, request: WebRequest):
-        case_for(case_id, access.require(request))
+    def audit(case_id: str):
+        case_for(case_id)
         return svc.store.audit(case_id)
-
-    @app.get("/v1/cases/{case_id}/export")
-    def export(case_id: str, request: WebRequest):
-        case = case_for(case_id, access.require(request))
-        return JSONResponse({"case": svc.public_job(case), "audit": svc.store.audit(case_id),
-                             "privacy": "Synthetic data; identifiers masked; source credentials are never exported.",
-                             "decision_scope": "Income assessment only. No loan approval is performed."},
-                            headers={"Content-Disposition": f'attachment; filename="case-{case_id}.json"'})
 
     @app.post("/v1/cases/{case_id}/review")
     def review(case_id: str, body: ReviewRequest, request: WebRequest):
-        principal = access.require(request, write=True)
+        check_write_origin(request)
         with svc.store.lock:
-            case = case_for(case_id, principal)
+            case = case_for(case_id)
             if case["status"] != "done":
                 raise HTTPException(409, "Only completed assessments can be reviewed")
             if len(body.reason.strip()) < 10:
@@ -710,23 +665,23 @@ def create_app(
                     raise HTTPException(409, "No estimate is available; request more evidence instead")
                 if (result["confidence"]["level"] in ("low", "very low") or result["partial_sources"]) and not body.acknowledge_uncertainty:
                     raise HTTPException(409, "Acknowledge the low confidence or missing-source limitation before accepting")
-            case["review"] = {"decision": body.decision, "reason": body.reason.strip(), "reviewer": principal["username"],
+            case["review"] = {"decision": body.decision, "reason": body.reason.strip(), "reviewer": "demo",
                               "at": timestamp(), "acknowledge_uncertainty": body.acknowledge_uncertainty,
                               "scope": "Income estimate review, not loan approval"}
-            svc.store.append(case_id, "Officer review recorded", principal["username"], case["review"])
+            svc.store.append(case_id, "Officer review recorded", "demo", case["review"])
             svc.store.save(svc.public_job(case), case.get("_owner", case.get("owner")))
         return case["review"]
 
     @app.post("/v1/cases/{case_id}/benchmark/start")
     def benchmark_start(case_id: str, request: WebRequest):
-        principal = access.require(request, write=True)
-        case = case_for(case_id, principal)
+        check_write_origin(request)
+        case = case_for(case_id)
         if case["status"] != "done" or not case["result"]["evidence"]["transactions"]:
             raise HTTPException(409, "A collected statement is required")
-        challenge = {"started_unix": time.time(), "started_at": timestamp(), "operator": principal["username"]}
+        challenge = {"started_unix": time.time(), "started_at": timestamp(), "operator": "demo"}
         case["benchmark_active"] = challenge
-        svc.store.save(svc.public_job(case), principal["username"])
-        svc.store.append(case_id, "Manual aggregation started", principal["username"], {"started_at": challenge["started_at"]})
+        svc.store.save(svc.public_job(case), "demo")
+        svc.store.append(case_id, "Manual aggregation started", "demo", {"started_at": challenge["started_at"]})
         evidence = case["result"]["evidence"]
         return {"started_at": challenge["started_at"], "window": evidence["window"],
                 "task": "Count and sum positive service-payment credits in the retained normalized statement. "
@@ -736,30 +691,29 @@ def create_app(
 
     @app.post("/v1/cases/{case_id}/benchmark/finish")
     def benchmark_finish(case_id: str, body: BenchmarkAnswer, request: WebRequest):
-        principal = access.require(request, write=True)
-        case = case_for(case_id, principal)
+        check_write_origin(request)
+        case = case_for(case_id)
         active = case.get("benchmark_active")
         if not active:
             raise HTTPException(409, "Start the manual aggregation task first")
         evidence = case["result"]["evidence"]
         expected = evidence["service_payments"]
         if body.payment_count != expected["count"] or not np.isfinite(body.total_gel) or abs(body.total_gel-expected["total_gel"]) > .01:
-            svc.store.append(case_id, "Manual aggregation answer incorrect", principal["username"], {})
+            svc.store.append(case_id, "Manual aggregation answer incorrect", "demo", {})
             raise HTTPException(422, "The count or total does not match the statement. The timer continues.")
         manual_ms = round((time.time()-active["started_unix"])*1000, 2)
         case["benchmark"] = {"manual_ms": manual_ms, "automated_ms": evidence["aggregation_ms"],
                              "payment_count": body.payment_count, "total_gel": round(body.total_gel, 2),
-                             "operator": principal["username"], "completed_at": timestamp(),
+                             "operator": "demo", "completed_at": timestamp(),
                              "limitation": "One self-timed operator run on a normalized synthetic statement; "
                                            "automation includes filtering and aggregation. Not an independent manual-process study."}
         case.pop("benchmark_active", None)
-        svc.store.save(svc.public_job(case), principal["username"])
-        svc.store.append(case_id, "Manual aggregation completed", principal["username"], case["benchmark"])
+        svc.store.save(svc.public_job(case), "demo")
+        svc.store.append(case_id, "Manual aggregation completed", "demo", case["benchmark"])
         return case["benchmark"]
 
     @app.get("/v1/evaluation")
-    def evaluation(request: WebRequest):
-        access.require(request)
+    def evaluation():
         from demo_evaluation import OUT
         if OUT.exists():
             report = json.loads(OUT.read_text(encoding="utf-8"))
@@ -769,7 +723,7 @@ def create_app(
 
     @app.post("/v1/evaluation", status_code=202)
     def run_evaluation(request: WebRequest):
-        access.require(request, write=True)
+        check_write_origin(request)
         if getattr(svc, "evaluation_status", {}).get("status") != "running":
             svc.evaluation_status = {"status": "running"}
             def run():
