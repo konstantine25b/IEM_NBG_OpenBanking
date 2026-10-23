@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useCountUp, useMounted } from '../hooks.js'
 
 const gel = (n) => new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(n)
@@ -76,34 +77,82 @@ function ConfidenceDetail({ confidence, income }) {
   )
 }
 
+const signed = (n) => `${n > 0 ? '+' : n < 0 ? '−' : ''}${gel(Math.abs(n))}`
+const pctTitle = (d) =>
+  `${d.share_pct}% of the total impact of all factors` + (d.pct_of_p50 != null ? `; ${signed(d.pct_of_p50)}% of the estimate itself` : '')
+
+function Bars({ value, max, grown, delay, hasNeg, hasPos }) {
+  const width = grown ? `${(Math.abs(value) / max) * 100}%` : '0%'
+  const style = { width, transitionDelay: `${delay}ms` }
+  return (
+    <span className="bars" aria-hidden="true">
+      <span className="half left" style={{ flex: hasNeg ? 1 : 0 }}>{value < 0 && <i className="neg" style={style} />}</span>
+      <span className="half right" style={{ flex: hasPos ? 1 : 0 }}>{value > 0 && <i className="pos" style={style} />}</span>
+    </span>
+  )
+}
+
 function Drivers({ explanation }) {
   const grown = useMounted(600)
+  // ?factors=all in the page address opens the full list (handy for a link or a screenshot)
+  const [showAll, setShowAll] = useState(() => new URLSearchParams(window.location.search).has('factors'))
   if (!explanation) return null
-  const { drivers, starting_point_gel: start } = explanation
-  const max = Math.max(...drivers.map((d) => Math.abs(d.effect_gel)), 1)
-  // when every driver pushes the same way, the bars use the whole width instead of half of it
-  const hasNeg = drivers.some((d) => d.effect_gel < 0)
-  const hasPos = drivers.some((d) => d.effect_gel > 0)
-  const width = (d) => (grown ? `${(Math.abs(d.effect_gel) / max) * 100}%` : '0%')
+  const rows = showAll ? explanation.all_drivers : explanation.drivers
+  const max = Math.max(...rows.map((d) => Math.abs(d.effect_gel)), 1)
+  // when every factor pushes the same way, the bars use the whole width instead of half of it
+  const hasNeg = rows.some((d) => d.effect_gel < 0)
+  const hasPos = rows.some((d) => d.effect_gel > 0)
+  const bars = (value, i) => <Bars value={value} max={max} grown={grown} delay={i * 140} hasNeg={hasNeg} hasPos={hasPos} />
   return (
     <section className="card rise late">
-      <h3>Why this estimate</h3>
+      <div className="drivers-head">
+        <h3>Why this estimate</h3>
+        <button type="button" className="link" onClick={() => setShowAll((v) => !v)} aria-expanded={showAll}>
+          {showAll ? 'Show fewer' : 'Show all factors'}
+        </button>
+      </div>
       <p className="hint">
-        Starts from the average client ({gel(start)} GEL); each factor moves it up or down (SHAP values of the P50 model).
+        Starts from the average client ({gel(explanation.starting_point_gel)} GEL); each factor moves it up or down (SHAP values of the P50 model).
+        <strong> Share</strong> is the factor&apos;s size as a % of all factors added together (100% in total).
       </p>
+      <div className="drivers-cols" aria-hidden="true">
+        <span>Factor</span><span /><span className="r">Effect, GEL</span><span className="r">Share</span>
+      </div>
       <ul className="drivers">
-        {drivers.map((d, i) => (
+        {rows.map((d, i) => (
           <li key={d.driver}>
-            <span className="name">{d.driver}</span>
-            <span className="bars" aria-hidden="true">
-              <span className="half left" style={{ flex: hasNeg ? 1 : 0 }}>{d.effect_gel < 0 && <i className="neg" style={{ width: width(d), transitionDelay: `${i * 140}ms` }} />}</span>
-              <span className="half right" style={{ flex: hasPos ? 1 : 0 }}>{d.effect_gel > 0 && <i className="pos" style={{ width: width(d), transitionDelay: `${i * 140}ms` }} />}</span>
-            </span>
-            <span className={`val ${d.effect_gel < 0 ? 'neg' : 'pos'}`}>{d.effect_gel > 0 ? '+' : '−'}{gel(Math.abs(d.effect_gel))}</span>
+            {showAll && d.features?.length ? (
+              <details>
+                <summary className="drow">
+                  <span className="name"><span className="chev" aria-hidden="true" />{d.driver}</span>
+                  {bars(d.effect_gel, i)}
+                  <span className={`val ${d.effect_gel < 0 ? 'neg' : 'pos'}`}>{signed(d.effect_gel)}</span>
+                  <span className="share" title={pctTitle(d)}>{d.share_pct.toFixed(1)}%</span>
+                </summary>
+                <ul className="features">
+                  {d.features.map((f) => (
+                    <li key={f.feature} className="drow sub">
+                      <span className="name">{f.label}{f.value != null && <em> = {gel(f.value)}</em>}</span>
+                      <span />
+                      <span className={`val ${f.effect_gel < 0 ? 'neg' : 'pos'}`}>{signed(Math.round(f.effect_gel))}</span>
+                      <span className="share">{f.share_pct.toFixed(1)}%</span>
+                    </li>
+                  ))}
+                  {d.features_not_shown > 0 && <li className="more">+ {d.features_not_shown} features with a tiny effect</li>}
+                </ul>
+              </details>
+            ) : (
+              <div className="drow">
+                <span className="name">{d.driver}</span>
+                {bars(d.effect_gel, i)}
+                <span className={`val ${d.effect_gel < 0 ? 'neg' : 'pos'}`}>{signed(d.effect_gel)}</span>
+                <span className="share" title={pctTitle(d)}>{d.share_pct.toFixed(1)}%</span>
+              </div>
+            )}
           </li>
         ))}
       </ul>
-      <p className="hint">= {gel(explanation.reported_p50_gel)} GEL (P50)</p>
+      <p className="hint">= {gel(explanation.reported_p50_gel)} GEL (P50){showAll && ' · open a factor to see the model features inside it'}</p>
     </section>
   )
 }

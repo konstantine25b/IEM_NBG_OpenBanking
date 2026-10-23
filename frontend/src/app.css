@@ -123,7 +123,6 @@ tr.dim td { color: var(--muted); }
 .measured li { margin: 4px 0; }
 
 .drivers { list-style: none; padding: 0; margin: 12px 0; }
-.drivers li { display: grid; grid-template-columns: minmax(110px, 170px) 1fr 64px; gap: 10px; align-items: center; padding: 6px 0; font-size: 14px; }
 .bars { display: flex; height: 14px; }
 .half { flex: 1; display: flex; }
 .half.left { justify-content: flex-end; border-right: 1px solid var(--muted); }
@@ -202,3 +201,26 @@ summary { cursor: pointer; color: var(--accent); font-size: 14px; }
 .demo-list > summary::before { content: '▸ '; color: var(--muted); }
 .demo-list[open] > summary::before { content: '▾ '; }
 .bar { flex-wrap: wrap; }
+
+/* ---------- factors (SHAP) ---------- */
+.drivers-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.drivers-head h3 { margin: 0; }
+.link { padding: 0; background: none; color: var(--accent); font-size: 14px; font-weight: 600; border-radius: 4px; }
+.link:hover:not(:disabled) { filter: none; text-decoration: underline; }
+.drivers-cols, .drow { display: grid; grid-template-columns: minmax(110px, 190px) 1fr 76px 52px; gap: 10px; align-items: center; }
+.drivers-cols { margin-top: 12px; padding-bottom: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); border-bottom: 1px solid var(--line); }
+.r { text-align: right; }
+.drivers { margin: 0; }
+.drow { padding: 7px 0; font-size: 14px; }
+.drivers > li { border-bottom: 1px solid var(--line); }
+.share { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+details > summary.drow { list-style: none; cursor: pointer; color: var(--text); }
+details > summary.drow::-webkit-details-marker { display: none; }
+.chev { display: inline-block; width: 0; height: 0; margin-right: 8px; border-left: 5px solid var(--muted); border-top: 4px solid transparent; border-bottom: 4px solid transparent; transition: transform 0.2s; }
+details[open] > summary .chev { transform: rotate(90deg); }
+.features { list-style: none; margin: 0 0 8px; padding: 6px 0 6px 18px; background: var(--bg); border-radius: 8px; }
+.drow.sub { padding: 4px 10px 4px 0; font-size: 13px; color: var(--muted); }
+.drow.sub .val { font-weight: 500; }
+.drow.sub em { font-style: normal; color: var(--text); }
+.more { padding: 4px 0; font-size: 12px; color: var(--muted); }
+@media (max-width: 560px) { .drivers-cols, .drow { grid-template-columns: 1fr 70px 46px; } .drivers-cols span:nth-child(2), .drow > .bars, .drow.sub > span:nth-child(2) { display: none; } }

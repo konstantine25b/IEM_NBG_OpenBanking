@@ -198,6 +198,23 @@ def test_result_has_shap_drivers_and_measured_confidence(stack):
     assert measured is None or 0 <= measured["inside_p10_p90_pct"] <= 100
 
 
+def test_all_factors_add_up_and_carry_percentages(stack):
+    explanation = _estimate(stack, _consents(stack, CID)["consent_set_id"])["result"]["explanation"]
+    groups = explanation["all_drivers"]
+    # every group, not only the top ones: still additive, and the shares of impact are a split of 100%
+    total = explanation["starting_point_gel"] + sum(g["effect_gel"] for g in groups)
+    assert abs(total - explanation["reported_p50_gel"]) <= 8
+    assert sum(g["share_pct"] for g in groups) == pytest.approx(100, abs=0.6)
+    assert [abs(g["effect_gel"]) for g in groups] == sorted((abs(g["effect_gel"]) for g in groups), reverse=True)
+    # the short list is the same numbers, summarised
+    assert sum(d["share_pct"] for d in explanation["drivers"]) == pytest.approx(100, abs=0.6)
+    top = groups[0]
+    assert top["pct_of_p50"] == pytest.approx(100 * top["effect_gel"] / explanation["reported_p50_gel"], abs=0.1)
+    # inside a group: readable names, the client's own value, and the effect of each model feature
+    feature = next(f for g in groups for f in g["features"])
+    assert feature["label"] and "effect_gel" in feature and "value" in feature
+
+
 def test_response_carries_only_what_the_portal_shows(stack):
     result = _estimate(stack, _consents(stack, CID)["consent_set_id"])["result"]
     assert not {"cleaning", "loan_request", "rs_declared"} & set(result)
