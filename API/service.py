@@ -3,7 +3,7 @@
 
   POST /v1/consents                     personal id -> consent requests to all 12 banks + RS + Creditinfo, in parallel
   GET  /v1/consents/{consent_set_id}    the same table again
-  POST /v1/income-estimates             consent_set_id (+ optional loan_request) -> 202 {job_id}
+  POST /v1/income-estimates             consent_set_id -> 202 {job_id}
   GET  /v1/income-estimates/{job_id}    progress per source, then the P10 / P50 / P90 result with confidence
 
 The three processes of the demo (each one also works alone):
@@ -170,7 +170,6 @@ def _same_name(kyc: dict, owner_name: str | None) -> bool:
 class EstimateRequest(BaseModel):
     consent_set_id: str
     applicant: dict[str, Any] | None = None  # overrides the KYC record: age, sex, region_name, city
-    loan_request: dict[str, Any] | None = None  # echoed back; the affordability step is not part of this API yet
 
 
 class ConsentRequest(BaseModel):
@@ -186,13 +185,14 @@ class Service:
         as_of: date | None = None,
     ) -> None:
         self.banks, self.registries = banks, registries
-        self.as_of = as_of  # None: every estimate looks back from the day it is made
+        self.as_of = as_of  # None: the window ends where the banks' data ends
         self.model = model or IncomeModel.load()
         self.calibration = json.loads(CALIBRATION.read_text()) if CALIBRATION.exists() else None
         self.pool = ThreadPoolExecutor(max_workers=24)
         self.consent_sets: dict[str, dict] = {}
         self.jobs: dict[str, dict] = {}
         self._catalog: list[dict] | None = None
+        self._data_end: date | None = None
 
     # ---- catalogue of banks ----
     def catalog(self) -> list[dict]:
@@ -279,7 +279,16 @@ class Service:
         return record
 
     def today(self) -> date:
-        return self.as_of or date.today()
+        """End of the history window: --as-of if given, else the day the banks' data ends. Real banks have data up to
+        today; the mock banks stop on the day they were generated, so asking them for later days only finds gaps."""
+        if self.as_of:
+            return self.as_of
+        if self._data_end is None:
+            try:
+                self._data_end = date.fromisoformat(self.banks.get("/_mock/clock").json()["as_of"])
+            except (httpx.HTTPError, ValueError, KeyError, TypeError):
+                self._data_end = date.today()
+        return self._data_end
 
     def _kyc(self, personal_id: str, bank_results: list[dict]) -> dict | None:
         """The client's profile for the lender, and where each part of it comes from."""
@@ -294,7 +303,12 @@ class Service:
         born = date.fromisoformat(record["birth_date"])
         record["age"] = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
         seen = [
-            {"bank": b["bank"], "owner_name": b["owner_name"], "matches": _same_name(record, b["owner_name"])}
+            {
+                "bank": b["bank"],
+                "bank_name": b["name"],
+                "owner_name": b["owner_name"],
+                "matches": _same_name(record, b["owner_name"]),
+            }
             for b in bank_results
             if b["status"] == "connected" and b.get("owner_name")
         ]
@@ -306,7 +320,6 @@ class Service:
             "place": "Lender's KYC record (registered address)",
             "personal_id": "Entered by the loan officer",
             "name_check": "Account owner name returned by each connected bank's open banking API",
-            "demo_note": "In this demo the KYC record is the generated customer record (API/mock_banks.py, /_mock/kyc).",
         }
         return record
 
@@ -344,7 +357,6 @@ class Service:
                 {"source": name, "label": label, "state": "pending", "detail": ""}
                 for name, label in (("rs", "Revenue Service"), ("creditinfo", "Creditinfo"))
             ],
-            "loan_request": req.loan_request,
             "result": None,
             "error": None,
         }
@@ -366,6 +378,14 @@ class Service:
         return None if status == "valid" else f"consent is {status}"
 
     def _pull_bank(self, job: dict, gateway: HttpGateway, entry: dict, date_from: str, personal_id: str):
+        bank = entry["bank"]
+        try:
+            return self._pull_bank_call(job, gateway, entry, date_from, personal_id)
+        except Exception as e:  # noqa: BLE001  one failing bank must not sink the estimate
+            self._set(job, bank, "failed", f"{type(e).__name__}: {e}")
+            return bank, None
+
+    def _pull_bank_call(self, job: dict, gateway: HttpGateway, entry: dict, date_from: str, personal_id: str):
         bank = entry["bank"]
         self._set(job, bank, "running", "checking consent")
         d = gateway.dialects[bank]
@@ -396,18 +416,27 @@ class Service:
         return bank, rows
 
     def _pull_registry(self, job: dict, service: str, entry: dict, path: str):
-        self._set(job, service, "running", "checking consent")
-        headers = {"Authorization": entry["authorization"], "Consent-ID": entry["consent_id"]}
-        problem = self._check_consent(self.registries, f"/{service}/v1/consents/{entry['consent_id']}/status")
-        if problem:
-            self._set(job, service, "failed", problem)
+        """RS or Creditinfo. Without a granted consent, or on any failure, this source is skipped and the estimate goes on."""
+        if entry.get("status") != "connected":
+            self._set(job, service, "failed", "consent was not granted")
             return None
-        reply = self.registries.get(path, headers=headers)
-        if reply.status_code != 200:
-            self._set(job, service, "failed", f"answered {reply.status_code}")
+        try:
+            self._set(job, service, "running", "checking consent")
+            headers = {"Authorization": entry["authorization"], "Consent-ID": entry["consent_id"]}
+            problem = self._check_consent(self.registries, f"/{service}/v1/consents/{entry['consent_id']}/status")
+            if problem:
+                self._set(job, service, "failed", problem)
+                return None
+            reply = self.registries.get(path, headers=headers)
+            if reply.status_code != 200:
+                self._set(job, service, "failed", f"answered {reply.status_code}")
+                return None
+            body = reply.json()
+        except (httpx.HTTPError, ValueError, KeyError, TypeError) as e:
+            self._set(job, service, "failed", f"{type(e).__name__}: {e}")
             return None
         self._set(job, service, "done", "data gathered")
-        return reply.json()
+        return body
 
     def _run(self, job: dict, record: dict, applicant: dict | None) -> None:
         try:
@@ -454,7 +483,9 @@ class Service:
                 if step["state"] == "failed":
                     warnings.append(f"{step['label']}: {step['detail']}")
             if not rs_body:
-                warnings.append("No Revenue Service data: the estimate uses bank data only.")
+                warnings.append("No Revenue Service data: the estimate does not use it.")
+            if not ci_body:
+                warnings.append("No Creditinfo data: the estimate does not use it.")
             job["result"] = {
                 "income": {k: float(out[k]) for k in ("p10", "p50", "p90")} | {"currency": "GEL", "period": "monthly"},
                 "confidence": {
@@ -471,12 +502,11 @@ class Service:
                 "warnings": warnings,
                 "data": {
                     "banks_used": sorted(got),
+                    "banks_used_names": [connected[b]["name"] for b in sorted(got)],
                     "months_covered": round(months, 1),
                     "transactions_used": cleaning["used_for_income"],
                 },
-                "cleaning": cleaning,
                 "sources_used": {"rs": bool(rs_body), "creditinfo": bool(ci_body)},
-                "loan_request": job["loan_request"],
             }
             job["status"], job["stage"] = "done", "done"
         except Exception as e:  # noqa: BLE001
@@ -501,7 +531,7 @@ class Service:
 
     @staticmethod
     def public_job(job: dict) -> dict:
-        return {k: v for k, v in job.items() if k not in ("created", "loan_request")}
+        return {k: v for k, v in job.items() if k != "created"}
 
 
 def create_app(
@@ -584,7 +614,9 @@ if __name__ == "__main__":
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--banks-url", default=BANKS_URL)
     parser.add_argument("--registries-url", default=REGISTRIES_URL)
-    parser.add_argument("--as-of", type=date.fromisoformat, help="end of the history window (default: today)")
+    parser.add_argument(
+        "--as-of", type=date.fromisoformat, help="end of the history window (default: the day the bank data ends)"
+    )
     args = parser.parse_args()
     app = create_app(
         httpx.Client(base_url=args.banks_url, timeout=120),

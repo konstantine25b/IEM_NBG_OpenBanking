@@ -1,4 +1,10 @@
+import { useState } from 'react'
+
+const narrow = () => window.matchMedia('(max-width: 980px)').matches
+
 export default function ClientPicker({ personalId, onChange, onSubmit, busy, connecting, clients }) {
+  // on a phone the ten cards would push the result far down, so the list starts folded and folds after a pick
+  const [open, setOpen] = useState(() => !narrow())
   return (
     <aside className="side">
       <form className="lookup" onSubmit={onSubmit}>
@@ -18,8 +24,8 @@ export default function ClientPicker({ personalId, onChange, onSubmit, busy, con
       </form>
 
       {clients.length > 0 && (
-        <>
-          <h2 className="side-title">Demo clients</h2>
+        <details className="demo-list" open={open} onToggle={(e) => setOpen(e.currentTarget.open)}>
+          <summary>Demo clients ({clients.length})</summary>
           <p className="hint">Ten kinds of person, from the clearest estimate to the hardest. None of them was used to train the model.</p>
           <ul className="clients">
             {clients.map((c) => (
@@ -27,7 +33,10 @@ export default function ClientPicker({ personalId, onChange, onSubmit, busy, con
                 <button
                   type="button"
                   className={`client ${personalId === c.personal_id ? 'active' : ''}`}
-                  onClick={() => onChange(c.personal_id)}
+                  onClick={() => {
+                    onChange(c.personal_id)
+                    if (narrow()) setOpen(false)
+                  }}
                   disabled={busy}
                   title={c.story}
                 >
@@ -41,7 +50,7 @@ export default function ClientPicker({ personalId, onChange, onSubmit, busy, con
               </li>
             ))}
           </ul>
-        </>
+        </details>
       )}
     </aside>
   )

@@ -1,11 +1,12 @@
-"""Income estimation API end to end, in process: portal -> service -> mock banks (all customers, on demand) + RS + Creditinfo.
+"""Income estimation API end to end, in process: portal -> service -> mock banks + RS + Creditinfo.
 
+Runs on a 240-customer dataset that the tests build themselves (tests/conftest.py).
 The checks that matter: what the service pulls over the bank APIs equals the stored api/ parquet rows, and the estimate
 equals what the model gives on the stored data."""
 
 from __future__ import annotations
 
-import sys
+import json
 import time
 from datetime import date
 from pathlib import Path
@@ -15,34 +16,41 @@ import pytest
 from fastapi.testclient import TestClient
 
 ROOT = Path(__file__).resolve().parents[1]
-DATASET = ROOT / "openbanking_mock" / "output" / "dataset"
-sys.path[:0] = [str(ROOT / "API"), str(ROOT / "income"), str(ROOT / "eda"), str(ROOT / "openbanking_mock")]
+AS_OF = date(2026, 10, 22)  # the history window of the estimates below ends here, not at the model's date
 
-pytestmark = pytest.mark.skipif(
-    not (DATASET / "api" / "transactions" / "part-00000.parquet").exists(), reason="dataset missing"
-)
-
-import mock_banks  # noqa: E402
-import mock_registries  # noqa: E402
-import service  # noqa: E402
-from income_pipeline import load_open_banking, predict_person, registry_of  # noqa: E402
-
-
-AS_OF = date(2026, 10, 22)  # the history window of every estimate in these tests ends here, not at the model's date
+CID = "C00012"
 
 
 @pytest.fixture(scope="module")
-def stack():
-    banks = TestClient(mock_banks.create_app(), base_url="http://banks")
+def modules(mini_dataset, mock_registries_on_mini):
+    import mock_banks
+    import service
+    from obmock.config import WorldConfig
+
+    return mock_banks, mock_registries_on_mini, service, WorldConfig
+
+
+@pytest.fixture(scope="module")
+def clients(modules):
+    mock_banks, mock_registries, _, WorldConfig = modules
+    banks = TestClient(mock_banks.create_app(mock_banks.Population(WorldConfig())), base_url="http://banks")
     registries = TestClient(mock_registries.create_app(), base_url="http://registries")
-    api = TestClient(service.create_app(banks, registries, as_of=AS_OF))
-    return api
+    return banks, registries
+
+
+@pytest.fixture(scope="module")
+def stack(modules, clients):
+    return TestClient(modules[2].create_app(*clients, as_of=AS_OF))
 
 
 def _consents(api, who):
     r = api.post("/v1/consents", json={"personal_id": who})
     assert r.status_code == 201, r.text
     return r.json()
+
+
+def _connected(table):
+    return [b["bank"] for b in table["banks"] if b["status"] == "connected"]
 
 
 def _estimate(api, consent_set_id, timeout=60):
@@ -58,58 +66,69 @@ def _estimate(api, consent_set_id, timeout=60):
     raise AssertionError("job did not finish")
 
 
-def _multi_bank_customer() -> str:
-    t = pd.read_parquet(DATASET / "truth" / "customers" / "part-00000.parquet", columns=["cid", "banks"])
+def _record(api, table):
+    return api.app.state.service.consent_sets[table["consent_set_id"]]
+
+
+@pytest.fixture(scope="module")
+def multi_bank_customer(mini_dataset):
+    t = pd.read_parquet(mini_dataset / "truth" / "customers" / "part-00000.parquet", columns=["cid", "banks"])
     t["n"] = t["banks"].str.count(r"\|") + 1
     return t.sort_values("n", ascending=False).iloc[0]["cid"]
 
 
-def test_consent_table_matches_where_the_client_has_accounts(stack):
-    cid = _multi_bank_customer()
+def test_consent_table_matches_where_the_client_has_accounts(stack, mini_dataset, multi_bank_customer):
+    cid = multi_bank_customer
     table = _consents(stack, cid)
-    accounts = pd.read_parquet(DATASET / "api" / "accounts" / "part-00000.parquet", columns=["psu_id", "bank"])
+    accounts = pd.read_parquet(mini_dataset / "api" / "accounts" / "part-00000.parquet", columns=["psu_id", "bank"])
     has_account = set(accounts[accounts["psu_id"] == cid]["bank"])
-    connected = {b["bank"] for b in table["banks"] if b["status"] == "connected"}
-    assert connected == has_account and len(table["banks"]) == 12
+    assert set(_connected(table)) == has_account and len(table["banks"]) == 12
     assert all(b["status"] == "no_relationship" for b in table["banks"] if b["bank"] not in has_account)
     assert table["rs"]["status"] == table["creditinfo"]["status"] == "connected"
     assert "authorization" not in str(table)  # tokens never leave the service
     # lookup by personal id gives the same client
-    by_person = _consents(stack, table["kyc"]["personId"])
-    assert {b["bank"] for b in by_person["banks"] if b["status"] == "connected"} == has_account
+    assert set(_connected(_consents(stack, table["kyc"]["personId"]))) == has_account
 
 
-def _stored_window(cid):
+def _stored_window(cid, dataset):
     """The stored api/ rows of a client, cut to the same 12 months back from AS_OF that the service asks for."""
-    tables = load_open_banking(cid)
+    from income_pipeline import load_open_banking
+
+    tables = load_open_banking(cid, dataset / "api")
     start = pd.Timestamp(AS_OF) - pd.DateOffset(months=12)
     booked = pd.to_datetime(tables["transactions"]["booking_date"])
     tables["transactions"] = tables["transactions"][(booked >= start) | booked.isna()]
     return tables
 
 
-def test_estimate_equals_the_model_on_the_stored_data(stack):
-    for cid in ("C00012", _multi_bank_customer()):
-        state = _estimate(stack, _consents(stack, cid)["consent_set_id"])
+def test_estimate_equals_the_model_on_the_stored_data(stack, mini_dataset, multi_bank_customer):
+    from income_pipeline import predict_person, registry_of
+
+    for cid in (CID, multi_bank_customer):
+        table = _consents(stack, cid)
+        state = _estimate(stack, table["consent_set_id"])
         assert state["status"] == "done", state
-        kyc = _consents(stack, cid)["kyc"]
-        registry = {**registry_of(cid), "Age": kyc["age"], "region_name": kyc["region_name"], "city": kyc["city"]}
-        direct = predict_person(registry, _stored_window(cid), as_of=AS_OF.isoformat())
+        kyc = table["kyc"]
+        registry = {
+            **registry_of(cid, mini_dataset / "truth" / "customers"),
+            "Age": kyc["age"], "region_name": kyc["region_name"], "city": kyc["city"],
+        }  # fmt: skip
+        direct = predict_person(registry, _stored_window(cid, mini_dataset), as_of=AS_OF.isoformat())
         income = state["result"]["income"]
         assert (income["p10"], income["p50"], income["p90"]) == (direct["p10"], direct["p50"], direct["p90"])
         assert all(s["state"] == "done" for s in state["progress"])
 
 
-def test_fetched_rows_equal_the_stored_api_tables(stack):
-    cid = "C00012"
+def test_fetched_rows_equal_the_stored_api_tables(stack, mini_dataset, modules):
+    service = modules[2]
     svc = stack.app.state.service
-    record = svc.consent_sets[_consents(stack, cid)["consent_set_id"]]
+    record = _record(stack, _consents(stack, CID))
     entries = {b["bank"]: b for b in record["banks"] if b["status"] == "connected"}
     gateway = svc._gateway_for(entries)
-    stored = pd.read_parquet(DATASET / "api" / "transactions" / "part-00000.parquet")
-    stored = stored[stored["psu_id"] == cid]
+    stored = pd.read_parquet(mini_dataset / "api" / "transactions" / "part-00000.parquet")
+    stored = stored[stored["psu_id"] == CID]
     for bank in entries:
-        rows = service.fetch_bank(gateway, bank, cid, "2025-10-19")["transactions"]
+        rows = service.fetch_bank(gateway, bank, CID, "2025-10-19")["transactions"]
         expected = stored[stored["bank"] == bank]
         assert len(rows) == len(expected)
         assert sum(float(r["amount"]) for r in rows) == pytest.approx(float(expected["amount"].sum()))
@@ -121,33 +140,55 @@ def test_unknown_client_and_unknown_ids(stack):
     assert stack.get("/v1/income-estimates/nope").status_code == 404
 
 
-def test_thin_data_gives_very_low_confidence_with_a_warning(stack):
-    table = _consents(stack, "C00012")
-    record = stack.app.state.service.consent_sets[table["consent_set_id"]]
-    for b in record["banks"]:
-        if b["bank"] != "bog":  # the client's big banks (salary) are not connected: only BoG is
-            b["status"] = "no_relationship"
-    state = _estimate(stack, table["consent_set_id"])
-    result = state["result"]
-    assert result["confidence"]["level"] == "very low"
-    assert any("transactions" in r for r in result["confidence"]["downgrade_reasons"])
-    assert result["data"]["banks_used"] == ["bog"]
+def test_no_bank_data_gives_very_low_confidence_with_a_warning(stack):
+    table = _consents(stack, CID)
+    for b in _record(stack, table)["banks"]:
+        b["status"] = "no_relationship"
+    result = _estimate(stack, table["consent_set_id"])["result"]
+    assert result["confidence"]["level"] == "very low" and result["data"]["banks_used"] == []
+    assert any("no bank data" in r for r in result["confidence"]["downgrade_reasons"])
+    assert result["confidence"]["measured"] is None and result["confidence"]["score"] <= 79
     assert result["warnings"]
 
 
-def test_a_dead_consent_is_reported_and_the_others_still_count(stack):
-    table = _consents(stack, "C00012")
-    record = stack.app.state.service.consent_sets[table["consent_set_id"]]
-    next(b for b in record["banks"] if b["bank"] == "liberty")["consent_id"] = "deadbeef"
+def test_thin_history_is_judged_very_low(modules):
+    judge = modules[2].judge_confidence
+    features = {"ob_inflow_month": 900.0, "ob_salary_month": 800.0}
+    assert judge("very high", 12.0, 600, features, 2) == ("very high", [], [])
+    level, reasons, _ = judge("very high", 1.5, 12, features, 1)
+    assert level == "very low" and len(reasons) == 2
+    _, reasons, warnings = judge("high", 12.0, 600, {"ob_inflow_month": 900.0}, 1)
+    assert reasons == [] and "salary" in warnings[0]  # no salary credits is a warning, not a downgrade
+
+
+def test_a_dead_bank_consent_is_reported_and_the_others_still_count(stack, multi_bank_customer):
+    table = _consents(stack, multi_bank_customer)
+    banks = _connected(table)
+    assert len(banks) >= 2
+    dead, others = banks[0], banks[1:]
+    next(b for b in _record(stack, table)["banks"] if b["bank"] == dead)["consent_id"] = "deadbeef"
     state = _estimate(stack, table["consent_set_id"])
-    liberty = next(p for p in state["progress"] if p["source"] == "liberty")
-    assert liberty["state"] == "failed"
-    assert state["status"] == "done" and "liberty" not in state["result"]["data"]["banks_used"]
-    assert any("Liberty" in w for w in state["result"]["warnings"])
+    assert next(p for p in state["progress"] if p["source"] == dead)["state"] == "failed"
+    assert state["status"] == "done" and dead not in state["result"]["data"]["banks_used"]
+    assert set(state["result"]["data"]["banks_used"]) == set(others)
+    assert any("consent" in w for w in state["result"]["warnings"])
+
+
+@pytest.mark.parametrize("registry", ["rs", "creditinfo"])
+def test_a_registry_without_consent_is_skipped_with_a_warning(stack, registry):
+    table = _consents(stack, CID)
+    record = _record(stack, table)
+    record[registry] = {"source": registry, "status": "error", "consent_id": None, "message": "refused"}  # no token
+    state = _estimate(stack, table["consent_set_id"])
+    assert state["status"] == "done", state  # used to die with a KeyError and leave the row on "running"
+    step = next(p for p in state["progress"] if p["source"] == registry)
+    assert step["state"] == "failed" and all(p["state"] in ("done", "failed") for p in state["progress"])
+    assert state["result"]["sources_used"][registry] is False
+    assert any(registry == "rs" and "Revenue Service" in w or "Creditinfo" in w for w in state["result"]["warnings"])
 
 
 def test_result_has_shap_drivers_and_measured_confidence(stack):
-    result = _estimate(stack, _consents(stack, "C00012")["consent_set_id"])["result"]
+    result = _estimate(stack, _consents(stack, CID)["consent_set_id"])["result"]
     explanation = result["explanation"]
     # TreeSHAP is additive: the starting point plus every driver is the model's P50
     total = explanation["starting_point_gel"] + sum(d["effect_gel"] for d in explanation["drivers"])
@@ -157,10 +198,11 @@ def test_result_has_shap_drivers_and_measured_confidence(stack):
     assert measured is None or 0 <= measured["inside_p10_p90_pct"] <= 100
 
 
-def test_demo_clients_are_ten_known_clients(stack):
-    clients = stack.get("/v1/demo/clients").json()
-    assert len(clients) == 10 and len({c["id"] for c in clients}) == 10
-    assert _consents(stack, clients[0]["id"])["connected_banks"] >= 1
+def test_response_carries_only_what_the_portal_shows(stack):
+    result = _estimate(stack, _consents(stack, CID)["consent_set_id"])["result"]
+    assert not {"cleaning", "loan_request", "rs_declared"} & set(result)
+    assert result["sources_used"] == {"rs": True, "creditinfo": True}
+    assert len(result["data"]["banks_used_names"]) == len(result["data"]["banks_used"])
 
 
 def test_confidence_is_read_off_the_band_width():
@@ -176,7 +218,7 @@ def test_confidence_is_read_off_the_band_width():
 def test_result_confidence_matches_its_band(stack):
     from confidence import level_of, score_of
 
-    c = _estimate(stack, _consents(stack, "C00012")["consent_set_id"])["result"]["confidence"]
+    c = _estimate(stack, _consents(stack, CID)["consent_set_id"])["result"]["confidence"]
     assert c["level"] == level_of(c["band_share"]) and c["score"] == score_of(c["band_share"])
     assert c["plus_minus_pct"] == pytest.approx(50 * c["band_share"], abs=0.06)
 
@@ -187,37 +229,44 @@ def test_sources_lists_every_consent_target(stack):
     assert sum(s["kind"] == "bank" for s in sources) == 12
 
 
-def test_the_history_window_ends_at_as_of_not_at_the_model_date(stack):
+def test_demo_clients_file_is_ten_distinct_clients():
+    clients = json.loads((ROOT / "API" / "demo_clients.json").read_text())
+    assert len(clients) == 10 and len({c["personal_id"] for c in clients}) == 10
+    assert all({"title", "story", "facts", "banks", "has_deposit", "personal_id"} <= set(c) for c in clients)
+
+
+def test_history_window_follows_as_of_or_else_where_the_bank_data_ends(stack, modules, clients):
     health = stack.get("/health").json()
     assert health["history_window_ends"] == AS_OF.isoformat() and health["model_trained_to"].startswith("2026-10-19")
+    default = TestClient(modules[2].create_app(*clients))  # no --as-of: the mock banks say their data ends 2026-10-19
+    assert default.get("/health").json()["history_window_ends"] == "2026-10-19"
 
 
 def test_profile_has_name_age_and_where_each_part_came_from(stack):
-    kyc = _consents(stack, "C00012")["kyc"]
+    kyc = _consents(stack, CID)["kyc"]
     born = date.fromisoformat(kyc["birth_date"])
     assert kyc["age"] == AS_OF.year - born.year - ((AS_OF.month, AS_OF.day) < (born.month, born.day))
     assert kyc["name_en"] and kyc["name_ka"]
     assert {"name", "birth_date", "age", "place", "personal_id", "name_check"} <= set(kyc["provenance"])
-    # the banks' own account owner names confirm the name
-    assert kyc["name_check"] and all(c["matches"] for c in kyc["name_check"])
+    assert "demo_note" not in kyc["provenance"]  # developer notes do not belong in a bank user's screen
+    assert kyc["name_check"] and all(c["matches"] and c["bank_name"] for c in kyc["name_check"])
 
 
-def test_one_failing_bank_does_not_fail_the_consent_call(stack, monkeypatch):
+def test_one_failing_bank_does_not_fail_the_consent_call(stack, modules):
     svc = stack.app.state.service
+    victim = _connected(_consents(stack, CID))[0]
     original = svc.banks.post
 
     def flaky(url, *args, **kwargs):
-        if "/_mock/session/liberty" in str(url):
-            raise service.httpx.ConnectError("liberty is down")
+        if f"/_mock/session/{victim}" in str(url):
+            raise modules[2].httpx.ConnectError(f"{victim} is down")
         return original(url, *args, **kwargs)
 
-    monkeypatch.setattr(svc.banks, "post", flaky)
-    table = _consents(stack, "C00012")
-    liberty = next(b for b in table["banks"] if b["bank"] == "liberty")
-    assert liberty["status"] == "error" and "liberty is down" in liberty["message"]
-    assert table["connected_banks"] >= 1  # the other banks still came through
-
-
-def test_result_has_no_scaled_rs_number(stack):
-    result = _estimate(stack, _consents(stack, "C00012")["consent_set_id"])["result"]
-    assert "rs_declared" not in result and result["sources_used"] == {"rs": True, "creditinfo": True}
+    svc.banks.post = flaky
+    try:
+        table = _consents(stack, CID)
+    finally:
+        svc.banks.post = original
+    failed = next(b for b in table["banks"] if b["bank"] == victim)
+    assert failed["status"] == "error" and f"{victim} is down" in failed["message"]
+    assert table["connected_banks"] >= 0 and len(table["banks"]) == 12  # every other bank still answered

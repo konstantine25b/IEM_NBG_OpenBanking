@@ -19,8 +19,7 @@ async function call(method, path, body) {
 export const connectAll = (personalId) => call('POST', '/v1/consents', { personal_id: personalId })
 
 // Phase 2: one call, returns a job id right away.
-export const startEstimate = (consentSetId, loanRequest) =>
-  call('POST', '/v1/income-estimates', { consent_set_id: consentSetId, loan_request: loanRequest })
+export const startEstimate = (consentSetId) => call('POST', '/v1/income-estimates', { consent_set_id: consentSetId })
 
 export const getEstimate = (jobId) => call('GET', `/v1/income-estimates/${jobId}`)
 

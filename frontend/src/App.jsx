@@ -10,18 +10,20 @@ import './app.css'
 const POLL_MS = 700
 const STEPS = ['Connect banks', 'Collect data', 'Result']
 
-function Stepper({ current }) {
+function Stepper({ states }) {
   return (
     <ol className="stepper" aria-label="Progress">
       {STEPS.map((label, i) => (
-        <li key={label} className={i < current ? 'done' : i === current ? 'active' : ''} aria-current={i === current ? 'step' : undefined}>
-          <span className="dot">{i < current ? '✓' : i + 1}</span>
+        <li key={label} className={states[i]} aria-current={states[i] === 'active' ? 'step' : undefined}>
+          <span className="dot">{states[i] === 'done' ? '✓' : i + 1}</span>
           {label}
         </li>
       ))}
     </ol>
   )
 }
+
+const narrow = () => window.matchMedia('(max-width: 980px)').matches
 
 export default function App() {
   const [personalId, setPersonalId] = useState('')
@@ -36,6 +38,7 @@ export default function App() {
   const played = useRef(null)
   const timer = useRef(null)
   const autoRan = useRef(false)
+  const mainRef = useRef(null)
 
   const reset = () => {
     clearTimeout(timer.current)
@@ -61,10 +64,15 @@ export default function App() {
     reset()
     setConnecting(true)
     try {
+      // the rows of the animation; if the list cannot be loaded the table simply appears without it
+      const known = sources.length ? sources : await getSources().catch(() => [])
+      if (!sources.length && known.length) setSources(known)
       const result = await connectAll(id)
       setReply(result)
-      // wait until the per-bank animation has played out, then show the table
-      await new Promise((resolve) => { played.current = resolve })
+      if (known.length) {
+        // wait until the per-bank animation has played out, then show the table
+        await new Promise((resolve) => { played.current = resolve })
+      }
       setConsents(result)
       return result
     } catch (e) {
@@ -113,7 +121,18 @@ export default function App() {
 
   const running = Boolean(job) && job.status !== 'done' && job.status !== 'failed'
   const showResult = job?.status === 'done' && revealed
-  const current = showResult ? 3 : job ? 1 : consents ? 1 : 0
+  // "Collect data" only becomes active once the estimate is started; before that it is the next step
+  const stepStates = showResult
+    ? ['done', 'done', 'done']
+    : job
+      ? ['done', 'active', 'todo']
+      : consents
+        ? ['done', 'next', 'todo']
+        : ['active', 'todo', 'todo']
+
+  useEffect(() => {
+    if ((connecting || showResult) && narrow()) mainRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [connecting, showResult])
 
   return (
     <div className="shell">
@@ -138,14 +157,14 @@ export default function App() {
           clients={demoClients}
         />
 
-        <main className="main">
-          <Stepper current={current} />
+        <main className="main" ref={mainRef}>
+          <Stepper states={stepStates} />
           {error && <p className="error" role="alert">{error}</p>}
 
           {!consents && !connecting && !error && (
             <section className="card empty">
               <h2>Start with a client</h2>
-              <p>Pick a demo client on the left, or type a personal ID, then press <strong>Connect all banks</strong>.</p>
+              <p>Pick a demo client, or type a personal ID, then press <strong>Connect all banks</strong>.</p>
             </section>
           )}
 

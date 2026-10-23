@@ -9,7 +9,8 @@ equals the stored api/ parquet rows.
 
   POST /_mock/session/{bank}?customer=C00012|09754421550   consent + token, already approved (skip mode)
   GET  /_mock/banks                                        the 12 banks: base URL, accounts URL, consent header
-  GET  /_mock/kyc/{customer}                               the lender's own KYC record (age, sex, region, city)
+  GET  /_mock/kyc/{customer}                               the lender's own KYC record (name, birth date, sex, place)
+  GET  /_mock/clock                                        the date the generated data ends
   ANY  /{bank}/...                                         the bank's XS2A routes; needs Authorization + Consent-ID
 
 A customer with no account at a bank gets a valid consent and an empty account list, like a real bank would answer.
@@ -156,6 +157,11 @@ def create_app(population: Population | None = None) -> FastAPI:
         if cid is None:
             return error(404, "UNKNOWN_CLIENT", f"no customer {customer!r}")
         return pop.session(bank, cid)
+
+    @app.get("/_mock/clock")
+    def clock():
+        """The date the generated bank data ends (demo only: real banks have no such call, their data ends today)."""
+        return {"as_of": pop.cfg.as_of.isoformat()}
 
     @app.get("/_mock/kyc/{customer}")
     def kyc(customer: str):

@@ -1,3 +1,19 @@
+# Income check demo (start here)
+
+A loan officer picks a client; the API asks all 12 mock banks, the Revenue Service and Creditinfo for consent, pulls
+the data, and the model returns a monthly income range with a confidence score and the reasons.
+
+```
+uv sync                  # once
+make frontend-setup      # once (needs Node.js: brew install node)
+make demo                # bank mock :8000, RS+Creditinfo :8001, income API :9000, page http://localhost:5173
+```
+
+Swagger for the income API: http://localhost:9000/docs. Details: `API/README.md`, `frontend/README.md`.
+Everything here is synthetic data. `make test` builds its own small dataset (about 10 s) and needs nothing else.
+
+---
+
 # Loan-portfolio EDA (pre-modeling)
 
 One command turns the ten CSV files in `nbg_synthetic_data/` (+ the Georgian data dictionary) into a **self-contained HTML

@@ -126,10 +126,11 @@ def predict_person(
     }
 
 
-def registry_of(cid: str) -> dict:
+def registry_of(cid: str, truth_dir: Path | None = None) -> dict:
     """The df_* registry fields of a generated customer (as in nbg_synthetic_data/df_*.csv)."""
     shard = (int(cid.lstrip("C")) - 1) // SHARD_SIZE
-    truth = HERE.parent / "openbanking_mock" / "output" / "dataset" / "truth" / "customers" / f"part-{shard:05d}.parquet"
+    truth_dir = truth_dir or HERE.parent / "openbanking_mock" / "output" / "dataset" / "truth" / "customers"
+    truth = truth_dir / f"part-{shard:05d}.parquet"
     person = pd.read_parquet(truth).set_index("cid").loc[cid]
     return {c.removeprefix("df_"): person[c] for c in person.index if c.startswith("df_")}
 

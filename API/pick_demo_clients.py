@@ -2,7 +2,9 @@
 """Choose the demo clients: ten different kinds of person, taken from the 20% the model never trained on.
 
 For each kind of person, among the held-out clients that fit, the pick is a typical one: the confidence level most
-of them get, and an error close to the middle of that group (not the luckiest case). The list is ordered from the
+of them get, and an error close to the middle of that group (not the luckiest case). The P10-P90 range holds the real
+income about 8 times in 10 on held-out clients, so eight of the ten picks are hits and two (MISSES) are near-misses:
+the demo should never suggest that the range always contains the real income. The list is ordered from the
 tightest band to the widest, so it reads as a gradient from easy to hard cases.
 The measured accuracy per confidence level is in income/models/confidence_calibration.json.
 
@@ -26,6 +28,7 @@ OUT = HERE / "demo_clients.json"
 TRUTH = HERE.parent / "openbanking_mock" / "output" / "dataset" / "truth" / "customers"
 SHARD_SIZE = 250
 BIG_CITIES = {"Tbilisi", "Batumi", "Kutaisi", "Rustavi"}
+MISSES = {"Receives remittances", "Hardest case: very wide band"}  # shown as near-misses
 
 
 BANK_NAMES = {"tbc": "TBC", "bog": "BoG", "basisbank": "Basisbank", "terabank": "TeraBank", "procredit": "ProCredit"}
@@ -75,7 +78,7 @@ def archetypes(t: pd.DataFrame) -> list[tuple[str, str, pd.Series]]:
         (
             "Small banks only, with a deposit",
             "No TBC, no BoG, no Liberty: smaller banks and a savings account.",
-            (t.ob_n_banks >= 2) & small & deposit,
+            (t.ob_n_banks >= 1) & small & deposit & salary,
         ),
         (
             "Hardest case: very wide band",
@@ -105,6 +108,12 @@ def main() -> None:
         pool = pool[pool.level == modal]
         fresh = pool[[not (set(b.split("|")) - {"tbc", "bog"} <= used_banks) for b in pool.banks]]
         pool = fresh if len(fresh) else pool
+        hit = (pool[LABEL] >= pool.p10) & (pool[LABEL] <= pool.p90)
+        want = title not in MISSES
+        pool = pool[hit == want] if (hit == want).any() else pool
+        if not want and (pool.error_pct <= 10).any():
+            pool = pool[pool.error_pct <= 10]  # a near-miss, not a wild one
+        pool = pool[pool.ob_n_banks == pool.ob_n_banks.max()]  # as many banks as that kind of client has here
         r = pool.iloc[(pool.error_pct - pool.error_pct.median()).abs().argsort().iloc[0]]
         used.add(r.cid)
         used_banks |= set(r.banks.split("|")) - {"tbc", "bog"}
@@ -118,12 +127,13 @@ def main() -> None:
                 "banks": bank_list(r.banks),
                 "has_deposit": bool(r.ob_has_savings == 1),
                 "band_share": round(float(r.band_share), 4),
+                "range_holds_actual": bool(r[LABEL] >= r.p10 and r[LABEL] <= r.p90),
                 "model_confidence": r.level,
             }
         )
         print(
             f"{r.cid}  {title:32s} actual {r[LABEL]:7.0f}  P50 {r.p50:7.0f}  err {r.error_pct:4.1f}%  "
-            f"band {100 * r.band_share:4.1f}%  {r.level}"
+            f"band {100 * r.band_share:4.1f}%  {r.level}  {'inside' if r[LABEL] >= r.p10 and r[LABEL] <= r.p90 else 'OUTSIDE'}"
         )
     picked.sort(key=lambda c: c["band_share"])
     OUT.write_text(json.dumps(picked, indent=2, ensure_ascii=False))
