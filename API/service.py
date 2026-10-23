@@ -161,6 +161,12 @@ def judge_confidence(
 
 
 # ----------------------------------------------------------------------------- the service
+def _same_name(kyc: dict, owner_name: str | None) -> bool:
+    """Does a bank's account owner name match the KYC name (either script, any word order)?"""
+    words = lambda text: sorted(str(text).replace(",", " ").upper().split())  # noqa: E731
+    return bool(owner_name) and words(owner_name) in (words(kyc["name_en"]), words(kyc["name_ka"]))
+
+
 class EstimateRequest(BaseModel):
     consent_set_id: str
     applicant: dict[str, Any] | None = None  # overrides the KYC record: age, sex, region_name, city
@@ -172,8 +178,15 @@ class ConsentRequest(BaseModel):
 
 
 class Service:
-    def __init__(self, banks: httpx.Client, registries: httpx.Client, model: IncomeModel | None = None) -> None:
+    def __init__(
+        self,
+        banks: httpx.Client,
+        registries: httpx.Client,
+        model: IncomeModel | None = None,
+        as_of: date | None = None,
+    ) -> None:
         self.banks, self.registries = banks, registries
+        self.as_of = as_of  # None: every estimate looks back from the day it is made
         self.model = model or IncomeModel.load()
         self.calibration = json.loads(CALIBRATION.read_text()) if CALIBRATION.exists() else None
         self.pool = ThreadPoolExecutor(max_workers=24)
@@ -192,6 +205,16 @@ class Service:
 
     # ---- phase 1: consents ----
     def _bank_consent(self, bank: dict, personal_id: str) -> dict:
+        """One bank's consent. Whatever goes wrong marks this bank as failed; the others carry on."""
+        try:
+            return self._bank_consent_call(bank, personal_id)
+        except (httpx.HTTPError, ValueError, KeyError, TypeError, AttributeError) as e:
+            return {
+                "bank": bank["bank"], "name": bank["name"], "status": "error", "consent_id": None, "accounts": 0,
+                "message": f"{type(e).__name__}: {e}",
+            }  # fmt: skip
+
+    def _bank_consent_call(self, bank: dict, personal_id: str) -> dict:
         key = bank["bank"]
         out = {"bank": key, "name": bank["name"], "status": "error", "consent_id": None, "accounts": 0}
         r = self.banks.post(f"/_mock/session/{key}", params={"customer": personal_id})
@@ -212,10 +235,20 @@ class Service:
             return out
         accounts = next((v for v in reply.body.values() if isinstance(v, list)), [])
         out["accounts"] = len(accounts)
+        # the account owner as this bank knows them, used to confirm the client's name
+        out["owner_name"] = next(
+            (a["ownerName"] for a in accounts if isinstance(a, dict) and a.get("ownerName")), None
+        )  # only the owner field: some banks put an IBAN or a label in `name`
         out["status"] = "connected" if accounts else "no_relationship"  # no account: drop the bank
         return out
 
     def _registry_consent(self, service: str, personal_id: str) -> dict:
+        try:
+            return self._registry_consent_call(service, personal_id)
+        except (httpx.HTTPError, ValueError, KeyError, TypeError) as e:
+            return {"source": service, "status": "error", "consent_id": None, "message": f"{type(e).__name__}: {e}"}
+
+    def _registry_consent_call(self, service: str, personal_id: str) -> dict:
         out = {"source": service, "status": "error", "consent_id": None}
         created = self.registries.post(f"/{service}/v1/consents", json={"personId": personal_id})
         if created.status_code != 201:
@@ -234,16 +267,47 @@ class Service:
         rs, creditinfo = (f.result() for f in registry_futures)
         if all(b["status"] == "unknown_client" for b in bank_results):
             return None
-        kyc = self.banks.get(f"/_mock/kyc/{personal_id}")
         record = {
             "consent_set_id": uuid.uuid4().hex[:12],
             "personal_id": personal_id,
             "banks": sorted(bank_results, key=lambda b: (b["status"] != "connected", -b["accounts"], b["bank"])),
             "rs": rs,
             "creditinfo": creditinfo,
-            "kyc": kyc.json() if kyc.status_code == 200 else None,
+            "kyc": self._kyc(personal_id, bank_results),
         }
         self.consent_sets[record["consent_set_id"]] = record
+        return record
+
+    def today(self) -> date:
+        return self.as_of or date.today()
+
+    def _kyc(self, personal_id: str, bank_results: list[dict]) -> dict | None:
+        """The client's profile for the lender, and where each part of it comes from."""
+        try:
+            reply = self.banks.get(f"/_mock/kyc/{personal_id}")
+            record = reply.json() if reply.status_code == 200 else None
+        except (httpx.HTTPError, ValueError):
+            record = None
+        if record is None:
+            return None
+        today = self.today()
+        born = date.fromisoformat(record["birth_date"])
+        record["age"] = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+        seen = [
+            {"bank": b["bank"], "owner_name": b["owner_name"], "matches": _same_name(record, b["owner_name"])}
+            for b in bank_results
+            if b["status"] == "connected" and b.get("owner_name")
+        ]
+        record["name_check"] = seen
+        record["provenance"] = {
+            "name": "Lender's KYC record (ID card at onboarding)",
+            "birth_date": "Lender's KYC record (ID card at onboarding)",
+            "age": f"Calculated from the date of birth on {today.isoformat()}",
+            "place": "Lender's KYC record (registered address)",
+            "personal_id": "Entered by the loan officer",
+            "name_check": "Account owner name returned by each connected bank's open banking API",
+            "demo_note": "In this demo the KYC record is the generated customer record (API/mock_banks.py, /_mock/kyc).",
+        }
         return record
 
     @staticmethod
@@ -348,7 +412,7 @@ class Service:
     def _run(self, job: dict, record: dict, applicant: dict | None) -> None:
         try:
             job["status"], job["stage"] = "running", "fetching"
-            as_of = pd.Timestamp(self.model.state["ob_window"]["as_of"])
+            as_of = pd.Timestamp(self.today())  # the window ends today, not where the model was trained
             date_from = (as_of - pd.DateOffset(months=HISTORY_MONTHS)).date().isoformat()
             connected = {b["bank"]: b for b in record["banks"] if b["status"] == "connected"}
             gateway = self._gateway_for(connected)
@@ -411,7 +475,7 @@ class Service:
                     "transactions_used": cleaning["used_for_income"],
                 },
                 "cleaning": cleaning,
-                "rs_declared": {"SOI04": registry.get("INCOME_AMOUNT_SOI04")} if rs_body else None,
+                "sources_used": {"rs": bool(rs_body), "creditinfo": bool(ci_body)},
                 "loan_request": job["loan_request"],
             }
             job["status"], job["stage"] = "done", "done"
@@ -441,12 +505,16 @@ class Service:
 
 
 def create_app(
-    banks: httpx.Client | None = None, registries: httpx.Client | None = None, model: IncomeModel | None = None
+    banks: httpx.Client | None = None,
+    registries: httpx.Client | None = None,
+    model: IncomeModel | None = None,
+    as_of: date | None = None,
 ) -> FastAPI:
     svc = Service(
         banks or httpx.Client(base_url=BANKS_URL, timeout=60),
         registries or httpx.Client(base_url=REGISTRIES_URL, timeout=60),
         model,
+        as_of,
     )
     app = FastAPI(
         title="Income estimation API", description="Open banking + RS + Creditinfo -> P10 / P50 / P90 monthly income."
@@ -458,7 +526,8 @@ def create_app(
     def health():
         return {
             "status": "ok",
-            "model_window": svc.model.state["ob_window"]["as_of"],
+            "model_trained_to": svc.model.state["ob_window"]["as_of"],
+            "history_window_ends": svc.today().isoformat(),
             "today": date.today().isoformat(),
         }
 
@@ -477,7 +546,10 @@ def create_app(
 
     @app.post("/v1/consents", status_code=201)
     def create_consents(body: ConsentRequest):
-        record = svc.create_consents(body.personal_id.strip())
+        try:
+            record = svc.create_consents(body.personal_id.strip())
+        except httpx.HTTPError as e:
+            return JSONResponse({"error": "GATEWAY_UNREACHABLE", "text": str(e)}, status_code=502)
         if record is None:
             return JSONResponse({"error": "UNKNOWN_CLIENT", "text": "no bank knows this personal id"}, status_code=404)
         return svc.public_consents(record)
@@ -512,8 +584,11 @@ if __name__ == "__main__":
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--banks-url", default=BANKS_URL)
     parser.add_argument("--registries-url", default=REGISTRIES_URL)
+    parser.add_argument("--as-of", type=date.fromisoformat, help="end of the history window (default: today)")
     args = parser.parse_args()
     app = create_app(
-        httpx.Client(base_url=args.banks_url, timeout=120), httpx.Client(base_url=args.registries_url, timeout=60)
+        httpx.Client(base_url=args.banks_url, timeout=120),
+        httpx.Client(base_url=args.registries_url, timeout=60),
+        as_of=args.as_of,
     )
     uvicorn.run(app, host=args.host, port=args.port)

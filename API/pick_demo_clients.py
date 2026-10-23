@@ -48,36 +48,39 @@ def archetypes(t: pd.DataFrame) -> list[tuple[str, str, pd.Series]]:
     banks = t["banks"].fillna("").str.split("|")
     uses = lambda k: banks.apply(lambda lst: k in lst)  # noqa: E731
     deposit = (t.ob_has_savings == 1) & (t.ob_savings_ratio > 1)
+    # the common real-life case: BoG and TBC plus one more bank
+    trio = (t.ob_n_banks == 3) & uses("tbc") & uses("bog")
+    small = ~uses("tbc") & ~uses("bog") & ~uses("liberty")
     return [
         (
-            "Salaried, Tbilisi, one bank",
-            "Steady salary credits at one bank.",
-            salary & (t.region_name == "Tbilisi") & (t.ob_n_banks == 1) & income.between(2000, 3500),
+            "Salaried, three banks",
+            "Salary credits; BoG and TBC plus a third bank.",
+            trio & salary & income.between(1500, 6000),
         ),
         (
             "Saver with a deposit",
-            "Salary plus a savings / deposit account.",
-            salary & deposit & uses("tbc") & income.between(2500, 6000),
+            "Three banks and a savings / deposit account.",
+            trio & salary & (t.ob_has_savings == 1),
         ),
-        ("Three banks, not TBC", "Uses three banks, none of them TBC.", salary & (t.ob_n_banks == 3) & ~uses("tbc")),
-        ("Young, low income", "Under 26, early in working life.", (t.Age < 26) & (income < 1500)),
+        ("Young, low income", "Under 26, early in working life; three banks.", trio & (t.Age < 26)),
+        ("Outside the big cities", "Small town or village; three banks.", trio & salary & ~t.city.isin(BIG_CITIES)),
         (
-            "Outside the big cities, not BoG",
-            "Small town or village; Bank of Georgia is not one of the banks.",
-            salary & ~t.city.isin(BIG_CITIES) & ~uses("bog") & income.between(1000, 3000),
+            "Receives remittances",
+            "Regular transfers from abroad; three banks.",
+            trio & (t.ob_remit_month.fillna(0) > 100),
         ),
-        ("Sole proprietor", "Registered individual entrepreneur.", (t.CLIENT_LEGAL_FORM == 1) & (t.ob_n_banks >= 1)),
-        ("No salary credits", "Income does not arrive as a salary: the hard, informal case.", ~salary & (income > 800)),
-        ("Receives remittances", "Regular transfers from abroad.", (t.ob_remit_month.fillna(0) > 100) & salary),
+        ("Sole proprietor", "Registered individual entrepreneur; three banks.", trio & (t.CLIENT_LEGAL_FORM == 1)),
+        ("No salary credits", "Income does not arrive as a salary: the hard, informal case.", trio & ~salary),
+        ("Three banks, not TBC", "Uses three banks, none of them TBC.", salary & (t.ob_n_banks == 3) & ~uses("tbc")),
         (
             "Small banks only, with a deposit",
-            "No TBC, no BoG, no Liberty: only smaller banks, and a savings account.",
-            salary & deposit & ~uses("tbc") & ~uses("bog") & ~uses("liberty"),
+            "No TBC, no BoG, no Liberty: smaller banks and a savings account.",
+            (t.ob_n_banks >= 2) & small & deposit,
         ),
         (
             "Hardest case: very wide band",
             "The model finds little to go on, so the band is very wide.",
-            t.band_share > 0.20,
+            (t.ob_n_banks >= 2) & (t.band_share > 0.25),
         ),
     ]
 
@@ -92,6 +95,7 @@ def main() -> None:
     t["level"] = [level_of(b) for b in t.band_share]
     picked: list[dict] = []
     used: set[str] = set()
+    used_banks: set[str] = set()  # banks other than TBC and BoG already shown
     for title, story, mask in archetypes(t):
         pool = t[mask & ~t.cid.isin(used)]
         if pool.empty:
@@ -99,8 +103,11 @@ def main() -> None:
             continue
         modal = pool.level.value_counts().idxmax()  # what most people of this kind get
         pool = pool[pool.level == modal]
+        fresh = pool[[not (set(b.split("|")) - {"tbc", "bog"} <= used_banks) for b in pool.banks]]
+        pool = fresh if len(fresh) else pool
         r = pool.iloc[(pool.error_pct - pool.error_pct.median()).abs().argsort().iloc[0]]
         used.add(r.cid)
+        used_banks |= set(r.banks.split("|")) - {"tbc", "bog"}
         picked.append(
             {
                 "id": r.cid,

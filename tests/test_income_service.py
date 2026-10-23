@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import sys
 import time
+from datetime import date
 from pathlib import Path
 
 import pandas as pd
@@ -27,11 +28,14 @@ import service  # noqa: E402
 from income_pipeline import load_open_banking, predict_person, registry_of  # noqa: E402
 
 
+AS_OF = date(2026, 10, 22)  # the history window of every estimate in these tests ends here, not at the model's date
+
+
 @pytest.fixture(scope="module")
 def stack():
     banks = TestClient(mock_banks.create_app(), base_url="http://banks")
     registries = TestClient(mock_registries.create_app(), base_url="http://registries")
-    api = TestClient(service.create_app(banks, registries))
+    api = TestClient(service.create_app(banks, registries, as_of=AS_OF))
     return api
 
 
@@ -75,14 +79,22 @@ def test_consent_table_matches_where_the_client_has_accounts(stack):
     assert {b["bank"] for b in by_person["banks"] if b["status"] == "connected"} == has_account
 
 
+def _stored_window(cid):
+    """The stored api/ rows of a client, cut to the same 12 months back from AS_OF that the service asks for."""
+    tables = load_open_banking(cid)
+    start = pd.Timestamp(AS_OF) - pd.DateOffset(months=12)
+    booked = pd.to_datetime(tables["transactions"]["booking_date"])
+    tables["transactions"] = tables["transactions"][(booked >= start) | booked.isna()]
+    return tables
+
+
 def test_estimate_equals_the_model_on_the_stored_data(stack):
     for cid in ("C00012", _multi_bank_customer()):
         state = _estimate(stack, _consents(stack, cid)["consent_set_id"])
         assert state["status"] == "done", state
         kyc = _consents(stack, cid)["kyc"]
-        direct = predict_person(
-            {**registry_of(cid), "region_name": kyc["region_name"], "city": kyc["city"]}, load_open_banking(cid)
-        )
+        registry = {**registry_of(cid), "Age": kyc["age"], "region_name": kyc["region_name"], "city": kyc["city"]}
+        direct = predict_person(registry, _stored_window(cid), as_of=AS_OF.isoformat())
         income = state["result"]["income"]
         assert (income["p10"], income["p50"], income["p90"]) == (direct["p10"], direct["p50"], direct["p90"])
         assert all(s["state"] == "done" for s in state["progress"])
@@ -173,3 +185,39 @@ def test_sources_lists_every_consent_target(stack):
     sources = stack.get("/v1/sources").json()
     assert [s["key"] for s in sources if s["kind"] == "registry"] == ["rs", "creditinfo"]
     assert sum(s["kind"] == "bank" for s in sources) == 12
+
+
+def test_the_history_window_ends_at_as_of_not_at_the_model_date(stack):
+    health = stack.get("/health").json()
+    assert health["history_window_ends"] == AS_OF.isoformat() and health["model_trained_to"].startswith("2026-10-19")
+
+
+def test_profile_has_name_age_and_where_each_part_came_from(stack):
+    kyc = _consents(stack, "C00012")["kyc"]
+    born = date.fromisoformat(kyc["birth_date"])
+    assert kyc["age"] == AS_OF.year - born.year - ((AS_OF.month, AS_OF.day) < (born.month, born.day))
+    assert kyc["name_en"] and kyc["name_ka"]
+    assert {"name", "birth_date", "age", "place", "personal_id", "name_check"} <= set(kyc["provenance"])
+    # the banks' own account owner names confirm the name
+    assert kyc["name_check"] and all(c["matches"] for c in kyc["name_check"])
+
+
+def test_one_failing_bank_does_not_fail_the_consent_call(stack, monkeypatch):
+    svc = stack.app.state.service
+    original = svc.banks.post
+
+    def flaky(url, *args, **kwargs):
+        if "/_mock/session/liberty" in str(url):
+            raise service.httpx.ConnectError("liberty is down")
+        return original(url, *args, **kwargs)
+
+    monkeypatch.setattr(svc.banks, "post", flaky)
+    table = _consents(stack, "C00012")
+    liberty = next(b for b in table["banks"] if b["bank"] == "liberty")
+    assert liberty["status"] == "error" and "liberty is down" in liberty["message"]
+    assert table["connected_banks"] >= 1  # the other banks still came through
+
+
+def test_result_has_no_scaled_rs_number(stack):
+    result = _estimate(stack, _consents(stack, "C00012")["consent_set_id"])["result"]
+    assert "rs_declared" not in result and result["sources_used"] == {"rs": True, "creditinfo": True}

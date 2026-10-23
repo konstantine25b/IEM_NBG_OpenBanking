@@ -112,14 +112,16 @@ class Population:
         }
 
     def kyc(self, cid: str) -> dict[str, Any]:
-        plan = self.plans[int(cid[1:]) - 1]
+        """The lender's own KYC record of the client (name, birth date, sex, place), as from the ID card at onboarding."""
         customer = self.gateway(cid).world.customers[cid]
         return {
-            "age": plan.row["Age"],
+            "personId": customer.person_id,
+            "name_en": f"{customer.first_en.title()} {customer.last_en.title()}",
+            "name_ka": customer.name_ka,
+            "birth_date": customer.birth_date.isoformat(),
             "sex": customer.sex,
             "region_name": customer.region_name,
             "city": customer.city,
-            "personId": customer.person_id,
         }
 
 

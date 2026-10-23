@@ -1,3 +1,5 @@
+import ClientProfile from './ClientProfile.jsx'
+
 const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`
 
 function SourceChip({ label, entry }) {
@@ -10,12 +12,11 @@ export default function ConsentTable({ consents }) {
   const held = banks.filter((b) => b.status === 'connected')
   const none = banks.filter((b) => b.status === 'no_relationship')
   const failed = banks.filter((b) => b.status !== 'connected' && b.status !== 'no_relationship')
-  const place = kyc && (kyc.city === kyc.region_name ? kyc.city : `${kyc.city}, ${kyc.region_name}`)
   return (
     <div className="consents">
+      <ClientProfile kyc={kyc} />
       <p className="summary">
         <strong>{connected}</strong> of {banks.length} banks hold accounts for this client
-        {kyc && <span className="muted"> · age {Math.round(kyc.age)}, {place}</span>}
       </p>
       <div className="chips">
         <SourceChip label="Revenue Service" entry={rs} />
