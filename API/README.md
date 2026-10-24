@@ -31,7 +31,7 @@ A source without consent (RS, Creditinfo or a bank) is skipped with a warning; t
 - **Client profile.** Name, birth date and place come from the lender's KYC record. In this demo that record is the
   generated customer (`/_mock/kyc/{customer}` on the bank mock). The name is checked against each bank's account owner name.
 - **Demo clients.** `API/pick_demo_clients.py` picks kinds of person from the clients the model never trained on, typical
-  of their kind; eight have the real income inside the range, two do not, like the held-out rate.
+  of their kind; on 17 of the 20 the real income is inside the range, close to the held-out rate.
 - **Synthetic data only.** Scores here say nothing about real-world accuracy.
 
 ## Tests

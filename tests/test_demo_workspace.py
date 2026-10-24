@@ -128,6 +128,8 @@ def test_real_mock_source_outage_and_abstention(stack):
     empty = estimate(stack[0], "banks_unavailable")
     assert empty["result"]["outcome"] == "abstained"
     assert empty["result"]["income"] is None
+    assert "No bank could be reached, so the estimate was withheld." in empty["result"]["warnings"]
+    assert not any("other banks continued" in w for w in empty["result"]["warnings"])
 
 
 def test_assessments_are_not_saved_but_audit_events_persist(stack, normal):

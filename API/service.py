@@ -594,9 +594,11 @@ class Service:
                 matrix = self.model.transform(self.model.prepare(row))
                 explanation = explain_p50(self.model, matrix, income["p50"])
                 self._event(job, "TreeSHAP explanation completed", {"duration_ms": round((time.perf_counter()-explain_start)*1000, 2)})
-            for step in job["progress"]:
-                if step["state"] == "failed" and step["source"] not in REGISTRY_LABELS:
-                    warnings.append(f"{step['label']} is temporarily unavailable. The other banks continued.")
+            failed_banks = [s for s in job["progress"] if s["state"] == "failed" and s["source"] not in REGISTRY_LABELS]
+            if failed_banks and not got:
+                warnings.append("No bank could be reached, so the estimate was withheld.")
+            else:
+                warnings.extend(f"{s['label']} is temporarily unavailable. The other banks continued." for s in failed_banks)
             if not rs_body:
                 warnings.append("Revenue Service data unavailable. Based on bank data only.")
             if not ci_body:

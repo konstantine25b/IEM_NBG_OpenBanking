@@ -1,6 +1,6 @@
 # Income Estimation ML model
 
-**Estimate how much a person really earns each month, for lending decisions in Georgia, from their open-banking data.**
+**Estimates how much a person earns each month, for lending decisions in Georgia, from their open-banking data.**
 Built for the GITA Hackathon (theme: AI and Open Banking in finance). All data in this repository is synthetic.
 
 A loan officer picks a client, one click asks all banks (and the Revenue Service and the credit bureau) for the client's
