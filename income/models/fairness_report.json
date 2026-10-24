@@ -1,0 +1,163 @@
+{
+  "basis": "20,000 held-out clients (20% of the data, never seen in training); synthetic data",
+  "interval": "P10-P90 (nominal 80%)",
+  "overall": {
+    "n": 20000,
+    "inside_p10_p90_pct": 80.5,
+    "median_error_pct": 0.78
+  },
+  "by_sex": [
+    {
+      "group": "male",
+      "n": 10959,
+      "inside_p10_p90_pct": 80.5,
+      "median_error_pct": 0.77
+    },
+    {
+      "group": "female",
+      "n": 9041,
+      "inside_p10_p90_pct": 80.5,
+      "median_error_pct": 0.79
+    }
+  ],
+  "by_region": [
+    {
+      "group": "Tbilisi",
+      "n": 9842,
+      "inside_p10_p90_pct": 79.8,
+      "median_error_pct": 0.79
+    },
+    {
+      "group": "Imereti",
+      "n": 2050,
+      "inside_p10_p90_pct": 79.9,
+      "median_error_pct": 0.88
+    },
+    {
+      "group": "Adjara",
+      "n": 1801,
+      "inside_p10_p90_pct": 83.5,
+      "median_error_pct": 0.69
+    },
+    {
+      "group": "Kakheti/Other",
+      "n": 1174,
+      "inside_p10_p90_pct": 78.7,
+      "median_error_pct": 0.84
+    },
+    {
+      "group": "Kvemo Kartli",
+      "n": 1139,
+      "inside_p10_p90_pct": 80.4,
+      "median_error_pct": 0.73
+    },
+    {
+      "group": "Samegrelo",
+      "n": 1009,
+      "inside_p10_p90_pct": 80.1,
+      "median_error_pct": 0.75
+    },
+    {
+      "group": "Shida Kartli",
+      "n": 969,
+      "inside_p10_p90_pct": 82.0,
+      "median_error_pct": 0.84
+    },
+    {
+      "group": "Kakheti",
+      "n": 911,
+      "inside_p10_p90_pct": 83.1,
+      "median_error_pct": 0.74
+    },
+    {
+      "group": "Samtskhe-Javakheti",
+      "n": 525,
+      "inside_p10_p90_pct": 81.7,
+      "median_error_pct": 0.74
+    },
+    {
+      "group": "Guria",
+      "n": 461,
+      "inside_p10_p90_pct": 81.8,
+      "median_error_pct": 0.75
+    },
+    {
+      "group": "Racha",
+      "n": 119,
+      "inside_p10_p90_pct": 84.0,
+      "median_error_pct": 0.68
+    }
+  ],
+  "by_region_range": {
+    "min_pct": 78.7,
+    "min_group": "Kakheti/Other",
+    "max_pct": 84.0,
+    "max_group": "Racha",
+    "min_group_size": 100
+  },
+  "by_citizenship": [
+    {
+      "group": "Georgian citizen",
+      "n": 19513,
+      "inside_p10_p90_pct": 80.5,
+      "median_error_pct": 0.78
+    },
+    {
+      "group": "not a citizen",
+      "n": 487,
+      "inside_p10_p90_pct": 79.7,
+      "median_error_pct": 0.7
+    }
+  ],
+  "by_legal_form": [
+    {
+      "group": "other legal form",
+      "n": 18814,
+      "inside_p10_p90_pct": 81.0,
+      "median_error_pct": 0.73
+    },
+    {
+      "group": "sole proprietor",
+      "n": 1186,
+      "inside_p10_p90_pct": 72.9,
+      "median_error_pct": 4.67
+    }
+  ],
+  "importance": {
+    "SEX": {
+      "gain_share_pct": 0.007,
+      "gain_rank": 34,
+      "mean_abs_shap_p50_gel": 0.1,
+      "shap_rank": 49,
+      "of_features": 89,
+      "columns": [
+        "SEX_1",
+        "SEX_2"
+      ]
+    },
+    "GeoCitizen": {
+      "gain_share_pct": 0.0,
+      "gain_rank": 64,
+      "mean_abs_shap_p50_gel": 0.02,
+      "shap_rank": 63,
+      "of_features": 89,
+      "columns": [
+        "GeoCitizen_No",
+        "GeoCitizen_Yes"
+      ]
+    }
+  },
+  "sex_flip_test": {
+    "n": 20000,
+    "median_pct_change": 0.0,
+    "p95_pct_change": 0.082,
+    "max_pct_change": 1.226,
+    "share_with_any_change_pct": 17.2
+  },
+  "sole_proprietor_gap": {
+    "coverage_gap_pts": 8.1,
+    "median_error_sole_pct": 4.67,
+    "median_error_other_pct": 0.73,
+    "note": "Known limitation: income of sole proprietors is estimated less accurately than that of other clients."
+  }
+}

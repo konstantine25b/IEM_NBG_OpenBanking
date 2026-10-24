@@ -91,12 +91,15 @@ class CaseStore:
             events.append({**event, "previous_hash": expected, "event_hash": digest})
             previous = digest
         case = self.get(case_id)
-        ready = next((e for e in reversed(events) if e["kind"] == "Estimate completed"), None)
+        ready = next((e for e in reversed(events) if e["kind"] in ("Estimate completed", "Estimate withheld")), None)
+        decisions = [e for e in events if e["kind"] == "officer_decision"]
         result_matches = None
         if case and ready and valid:
             result_matches = hashlib.sha256(canonical(case["result"]).encode()).hexdigest() == ready["detail"][
                 "detail"
             ].get("result_sha256")
+            if decisions:  # the decision shown with the case must be the one in the audit
+                result_matches &= case.get("review") == decisions[-1]["detail"]
         if not valid:
             result_matches = False
         return {

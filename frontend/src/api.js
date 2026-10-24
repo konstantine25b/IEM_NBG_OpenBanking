@@ -30,4 +30,5 @@ export const getDemoClients = () => call('GET', '/v1/demo/clients')
 // The 12 banks + RS + Creditinfo that a consent request goes to.
 export const getSources = () => call('GET', '/v1/sources')
 
+export const reviewCase = (caseId, body) => call('POST', `/v1/cases/${caseId}/review`, body)
 export const getAudit = (caseId) => call('GET', `/v1/cases/${caseId}/audit`)

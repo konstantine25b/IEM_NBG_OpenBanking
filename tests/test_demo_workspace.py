@@ -96,6 +96,52 @@ def test_other_existing_demo_clients(stack, cid):
     assert case["result"]["evidence"]["transactions"]
 
 
+def test_officer_accepts_a_high_confidence_case(stack):
+    api = stack[0]
+    case = estimate(api, personal_id="43180413252")  # C21414: very high confidence
+    assert case["result"]["confidence"]["level"] in ("high", "very high") and not case["result"]["partial_sources"]
+    url = f"/v1/cases/{case['job_id']}/review"
+    response = api.post(url, json={"decision": "accept"})
+    assert response.status_code == 200, response.text
+    assert response.json()["officer"] == "demo-officer"
+    assert api.get(f"/v1/cases/{case['job_id']}").json()["review"]["decision"] == "accept"
+    assert api.post(url, json={"decision": "reject", "reason": "Changed my mind about this."}).status_code == 409
+    audit = api.get(f"/v1/cases/{case['job_id']}/audit").json()
+    assert audit["chain_valid"] and audit["case_matches_audit"]
+    assert [e["kind"] for e in audit["events"]][-1] == "officer_decision"
+
+
+def test_low_confidence_needs_a_reason_and_acknowledgement(stack, normal):
+    api = stack[0]
+    assert normal["result"]["confidence"]["level"] in ("low", "very low")
+    url = f"/v1/cases/{normal['job_id']}/review"
+    assert api.post(url, json={"decision": "accept"}).status_code == 422
+    assert api.post(url, json={"decision": "accept", "reason": "short", "acknowledged_uncertainty": True}).status_code == 422
+    long = "Checked the salary credits and the statement."
+    assert api.post(url, json={"decision": "accept", "reason": long}).status_code == 422  # not acknowledged
+    ok = api.post(url, json={"decision": "request_more_evidence", "reason": long, "acknowledged_uncertainty": True})
+    assert ok.status_code == 200, ok.text
+    assert api.post(url, json={"decision": "reject", "reason": long, "acknowledged_uncertainty": True}).status_code == 409
+    audit = api.get(f"/v1/cases/{normal['job_id']}/audit").json()
+    assert audit["chain_valid"] and audit["case_matches_audit"]
+
+
+def test_withheld_estimate_cannot_be_accepted_and_ends_as_withheld(stack):
+    api = stack[0]
+    empty = estimate(api, "banks_unavailable")
+    assert empty["trace"][-1]["stage"] == "Estimate withheld"
+    url = f"/v1/cases/{empty['job_id']}/review"
+    reason = {"reason": "No bank data, asking for statements.", "acknowledged_uncertainty": True}
+    assert api.post(url, json={"decision": "accept", **reason}).status_code == 422
+    assert api.post(url, json={"decision": "request_more_evidence"}).status_code == 422
+    assert api.post(url, json={"decision": "request_more_evidence", **reason}).status_code == 200
+
+
+def test_fairness_report_is_served(stack):
+    report = stack[0].get("/v1/model/fairness").json()
+    assert {"by_sex", "by_region", "sex_flip_test", "importance"} <= report.keys()
+
+
 def test_direct_access_without_accounts_history_or_downloads(stack, normal):
     app = stack[0].app
     with TestClient(app) as anonymous:
@@ -192,7 +238,7 @@ def test_integrated_response_preserves_both_frontend_contracts(stack, normal):
     body = api.get(f"/v1/income-estimates/{normal['job_id']}").json()
     assert not any(key.startswith("_") for key in body)
     health = api.get("/health").json()
-    assert health["demo_version"] == "case-review-v1"
+    assert health["service"] == "income-estimation"
     assert health["history_window_ends"] == result["evidence"]["window"]["to"]
 
 

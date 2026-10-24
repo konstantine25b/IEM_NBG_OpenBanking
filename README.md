@@ -1,5 +1,7 @@
 # Income Estimation ML model
 
+**Track: AI in Finance – Direction 1, Credit Risk**
+
 **Estimates how much a person earns each month, for lending decisions in Georgia, from their open-banking data.**
 Built for the GITA Hackathon (theme: AI and Open Banking in finance). All data in this repository is synthetic.
 
@@ -96,8 +98,14 @@ Then open **http://localhost:5173**. Swagger for the income API is at http://loc
 2. **Connect all banks.** Every bank, RS and Creditinfo gets its own animated request. The client profile appears
    (name, birth date, place, with the source of each; the name is checked against each bank's account owner name).
 3. **Estimate income.** Each source shows its progress, then the result: the P50 on a P10 to P90 bar, the confidence
-   badge, "How sure is this?" (score, band width, measured hit rate), and "Why this estimate" (SHAP factors; **Show all
-   factors** opens every group and the model features inside it, with each one's share of the impact in %).
+   badge, "How sure is this?" (band width, measured hit rate), and "Why this estimate" (SHAP factors; **Show all factors** opens
+   every group and the model features inside it, with each one's share of the impact in %).
+4. **Officer decision.** Under the result, the officer accepts, asks for more documents, or rejects. With high confidence
+   one click is enough; with lower confidence, a withheld estimate or a failed source, a reason (10+ characters) and the
+   box "I reviewed the uncertainty and the evidence" are required. The decision is locked and appears in the audit trail.
+5. **Demo controls** (left, collapsed): simulate "Revenue Service unavailable" or "Banks unavailable" in the next
+   estimate to show the fallback live. When no bank can be reached the estimate is withheld and the trace ends with
+   "Estimate withheld".
 
 `http://localhost:5173/?client=<personal id>` runs the whole flow from a link.
 
@@ -218,7 +226,78 @@ because the bank mock simulates each customer on demand.
 - **Not built yet:** the affordability step (maximum loan payment from the P10 end and the National Bank's limits).
 - Georgian bank API fields follow each bank's published spec; what is assumed is flagged in `openbanking_mock/docs/`.
 
-## 11. More documentation
+## 11. Fairness
+
+`uv run python income/fairness_check.py` measures the saved model on the 20,000 held-out clients (the same split as the
+rest of the repository) and writes `income/models/fairness_report.json`; every number below comes from that file. The API
+serves it at `GET /v1/model/fairness`; the result page does not show it. The model is not changed
+by the check. Data is synthetic, so the figures compare groups with each other and are not real-world accuracy.
+
+| Group | Clients | Inside P10–P90 (nominal 80%) | Median error |
+|---|---|---|---|
+| All | 20,000 | 80.5% | 0.78% |
+| Male | 10,959 | 80.5% | 0.77% |
+| Female | 9,041 | 80.5% | 0.79% |
+| Georgian citizen | 19,513 | 80.5% | 0.78% |
+| Not a citizen | 487 | 79.7% | 0.7% |
+| 11 regions (groups of 100+ clients) | | 78.7% (Kakheti/Other) to 84.0% (Racha) | per region in the JSON |
+| Other legal forms | 18,814 | 81.0% | 0.73% |
+| **Sole proprietors** | 1,186 | **72.9%** | **4.67%** |
+
+- **Gender is an input but has negligible influence.** Of 89 model inputs, SEX has 0.007% of the
+  XGBoost total gain (rank 34) and a mean |SHAP| of 0.1 GEL on the P50 (rank 49). GeoCitizen:
+  0.0% of the gain (rank 64), 0.02 GEL (rank 63).
+- **Flip test.** Setting every client's SEX to the other value and predicting again changes the P50 by a median of
+  0.0%, 95th percentile 0.082%, at most 1.226% (17.2% of clients see any change).
+- **Could be removed.** An internal A/B retrain without SEX gave held-out coverage 80.0% vs 79.6% and median error
+  0.64% vs 0.63% (this retrain is not part of this repository's scripts). A production version would drop the field to
+  comply with fair-lending expectations.
+- **Known limitation: sole proprietors.** Their income is estimated less accurately (72.9% coverage, 4.67% median error
+  against 0.73%). Officers should check these cases with extra care.
+
+## 12. Guardrails
+
+| Control | What it does | Where |
+|---|---|---|
+| Consent handling | Nothing is read without a consent per bank and registry; every source call checks the consent status first; consent lives at most 90 days | `API/service.py` (`create_consents`, `_check_consent`) |
+| ID and name masking | Personal IDs, consent IDs and account owner names are masked in the UI and the audit; tokens never reach the audit | `API/service.py` (`mask_name`), `API/demo_evidence.py` (`mask`) |
+| Abstention when data is thin | Fewer than the minimum months or transactions, or no inflow: no estimate, confidence forced to "very low" | `API/service.py` (`judge_confidence`) |
+| Per-source outage fallback | One failing bank or registry never sinks the estimate; the screen says which source is missing | `API/service.py` (`_pull_bank`, `_pull_registry`), demo control in `frontend/src/App.jsx` |
+| Officer decision step | The model suggests, the officer decides: accept, request more documents or reject; a reason and an acknowledgement are required when confidence is low or evidence is missing; one decision per case | `API/service.py` (`/v1/cases/{id}/review`), `frontend/src/components/OfficerDecision.jsx` |
+| Hash-chained audit trail | Every step and the officer decision is an append-only event, hash-linked; edits are detected; the stored result is bound to the audit | `API/case_store.py` |
+| Confidence calibration | Labels come from the range width and are checked on held-out clients | `income/confidence.py`, `income/confidence_calibration.py` |
+| Fairness check | Coverage by group, SEX and GeoCitizen importance, gender flip test | `income/fairness_check.py`, `GET /v1/model/fairness` |
+| Synthetic data only | No real customer data; the UI carries a "synthetic data" banner | `nbg_synthetic_data/`, `openbanking_mock/`, `frontend/src/App.jsx` |
+
+## 13. Third-party components and licences
+
+Direct dependencies as declared in `pyproject.toml` and `frontend/package.json`; exact versions are in `uv.lock` and
+`frontend/package-lock.json`. Licences are read from the installed packages.
+
+| Component | Used for | Licence |
+|---|---|---|
+| FastAPI | the three API services | MIT |
+| Uvicorn | serves the APIs | BSD-3-Clause |
+| HTTPX | calls between the services | BSD-3-Clause |
+| Pydantic (via FastAPI) | request models | MIT |
+| XGBoost | quantile model, TreeSHAP | Apache-2.0 |
+| scikit-learn | train/test split, preprocessing helpers | BSD-3-Clause |
+| joblib (via scikit-learn) | model file | BSD-3-Clause |
+| NumPy | numerics | BSD-3-Clause (with 0BSD, MIT, Zlib, CC0-1.0 parts) |
+| pandas | tables | BSD-3-Clause |
+| SciPy | statistics | BSD-3-Clause |
+| threadpoolctl | thread limits for the numeric libraries | BSD-3-Clause |
+| PyArrow | Parquet files of the mock banks | Apache-2.0 |
+| jsonschema | checks mock responses | MIT |
+| PyYAML | mock bank specifications | MIT |
+| openpyxl | reading the organiser's Excel files | MIT |
+| Matplotlib | EDA charts | Matplotlib licence (PSF-based) |
+| pytest, ruff, ipykernel (dev) | tests, lint, notebooks | MIT, MIT, BSD-3-Clause |
+| React, React DOM | the web page | MIT |
+| Vite, @vitejs/plugin-react | build and dev server | MIT |
+| oxlint, @types/react, @types/react-dom (dev) | lint and types | MIT |
+
+## 14. More documentation
 
 [`API/README.md`](API/README.md) · [`frontend/README.md`](frontend/README.md) · [`eda/README.md`](eda/README.md) ·
 [`openbanking_mock/README.md`](openbanking_mock/README.md)

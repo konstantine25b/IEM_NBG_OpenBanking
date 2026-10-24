@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useCountUp, useMounted } from '../hooks.js'
+import OfficerDecision from './OfficerDecision.jsx'
 import WarningLabel from './WarningLabel.jsx'
 
 const gel = (n) => new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(n)
@@ -157,7 +158,7 @@ function Drivers({ explanation }) {
   )
 }
 
-export default function Result({ result }) {
+export default function Result({ result, caseId, review, onDecided }) {
   const { income, confidence, warnings, explanation } = result
   const p50 = useCountUp(income?.p50 ?? 0, 1500)
   const levelClass = LEVEL_CLASS[confidence.level] ?? 'warn'
@@ -191,6 +192,8 @@ export default function Result({ result }) {
           )}
         </section>
       )}
+
+      <OfficerDecision caseId={caseId} result={result} review={review} onDecided={onDecided} />
 
       <div className="two">
         {income && <ConfidenceDetail confidence={confidence} income={income} />}

@@ -73,6 +73,10 @@ MIN_MONTHS_COVERED = 3.0
 MIN_TRANSACTIONS = 30
 TPP_KEYS = {"procredit": {"Ocp-Apim-Subscription-Key": "demo-tpp-key"}}  # issued to the TPP at onboarding (APIM)
 CALIBRATION = REPO / "income" / "models" / "confidence_calibration.json"  # income/confidence_calibration.py
+FAIRNESS = REPO / "income" / "models" / "fairness_report.json"  # income/fairness_check.py
+OFFICER = "demo-officer"
+DECISIONS = ("accept", "request_more_evidence", "reject")
+MIN_REASON = 10
 DEMO_CLIENTS = HERE / "demo_clients.json"  # API/pick_demo_clients.py
 BANK_LABELS = {"tbc": "TBC", "bog": "Bank of Georgia"}
 REGISTRY_LABELS = {"rs": "Revenue Service", "creditinfo": "Creditinfo"}
@@ -201,6 +205,12 @@ class EstimateRequest(BaseModel):
 
 class ConsentRequest(BaseModel):
     personal_id: str
+
+
+class ReviewRequest(BaseModel):
+    decision: Literal["accept", "request_more_evidence", "reject"]
+    reason: str = ""
+    acknowledged_uncertainty: bool = False
 
 
 class Service:
@@ -395,7 +405,7 @@ class Service:
             "subject": next((d["id"] for d in json.loads(DEMO_CLIENTS.read_text()) if d["personal_id"] == record["personal_id"]), mask(record["personal_id"])),
             "scenario": req.demo_failure,
             "model_sha256": getattr(self.model, "artifact_sha256", "unavailable"),
-            "trace": [],
+            "trace": [], "review": None,
             "consent_summary": {"mode": "Simulated automatic authorization; subsequent source calls validate consent",
                                 "scope": ["accounts", "balances", "transactions (12 months)", "RS remittances", "Creditinfo"],
                                 "sources": [{"source": b["bank"], "status": b["status"], "accounts": b["accounts"],
@@ -631,13 +641,18 @@ class Service:
                 "partial_sources": any(p["state"] == "failed" for p in job["progress"]),
             }
             job["processing_ms"] = round((time.perf_counter()-job["_started"])*1000, 2)
-            self._event(job, "Estimate completed", {"outcome": job["result"]["outcome"], "processing_ms": job["processing_ms"],
+            self._event(job, "Estimate withheld" if reasons else "Estimate completed", {"outcome": job["result"]["outcome"], "processing_ms": job["processing_ms"],
                                                            "result_sha256": hashlib.sha256(canonical(job["result"]).encode()).hexdigest()})
             job["status"], job["stage"] = "done", "done"
             self._save(job)
         except Exception as e:  # noqa: BLE001
-            job["status"], job["stage"], job["error"] = "failed", "failed", f"{type(e).__name__}: {re.sub(r'\d{11}', '[redacted]', str(e))[:200]}"
-            self._event(job, "Case failed", {"error": job["error"]})
+            job["status"], job["stage"] = "failed", "failed"
+            job["error"] = (
+                "A data source cannot be reached right now. Try again in a moment."
+                if isinstance(e, httpx.HTTPError)
+                else "The assessment could not be completed. Try again or contact support."
+            )
+            self._event(job, "Case failed", {"error": re.sub(r"\d{11}", "[redacted]", f"{type(e).__name__}: {e}")[:200]})
 
     @staticmethod
     def _score(band_share: float, downgraded: bool) -> int:
@@ -698,7 +713,7 @@ def create_app(
             "model_window": svc.model.state["ob_window"]["as_of"],
             "history_window_ends": svc.today().isoformat(),
             "today": date.today().isoformat(),
-            "demo_version": "case-review-v1",
+            "service": "income-estimation",
         }
 
     @app.get("/v1/sources")
@@ -719,8 +734,11 @@ def create_app(
         check_write_origin(request)
         try:
             record = svc.create_consents(body.personal_id.strip())
-        except httpx.HTTPError as e:
-            return JSONResponse({"error": "GATEWAY_UNREACHABLE", "text": str(e)}, status_code=502)
+        except httpx.HTTPError:
+            return JSONResponse(
+                {"error": "GATEWAY_UNREACHABLE", "text": "The banks cannot be reached right now. Try again in a moment."},
+                status_code=502,
+            )
         if record is None:
             return JSONResponse({"error": "UNKNOWN_CLIENT", "text": "no bank knows this personal id"}, status_code=404)
         return svc.public_consents(record)
@@ -752,6 +770,44 @@ def create_app(
     def audit(case_id: str):
         case_for(case_id)
         return svc.store.audit(case_id)
+
+    @app.get("/v1/model/fairness")
+    def fairness():
+        if not FAIRNESS.exists():
+            raise HTTPException(404, "Run income/fairness_check.py to create the fairness report")
+        return json.loads(FAIRNESS.read_text())
+
+    @app.post("/v1/cases/{case_id}/review")
+    def review(case_id: str, body: ReviewRequest, request: WebRequest):
+        """The officer decides. The model only suggests: a decision is stored once, in the hash-chained audit."""
+        check_write_origin(request)
+        reason = body.reason.strip()
+        with svc.store.lock:
+            case = case_for(case_id)
+            if case["status"] != "done":
+                raise HTTPException(409, "Only a completed assessment can be decided")
+            if case.get("review"):
+                raise HTTPException(409, "This case already has an officer decision")
+            result = case["result"]
+            withheld = result["income"] is None
+            if body.decision == "accept" and withheld:
+                raise HTTPException(422, "No estimate was produced, so there is nothing to accept")
+            risky = withheld or result["confidence"]["level"] in ("low", "very low") or result["partial_sources"]
+            if risky and len(reason) < MIN_REASON:
+                raise HTTPException(
+                    422, f"Give a reason of at least {MIN_REASON} characters: confidence is low or evidence is missing"
+                )
+            if risky and not body.acknowledged_uncertainty:
+                raise HTTPException(422, "Confirm that you reviewed the uncertainty and the evidence")
+            decision = {
+                "decision": body.decision, "reason": reason, "officer": OFFICER, "at": timestamp(),
+                "acknowledged_uncertainty": body.acknowledged_uncertainty,
+                "scope": "Income estimate decision, not loan approval",
+            }  # fmt: skip
+            case["review"] = decision
+            svc.store.append(case_id, "officer_decision", OFFICER, decision)
+            svc.store.save(svc.public_job(case), case.get("_owner", case.get("owner")))
+        return decision
 
     return app
 

@@ -6,13 +6,13 @@ This is an **AI in Finance** prototype for a Georgian loan officer assessing rec
 
 Use Python 3.12+ and Node.js 22.12+. Install the existing locked dependencies:
 
-```powershell
+```bash
 uv sync
-cd frontend
-npm ci
-cd ..
+(cd frontend && npm ci)
 uv run python tools/run_demo.py --check
 ```
+
+On Windows PowerShell the same commands are `uv sync`, `cd frontend; npm ci; cd ..`, then `uv run python tools/run_demo.py --check`.
 
 Open http://localhost:5173. The launcher starts the 12-bank mock on port 8000, registry mock on 8001, income API on 9000, and Vite on 5173. Ctrl+C stops the processes it created. Existing services on those ports must be stopped first. Logs and persistent audit events live under git-ignored `.runtime/`. Assessments remain in memory and cannot be reopened after a server restart.
 
@@ -30,7 +30,7 @@ The local demo opens directly without accounts, passwords or roles. The service 
 6. Expand **Show all factors** and inspect the underlying SHAP feature values and shares. The estimate supports income assessment and does not approve a loan.
 7. Inspect the current assessment's audit events and hash verification in **Processing evidence and audit trail**. SQLite stores audit events only; assessment results are not saved for reopening.
 
-The removed recording-scenario, officer-review and manual-comparison controls remain absent. API regression tests exercise actual simulated RS and bank outages, missing-source warnings and withheld estimates.
+The officer decision step (accept / request more documents / reject, with a required reason and acknowledgement when confidence is low or evidence is missing) is part of the result page and is written to the audit trail. The recording-scenario and manual-comparison controls remain absent; outages are simulated with the **Demo controls** dropdown. API regression tests exercise actual simulated RS and bank outages, missing-source warnings and withheld estimates.
 
 ## Benchmarks
 
@@ -47,10 +47,9 @@ Before adoption: bank SSO and tenant isolation, durable consent lifecycle/revoca
 
 ## Verification
 
-```powershell
-uv run pytest tests/test_demo_workspace.py tests/test_income_predictor.py tests/test_mock_registries.py
-cd frontend
-npm run build
+```bash
+uv run python -m pytest tests/test_demo_workspace.py tests/test_income_predictor.py tests/test_mock_registries.py
+(cd frontend && npm run build)
 ```
 
 `test_demo_workspace.py` uses the actual on-demand mock stack and committed model; it does not require the omitted transaction shards. It verifies the existing customer, direct access without accounts, removal of saved-case and download routes, faults, abstention, non-persistence of assessments, and audit privacy and tampering detection.

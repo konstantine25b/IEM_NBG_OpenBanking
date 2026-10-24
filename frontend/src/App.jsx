@@ -26,6 +26,7 @@ export default function App() {
   const [error, setError] = useState(null)
   const [demoClients, setDemoClients] = useState([])
   const [sources, setSources] = useState([])
+  const [demoFailure, setDemoFailure] = useState('none')
   const timer = useRef(null)
   const generation = useRef(0)
   const autoRan = useRef(false)
@@ -43,7 +44,7 @@ export default function App() {
   const estimate = async (id) => {
     setError(null); setRevealed(false); setJob({ status: 'queued', stage: 'queued', progress: [], trace: [] })
     const version = generation.current
-    try { const next = await startEstimate(id); poll(next.job_id, version) } catch (e) { setJob(null); setError(e.message) }
+    try { const next = await startEstimate(id, demoFailure); poll(next.job_id, version) } catch (e) { setJob(null); setError(e.message) }
   }
   const connect = async (id, run = false) => {
     reset(); setConnecting(true)
@@ -84,6 +85,16 @@ export default function App() {
     </header>
     <div className="layout">
       <div className="sidebar-stack"><ClientPicker personalId={personalId} onChange={setPersonalId} onSubmit={(event) => { event.preventDefault(); connect(personalId.trim()) }} busy={connecting || running} connecting={connecting} clients={demoClients} />
+        <details className="card demo-controls"><summary>Demo controls</summary>
+          <label>Simulate an outage in the next estimate
+            <select value={demoFailure} onChange={(e) => setDemoFailure(e.target.value)} disabled={running}>
+              <option value="none">None</option>
+              <option value="rs_unavailable">Revenue Service unavailable</option>
+              <option value="banks_unavailable">Banks unavailable</option>
+            </select>
+          </label>
+          <p className="hint">Shows the error handling and the fallback live. Applies when you press “Estimate income”.</p>
+        </details>
       </div>
       <main className="main" ref={mainRef}><Stepper states={stepStates} />{error && <p className="error" role="alert"><WarningLabel />: {error}</p>}
         {!consents && !job && !connecting && <section className="card empty"><h2>Start with a client</h2><p>Assess recurring income and inspect the evidence. Lending decisions remain outside this prototype.</p></section>}

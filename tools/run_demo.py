@@ -99,7 +99,7 @@ def main() -> int:
                 raise RuntimeError("A demo process exited. See .runtime/logs/.")
             try:
                 with urllib.request.urlopen("http://127.0.0.1:9000/health", timeout=1) as response:
-                    if json.load(response).get("demo_version") == "case-review-v1":
+                    if json.load(response).get("service") == "income-estimation":
                         with urllib.request.urlopen("http://127.0.0.1:5173", timeout=1):
                             break
             except (OSError, ValueError):

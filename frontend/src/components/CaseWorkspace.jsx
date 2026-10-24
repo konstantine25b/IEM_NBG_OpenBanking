@@ -71,7 +71,7 @@ function ProcessingAudit({ job, audit }) {
   const verified = audit?.chain_valid && audit?.case_matches_audit
   return <section className="card"><h2>Processing evidence and audit trail</h2>
     <div className="toolbar"><span className={`pill ${verified ? 'ok' : 'bad'}`}>{verified ? 'Hash chain and case result verified' : <><WarningLabel />: Audit unavailable or invalid</>}</span></div>
-    <dl className="facts"><div><dt>Started (UTC)</dt><dd className="mono"><EventTime at={events.find((event) => event.stage === 'Case created')?.at} /></dd></div><div><dt>Completed (UTC)</dt><dd className="mono"><EventTime at={events.find((event) => event.stage === 'Estimate completed')?.at} /></dd></div><div><dt>Backend processing</dt><dd>{money(job.processing_ms)} ms</dd></div><div><dt>Recorded bank API calls</dt><dd>{calls.length}</dd></div><div><dt>Recorded events</dt><dd>{events.length}</dd></div></dl>
+    <dl className="facts"><div><dt>Started (UTC)</dt><dd className="mono"><EventTime at={events.find((event) => event.stage === 'Case created')?.at} /></dd></div><div><dt>Completed (UTC)</dt><dd className="mono"><EventTime at={events.find((event) => ['Estimate completed', 'Estimate withheld'].includes(event.stage))?.at} /></dd></div><div><dt>Backend processing</dt><dd>{money(job.processing_ms)} ms</dd></div><div><dt>Recorded bank API calls</dt><dd>{calls.length}</dd></div><div><dt>Recorded events</dt><dd>{events.length}</dd></div></dl>
     <p className="hint">Exact backend event dates and times in UTC, including milliseconds. Processing durations exclude presentation animation and browser polling. Sources run in parallel.</p>
     <details open><summary>Processing and audit events</summary><div className="table-scroll"><table><thead><tr><th>Date / time (UTC)</th><th>Elapsed</th><th>Actor</th><th>Event</th><th>Evidence</th></tr></thead><tbody>{stages.map((event) => <tr key={event.key}><td className="mono"><EventTime at={event.at} /></td><td className="mono">{event.elapsed_ms == null ? '—' : `${event.elapsed_ms} ms`}</td><td>{event.actor}</td><td>{event.stage}</td><td className="mono trace-detail">{event.stage === 'Case created' ? `Scenario: ${event.detail.scenario}; ${event.detail.consents.sources.length} consent outcomes; model ${event.detail.model_sha256.slice(0, 12)}…` : JSON.stringify(event.detail)}</td></tr>)}</tbody></table></div></details>
     <details><summary>Individual bank API responses</summary><div className="table-scroll"><table><thead><tr><th>Date / time (UTC)</th><th>Source</th><th>Request</th><th>Status</th><th>Duration</th></tr></thead><tbody>{calls.map(({ at, detail, key }) => <tr key={key}><td className="mono"><EventTime at={at} /></td><td>{detail.source}</td><td className="mono">{detail.method} {detail.route}</td><td>{detail.http_status}</td><td>{detail.duration_ms} ms</td></tr>)}</tbody></table></div></details>
@@ -83,11 +83,14 @@ function ProcessingAudit({ job, audit }) {
 export default function CaseWorkspace({ initialJob: job }) {
   const [audit, setAudit] = useState(null)
   const [error, setError] = useState(null)
-  useEffect(() => { getAudit(job.job_id).then(setAudit).catch((e) => setError(e.message)) }, [job.job_id])
+  const [review, setReview] = useState(job.review ?? null)
+  const loadAudit = () => getAudit(job.job_id).then(setAudit).catch((e) => setError(e.message))
+  useEffect(() => { loadAudit() }, [job.job_id]) // eslint-disable-line react-hooks/exhaustive-deps
+  const decided = (decision) => { setReview(decision); loadAudit() }
   return <div className="case-workspace enter">
     {job.scenario !== 'none' && <section className="card"><p className="notice warn"><WarningLabel />: Explicit fault simulation: {job.scenario === 'rs_unavailable' ? 'Revenue Service returns HTTP 503' : 'Connected banks return HTTP 503'}.</p></section>}
     {error && <p className="error" role="alert"><WarningLabel />: {error}</p>}
     <section className="card"><h3>Source outcomes</h3><Progress job={job} /><details><summary>Consent scope and source authorization</summary><p className="hint">{job.consent_summary.mode}</p><p>{job.consent_summary.scope.join(' · ')}</p><ul>{job.consent_summary.sources.map((s) => <li key={s.source}>{s.source}: {s.status} · consent {s.consent}</li>)}</ul></details></section>
-    <Result result={job.result} /><Evidence evidence={job.result.evidence} /><ProcessingAudit job={job} audit={audit} />
+    <Result result={job.result} caseId={job.job_id} review={review} onDecided={decided} /><Evidence evidence={job.result.evidence} /><ProcessingAudit job={job} audit={audit} />
   </div>
 }
