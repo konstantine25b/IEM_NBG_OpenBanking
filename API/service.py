@@ -701,7 +701,8 @@ def create_app(
 
     def check_write_origin(request: WebRequest) -> None:
         if request.headers.get("origin") and request.headers["origin"] not in {
-            "http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:9000", "http://127.0.0.1:9000"
+            "http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:9000", "http://127.0.0.1:9000",
+            str(request.base_url).rstrip("/"),  # compiled frontend served by this API in production
         }:
             raise HTTPException(403, "Cross-origin write rejected")
 
