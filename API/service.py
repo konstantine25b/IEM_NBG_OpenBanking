@@ -75,6 +75,7 @@ TPP_KEYS = {"procredit": {"Ocp-Apim-Subscription-Key": "demo-tpp-key"}}  # issue
 CALIBRATION = REPO / "income" / "models" / "confidence_calibration.json"  # income/confidence_calibration.py
 DEMO_CLIENTS = HERE / "demo_clients.json"  # API/pick_demo_clients.py
 BANK_LABELS = {"tbc": "TBC", "bog": "Bank of Georgia"}
+REGISTRY_LABELS = {"rs": "Revenue Service", "creditinfo": "Creditinfo"}
 
 
 # ----------------------------------------------------------------------------- the TPP side: one bank over HTTP
@@ -155,7 +156,7 @@ def clean(tables: dict[str, pd.DataFrame]) -> dict[str, Any]:
 
 # ----------------------------------------------------------------------------- confidence
 def judge_confidence(
-    model_level: str, months: float, n_tx: int, features: dict, banks_used: int
+    model_level: str, months: float, n_tx: int, features: dict, banks_used: int, banks_failed: int = 0
 ) -> tuple[str, list[str], list[str]]:
     """(level, reasons for a downgrade, warnings). Thin data forces 'very low'; a missing salary is only a warning,
     because self-employed clients legitimately have none."""
@@ -170,7 +171,7 @@ def judge_confidence(
     if inflow is None or not np.isfinite(inflow) or inflow <= 0:
         reasons.append("no income-like inflow found")
     salary = features.get("ob_salary_month")
-    if salary is None or not np.isfinite(salary) or salary <= 0:
+    if (salary is None or not np.isfinite(salary) or salary <= 0) and not banks_failed:  # a failed bank may pay it
         warnings.append(
             "No salary credits found. The bank that pays the salary may not be connected; ask the client to connect it."
         )
@@ -195,23 +196,11 @@ def _same_name(kyc: dict, owner_name: str | None) -> bool:
 class EstimateRequest(BaseModel):
     consent_set_id: str
     applicant: dict[str, Any] | None = None  # overrides the KYC record: age, sex, region_name, city
-    loan_request: dict[str, Any] | None = None  # echoed back; the affordability step is not part of this API yet
     demo_failure: Literal["none", "rs_unavailable", "banks_unavailable"] = "none"
 
 
 class ConsentRequest(BaseModel):
     personal_id: str
-
-
-class ReviewRequest(BaseModel):
-    decision: Literal["accepted", "more_evidence", "rejected"]
-    reason: str
-    acknowledge_uncertainty: bool = False
-
-
-class BenchmarkAnswer(BaseModel):
-    payment_count: int
-    total_gel: float
 
 
 class Service:
@@ -248,10 +237,10 @@ class Service:
         """One bank's consent. Whatever goes wrong marks this bank as failed; the others carry on."""
         try:
             return self._bank_consent_call(bank, personal_id)
-        except (httpx.HTTPError, ValueError, KeyError, TypeError, AttributeError) as e:
+        except (httpx.HTTPError, ValueError, KeyError, TypeError, AttributeError):
             return {
                 "bank": bank["bank"], "name": bank["name"], "status": "error", "consent_id": None, "accounts": 0,
-                "message": f"{type(e).__name__}: {e}",
+                "message": f"{bank['name']} is temporarily unavailable. The other banks continued.",
             }  # fmt: skip
 
     def _bank_consent_call(self, bank: dict, personal_id: str) -> dict:
@@ -285,8 +274,8 @@ class Service:
     def _registry_consent(self, service: str, personal_id: str) -> dict:
         try:
             return self._registry_consent_call(service, personal_id)
-        except (httpx.HTTPError, ValueError, KeyError, TypeError) as e:
-            return {"source": service, "status": "error", "consent_id": None, "message": f"{type(e).__name__}: {e}"}
+        except (httpx.HTTPError, ValueError, KeyError, TypeError):
+            return {"source": service, "status": "error", "consent_id": None, "message": f"{REGISTRY_LABELS[service]} is temporarily unavailable."}
 
     def _registry_consent_call(self, service: str, personal_id: str) -> dict:
         out = {"source": service, "status": "error", "consent_id": None}
@@ -295,8 +284,10 @@ class Service:
             out["status"] = "unknown_client" if created.status_code == 400 else "error"
             return out
         consent_id = created.json()["consentId"]
-        approved = self.registries.post(f"/_mock/consents/{service}/{consent_id}/authorise").json()  # skip mode
-        out.update(status="connected", consent_id=consent_id, authorization=approved["authorization"])
+        approved = self.registries.post(f"/_mock/consents/{service}/{consent_id}/authorise")  # skip mode
+        if approved.status_code != 200:
+            return out
+        out.update(status="connected", consent_id=consent_id, authorization=approved.json()["authorization"])
         return out
 
     def create_consents(self, personal_id: str) -> dict | None:
@@ -404,7 +395,7 @@ class Service:
             "subject": next((d["id"] for d in json.loads(DEMO_CLIENTS.read_text()) if d["personal_id"] == record["personal_id"]), mask(record["personal_id"])),
             "scenario": req.demo_failure,
             "model_sha256": getattr(self.model, "artifact_sha256", "unavailable"),
-            "trace": [], "review": None,
+            "trace": [],
             "consent_summary": {"mode": "Simulated automatic authorization; subsequent source calls validate consent",
                                 "scope": ["accounts", "balances", "transactions (12 months)", "RS remittances", "Creditinfo"],
                                 "sources": [{"source": b["bank"], "status": b["status"], "accounts": b["accounts"],
@@ -453,7 +444,7 @@ class Service:
         try:
             return self._pull_bank_call(job, gateway, entry, date_from, personal_id)
         except Exception as e:  # noqa: BLE001  one failing bank must not sink the estimate
-            self._set(job, bank, "failed", f"{type(e).__name__}: {e}")
+            self._set(job, bank, "failed", "temporarily unavailable")
             self._event(job, "Source request failed", {"source": bank, "reason": type(e).__name__})
             return bank, None
 
@@ -471,7 +462,7 @@ class Service:
             else None
         )
         if problem:
-            self._set(job, bank, "failed", problem)
+            self._set(job, bank, "failed", "temporarily unavailable")
             self._event(job, "Source request failed", {"source": bank, "reason": problem,
                                                        "duration_ms": round((time.perf_counter()-start)*1000, 2)})
             return bank, None
@@ -479,7 +470,7 @@ class Service:
         try:
             rows = fetch_bank(gateway, bank, personal_id, date_from)
         except Exception as e:  # noqa: BLE001  one failing bank must not sink the estimate
-            self._set(job, bank, "failed", type(e).__name__)
+            self._set(job, bank, "failed", "temporarily unavailable")
             self._event(job, "Source request failed", {"source": bank, "reason": type(e).__name__})
             return bank, None
         n_acc = len(
@@ -513,7 +504,7 @@ class Service:
             reply.raise_for_status()
             body = reply.json()
         except Exception as exc:
-            detail = f"HTTP {exc.response.status_code}" if isinstance(exc, httpx.HTTPStatusError) else type(exc).__name__
+            detail = "consent not granted" if isinstance(exc, PermissionError) else "unavailable"
             self._set(job, service, "failed", detail)
             self._event(job, "Source request failed", {"source": service, "reason": detail,
                                                        "duration_ms": round((time.perf_counter()-start)*1000, 2)})
@@ -584,7 +575,10 @@ class Service:
                 tx[(tx["status"] == "booked") & ~tx["is_card_mirror"].fillna(False).astype(bool)] if len(tx) else tx
             )
             months = float((as_of - pd.to_datetime(booked["booking_date"]).min()).days / 30.44) if len(booked) else 0.0
-            _, reasons, warnings = judge_confidence(LOWEST, months, len(booked), features, len(got))
+            _, reasons, warnings = judge_confidence(
+                LOWEST, months, len(booked), features, len(got),
+                sum(1 for p in job["progress"] if p["state"] == "failed" and p["source"] not in REGISTRY_LABELS),
+            )
             if reasons:
                 income, explanation, band, level = None, None, None, LOWEST
                 self._event(job, "Inference withheld", {"reasons": reasons})
@@ -601,12 +595,12 @@ class Service:
                 explanation = explain_p50(self.model, matrix, income["p50"])
                 self._event(job, "TreeSHAP explanation completed", {"duration_ms": round((time.perf_counter()-explain_start)*1000, 2)})
             for step in job["progress"]:
-                if step["state"] == "failed":
-                    warnings.append(f"{step['label']}: {step['detail']}")
+                if step["state"] == "failed" and step["source"] not in REGISTRY_LABELS:
+                    warnings.append(f"{step['label']} is temporarily unavailable. The other banks continued.")
             if not rs_body:
-                warnings.append("No Revenue Service data: the estimate does not use it.")
+                warnings.append("Revenue Service data unavailable. Based on bank data only.")
             if not ci_body:
-                warnings.append("No Creditinfo data: the estimate does not use it.")
+                warnings.append("Creditinfo data unavailable: existing loans were not considered.")
             job["result"] = {
                 "income": income,
                 "outcome": "abstained" if reasons else "estimated",
@@ -631,13 +625,11 @@ class Service:
                 "sources_used": {"rs": bool(rs_body), "creditinfo": bool(ci_body)},
                 "cleaning": cleaning,
                 "rs_declared": {"SOI04": registry.get("INCOME_AMOUNT_SOI04")} if rs_body else None,
-                "loan_request": job.get("loan_request"),
                 "evidence": evidence,
-                "review_required": True,
                 "partial_sources": any(p["state"] == "failed" for p in job["progress"]),
             }
             job["processing_ms"] = round((time.perf_counter()-job["_started"])*1000, 2)
-            self._event(job, "Case ready for human review", {"outcome": job["result"]["outcome"], "processing_ms": job["processing_ms"],
+            self._event(job, "Estimate completed", {"outcome": job["result"]["outcome"], "processing_ms": job["processing_ms"],
                                                            "result_sha256": hashlib.sha256(canonical(job["result"]).encode()).hexdigest()})
             job["status"], job["stage"] = "done", "done"
             self._save(job)
@@ -664,7 +656,7 @@ class Service:
 
     @staticmethod
     def public_job(job: dict) -> dict:
-        return {k: v for k, v in job.items() if not k.startswith("_") and k not in ("created", "loan_request")}
+        return {k: v for k, v in job.items() if not k.startswith("_") and k != "created"}
 
 
 def create_app(
@@ -758,68 +750,6 @@ def create_app(
     def audit(case_id: str):
         case_for(case_id)
         return svc.store.audit(case_id)
-
-    @app.post("/v1/cases/{case_id}/review")
-    def review(case_id: str, body: ReviewRequest, request: WebRequest):
-        check_write_origin(request)
-        with svc.store.lock:
-            case = case_for(case_id)
-            if case["status"] != "done":
-                raise HTTPException(409, "Only completed assessments can be reviewed")
-            if len(body.reason.strip()) < 10:
-                raise HTTPException(422, "Record a review reason of at least 10 characters")
-            result = case["result"]
-            if body.decision == "accepted":
-                if result["outcome"] == "abstained":
-                    raise HTTPException(409, "No estimate is available; request more evidence instead")
-                if (result["confidence"]["level"] in ("low", "very low") or result["partial_sources"]) and not body.acknowledge_uncertainty:
-                    raise HTTPException(409, "Acknowledge the low confidence or missing-source limitation before accepting")
-            case["review"] = {"decision": body.decision, "reason": body.reason.strip(), "reviewer": "demo",
-                              "at": timestamp(), "acknowledge_uncertainty": body.acknowledge_uncertainty,
-                              "scope": "Income estimate review, not loan approval"}
-            svc.store.append(case_id, "Officer review recorded", "demo", case["review"])
-            svc.store.save(svc.public_job(case), case.get("_owner", case.get("owner")))
-        return case["review"]
-
-    @app.post("/v1/cases/{case_id}/benchmark/start")
-    def benchmark_start(case_id: str, request: WebRequest):
-        check_write_origin(request)
-        case = case_for(case_id)
-        if case["status"] != "done" or not case["result"]["evidence"]["transactions"]:
-            raise HTTPException(409, "A collected statement is required")
-        challenge = {"started_unix": time.time(), "started_at": timestamp(), "operator": "demo"}
-        case["benchmark_active"] = challenge
-        svc.store.save(svc.public_job(case), "demo")
-        svc.store.append(case_id, "Manual aggregation started", "demo", {"started_at": challenge["started_at"]})
-        evidence = case["result"]["evidence"]
-        return {"started_at": challenge["started_at"], "window": evidence["window"],
-                "task": "Count and sum positive service-payment credits in the retained normalized statement. "
-                        "Do not count cash deposits or generic P2P receipts. Model output and classifications are hidden during this task.",
-                "transactions": [{k: row[k] for k in ("reference", "bank", "date", "amount", "currency", "amount_gel", "description", "counterparty")}
-                                 for row in evidence["transactions"] if row["retained"]]}
-
-    @app.post("/v1/cases/{case_id}/benchmark/finish")
-    def benchmark_finish(case_id: str, body: BenchmarkAnswer, request: WebRequest):
-        check_write_origin(request)
-        case = case_for(case_id)
-        active = case.get("benchmark_active")
-        if not active:
-            raise HTTPException(409, "Start the manual aggregation task first")
-        evidence = case["result"]["evidence"]
-        expected = evidence["service_payments"]
-        if body.payment_count != expected["count"] or not np.isfinite(body.total_gel) or abs(body.total_gel-expected["total_gel"]) > .01:
-            svc.store.append(case_id, "Manual aggregation answer incorrect", "demo", {})
-            raise HTTPException(422, "The count or total does not match the statement. The timer continues.")
-        manual_ms = round((time.time()-active["started_unix"])*1000, 2)
-        case["benchmark"] = {"manual_ms": manual_ms, "automated_ms": evidence["aggregation_ms"],
-                             "payment_count": body.payment_count, "total_gel": round(body.total_gel, 2),
-                             "operator": "demo", "completed_at": timestamp(),
-                             "limitation": "One self-timed operator run on a normalized synthetic statement; "
-                                           "automation includes filtering and aggregation. Not an independent manual-process study."}
-        case.pop("benchmark_active", None)
-        svc.store.save(svc.public_job(case), "demo")
-        svc.store.append(case_id, "Manual aggregation completed", "demo", case["benchmark"])
-        return case["benchmark"]
 
     return app
 

@@ -3,7 +3,7 @@ import { useState } from 'react'
 const narrow = () => window.matchMedia('(max-width: 980px)').matches
 
 export default function ClientPicker({ personalId, onChange, onSubmit, busy, connecting, clients }) {
-  // on a phone the ten cards would push the result far down, so the list starts folded and folds after a pick
+  // on a phone the twenty cards would push the result far down, so the list starts folded and folds after a pick
   const [open, setOpen] = useState(() => !narrow())
   return (
     <aside className="side">

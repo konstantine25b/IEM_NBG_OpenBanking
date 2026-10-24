@@ -96,15 +96,6 @@ def test_other_existing_demo_clients(stack, cid):
     assert case["result"]["evidence"]["transactions"]
 
 
-def test_review_is_enforced_by_api(stack, normal):
-    api = stack[0]
-    url = f"/v1/cases/{normal['job_id']}/review"
-    review = {"decision": "accepted", "reason": "Reviewed the service payments and the prediction uncertainty."}
-    assert api.post(url, json=review).status_code == 409
-    assert api.post(url, json={**review, "acknowledge_uncertainty": True}).status_code == 200
-    assert api.get(f"/v1/cases/{normal['job_id']}").json()["review"]["reviewer"] == "demo"
-
-
 def test_direct_access_without_accounts_history_or_downloads(stack, normal):
     app = stack[0].app
     with TestClient(app) as anonymous:
@@ -133,15 +124,10 @@ def test_real_mock_source_outage_and_abstention(stack):
     assert partial["result"]["evidence"]["registries"]["rs"] is None
     assert partial["result"]["evidence"]["registries"]["creditinfo"] is not None
     assert partial["result"]["confidence"]["measured"] is None
-    assert any("HTTP 503" in w for w in partial["result"]["warnings"])
+    assert any("Based on bank data only" in w for w in partial["result"]["warnings"])
     empty = estimate(stack[0], "banks_unavailable")
     assert empty["result"]["outcome"] == "abstained"
     assert empty["result"]["income"] is None
-    response = stack[0].post(
-        f"/v1/cases/{empty['job_id']}/review",
-        json={"decision": "accepted", "reason": "Acknowledged missing bank data.", "acknowledge_uncertainty": True},
-    )
-    assert response.status_code == 409
 
 
 def test_assessments_are_not_saved_but_audit_events_persist(stack, normal):
@@ -167,19 +153,6 @@ def test_assessments_are_not_saved_but_audit_events_persist(stack, normal):
         reopened.close()
 
 
-def test_manual_timer_requires_correct_answer(stack, normal):
-    api = stack[0]
-    prefix = f"/v1/cases/{normal['job_id']}/benchmark"
-    task = api.post(prefix + "/start")
-    assert task.status_code == 200
-    assert "classification" not in task.json()["transactions"][0]
-    assert api.post(prefix + "/finish", json={"payment_count": 0, "total_gel": 0}).status_code == 422
-    response = api.post(prefix + "/finish", json={"payment_count": 76, "total_gel": 21694.69})
-    assert response.status_code == 200, response.text
-    assert response.json()["manual_ms"] > 0
-    assert response.json()["automated_ms"] > 0
-
-
 def test_hash_chain_detects_changes(tmp_path):
     store = CaseStore(tmp_path / "audit.sqlite3")
     store.append("case1", "test", "officer", {"value": 1})
@@ -193,10 +166,10 @@ def test_audit_binds_the_saved_result(tmp_path):
     import hashlib
 
     store = CaseStore(tmp_path / "case.sqlite3")
-    case = {"job_id": "case1", "result": {"income": {"p50": 1878}}, "review": None}
+    case = {"job_id": "case1", "result": {"income": {"p50": 1878}}, }
     store.save(case, "officer")
     digest = hashlib.sha256(canonical(case["result"]).encode()).hexdigest()
-    store.append("case1", "Case ready for human review", "system", {"detail": {"result_sha256": digest}})
+    store.append("case1", "Estimate completed", "system", {"detail": {"result_sha256": digest}})
     assert store.audit("case1")["case_matches_audit"]
     case["result"]["income"]["p50"] = 9999
     store.save(case, "officer")

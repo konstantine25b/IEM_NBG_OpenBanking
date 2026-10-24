@@ -30,7 +30,7 @@ A source without consent (RS, Creditinfo or a bank) is skipped with a warning; t
   inside P10-P90 (about 80%, never 100%) is in `income/models/confidence_calibration.json` and shown next to it.
 - **Client profile.** Name, birth date and place come from the lender's KYC record. In this demo that record is the
   generated customer (`/_mock/kyc/{customer}` on the bank mock). The name is checked against each bank's account owner name.
-- **Demo clients.** `API/pick_demo_clients.py` picks ten kinds of person from the clients the model never trained on, typical
+- **Demo clients.** `API/pick_demo_clients.py` picks kinds of person from the clients the model never trained on, typical
   of their kind; eight have the real income inside the range, two do not, like the held-out rate.
 - **Synthetic data only.** Scores here say nothing about real-world accuracy.
 

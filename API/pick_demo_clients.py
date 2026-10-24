@@ -13,6 +13,7 @@ The measured accuracy per confidence level is in income/models/confidence_calibr
 
 from __future__ import annotations
 
+import collections
 import json
 import sys
 from pathlib import Path
@@ -139,7 +140,16 @@ def main() -> None:
     catalog = {c["id"]: c for c in previous}  # the list keeps its order; new picks go to the end
     for c in picked:
         catalog.setdefault(c["id"], c)
-    OUT.write_text(json.dumps(list(catalog.values()), indent=2, ensure_ascii=False))
+    clients = list(catalog.values())
+    titles = collections.Counter(c["title"] for c in clients)
+    for c in clients:  # one archetype can match several clients: tell them apart by city (then by first bank)
+        if titles[c["title"]] > 1 and not c["title"].endswith(")"):
+            c["title"] += f" ({c['facts'].split(', ', 1)[1]})"
+    titles = collections.Counter(c["title"] for c in clients)
+    for c in clients:
+        if titles[c["title"]] > 1:
+            c["title"] = c["title"][:-1] + f", {c['banks'][0]})"
+    OUT.write_text(json.dumps(clients, indent=2, ensure_ascii=False))
     print(f"wrote {OUT}")
 
 

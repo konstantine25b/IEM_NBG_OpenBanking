@@ -13,7 +13,7 @@ drove it, and what is missing.
 
 Georgian banks must verify income before lending: the National Bank's responsible-lending rules cap the payment-to-income
 ratio, and loans without verified income are limited. But the Revenue Service (RS) only shows *declared* income, and about
-40% of workers in Georgia are informal (ILO Working Paper 159, from the Geostat labour force survey 2022). Young people,
+37.1% of workers in Georgia are informal (2022; ILO Working Paper 159, based on the Geostat Labour Force Survey). Young people,
 the self-employed, rural households and small businesses often have real income that is invisible or heavily discounted,
 so they are rejected or under-lent.
 
@@ -23,15 +23,15 @@ With the client's consent, the lending bank combines:
 
 | Source | What it gives | Mock in this repo |
 |---|---|---|
-| **Open banking** (the client's other banks) | accounts, balances, up to 12 months of transactions, over the standard Georgian API (Berlin Group NextGenPSD2 XS2A v0.8, consent valid at most 90 days) | 12 bank APIs, one per bank, 7 wire dialects |
+| **Open banking** (the client's other banks) | accounts, balances, up to 12 months of transactions, over the Georgian Open Banking Standard (based on Berlin Group); the client re-authorises at least every 90 days | 12 bank APIs, one per bank, 7 wire dialects |
 | **Revenue Service** | the client's taxpayer data and income items | `API/mock_registries.py` |
 | **Creditinfo** (credit bureau) | existing loans and credit searches (no income) | `API/mock_registries.py` |
 | **The lender's own KYC** | name, birth date, place | `/_mock/kyc` on the bank mock |
 
-A machine-learning model turns this into **estimated sustainable monthly income as a range**: P10 (conservative),
+A machine-learning model turns this into **estimated monthly income as a range**: P10 (conservative),
 P50 (most likely), P90 (optimistic). It works for clients with RS-verified income (refining it) and for clients without
 (estimating from bank data alone). The range is returned with:
-- a **confidence label and score** read from the width of the range,
+- a **confidence label** read from the width of the range (shown as ±% of the P50),
 - the **measured hit rate** of that label on clients the model never saw,
 - **SHAP explanations** of what pushed the estimate up or down,
 - **warnings** when data is missing (for example no salary credits found, or a bank that refused its consent).
@@ -71,6 +71,7 @@ P50 (most likely), P90 (optimistic). It works for clients with RS-verified incom
 uv sync                  # Python packages, once
 make frontend-setup      # web page packages, once
 make demo                # starts everything; Ctrl-C stops it
+# no make? run ./tools/demo.sh instead (same thing)
 ```
 
 Then open **http://localhost:5173**. Swagger for the income API is at http://localhost:9000/docs.
@@ -173,10 +174,10 @@ More in [`API/README.md`](API/README.md); the 12 bank dialects are documented in
   | low | 10% | 77.2% | 3.63% |
   | very low | 0.6% | 62.1% | 7.30% |
 
-  The range does not always contain actual income. The ten clients added on main include eight hits and two near-misses; the combined catalog also preserves the ten original clients.
+  The range does not always contain actual income. On the 20 demo clients, the true income falls inside the range for 17.
 - **Explanations:** exact TreeSHAP values from XGBoost (`pred_contribs`) for the P50 head, grouped into readable drivers
   in `API/explain.py`. They add up: the average client's 2,717 GEL plus all factors equals the P50.
-- **Demo clients:** `uv run python API/pick_demo_clients.py` selects ten typical clients from the held-out 20% and retains existing catalog entries, including C50811.
+- **Demo clients:** `uv run python API/pick_demo_clients.py` selects typical clients from the held-out 20% and keeps existing catalog entries.
 
 ## 8. Repository map
 
@@ -220,6 +221,6 @@ because the bank mock simulates each customer on demand.
 ## 11. More documentation
 
 [`API/README.md`](API/README.md) · [`frontend/README.md`](frontend/README.md) · [`eda/README.md`](eda/README.md) ·
-[`openbanking_mock/README.md`](openbanking_mock/README.md) · `CLAUDE.md` (project context for the coding assistant)
+[`openbanking_mock/README.md`](openbanking_mock/README.md)
 
 Integration demo details, audit limitations and the Python launcher: [API/DEMO_GUIDE.md](API/DEMO_GUIDE.md).

@@ -14,7 +14,7 @@ cd ..
 uv run python tools/run_demo.py --check
 ```
 
-Open http://127.0.0.1:5173. The launcher starts the 12-bank mock on port 8000, registry mock on 8001, income API on 9000, and Vite on 5173. Ctrl+C stops the processes it created. Existing services on those ports must be stopped first. Logs and persistent audit events live under git-ignored `.runtime/`. Assessments remain in memory and cannot be reopened after a server restart.
+Open http://localhost:5173. The launcher starts the 12-bank mock on port 8000, registry mock on 8001, income API on 9000, and Vite on 5173. Ctrl+C stops the processes it created. Existing services on those ports must be stopped first. Logs and persistent audit events live under git-ignored `.runtime/`. Assessments remain in memory and cannot be reopened after a server restart.
 
 The committed XGBoost joblib is loaded normally when supported. For an incompatible native snapshot, the loader reads its embedded portable UBJ model in memory. It does not rewrite the artifact or retrain. No file inside `.venv/` is needed as a model artifact.
 
@@ -53,6 +53,6 @@ cd frontend
 npm run build
 ```
 
-`test_demo_workspace.py` uses the actual on-demand mock stack and committed model; it does not require the omitted transaction shards. It verifies the existing customer, direct access without accounts, removal of saved-case and download routes, review gates, faults, abstention, non-persistence of assessments, audit privacy and tampering detection, and benchmark answer checking.
+`test_demo_workspace.py` uses the actual on-demand mock stack and committed model; it does not require the omitted transaction shards. It verifies the existing customer, direct access without accounts, removal of saved-case and download routes, faults, abstention, non-persistence of assessments, and audit privacy and tampering detection.
 
 Primary third-party components: React / Vite / FastAPI (MIT), HTTPX / NumPy / pandas / scikit-learn / joblib (BSD-3-Clause), XGBoost / Apache Arrow (Apache-2.0), and Matplotlib (Matplotlib license based on PSF). Exact dependency versions are recorded in `uv.lock` and `frontend/package-lock.json`; distribution notices must accompany a packaged deployment.

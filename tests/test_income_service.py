@@ -166,6 +166,8 @@ def test_thin_history_is_judged_very_low(modules):
     assert level == "very low" and len(reasons) == 2
     _, reasons, warnings = judge("high", 12.0, 600, {"ob_inflow_month": 900.0}, 1)
     assert reasons == [] and "salary" in warnings[0]  # no salary credits is a warning, not a downgrade
+    _, _, warnings = judge("high", 12.0, 600, {"ob_inflow_month": 900.0}, 1, banks_failed=1)
+    assert warnings == []  # a failed bank may be the one that pays the salary
 
 
 def test_a_dead_bank_consent_is_reported_and_the_others_still_count(stack, multi_bank_customer):
@@ -178,7 +180,7 @@ def test_a_dead_bank_consent_is_reported_and_the_others_still_count(stack, multi
     assert next(p for p in state["progress"] if p["source"] == dead)["state"] == "failed"
     assert state["status"] == "done" and dead not in state["result"]["data"]["banks_used"]
     assert set(state["result"]["data"]["banks_used"]) == set(others)
-    assert any("consent" in w for w in state["result"]["warnings"])
+    assert any("temporarily unavailable" in w for w in state["result"]["warnings"])
 
 
 @pytest.mark.parametrize("registry", ["rs", "creditinfo"])
@@ -296,7 +298,7 @@ def test_one_failing_bank_does_not_fail_the_consent_call(stack, modules):
     finally:
         svc.banks.post = original
     failed = next(b for b in table["banks"] if b["bank"] == victim)
-    assert failed["status"] == "error" and f"{victim} is down" in failed["message"]
+    assert failed["status"] == "error" and "temporarily unavailable" in failed["message"] and "is down" not in failed["message"]
     assert table["connected_banks"] >= 0 and len(table["banks"]) == 12  # every other bank still answered
 
 
