@@ -1,0 +1,18 @@
+[Unit]
+Description=Verify and deploy the income-check main branch on native ARM64
+Wants=network-online.target
+After=network-online.target docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+User=ubuntu
+Group=ubuntu
+SupplementaryGroups=docker
+WorkingDirectory=/home/ubuntu/IEM_NBG_OpenBanking
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 /usr/local/lib/income-check/autodeploy.py
+TimeoutStartSec=45min
+TimeoutStopSec=90s
+KillMode=mixed
+UMask=0077

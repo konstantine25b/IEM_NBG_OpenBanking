@@ -1,0 +1,12 @@
+[Unit]
+Description=Check main for income-check updates every minute
+
+[Timer]
+OnBootSec=2min
+OnUnitInactiveSec=60s
+RandomizedDelaySec=5s
+AccuracySec=1s
+Unit=income-check-deploy.service
+
+[Install]
+WantedBy=timers.target
